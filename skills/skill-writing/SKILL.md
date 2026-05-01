@@ -157,6 +157,28 @@ If a skill covers multiple subdomains, split references by topic. For example:
 
 Do not bury important files several levels deep. Link them directly from `SKILL.md`.
 
+### Book and Source-File Distillation Rule
+
+When the user provides books, EPUBs, PDFs, course notes, long articles, or other
+source files while creating or upgrading a skill:
+
+- Treat the source files as temporary inputs. The finished skill must remain
+  useful after those files are deleted, moved, or renamed.
+- Do not merely link to the source file path. Distill the practical knowledge
+  into self-contained `references/*.md` files.
+- Preserve operational knowledge: workflows, decision tables, checklists,
+  failure modes, examples, quality gates, and output requirements.
+- Keep `SKILL.md` concise. Put durable depth in directly linked reference files.
+- Avoid copying long passages. Summarize, synthesize, and convert book knowledge
+  into reusable execution rules.
+- Add a short note in the reference file saying it is self-contained and was
+  prepared from provided source material, so future agents do not depend on the
+  original file.
+- If the source material is broad, split the result by practical topic rather
+  than by book chapter.
+- Validate that every new reference is linked from `SKILL.md` with clear
+  conditions for when to load it.
+
 ## Upgrade Checklist
 
 When improving an existing skill:
@@ -164,6 +186,8 @@ When improving an existing skill:
 - Remove vague or generic advice.
 - Add decision rules and release gates.
 - Add real failure cases and anti-patterns.
+- If book/source files were provided, make the upgraded skill self-contained and
+  do not depend on those files continuing to exist.
 - Tighten the activation description.
 - Link to other skills only when the dependency is genuinely useful.
 - Re-check line counts after editing.

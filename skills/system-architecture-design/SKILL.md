@@ -56,6 +56,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- [references/practical-architecture-knowledge.md](references/practical-architecture-knowledge.md) - book-distilled checks for DDD boundaries, scalability, architecture metrics, and executable architecture documentation.
 <!-- dual-compat-end -->
 Use this skill when the problem is bigger than a single component. Start here before committing to frameworks, service boundaries, data ownership, or integration patterns.
 
@@ -117,6 +118,8 @@ Also define:
 - ownership of downstream effects
 - rollback or reconciliation path when dependencies disagree
 - release evidence needed before exposing the flow broadly
+
+For domain-heavy or scale-sensitive systems, load [references/practical-architecture-knowledge.md](references/practical-architecture-knowledge.md) and apply its bounded-context, scalable-systems, and architecture-metric checks.
 
 ### 5. Record Decisions
 

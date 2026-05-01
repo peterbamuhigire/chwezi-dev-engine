@@ -61,8 +61,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- [references/practical-typescript.md](references/practical-typescript.md) - production TypeScript judgment for domain types, runtime boundaries, config typing, discriminated unions, and maintainability review.
 <!-- dual-compat-end -->
 Production-grade TypeScript. Synthesised from Total TypeScript (Pocock), Ultimate TypeScript Handbook (Wellman), 250 Killer TypeScript One-Liners (Abella), and Programming TypeScript (Cherny).
+
+For code reviews, API boundary work, or domain model implementation, also load [references/practical-typescript.md](references/practical-typescript.md).
 
 ---
 

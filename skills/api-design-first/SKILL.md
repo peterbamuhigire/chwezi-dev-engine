@@ -82,6 +82,7 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 - [references/openapi-workflow.md](references/openapi-workflow.md) — spec-first workflow, OpenAPI 3.1 skeleton, versioning, HATEOAS, HTTP caching, GraphQL decision.
 - [references/auth-and-security.md](references/auth-and-security.md) — headers, CORS, auth-method selection table, API key, JWT, OAuth2, rate limiting, idempotency keys.
 - [references/implementation-checklist.md](references/implementation-checklist.md) — pre-merge checklist and observability contract handed to `observability-monitoring`.
+- [references/practical-api-architecture.md](references/practical-api-architecture.md) — book-distilled API product-contract checks, lifecycle/versioning policy, idempotency map, and error semantics.
 - Companion skill: `graphql-patterns` — schema-first Apollo Server + TypeScript patterns when choosing GraphQL over REST for client-shaped reads.
 <!-- dual-compat-end -->
 
@@ -197,6 +198,7 @@ Failure mode if wrong: GraphQL-first for simple CRUD buys query-complexity DoS r
 6. Validate that the API can evolve without breaking current consumers.
 
 Full spec skeleton and per-step detail in `references/openapi-workflow.md`.
+For partner, public, long-lived, or workflow-heavy APIs, also load `references/practical-api-architecture.md`.
 
 ## Response envelope
 
@@ -249,4 +251,5 @@ Detail, status-code mapping, and pagination mechanics live in `references/rest-c
 - [references/openapi-workflow.md](references/openapi-workflow.md) — six-step workflow, OpenAPI 3.1 skeleton, versioning, HATEOAS, HTTP caching (ETags), GraphQL decision.
 - [references/auth-and-security.md](references/auth-and-security.md) — security headers, CORS, auth-method selection, API key, JWT, OAuth2, rate limiting, idempotency keys.
 - [references/implementation-checklist.md](references/implementation-checklist.md) — pre-merge checklist, observability notes handed to `observability-monitoring`, hand-off table to other skills.
+- [references/practical-api-architecture.md](references/practical-api-architecture.md) — API product-contract checks, versioning lifecycle, idempotency, and error semantics.
 - [references/skill-deep-dive.md](references/skill-deep-dive.md) — index redirect for the legacy deep-dive; kept for backward compatibility.

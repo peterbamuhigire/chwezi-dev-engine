@@ -61,6 +61,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- [references/practical-ai-engineering.md](references/practical-ai-engineering.md) - evaluation-first AI engineering, RAG quality checks, agentic workflow controls, guardrails, telemetry, and cost discipline.
 <!-- dual-compat-end -->
 ## Overview
 
@@ -157,6 +158,8 @@ Step 6 (Agents):     Router → Agent Loop [Plan → Tools → Reflect] → Resp
 ```
 
 Add each layer only when its absence is causing a real problem.
+
+For production AI features, load [references/practical-ai-engineering.md](references/practical-ai-engineering.md) before finalising the architecture. It adds evaluation, RAG, agent, safety, fallback, telemetry, and cost-control gates.
 
 ---
 
