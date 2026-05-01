@@ -5,6 +5,8 @@ description: Use for demand forecasts, stockout timing, reorder logic, branch/pr
 
 # Demand Forecasting
 
+> **STATUS: STUB — pending implementation depth.** This skill encodes a working baseline (workflow, join guardrails, formulas) but lacks the deeper materials a world-class skill carries: forecast-method decision matrix (moving average vs Holt-Winters vs Croston for intermittent demand), bias/error backtesting templates, multi-echelon planning, supplier-lead-time variability, and SQL templates for MySQL + PostgreSQL across both transactional and warehoused sales schemas. Expand `references/demand_forecasting.md` and add `references/forecast-methods.md`, `references/backtesting-evidence.md`, and `references/sql-templates.md` before promoting.
+
 ## Overview
 
 Use this skill to turn sales, inventory, branch, and operational signals into demand forecasts and replenishment recommendations. It is especially relevant when fixing SQL joins that duplicate products, deriving days until stockout, or documenting demand-driven planning assumptions.

@@ -7,9 +7,9 @@ wealth-generating web, mobile, and AI-powered software products.
 **Business Context:** Building an independent technology business that accumulates wealth through
 consulting, SaaS products, and AI-powered platforms — targeting relevance through the 2040s.
 
-**Date:** April 2026 (Revised) | **Skills Audited:** 210 | **Analyst:** Claude Sonnet 4.6 / Opus 4.6
+**Date:** May 2026 (Revised) | **Skills Audited:** 245 | **Analyst:** Claude Opus 4.7 (1M ctx) — building on prior Sonnet 4.6 / Opus 4.6 passes
 
-**Current overall score: 9.0 / 10** (2026-04-16) — see [`docs/evaluation/2026-04-12/scoring.md`](../evaluation/2026-04-12/scoring.md) for the authoritative 8-dimension breakdown and history (7.1 → 8.4 → 8.9 → 9.0).
+**Current overall score: 9.1 / 10** (2026-05-01) — see [`2026-05-01-thorough-review.md`](2026-05-01-thorough-review.md) for the latest 8-dimension breakdown and the regression list. Score history: 7.1 (2026-04-12) → 8.4 → 8.9 → 9.0 (2026-04-16) → **9.1 (2026-05-01)**.
 
 ---
 
@@ -24,6 +24,7 @@ consulting, SaaS products, and AI-powered platforms — targeting relevance thro
 | 05 | [AI Integration Strategy](05-ai-integration-strategy.md) | How AI is now integrated across every product layer |
 | 06 | [New Skills Roadmap](06-new-skills-roadmap.md) | Remaining skills to create, re-prioritised by current state |
 | 07 | [Wealth Accumulation Engine](07-wealth-accumulation-engine.md) | Business model, revenue streams, 2040s strategy |
+| 08 | [2026-05-01 Thorough Review](2026-05-01-thorough-review.md) | **Latest pass — 245 skills, score 9.1, regression list, top-10 priorities** |
 
 ---
 
