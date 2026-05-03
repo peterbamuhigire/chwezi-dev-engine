@@ -67,6 +67,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- Use companion skill `accounting-finance-controller` when the implementation also needs IFRS-aware reporting, management accounting, cost accounting, financial controls, projections, or CFO-grade review beyond the core double-entry engine.
 <!-- dual-compat-end -->
 ## Overview
 
