@@ -72,6 +72,7 @@ Use this skill when shipping software to real users. It turns implementation out
 1. Load `world-class-engineering`.
 2. Load this skill when a change affects deployment, migrations, operational risk, or production rollout.
 3. Pair it with `observability-monitoring` and `advanced-testing-strategy`.
+4. Pair it with `docker-development` when shipping, tagging, scanning, or promoting container images.
 
 ## Release Workflow
 
@@ -101,6 +102,7 @@ Higher-risk releases need narrower rollout and stronger verification.
 - Keep environment differences in configuration and secrets, not source or binaries.
 - Do not rebuild separately for staging and production.
 - Keep pipeline definition in version control so release mechanics are reviewable.
+- For Docker delivery, promote the tested image by immutable digest; human-readable tags are labels, not the release source of truth.
 
 ### 3. Use A Deployment Pipeline, Not Ad Hoc Stages
 
@@ -213,3 +215,4 @@ For significant releases, produce:
 - [references/release-checklist.md](references/release-checklist.md): Pre-deploy and post-deploy checks.
 - [references/rollout-selection.md](references/rollout-selection.md): Choosing rolling, blue-green, or canary.
 - [references/devops-book-patterns.md](references/devops-book-patterns.md): Value-stream, pipeline, observability, DevSecOps, PHP, cloud-native, and GitOps patterns from the supplied DevOps books.
+- [../docker-development/references/php-python-js-container-delivery.md](../docker-development/references/php-python-js-container-delivery.md): Docker image, Compose, CI, registry, and runtime promotion standards for PHP, Python, and JavaScript services.

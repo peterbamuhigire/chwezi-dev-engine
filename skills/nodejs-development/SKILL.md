@@ -34,6 +34,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 - Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
+- Pair with `javascript-patterns` for advanced object/module pattern selection and `docker-development` for containerized runtime or asset build delivery.
 - Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
 - Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 

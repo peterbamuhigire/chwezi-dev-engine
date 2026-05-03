@@ -32,6 +32,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 - Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
+- Load `references/scalable-js-oop-patterns.md` when choosing patterns, reviewing OOP/prototype code, or preventing large-module decay.
 - Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
 - Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 
@@ -61,11 +62,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- `references/scalable-js-oop-patterns.md` — OOP/prototype rules, pattern selection, async patterns, and anti-pattern review.
+- `references/source-register-dev-engine.md` — local EPUB sources used for this development-engine upgrade.
 <!-- dual-compat-end -->
 Production-grade patterns for structuring JavaScript in PHP-backed SaaS applications.
 
 **Core principle:** Every feature is a module. Components communicate through events, not
 direct references. Data access lives in repositories, not scattered `fetch` calls.
+
+For complex or long-lived JavaScript, choose patterns from a problem statement, not from taste. A pattern is justified only when it reduces coupling, clarifies object creation, stabilizes event flow, supports testability, or prevents repeated code decay.
 
 ✅ Vanilla JS ✅ PHP SaaS ✅ ES2020+ ✅ No framework | ❌ React/Vue ❌ Node.js server-side
 

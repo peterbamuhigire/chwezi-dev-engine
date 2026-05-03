@@ -33,6 +33,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 - Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
+- For Python sidecars, FastAPI services, workers, queue consumers, or API integrations, load `references/api-container-sidecar-engineering.md`.
+- For containerized Python work, pair with `docker-development`.
 - Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
 - Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 
@@ -62,6 +64,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- Use `references/api-container-sidecar-engineering.md` when Python participates in APIs, workers, queues, sidecars, or Dockerized service delivery.
 <!-- dual-compat-end -->
 The house style for Python in our PHP + Android + iOS SaaS stack. Every Python file in our projects must follow this skill. Other Python skills (saas-integration, data-analytics, document-generation, ml-predictive, data-pipelines) assume you have read this first.
 
@@ -343,3 +346,4 @@ When the task requires it, load:
 - `references/testing-pytest.md`
 - `references/security-baseline.md`
 - `references/anti-patterns.md`
+- `references/api-container-sidecar-engineering.md`

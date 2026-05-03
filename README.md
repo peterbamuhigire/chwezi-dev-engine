@@ -101,7 +101,7 @@ Typical baseline choices:
 | Area | Key Skills |
 |------|------------|
 | Web frontend | `webapp-gui-design`, `premium-ui-ux-design`, `form-ux-design`, `responsive-design`, `frontend-performance` |
-| Web backend | `php-modern-standards`, `php-security`, `nodejs-development`, `nextjs-app-router` |
+| Web backend | `php-modern-standards`, `api-design-first`, `docker-development`, `php-security`, `nodejs-development`, `nextjs-app-router` |
 | Android | `android-development`, `android-ui-ux-design`, `android-data-persistence`, `android-tdd`, `jetpack-compose-ui` |
 | iOS | `ios-development`, `ios-ui-ux-design`, `ios-data-persistence`, `ios-tdd`, `swiftui-design` |
 | Cross-platform planning | `mobile-saas-planning`, `mobile-reports`, `mobile-report-tables`, `mobile-rbac` |
@@ -126,6 +126,16 @@ Python sits alongside the PHP backend as a sidecar and worker to handle analytic
 | `python-data-pipelines` | ETL from external APIs, OCR, PDF/image processing, scheduling, DLQs, multi-tenant pipelines |
 
 Load order for Python work: `python-modern-standards` + `python-saas-integration` first, then the domain-specific skill.
+
+For Python sidecars, FastAPI services, workers, queue consumers, or API integrations, `python-modern-standards` now loads the API/container sidecar reference. Pair it with `docker-development` whenever the Python work must run as a repeatable service image rather than a loose script.
+
+### JavaScript And Runtime Containers
+
+JavaScript work that grows beyond simple DOM code should pair `javascript-modern` with `javascript-patterns` so object boundaries, prototypes/classes, async flows, and browser modules remain maintainable. Node services and asset build pipelines should also pair with `docker-development` when the runtime, Compose environment, CI image, or production artifact matters.
+
+### Docker And Local Delivery
+
+Use `docker-development` whenever a PHP, Python, JavaScript, Node, API, worker, queue, database, cache, or reverse-proxy service needs a repeatable local environment or production image. It sets the baseline for deterministic dependency installs, Docker Compose orchestration, dev/prod image separation, secrets hygiene, image scanning, registry tagging, and build-once promotion.
 
 ### TypeScript (production + full-stack)
 
@@ -203,7 +213,7 @@ Extends existing `gis-mapping` (Leaflet) with:
 
 ## Recommended Skill Stacks
 
-- Web application: `world-class-engineering` + `system-architecture-design` + `api-design-first` + `database-design-engineering` + `vibe-security-skill`
+- Web application: `world-class-engineering` + `system-architecture-design` + `api-design-first` + `database-design-engineering` + `docker-development` + `vibe-security-skill`
 - SaaS or ERP platform: `world-class-engineering` + `saas-erp-system-design` + `modular-saas-architecture` + `multi-tenant-saas-architecture` + `database-design-engineering`
 - Mobile-backed product: `world-class-engineering` + `system-architecture-design` + `android-development` or `ios-development` + security and persistence skills
 - AI-enabled application: `world-class-engineering` + `ai-economic-value-engine` + `system-architecture-design` + `ai-app-architecture` + `ai-evaluation` + `ai-security` + `frontend-performance`
@@ -213,6 +223,7 @@ Extends existing `gis-mapping` (Leaflet) with:
 - Python analytics + document generation add-on to a PHP SaaS: `python-modern-standards` + `python-saas-integration` + `python-data-analytics` + `python-document-generation`
 - Python predictive ML feature: `python-modern-standards` + `python-saas-integration` + `python-ml-predictive` + `python-data-analytics`
 - Python ETL / OCR / data ingestion: `python-modern-standards` + `python-saas-integration` + `python-data-pipelines`
+- PHP or Node API service: `php-modern-standards` or `nodejs-development` + `api-design-first` + `docker-development` + `advanced-testing-strategy` + `deployment-release-engineering`
 
 ## How To Use
 

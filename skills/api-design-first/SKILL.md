@@ -83,6 +83,8 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 - [references/auth-and-security.md](references/auth-and-security.md) — headers, CORS, auth-method selection table, API key, JWT, OAuth2, rate limiting, idempotency keys.
 - [references/implementation-checklist.md](references/implementation-checklist.md) — pre-merge checklist and observability contract handed to `observability-monitoring`.
 - [references/practical-api-architecture.md](references/practical-api-architecture.md) — book-distilled API product-contract checks, lifecycle/versioning policy, idempotency map, and error semantics.
+- [references/api-you-wont-hate-rules.md](references/api-you-wont-hate-rules.md) — consumer-first API action planning, resource shape, pagination, versioning, and endpoint test rules.
+- [references/source-register-api-you-wont-hate.md](references/source-register-api-you-wont-hate.md) — local EPUB source register for the API-design upgrade.
 - Companion skill: `graphql-patterns` — schema-first Apollo Server + TypeScript patterns when choosing GraphQL over REST for client-shaped reads.
 <!-- dual-compat-end -->
 
@@ -191,7 +193,7 @@ Failure mode if wrong: GraphQL-first for simple CRUD buys query-complexity DoS r
 ## Design workflow (six steps)
 
 1. Define consumers, latency expectations, and trust boundaries.
-2. Model resources and actions around business concepts, not controller names.
+2. Write the API action plan, then model resources and actions around business concepts, not controller names.
 3. Write the OpenAPI contract, including auth, validation, errors, and pagination.
 4. Prove tenancy, authorisation, and idempotency rules before implementation.
 5. Design observability: request IDs, audit events, deprecation path, rate-limit telemetry.
@@ -199,6 +201,7 @@ Failure mode if wrong: GraphQL-first for simple CRUD buys query-complexity DoS r
 
 Full spec skeleton and per-step detail in `references/openapi-workflow.md`.
 For partner, public, long-lived, or workflow-heavy APIs, also load `references/practical-api-architecture.md`.
+For consumer ergonomics, endpoint naming, pagination, embedding, versioning, and test expectations, load `references/api-you-wont-hate-rules.md`.
 
 ## Response envelope
 
@@ -252,4 +255,6 @@ Detail, status-code mapping, and pagination mechanics live in `references/rest-c
 - [references/auth-and-security.md](references/auth-and-security.md) — security headers, CORS, auth-method selection, API key, JWT, OAuth2, rate limiting, idempotency keys.
 - [references/implementation-checklist.md](references/implementation-checklist.md) — pre-merge checklist, observability notes handed to `observability-monitoring`, hand-off table to other skills.
 - [references/practical-api-architecture.md](references/practical-api-architecture.md) — API product-contract checks, versioning lifecycle, idempotency, and error semantics.
+- [references/api-you-wont-hate-rules.md](references/api-you-wont-hate-rules.md) — API action plan, resource design, JSON ergonomics, pagination, embedding, versioning, and endpoint tests.
+- [references/source-register-api-you-wont-hate.md](references/source-register-api-you-wont-hate.md) — local EPUB source register for the API-design upgrade.
 - [references/skill-deep-dive.md](references/skill-deep-dive.md) — index redirect for the legacy deep-dive; kept for backward compatibility.

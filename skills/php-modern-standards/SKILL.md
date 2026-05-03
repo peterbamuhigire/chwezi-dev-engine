@@ -32,6 +32,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 - Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
+- For long-lived PHP application work, load `references/world-class-php-oop-clean-architecture.md` before designing controllers, services, repositories, or domain objects.
+- For containerized PHP work, pair with `docker-development`.
 - Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
 - Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 
@@ -78,6 +80,8 @@ Production-grade PHP patterns for maintainable, testable, secure, high-performan
 - `references/restful-api-patterns.md` — cURL client, Attribute routing, JWT, API versioning, testing
 - `references/database-orm-patterns.md` — PDO, QueryBuilder, Active Record Model, soft delete, ORM concepts
 - `references/attack-prevention.md` — SQL injection, XSS, CSRF, CSP, brute force, least privilege
+- `references/world-class-php-oop-clean-architecture.md` — PHP 8 OOP, SOLID, clean architecture, repositories, adapters, and framework-independent domain rules
+- `references/source-register-dev-engine.md` — local EPUB sources used for this development-engine upgrade
 
 **Examples:** `examples/modern-php-patterns.php`, `examples/laravel-patterns.php`
 **Security:** Use **php-security** skill for comprehensive security patterns.
@@ -127,7 +131,7 @@ Extended guidance for `php-modern-standards` was moved to [references/skill-deep
 
 ### PHP DevOps Runtime Discipline
 
-When PHP work affects deployment or production operations, pair this skill with `deployment-release-engineering` and apply the PHP delivery notes in `../deployment-release-engineering/references/devops-book-patterns.md`:
+When PHP work affects deployment, Docker, or production operations, pair this skill with `docker-development` and `deployment-release-engineering`, then apply the PHP delivery notes in `../deployment-release-engineering/references/devops-book-patterns.md`:
 
 - keep Composer lockfiles and dependency installation reproducible;
 - run static analysis, coding standards, and tests in CI before packaging;

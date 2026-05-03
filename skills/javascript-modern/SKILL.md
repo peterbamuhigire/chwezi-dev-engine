@@ -33,6 +33,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 - Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
+- For OOP-heavy browser modules, reusable UI widgets, or complex stateful workflows, pair with `javascript-patterns` and load `javascript-patterns/references/scalable-js-oop-patterns.md`.
+- For Node/runtime container work, pair with `docker-development`.
 - Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
 - Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 
@@ -62,6 +64,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- Use `javascript-patterns/references/scalable-js-oop-patterns.md` when the task involves OOP, prototypes, design patterns, event modules, or maintainable browser architecture.
 <!-- dual-compat-end -->
 Expert-level ES6+ patterns for PHP+JavaScript SaaS developers. Assumes fluency with variables, loops, and functions.
 
