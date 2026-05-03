@@ -72,7 +72,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 1. Load `world-class-engineering` for shared production gates.
 2. Load `system-architecture-design` when the app participates in broader service or module architecture.
 3. Load this skill for iOS implementation details.
-4. Load `ios-app-security`, `ios-networking-advanced`, or other focused skills as needed.
+4. Load `ios-ui-ux-design` for every user-facing iOS/iPadOS screen, especially premium, dashboard, onboarding, reporting, form, or revenue-critical flows.
+5. Load `ios-app-security`, `ios-networking-advanced`, or other focused skills as needed.
 
 Production-grade iOS development standards for AI-assisted implementation. Swift-first with SwiftUI, following modern Apple platform best practices.
 
@@ -111,3 +112,5 @@ Use that deep dive for:
 - `Navigation (iOS 17+)`
 - `Minimum Requirements`
 - Additional deep-dive sections continue in the reference file.
+
+For screen quality, visual polish, native interaction, Dynamic Type, VoiceOver, iPad adaptation, and premium UX gates, load `ios-ui-ux-design` alongside this implementation skill.

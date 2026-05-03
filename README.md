@@ -100,11 +100,17 @@ Typical baseline choices:
 
 | Area | Key Skills |
 |------|------------|
-| Web frontend | `webapp-gui-design`, `form-ux-design`, `responsive-design`, `frontend-performance` |
+| Web frontend | `webapp-gui-design`, `premium-ui-ux-design`, `form-ux-design`, `responsive-design`, `frontend-performance` |
 | Web backend | `php-modern-standards`, `php-security`, `nodejs-development`, `nextjs-app-router` |
-| Android | `android-development`, `android-data-persistence`, `android-tdd`, `jetpack-compose-ui` |
-| iOS | `ios-development`, `ios-data-persistence`, `ios-tdd`, `swiftui-design` |
+| Android | `android-development`, `android-ui-ux-design`, `android-data-persistence`, `android-tdd`, `jetpack-compose-ui` |
+| iOS | `ios-development`, `ios-ui-ux-design`, `ios-data-persistence`, `ios-tdd`, `swiftui-design` |
 | Cross-platform planning | `mobile-saas-planning`, `mobile-reports`, `mobile-report-tables`, `mobile-rbac` |
+
+Use `premium-ui-ux-design` whenever perceived quality, beauty, dashboard clarity,
+conversion, or commercial trust is part of the product outcome. Native mobile work
+should pair `android-development` with `android-ui-ux-design`, and
+`ios-development` with `ios-ui-ux-design`, so Android and iOS products get
+platform-specific premium UX instead of generic responsive-web patterns.
 
 ### Python (analytics, documents, ML, ETL)
 

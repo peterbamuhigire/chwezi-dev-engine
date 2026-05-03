@@ -70,7 +70,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
    Prefer target users; if unavailable, validate task realism with proximate operators and record the limitation.
 5. Convert findings into requirements.
    Write only what the prototype and task evidence justify.
-6. Decide.
+6. If the feature will ship as a polished web, Android, iOS, or dashboard surface, load `premium-ui-ux-design` before visual direction and acceptance criteria are finalized.
+7. Decide.
    Recommend `go`, `refine`, or `drop`. If the feature is still vague after two serious cycles, stop spending time on it.
 
 ## Companion Skills
@@ -78,6 +79,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `product-discovery` for broader opportunity and risk framing.
 - `feature-planning` after discovery is resolved.
 - `webapp-gui-design`, `jetpack-compose-ui`, or `swiftui-design` for platform execution after the flow is defined.
+- `premium-ui-ux-design` when the discovered flow must become a beautiful, pleasant, efficient, commercially credible product experience.
 ---
 
 ## ARRIVE — Six-stage framework for established firms

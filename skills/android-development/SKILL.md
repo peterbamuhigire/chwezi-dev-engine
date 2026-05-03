@@ -72,7 +72,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 1. Load `world-class-engineering` for shared production gates.
 2. Load `system-architecture-design` when the Android app is part of a larger backend or multi-module system.
 3. Load this skill for Android implementation details.
-4. Load `vibe-security-skill` and feature-specific skills as needed.
+4. Load `android-ui-ux-design` for every user-facing Android screen, especially premium, dashboard, onboarding, reporting, form, or revenue-critical flows.
+5. Load `vibe-security-skill` and feature-specific skills as needed.
 
 Production-grade Android development standards for AI-assisted implementation. Kotlin-first with Jetpack Compose, following modern Android best practices.
 
@@ -112,6 +113,7 @@ Configure base URLs using build flavors (`dev`, `staging`, `prod`) so the app ta
 | **Dependency Injection**    | `references/dependency-injection.md`  | Hilt modules, scoping, ViewModel injection      |
 | **Security**                | `references/security.md`              | Encrypted storage, biometrics, network security |
 | **UI Design System**        | `references/ui-design-system.md`      | Tokens, components, Material 3                  |
+| **Premium Android UX**      | `../android-ui-ux-design/SKILL.md`    | Material 3 polish, mobile ergonomics, premium gate |
 | **Screen Patterns**         | `references/screen-patterns.md`       | Complete screen templates, state handling       |
 | **Testing**                 | `references/testing.md`               | Unit, UI, instrumentation tests                 |
 | **Build Configuration**     | `references/build-configuration.md`   | Gradle KTS, Android Studio setup, dependencies, build types, build-speed tuning |
@@ -292,6 +294,7 @@ Before calling an Android feature production-ready:
 - Verify startup, scrolling, and list interactions against performance expectations.
 - Verify crash reporting, analytics, and audit-sensitive actions are instrumented.
 - Verify sensitive data never lands in logs, screenshots, or unsecured storage.
+- Verify `android-ui-ux-design` premium UX checks for navigation, touch targets, text scaling, TalkBack, state completeness, and platform-native polish.
 
 ### Local Development Networking (WAMP)
 
@@ -419,6 +422,8 @@ module is governed by the `kmp-development` skill. Use Hilt for DI in
 feature-planning           -> spec + implementation strategy
   |
 android-development        -> Kotlin/Compose implementation
+  |
+android-ui-ux-design       -> premium Material 3 UX and screen quality
   |
 google-play-store-review   -> Play policy and submission readiness
   |
