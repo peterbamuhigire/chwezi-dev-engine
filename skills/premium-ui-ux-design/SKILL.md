@@ -18,6 +18,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - A product must feel premium, beautiful, calm, efficient, and worth paying serious money for.
 - Existing UI work looks generic, cluttered, one-note, hard to scan, or visually cheap.
 - Creating a design system, visual QA report, UX specification, or screen-by-screen implementation plan.
+- Writing or reviewing an SRS, acceptance criteria, traceability matrix, or design handoff requirements where premium UI/UX must be specified as testable, non-taste-based requirements.
 
 ## Do Not Use When
 
@@ -40,6 +41,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 6. Apply platform conventions: web, Android, and iOS must feel native to their medium, not like resized versions of one another.
 7. Run the premium UI/UX gate before calling the work done.
 8. Produce evidence: screenshots, score, defects, and concrete improvements.
+9. When operating in SRS mode, translate the above into testable non-functional requirements linked to SRS IDs and verification methods (see `premium-ui-ux-specification-rules.md`).
 
 ## Quality Standards
 
@@ -73,5 +75,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/production-quality-handoff.md` - production polish, asset quality, handoff, and implementation QA.
 - `references/mobile-android-ios-premium-ux.md` - platform-specific Android and iOS UX guidance.
 - `references/premium-ui-ux-gate.md` - scoring rubric and blocking checks.
+- `references/premium-ui-ux-specification-rules.md` - SRS/UX-specification rules: how to translate premium UI/UX into testable, traceable requirements and acceptance criteria.
 - `references/source-register.md` - local book sources dissected for this skill.
 <!-- dual-compat-end -->
