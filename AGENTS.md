@@ -51,7 +51,8 @@ Recommended high-value companion skills:
 
 Route work to skills by problem type:
 
-- Architecture and system boundaries: `system-architecture-design`, `modular-saas-architecture`, `multi-tenant-saas-architecture`
+- Architecture and system boundaries: `system-architecture-design`, `modular-saas-architecture`, `multi-tenant-saas-architecture`, `saas-architecture-strategy`
+- Engineering strategy, policy, operating cadence: `engineering-strategy`, `continuous-improvement-system`
 - Data modeling, migrations, query safety: `database-design-engineering`, engine-specific database skills
 - APIs and backend contracts: `api-design-first`, `api-error-handling`, `api-pagination`, backend stack skills
 - Web and frontend implementation: `react-development`, `nextjs-app-router`, `webapp-gui-design`, `form-ux-design`, `frontend-performance`
@@ -59,7 +60,8 @@ Route work to skills by problem type:
 - iOS: `ios-development`, `ios-data-persistence`, `ios-swiftdata`, `ios-tdd`, `swiftui-design`
 - AI-enabled systems: `ai-web-apps`, `ai-llm-integration`, `ai-rag-patterns`, `ai-security`, `llm-security`
 - Security review and hardening: `vibe-security-skill`, `web-app-security-audit`, `php-security`, `network-security`, `linux-security-hardening`
-- Product, UX, and content: `premium-software-product-execution`, `product-discovery`, `ux-writing`, `practical-ui-design`, `interaction-design-patterns`, `design-audit`
+- Product, UX, and content: `premium-software-product-execution`, `product-discovery`, `experience-mapping`, `service-design-blueprinting`, `ux-content-strategy`, `ux-writing`, `practical-ui-design`, `interaction-design-patterns`, `design-audit`
+- Premium sales, client service, retention: `premium-client-sales`, `customer-service-excellence`, `premium-product-positioning`
 - Skill authoring and maintenance: `skill-writing`, `skill-safety-audit`, `update-claude-documentation`
 
 ## Working Model

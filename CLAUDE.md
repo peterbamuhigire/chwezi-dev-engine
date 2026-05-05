@@ -91,6 +91,14 @@ If improving a skill:
 - `deployment-release-engineering` - rollout, rollback, migration-safe deployment, post-deploy verification
 - `distributed-systems-patterns` - consistency, messaging, idempotency, sagas, and cross-service tradeoffs
 - `engineering-management-system` - prioritization, delegation, operating rhythm, coaching, and team scaling
+- `engineering-strategy` - strategy diagnosis, altitude, guiding policy, operating mechanisms, review loops, written strategy briefs
+- `saas-architecture-strategy` - tenancy/consumption model selection, deployment mapping, scaling, blast radius, architecture-to-capability map
+- `experience-mapping` - hypothesis-driven discovery, impact mapping, journey mapping, outcome-to-feature traceability
+- `service-design-blueprinting` - service blueprints, frontstage/backstage alignment, failure/recovery design, CX/EX alignment
+- `ux-content-strategy` - voice charts, content-first design, UI text patterns, form completion gates, content measurement, decision communication, narrative arcs
+- `premium-client-sales` - discovery, ethical persuasion, objection handling, premium pricing discipline, buyer proof
+- `customer-service-excellence` - recovery loop, service language, difficult interactions, service quality measurement, CX/EX
+- `continuous-improvement-system` - operating cadence, evidence-driven retros, outcome traceability, earn-or-learn milestones
 
 ### Per-domain stacks
 
