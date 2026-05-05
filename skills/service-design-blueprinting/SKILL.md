@@ -78,6 +78,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Co-creation workshop output: stress-test findings, agreed changes.
 - Implementation backlog with paired customer-signal and staff-signal items.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Correctness | Service blueprint | Diagram or markdown table with frontstage, backstage, systems, evidence, and handoffs | `docs/service/service-blueprint.md` |
+| Operability | Failure and recovery register | Markdown table with severity, frequency, owner, detection, and recovery play | `docs/service/failure-register.md` |
+| UX quality | CX/EX alignment note | Markdown summary of staff enablement needed for the promised experience | `docs/service/cx-ex-alignment.md` |
+
 ## References
 
 - `references/blueprint-construction-and-swimlanes.md` — swimlane structure, lines, evidence, granularity rules.

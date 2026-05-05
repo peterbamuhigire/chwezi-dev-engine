@@ -72,6 +72,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - A prevention entry: knowledge-base update, process change, or accepted-loss note.
 - A follow-up scheduled at an explicit date.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Operability | Service recovery plan | Markdown with acknowledgement, owner, update cadence, escalation, and closure condition | `docs/service/recovery-plan.md` |
+| Release evidence | Support language script set | Markdown library for acknowledgement, referral, escalation, follow-up, and recovery | `docs/service/support-scripts.md` |
+| UX quality | Service quality dashboard definition | Markdown or CSV with response, resolution, recurrence, and satisfaction metrics | `docs/service/service-quality-dashboard.md` |
+
 ## References
 
 - `references/recovery-and-retention-loop.md` for the ten-step loop and exit criteria per step.

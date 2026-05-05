@@ -67,6 +67,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - A scaling and blast-radius plan with isolation boundaries and failure containment rules.
 - A tradeoff matrix used to defend each decision in review.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Release evidence | SaaS architecture strategy memo | Markdown with tenancy, scaling, consumption model, and operating model | `docs/architecture/saas-strategy.md` |
+| Security | Tenant isolation decision record | ADR or markdown table covering isolation boundary and data access controls | `docs/architecture/tenant-isolation-adr.md` |
+| Performance | Scaling and blast-radius checklist | Markdown checklist with load, elasticity, cell, and failure-domain decisions | `docs/architecture/scaling-checklist.md` |
+| Operability | SaaS operations assumptions | Markdown runbook section for upgrades, support, usage, and maintenance windows | `docs/ops/saas-ops-assumptions.md` |
+
 ## References
 - references/multi-tenant-consumption-models.md — pooled, siloed, bridge patterns; tenant tiers; consumption-model selection rules.
 - references/deployment-mapping-and-iaas-assumptions.md — translating architecture building blocks into IaaS configuration; what hypervisors and auto-scalers actually guarantee.

@@ -74,6 +74,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - A next-step commitment: date, owner, deliverable.
 - An objection log feeding the improvement loop.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Release evidence | Premium opportunity qualification note | Markdown with fit score, buyer path, proof needs, and next step | `docs/sales/premium-opportunity.md` |
+| Correctness | Discovery question plan | Markdown question bank mapped to value, risk, budget, and decision criteria | `docs/sales/discovery-plan.md` |
+| Operability | Objection and pricing response log | Markdown table with concern, response, evidence, tradeoff, and follow-up | `docs/sales/objection-log.md` |
+
 ## References
 
 - `references/sales-conversation-arc.md` for the nine-stage arc and stage-exit criteria.

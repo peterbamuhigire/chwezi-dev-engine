@@ -75,6 +75,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Outcome-to-feature traceability matrix.
 - Earn-or-learn milestone plan with kill criteria.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Correctness | Experience map and hypothesis ledger | Markdown or diagram with assumptions, evidence, thresholds, and decision states | `docs/discovery/experience-map.md` |
+| UX quality | Journey-to-requirements matrix | Markdown table mapping stages, pain points, features, content, and metrics | `docs/discovery/journey-requirements-matrix.md` |
+| Release evidence | Alignment workshop decision record | Markdown notes with decisions, owners, and unresolved risks | `docs/discovery/alignment-decisions.md` |
+
 ## References
 
 - `references/hypothesis-and-validation-thresholds.md` — assumption ranking, falsification thresholds, evidence calculus.

@@ -74,6 +74,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Earn-or-learn milestone records with delivery or learning attached to each.
 - A retention/churn signal feed into the next strategy review.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Release evidence | Continuous-improvement cadence | Markdown calendar with daily, weekly, monthly, and quarterly loops | `docs/improvement/cadence.md` |
+| Correctness | Outcome traceability ledger | Markdown or CSV mapping goals, assumptions, actions, evidence, and verdicts | `docs/improvement/outcome-ledger.csv` |
+| Operability | Earn-or-learn milestone plan | Markdown table with target, constraint, learning signal, and decision state | `docs/improvement/milestones.md` |
+| Performance | Capability development plan | Markdown plan linking recurring gaps to skill, system, or process improvements | `docs/improvement/capability-plan.md` |
+
 ## References
 
 - `references/operating-cadence-and-review-loops.md` for the four-level cadence with agenda, owner, and exit criteria.

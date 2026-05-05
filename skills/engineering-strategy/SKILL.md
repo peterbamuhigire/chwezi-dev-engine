@@ -63,6 +63,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - A review cadence entry with falsification evidence and kill / revise criteria.
 - A short companion note for affected teams translating the strategy into their decision context.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Release evidence | Engineering strategy brief | Markdown with diagnosis, policy, actions, owner, and review loop | `docs/strategy/engineering-strategy-2026-q2.md` |
+| Correctness | Strategy review checklist | Markdown table mapping actions to policy clauses and tradeoffs | `docs/strategy/strategy-review.md` |
+| Operability | Strategy operating cadence | Calendar or markdown cadence with falsification evidence and revise/kill criteria | `docs/strategy/operating-cadence.md` |
+
 ## References
 - references/diagnosis-and-leverage.md — how to frame the real problem and locate the leverage point before writing any policy.
 - references/strategy-altitude-and-policy.md — choosing altitude, and what guiding policy looks like at each level.

@@ -76,6 +76,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Lifecycle narrative map with peak/end moments identified per persona.
 - 30 / 60 / 90-day content operations plan when scope warrants.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| UX quality | UX content strategy and voice chart | Markdown with voice principles, UI patterns, and audience rules | `docs/ux/content-strategy.md` |
+| Correctness | UI text QA checklist | Markdown checklist covering buttons, labels, errors, empty states, and confirmations | `docs/ux/ui-text-qa.md` |
+| Performance | Form completion gate | Markdown or CSV with friction, validation timing, and completion metrics | `docs/ux/form-completion-gate.md` |
+| Release evidence | Content measurement plan | Markdown plan with metrics, owners, review cadence, and change log | `docs/ux/content-measurement.md` |
+
 ## References
 
 - `references/voice-chart-construction.md` - deriving voice attributes and the tone-shift table.

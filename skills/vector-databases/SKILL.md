@@ -79,7 +79,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 |----------|----------|--------|---------|
 | Correctness | Retrieval evaluation report | Markdown with recall@k and p95 latency on a fixed eval set | `docs/ai/vector-eval-2026-05.md` |
 | Data safety | Multi-tenant isolation test report | Markdown describing pre-filter pattern and a leakage test result | `docs/ai/vector-tenancy.md` |
-| Cost | Embedding spend baseline | CSV or table of tokens-per-day and USD-per-day | `docs/ai/embedding-cost-baseline.csv` |
+| Operability | Embedding spend baseline | CSV or table of tokens-per-day and USD-per-day | `docs/ai/embedding-cost-baseline.csv` |
 | Operability | Bridge runbook | Markdown covering reindex, ghost-chunk reaping, and rollback | `docs/runbooks/vector-bridge.md` |
 
 ## References

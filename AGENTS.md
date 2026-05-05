@@ -64,6 +64,15 @@ Route work to skills by problem type:
 - Premium sales, client service, retention: `premium-client-sales`, `customer-service-excellence`, `premium-product-positioning`
 - Skill authoring and maintenance: `skill-writing`, `skill-safety-audit`, `update-claude-documentation`
 
+## Cross-Engine Handoffs
+
+- Use this master engineering engine after the proposal and SRS engines have produced delivery commitments, requirements, architecture briefs, or rollout plans that need production implementation.
+- Proposal to SRS: proposal win themes, methodology, scope, pricing assumptions, and support promises become SRS discovery inputs, requirements constraints, acceptance criteria, and evidence obligations.
+- Proposal to website delivery: website proposal scope, content/SEO assumptions, launch promises, support package, and commercial boundaries become website-engine discovery, build, QA, launch, and retainer inputs.
+- SRS to implementation: signed PRD/SRS, HLD/LLD, API/database specs, traceability matrix, test strategy, go-live readiness, and adoption/support plan become this engine's implementation baseline.
+- Implementation to maintenance/support: release evidence, runbooks, observability dashboards, incident history, and known risks hand off to `customer-service-excellence`, `observability-monitoring`, `reliability-engineering`, and the website/proposal support skills where relevant.
+- Website launch to growth: website-engine launch, observability, experimentation, retention, and QBR evidence can feed this engine's analytics, product, reliability, and continuous-improvement skills.
+
 ## Working Model
 
 When using this repository in Codex or Claude Code:
