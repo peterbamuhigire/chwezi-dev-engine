@@ -133,3 +133,14 @@ Guidance is split across two reference files so this entrypoint stays compact.
 - `Gates Before Shipping`
 
 Load the production file when building a RAG system that has to pass evaluation gates, survive multi-tenant review, or hit a cost budget under load.
+## Multi-Tenant Addendum
+
+This skill describes RAG patterns in general. When the RAG feature ships inside a multi-tenant SaaS, the production answer is `ai-rag-multi-tenant` — per-tenant ingestion pipelines, vector store partitioning, tier-specific chunking and embedding models, defence-in-depth retrieval security, and citation grounding tied to live sources.
+
+Cross-references:
+- `ai-rag-multi-tenant` — multi-tenant RAG end-to-end.
+- `ai-tenant-isolation-patterns` — vector-store partitioning tradeoffs and data-bleed tests.
+- `ai-on-saas-architecture` — KB service as a control-plane service.
+- `ai-hallucination-slo-and-grounding` — citation grounding + faithfulness SLO.
+- `ai-model-gateway` — gateway-mediated retrieval calls.
+- `saas-tenant-data-portability-and-erasure` — KB erasure cascade for embeddings.

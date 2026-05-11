@@ -311,3 +311,19 @@ Before going live, verify:
 - `vibe-security-skill` — General web app security baseline
 - `web-app-security-audit` — Full 8-layer security audit
 - `uganda-dppa-compliance` — DPPA 2019 full compliance skill
+## Threat Model + Red-Team Suite
+
+This skill is the AI-security checklist. The deeper threat-model treatment plus the standing red-team test suite live in `ai-prompt-injection-and-tenant-safety`:
+
+- Full STRIDE-adapted threat model template per AI feature.
+- Instruction hierarchy (system → tenant policy → developer → KB → tool → user).
+- Input sanitisation + classifier + boundary tokens.
+- Output filters (PII, cross-tenant leakage, system prompt leakage, exfiltration).
+- Agent action gating (reversible vs irreversible, per-tenant tool allow-list).
+- Red-team test taxonomy and CI suite.
+
+Cross-references:
+- `ai-prompt-injection-and-tenant-safety` — threat model + red team.
+- `ai-tenant-isolation-patterns` — storage-side complement.
+- `ai-model-gateway` — where filters run.
+- `ai-observability-and-debugging` — forensic traces.

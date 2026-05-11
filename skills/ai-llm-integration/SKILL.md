@@ -481,3 +481,15 @@ def log_usage(model: str, usage, tenant_id: int):
 ---
 
 *Sources: OpenAI API docs; Anthropic docs; Aremu — DeepSeek AI (2025); Habib — Building Agents with OpenAI Agents SDK (2025)*
+## Multi-Tenant Production Pattern
+
+This skill covers direct LLM provider integration (SDKs, retries, streaming, tools). In a multi-tenant SaaS, direct SDK calls from feature code are an **architecture violation** — they bypass tenant scoping, per-tenant rate limiting, audit logging, cost attribution, fallback, and the kill-switch. The production answer is an LLM **gateway** as a control-plane service that mediates every call.
+
+Cross-references:
+- `ai-model-gateway` — the LLM gateway design (provider abstraction, model selection per tier, fallback chains, per-tenant rate limit, audit, cost capture).
+- `ai-on-saas-architecture` — gateway as control-plane service.
+- `ai-cost-per-tenant-attribution` — what the gateway feeds.
+- `ai-entitlements-and-feature-gating` — gateway entitlement enforcement.
+- `ai-prompt-injection-and-tenant-safety` — gateway safety-in / safety-out stages.
+
+Use this skill for the bare-metal SDK exploration; promote to `ai-model-gateway` before production traffic.
