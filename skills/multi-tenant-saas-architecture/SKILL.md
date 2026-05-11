@@ -433,3 +433,13 @@ Archival is reversible until a configured retention cut-off; archived tenants ar
 - `references/database-schema.md` — tenant, user, audit, and tenant-scoped table schemas with indexes and partitioning.
 - `references/permission-model.md` — RBAC schema, permission resolution algorithm, caching, middleware, hierarchical and conditional permissions.
 - `documentation/migration.md` — adding `tenant_id` safely, zero-downtime migration, single-to-multi-tenant phases, rollback.
+## AI Services Isolation Addendum
+
+Tenant isolation patterns apply one level deeper when AI is in play. The transactional patterns in this skill (RLS / schema-per-tenant / DB-per-tenant) extend to AI asset classes — vector stores, prompts, fine-tunes, eval datasets, conversation logs, retrieval caches, audit log payloads. The dedicated skill is `ai-tenant-isolation-patterns`.
+
+Cross-references:
+- `ai-on-saas-architecture` — unifying AI+SaaS architecture.
+- `ai-tenant-isolation-patterns` — vector-store partitioning, defence-in-depth, BYOK, data-bleed test suite.
+- `ai-rag-multi-tenant` — RAG-specific isolation.
+- `ai-model-gateway` — enforces tenant scope at the request boundary.
+- `ai-prompt-injection-and-tenant-safety` — prompt-layer adversarial complement.

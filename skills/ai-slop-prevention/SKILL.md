@@ -309,3 +309,12 @@ This skill is a **cross-cutting quality gate**. Reference it from:
 ---
 
 *Source: Impeccable — Design fluency for AI harnesses (Bakaus, 2025). Anti-patterns observed across AI-generated interfaces 2024-2025.*
+## Multi-Tenant Addendum
+
+Anti-slop discipline at platform scale means: per-feature SLOs (faithfulness, abstain), per-tenant golden eval, citation grounding tied to live sources, and rollback when quality regresses.
+
+Cross-references:
+- `ai-eval-harness` — per-tenant goldens, judge-LLM, CI gate.
+- `ai-hallucination-slo-and-grounding` — operational SLO for faithfulness.
+- `ai-rag-multi-tenant` — citation grounding tied to live sources.
+- `ai-feature-rollout-and-experimentation` — auto-rollback on quality regression.

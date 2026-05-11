@@ -357,3 +357,13 @@ Schedule::call(fn() => AIInvoiceGenerationJob::dispatch())->monthlyOn(1, '06:00'
 - `ai-cost-modeling` — Pricing inputs and margin calculations
 - `ai-ux-patterns` — Usage dashboard UX for users and admins
 - `ai-security` — Audit logging alongside metering
+## Scope Clarification + Cross-Links
+
+This skill is the engineering ledger for AI usage (token records, aggregation, retention). Adjacent skills complete the multi-tenant picture:
+
+- `ai-usage-metering-and-billing` — the commercial-billing recipe on top of the ledger: AI credits, included allowance + overage, prepaid packs, Stripe Meters, invoice copy.
+- `ai-cost-per-tenant-attribution` — the internal cost view: realtime per-tenant cost, COGS guardrails, anomaly detection, kill-switches.
+- `ai-model-gateway` — emits the cost-recorded events the ledger consumes.
+- `ai-on-saas-architecture` — control-plane positioning.
+
+Keep this skill as the ledger source-of-truth; promote to the commercial skill for tenant-facing invoicing.

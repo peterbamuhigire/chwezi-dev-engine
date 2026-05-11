@@ -372,3 +372,13 @@ ORDER BY week;
 
 ## Sources
 Chip Huyen — *AI Engineering* (2025) Ch.3–4,10; Chip Huyen — *Designing ML Systems* (2022) Ch.8
+
+## Multi-Tenant Eval Harness
+
+This skill covers evaluation concepts. The engineering of the eval harness as a control-plane service in a multi-tenant SaaS — per-tenant golden datasets, CI gate that blocks regressing prompt/model changes, judge-LLM calibration, production sampling, drift detection, and pre-promotion gates for flagship tenants — lives in `ai-eval-harness`.
+
+Cross-references:
+- `ai-eval-harness` — the harness as a service.
+- `ai-hallucination-slo-and-grounding` — uses eval signals to budget hallucination.
+- `ai-feature-rollout-and-experimentation` — gates rollouts on eval.
+- `ai-on-saas-architecture` — control-plane positioning.

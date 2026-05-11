@@ -116,3 +116,12 @@ Use that deep dive for:
 - `Layer 5: Documentation Validation`
 - `The Validation Loop`
 - Additional deep-dive sections continue in the reference file.
+## Multi-Tenant Addendum
+
+In a multi-tenant SaaS, AI errors are tenant-scoped events with billing and SLO consequences. Always include tenant_id, feature, model_used, prompt_version, request_id in error context, and emit ai.request.failed events on the bus for the cost ledger and SLO calculators.
+
+Cross-references:
+- `ai-model-gateway` — pipeline-stage error semantics.
+- `ai-observability-and-debugging` — trace-driven triage.
+- `ai-hallucination-slo-and-grounding` — what counts as an error vs an abstain.
+- `ai-on-saas-architecture` — control-plane positioning.

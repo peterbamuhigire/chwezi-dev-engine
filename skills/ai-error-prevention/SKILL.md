@@ -105,3 +105,13 @@ Use that deep dive for:
 - `Token Waste Prevention`
 - `Integration with Other Skills`
 - `Summary`
+## Multi-Tenant Addendum
+
+Prevention in a multi-tenant SaaS includes: per-tenant rate limits, per-tenant cost caps, gateway-mediated retries (not feature-side), tenant-scoped fallbacks, and pre-deploy eval gates.
+
+Cross-references:
+- `ai-model-gateway` — gateway as the chokepoint where prevention is enforced.
+- `ai-eval-harness` — CI eval gate prevents regressions reaching production.
+- `ai-feature-rollout-and-experimentation` — staged rollouts + auto-rollback.
+- `ai-tenant-isolation-patterns` — prevents data-bleed regressions.
+- `ai-cost-per-tenant-attribution` — prevents runaway-cost incidents.

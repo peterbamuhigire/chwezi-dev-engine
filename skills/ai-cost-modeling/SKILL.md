@@ -264,3 +264,13 @@ Budget hard cap (USD):  $[n]
 - `ai-metering-billing` — Token ledger and budget enforcement
 - `ai-architecture-patterns` — Budget Guard middleware implementation
 - `ai-opportunity-canvas` — Feature prioritisation by cost tier
+## Operational Attribution Pipeline
+
+This skill covers design-time cost modeling — unit economics, COGS targets, plan-cost reasoning. The **operational** pipeline that attributes every AI request to a tenant in real time (gateway-emitted cost, per-tenant dashboards, anomaly detection, soft/hard ceilings, kill-switch, reconciliation) lives in `ai-cost-per-tenant-attribution`.
+
+Cross-references:
+- `ai-cost-per-tenant-attribution` — operational pipeline.
+- `ai-usage-metering-and-billing` — turning tokens into invoiced units (Stripe Meters recipe).
+- `ai-model-gateway` — captures cost at request close.
+- `ai-entitlements-and-feature-gating` — defines the caps the pipeline guardrails.
+- `ai-on-saas-architecture` — control-plane positioning.
