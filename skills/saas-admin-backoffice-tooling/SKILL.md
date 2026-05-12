@@ -309,3 +309,77 @@ The kill-with-rollback runbook (`ai-agent-reversibility-and-blast-radius` §4) d
 - `vibe-security-skill` — security baseline for the back-office app.
 - `ai-agent-runtime-architecture` — agent task control-plane.
 - `ai-agent-observability-and-replay` — task viewer + replay surfaces.
+
+## §12 SLA-Credit Override + Dispute-Resolution Console (Enhancement)
+
+For agent products, the back-office needs two purpose-built surfaces beyond the standard tenant/billing views: an **SLA-credit override** console and a **dispute-resolution** console. Both share the principle that every keystroke is dual-authed, audit-logged, and links to the verdict / evidence pack.
+
+### SLA-credit override console
+
+Reads from the credit-case ledger produced by `ai-agent-sla-credit-automation`. For each open case the operator sees:
+
+- The breach event (incident link or detection signal).
+- The eligibility decision (auto-approved, auto-denied, needs-review).
+- The proposed credit amount (formula + inputs).
+- The trace bundle + verdict + evidence pack.
+- The per-tenant credit cap remaining for the period.
+
+Actions:
+
+| Action | Requires | Audit fields |
+|---|---|---|
+| Approve as-proposed | single-auth (operator role) | `approved_by`, `approved_at` |
+| Adjust amount | dual-auth (operator + manager) | `original_amount`, `adjusted_amount`, `reason_code`, `manager_id` |
+| Deny | dual-auth | `reason_code` (from enumerated list: `customer_caused` / `force_majeure` / `excluded_class` / `cap_reached`), `denial_text` |
+| Issue mass credit | dual-auth + IC approval link | `incident_id`, `tenant_filter_sql`, `formula_ref` |
+
+Every action emits to the credit-case audit log; the customer-facing dashboard reflects the outcome in < 60 seconds.
+
+### Dispute-resolution console
+
+Reads from the dispute queue produced by `ai-agent-task-success-tracking/references/dispute-resolution.md`. For each open dispute the operator sees:
+
+- Customer-asserted outcome (success or failure).
+- System verdict (`task.success.verdict`) and evidence pack.
+- The judge rationale.
+- Per-tenant dispute volume in the rolling window (abuse signal).
+- The proposed resolution from the rebuttal pipeline.
+
+Actions:
+
+| Action | Effect |
+|---|---|
+| Uphold system verdict | dispute closed; no commercial action |
+| Overturn (success → failed) | refund triggered (`ai-agent-abandonment-and-refund-policy`), revenue de-recognized in current period |
+| Overturn (failed → success) | rebill at resolution price; customer notified |
+| Escalate | dual-auth review queue for the head of CS |
+
+Rate-limit safeguard: if a tenant's overturn-in-customer-favor rate in the rolling 90-day window exceeds the configured chargeback ceiling, the console refuses single-auth overturns and forces escalation.
+
+### Cross-links
+
+- `ai-agent-sla-credit-automation` — case data source.
+- `ai-agent-task-success-tracking` — dispute data source.
+- `ai-agent-abandonment-and-refund-policy` — refund execution invoked from overturns.
+- `dual-auth-rbac` — auth model for the override actions.
+
+---
+
+## Compliance Console (Enhancement)
+
+The back-office adds a **Compliance Console** surface for control owners and (read-only) for auditors.
+
+| Screen | Purpose | Backing service |
+|---|---|---|
+| **Control Status** | One row per SOC 2 / ISO 27001 / HIPAA control; latest evidence pack, cadence health, owner, open exceptions | `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls` |
+| **Run Evidence Collection** | Trigger an ad-hoc collector run (auditor sample request) | `ai-agent-evidence-automation` |
+| **Integrity Verification** | Run a chain-witness over a custom window; show drift positions | `ai-agent-audit-log-integrity` |
+| **Drill Cadence** | All drill classes with last pass date, next-due, status | `ai-agent-drill-evidence-and-cadence` |
+| **Approval Completeness** | Latest PI1.1 report; open gaps | `ai-agent-approval-audit-completeness` |
+| **Erasure Requests** | Open and recent erasure requests with proof-pack links | `ai-agent-memory-erasure-proof`, `saas-tenant-data-portability-and-erasure` |
+| **Exception Register** | All open compliance exceptions sortable by control / severity / target-close | `ai-agent-soc2-controls` |
+| **Auditor Portal** | Read-only auditor sub-surface (separate auth realm, scoped to packs) | `ai-agent-evidence-automation` |
+
+All Compliance Console actions are themselves logged onto the action audit log with `event_class=compliance_console`. Auditor-portal access is logged separately into `auditor_access_log` (evidence for CC6.1).
+
+Cross-links: `ai-agent-evidence-automation`, `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-drill-evidence-and-cadence`, `ai-agent-approval-audit-completeness`, `ai-agent-memory-erasure-proof`, `ai-agent-control-testing-and-attestation`.

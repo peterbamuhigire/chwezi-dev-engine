@@ -6,6 +6,24 @@ The repository is designed to help Claude Code and Codex produce systems that ar
 
 The baseline is now aimed at world-class software development, engineering, and management: software that solves expensive real problems, feels excellent to use, operates reliably, evolves safely, and becomes more valuable as the team scales.
 
+## Recent additions (May 2026)
+
+Major SaaS and AI-on-SaaS engineering layer added through five paired sessions across this engine and three sister engines (`srs-skills`, `proposal-skills`, `business-plan-skills`).
+
+**SaaS engineering core (10 skills + 9 enhancements):** `saas-control-plane-engineering`, `saas-tenant-onboarding-automation`, `saas-deployment-models` (silo / pool / mixed-mode / pod decision tree), `saas-entitlements-and-plan-gating`, `saas-transactional-email-infrastructure`, `saas-lifecycle-email-orchestration`, `saas-admin-backoffice-tooling`, `saas-sso-scim-enterprise-auth`, `saas-tenant-data-portability-and-erasure`, `saas-rate-limiting-and-quotas`.
+
+**AI-on-SaaS (12 skills + 15 enhancements):** `ai-on-saas-architecture` (AI control plane), `ai-model-gateway`, `ai-tenant-isolation-patterns`, `ai-cost-per-tenant-attribution`, `ai-usage-metering-and-billing`, `ai-entitlements-and-feature-gating`, `ai-eval-harness`, `ai-hallucination-slo-and-grounding`, `ai-prompt-injection-and-tenant-safety`, `ai-feature-rollout-and-experimentation`, `ai-observability-and-debugging`, `ai-rag-multi-tenant`.
+
+**Agent products (12 skills + 9 enhancements):** `ai-agent-runtime-architecture` (promotes AI control plane from 5 to 6 services), `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-action-approval-and-hitl`, `ai-agent-reversibility-and-blast-radius`, `ai-agent-memory`, `ai-agent-multi-agent-coordination`, `ai-agent-cost-and-step-budgets`, `ai-agent-eval`, `ai-agent-observability-and-replay`, `ai-agent-safety-and-red-team`, `ai-agent-async-and-long-running-tasks`, `ai-agent-mobile-and-web-ux-patterns`.
+
+**AI incident response (8 skills + 9 enhancements):** `ai-incident-detection-and-triage`, `ai-incident-response-runbook` (10 per-failure-class playbooks), `ai-incident-evidence-capture`, `ai-incident-customer-comms`, `ai-incident-postmortem`, `ai-rca-taxonomy`, `ai-incident-recovery-and-rollback`, `ai-incident-drill-and-game-day`.
+
+**Agent SLA + commercial (8 skills + 8 enhancements):** `ai-agent-sla-and-commitments`, `ai-agent-task-success-tracking`, `ai-agent-sla-credit-automation`, `ai-agent-attempted-vs-completed-billing`, `ai-agent-abandonment-and-refund-policy`, `ai-agent-customer-sla-dashboard`, `ai-agent-pricing-engine`, `ai-agent-revenue-recognition` (with double-entry ledger and month-end-close pipeline).
+
+**Agent compliance (9 skills + 11 enhancements):** `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity` (SHA-256 hash chain), `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`, `ai-agent-approval-audit-completeness`, `ai-agent-drill-evidence-and-cadence`, `ai-agent-memory-erasure-proof` (9-step cascade with independent verification probes).
+
+**Book extractions** (in `book-extractions/`): 7 SaaS books distilled through the engineering lens plus 6 audit documents capturing the rationale for each session.
+
 ## What Skills Are
 
 Skills are markdown instruction packages that encode reusable engineering judgment:

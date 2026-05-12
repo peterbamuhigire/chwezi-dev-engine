@@ -294,3 +294,34 @@ Push notification payload:
 - Standing approval with no scope and no expiry. Power user gets phished, agent drains the org.
 - Approval payload renders the agent's free-text plan only. User cannot inspect actual arguments.
 - Mobile approval that doesn't re-auth before an irreversible action.
+
+---
+
+## §10 Approval Events as Compliance Evidence (Enhancement)
+
+Every approval event is a **compliance evidence point** for SOC 2 PI1.1 (system processing complete, accurate, timely, and authorised) and ISO 27001 A.9.4.1 (information access restriction). The approval record is the proof.
+
+Schema additions for evidence-grade approvals:
+
+```sql
+ALTER TABLE approvals ADD COLUMN signature             TEXT NOT NULL;     -- ed25519 over canonical row
+ALTER TABLE approvals ADD COLUMN signature_key_id      VARCHAR(64) NOT NULL;
+ALTER TABLE approvals ADD COLUMN linked_action_chain_pos BIGINT NOT NULL; -- audit log chain pos of the action
+ALTER TABLE approvals ADD COLUMN policy_version        VARCHAR(32) NOT NULL;
+ALTER TABLE approvals ADD COLUMN dual_approver_id      VARCHAR(128);
+ALTER TABLE approvals ADD COLUMN dual_approver_signature TEXT;
+```
+
+When an approval is granted:
+
+1. Compute the canonical bytes (sorted keys, deterministic field set).
+2. Sign with the approver's per-session key (delegated from SSO + 2FA; key validity ≤ 24h).
+3. Capture `linked_action_chain_pos` from the audit log emitter so completeness checks can verify chain linkage (see `ai-agent-approval-audit-completeness`).
+4. Emit `approval_received` event onto the action audit log with the signature embedded in `payload_summary`.
+
+Approvals where:
+- `approver_id == initiator_id` → reject (self-approval).
+- `approver_id NOT IN allowlist_at(tenant_id, policy_version)` → reject (unauthorised).
+- `dual_approver_required AND dual_approver_id IS NULL` → reject (incomplete).
+
+Cross-links: `ai-agent-approval-audit-completeness` (the completeness check that consumes these rows), `ai-agent-audit-log-integrity` (chain storage), `ai-agent-soc2-controls` (PI1.1).

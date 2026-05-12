@@ -275,3 +275,93 @@ Every dashboard links into the task viewer for drill-down.
 - No retention policy on traces. Cost + compliance disaster.
 - "Show me why" surface that's just the LLM's chain-of-thought, no tool spans. Misleading.
 - Dashboards that aggregate without drill-down. Trends without diagnosis.
+
+## §9 Task-Success Evidence as a First-Class Trace Field (Enhancement)
+
+The trace bundle is the **evidence pack** the SLA credit pipeline, the dispute-resolution flow, and the auditor all read. Task-success evidence is not a side artifact — it lives in the trace.
+
+### Required trace fields
+
+Every task trace adds these top-level fields once the success-tracking cascade has produced a verdict:
+
+| Field | Type | Description |
+|---|---|---|
+| `task.success.verdict` | enum | `resolved` / `failed` / `attempted_only` / `abandoned` |
+| `task.success.verdict_source` | enum | `heuristic` / `llm_judge` / `human_verifier` |
+| `task.success.confidence` | float | 0.0–1.0 (judge output) |
+| `task.success.evidence_ref` | string | URI to the evidence JSON in object storage |
+| `task.success.policy_version` | string | success-contract version pinned for the verdict |
+| `task.success.verdict_at` | ISO-8601 | when the verdict was finalized |
+| `task.success.disputed` | bool | true if a dispute is currently open |
+| `task.success.dispute_outcome` | enum / null | `upheld` / `overturned` / `pending` |
+| `task.success.refund_event_id` | string / null | if a refund was issued |
+| `task.success.sla_credit_event_id` | string / null | if a credit was issued |
+
+### The evidence JSON
+
+`evidence_ref` points to an immutable object (S3 / GCS with object lock) containing:
+
+```json
+{
+  "task_id": "...",
+  "verdict": "resolved",
+  "verdict_source": "llm_judge",
+  "judge_model": "claude-opus-4-7@2026-04",
+  "judge_prompt_hash": "sha256:...",
+  "evidence_inputs": {
+    "user_goal": "...",
+    "agent_final_response": "...",
+    "tool_calls_summary": "...",
+    "heuristic_signals": { "user_replied_thanks": true, "no_followup_24h": true }
+  },
+  "judge_output": { "verdict": "resolved", "rationale": "...", "confidence": 0.92 },
+  "human_override": null,
+  "created_at": "2026-05-12T10:14:09Z"
+}
+```
+
+### Why it lives in the trace
+
+- **Disputes:** the customer (or CS rep) opens the trace and sees the *exact* reasoning that produced the verdict.
+- **SLA credits:** the credit-issuance pipeline (`ai-agent-sla-credit-automation`) embeds the `evidence_ref` in the audit-log row, so 18 months later an auditor can reconstruct *why* a credit was issued.
+- **Regulator retention:** for financial-services tenants the evidence pack is part of the 7-year retention scope (SOX) or 10-year (MiFID II).
+
+### Retention
+
+- `task.success.evidence_ref` objects retain for **min(tenant_policy, regulatory_floor)**.
+- The trace itself may be aged out to cheaper storage; the evidence JSON stays in the original bucket.
+- Object-lock prevents tampering between verdict and dispute deadline.
+
+### Cross-links
+
+- `ai-agent-task-success-tracking` — produces the verdict and the evidence ref.
+- `ai-agent-sla-credit-automation/references/credit-issuance-pipeline.md` — consumes the evidence ref.
+- `ai-agent-revenue-recognition/references/month-end-close-pipeline.md` — requires `verdict_ref` on every revenue line.
+
+---
+
+## Replay Availability as Compliance Evidence (Enhancement)
+
+Replay availability is an auditable control for SOC 2 **Availability (A1.3, recovery)** and **Processing Integrity (PI1.5, re-processing)** and for ISO 27001 **A.12.4 (logging) + A.17.1 (continuity)**.
+
+A monthly **replay-availability test** picks a random sample of N=50 historical tasks (stratified by tool class and tenant) and re-runs them through the replay harness. Pass criteria:
+
+- 100% of tasks resolve to a deterministic trajectory or to a documented non-determinism reason (provider-side randomness, retired tool).
+- Median replay latency ≤ 1.5× the original task latency.
+- No replay attempt fails to fetch prompt registry / tool registry state at task time.
+
+The test emits an evidence pack:
+
+```
+evidence/availability/replay/{YYYY-MM}/
+├── manifest.json
+├── sample.jsonl                # the 50 sampled tasks
+├── replay-results.jsonl        # per-task: deterministic / drifted / unreplayable
+├── latency-distribution.json
+├── attestation.txt
+└── signature.sig
+```
+
+Cadence: monthly, recorded in `ops/compliance/evidence-cadence.yaml` as `availability_replay_test`. Failed runs open a `high` exception against A1.3 and PI1.5.
+
+Cross-links: `ai-agent-soc2-controls` (A1.3, PI1.5), `ai-agent-iso27001-controls` (A.12.4, A.17.1), `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.

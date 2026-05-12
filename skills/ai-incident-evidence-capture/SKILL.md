@@ -236,3 +236,22 @@ See `references/reproduce-script-template.md`.
 - No retention policy — evidence destroyed in the routine 30-day cleanup before postmortem completes.
 - Redaction is "responder removed what they thought was PII" — inconsistent, sometimes too much, sometimes too little.
 - Unredacted vault accessible to every engineer — privacy violation by way of incident response.
+
+---
+
+## §7 Compliance-Evidence Superset (Enhancement)
+
+The incident-evidence-bundle pipeline generalises into the **compliance-evidence superset** consumed by `ai-agent-evidence-automation`. There are two triggers:
+
+| Trigger | Pipeline output |
+|---|---|
+| **Incident** (page, sev1-3) | Per-incident bundle (this skill's primary use case) |
+| **Cadence** (cron) | Per-control evidence pack (`ai-agent-soc2-controls`, ISO, HIPAA) |
+
+Both share the **same pack format** (manifest + files + signature), the **same evidence vault**, and the **same auditor portal** index. The difference is metadata: `trigger_kind ∈ {incident, cadence, ad_hoc_request}` and `control_id` (cadence) vs `incident_id` (incident).
+
+Implementation: factor the `EvidencePack` writer out of the incident pipeline into `compliance.evidence_pack` (shared with `ai-agent-evidence-automation`); the incident pipeline becomes one consumer. An incident bundle that is **also** material to a SOC 2 control (e.g. a kill-switch flip during an incident) is cross-linked via `related_control_ids` and is sampled by the auditor when reviewing that control window.
+
+The retention policy is the **maximum** of the incident retention and the control's retention class.
+
+Cross-links: `ai-agent-evidence-automation`, `ai-agent-soc2-controls` (CC7.4), `ai-agent-iso27001-controls` (A.16.1), `ai-agent-audit-log-integrity`.

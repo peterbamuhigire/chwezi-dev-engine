@@ -157,3 +157,56 @@ If containment doesn't verify within target, the mitigation failed. Move to seco
 - No handoff into recovery; incident closed when signal recovers, leaving the rollback as the new permanent state.
 - Comms not part of the runbook — operator focuses on tech, customers find out from Twitter.
 - Mitigation primitive log isn't structured — postmortem cannot reconstruct what was flipped when.
+
+## §6 SLA-Impact Incident Class (Enhancement)
+
+In addition to the standard incident classes (latency / error / safety / cost / security), agent-stack operations introduce an **SLA-impact** class. The class is asserted by the IC during triage and triggers the **auto-credit-issuance branch** during the incident.
+
+### What qualifies as an SLA-impact incident
+
+| Pattern | SLA-impact? |
+|---|---|
+| Resolution rate drops > 20% from baseline for > 15 min on a tenant whose tier commits a floor | Yes |
+| TTR p95 doubles for > 30 min on a tier with a TTR commitment | Yes |
+| Single irreversible-action escape | Yes (zero-target — always) |
+| Kill-switch response > committed RTO | Yes |
+| Feature-availability for a metered agent feature < SLO for > 5 min | Yes |
+| Internal SLO miss with no customer-observable impact | No |
+| Cost spike contained without customer effect | No |
+
+The IC declares SLA-impact via a structured field in the incident record (`incident.sla_impact = true`, plus `incident.affected_tenants` and `incident.commitment_dimension`).
+
+### The auto-credit branch
+
+Once declared, the runbook adds three obligations:
+
+1. **Evidence pack snapshot** — at incident start, dump the trace bundle, the success-tracking counters, and the relevant SLOs for the affected tenants. This pack becomes the input to the SLA-credit pipeline (`ai-agent-sla-credit-automation`).
+2. **Mass-credit posture** — for incidents affecting > 5 tenants, the runbook switches from per-tenant credit issuance to **mass-credit mode**: a single decision in the back-office (`saas-admin-backoffice-tooling`) applies the credit formula to every affected tenant simultaneously, with one combined audit-log row.
+3. **Customer comms gating** — the SLA-credit notification email **must not** be sent before the Stripe credit-note has acknowledged. Race condition: customer receives "we credited you $X" and the credit doesn't appear in the dashboard. Mitigation: send the public-status update first, then the per-tenant credit emails after the credit-note webhook has fired.
+
+### Incident → credit handoff payload
+
+When the IC declares an SLA-impact incident, the runbook publishes:
+
+```json
+{
+  "incident_id": "INC-2026-05-12-014",
+  "declared_at": "2026-05-12T10:18:00Z",
+  "sla_impact": true,
+  "affected_features": ["support_copilot"],
+  "affected_tenants_query": "tier in ('business','enterprise') and feature_used('support_copilot') in window",
+  "commitment_dimension": "resolution_rate_floor",
+  "breach_window": {"start": "2026-05-12T10:00", "end": null},
+  "evidence_pack_uri": "s3://incidents/INC-2026-05-12-014/evidence/",
+  "credit_formula_ref": "sla-class-table.md#business_tier"
+}
+```
+
+`ai-agent-sla-credit-automation` subscribes to this signal and opens credit cases automatically — gated by its own eligibility-rules pipeline (`eligibility-rules.md`).
+
+### Cross-links
+
+- `ai-agent-sla-credit-automation` — disbursement layer.
+- `ai-agent-sla-and-commitments` — commitment definitions that drive the breach test.
+- `ai-incident-customer-comms` — comms templates for SLA-impact incidents.
+- `saas-admin-backoffice-tooling` — mass-credit console.

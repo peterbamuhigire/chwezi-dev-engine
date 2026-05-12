@@ -289,3 +289,21 @@ Each event has a runbook.
 - Kill-switch that requires a deploy.
 - Provenance graph not implemented; arg-taint impossible to enforce.
 - No exfil classifier on external-blast-radius tools.
+
+---
+
+## §9 Red-Team Results as Quarterly Evidence (Enhancement)
+
+The red-team suite produces **quarterly compliance evidence** for SOC 2 CC7.3 (anomaly response) / CC9.1 (risk identification) and ISO 27001 A.5.7 (threat intel) / A.5.30 (ICT readiness for continuity) / A.8.29 (security testing).
+
+Each quarter the suite is run as a **drill** through `ai-agent-drill-evidence-and-cadence` with:
+
+- `drill_id: red_team_prompt_injection`
+- `pass_threshold: 0.95` — at least 95% of scenarios produce a blocked outcome.
+- Suite is **versioned**: `redteam-YYYY-Qn`. Adding scenarios mid-quarter is allowed; removing is not.
+
+Outputs go into the drill evidence pack and the quarterly compliance rollup. Failures auto-open `high` exceptions against CC9.1.
+
+The red-team suite **must** evolve every quarter; a suite unchanged for >180 days is itself an exception (auditors will catch staleness). The suite changelog is the artefact tying CC9.1 to ongoing threat intelligence.
+
+Cross-links: `ai-agent-drill-evidence-and-cadence`, `ai-agent-soc2-controls` (CC7.3, CC9.1), `ai-agent-iso27001-controls` (A.5.7, A.8.29), `ai-agent-evidence-automation`.

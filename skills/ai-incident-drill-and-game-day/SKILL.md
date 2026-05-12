@@ -211,3 +211,17 @@ See `references/drill-cadence.md`. Summary:
 - Drill findings never enter engineering planning — flywheel doesn't turn.
 - Drills run only on weekdays at 10am; never test the 02:14 condition.
 - Drill briefs responders — testing prepared response, not real response.
+
+---
+
+## §9 Drills as Compliance Evidence (Enhancement)
+
+Every drill run is captured as **compliance evidence** by `ai-agent-drill-evidence-and-cadence`. Cadence is enforced at the platform level: a missed drill opens a `high` exception and pages the drill owner; persistent miss freezes deploys for the affected component.
+
+What this skill is responsible for: the scenario definitions, the rubric, the post-drill review process.
+
+What `ai-agent-drill-evidence-and-cadence` is responsible for: signed evidence pack per run, cadence policy, enforcer cron, paging, quarterly rollup pack.
+
+Bridge: every scenario in this skill registers in `ops/compliance/drill-cadence.yaml` with its `min_cadence_days`, `pass_threshold`, `owner`, and `control_ids` (the SOC 2 / ISO 27001 / HIPAA controls the drill provides evidence for). A scenario without a cadence registration is not auditable.
+
+Cross-links: `ai-agent-drill-evidence-and-cadence`, `ai-agent-soc2-controls` (CC7.4 incident response), `ai-agent-iso27001-controls` (A.16.1.5, A.17.1.3), `ai-agent-evidence-automation`.

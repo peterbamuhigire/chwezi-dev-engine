@@ -265,3 +265,43 @@ Behind each line, a link to a usage drilldown that matches the credit ledger.
 - `ai-model-gateway` — emits `ai.cost.recorded`.
 - `saas-rate-limiting-and-quotas` — runtime enforcement of overage caps.
 - `subscription-billing` — broader billing context.
+
+## §11 Agent Event Family (Enhancement)
+
+For agent products, the meter ingests a dedicated event family in addition to the token / generation / credit events above. These events feed the **pricing engine** (`ai-agent-pricing-engine`), the **SLA dashboard** (`ai-agent-customer-sla-dashboard`), and the **revenue recognition** pipeline (`ai-agent-revenue-recognition`).
+
+### `agent.task.*`
+
+| Event | Emitted when | Required fields |
+|---|---|---|
+| `agent.task.started` | task enters `ACTING` | `task_id`, `tenant_id`, `feature`, `started_at`, `attempt_no` |
+| `agent.task.attempted` | task reaches any terminal state with `verdict in ('failed','attempted_only')` | `task_id`, terminal_state, `attempt_no`, `verdict_ref` |
+| `agent.task.abandoned` | task ends with `verdict='abandoned'` | `task_id`, `abandonment_class` (technical / user-abort / out-of-scope / budget-exceeded) |
+
+### `agent.resolution.*` (the billable line)
+
+| Event | Emitted when | Required fields |
+|---|---|---|
+| `agent.resolution.completed` | success-tracking cascade produces verdict='resolved' | `task_id`, `verdict_ref`, `evidence_ref`, `pricing_rule_version`, `unit_cost_minor`, `currency` |
+| `agent.resolution.disputed` | customer files a dispute | `task_id`, `dispute_id`, `original_verdict` |
+| `agent.resolution.overturned` | dispute upheld; verdict flips | `task_id`, `dispute_id`, `new_verdict`, `refund_event_id` |
+
+### `agent.intervention.*`
+
+| Event | Emitted when | Required fields |
+|---|---|---|
+| `agent.intervention.recorded` | HITL approval / edit / takeover happened during the task | `task_id`, `intervention_class` (full-credit / shared-credit / no-credit), `human_minutes`, `decision_ref` |
+
+### Meter contract
+
+- All events carry `idempotency_key = "agent_event:{task_id}:{event_type}:{seq}"`.
+- All events are written to the same `usage_meter` table; the pricing engine consumes them by `event_type`.
+- `agent.resolution.completed` is the *only* event that produces a billable line in the per-resolution pricing model; `agent.task.attempted` may produce a billable line in the attempted-only pricing model (`ai-agent-attempted-vs-completed-billing`).
+- The meter writes are **eval-gated** for resolutions: the consumer waits for the verdict before counting (see `ai-agent-eval` enhancement).
+
+### Cross-links
+
+- `ai-agent-pricing-engine` consumes these events through the price-rule resolver.
+- `ai-agent-attempted-vs-completed-billing` defines which events bill and at what price.
+- `ai-agent-sla-credit-automation` consumes `agent.resolution.disputed` and breach signals.
+- `ai-agent-customer-sla-dashboard` aggregates these events into the customer-facing surface.

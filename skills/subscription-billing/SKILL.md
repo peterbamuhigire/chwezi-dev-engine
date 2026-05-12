@@ -358,6 +358,50 @@ Recommendation table:
 - Cash collection and revenue recognition are separate ledgers; subscription, invoice, and entitlement state must reconcile.
 - Revenue metrics must be reproducible from raw billing data, not spreadsheet folklore.
 
+## Agent Line-Item Patterns (Enhancement)
+
+When the subscription drives an agent product, four line-item patterns appear on the invoice. Engineer them as **named, distinct** Stripe price IDs — not as opaque "Usage" lines — so finance, dispute teams, and customers can reconcile them.
+
+### Pattern 1 — Per-resolution price
+
+- Stripe `Price` model: `usage_type='metered', aggregate_usage='sum'`.
+- Meter: `agent_resolutions_completed_{feature}`.
+- Reported by `ai-usage-metering-and-billing` on `agent.resolution.completed` (verdict='resolved').
+- Invoice line label: `"{Feature} — Resolutions (completed)"`.
+
+### Pattern 2 — Attempted-only price
+
+- Separate `Price` from Pattern 1, typically 20–40% of the resolution unit price.
+- Meter: `agent_tasks_attempted_only_{feature}`.
+- Reported on `agent.task.attempted` when the tier's pricing policy bills for attempts (see `ai-agent-attempted-vs-completed-billing/references/attempt-classification.md`).
+- Invoice line label: `"{Feature} — Attempted (no resolution)"`.
+
+### Pattern 3 — SLA credit
+
+- Stripe **credit note**, not a negative invoice line.
+- Issued by the SLA-credit pipeline (`ai-agent-sla-credit-automation`).
+- Reason text on the credit note carries the breach metadata: `"SLA breach: resolution_rate_floor — period 2026-05 — eligible_amount $X"`.
+- Reconciles to the `4920 SLA Credits Issued — Agent` contra-revenue account (see `ai-agent-revenue-recognition/references/deferred-revenue-and-refund-reserves.md`).
+
+### Pattern 4 — Abandonment refund
+
+- Stripe **refund** against the original PaymentIntent (or invoice credit for net-30 customers).
+- Issued by the abandonment-and-refund pipeline (`ai-agent-abandonment-and-refund-policy`).
+- Reason text: `"Abandonment refund — class={technical|out-of-scope} — task={task_id}"`.
+- Reconciles via the refund reserve.
+
+### Don't conflate the four
+
+A common anti-pattern is one negative line "Discount". The four patterns have **different ledger accounts**, **different auditor scrutiny**, and **different customer-comms templates**. They must remain distinguishable in the billing system, the GL, and the customer invoice.
+
+### Cross-links
+
+- `ai-agent-pricing-engine` — resolves which Price ID applies per event.
+- `ai-agent-attempted-vs-completed-billing` — defines pattern 1 vs pattern 2 selection.
+- `ai-agent-sla-credit-automation` — issues pattern 3.
+- `ai-agent-abandonment-and-refund-policy` — issues pattern 4.
+- `ai-agent-revenue-recognition` — booking of all four patterns.
+
 ## Companion Skills
 
 - [../stripe-payments/SKILL.md](../stripe-payments/SKILL.md): Stripe primitives — PaymentIntents, webhook signature verification, 3DS / SCA, idempotency.

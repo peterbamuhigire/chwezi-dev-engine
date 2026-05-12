@@ -283,3 +283,15 @@ Cross-references:
 - `ai-rag-multi-tenant` — KB erasure cascade.
 - `ai-on-saas-architecture` — AI audit log retention.
 - `ai-observability-and-debugging` — trace retention.
+
+---
+
+## Agent-Memory Erasure Proof (Enhancement)
+
+For tenants whose erasure includes agent-derived memory (working, episodic, semantic, vectors, fine-tune corpora, uploads, derivatives), the agent-memory leg is delegated to **`ai-agent-memory-erasure-proof`**. That skill runs the 9-step cascade, then runs **independent verification probes** (separate code path) to assert residue=0 across every tier, then emits a **signed proof-of-erasure pack** (manifest + step records + verification + subprocessor receipts + audit-log redaction record + DPO signature).
+
+This skill's orchestrator invokes the agent-memory leg as one of its tier coordinators; the produced pack is referenced from the tenant erasure response and retained as compliance evidence for ≥6 years.
+
+Audit-log entries about the tenant / subject are **redacted, not deleted** — see `ai-agent-audit-log-integrity`. Deleting log rows destroys the evidence that the erasure happened.
+
+Cross-links: `ai-agent-memory-erasure-proof`, `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls` (C1.2, P5), `ai-agent-hipaa-security-controls`, `uganda-dppa-compliance`.

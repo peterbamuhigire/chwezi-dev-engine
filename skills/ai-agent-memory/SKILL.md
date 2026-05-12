@@ -189,3 +189,28 @@ Three modes per tenant:
 - Memory shared across the customer's org without scoping. User A's preferences applied to user B's session.
 - Erasure that deletes the user but leaves vector embeddings (foreign keys, anyone?).
 - Memory writes with no confidence score — every later retrieval treats them as ground truth.
+
+---
+
+## §8 Retention and Erasure (Enhancement)
+
+Each memory tier carries a **retention class** consumed by the compliance pipeline.
+
+| Tier | Default retention | Regulatory minima |
+|---|---|---|
+| Working memory | session-end + 24h grace | none |
+| Episodic | 90 days (configurable per tenant) | GDPR storage-limitation; HIPAA 6y if PHI |
+| Semantic (entity graph) | until subject-erasure or 7y | GDPR storage-limitation; HIPAA 6y |
+| Vectors | parallel to source tier | parallel |
+| Fine-tune corpora | tied to model lineage; explicit retain-or-retrain decision on erasure | GDPR Art. 17(3) lawful basis or retrain |
+| Uploads | configurable per tenant | per data class |
+| Derivatives | parallel to source tier | parallel |
+
+Per-tier deletion functions **must** be idempotent and **must** wait on replication drain — they are invoked by the 9-step cascade in `ai-agent-memory-erasure-proof`. After every cascade run, the independent verification probes (separate code path) must return residue=0; otherwise the erasure request is held back from notification.
+
+Cross-links:
+
+- **`ai-agent-memory-erasure-proof`** — the verification job and the proof-of-erasure pack consumer.
+- **`saas-tenant-data-portability-and-erasure`** — whole-tenant erasure that fans into agent-memory leg.
+- **`ai-agent-soc2-controls`** — C1.2 (confidential disposal), P5 (retention and disposal).
+- **`ai-agent-hipaa-security-controls`** — PHI-tier constraints.
