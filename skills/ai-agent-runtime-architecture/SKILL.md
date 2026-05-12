@@ -198,3 +198,29 @@ Tools that cannot accept an idempotency key (legacy APIs) must be wrapped in an 
 - Tool-call idempotency keys derived from `random.uuid()`.
 - Logging the plan but not persisting it — replay is impossible.
 - The agent loop process is the same process as the web app — runaway OOM crashes API.
+
+---
+
+## §8 Compliance-Evidence Emissions (Enhancement)
+
+Every state-machine transition emits a **compliance event** onto the hash-chained action audit log (`ai-agent-audit-log-integrity`). The runtime is the canonical source of compliance evidence for `ai-agent-soc2-controls` CC7.2 (monitoring), PI1.1 (processing integrity), and `ai-agent-iso27001-controls` A.12.4 (logging).
+
+Minimum event taxonomy emitted by the loop:
+
+| Transition | `event_class` | Required fields |
+|---|---|---|
+| Task accepted | `task_accepted` | task_id, tenant_id, agent_id, intent_summary, policy_version |
+| Plan committed | `plan_committed` | task_id, plan_hash, step_count |
+| Tool call started | `tool_call_started` | task_id, step_index, tool_name, tool_version, reversibility, data_class |
+| Tool call ended | `tool_call_ended` | task_id, step_index, outcome, idempotency_key, latency_ms |
+| Approval required | `approval_required` | task_id, step_index, tool_name, approver_role |
+| Approval received | `approval_received` | task_id, step_index, approval_id, approver_id |
+| Kill-switch flipped | `kill_switch_flipped` | scope, actor, reason, drill_run_id (nullable) |
+| Budget breached | `budget_breached` | task_id, budget_kind, threshold, observed |
+| Memory write | `memory_write` | task_id, tier, retention_class, subject_id (hashed) |
+| Erasure step | `erasure_step` | request_id, step, status |
+| Task closed | `task_closed` | task_id, terminal_state, verdict_ref |
+
+Every event carries `policy_version` so historical authority checks resolve correctly (see `ai-agent-approval-audit-completeness`). Emissions are synchronous on the critical path for irreversible-action transitions and `kill_switch_flipped`; everything else may be batched with at-most-1s drain.
+
+Cross-links: `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls`, `ai-agent-evidence-automation`, `ai-agent-approval-audit-completeness`.

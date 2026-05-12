@@ -386,3 +386,50 @@ Cross-references:
 - `ai-cost-per-tenant-attribution` — soft/hard ceilings with comms.
 - `ai-rag-multi-tenant` — KB-side caps.
 - `ai-on-saas-architecture` — overall architecture.
+
+## Quota Breach → SLA Implications (Enhancement)
+
+Not every quota breach is an SLA event. The platform commits to *enforcement*, not to *unlimited capacity*. The mapping below classifies each breach so the SLA-credit pipeline (`ai-agent-sla-credit-automation`) can route correctly.
+
+### Classification matrix
+
+| Breach pattern | Customer-observable? | SLA-impact? | Treatment |
+|---|---|---|---|
+| Tenant hits committed monthly quota (e.g., 50k tasks/Pro) | Yes (429 / "limit reached") | **No — expected guard** | UX: clear comms + upsell prompt; no credit. |
+| Tenant hits a *soft* ceiling we set (cost protection) | Yes (slowed or refused) | **No — platform self-protection** | UX: notify tenant; document in account. |
+| Tenant blocked because a *neighbor* exhausted shared pool (noisy-neighbor) | Yes (429 on tenant who didn't breach) | **Yes — eligible breach** | Pool isolation fix; credit the affected tenant. |
+| Platform-wide quota mis-configuration blocking tenants under their committed cap | Yes | **Yes — eligible breach** | Mass-credit via incident pipeline. |
+| Tenant blocked due to negotiated bespoke cap they signed | Yes | **No — customer-caused** | No credit; comms cite the contract. |
+| Burst rate-limit fires during agent task → task aborts | Sometimes | **Conditional** — eligible if tier commits resolution rate AND breach traces to platform side |
+| Burst rate-limit fires because tenant launched 10k concurrent tasks | Yes | **No — customer-caused** | Document in audit. |
+
+### Emitted classification
+
+When a quota breach terminates a billable event (task abort, refused request), the limiter emits:
+
+```json
+{
+  "event": "quota.breach.classified",
+  "tenant_id": "...",
+  "quota_key": "tasks_per_month | tokens_per_min | concurrent_tasks | ...",
+  "limit": 50000,
+  "consumed": 50001,
+  "scope": "committed | soft | shared_pool",
+  "cause": "tenant_traffic | neighbor_traffic | platform_misconfig | tenant_bespoke_cap",
+  "sla_classification": "expected_guard | eligible_breach | customer_caused",
+  "task_id": "...",
+  "timestamp": "..."
+}
+```
+
+The SLA-credit pipeline subscribes to events with `sla_classification='eligible_breach'`.
+
+### Pool isolation principle
+
+Shared-pool quotas (rate-limit buckets that several tenants draw from) are the most common source of accidental eligible breaches. Pool design should prefer **per-tenant buckets** for any quota that gates a committed SLA dimension. Where shared pools must remain, the SLA-class table (`ai-agent-sla-and-commitments`) should explicitly call out the elevated breach probability.
+
+### Cross-links
+
+- `ai-agent-sla-credit-automation/references/eligibility-rules.md` — consumes the `sla_classification` field.
+- `ai-agent-sla-and-commitments` — defines which quotas map to committed dimensions.
+- `ai-agent-cost-and-step-budgets` — inner quota layer with its own SLA handoff.

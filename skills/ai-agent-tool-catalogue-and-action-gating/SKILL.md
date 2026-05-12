@@ -194,3 +194,36 @@ Observability: every tool call writes a span with `tool.name`, `tool.version`, `
 - Tool description-for-model that lists more than 6 use cases. The model gets confused; tool routing degrades.
 - Side-effect budgets only enforced "in the application layer" with no atomic counter. Race conditions allow burst above limit.
 - Tool returns the raw provider object. Provider field rename breaks the agent and leaks PII.
+
+---
+
+## §8 Compliance-Relevant Tool Metadata (Enhancement)
+
+Every tool registration emits compliance-relevant metadata that downstream controls consume. The registry is the **asset register** for ISO 27001 A.8 (asset management for tools, prompts, models) and feeds SOC 2 CC6.1 (logical access).
+
+Required registration fields:
+
+```yaml
+- tool_id: stripe.refund.create
+  version: 1.4.0
+  description_for_model: "Refund a Stripe charge ..."
+  reversibility: irreversible       # reversible | soft_reversible | irreversible
+  data_class: financial             # public | internal | confidential | financial | phi | pii
+  phi_flag: false                   # if true, only BAA-scoped models may invoke
+  pii_scope: subject_payment_method
+  baa_scoped: false                 # if true, only BAA-covered subprocessors in call chain
+  retention_class: financial_7y     # one of the retention classes in audit-log-integrity
+  required_approval_level: dual_approver
+  blast_radius: external_per_tenant # internal | external_per_tenant | external_cross_tenant
+  egress_classification: customer_funds
+  regulator_in_scope: [SOC2_PI1.1, ISO27001_A.8.1, PCI_OUT_OF_SCOPE]
+  owner: payments-team@example.com
+  added_at: 2026-01-12
+  last_reviewed_at: 2026-04-01
+```
+
+A tool **cannot** register without these fields; CI rejects the PR. The registry is exported as evidence on a daily cadence (`ai-agent-evidence-automation` collector `tool_registry_snapshot`) so the auditor sees the asset register at every point in the audit window.
+
+Tools handling PHI **must** carry `phi_flag: true` and `baa_scoped: true`; the runtime enforces that only BAA-covered LLM providers can be selected for tasks invoking such tools (`ai-agent-hipaa-security-controls`).
+
+Cross-links: `ai-agent-soc2-controls` (CC6.1, PI1.1), `ai-agent-iso27001-controls` (A.8), `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-evidence-automation`.

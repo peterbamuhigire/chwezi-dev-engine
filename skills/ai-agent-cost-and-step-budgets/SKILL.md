@@ -211,3 +211,50 @@ Alert when a single task's `usd_total > 10 × median(feature, plan)`. The dashbo
 - "We'll add a budget later." First runaway loop is in production within a week.
 - Cost-per-task missing from the cost dashboard. Cannot find which tasks are expensive.
 - Per-tenant override granted by a SQL UPDATE with no audit row.
+
+## §8 Budget Breach → SLA-Credit Eligibility (Enhancement)
+
+A budget breach is not just a kill signal. It is a **commercial event** that may entitle the customer to an SLA credit, may trigger a refund, or may be silently expected — depending on which budget and which tier.
+
+### Classification matrix
+
+| Budget breached | Tenant tier | SLA-credit eligible? | Refund triggered? |
+|---|---|---|---|
+| Step budget | Pro / Business / Enterprise | Yes if it caused `verdict='failed'` and the SLA-class commits a resolution-rate floor | No (failed task is unbilled in eval-gated billing) |
+| Token budget | All | Same as step | No |
+| Wallclock budget | Business / Enterprise (TTR commitment) | Yes if it caused a TTR p95 breach for the period | No |
+| Tool cost budget | All | No — this is platform self-protection, not a customer commitment | No |
+| Budget set unusually low by the tenant | All | No (customer-caused exclusion; see `ai-agent-sla-and-commitments`) | No |
+
+### Handoff event
+
+On a budget breach that terminates a task, the budget enforcer must emit:
+
+```json
+{
+  "event": "agent.task.budget_exceeded",
+  "task_id": "...",
+  "tenant_id": "...",
+  "feature": "support_copilot",
+  "budget_class": "step | token | wallclock | tool_cost",
+  "limit": 30,
+  "consumed": 30,
+  "tier": "business",
+  "configured_by": "platform_default | tenant_override",
+  "eligibility_hint": "platform_caused | customer_caused",
+  "verdict_ref": "...",
+  "idempotency_key": "budget_breach:{task_id}"
+}
+```
+
+`ai-agent-sla-credit-automation` subscribes to this event, runs the eligibility-rules pipeline, and (if eligible) opens an SLA-credit case automatically. The budget-enforcement layer does **not** issue the credit — it just emits the signal with enough context for the downstream pipeline to decide.
+
+### Implementation note
+
+The `configured_by` field is critical: a tenant who set a step budget of 5 on a 30-step task is a **customer-caused** exclusion. Without this field the credit pipeline would issue refunds for self-inflicted breaches.
+
+### Cross-links
+
+- `ai-agent-sla-credit-automation/references/eligibility-rules.md` — consumes the `eligibility_hint` field.
+- `ai-agent-sla-and-commitments/references/sla-class-table.md` — defines which budgets map to which committed dimensions per tier.
+- `ai-agent-abandonment-and-refund-policy/references/abandonment-taxonomy.md` — `budget-exceeded` class definition.
