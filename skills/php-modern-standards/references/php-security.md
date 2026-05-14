@@ -12,7 +12,7 @@ description: Use when building or reviewing PHP web applications for security vu
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -13,7 +13,7 @@ description: Comprehensive, standardized error response system for PHP REST APIs
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

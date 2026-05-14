@@ -7,7 +7,7 @@ description: Use when designing or reviewing deployment pipelines, rollout strat
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

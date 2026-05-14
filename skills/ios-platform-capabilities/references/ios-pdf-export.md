@@ -7,7 +7,7 @@ description: Native iOS PDF export system using UIGraphicsPDFRenderer (zero depe
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

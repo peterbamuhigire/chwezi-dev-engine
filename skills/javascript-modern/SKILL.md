@@ -7,7 +7,7 @@ description: 'Modern JavaScript (ES6+) patterns for PHP+JavaScript SaaS apps: mo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

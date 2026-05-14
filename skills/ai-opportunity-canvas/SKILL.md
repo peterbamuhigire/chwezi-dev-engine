@@ -7,7 +7,7 @@ description: Systematically discover and rank AI use cases for any software proj
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

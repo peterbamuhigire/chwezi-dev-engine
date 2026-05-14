@@ -11,7 +11,7 @@ description: Enforce thorough API endpoint testing before any API-dependent feat
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -359,7 +359,7 @@ android-tdd → Write unit tests (with mocked responses)
       ↓
 api-testing-verification → MANDATORY: Test with real backend (THIS SKILL)
       ↓
-update-claude-documentation → Document API contract in completion report
+update-Codex-documentation → Document API contract in completion report
 ```
 
 ## Summary

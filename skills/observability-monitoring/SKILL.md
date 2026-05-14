@@ -7,7 +7,7 @@ description: Use when designing or reviewing logs, metrics, traces, alerts, SLOs
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

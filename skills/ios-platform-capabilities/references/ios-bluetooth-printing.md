@@ -7,7 +7,7 @@ description: CoreBluetooth integration for ESC/POS thermal printer communication
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

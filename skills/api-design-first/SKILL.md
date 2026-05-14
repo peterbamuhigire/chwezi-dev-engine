@@ -4,7 +4,7 @@ description: Use when designing or building HTTP APIs — spec-first OpenAPI wor
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

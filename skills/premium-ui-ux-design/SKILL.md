@@ -4,7 +4,7 @@ description: Premium UI/UX design intelligence for web, SaaS, dashboard, Android
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

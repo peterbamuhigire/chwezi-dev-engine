@@ -4,7 +4,7 @@ description: Use when designing the transactional and lifecycle email infrastruc
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

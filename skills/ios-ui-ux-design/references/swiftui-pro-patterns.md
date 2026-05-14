@@ -6,7 +6,7 @@ description: Advanced SwiftUI patterns from Pro SwiftUI (Hudson, 2022). Deep lay
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

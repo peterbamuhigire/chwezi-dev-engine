@@ -4,7 +4,7 @@ description: Use when implementing enterprise auth on a multi-tenant SaaS — SA
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -6,7 +6,7 @@ description: Use custom PNG icons in mobile apps (Android and iOS) instead of li
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

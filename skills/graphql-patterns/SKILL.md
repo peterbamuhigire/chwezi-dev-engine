@@ -8,7 +8,7 @@ description: Use when designing, building, or operating GraphQL APIs with Apollo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

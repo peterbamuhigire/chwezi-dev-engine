@@ -6,7 +6,7 @@ description: Hypothesis-driven UX validation process from Laura Klein's UX for L
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

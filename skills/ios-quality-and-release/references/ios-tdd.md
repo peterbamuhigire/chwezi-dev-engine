@@ -6,7 +6,7 @@ description: iOS Test-Driven Development standards. Enforces Red-Green-Refactor 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

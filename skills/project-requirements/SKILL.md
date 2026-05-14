@@ -6,7 +6,7 @@ description: Guided interview to create comprehensive project requirements docum
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -435,7 +435,7 @@ Ready to bootstrap? Use:
 
 - Template files in `docs/project-requirements/*.template`
 - `saas-seeder` skill for bootstrapping after requirements
-- `../../CLAUDE.md` - Project-specific documentation after bootstrap
+- `../../AGENTS.md` - Project-specific documentation after bootstrap
 - Multi-tenant patterns: All franchise-scoped data needs franchise_id
 
 ## Cross-References to SDLC Skills

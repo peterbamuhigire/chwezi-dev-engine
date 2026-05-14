@@ -12,7 +12,7 @@ description: All 23 GoF design patterns implemented in TypeScript — Creational
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

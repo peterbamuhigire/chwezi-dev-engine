@@ -7,7 +7,7 @@ description: Use when generating downloadable Excel dashboards, Word documents, 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

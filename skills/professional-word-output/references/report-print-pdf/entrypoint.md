@@ -6,7 +6,7 @@ description: Guidance for building report templates that serve both mPDF exports
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

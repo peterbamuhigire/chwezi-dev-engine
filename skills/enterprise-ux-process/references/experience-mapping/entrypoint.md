@@ -4,7 +4,7 @@ description: Use when discovering or de-risking a product direction by mapping u
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

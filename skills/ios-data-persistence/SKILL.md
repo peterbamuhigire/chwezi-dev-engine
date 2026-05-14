@@ -7,7 +7,7 @@ description: iOS data persistence standards with SwiftData as primary local stor
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

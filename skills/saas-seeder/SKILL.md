@@ -6,7 +6,7 @@ description: 'Bootstrap a new SaaS from the SaaS Seeder Template: setup database
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -157,7 +157,7 @@ When starting a new project:
 
 3. **Update Project Documentation**
    - Replace README.md with project-specific content
-   - Update CLAUDE.md with project-specific guidance
+   - Update AGENTS.md with project-specific guidance
    - Remove template docs from docs/ (keep only project-relevant ones)
    - Add project-specific documentation based on requirements
    - Ensure `docs/plans/INDEX.md` exists as the master plan status index and is maintained as plans are created or updated
@@ -293,7 +293,7 @@ Hash: salt + Argon2ID(HMAC-SHA256(password, pepper) + salt)
    - Customize user types enum
    - Apply project database schema
    - Update branding throughout
-   - Create project-specific CLAUDE.md
+   - Create project-specific AGENTS.md
 
 ## Seeding Rules
 
@@ -378,7 +378,7 @@ PHP Development Tools Installed:
 
 Project Documentation:
 - ✅ README.md updated for [Project Name]
-- ✅ CLAUDE.md created with project-specific guidance
+- ✅ AGENTS.md created with project-specific guidance
 - ✅ Template docs archived/removed
 
 Branding:
@@ -387,7 +387,7 @@ Branding:
 - ✅ Login page branded
 
 Next Steps:
-1. Review updated CLAUDE.md for project-specific guidance
+1. Review updated AGENTS.md for project-specific guidance
 2. Create super admin at http://localhost:8000/super-user-dev.php
 3. Login and verify three-tier panel structure
 4. Run quality checks: composer quality
@@ -402,7 +402,7 @@ Development Commands:
 References:
 - Requirements: docs/project-requirements/
 - Schema: database/schema/
-- Development Guide: CLAUDE.md
+- Development Guide: AGENTS.md
 ```
 
 ## File Structure After Setup
@@ -442,7 +442,7 @@ saas-seeder/
 ├── composer.json         # Dependencies
 ├── setup-database.ps1    # Setup script
 ├── fix-database.ps1      # Fix script
-└── CLAUDE.md             # Development guide
+└── AGENTS.md             # Development guide
 ```
 
 ## References
@@ -457,7 +457,7 @@ saas-seeder/
 **External references:**
 
 - `../../docs/PANEL-STRUCTURE.md` - Three-tier architecture guide
-- `../../CLAUDE.md` - Development guidelines
+- `../../AGENTS.md` - Development guidelines
 - `../project-requirements/` - Skill for creating requirements docs
 
 ## Quality Assurance

@@ -13,7 +13,7 @@ description: Use when integrating Python services into a PHP + Android + iOS Saa
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

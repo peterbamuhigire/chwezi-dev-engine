@@ -6,7 +6,7 @@ description: Use when designing or reviewing multi-service, message-driven, or e
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

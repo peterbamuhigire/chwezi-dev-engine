@@ -4,7 +4,7 @@ description: Use when designing the entitlements engine that enforces what each 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

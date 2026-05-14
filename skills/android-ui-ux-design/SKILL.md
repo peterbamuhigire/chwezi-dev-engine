@@ -4,7 +4,7 @@ description: Specialized Android UI/UX design skill for premium Jetpack Compose 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

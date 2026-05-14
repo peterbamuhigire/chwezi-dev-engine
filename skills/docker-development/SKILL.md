@@ -4,7 +4,7 @@ description: Docker and Docker Compose standards for PHP, Python, JavaScript, an
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -13,7 +13,7 @@ description: Autonomous plan executor that implements feature plans from start t
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -243,7 +243,7 @@ After completing a task:
 
 ## Output Token Limit Recovery
 
-If Claude's output is truncated mid-generation (stops mid-code block), the user should reply:
+If Codex's output is truncated mid-generation (stops mid-code block), the user should reply:
 
 > "Continue exactly where you left off, starting from the line [paste last line generated]."
 

@@ -6,7 +6,7 @@ description: Kotlin Multiplatform shared module development standards for sharin
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

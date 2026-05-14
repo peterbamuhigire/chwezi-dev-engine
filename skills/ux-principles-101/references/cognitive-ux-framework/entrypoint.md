@@ -6,7 +6,7 @@ description: Cognitive science-based UI/UX evaluation framework built on John Wh
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

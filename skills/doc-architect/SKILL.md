@@ -6,7 +6,7 @@ description: Generate Triple-Layer AGENTS.md documentation by scanning a project
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -70,7 +70,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 Design and generate a portable Triple-Layer AGENTS.md documentation set that reflects the project’s real structure and constraints.
 
-**Modularize Instructions (Token Economy):** Avoid consolidating all AI/dev guidance into a single CLAUDE.md. Prefer smaller, focused docs (e.g., docs/setup.md, docs/api.md, docs/workflows.md) and reference them only when needed.
+**Modularize Instructions (Token Economy):** Avoid consolidating all AI/dev guidance into a single AGENTS.md. Prefer smaller, focused docs (e.g., docs/setup.md, docs/api.md, docs/workflows.md) and reference them only when needed.
 
 **Documentation Standards (MANDATORY):** ALL generated markdown files must follow strict formatting rules:
 - **500-line hard limit** - no exceptions for any .md file
@@ -96,7 +96,7 @@ The skill should activate when the user asks to:
 ## Standard Operating Procedure (SOP)
 
 1. **Scan the workspace**
-   - Inspect the root for identifiers (README, PROJECT_BRIEF, TECH_STACK, ARCHITECTURE, CLAUDE, package.json, composer.json, \*.sln, pyproject.toml).
+   - Inspect the root for identifiers (README, PROJECT_BRIEF, TECH_STACK, ARCHITECTURE, Codex, package.json, composer.json, \*.sln, pyproject.toml).
    - Locate likely data directories (database/, schema/, migrations/, sql/, db/).
    - Locate planning/documentation directories (docs/, docs/plans/, planning/, specs/).
    - Identify module/area entry points (menus, docs, feature folders) to group specs.
@@ -166,7 +166,7 @@ When generating AGENTS.md files, be aware of the complete SDLC documentation eco
 | `project-requirements` | Raw requirements interview | Input source for SDLC planning docs |
 | `feature-planning` | Feature-level specs + implementation plans | Stored in `docs/plans/` (planning directory) |
 | `manual-guide` | End-user manuals and guides | Stored in `/manuals/` (separate from AGENTS.md) |
-| `update-claude-documentation` | Keep project docs (README, CLAUDE.md) updated | Maintains project-level docs after changes |
+| `update-Codex-documentation` | Keep project docs (README, AGENTS.md) updated | Maintains project-level docs after changes |
 
 ### SDLC Output Directory Structure
 

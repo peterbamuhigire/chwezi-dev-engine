@@ -13,7 +13,7 @@ description: Generate Testing & Quality documentation for SDLC projects. Complia
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -409,6 +409,6 @@ Each template provides the complete structure, section-by-section guidance, exam
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [android-tdd](../android-tdd/SKILL.md) | [vibe-security-skill](../vibe-security-skill/SKILL.md) | [ai-error-handling](../ai-error-handling/SKILL.md)
 **Last Updated:** 2026-03-15 (upgraded to BS ISO/IEC/IEEE 29119-3:2013 per Winston, BS Standards; strengthened per Adjei 2023, Splunk Product is Docs)

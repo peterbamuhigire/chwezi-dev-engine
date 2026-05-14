@@ -6,7 +6,7 @@ description: Optional biometric (Face ID/Touch ID) gate on iOS app launch using 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

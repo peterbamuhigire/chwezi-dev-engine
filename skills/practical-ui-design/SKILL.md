@@ -6,7 +6,7 @@ description: Rules-based visual UI design system covering colour, typography, sp
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

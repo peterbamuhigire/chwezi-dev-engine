@@ -6,7 +6,7 @@ description: 'Comprehensive React patterns and best practices: functional compon
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

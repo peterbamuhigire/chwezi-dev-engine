@@ -8,7 +8,7 @@ description: Hard rule for end-user-facing forms — operators must never be req
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

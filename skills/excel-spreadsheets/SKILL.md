@@ -6,7 +6,7 @@ description: 'Generate world-class, professionally designed Microsoft Excel spre
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -1,12 +1,12 @@
 ---
-name: update-claude-documentation
+name: update-Codex-documentation
 description: Update project documentation files (README.md, PROJECT_BRIEF.md, TECH_STACK.md,
-  ARCHITECTURE.md, docs/API.md, docs/DATABASE.md, CLAUDE.md, docs/plans/NEXT_FEATURES.md)
+  ARCHITECTURE.md, docs/API.md, docs/DATABASE.md, AGENTS.md, docs/plans/NEXT_FEATURES.md)
   when significant changes occur. MANDATORY at end of each work session to...
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -14,18 +14,18 @@ metadata:
 
 - Optional helper plugins may help in some environments, but they must not be treated as required for this skill.
 
-# Update Claude Documentation
+# Update Codex Documentation
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
 ## Use When
 
-- Update project documentation files (README.md, PROJECT_BRIEF.md, TECH_STACK.md, ARCHITECTURE.md, docs/API.md, docs/DATABASE.md, CLAUDE.md, docs/plans/NEXT_FEATURES.md) when significant changes occur. MANDATORY at end of each work session to...
+- Update project documentation files (README.md, PROJECT_BRIEF.md, TECH_STACK.md, ARCHITECTURE.md, docs/API.md, docs/DATABASE.md, AGENTS.md, docs/plans/NEXT_FEATURES.md) when significant changes occur. MANDATORY at end of each work session to...
 - The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `update-claude-documentation` or would be better handled by a more specific companion skill.
+- The task is unrelated to `update-Codex-documentation` or would be better handled by a more specific companion skill.
 - The request only needs a trivial answer and none of this skill's constraints or references materially help.
 
 ## Required Inputs
@@ -70,7 +70,7 @@ Update project documentation systematically after significant changes. Keep all 
 
 **Core Principle:** Documentation tells one cohesive story. Each file serves a specific audience but must reflect the same reality.
 
-**Deployment Context:** Project runs across Windows dev, Ubuntu staging, and Debian production (all MySQL 8.x). Documentation must reflect this 3-environment setup. When updating CLAUDE.md or TECH_STACK.md, always include the deployment environment table and cross-platform rules.
+**Deployment Context:** Project runs across Windows dev, Ubuntu staging, and Debian production (all MySQL 8.x). Documentation must reflect this 3-environment setup. When updating AGENTS.md or TECH_STACK.md, always include the deployment environment table and cross-platform rules.
 
 **Style Rule:** Be precise and concise. Do not add verbose or unnecessary text to any documentation file.
 
@@ -80,13 +80,13 @@ Update project documentation systematically after significant changes. Keep all 
 - **Smart subdirectory grouping** for related documentation
 - **See `doc-standards.md` for complete requirements**
 
-**Modularize Instructions (Token Economy):** Avoid packing everything into a single CLAUDE.md. Prefer multiple focused docs (e.g., docs/setup.md, docs/api.md, docs/workflows.md) and reference them only when needed to reduce context bloat.
+**Modularize Instructions (Token Economy):** Avoid packing everything into a single AGENTS.md. Prefer multiple focused docs (e.g., docs/setup.md, docs/api.md, docs/workflows.md) and reference them only when needed to reduce context bloat.
 
-**CLAUDE.md as Navigation Hub (CRITICAL):** Keep CLAUDE.md under 10k characters as a quick-reference hub with links to detailed documentation. Move verbose sections (detailed workflows, extensive examples, module-specific guides) to appropriate `docs/` subdirectories. CLAUDE.md should provide essential patterns and pointers, not duplicate comprehensive content that exists elsewhere. This reduces AI context window usage by 80%+ and makes information easier to maintain.
+**AGENTS.md as Navigation Hub (CRITICAL):** Keep AGENTS.md under 10k characters as a quick-reference hub with links to detailed documentation. Move verbose sections (detailed workflows, extensive examples, module-specific guides) to appropriate `docs/` subdirectories. AGENTS.md should provide essential patterns and pointers, not duplicate comprehensive content that exists elsewhere. This reduces AI context window usage by 80%+ and makes information easier to maintain.
 
 **Docs Organization Rule (Required):** All documentation markdown now lives under `docs/` plus a semantic subdirectory (overview, architecture, pharmacy, localization, etc.). Do not add new files directly to the repo root—move existing root markdown into the appropriate `docs/<module>` folder before editing, then update `docs/agents/AGENTS.md` and always update `docs/plans/AGENTS.md` when plans are added or their status changes. The canonical landing doc is now `docs/overview/README.md`, and the root `README.md` should only point people into `docs/`.
 
-**Claude-Ready Module Headers (Required):** Updating documentation now includes refreshing `CLAUDE.md` and the hero portion of each touched skill (`*/SKILL.md`). Claude relies on the YAML `name`/`description` pair and the opening markdown (hero title, quick summary, when-to-use bullets) for each skill, so keep that block aligned with the module-header template in `references/module-header-template.md`. The template spells out the claude-friendly structure with a checklist for ensuring the front-matter description triggers the right use cases and the leading sections stay concise yet informative.
+**Codex-Ready Module Headers (Required):** Updating documentation now includes refreshing `AGENTS.md` and the hero portion of each touched skill (`*/SKILL.md`). Codex relies on the YAML `name`/`description` pair and the opening markdown (hero title, quick summary, when-to-use bullets) for each skill, so keep that block aligned with the module-header template in `references/module-header-template.md`. The template spells out the Codex-friendly structure with a checklist for ensuring the front-matter description triggers the right use cases and the leading sections stay concise yet informative.
 
 ## When to Use
 
@@ -152,10 +152,10 @@ Update project documentation systematically after significant changes. Keep all 
 | ARCHITECTURE.md            | Senior devs, architects | System design               | Architecture changes  |
 | docs/API.md                | API consumers           | API reference               | API changes           |
 | docs/DATABASE.md           | Backend devs, DBAs      | Schema docs                 | Schema changes        |
-| CLAUDE.md                  | Claude Code             | Dev patterns                | Pattern changes       |
-| docs/plans/NEXT_FEATURES.md| Team, Claude Code       | **Priority roadmap**        | **Every session**     |
-| docs/plans/INDEX.md        | Team, Claude Code       | Plans index                 | Plan status changes   |
-| MEMORY.md                  | Claude Code             | Session memory, learnings   | End of each session   |
+| AGENTS.md                  | Codex             | Dev patterns                | Pattern changes       |
+| docs/plans/NEXT_FEATURES.md| Team, Codex       | **Priority roadmap**        | **Every session**     |
+| docs/plans/INDEX.md        | Team, Codex       | Plans index                 | Plan status changes   |
+| MEMORY.md                  | Codex             | Session memory, learnings   | End of each session   |
 
 ## Change → File Mapping
 
@@ -165,32 +165,32 @@ Update project documentation systematically after significant changes. Keep all 
 - docs/API.md (if adds endpoints)
 - docs/DATABASE.md (if adds tables)
 - ARCHITECTURE.md (if adds components)
-- CLAUDE.md (if changes patterns)
+- AGENTS.md (if changes patterns)
 - PROJECT_BRIEF.md (if significant)
 - **docs/plans/NEXT_FEATURES.md (MANDATORY - mark as completed, update priorities)**
 - docs/plans/INDEX.md (update status)
 - MEMORY.md (capture key learnings)
-- Each affected `*/SKILL.md` front-matter and hero section should follow the module-header template above so Claude sees the change immediately and can re-trigger the skill with the new context.
+- Each affected `*/SKILL.md` front-matter and hero section should follow the module-header template above so Codex sees the change immediately and can re-trigger the skill with the new context.
 
 **Tech Stack Change:**
 
 - TECH_STACK.md (always)
 - README.md (setup instructions)
 - ARCHITECTURE.md (if affects design)
-- CLAUDE.md (if affects workflows)
+- AGENTS.md (if affects workflows)
 
 **Architecture Change:**
 
 - ARCHITECTURE.md (always)
 - README.md (overview section)
-- CLAUDE.md (patterns)
+- AGENTS.md (patterns)
 - PROJECT_BRIEF.md (if major)
 
 **API/Database Change:**
 
 - docs/API.md or docs/DATABASE.md (always)
 - ARCHITECTURE.md (if changes contracts)
-- CLAUDE.md (if affects patterns)
+- AGENTS.md (if affects patterns)
 - README.md (if affects usage)
 
 ## Update Workflow
@@ -210,7 +210,7 @@ Order: Specific → General
 
 1. Technical Specs (API.md, DATABASE.md)
 2. Architecture (ARCHITECTURE.md, TECH_STACK.md)
-3. AI Instructions (CLAUDE.md)
+3. AI Instructions (AGENTS.md)
 4. User Guides (README.md)
 5. Overview (PROJECT_BRIEF.md)
 6. **Priority Roadmap (docs/plans/NEXT_FEATURES.md)** - MANDATORY every session
@@ -221,7 +221,7 @@ Read all affected files in parallel.
 
 ### 3.a. Review Module Headers (1-2 min)
 
-Open every impacted `*/SKILL.md` and verify the hero `name`/`description` plus the opening sections line up with the Claude-friendly template. Capture the new feature/behavior in the quick summary and `## When to Use` bullets before editing the downstream docs.
+Open every impacted `*/SKILL.md` and verify the hero `name`/`description` plus the opening sections line up with the Codex-friendly template. Capture the new feature/behavior in the quick summary and `## When to Use` bullets before editing the downstream docs.
 
 ### 4. Update Systematically (10-20 min)
 
@@ -287,7 +287,7 @@ Check across all files:
 ### 7. Final Review (1 min)
 
 - [ ] New dev can understand from README
-- [ ] CLAUDE.md has context
+- [ ] AGENTS.md has context
 - [ ] Breaking changes marked
 - [ ] Examples work
 - [ ] No contradictions
@@ -300,7 +300,7 @@ Check across all files:
 ❌ **Updating only one file**
 
 ```markdown
-# Updated README but forgot CLAUDE.md
+# Updated README but forgot AGENTS.md
 
 # Result: AI doesn't know new pattern
 ```
@@ -312,7 +312,7 @@ Check across all files:
 
 # ARCHITECTURE.md: "Auth Module"
 
-# CLAUDE.md: "Login System"
+# AGENTS.md: "Login System"
 
 # Pick ONE term everywhere
 ```
@@ -333,12 +333,12 @@ Check across all files:
 # GOOD: Update API.md first (precise), then BRIEF (summary)
 ```
 
-❌ **Bloated CLAUDE.md with duplicate content**
+❌ **Bloated AGENTS.md with duplicate content**
 
 ```markdown
-# BAD: 40k+ character CLAUDE.md with detailed implementation guides
+# BAD: 40k+ character AGENTS.md with detailed implementation guides
 
-# GOOD: 6k character CLAUDE.md hub linking to docs/coding/UI_DEVELOPMENT_GUIDE.md
+# GOOD: 6k character AGENTS.md hub linking to docs/coding/UI_DEVELOPMENT_GUIDE.md
 
 # Result: 84% reduction in AI context usage, easier maintenance
 ```
@@ -348,7 +348,7 @@ Check across all files:
 **Update Order:**
 
 ```
-API/DB Specs → Architecture → CLAUDE → README → BRIEF
+API/DB Specs → Architecture → Codex → README → BRIEF
 ```
 
 **Consistency Checks:**

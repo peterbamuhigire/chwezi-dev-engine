@@ -6,7 +6,7 @@ description: Business model frameworks for software companies. Covers products v
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

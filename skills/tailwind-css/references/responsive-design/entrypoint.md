@@ -6,7 +6,7 @@ description: Mobile-first responsive design standards covering content-driven br
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

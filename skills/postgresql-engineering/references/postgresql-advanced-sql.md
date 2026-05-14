@@ -14,7 +14,7 @@ description: Advanced PostgreSQL SQL patterns sourced from "Mastering PostgreSQL
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

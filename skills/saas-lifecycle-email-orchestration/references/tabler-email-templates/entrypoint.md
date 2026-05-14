@@ -149,7 +149,7 @@ Tabler Emails is commercial. The included `LICENSE-tabler.txt` is the personal l
 - allowed: unlimited End Products, including ones sold to End Users, for unlimited clients.
 - not allowed: redistributing the templates as templates (e.g. open-sourcing this folder, shipping a template marketplace that re-uses them).
 
-When Claude copies a template into an app, the app counts as an End Product and is covered. If this skills repository is ever made public or shared outside the licensee's team, the `templates/` folder must be removed first — the skill can then point back to the original purchase location as a reference instead.
+When Codex copies a template into an app, the app counts as an End Product and is covered. If this skills repository is ever made public or shared outside the licensee's team, the `templates/` folder must be removed first — the skill can then point back to the original purchase location as a reference instead.
 
 ## Quick Decision Guide
 

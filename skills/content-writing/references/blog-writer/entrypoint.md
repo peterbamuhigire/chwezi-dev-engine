@@ -7,7 +7,7 @@ description: Generate SEO-optimised, bilingual blog articles with featured image
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

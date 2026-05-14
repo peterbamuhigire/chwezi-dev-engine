@@ -4,7 +4,7 @@ description: Specialized iOS UI/UX design skill for premium SwiftUI apps. Use al
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

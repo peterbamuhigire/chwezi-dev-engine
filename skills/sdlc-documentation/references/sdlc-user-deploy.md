@@ -13,7 +13,7 @@ description: Generate User & Deployment documentation for SDLC projects. Covers 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -111,7 +111,7 @@ Delivery documents must define:
 - **Writing ERP module-specific manuals** with in-app PHP delivery -- use `manual-guide` skill
 - **Planning a single feature** -- use `feature-planning` skill
 - **Bootstrapping a new SaaS project** -- use `saas-seeder` skill
-- **Updating project docs** (CLAUDE.md, README) after code changes -- use `update-claude-documentation`
+- **Updating project docs** (AGENTS.md, README) after code changes -- use `update-Codex-documentation`
 
 ## Document Inventory
 
@@ -190,7 +190,7 @@ Step 6: Release Notes (per-version communication — ongoing)
 
 | Skill | Relationship |
 |-------|-------------|
-| `update-claude-documentation` | Keeps project docs (README, CLAUDE.md) updated after changes. |
+| `update-Codex-documentation` | Keeps project docs (README, AGENTS.md) updated after changes. |
 | `saas-seeder` | Uses operations manual patterns when bootstrapping new SaaS instances. |
 
 ### Sibling SDLC Skills
@@ -360,7 +360,7 @@ Each template provides the complete structure, section-by-section guidance, exam
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [sdlc-design](../sdlc-design/SKILL.md) | [sdlc-testing](../sdlc-testing/SKILL.md) | [manual-guide](../manual-guide/SKILL.md) | [google-play-store-review](../google-play-store-review/SKILL.md)
 **Last Updated:** 2026-03-15 (strengthened per Etter 2016, Cone 2023, Splunk Product is Docs)
 

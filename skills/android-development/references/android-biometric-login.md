@@ -6,7 +6,7 @@ description: Optional biometric (fingerprint/face) gate on Android app launch us
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

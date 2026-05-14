@@ -4,7 +4,7 @@ description: Use when designing logos, brand systems, illustration systems, moti
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

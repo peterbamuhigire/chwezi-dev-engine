@@ -7,7 +7,7 @@ description: Apple App Store compliance and review readiness for iOS apps. Use w
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

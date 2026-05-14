@@ -6,7 +6,7 @@ description: Build SAAS platforms with pluggable business modules (Advanced Inve
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

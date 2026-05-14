@@ -6,7 +6,7 @@ description: Android Test-Driven Development standards. Enforces Red-Green-Refac
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

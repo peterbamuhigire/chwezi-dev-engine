@@ -7,7 +7,7 @@ description: Use when writing or reviewing any Python code in our SaaS projects 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

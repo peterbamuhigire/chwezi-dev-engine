@@ -6,7 +6,7 @@ description: Framework for writing winning technology grant applications. Covers
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

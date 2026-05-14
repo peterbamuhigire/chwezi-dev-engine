@@ -7,7 +7,7 @@ description: Comprehensive Room database skill for Android — entities, DAOs, r
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

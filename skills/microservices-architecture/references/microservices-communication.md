@@ -13,7 +13,7 @@ description: Inter-service communication patterns — synchronous (HTTP/REST, gR
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

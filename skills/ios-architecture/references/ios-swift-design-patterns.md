@@ -6,7 +6,7 @@ description: Swift-idiomatic design patterns for iOS — VC containment to elimi
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -13,7 +13,7 @@ description: 'JavaScript integration patterns for PHP+JavaScript SaaS apps. Enfo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

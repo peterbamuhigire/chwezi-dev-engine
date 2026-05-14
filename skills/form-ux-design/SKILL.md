@@ -7,7 +7,7 @@ description: Cross-platform form UX/UI patterns for web (Bootstrap 5/Tabler), An
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

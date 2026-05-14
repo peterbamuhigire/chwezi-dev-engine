@@ -6,7 +6,7 @@ description: Pricing strategy for software products and SaaS. Covers value-based
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

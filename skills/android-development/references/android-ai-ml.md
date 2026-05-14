@@ -4,7 +4,7 @@ description: Use when adding on-device AI/ML to an Android app — ML Kit (visio
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

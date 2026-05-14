@@ -6,7 +6,7 @@ description: Kotlin Multiplatform Test-Driven Development standards for shared m
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -6,7 +6,7 @@ description: Scan new or updated skills for unsafe or malicious instructions (un
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -143,7 +143,7 @@ Flag any instruction or script that:
 3. **Review bundled scripts and references** for hidden commands or prompt-injection content.
 4. **Check for new external dependencies** and verify they are approved.
 5. **Check for credential requests** or any data collection.
-6. **Confirm instructions align with project policies** in `AGENTS.md`, `CLAUDE.md`, and the relevant repository docs.
+6. **Confirm instructions align with project policies** in `AGENTS.md`, `AGENTS.md`, and the relevant repository docs.
 7. **Record outcome**:
    - ✅ Safe: no malicious or unsafe instructions.
    - ⚠️ Needs review: uncertain or questionable instructions.

@@ -12,7 +12,7 @@ description: 'Expert MySQL 8 query performance tuning: EXPLAIN analysis, index d
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

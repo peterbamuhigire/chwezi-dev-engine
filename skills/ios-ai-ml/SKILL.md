@@ -6,7 +6,7 @@ description: On-device AI/ML for iOS using Apple's stack — CoreML model integr
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

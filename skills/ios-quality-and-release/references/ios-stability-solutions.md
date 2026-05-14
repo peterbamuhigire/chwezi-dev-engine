@@ -6,7 +6,7 @@ description: Crash-prevention and production stability patterns for iOS. Use whe
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

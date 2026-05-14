@@ -6,7 +6,7 @@ description: Use when designing interfaces, building UX flows, choosing layouts,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

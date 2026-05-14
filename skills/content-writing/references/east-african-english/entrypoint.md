@@ -6,7 +6,7 @@ description: Language and tone standard for all written content. Enforces authen
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

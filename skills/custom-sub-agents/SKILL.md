@@ -6,7 +6,7 @@ description: Guidance for creating and organizing custom sub-agents in local rep
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -68,7 +68,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 ## Overview
 
-Use this skill to define sub-agents as portable repository assets instead of editor-specific features. The goal is to make agent structure, ownership, and discovery clear enough that both Claude Code and Codex can work with the same project layout.
+Use this skill to define sub-agents as portable repository assets instead of editor-specific features. The goal is to make agent structure, ownership, and discovery clear enough that both Codex and Codex can work with the same project layout.
 
 ## Recommended Layout
 

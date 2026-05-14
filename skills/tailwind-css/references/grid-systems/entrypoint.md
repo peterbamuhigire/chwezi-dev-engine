@@ -9,7 +9,7 @@ description: Use when laying out any screen, page, dashboard, or editorial surfa
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

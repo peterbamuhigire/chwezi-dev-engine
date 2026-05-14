@@ -7,7 +7,7 @@ description: Use when designing products, features, or onboarding flows that nee
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

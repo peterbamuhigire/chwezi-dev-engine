@@ -4,7 +4,7 @@ description: Use when designing or fixing a service that crosses customer touchp
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

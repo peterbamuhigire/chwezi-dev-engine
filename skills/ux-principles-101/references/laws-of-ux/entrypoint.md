@@ -6,7 +6,7 @@ description: Comprehensive named-law quick reference for all 30 Laws of UX (Yabl
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

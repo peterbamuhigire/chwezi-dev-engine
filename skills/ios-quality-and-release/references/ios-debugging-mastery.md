@@ -7,7 +7,7 @@ description: Expert LLDB debugging for iOS — non-obvious commands (regex break
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

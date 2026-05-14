@@ -6,7 +6,7 @@ description: Orchestrate AI coding agents, human reviewers, CI, and delivery wor
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -68,7 +68,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 ## Overview
 
-Learn to **orchestrate multiple AI agents** (like Claude Code, custom sub-agents, or specialized AI tools) to work together effectively in software development.
+Learn to **orchestrate multiple AI agents** (like Codex, custom sub-agents, or specialized AI tools) to work together effectively in software development.
 
 This skill bridges **prompting patterns** + **orchestration** + **sub-agent coordination** for real-world AI-assisted development.
 

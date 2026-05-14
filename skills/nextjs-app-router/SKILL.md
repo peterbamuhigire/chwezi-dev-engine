@@ -7,7 +7,7 @@ description: 'Next.js App Router patterns for production — server/client compo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

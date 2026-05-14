@@ -6,7 +6,7 @@ description: Manage photo uploads, previews, storage, and deletion across the ap
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -4,7 +4,7 @@ description: Use when adding semantic similarity search alongside a relational s
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

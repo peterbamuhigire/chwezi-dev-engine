@@ -6,7 +6,7 @@ description: Role-Based Access Control for iOS apps integrating with a multi-ten
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

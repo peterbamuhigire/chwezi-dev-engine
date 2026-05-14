@@ -7,7 +7,7 @@ description: Advanced UIKit for production iOS apps — UICollectionViewDiffable
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

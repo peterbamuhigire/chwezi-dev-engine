@@ -6,7 +6,7 @@ description: Design a single AI-powered feature end-to-end — model selection, 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -129,10 +129,10 @@ Choose the cheapest model that reliably handles the task.
 
 | Task Complexity | Recommended Model | Fallback |
 |----------------|-------------------|---------|
-| Summarisation, classification, short extraction | Claude Haiku 4.5 / Gemini 2.0 Flash / GPT-4o mini | DeepSeek V3 |
-| Multi-step reasoning, structured JSON output, analysis | Claude Sonnet 4.6 / GPT-4o | Claude Haiku 4.5 |
-| Complex document analysis, long context (> 50K tokens) | Claude Sonnet 4.6 (200K context) | Gemini 1.5 Pro |
-| Image / document OCR + extraction | Claude Sonnet 4.6 / GPT-4o Vision | Gemini 2.0 Flash |
+| Summarisation, classification, short extraction | Codex Haiku 4.5 / Gemini 2.0 Flash / GPT-4o mini | DeepSeek V3 |
+| Multi-step reasoning, structured JSON output, analysis | Codex Sonnet 4.6 / GPT-4o | Codex Haiku 4.5 |
+| Complex document analysis, long context (> 50K tokens) | Codex Sonnet 4.6 (200K context) | Gemini 1.5 Pro |
+| Image / document OCR + extraction | Codex Sonnet 4.6 / GPT-4o Vision | Gemini 2.0 Flash |
 | Cost-critical, high volume (> 1,000 calls/day) | DeepSeek V3 / Gemini 2.0 Flash | GPT-4o mini |
 
 **Rule:** Always start with the cheapest adequate model. Upgrade only when output quality is demonstrably insufficient.

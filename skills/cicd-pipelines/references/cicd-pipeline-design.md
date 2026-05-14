@@ -12,7 +12,7 @@ description: Use when designing or reviewing production CI/CD pipelines, deploym
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

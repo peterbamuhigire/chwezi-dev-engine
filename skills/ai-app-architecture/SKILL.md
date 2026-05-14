@@ -6,7 +6,7 @@ description: Use when designing or building AI-powered application systems — c
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -110,7 +110,7 @@ Reject AI features that cannot state their economic value or decision impact.
 │   Router / Intent Classifier     │  ← route to right model/solution
 │   Context Builder (RAG / Tools)  │  ← feature engineering for AI
 │   Model Gateway                  │  ← unified API wrapper, key mgmt, fallbacks
-│   LLM API (OpenAI/Claude/Gemini) │
+│   LLM API (OpenAI/Codex/Gemini) │
 │   Output Guardrail               │  ← catch toxicity, format failures, PII
 │   Cache Layer                    │  ← exact + semantic caching
 │   Streaming Handler              │  ← MANDATORY — never block on full generation
@@ -214,7 +214,7 @@ For production AI features, load [references/practical-ai-engineering.md](refere
 
 | Option | Effort | Control | Cost | When |
 |---|---|---|---|---|
-| Commercial API (OpenAI/Claude) | Low | Low | Per-token | Default choice |
+| Commercial API (OpenAI/Codex) | Low | Low | Per-token | Default choice |
 | Open source self-hosted (Llama) | High | Full | GPU infra | Data privacy requirement, high volume |
 | Fine-tuned commercial | Medium | Partial | Training + inference | Brand voice, jargon control |
 | Fine-tuned self-hosted | Very High | Full | High | Maximum control, regulated industries |
@@ -254,7 +254,7 @@ CREATE TABLE ai_token_usage (
   tenant_id     INT NOT NULL,
   user_id       INT NOT NULL,
   feature_name  VARCHAR(100),            -- 'invoice_analysis', 'report_summary'
-  model         VARCHAR(50),             -- 'gpt-4o', 'claude-3-sonnet'
+  model         VARCHAR(50),             -- 'gpt-4o', 'Codex-3-sonnet'
   tokens_in     INT NOT NULL,
   tokens_out    INT NOT NULL,
   cost_usd      DECIMAL(10,6),           -- calculated at log time

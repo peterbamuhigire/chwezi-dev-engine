@@ -12,7 +12,7 @@ description: 'Advanced JavaScript internals: closures, prototype chain, OOP with
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
