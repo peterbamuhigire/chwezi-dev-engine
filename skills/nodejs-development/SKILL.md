@@ -8,7 +8,7 @@ description: Production Node.js development — async patterns, streams, design 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

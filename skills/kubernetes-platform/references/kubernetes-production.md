@@ -13,7 +13,7 @@ description: Use when operating production Kubernetes — Helm, autoscaling (HPA
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

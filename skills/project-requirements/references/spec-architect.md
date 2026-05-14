@@ -12,7 +12,7 @@ description: 'Spec-driven development: write feature specs, plan modules, produc
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -163,6 +163,6 @@ sdlc-user-deploy / manual-guide → Document for users
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [feature-planning](../feature-planning/SKILL.md) | [sdlc-planning](../sdlc-planning/SKILL.md) | [manual-guide](../manual-guide/SKILL.md)
 **Last Updated:** 2026-02-20

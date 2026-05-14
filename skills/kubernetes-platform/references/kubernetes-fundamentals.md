@@ -12,7 +12,7 @@ description: Use when starting with Kubernetes — core objects, kubectl workflo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -8,7 +8,7 @@ description: Compose Multiplatform for shared UI across Android, iOS, Desktop (J
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

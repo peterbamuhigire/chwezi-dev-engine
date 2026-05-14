@@ -13,7 +13,7 @@ description: Generate Planning & Management documentation for SDLC projects. Cov
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -328,6 +328,6 @@ Each template provides the complete structure, section-by-section guidance, exam
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [project-requirements](../project-requirements/SKILL.md) | [feature-planning](../feature-planning/SKILL.md) | [mobile-saas-planning](../mobile-saas-planning/SKILL.md)
 **Last Updated:** 2026-03-15 (strengthened per Adjei 2023, Winston, Etter 2016, Cone 2023)

@@ -7,7 +7,7 @@ description: Use when designing configurable SaaS or ERP platforms with multi-st
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -15,7 +15,7 @@ description: PostgreSQL query performance and storage internals sourced from "In
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

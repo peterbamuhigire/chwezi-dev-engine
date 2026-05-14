@@ -7,7 +7,7 @@ description: Use when designing or reviewing test strategy for production system
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

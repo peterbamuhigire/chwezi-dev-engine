@@ -4,7 +4,7 @@ description: Use when building the control plane of a multi-tenant SaaS — the 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

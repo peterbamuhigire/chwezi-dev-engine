@@ -6,7 +6,7 @@ description: Scan any codebase for 14 critical safety issues across security vul
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

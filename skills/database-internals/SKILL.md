@@ -7,7 +7,7 @@ description: 'Deep database internals: B-tree storage, WAL/REDO logging, MVCC, b
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

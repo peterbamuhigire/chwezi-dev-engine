@@ -6,7 +6,7 @@ description: Animation and micro-interaction standards for web, Android, and iOS
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

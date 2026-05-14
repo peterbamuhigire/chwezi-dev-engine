@@ -7,7 +7,7 @@ description: Use when building offline-first Progressive Web Apps — Service Wo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

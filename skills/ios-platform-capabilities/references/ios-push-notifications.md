@@ -6,7 +6,7 @@ description: APNs push notifications, rich notifications, notification extension
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -7,7 +7,7 @@ description: Comprehensive UI/UX quality audit covering visual hierarchy, access
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -244,7 +244,7 @@ Every interactive element must have these states defined:
 ```
 # Design Audit Report
 **Date:** [Date]
-**Auditor:** Claude (AI-assisted)
+**Auditor:** Codex (AI-assisted)
 **Target:** [Screen/feature name]
 **Platform:** [Web/Android/iOS]
 **Context:** [Brief description of purpose and users]

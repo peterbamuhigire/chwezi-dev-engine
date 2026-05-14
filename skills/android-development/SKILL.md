@@ -6,7 +6,7 @@ description: Android development standards for AI agent implementation. Kotlin-f
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

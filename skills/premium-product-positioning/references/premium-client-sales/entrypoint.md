@@ -4,7 +4,7 @@ description: Use when running a premium-priced sales conversation, qualifying a 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

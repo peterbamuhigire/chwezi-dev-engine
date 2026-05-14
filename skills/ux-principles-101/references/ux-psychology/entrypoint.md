@@ -6,7 +6,7 @@ description: Foundational cognitive science for design. Covers dual-process thin
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

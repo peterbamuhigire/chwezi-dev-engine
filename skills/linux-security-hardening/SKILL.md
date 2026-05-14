@@ -8,7 +8,7 @@ description: Use when hardening a Debian/Ubuntu server — user/group/sudo harde
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

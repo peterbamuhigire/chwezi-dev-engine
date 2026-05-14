@@ -6,7 +6,7 @@ description: Design POS, checkout, and sales entry web UIs that are simple, acce
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

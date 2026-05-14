@@ -15,7 +15,7 @@ description: PostgreSQL DBA operations sourced from "Introduction to PostgreSQL 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

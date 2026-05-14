@@ -7,7 +7,7 @@ description: Security checklist for AI-powered application features — prompt i
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

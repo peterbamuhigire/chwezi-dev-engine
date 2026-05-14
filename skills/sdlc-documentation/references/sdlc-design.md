@@ -13,7 +13,7 @@ description: Generate Design & Development documentation for SDLC projects. Cove
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -314,6 +314,6 @@ Each template provides the complete structure, section-by-section guidance, exam
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [feature-planning](../feature-planning/SKILL.md) | [mysql-best-practices](../mysql-best-practices/SKILL.md) | [api-error-handling](../api-error-handling/SKILL.md)
 **Last Updated:** 2026-03-15 (strengthened per Adjei 2023, Winston, Etter 2016)

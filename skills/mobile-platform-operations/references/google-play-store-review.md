@@ -6,7 +6,7 @@ description: Google Play Store compliance and review readiness for Android apps.
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

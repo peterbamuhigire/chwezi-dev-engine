@@ -4,7 +4,7 @@ description: Use when designing the runtime that hosts agentic LLM features in a
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -4,7 +4,7 @@ description: Use when designing cloud deployments, Dockerising applications, lay
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -378,5 +378,5 @@ Health checks hit a dedicated `/healthz` path; verify dependencies shallowly —
 
 ## Platform Notes
 
-- Claude Code: `aws` CLI and `docker` CLI are the primary surface. Configure profiles with `aws configure sso`; use named profiles per environment.
+- Codex: `aws` CLI and `docker` CLI are the primary surface. Configure profiles with `aws configure sso`; use named profiles per environment.
 - Codex: treat every command as a patch candidate; keep commands in shell blocks so they stay portable.

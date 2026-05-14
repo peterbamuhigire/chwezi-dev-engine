@@ -7,7 +7,7 @@ description: Use when designing or reviewing relational or document-backed data 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

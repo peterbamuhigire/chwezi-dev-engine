@@ -7,7 +7,7 @@ description: Use when writing production TypeScript — clean code idioms, effec
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

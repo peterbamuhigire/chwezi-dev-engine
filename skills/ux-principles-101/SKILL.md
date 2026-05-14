@@ -6,7 +6,7 @@ description: 101 actionable UX principles covering accessibility (WCAG), control
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

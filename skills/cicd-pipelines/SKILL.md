@@ -4,7 +4,7 @@ description: Use when designing or implementing a CI/CD pipeline — stage gates
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -320,7 +320,7 @@ Pick one per repo and document in `CONTRIBUTING.md`. Conventional commits drive 
 
 - Every workflow PR is reviewed by someone other than the author; `actionlint` is a required status check on any `.github/workflows/*.yml` change.
 - Track DORA metrics off the deployment-record sink; alert when change-failure rate or queue time p95 breach the SLO.
-- Claude Code and Codex users on the same repo work from the same files — nothing platform-specific in workflow YAML.
+- Codex and Codex users on the same repo work from the same files — nothing platform-specific in workflow YAML.
 
 ## Companion Skills
 

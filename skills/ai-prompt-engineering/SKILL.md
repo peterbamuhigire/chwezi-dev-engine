@@ -6,7 +6,7 @@ description: Use when writing, refining, or structuring prompts for AI-powered a
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -197,7 +197,7 @@ Respond in formal English."""
 - Persona + domain restriction + tone + format rules
 - Stored in config/database — NOT hardcoded in application logic
 - Keep it under 500 tokens where possible (every call re-sends it)
-- Use prefix KV caching when available (OpenAI, Claude) — eliminates repeated processing cost
+- Use prefix KV caching when available (OpenAI, Codex) — eliminates repeated processing cost
 
 ---
 

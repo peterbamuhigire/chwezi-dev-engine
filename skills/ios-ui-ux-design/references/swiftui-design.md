@@ -6,7 +6,7 @@ description: SwiftUI UI standards for beautiful, sleek, minimalistic iOS apps. E
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

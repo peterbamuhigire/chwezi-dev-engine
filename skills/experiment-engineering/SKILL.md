@@ -9,7 +9,7 @@ description: Use when designing trustworthy product experiments — counterfactu
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

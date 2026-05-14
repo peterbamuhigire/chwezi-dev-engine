@@ -7,7 +7,7 @@ description: Use when administering ArcGIS Enterprise or building real-estate-sp
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

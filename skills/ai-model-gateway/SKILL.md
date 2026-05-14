@@ -4,7 +4,7 @@ description: Use when designing or building the LLM gateway — the single outbo
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -126,7 +126,7 @@ Response:
 ```json
 {
   "request_id": "ai_req_01HXY...",
-  "model_used": "claude-3.7-sonnet",
+  "model_used": "Codex-3.7-sonnet",
   "region": "eu-west-1",
   "text": "...",
   "tokens_in": 1840,
@@ -181,9 +181,9 @@ class Provider(Protocol):
 class AnthropicProvider:
     name = "anthropic"
     models = [
-        ModelDescriptor("claude-3.7-sonnet", ctx=200_000,
+        ModelDescriptor("Codex-3.7-sonnet", ctx=200_000,
                         in_price=3e-6, out_price=15e-6),
-        ModelDescriptor("claude-3-haiku", ctx=200_000,
+        ModelDescriptor("Codex-3-haiku", ctx=200_000,
                         in_price=0.25e-6, out_price=1.25e-6),
     ]
     regions = ["us-east-1", "eu-west-1"]
@@ -206,14 +206,14 @@ Per tier, an ordered list of (provider, model, region) candidates.
 ```yaml
 tiers:
   enterprise:
-    primary:     [anthropic, claude-3.7-sonnet, region:tenant]
-    fallback_1:  [bedrock,   anthropic.claude-3-5-sonnet, region:tenant]
+    primary:     [anthropic, Codex-3.7-sonnet, region:tenant]
+    fallback_1:  [bedrock,   anthropic.Codex-3-5-sonnet, region:tenant]
     fallback_2:  [openai,    gpt-4o, region:tenant_or_us]
   pro:
-    primary:     [anthropic, claude-3.7-sonnet, region:tenant]
-    fallback_1:  [anthropic, claude-3-5-haiku, region:tenant]
+    primary:     [anthropic, Codex-3.7-sonnet, region:tenant]
+    fallback_1:  [anthropic, Codex-3-5-haiku, region:tenant]
   free:
-    primary:     [anthropic, claude-3-haiku, region:any]
+    primary:     [anthropic, Codex-3-haiku, region:any]
     fallback_1:  [openai,    gpt-4o-mini, region:any]
 ```
 

@@ -4,7 +4,7 @@ description: Use when building the observability stack for AI features in a mult
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

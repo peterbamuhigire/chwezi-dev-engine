@@ -4,7 +4,7 @@ description: Use when choosing or auditing colours for any web, app, or brand su
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

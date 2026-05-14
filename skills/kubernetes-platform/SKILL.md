@@ -4,7 +4,7 @@ description: Use when running Kubernetes as a platform team — bootstrapping se
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

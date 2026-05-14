@@ -7,7 +7,7 @@ description: Production-grade iOS patterns that separate good apps from great ap
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -4,7 +4,7 @@ description: Use when designing or reviewing security for a web application, API
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

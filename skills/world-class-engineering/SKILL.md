@@ -7,7 +7,7 @@ description: Use when designing, building, reviewing, or upgrading production so
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

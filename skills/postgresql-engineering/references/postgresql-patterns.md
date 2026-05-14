@@ -14,7 +14,7 @@ description: Use when adding pgvector to a Debian/Ubuntu PostgreSQL instance, bu
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

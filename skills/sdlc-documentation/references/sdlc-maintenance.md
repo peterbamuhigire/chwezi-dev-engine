@@ -13,7 +13,7 @@ description: Generate a Software Maintenance Plan (SMP) and supporting maintenan
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -280,7 +280,7 @@ Two of Lehman's eight laws are directly relevant to maintenance planning and ser
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [sdlc-testing](../sdlc-testing/SKILL.md) | [sdlc-user-deploy](../sdlc-user-deploy/SKILL.md) | [sdlc-post-deployment](../sdlc-post-deployment/SKILL.md)
 **Last Updated:** 2026-03-15 (created per ISO/IEC/IEEE 14764:2022 Clause 9 + Grubb & Takang 2003)
 

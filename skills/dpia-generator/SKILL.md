@@ -6,7 +6,7 @@ metadata:
   compatibility_notes: Uganda-based systems requiring DPPA 2019 compliance
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

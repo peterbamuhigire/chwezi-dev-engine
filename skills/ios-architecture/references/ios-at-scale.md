@@ -6,7 +6,7 @@ description: Production iOS engineering for large teams and apps — modular arc
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

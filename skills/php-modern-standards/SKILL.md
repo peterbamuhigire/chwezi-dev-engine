@@ -6,7 +6,7 @@ description: Modern PHP development standards for maintainable, testable, object
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -12,7 +12,7 @@ description: Use when integrating Google Maps JavaScript API or Mapbox GL into a
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

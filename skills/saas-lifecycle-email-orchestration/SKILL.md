@@ -4,7 +4,7 @@ description: Use when designing the six core lifecycle email sequences (welcome/
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

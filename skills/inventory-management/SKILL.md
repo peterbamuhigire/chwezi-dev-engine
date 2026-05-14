@@ -7,7 +7,7 @@ description: Coordinate infrastructure for inventory, stock movement, BOMs, valu
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

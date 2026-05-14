@@ -6,7 +6,7 @@ description: Client-side image compression before upload using Squoosh with Canv
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -6,7 +6,7 @@ description: iOS development standards for AI agent implementation. Swift-first,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

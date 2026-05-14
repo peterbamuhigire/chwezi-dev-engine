@@ -12,7 +12,7 @@ description: Generate a Post-Deployment Evaluation Report (PDER) to assess softw
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -293,7 +293,7 @@ Osborne's Model (Grubb & Takang, 2003) defines a formal post-installation review
 
 ---
 
-**Back to:** [Skills Repository](../CLAUDE.md)
+**Back to:** [Skills Repository](../AGENTS.md)
 **Related:** [sdlc-maintenance](../sdlc-maintenance/SKILL.md) | [sdlc-testing](../sdlc-testing/SKILL.md) | [sdlc-user-deploy](../sdlc-user-deploy/SKILL.md)
 **Last Updated:** 2026-03-15 (created per ISO/IEC/IEEE 14764:2022 Clause 6 + Grubb & Takang 2003)
 

@@ -7,7 +7,7 @@ description: Android data persistence standards with Room as primary local stora
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

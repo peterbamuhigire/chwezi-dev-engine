@@ -7,7 +7,7 @@ description: Generate 15-25 targeted blog post ideas with 200-word summaries for
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -9,7 +9,7 @@ description: 'Database reliability engineering: SLI/SLO design and error-budget 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

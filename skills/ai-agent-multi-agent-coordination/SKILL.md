@@ -4,7 +4,7 @@ description: Use when designing systems where multiple agents collaborate on one
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

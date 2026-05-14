@@ -9,7 +9,7 @@ description: Use when securing an iOS app — Keychain best practices with Secur
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

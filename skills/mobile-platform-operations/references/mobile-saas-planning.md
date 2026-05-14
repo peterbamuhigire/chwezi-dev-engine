@@ -6,7 +6,7 @@ description: Create comprehensive planning documentation for a native mobile app
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

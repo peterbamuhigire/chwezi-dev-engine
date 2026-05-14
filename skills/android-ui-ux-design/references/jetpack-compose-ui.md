@@ -6,7 +6,7 @@ description: Jetpack Compose UI standards for beautiful, sleek, minimalistic And
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

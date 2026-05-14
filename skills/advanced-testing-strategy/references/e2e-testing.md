@@ -10,7 +10,7 @@ description: Use when writing end-to-end browser tests for production web apps â
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

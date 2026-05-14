@@ -12,7 +12,7 @@ description: 'Comprehensive TypeScript skill covering the full type system: fund
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

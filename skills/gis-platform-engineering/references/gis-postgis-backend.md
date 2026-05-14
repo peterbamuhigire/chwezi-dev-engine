@@ -12,7 +12,7 @@ description: Use when building server-side spatial features — PostGIS schema d
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

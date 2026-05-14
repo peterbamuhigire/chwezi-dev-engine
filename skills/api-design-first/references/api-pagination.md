@@ -13,7 +13,7 @@ description: Offset pagination pattern for PHP REST APIs and mobile clients (And
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

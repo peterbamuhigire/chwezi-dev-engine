@@ -13,7 +13,7 @@ description: Use when designing event-driven systems, async service integration,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

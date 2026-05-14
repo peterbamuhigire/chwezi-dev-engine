@@ -15,7 +15,7 @@ description: Set up and configure Jenkins on Debian/Ubuntu — installation, Dec
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

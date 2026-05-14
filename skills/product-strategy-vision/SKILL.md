@@ -7,7 +7,7 @@ description: Frameworks for defining a compelling product vision and a focused p
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

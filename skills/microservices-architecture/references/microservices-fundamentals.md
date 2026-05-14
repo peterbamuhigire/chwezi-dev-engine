@@ -12,7 +12,7 @@ description: Core microservices concepts — monolith vs microservices trade-off
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

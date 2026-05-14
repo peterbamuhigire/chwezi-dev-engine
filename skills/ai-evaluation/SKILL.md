@@ -6,7 +6,7 @@ description: Use when setting up quality assurance for AI features — defining 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

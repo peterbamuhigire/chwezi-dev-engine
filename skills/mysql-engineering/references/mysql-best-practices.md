@@ -12,7 +12,7 @@ description: MySQL 8.x best practices for high-performance, secure SaaS applicat
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

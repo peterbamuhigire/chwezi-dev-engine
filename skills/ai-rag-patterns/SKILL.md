@@ -7,7 +7,7 @@ description: Use when building features that answer questions from private data,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

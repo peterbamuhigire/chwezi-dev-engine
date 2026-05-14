@@ -5,7 +5,7 @@ description: Fix markdown lint warnings by enforcing headings, blank lines aroun
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -12,7 +12,7 @@ description: The three NGINX Microservices Reference Architecture networking mod
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

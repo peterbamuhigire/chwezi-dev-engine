@@ -12,7 +12,7 @@ description: Use when running multi-tenant SaaS on Kubernetes — namespace isol
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -12,7 +12,7 @@ description: Use when building real-time features — live dashboards, notificat
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -13,7 +13,7 @@ description: Decision framework for choosing PHP vs Next.js/Node.js for web proj
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

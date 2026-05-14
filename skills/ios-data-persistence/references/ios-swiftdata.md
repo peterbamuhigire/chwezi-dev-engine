@@ -7,7 +7,7 @@ description: Comprehensive SwiftData API reference (iOS 17+) — @Model, @Attrib
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

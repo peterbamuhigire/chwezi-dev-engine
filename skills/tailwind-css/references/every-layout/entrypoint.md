@@ -4,7 +4,7 @@ description: Use when building or reviewing CSS layouts for any web or app inter
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

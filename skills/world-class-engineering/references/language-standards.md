@@ -12,7 +12,7 @@ description: Language and tone standards for all written content across 3 langua
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
