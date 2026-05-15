@@ -7,7 +7,7 @@ description: Complete SaaS metrics framework covering revenue (MRR/ARR/ARPU), gr
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

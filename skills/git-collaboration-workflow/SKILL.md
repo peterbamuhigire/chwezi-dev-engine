@@ -6,7 +6,7 @@ description: Use when planning branch strategy, making commits, reviewing diffs,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

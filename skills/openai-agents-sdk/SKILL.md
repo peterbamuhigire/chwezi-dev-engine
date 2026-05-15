@@ -6,7 +6,7 @@ description: Build production AI agents with the OpenAI Agents SDK (Python) — 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

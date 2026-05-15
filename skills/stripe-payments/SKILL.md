@@ -4,7 +4,7 @@ description: Use when integrating Stripe one-time payments, PaymentIntents, Setu
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

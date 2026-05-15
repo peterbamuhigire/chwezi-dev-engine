@@ -6,7 +6,7 @@ description: Copywriting and content creation standards for website pages, blog 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -7,7 +7,7 @@ description: Use when designing PLG motions for a SaaS product — freemium tier
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

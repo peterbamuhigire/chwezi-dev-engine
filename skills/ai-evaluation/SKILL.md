@@ -6,7 +6,7 @@ description: Use when setting up quality assurance for AI features — defining 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -382,3 +382,7 @@ Cross-references:
 - `ai-hallucination-slo-and-grounding` — uses eval signals to budget hallucination.
 - `ai-feature-rollout-and-experimentation` — gates rollouts on eval.
 - `ai-on-saas-architecture` — control-plane positioning.
+## Consolidated Child References
+
+- Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+

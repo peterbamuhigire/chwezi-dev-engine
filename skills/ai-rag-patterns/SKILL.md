@@ -7,7 +7,7 @@ description: Use when building features that answer questions from private data,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -144,3 +144,7 @@ Cross-references:
 - `ai-hallucination-slo-and-grounding` — citation grounding + faithfulness SLO.
 - `ai-model-gateway` — gateway-mediated retrieval calls.
 - `saas-tenant-data-portability-and-erasure` — KB erasure cascade for embeddings.
+## Consolidated Child References
+
+- Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+

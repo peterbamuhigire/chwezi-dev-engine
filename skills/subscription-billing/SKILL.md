@@ -7,7 +7,7 @@ description: Use when designing or reviewing recurring subscription lifecycle on
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -4,7 +4,7 @@ description: Use when starting a new project, scoping a feature, or deciding whi
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -80,7 +80,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | **Database (relational)** | `database-design-engineering`, `mysql-data-modeling` | `mysql-best-practices`, `postgresql-fundamentals` | `database-reliability`, `mysql-query-performance`, `postgresql-performance` | `mysql-administration`, `postgresql-administration`, `database-internals` |
 | **Frontend (React / Next)** | `nextjs-app-router`, `system-architecture-design` | `react-development`, `react-patterns`, `tailwind-css` | `frontend-performance`, `design-audit` | `grid-systems`, `practical-ui-design`, `interaction-design-patterns`, `motion-design`, `responsive-design`, `ux-writing`, `ai-slop-prevention` |
 | **AI Feature** | `ai-app-architecture`, `ai-feature-spec`, `ai-architecture-patterns` | `ai-llm-integration`, `ai-prompt-engineering` | `ai-evaluation`, `llm-security`, `ai-error-handling`, `ai-security` | `ai-ux-patterns`, `ux-for-ai`, `ai-cost-modeling`, `ai-slop-prevention` |
-| **LLM Integration** | `ai-llm-integration`, `ai-app-architecture` | `claude-api`, `deepseek-integration`, `openai-agents-sdk` | `llm-security`, `ai-evaluation`, `ai-error-handling` | `ai-prompt-engineering`, `ai-rag-patterns`, `ai-agents-tools`, `microservices-ai-integration` |
+| **LLM Integration** | `ai-llm-integration`, `ai-app-architecture` | `Codex-api`, `deepseek-integration`, `openai-agents-sdk` | `llm-security`, `ai-evaluation`, `ai-error-handling` | `ai-prompt-engineering`, `ai-rag-patterns`, `ai-agents-tools`, `microservices-ai-integration` |
 | **Python Service** | `python-modern-standards` | `python-saas-integration` | `advanced-testing-strategy` | `python-data-analytics`, `python-document-generation`, `python-ml-predictive`, `python-data-pipelines` |
 | **TypeScript Stack** | `typescript-mastery`, `typescript-effective` | `typescript-full-stack`, `typescript-design-patterns` | `api-testing-verification`, `advanced-testing-strategy` | `nodejs-development`, `react-development` |
 | **Kubernetes** | `kubernetes-fundamentals`, `system-architecture-design` | `kubernetes-production` | `observability-monitoring`, `reliability-engineering`, `network-security` | `kubernetes-saas-delivery`, `cicd-devsecops`, `cloud-architecture` |

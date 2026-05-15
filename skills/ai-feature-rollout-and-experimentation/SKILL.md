@@ -4,7 +4,7 @@ description: Use when rolling out AI features safely in a multi-tenant SaaS — 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

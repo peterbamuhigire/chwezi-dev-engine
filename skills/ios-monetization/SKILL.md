@@ -6,7 +6,7 @@ description: StoreKit 2 in-app purchases, subscriptions, and monetization for iO
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

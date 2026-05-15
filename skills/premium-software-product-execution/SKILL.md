@@ -4,7 +4,7 @@ description: Use when designing, building, pricing, packaging, or reviewing prem
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

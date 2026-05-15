@@ -4,7 +4,7 @@ description: Use when designing per-tenant rate limits and quotas — algorithm 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

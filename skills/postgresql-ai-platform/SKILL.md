@@ -9,7 +9,7 @@ description: PostgreSQL as an AI data platform, sourced from "Building a Data an
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

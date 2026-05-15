@@ -4,7 +4,7 @@ description: Use for accounting, bookkeeping, ERP finance, POS, inventory, payro
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

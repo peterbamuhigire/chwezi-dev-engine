@@ -7,7 +7,7 @@ description: Tailwind CSS v3 utility-first styling — setup, responsive design,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

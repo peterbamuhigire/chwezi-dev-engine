@@ -8,7 +8,7 @@ description: Use when designing or reviewing a multi-tenant SaaS platform — te
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

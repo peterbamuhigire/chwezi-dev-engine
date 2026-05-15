@@ -1,10 +1,10 @@
----
+﻿---
 name: ai-agent-runtime-architecture
-description: Use when designing the runtime that hosts agentic LLM features in a multi-tenant SaaS — the agent loop as a control-plane service, formal state machine (PERCEIVE → PLAN → ACT → OBSERVE), retries, idempotency, max-step caps, deterministic resumability, and the "agent vs workflow vs cron" decision. Distinct from `ai-agents-tools` (agent fundamentals) and `ai-on-saas-architecture` (overall AI architecture).
+description: Use when designing the runtime that hosts agentic LLM features in a multi-tenant SaaS â€” the agent loop as a control-plane service, formal state machine (PERCEIVE â†’ PLAN â†’ ACT â†’ OBSERVE), retries, idempotency, max-step caps, deterministic resumability, and the "agent vs workflow vs cron" decision. Distinct from `ai-agents-tools` (agent fundamentals) and `ai-on-saas-architecture` (overall AI architecture).
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -22,14 +22,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Do Not Use When
 
-- The task is the fundamentals of the ReAct loop / tool contract — `ai-agents-tools`.
-- The task is the multi-agent coordination pattern — `ai-agent-multi-agent-coordination`.
-- The task is long-running (hours-to-days) durability and progress UX — `ai-agent-async-and-long-running-tasks` builds on this skill.
-- The task is the overall AI architecture — `ai-on-saas-architecture`.
+- The task is the fundamentals of the ReAct loop / tool contract â€” `ai-agents-tools`.
+- The task is the multi-agent coordination pattern â€” `ai-agent-multi-agent-coordination`.
+- The task is long-running (hours-to-days) durability and progress UX â€” `ai-agent-async-and-long-running-tasks` builds on this skill.
+- The task is the overall AI architecture â€” `ai-on-saas-architecture`.
 
 ## Required Inputs
 
-- The AI on SaaS architecture decision (`ai-on-saas-architecture`) — gateway, audit log, prompt registry.
+- The AI on SaaS architecture decision (`ai-on-saas-architecture`) â€” gateway, audit log, prompt registry.
 - The agent feature catalogue (which features are agentic, which are single-shot).
 - The plan / tier catalogue with agent entitlements (`ai-entitlements-and-feature-gating`).
 - Tenant-aware queue / worker infrastructure (`distributed-systems-patterns`, `reliability-engineering`).
@@ -38,20 +38,20 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Apply the **agent vs workflow vs cron decision** (§1). Reject "agent" as the default. Many agentic features are actually workflows with an LLM step.
-3. Design the **agent loop state machine** (§2) with explicit states and idempotent transitions.
-4. Pick the **execution substrate** (§3) — inline / queue worker / durable execution engine — based on max wallclock and resumability requirements.
-5. Wire **step / token / wallclock / cost budgets** (§4) into the loop (delegates to `ai-agent-cost-and-step-budgets` for full enforcement).
-6. Make every step **idempotent and resumable** (§5).
-7. Emit **task lifecycle events** (§6) for observability, back-office, and customer-facing UI.
-8. Apply anti-patterns (§7).
+2. Apply the **agent vs workflow vs cron decision** (Â§1). Reject "agent" as the default. Many agentic features are actually workflows with an LLM step.
+3. Design the **agent loop state machine** (Â§2) with explicit states and idempotent transitions.
+4. Pick the **execution substrate** (Â§3) â€” inline / queue worker / durable execution engine â€” based on max wallclock and resumability requirements.
+5. Wire **step / token / wallclock / cost budgets** (Â§4) into the loop (delegates to `ai-agent-cost-and-step-budgets` for full enforcement).
+6. Make every step **idempotent and resumable** (Â§5).
+7. Emit **task lifecycle events** (Â§6) for observability, back-office, and customer-facing UI.
+8. Apply anti-patterns (Â§7).
 
 ## Quality Standards
 
 - The agent runtime is a **separate deployment** from request-serving web/API workers. Crash-isolated.
 - Every task has a `task_id`, `tenant_id`, `feature`, `model_pin`, `prompt_version`, `tool_set_version`, `step_budget`, `wallclock_budget`, `cost_budget`, `created_at`, `state`.
 - Every step writes a row to `agent_steps` with `step_index`, `state_before`, `action`, `observation`, `tokens`, `usd_cost`, `latency_ms` before the next step runs.
-- A worker crash mid-step does **not** re-execute irreversible actions on restart — idempotency keys are mandatory on side-effects.
+- A worker crash mid-step does **not** re-execute irreversible actions on restart â€” idempotency keys are mandatory on side-effects.
 - A task that exceeds any budget is **terminated cleanly**, emits `agent.task.budget_exceeded`, and surfaces in the agent inbox.
 - Every task has a **per-tenant kill-switch** the back-office can flip in < 5 seconds (`ai-agent-safety-and-red-team`, `saas-admin-backoffice-tooling`).
 - An agent task is **never** started inside an HTTP request handler with `max_execution_time > 30s`. Always queued.
@@ -86,13 +86,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/agent-loop-state-machine.md` — formal state machine, transitions, idempotency contract.
-- `references/agent-vs-workflow-vs-cron-decision.md` — decision matrix with worked examples.
+- `references/agent-loop-state-machine.md` â€” formal state machine, transitions, idempotency contract.
+- `references/agent-vs-workflow-vs-cron-decision.md` â€” decision matrix with worked examples.
 - Companion: `ai-agents-tools`, `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-cost-and-step-budgets`, `ai-agent-observability-and-replay`, `ai-agent-async-and-long-running-tasks`, `ai-on-saas-architecture`, `distributed-systems-patterns`, `reliability-engineering`.
 
 <!-- dual-compat-end -->
 
-## §1 Agent vs Workflow vs Cron — The First Decision
+## Â§1 Agent vs Workflow vs Cron â€” The First Decision
 
 Most "we need an agent" requests are **workflows in disguise**. An agent is *only* the right tool when:
 
@@ -100,43 +100,43 @@ Most "we need an agent" requests are **workflows in disguise**. An agent is *onl
 - Branching depends on intermediate observations only the LLM can interpret.
 - Tool choice itself depends on the observation, not the input.
 
-If steps are fixed, **prefer a workflow** — same LLM calls, deterministic order, vastly cheaper to test, debug, and operate. See `references/agent-vs-workflow-vs-cron-decision.md`.
+If steps are fixed, **prefer a workflow** â€” same LLM calls, deterministic order, vastly cheaper to test, debug, and operate. See `references/agent-vs-workflow-vs-cron-decision.md`.
 
-## §2 The Agent Loop State Machine
+## Â§2 The Agent Loop State Machine
 
 ```
-                ┌──────────────┐
-       enqueue  │   QUEUED     │
-                └──────┬───────┘
-                       │ worker claims
-                       ▼
-                ┌──────────────┐
-                │   PLANNING   │ ◄──────────────┐
-                └──────┬───────┘                │
-                       │ plan emitted           │ revise plan
-           needs HITL? │                        │
-              ┌────────┴────────┐               │
-              ▼                 ▼               │
-       ┌──────────────┐  ┌──────────────┐       │
-       │ AWAITING_    │  │   ACTING     │       │
-       │  APPROVAL    │  └──────┬───────┘       │
-       └──────┬───────┘         │ tool result   │
-              │ approved/       ▼               │
-              │ rejected ┌──────────────┐       │
-              └────────► │  OBSERVING   │───────┘ continue
-                         └──────┬───────┘
-                                │ done
-                                ▼
-                         ┌──────────────┐
-                         │  COMPLETED   │
-                         └──────────────┘
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+       enqueue  â”‚   QUEUED     â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â”‚ worker claims
+                       â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚   PLANNING   â”‚ â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜                â”‚
+                       â”‚ plan emitted           â”‚ revise plan
+           needs HITL? â”‚                        â”‚
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
+              â–¼                 â–¼               â”‚
+       â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+       â”‚ AWAITING_    â”‚  â”‚   ACTING     â”‚       â”‚
+       â”‚  APPROVAL    â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+       â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚ tool result   â”‚
+              â”‚ approved/       â–¼               â”‚
+              â”‚ rejected â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+              â””â”€â”€â”€â”€â”€â”€â”€â”€â–º â”‚  OBSERVING   â”‚â”€â”€â”€â”€â”€â”€â”€â”˜ continue
+                         â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                                â”‚ done
+                                â–¼
+                         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                         â”‚  COMPLETED   â”‚
+                         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Terminal states: `COMPLETED`, `FAILED`, `BUDGET_EXCEEDED`, `KILLED`, `ABANDONED`.
 
 All state transitions write to `agent_steps` *before* the next state is entered. A worker crash between two steps re-enters the loop in the last persisted state. See `references/agent-loop-state-machine.md`.
 
-## §3 Execution Substrate
+## Â§3 Execution Substrate
 
 | Wallclock cap | Resumability requirement | Substrate |
 |---|---|---|
@@ -147,7 +147,7 @@ All state transitions write to `agent_steps` *before* the next state is entered.
 
 For anything writing to customer state, **never** run inline in the HTTP handler. The customer's request times out and the agent keeps spending.
 
-## §4 Budgets Wired Into the Loop
+## Â§4 Budgets Wired Into the Loop
 
 Before entering `PLANNING` and `ACTING`, the loop checks four budgets:
 
@@ -160,7 +160,7 @@ Before entering `PLANNING` and `ACTING`, the loop checks four budgets:
 
 Budgets come from `ai-agent-cost-and-step-budgets`. The runtime is the **enforcement point**.
 
-## §5 Idempotency and Resumability
+## Â§5 Idempotency and Resumability
 
 Every side-effecting tool call carries an idempotency key derived from `(task_id, step_index, tool_name, arg_hash)`. If a worker crashes after the side-effect but before persistence, the next worker's tool call short-circuits to the recorded result.
 
@@ -177,7 +177,7 @@ def execute_tool_with_idempotency(task_id, step_idx, tool_name, args):
 
 Tools that cannot accept an idempotency key (legacy APIs) must be wrapped in an outbox pattern with a deduplication table. See `distributed-systems-patterns`.
 
-## §6 Task Lifecycle Events
+## Â§6 Task Lifecycle Events
 
 | Event | When | Used by |
 |---|---|---|
@@ -191,17 +191,17 @@ Tools that cannot accept an idempotency key (legacy APIs) must be wrapped in an 
 | `agent.task.completed` | Success | Customer notification, eval |
 | `agent.task.failed` | Unrecoverable error | Support, eval |
 
-## §7 Anti-Pattern Reminders
+## Â§7 Anti-Pattern Reminders
 
 - Implementing the loop inline in the API handler.
 - Treating step-budget as a comment.
 - Tool-call idempotency keys derived from `random.uuid()`.
-- Logging the plan but not persisting it — replay is impossible.
-- The agent loop process is the same process as the web app — runaway OOM crashes API.
+- Logging the plan but not persisting it â€” replay is impossible.
+- The agent loop process is the same process as the web app â€” runaway OOM crashes API.
 
 ---
 
-## §8 Compliance-Evidence Emissions (Enhancement)
+## Â§8 Compliance-Evidence Emissions (Enhancement)
 
 Every state-machine transition emits a **compliance event** onto the hash-chained action audit log (`ai-agent-audit-log-integrity`). The runtime is the canonical source of compliance evidence for `ai-agent-soc2-controls` CC7.2 (monitoring), PI1.1 (processing integrity), and `ai-agent-iso27001-controls` A.12.4 (logging).
 
@@ -224,3 +224,7 @@ Minimum event taxonomy emitted by the loop:
 Every event carries `policy_version` so historical authority checks resolve correctly (see `ai-agent-approval-audit-completeness`). Emissions are synchronous on the critical path for irreversible-action transitions and `kill_switch_flipped`; everything else may be batched with at-most-1s drain.
 
 Cross-links: `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls`, `ai-agent-evidence-automation`, `ai-agent-approval-audit-completeness`.
+## Consolidated Child References
+
+- Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+

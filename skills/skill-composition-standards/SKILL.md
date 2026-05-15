@@ -8,7 +8,7 @@ description: Use when authoring a new skill, normalising an older skill, or revi
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -57,6 +57,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- Load `references/orchestration-best-practices.md` when coordinating multi-skill workflows, handoffs, routing, or agent orchestration policy.
 <!-- dual-compat-end -->
 The rules that make every skill in this repository compose cleanly with every other skill. Two concerns in one skill, because they are two faces of the same question: "what does this skill promise, and what is it allowed to expect?"
 
@@ -93,7 +94,7 @@ description: Use when <trigger scenarios> — <what this skill covers>, <what it
 
 Rules for `description`:
 
-- Starts with "Use when" (trigger-phrasing — Claude loads skills on trigger match).
+- Starts with "Use when" (trigger-phrasing — Codex loads skills on trigger match).
 - Names the scenarios that should trigger loading.
 - Names the neighbour skills (so the reader knows the difference).
 - Single line, fits on screen without wrapping — under ~350 characters.

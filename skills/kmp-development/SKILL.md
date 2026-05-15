@@ -6,7 +6,7 @@ description: Kotlin Multiplatform shared module development standards for sharin
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -61,6 +61,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- `references/kmp-compose-multiplatform.md` for shared Compose UI across Android, iOS, Desktop, and Web targets.
+- `references/kmp-tdd.md` for shared-module Red-Green-Refactor, common tests, and expect/actual test strategy.
 <!-- dual-compat-end -->
 ## Strategy: Shared Logic, Native UI
 

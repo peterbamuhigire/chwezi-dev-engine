@@ -7,7 +7,7 @@ description: Framework for writing persuasive IT project proposals that win work
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

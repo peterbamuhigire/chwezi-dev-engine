@@ -7,7 +7,7 @@ description: Use when auditing a PHP/JavaScript/HTML web application for securit
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -63,7 +63,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 <!-- dual-compat-end -->
-Systematic security audit for PHP/JavaScript/HTML web applications. Scans 8 security layers, produces a structured report with severity-rated findings and actionable fix recommendations that Claude can apply.
+Systematic security audit for PHP/JavaScript/HTML web applications. Scans 8 security layers, produces a structured report with severity-rated findings and actionable fix recommendations that Codex can apply.
 
 **Core Principle:** Scan everything before fixing anything. Full picture first, then targeted remediation.
 

@@ -8,7 +8,7 @@ description: Use when designing or building SaaS web application UIs with React,
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
