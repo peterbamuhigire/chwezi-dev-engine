@@ -4,7 +4,7 @@ description: Use when designing or building an AI-enhanced web app (Next.js + Ve
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -140,9 +140,9 @@ Wrong choice cost: inline-when-should-be-MCP means every app duplicates the tool
 | Need | First choice | Fallback | Why not the other way |
 |---|---|---|---|
 | Latency-critical chat, short replies | Gemini Flash | GPT-3.5 | frontier model burns budget on a task that does not need it |
-| High-quality reasoning, long tool chains | Claude Sonnet | GPT-4o | flash model hallucinates multi-step chains |
+| High-quality reasoning, long tool chains | Codex Sonnet | GPT-4o | flash model hallucinates multi-step chains |
 | Cheapest structured extraction | Gemini Flash | GPT-3.5 | frontier cost is a 10–30x multiplier with no quality gain |
-| Strict schema adherence (`generateObject`) | GPT-4o | Claude Sonnet (tool-call) | flash models drift from the schema under pressure |
+| Strict schema adherence (`generateObject`) | GPT-4o | Codex Sonnet (tool-call) | flash models drift from the schema under pressure |
 | Residency / on-prem constraint | regional deployment | fail closed | cross-region fallback is a compliance breach |
 
 Full selection table: `references/provider-abstraction.md`.

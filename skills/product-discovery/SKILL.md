@@ -4,7 +4,7 @@ description: Structured product discovery before building. Covers the four produ
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

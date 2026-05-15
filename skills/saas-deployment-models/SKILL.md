@@ -4,7 +4,7 @@ description: Use when selecting a multi-tenant deployment model — full stack s
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

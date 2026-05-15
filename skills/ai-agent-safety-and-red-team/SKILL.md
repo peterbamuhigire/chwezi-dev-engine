@@ -4,7 +4,7 @@ description: Use when hardening agentic features against agent-specific attack s
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

@@ -7,7 +7,7 @@ description: Use when designing or scaling a SaaS sales organisation — sales m
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

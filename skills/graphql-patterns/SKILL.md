@@ -4,11 +4,11 @@ description: Use when designing, building, or operating GraphQL APIs with Apollo
   TypeScript — covers schema-first SDL design, resolver architecture, DataLoader, JWT and
   directive-based authz, Relay cursor pagination, typed error payloads, federation v2,
   graphql-codegen, and production hardening (depth/complexity limits, timeouts, persisted
-  queries). Pair with graphql-security for hostile-input defence.
+  queries). Load references/graphql-security.md for hostile-input defence.
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -26,7 +26,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - Pure REST/gRPC — use `api-design-first`
-- Threat-modelling GraphQL against malicious input — load `graphql-security` first
+- Threat-modelling GraphQL against malicious input — load `references/graphql-security.md` first
 - Single canonical UI shape, CDN caching dominant — REST is simpler
 
 ## Required Inputs
@@ -69,7 +69,7 @@ Monolithic `schema.js`/`index.js`; mixed auth patterns across resolvers; client-
 
 - *Fullstack GraphQL* (TS + Apollo + React); *JavaScript Everywhere* — Adam D. Scott (O'Reilly, 2020).
 - Apollo Server + Federation v2 docs; Relay cursor connection spec (`relay.dev/graphql/connections.htm`).
-- Companion skills: `api-design-first`, `graphql-security`, `typescript-full-stack`, `nodejs-development`.
+- Companion skills: `api-design-first`, `references/graphql-security.md`, `typescript-full-stack`, `nodejs-development`.
 <!-- dual-compat-end -->
 
 ## Overview
@@ -483,7 +483,7 @@ Resolver receives `{ createReadStream, filename, mimetype }`. Stream directly to
 
 Mandatory for any public endpoint: **depth limit** (`depthLimit(7)`); **complexity/cost analysis** (`graphql-cost-analysis` — cap per request, record score for rate-limiting and metering); **introspection off** in production (GitLab's 2019 DoS was unlimited introspection); **persisted queries** (APQ + whitelist — reject unknown hashes in strict mode); **timeouts** (HTTP 30 s at proxy, resolver `AbortController` on downstream); **disable batching array requests** unless used (bypasses per-request rate limits); **CORS allow-list** — never `*`; **helmet + TLS** at the edge; **tracing** (OpenTelemetry → Jaeger/Tempo + Apollo Studio).
 
-Load `graphql-security` for the adversarial checklist (alias/directive overloading, SSRF via argument fields, CSRF on mutations).
+Load `references/graphql-security.md` for the adversarial checklist (alias/directive overloading, SSRF via argument fields, CSRF on mutations).
 
 ---
 
@@ -494,4 +494,4 @@ Load `graphql-security` for the adversarial checklist (alias/directive overloadi
 - Public API where CDN edge caching is business-critical → GraphQL's POST-only default defeats it.
 - One team, one service, <10 endpoints → the tooling weight does not pay back.
 
-**Hybrid default:** GraphQL as a BFF over REST microservices — REST for webhooks and file upload, GraphQL for client-shaped reads of relational UIs. Pairs naturally with `microservices-communication`.
+**Hybrid default:** GraphQL as a BFF over REST microservices — REST for webhooks and file upload, GraphQL for client-shaped reads of relational UIs. Pairs naturally with `microservices-architecture` reference `references/microservices-communication.md`.

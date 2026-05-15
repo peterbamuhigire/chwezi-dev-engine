@@ -6,7 +6,7 @@ description: Use when creating or upgrading skills in this repository. Covers re
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -57,7 +57,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Use the `scripts/` directory for repository-native automation before inventing new tooling.
 <!-- dual-compat-end -->
-Use this skill for repository-native skill authoring. The goal is not to create generic instructional files; it is to encode reusable, high-signal operational knowledge for Claude Code.
+Use this skill for repository-native skill authoring. The goal is not to create generic instructional files; it is to encode reusable, high-signal operational knowledge for Codex.
 
 ## Repository Rules
 
@@ -107,7 +107,7 @@ Move these to `references/`:
 
 ### 4. Encode Judgment, Not Boilerplate
 
-Good skills tell Claude Code:
+Good skills tell Codex:
 
 - What to prioritize
 - What to avoid
@@ -118,7 +118,7 @@ Bad skills just restate obvious framework syntax or dump long tutorials.
 
 ## Quality Standard
 
-Every skill in this repo should help Claude Code produce outputs that are:
+Every skill in this repo should help Codex produce outputs that are:
 
 - Production-ready
 - Secure by default

@@ -4,7 +4,7 @@ description: Use when designing the internal admin / back-office console of a mu
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

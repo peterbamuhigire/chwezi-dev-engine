@@ -4,7 +4,7 @@ description: Use when designing the GDPR/POPIA/CCPA-compliant data export (right
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

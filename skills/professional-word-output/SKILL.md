@@ -7,7 +7,7 @@ description: 'Generate world-class, professionally designed Microsoft Word (.doc
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

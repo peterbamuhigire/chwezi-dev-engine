@@ -7,7 +7,7 @@ description: Implement a complete double-entry accounting system inside any SaaS
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

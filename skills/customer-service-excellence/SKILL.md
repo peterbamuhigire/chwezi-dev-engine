@@ -4,7 +4,7 @@ description: Use when handling a customer service interaction (especially recove
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

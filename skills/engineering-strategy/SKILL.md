@@ -4,7 +4,7 @@ description: Use when drafting, reviewing, or repairing an engineering strategy 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

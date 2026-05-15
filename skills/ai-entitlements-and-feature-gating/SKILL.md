@@ -4,7 +4,7 @@ description: Use when designing how AI features are unlocked by plan tier — wh
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

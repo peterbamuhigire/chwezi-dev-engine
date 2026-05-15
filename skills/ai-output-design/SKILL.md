@@ -8,7 +8,7 @@ description: Use when designing AI output surfaces — structure templates, veri
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -120,7 +120,7 @@ See `references/verifiability-patterns.md`.
 
 Users trust an output when they know **the lens the model used**. Surface:
 
-- Model + version ("Claude Sonnet 4.6").
+- Model + version ("Codex Sonnet 4.6").
 - Agent / tool used ("Used Web Search").
 - Locale / jurisdiction ("Answer framed for UK law").
 - Mode ("Fast mode vs Thinking mode").
@@ -149,7 +149,7 @@ Rule: a response that ends "…and that's it" without an action button is a desi
 - **On-select UI** (Notion pattern): user highlights text → inline menu: "Shorter / Longer / Simpler / Formal / Translate". Runs a scoped prompt on just the selection. The user does not type a new prompt.
 - **Prompt augmentation** (Elaborate button): user clicks "Elaborate" → system appends a directive to the last prompt and re-runs. Avoids re-prompt-from-scratch.
 - **Knobs** (QuillBot Fluency/Formal sliders): exposed as persistent controls above the output. Changing them regenerates.
-- **Version selector** (Claude Artifacts pattern): every regeneration is a versioned sibling, not a destructive overwrite. Users compare and pick.
+- **Version selector** (Codex Artifacts pattern): every regeneration is a versioned sibling, not a destructive overwrite. Users compare and pick.
 
 See `references/inline-refinement.md`.
 
@@ -162,7 +162,7 @@ Two distinct output paradigms.
 | Paradigm | When to use | Prescriptions |
 |---|---|---|
 | Chat | Ephemeral Q&A, conversational iteration, short outputs | Linear transcript, streaming tokens, recent history visible |
-| Canvas | Output is durable artifact (doc, plan, image, code) — shareable, storable, returnable | Editable workspace, version history (Claude Artifacts), undo/redo, node-based iteration for generative media (Runway) |
+| Canvas | Output is durable artifact (doc, plan, image, code) — shareable, storable, returnable | Editable workspace, version history (Codex Artifacts), undo/redo, node-based iteration for generative media (Runway) |
 
 Rule: move output to canvas the moment it becomes shareable. A 3-page policy draft in chat is friction; the same draft in canvas is a deliverable.
 
@@ -209,3 +209,7 @@ If a section has no content, omit it.
 - `ai-agentic-ui` — long-running agent surfaces.
 - `ai-feature-spec` — output schema design.
 - `ux-for-ai` — trust and transparency principles.
+## Consolidated Child References
+
+- Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+

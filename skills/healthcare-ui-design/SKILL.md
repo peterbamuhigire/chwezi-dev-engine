@@ -6,7 +6,7 @@ description: Design world-class clinical and patient-facing healthcare UIs for w
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

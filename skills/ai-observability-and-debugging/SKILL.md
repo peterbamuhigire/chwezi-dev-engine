@@ -4,7 +4,7 @@ description: Use when building the observability stack for AI features in a mult
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -224,3 +224,7 @@ Required replay surface: per-task replay re-running a recorded task with candida
 - `ai-prompt-injection-and-tenant-safety` — safety signals to dashboards.
 - `observability-monitoring` — broader observability.
 - `saas-admin-backoffice-tooling` — operator UI.
+## Consolidated Child References
+
+- Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+

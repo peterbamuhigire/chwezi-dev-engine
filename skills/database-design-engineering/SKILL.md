@@ -7,7 +7,7 @@ description: Use when designing or reviewing relational or document-backed data 
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
@@ -71,7 +71,7 @@ Use this skill when schema choices will shape correctness, performance, or futur
 
 1. Load `world-class-engineering`.
 2. Load this skill to design the data model and lifecycle.
-3. Load engine-specific skills such as `mysql-best-practices` or PostgreSQL skills afterward.
+3. Load engine-specific parent skills afterward: `mysql-engineering`, `mysql-operations`, `postgresql-engineering`, or `postgresql-operations`.
 
 ## Database Workflow
 
@@ -151,6 +151,8 @@ Do not use schemaless storage as a substitute for undecided modeling.
 - Keep application code compatible across deployment overlap where possible.
 - Rehearse destructive or high-volume changes before production.
 - Tag migrations with rollback posture: reversible, compensating-only, or forward-fix-only.
+- For web projects, provide a root pull-time migration script that reads the app's environment database settings, compares tracked migrations with live migration history, and applies only missing migrations.
+- Never bundle seeds into the normal migration-apply path. Demo data, reference seeds, fixtures, and production bootstrap scripts must require a separate explicit command.
 
 ### Operable Data Systems
 

@@ -8,7 +8,7 @@ description: Use when designing, hardening, or auditing network-layer security f
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 

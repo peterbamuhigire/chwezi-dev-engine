@@ -4,7 +4,7 @@ description: Data visualization patterns for transforming raw data into compelli
 metadata:
   portable: true
   compatible_with:
-  - claude-code
+  - Codex
   - codex
 ---
 
