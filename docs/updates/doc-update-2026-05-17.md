@@ -3,7 +3,8 @@
 ## Summary
 
 Recreated the missing project documentation entrypoints for the skills
-repository.
+repository, then updated the catalog documentation after the active skill alias
+cleanup.
 
 ## Files Added
 
@@ -22,17 +23,26 @@ repository.
 
 ## Verification
 
-Baseline guardrail command:
+Guardrail command:
 
 ```powershell
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 ```
 
-Known current findings:
+Current result after cleanup:
 
-- Active skill count is above the cap.
-- Duplicate finance frontmatter names exist between `doctrine/skills/` and
-  `skills/finance/`.
+- Active `SKILL.md` files: 169.
+- Duplicate frontmatter names: 0.
+- Guardrail findings: 0.
 
-These are pre-existing catalog issues and were not changed by this documentation
-repair.
+## Follow-Up Update
+
+| File | Change |
+| --- | --- |
+| `README.md` | Expanded into a fuller guide to skill benefits, active roots, domains, routing, aliases, and maintenance rules. |
+| `docs/skill-routing-index.md` | Updated baseline counts and recorded inactive alias routes. |
+| `docs/skill-aliases.yml` | Added current active count and machine-readable inactive alias targets. |
+| `docs/overview/README.md` | Updated current catalog policy and alias behavior. |
+| `docs/overview/PROJECT_BRIEF.md` | Replaced resolved duplicate-count risks with ongoing catalog-discipline risks. |
+| `docs/overview/ARCHITECTURE.md` | Documented `ALIAS.md` as the inactive entrypoint preservation mechanism. |
+| `docs/plans/NEXT_FEATURES.md` | Moved count reduction and finance duplicate cleanup to recently completed work. |
