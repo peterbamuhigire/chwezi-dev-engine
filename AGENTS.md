@@ -42,6 +42,9 @@ accurate, portable, easy to route, and below the active skill cap.
 An active skill is a `SKILL.md` under one of those roots. Reference material
 should not be named `SKILL.md`.
 
+Inactive aliases are kept as `ALIAS.md` in the original skill directory and
+must be routed through `docs/skill-aliases.yml`.
+
 ## Guardrails
 
 Run this after catalog routing or skill frontmatter changes:
@@ -52,10 +55,10 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 
 Known baseline as of 2026-05-17:
 
-- Active `SKILL.md` files: 209.
+- Active `SKILL.md` files: 169.
 - Target active catalog size: 150-170.
 - Hard cap tracked by the guardrail script: 200.
-- Known duplicate names exist between `doctrine/skills/` and `skills/finance/`.
+- Duplicate frontmatter names: 0.
 
 ## Cross-Platform Context
 

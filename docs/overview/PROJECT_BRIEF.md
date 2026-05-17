@@ -35,8 +35,9 @@ security, UX, and SDLC documentation.
 
 ## Current Risks
 
-- The active skill count is above the configured cap.
-- Several finance skills have duplicate frontmatter names between
-  `doctrine/skills/` and `skills/finance/`.
+- The active skill count is now within target, but future skill additions can
+  easily push the catalog over 170 without alias discipline.
+- Inactive aliases must stay documented in `docs/skill-aliases.yml`; otherwise
+  old skill names become hard to route.
 - `doctrine` appears as a modified path in git and should be handled carefully
   before unrelated changes touch that area.

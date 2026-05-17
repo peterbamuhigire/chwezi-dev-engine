@@ -31,6 +31,10 @@ Reference material should be stored under directories such as `references/`,
 `sections/`, `templates/`, `assets/`, or examples, not as extra `SKILL.md`
 files. This keeps active skill count controllable.
 
+Legacy entrypoints that should not be active are kept in-place as `ALIAS.md`.
+Those files preserve historical content without participating in loader
+routing.
+
 ## Routing Model
 
 When multiple narrow skills overlap, prefer one retained parent skill and route
@@ -38,6 +42,8 @@ legacy names through:
 
 - `docs/skill-routing-index.md` for human-readable policy.
 - `docs/skill-aliases.yml` for machine-readable aliases.
+- `ALIAS.md` in the old skill directory when the original content is retained
+  but no longer active.
 
 Finance, accounting, audit, close, reporting, controls, IFRS, banking,
 reconciliation, and finance UX route first to `doctrine/skills/` unless a root
@@ -57,5 +63,7 @@ skill adds distinct implementation behavior.
 - Markdown files should stay under 500 lines.
 - `AGENTS.md` should remain a short navigation hub.
 - Avoid deleting compatibility aliases without a migration decision.
+- When deactivating an entrypoint, rename only `SKILL.md` to `ALIAS.md`, keep
+  the directory intact, and add the target route to `docs/skill-aliases.yml`.
 - `doctrine` currently behaves like a special tracked path and should not be
   modified incidentally.

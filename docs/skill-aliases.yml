@@ -1,6 +1,6 @@
 version: 1
 source: docs/skills-trimminhg.md
-updated: 2026-05-13
+updated: 2026-05-17
 active_skill_policy:
   active_roots:
     - skills
@@ -8,11 +8,14 @@ active_skill_policy:
     - 00-meta-initialization
   hard_cap: 200
   target_range: 150-170
+  current_active_skill_count: 169
   finance_doctrine_canonical: true
   do_not_move_or_delete_skill_directories_from_registry_work: true
+inactive_alias_file: ALIAS.md
 finance_canonical_duplicates:
   skills/finance/audit-ready-reporting-pack: doctrine/skills/audit-ready-reporting-pack
   skills/finance/bank-and-mobile-money-reconciliation: doctrine/skills/bank-and-mobile-money-reconciliation
+  skills/finance/finance-module-audit: doctrine/skills/finance-module-audit
   skills/finance/finance-ui-pattern-library: doctrine/skills/finance-ui-pattern-library
   skills/finance/finance-ux-for-non-accountants: doctrine/skills/finance-ux-for-non-accountants
   skills/finance/ias-agriculture: doctrine/skills/ias-agriculture
@@ -28,6 +31,54 @@ finance_canonical_duplicates:
   skills/finance/management-accounting-dimensions: doctrine/skills/management-accounting-dimensions
   skills/finance/month-end-and-year-end-close-playbook: doctrine/skills/month-end-and-year-end-close-playbook
   skills/finance/opening-balances-and-migration-playbook: doctrine/skills/opening-balances-and-migration-playbook
+inactive_skill_aliases:
+  skills/finance/audit-ready-reporting-pack: doctrine/skills/audit-ready-reporting-pack
+  skills/finance/bank-and-mobile-money-reconciliation: doctrine/skills/bank-and-mobile-money-reconciliation
+  skills/finance/finance-module-audit: doctrine/skills/finance-module-audit
+  skills/finance/finance-ui-pattern-library: doctrine/skills/finance-ui-pattern-library
+  skills/finance/finance-ux-for-non-accountants: doctrine/skills/finance-ux-for-non-accountants
+  skills/finance/ias-agriculture: doctrine/skills/ias-agriculture
+  skills/finance/ias-government-grants: doctrine/skills/ias-government-grants
+  skills/finance/ias-impairment: doctrine/skills/ias-impairment
+  skills/finance/ias-income-tax-deferred-tax: doctrine/skills/ias-income-tax-deferred-tax
+  skills/finance/ias-provisions-contingencies: doctrine/skills/ias-provisions-contingencies
+  skills/finance/ifrs-financial-instruments: doctrine/skills/ifrs-financial-instruments
+  skills/finance/ifrs-for-smes-equivalents: doctrine/skills/ifrs-for-smes-equivalents
+  skills/finance/ifrs-leases: doctrine/skills/ifrs-leases
+  skills/finance/ifrs-revenue-recognition: doctrine/skills/ifrs-revenue-recognition
+  skills/finance/internal-controls-library: doctrine/skills/internal-controls-library
+  skills/finance/management-accounting-dimensions: doctrine/skills/management-accounting-dimensions
+  skills/finance/month-end-and-year-end-close-playbook: doctrine/skills/month-end-and-year-end-close-playbook
+  skills/finance/opening-balances-and-migration-playbook: doctrine/skills/opening-balances-and-migration-playbook
+  skills/fixed-assets-and-depreciation: doctrine/skills/fixed-assets-and-depreciation
+  skills/inventory-costing: doctrine/skills/inventory-costing-and-stock-accounting
+  skills/inventory-management: doctrine/skills/inventory-costing-and-stock-accounting
+  skills/payroll-postings-uganda: doctrine/skills/payroll-and-statutory-postings-east-africa
+  skills/pos-restaurant-ui-standard: doctrine/skills/finance-ui-pattern-library
+  skills/pos-sales-ui-design: doctrine/skills/finance-ui-pattern-library
+  skills/chart-of-accounts-templates: doctrine/skills/ledger-posting-engine-core
+  skills/rag-implementation: skills/ai-rag-patterns
+  skills/vector-databases: skills/ai-rag-patterns
+  skills/ux-for-ai: skills/ai-agent-ux
+  skills/microservices-ai-integration: skills/ai-app-architecture
+  skills/demand-forecasting: skills/python-ml-predictive
+  skills/growth-telemetry-pipeline: skills/python-data-analytics
+  skills/postgresql-ai-platform: skills/ai-rag-patterns
+  skills/dual-auth-rbac: skills/vibe-security-skill
+  skills/uganda-dppa-compliance: skills/dpia-generator
+  skills/saas-subscription-mastery: skills/subscription-billing
+  skills/saas-deployment-models: skills/saas-architecture-strategy
+  skills/saas-control-plane-engineering: skills/saas-architecture-strategy
+  skills/saas-tenant-onboarding-automation: skills/product-led-growth
+  skills/capability-matrix: skills/product-discovery
+  skills/custom-sub-agents: skills/ai-agent-multi-agent-coordination
+  skills/experiment-engineering: skills/ai-feature-rollout-and-experimentation
+  skills/continuous-improvement-system: skills/world-class-engineering
+  skills/engineering-strategy: skills/world-class-engineering
+  skills/engineering-management-system: skills/world-class-engineering
+  skills/ux-principles-101: skills/practical-ui-design
+  skills/database-internals: skills/database-design-engineering
+  skills/mobile-reports: skills/professional-word-output
 planned_routes:
   doctrine/skills/ifrs-standards-suite:
     domain: finance
