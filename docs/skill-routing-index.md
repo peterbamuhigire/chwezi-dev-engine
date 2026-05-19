@@ -33,7 +33,7 @@ Current guardrail baseline after the 2026-05-17 cleanup:
 Finance, accounting, tax, inventory, payroll, banking, mobile money, POS,
 statutory compliance, and accounting-record work routes first to
 `doctrine/skills/*` for doctrine-owned rules. Duplicate finance entrypoints under
-`skills/finance/*` are compatibility aliases only until their durable material is
+`skills/finance-accounting/finance/*` are compatibility aliases only until their durable material is
 absorbed into doctrine references or a small number of orchestration wrappers.
 
 Root-level finance implementation skills may remain active when they add behavior
@@ -41,34 +41,34 @@ outside doctrine:
 
 | Active skill | Role |
 |---|---|
-| `skills/accounting-engine` | Posting engine, ledger integrity, reversals, idempotency, implementation contracts. |
-| `skills/accounting-finance-controller` | Controller-grade routing, quality gates, finance audit orchestration. |
-| `skills/saas-accounting-system` | SaaS-specific accounting product architecture, if still distinct from `accounting-engine`. |
+| `skills/finance-accounting/accounting-engine` | Posting engine, ledger integrity, reversals, idempotency, implementation contracts. |
+| `skills/finance-accounting/accounting-finance-controller` | Controller-grade routing, quality gates, finance audit orchestration. |
+| `skills/saas/saas-accounting-system` | SaaS-specific accounting product architecture, if still distinct from `accounting-engine`. |
 | `doctrine/skills/*` | Canonical accounting doctrine, controls, reporting, close, migration, reconciliation, and finance UX. |
 
 ## Finance Alias Map
 
 | Old or narrow slug | Target active skill | Status |
 |---|---|---|
-| `skills/finance/audit-ready-reporting-pack` | `doctrine/skills/audit-ready-reporting-pack` | Inactive alias |
-| `skills/finance/bank-and-mobile-money-reconciliation` | `doctrine/skills/bank-and-mobile-money-reconciliation` | Inactive alias |
-| `skills/finance/finance-module-audit` | `doctrine/skills/finance-module-audit` | Inactive alias |
-| `skills/finance/finance-ui-pattern-library` | `doctrine/skills/finance-ui-pattern-library` | Inactive alias |
-| `skills/finance/finance-ux-for-non-accountants` | `doctrine/skills/finance-ux-for-non-accountants` | Inactive alias |
-| `skills/finance/ias-agriculture` | `doctrine/skills/ias-agriculture` | Inactive alias |
-| `skills/finance/ias-government-grants` | `doctrine/skills/ias-government-grants` | Inactive alias |
-| `skills/finance/ias-impairment` | `doctrine/skills/ias-impairment` | Inactive alias |
-| `skills/finance/ias-income-tax-deferred-tax` | `doctrine/skills/ias-income-tax-deferred-tax` | Inactive alias |
-| `skills/finance/ias-provisions-contingencies` | `doctrine/skills/ias-provisions-contingencies` | Inactive alias |
-| `skills/finance/ifrs-financial-instruments` | `doctrine/skills/ifrs-financial-instruments` | Inactive alias |
-| `skills/finance/ifrs-for-smes-equivalents` | `doctrine/skills/ifrs-for-smes-equivalents` | Inactive alias |
-| `skills/finance/ifrs-leases` | `doctrine/skills/ifrs-leases` | Inactive alias |
-| `skills/finance/ifrs-revenue-recognition` | `doctrine/skills/ifrs-revenue-recognition` | Inactive alias |
-| `skills/finance/internal-controls-library` | `doctrine/skills/internal-controls-library` | Inactive alias |
-| `skills/finance/management-accounting-dimensions` | `doctrine/skills/management-accounting-dimensions` | Inactive alias |
-| `skills/finance/month-end-and-year-end-close-playbook` | `doctrine/skills/month-end-and-year-end-close-playbook` | Inactive alias |
-| `skills/finance/opening-balances-and-migration-playbook` | `doctrine/skills/opening-balances-and-migration-playbook` | Inactive alias |
-| `skills/fixed-assets-and-depreciation` | `doctrine/skills/fixed-assets-and-depreciation` | Inactive alias |
+| `skills/finance-accounting/finance/audit-ready-reporting-pack` | `doctrine/skills/audit-ready-reporting-pack` | Inactive alias |
+| `skills/finance-accounting/finance/bank-and-mobile-money-reconciliation` | `doctrine/skills/bank-and-mobile-money-reconciliation` | Inactive alias |
+| `skills/finance-accounting/finance/finance-module-audit` | `doctrine/skills/finance-module-audit` | Inactive alias |
+| `skills/finance-accounting/finance/finance-ui-pattern-library` | `doctrine/skills/finance-ui-pattern-library` | Inactive alias |
+| `skills/finance-accounting/finance/finance-ux-for-non-accountants` | `doctrine/skills/finance-ux-for-non-accountants` | Inactive alias |
+| `skills/finance-accounting/finance/ias-agriculture` | `doctrine/skills/ias-agriculture` | Inactive alias |
+| `skills/finance-accounting/finance/ias-government-grants` | `doctrine/skills/ias-government-grants` | Inactive alias |
+| `skills/finance-accounting/finance/ias-impairment` | `doctrine/skills/ias-impairment` | Inactive alias |
+| `skills/finance-accounting/finance/ias-income-tax-deferred-tax` | `doctrine/skills/ias-income-tax-deferred-tax` | Inactive alias |
+| `skills/finance-accounting/finance/ias-provisions-contingencies` | `doctrine/skills/ias-provisions-contingencies` | Inactive alias |
+| `skills/finance-accounting/finance/ifrs-financial-instruments` | `doctrine/skills/ifrs-financial-instruments` | Inactive alias |
+| `skills/finance-accounting/finance/ifrs-for-smes-equivalents` | `doctrine/skills/ifrs-for-smes-equivalents` | Inactive alias |
+| `skills/finance-accounting/finance/ifrs-leases` | `doctrine/skills/ifrs-leases` | Inactive alias |
+| `skills/finance-accounting/finance/ifrs-revenue-recognition` | `doctrine/skills/ifrs-revenue-recognition` | Inactive alias |
+| `skills/finance-accounting/finance/internal-controls-library` | `doctrine/skills/internal-controls-library` | Inactive alias |
+| `skills/finance-accounting/finance/management-accounting-dimensions` | `doctrine/skills/management-accounting-dimensions` | Inactive alias |
+| `skills/finance-accounting/finance/month-end-and-year-end-close-playbook` | `doctrine/skills/month-end-and-year-end-close-playbook` | Inactive alias |
+| `skills/finance-accounting/finance/opening-balances-and-migration-playbook` | `doctrine/skills/opening-balances-and-migration-playbook` | Inactive alias |
+| `skills/finance-accounting/fixed-assets-and-depreciation` | `doctrine/skills/fixed-assets-and-depreciation` | Inactive alias |
 | `fixed-assets-and-depreciation`, `multicurrency-and-fx` | `doctrine/skills/ifrs-standards-suite` | Planned absorbed reference |
 | `inventory-costing`, `inventory-management`, `payroll-postings-uganda`, `pos-restaurant-ui-standard`, `pos-sales-ui-design` | `doctrine/skills/inventory-payroll-pos` | Planned absorbed references |
 | POS cash drawer, card settlements, clearing accounts | `doctrine/skills/reconciliation-and-cash-control` | Planned absorbed references |
@@ -81,34 +81,34 @@ target instead.
 
 | Inactive alias | Retained target |
 |---|---|
-| `skills/chart-of-accounts-templates` | `doctrine/skills/ledger-posting-engine-core` |
-| `skills/capability-matrix` | `skills/product-discovery` |
-| `skills/continuous-improvement-system` | `skills/world-class-engineering` |
-| `skills/custom-sub-agents` | `skills/ai-agent-multi-agent-coordination` |
-| `skills/database-internals` | `skills/database-design-engineering` |
-| `skills/demand-forecasting` | `skills/python-ml-predictive` |
-| `skills/dual-auth-rbac` | `skills/vibe-security-skill` |
-| `skills/engineering-management-system` | `skills/world-class-engineering` |
-| `skills/engineering-strategy` | `skills/world-class-engineering` |
-| `skills/experiment-engineering` | `skills/ai-feature-rollout-and-experimentation` |
-| `skills/growth-telemetry-pipeline` | `skills/python-data-analytics` |
-| `skills/inventory-costing` | `doctrine/skills/inventory-costing-and-stock-accounting` |
-| `skills/inventory-management` | `doctrine/skills/inventory-costing-and-stock-accounting` |
-| `skills/microservices-ai-integration` | `skills/ai-app-architecture` |
-| `skills/mobile-reports` | `skills/professional-word-output` |
-| `skills/payroll-postings-uganda` | `doctrine/skills/payroll-and-statutory-postings-east-africa` |
-| `skills/pos-restaurant-ui-standard` | `doctrine/skills/finance-ui-pattern-library` |
-| `skills/pos-sales-ui-design` | `doctrine/skills/finance-ui-pattern-library` |
-| `skills/postgresql-ai-platform` | `skills/ai-rag-patterns` |
-| `skills/rag-implementation` | `skills/ai-rag-patterns` |
-| `skills/saas-control-plane-engineering` | `skills/saas-architecture-strategy` |
-| `skills/saas-deployment-models` | `skills/saas-architecture-strategy` |
-| `skills/saas-subscription-mastery` | `skills/subscription-billing` |
-| `skills/saas-tenant-onboarding-automation` | `skills/product-led-growth` |
-| `skills/uganda-dppa-compliance` | `skills/dpia-generator` |
-| `skills/ux-for-ai` | `skills/ai-agent-ux` |
-| `skills/ux-principles-101` | `skills/practical-ui-design` |
-| `skills/vector-databases` | `skills/ai-rag-patterns` |
+| `skills/finance-accounting/chart-of-accounts-templates` | `doctrine/skills/ledger-posting-engine-core` |
+| `skills/sdlc-meta/capability-matrix` | `skills/product-business/product-discovery` |
+| `skills/sdlc-meta/continuous-improvement-system` | `skills/sdlc-meta/world-class-engineering` |
+| `skills/sdlc-meta/custom-sub-agents` | `skills/ai/ai-agent-multi-agent-coordination` |
+| `skills/backend-databases/database-internals` | `skills/backend-databases/database-design-engineering` |
+| `skills/finance-accounting/demand-forecasting` | `skills/languages/python-ml-predictive` |
+| `skills/security/dual-auth-rbac` | `skills/security/vibe-security-skill` |
+| `skills/sdlc-meta/engineering-management-system` | `skills/sdlc-meta/world-class-engineering` |
+| `skills/sdlc-meta/engineering-strategy` | `skills/sdlc-meta/world-class-engineering` |
+| `skills/product-business/experiment-engineering` | `skills/ai/ai-feature-rollout-and-experimentation` |
+| `skills/product-business/growth-telemetry-pipeline` | `skills/languages/python-data-analytics` |
+| `skills/finance-accounting/inventory-costing` | `doctrine/skills/inventory-costing-and-stock-accounting` |
+| `skills/finance-accounting/inventory-management` | `doctrine/skills/inventory-costing-and-stock-accounting` |
+| `skills/architecture/microservices-ai-integration` | `skills/ai/ai-app-architecture` |
+| `skills/mobile-cross/mobile-reports` | `skills/product-business/professional-word-output` |
+| `skills/finance-accounting/payroll-postings-uganda` | `doctrine/skills/payroll-and-statutory-postings-east-africa` |
+| `skills/frontend-ux/pos-restaurant-ui-standard` | `doctrine/skills/finance-ui-pattern-library` |
+| `skills/frontend-ux/pos-sales-ui-design` | `doctrine/skills/finance-ui-pattern-library` |
+| `skills/backend-databases/postgresql-ai-platform` | `skills/ai/ai-rag-patterns` |
+| `skills/ai/rag-implementation` | `skills/ai/ai-rag-patterns` |
+| `skills/saas/saas-control-plane-engineering` | `skills/saas/saas-architecture-strategy` |
+| `skills/saas/saas-deployment-models` | `skills/saas/saas-architecture-strategy` |
+| `skills/saas/saas-subscription-mastery` | `skills/saas/subscription-billing` |
+| `skills/saas/saas-tenant-onboarding-automation` | `skills/product-business/product-led-growth` |
+| `skills/security/uganda-dppa-compliance` | `skills/security/dpia-generator` |
+| `skills/ai/ux-for-ai` | `skills/ai/ai-agent-ux` |
+| `skills/frontend-ux/ux-principles-101` | `skills/frontend-ux/practical-ui-design` |
+| `skills/backend-databases/vector-databases` | `skills/ai/ai-rag-patterns` |
 
 ## Broad Routing Groups
 
