@@ -6,7 +6,7 @@ description: Use when designing interfaces, building UX flows, choosing layouts,
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -83,6 +83,7 @@ Load this skill alongside any design skill when:
 | **Layout** | Visual Framework, Center Stage, Grid of Equals, Accordion, Collapsible Panels, Titled Sections | `sections/03-layout.md` |
 | **Actions** | Prominent Done Button, Preview, Multi-Level Undo, Hover Tools, Smart Menu Items, Cancelability | `sections/04-actions.md` |
 | **Data Display** | Datatips, Data Spotlight, Dynamic Queries, Small Multiples, Multi-Y Graph | `sections/05-data.md` |
+| **SaaS Web Apps** | Cards vs tables, skeletons, empty states, progressive disclosure, AI UI, pagination | `sections/06-saas-web-app-patterns.md` |
 
 ---
 
