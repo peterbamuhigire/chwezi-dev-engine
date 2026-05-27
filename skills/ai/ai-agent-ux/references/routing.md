@@ -7,3 +7,4 @@
 | `ai-agentic-ui` | [references/ai-agentic-ui/entrypoint.md](ai-agentic-ui/entrypoint.md) | Ai Agentic Ui details migrated from the former active skill. |
 | `ai-agent-mobile-and-web-ux-patterns` | [references/ai-agent-mobile-and-web-ux-patterns/entrypoint.md](ai-agent-mobile-and-web-ux-patterns/entrypoint.md) | Ai Agent Mobile And Web Ux Patterns details migrated from the former active skill. |
 | `ai-ux-patterns` | [references/ai-ux-patterns/entrypoint.md](ai-ux-patterns/entrypoint.md) | Ai Ux Patterns details migrated from the former active skill. |
+| `generative-ai-ui-ux` | [references/generative-ai-ui-ux.md](generative-ai-ui-ux.md) | Prompt, streaming, source, confidence, review, recovery, and human-override patterns for generative AI interfaces. |
