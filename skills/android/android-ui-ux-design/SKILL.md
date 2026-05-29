@@ -31,7 +31,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Load `android-development` for implementation standards.
-2. Load `premium-ui-ux-design` and specifically `references/mobile-android-ios-premium-ux.md`.
+2. Load `premium-ui-ux-design` and specifically its `../premium-ui-ux-design/references/mobile-android-ios-premium-ux.md` reference.
 3. Define the primary mobile task, top-level destinations, and device classes.
 4. Choose Material 3 components and adaptive navigation before custom patterns.
 5. Model every Compose screen state: loading, content, empty, error, offline, permission denied, and syncing.

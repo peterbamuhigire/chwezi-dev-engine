@@ -1,0 +1,53 @@
+name: skill-catalog-guardrails
+
+# The catalog is only a reliable engine if its invariants are enforced, not
+# just documented. This job is the gate: it fails the build on a duplicate
+# frontmatter name, an oversized SKILL.md, an over-length description, a broken
+# reference link, a stale or dangling alias, or an active count over the cap.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "doctrine/**"
+      - "00-meta-initialization/**"
+      - "docs/skill-aliases.yml"
+      - "scripts/skill_catalog_guardrails.py"
+      - "scripts/routing_smoke_test.py"
+      - "scripts/routing_fixtures.yml"
+      - ".github/workflows/skill-guardrails.yml"
+  pull_request:
+    paths:
+      - "skills/**"
+      - "doctrine/**"
+      - "00-meta-initialization/**"
+      - "docs/skill-aliases.yml"
+      - "scripts/skill_catalog_guardrails.py"
+      - "scripts/routing_smoke_test.py"
+      - "scripts/routing_fixtures.yml"
+      - ".github/workflows/skill-guardrails.yml"
+  workflow_dispatch:
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip pyyaml
+
+      # Enforcing mode: any finding fails the build (no --report-only).
+      - name: Run skill catalog guardrails
+        run: python -X utf8 scripts/skill_catalog_guardrails.py
+
+      # Routing smoke test: fails if any fixtured task's expected skill falls
+      # outside its top-N matches - i.e. a description drifted into ambiguity.
+      - name: Run routing smoke test
+        run: python -X utf8 scripts/routing_smoke_test.py

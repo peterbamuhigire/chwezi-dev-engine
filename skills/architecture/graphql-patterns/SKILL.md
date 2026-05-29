@@ -494,4 +494,4 @@ Load `references/graphql-security.md` for the adversarial checklist (alias/direc
 - Public API where CDN edge caching is business-critical → GraphQL's POST-only default defeats it.
 - One team, one service, <10 endpoints → the tooling weight does not pay back.
 
-**Hybrid default:** GraphQL as a BFF over REST microservices — REST for webhooks and file upload, GraphQL for client-shaped reads of relational UIs. Pairs naturally with `microservices-architecture` reference `references/microservices-communication.md`.
+**Hybrid default:** GraphQL as a BFF over REST microservices — REST for webhooks and file upload, GraphQL for client-shaped reads of relational UIs. Pairs naturally with `microservices-architecture`, which owns the inter-service communication patterns.

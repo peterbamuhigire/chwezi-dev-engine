@@ -62,7 +62,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
-- Use companion skill `premium-product-positioning` when the product must justify premium pricing, serve executive/enterprise/affluent buyers, support high-ticket services, or express luxury/premium brand positioning through product strategy and requirements.
 - Use companion skill `premium-software-product-execution` when premium positioning must become concrete software requirements, website/content expectations, proof assets, onboarding, controls, reporting, or sales enablement.
 <!-- dual-compat-end -->
 Based on Cagan (2017) *INSPIRED: How to Create Tech Products Customers Love* (2nd ed.)

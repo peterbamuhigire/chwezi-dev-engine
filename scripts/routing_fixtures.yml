@@ -1,0 +1,94 @@
+# Routing fixtures: representative task -> the skill that should win routing.
+#
+# These turn "routing precision" from an assertion into a measured number. Each
+# entry is a realistic task phrased the way a user would, and the slug that
+# should be the strongest match. `top_n` (default 3) sets how lenient the
+# assertion is: the expected skill must appear within the top_n ranked matches.
+#
+# Add a fixture whenever you add a skill that a neighbour could plausibly steal
+# traffic from - that is exactly the collision the smoke test exists to guard.
+# Run:  python -X utf8 scripts/routing_smoke_test.py
+#       python -X utf8 scripts/routing_smoke_test.py --collisions   (noise report)
+
+fixtures:
+  # --- AI ---
+  - task: "Design the overall architecture for an AI-powered SaaS feature, choosing components and the AI stack"
+    expect: ai-app-architecture
+  - task: "Implement retrieval augmented generation with chunking, embeddings and a vector store"
+    expect: ai-rag-patterns
+  - task: "Set up an evaluation harness and regression gates for our LLM outputs"
+    expect: ai-evaluation
+  - task: "Protect our LLM app from prompt injection and cross-tenant data leakage"
+    expect: ai-security
+  - task: "Meter and bill AI token usage per tenant and attribute cost"
+    expect: ai-cost-and-metering
+  - task: "Gate which AI model tier and how many generations a plan unlocks"
+    expect: ai-entitlements-and-feature-gating
+
+  # --- SaaS / product ---
+  - task: "Build the entitlements engine that enforces plan limits like seats and API calls"
+    expect: saas-entitlements-and-plan-gating
+  - task: "Implement subscription billing with proration, trials and dunning"
+    expect: subscription-billing
+  - task: "Design rate limiting and per-tenant request quotas"
+    expect: saas-rate-limiting-and-quotas
+  - task: "Add SSO with SAML and SCIM user provisioning for enterprise customers"
+    expect: saas-sso-scim-enterprise-auth
+  - task: "Let a tenant export all their data and handle a GDPR erasure request"
+    expect: saas-tenant-data-portability-and-erasure
+  - task: "Position, package and price a premium high-ticket software product for executive buyers"
+    expect: premium-software-product-execution
+  - task: "Run product discovery and decide which features to prioritise next"
+    expect: product-discovery
+
+  # --- Backend / data / API ---
+  - task: "Design the relational data model, tenancy and indexes for a multi-tenant ERP"
+    expect: database-design-engineering
+  - task: "Define an API contract first with versioning, idempotency and error model"
+    expect: api-design-first
+  - task: "Split a monolith into microservices and decide service boundaries and communication"
+    expect: microservices-architecture
+  - task: "Write advanced PostgreSQL queries, partitioning and server-side functions"
+    expect: postgresql-engineering
+  - task: "Compute cohort retention and funnel metrics and IRR in Python where SQL is unwieldy"
+    expect: python-data-analytics
+
+  # --- DevOps ---
+  - task: "Build a CI/CD pipeline with build, test and deployment stages"
+    expect: cicd-pipelines
+  - task: "Run our services on Kubernetes with production-grade deployment and scaling"
+    expect: kubernetes-platform
+  - task: "Define SLOs, dashboards and alerting for our service"
+    expect: observability-monitoring
+
+  # --- Frontend / UX ---
+  - task: "Set up a Tailwind design system with tokens and responsive layout"
+    expect: tailwind-css
+  - task: "Apply a rules-based visual UI system for colour, typography and spacing"
+    expect: practical-ui-design
+  - task: "Design accessible, resilient forms with validation and error states"
+    expect: form-ux-design
+
+  # --- Mobile ---
+  - task: "Architect an Android app with offline-first Room persistence and sync"
+    expect: android-data-persistence
+  - task: "Build offline-capable local storage and sync for an iOS app with SwiftData"
+    expect: ios-data-persistence
+  - task: "Design the iOS app UI following Apple Human Interface Guidelines"
+    expect: ios-ui-ux-design
+
+  # --- Security / compliance ---
+  - task: "Audit a web application for OWASP vulnerabilities and insecure code"
+    expect: vibe-security-skill
+  - task: "Produce a data protection impact assessment for a new feature"
+    expect: dpia-generator
+
+  # --- Languages ---
+  - task: "Write effective, type-safe TypeScript with sound generics and patterns"
+    expect: typescript-effective
+
+  # --- Meta / SDLC ---
+  - task: "Author a new skill that follows the repository house style and contracts"
+    expect: skill-writing
+  - task: "Initialise documentation and a methodology roadmap for a brand new project"
+    expect: 00-meta-initialization

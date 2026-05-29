@@ -328,7 +328,7 @@ Pick one per repo and document in `CONTRIBUTING.md`. Conventional commits drive 
 - `references/cicd-devsecops.md` — secrets policy, Vault server architecture, scan thresholds, exception governance.
 - `references/cicd-jenkins-debian.md` — when the CI server is Jenkins, not GitHub Actions or GitLab CI.
 - `deployment-release-engineering` — rollout, canary, blue/green, post-deploy verification.
-- `kubernetes-platform` reference `references/kubernetes-saas-delivery.md` — ArgoCD GitOps for multi-tenant SaaS.
+- `kubernetes-platform` — ArgoCD GitOps and progressive delivery for multi-tenant SaaS on Kubernetes.
 - `observability-monitoring` — deploy markers, SLO burn, MTTR, dashboards.
 - `cloud-architecture` — traffic-shifting plumbing for the deployment strategies invoked here.
 - `ios-development`, `android-development` — app build config upstream of the mobile pipelines.

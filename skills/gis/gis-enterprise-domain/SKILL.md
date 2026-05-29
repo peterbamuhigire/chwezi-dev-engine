@@ -66,7 +66,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 ArcGIS Enterprise administration for regulated / established GIS environments, plus real-estate-specific GIS patterns that map cleanly to PostGIS + map clients.
 
-**Prerequisites:** Load `gis-platform-engineering` reference `references/gis-postgis-backend.md` for the spatial backend, `gis-platform-engineering` reference `references/gis-mapping.md` or `gis-platform-engineering` reference `references/gis-maps-integration.md` for the map client, and `multi-tenant-saas-architecture` for tenant isolation.
+**Prerequisites:** Load the `gis-platform-engineering` skill for the spatial backend (its `gis-postgis-backend` reference) and the map client (its `gis-mapping` or `gis-maps-integration` reference), and `multi-tenant-saas-architecture` for tenant isolation.
 
 ## When this skill applies
 
@@ -240,8 +240,8 @@ See `references/real-estate-saas-integration.md`.
 
 ## Read next
 
-- `gis-platform-engineering` reference `references/gis-postgis-backend.md` — spatial backbone.
-- `gis-platform-engineering` reference `references/gis-maps-integration.md` — client mapping.
+- `gis-platform-engineering` skill (its `gis-postgis-backend` reference) — spatial backbone.
+- `gis-platform-engineering` skill (its `gis-maps-integration` reference) — client mapping.
 - `multi-tenant-saas-architecture` — tenant isolation end-to-end.
 
 ## References

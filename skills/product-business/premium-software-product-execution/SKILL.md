@@ -67,5 +67,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - `references/premium-software-product-gate.md` - execution gate for premium software, websites, SaaS, ERP/POS, dashboards, and agency delivery.
-- Companion skills: `world-class-engineering`, `premium-product-positioning`, `software-pricing-strategy`, `product-strategy-vision`, `product-discovery`, `webapp-gui-design`, `practical-ui-design`, `content-writing`, `ux-writing`, `it-proposal-writing`, `saas-sales-organization`.
+- Companion skills: `world-class-engineering`, `software-pricing-strategy`, `product-strategy-vision`, `product-discovery`, `webapp-gui-design`, `practical-ui-design`, `content-writing`, `ux-writing`, `it-proposal-writing`, `saas-sales-organization`.
 <!-- dual-compat-end -->

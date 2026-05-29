@@ -23,10 +23,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Do Not Use When
 
-- Authoring the application architecture inside the cluster — use `microservices-architecture` reference `references/microservices-architecture-models.md` and `microservices-architecture` reference `references/microservices-communication.md`.
+- Authoring the application architecture inside the cluster — use `microservices-architecture` (decomposition models and inter-service communication).
 - Provisioning the cluster's underlying VMs, VPC, or DNS through code — use `infrastructure-as-code` and `cloud-architecture`.
-- Building CI/CD pipelines that deploy into Kubernetes — use `cicd-pipelines` or `cicd-pipelines` reference `references/cicd-pipeline-design.md`.
-- Cluster-level observability deep-dives — use `observability-monitoring` reference `references/observability-platform.md` (SigNoz primary).
+- Building CI/CD pipelines that deploy into Kubernetes — use `cicd-pipelines` (pipeline shape and stage-gate design live there).
+- Cluster-level observability deep-dives — use `observability-monitoring` (SigNoz-led observability platform).
 - Service mesh design (Istio, Linkerd, Cilium service mesh) — out of scope.
 
 ## Sibling Kubernetes Skills
@@ -49,7 +49,7 @@ Load the sibling that owns a specific topic. This skill owns the bootstrap, gove
 ## Prerequisite Skills
 
 - `cloud-architecture` — for the network substrate.
-- `cicd-pipelines` reference `references/cicd-jenkins-debian.md` — for the Linux operations baseline on Debian/Ubuntu hosts.
+- `cicd-pipelines` — for the Linux operations baseline on Debian/Ubuntu hosts (Jenkins-on-Debian guidance lives there).
 - `web-app-security-audit` — for baseline application security posture.
 
 ## Workflow
@@ -190,7 +190,7 @@ Chart structure and reserved directories (helm.sh/docs/topics/charts, fetched 20
 | `charts/` | "A directory containing any charts upon which this chart depends." |
 | `crds/` | Custom Resource Definitions installed before templates. |
 | `values.schema.json` | Optional JSON Schema used to validate `values.yaml`. |
-| `templates/NOTES.txt` | Post-install message printed to the user. |
+| `NOTES.txt` (inside the chart's `templates` directory) | Post-install message printed to the user. |
 
 > Helm reserves use of the `charts/`, `crds/`, and `templates/` directories. (helm.sh, fetched 2026-05-01.)
 
@@ -409,8 +409,8 @@ If two or more "cloud-managed" rows apply, do not self-manage — the operationa
 - `references/kubernetes-saas-delivery.md` — multi-tenant isolation, GitOps, progressive delivery.
 - `cloud-architecture` — VPC, load balancers, DNS substrate.
 - `infrastructure-as-code` — Terraform modules that provision the VMs and network.
-- `cicd-pipelines`, `cicd-pipelines` reference `references/cicd-pipeline-design.md`, `cicd-pipelines` reference `references/cicd-jenkins-debian.md` — pipelines that build and deploy into the cluster.
-- `observability-monitoring` reference `references/observability-platform.md` — SigNoz-led observability above the cluster.
+- `cicd-pipelines` — pipelines that build and deploy into the cluster (pipeline shape and Jenkins-on-Debian guidance live there).
+- `observability-monitoring` — SigNoz-led observability above the cluster.
 - `web-app-security-audit` — application-layer security for workloads inside the cluster.
 
 ## References

@@ -31,7 +31,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Load `ios-development` for implementation standards.
-2. Load `premium-ui-ux-design` and specifically `references/mobile-android-ios-premium-ux.md`.
+2. Load `premium-ui-ux-design` and specifically its `../premium-ui-ux-design/references/mobile-android-ios-premium-ux.md` reference.
 3. Define the primary iOS task, top-level destinations, navigation hierarchy, and device classes.
 4. Choose SwiftUI-native patterns before custom controls.
 5. Model every screen state: loading, content, empty, error, offline, permission denied, and syncing.

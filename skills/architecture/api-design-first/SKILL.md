@@ -1,6 +1,6 @@
 ---
 name: api-design-first
-description: Use when designing or building HTTP APIs — spec-first OpenAPI workflow, REST conventions, versioning, auth model, rate limiting, idempotency keys, error envelope, and observability notes. Produces the OpenAPI contract plus error/auth/idempotency/observability artifacts that frontend, mobile, security, and reliability skills consume. For endpoint-level security review load `vibe-security-skill`; for GraphQL-specific hardening load `graphql-patterns` reference `references/graphql-security.md`.
+description: Use when designing or building HTTP APIs — spec-first OpenAPI workflow, REST conventions, versioning, auth model, rate limiting, idempotency keys, error envelope, and observability notes. Produces the OpenAPI contract plus error/auth/idempotency/observability artifacts that frontend, mobile, security, and reliability skills consume. For endpoint-level security review load `vibe-security-skill`; for GraphQL-specific hardening load `graphql-patterns`.
 metadata:
   portable: true
   compatible_with:
@@ -26,7 +26,7 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 
 - The task is purely client-side consumption of a third-party API (load the relevant SDK or integration skill).
 - The task is full threat modelling — load `vibe-security-skill`; this skill only records the auth model.
-- GraphQL-specific hardening is needed — load `graphql-patterns` reference `references/graphql-security.md`.
+- GraphQL-specific hardening is needed — load `graphql-patterns`.
 
 ## Required Inputs
 
@@ -102,7 +102,7 @@ Load these skills first:
 Load alongside:
 
 - `vibe-security-skill` for threat modelling of the auth model produced here.
-- `graphql-patterns` reference `references/graphql-security.md` whenever building or auditing a GraphQL API.
+- `graphql-patterns` whenever building or auditing a GraphQL API (it owns the GraphQL hardening guidance).
 
 ## When this skill applies
 
