@@ -20,6 +20,8 @@ every topic an active entrypoint.
 | Safer specialization | Finance, security, AI, and platform work keep domain constraints close to implementation guidance. |
 | Portable knowledge | Markdown, YAML, templates, and scripts work across Windows, Ubuntu, and Debian consumers. |
 | Lower catalog noise | Legacy and narrow topics route through aliases instead of competing as duplicate active skills. |
+| Enforced quality | CI gates fail the build on broken references, stale aliases, duplicates, oversized files, or a routing regression - the catalogue stays an engine, not a stale pile. |
+| Maintainable handoff | Meaningful work closes with a Delivery Definition of Done pack (tests, release, rollback, runbook, maintenance notes). |
 
 ## Active Catalog
 
@@ -102,7 +104,8 @@ canonical doctrine.
 | Path | Role |
 | --- | --- |
 | [`docs/`](docs/) | Overview docs, architecture, routing policy, plans, analysis, and update records. |
-| [`scripts/`](scripts/) | Maintenance checks, including active catalog guardrails. |
+| [`.github/workflows/`](.github/workflows/) | CI gates: catalog guardrails and routing smoke test on every push and PR. |
+| [`scripts/`](scripts/) | Catalog guardrail validator, routing smoke test (`routing_smoke_test.py` + `routing_fixtures.yml`), and setup helpers. |
 | [`claude-guides/`](claude-guides/) | Claude-specific skill creation and invocation guidance. |
 | [`book-extractions/`](book-extractions/) | Curated source notes and long-form reference material. |
 | [`blog-posts/`](blog-posts/) | Draft educational and marketing content. |

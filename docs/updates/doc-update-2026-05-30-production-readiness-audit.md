@@ -56,6 +56,24 @@ an already-passing system).
   `premium-software-product-execution` (172 -> 171 active; 48 aliases).
 - All six checklist questions now PASS. Routing is measured, not asserted.
 
+## Project documentation alignment
+
+Brought the documentation set named in `AGENTS.md` into line with the new state:
+
+- `README.md` - added "Enforced quality" and "Maintainable handoff" benefit
+  rows; the CI workflow and routing test in the Repository Map.
+- `docs/overview/README.md` - CI gates and integrator/client docs in the map;
+  both gate commands in the workflow; an "Enforced Invariants" section; count
+  169 -> 171; new related-doc links.
+- `docs/overview/PROJECT_BRIEF.md` - outcomes now name measured routing and the
+  Definition of Done; risks rewritten around the automated checks.
+- `docs/overview/TECH_STACK.md` - added GitHub Actions and the routing smoke
+  test to tooling and commands.
+- `docs/overview/ARCHITECTURE.md` - components updated; new "Validation And
+  Enforcement" section; maintenance flow runs both gates.
+- `docs/plans/INDEX.md` and `docs/plans/NEXT_FEATURES.md` - the CI workflow moved
+  from "to do" to completed; counts and next-session items refreshed.
+
 ## Remaining
 
 None of the six checklist questions remains open. Optional future hardening:

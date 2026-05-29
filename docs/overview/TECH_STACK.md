@@ -11,18 +11,25 @@ and YAML, with a small amount of Python and PowerShell for maintenance.
 | --- | --- |
 | Git | Version control. |
 | PowerShell | Primary local shell on Windows. |
-| Python 3 | Catalog guardrail script execution. |
-| PyYAML | YAML parsing for `scripts/skill_catalog_guardrails.py`. |
+| Python 3 | Catalog guardrail and routing smoke test execution. |
+| PyYAML | YAML parsing for `scripts/skill_catalog_guardrails.py` and `scripts/routing_smoke_test.py`. |
+| GitHub Actions | CI: runs both gates on every push and PR (`.github/workflows/skill-guardrails.yml`). |
 | ripgrep | Fast file and text search. |
 | Markdown | Skill bodies, plans, references, guides, and docs. |
-| YAML | Skill frontmatter and alias registry data. |
+| YAML | Skill frontmatter, alias registry, and routing fixtures. |
 
 ## Important Commands
 
 ```powershell
 rg --files -g "SKILL.md"
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
+python -X utf8 scripts\routing_smoke_test.py --report-only
+python -X utf8 scripts\routing_smoke_test.py --collisions
 ```
+
+The routing smoke test has no external dependency beyond PyYAML; it models the
+routing signal (skill name + description) as TF-IDF and asserts fixtured tasks
+match the expected skill. It does not call an LLM, so CI stays deterministic.
 
 Optional PDF helper setup:
 
