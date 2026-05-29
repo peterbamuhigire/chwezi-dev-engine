@@ -15,7 +15,10 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | `00-meta-initialization/` | Entry-point workflow for SDLC documentation setup. |
 | `docs/skill-routing-index.md` | Human routing map for consolidated and legacy skill names. |
 | `docs/skill-aliases.yml` | Machine-readable alias registry. |
-| `scripts/skill_catalog_guardrails.py` | Static guardrail scan for active skill count, duplicate names, frontmatter, UTF-8, description length, and `SKILL.md` line count. |
+| `scripts/skill_catalog_guardrails.py` | Static guardrail scan: active count, duplicate names, frontmatter, UTF-8, description length, `SKILL.md` line count, broken `references/`/`templates/` links, and alias integrity (unrouted, stale, dangling). |
+| `scripts/routing_smoke_test.py` + `scripts/routing_fixtures.yml` | Routing precision measurement: scores fixtured tasks against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |
+| `.github/workflows/skill-guardrails.yml` | CI: runs both gates on every push and PR touching skills, doctrine, aliases, fixtures, or the scripts. |
+| `skills/sdlc-meta/skill-composition-standards/references/` | Artifact templates (ADR, entity model, threat model, release/rollback plan, runbook, test plan) and the closing Delivery Definition of Done pack. |
 | `claude-guides/` | Skill authoring and Claude-specific usage guidance. |
 | `book-extractions/` | Long-form source notes and reference summaries. |
 
@@ -49,13 +52,29 @@ Finance, accounting, audit, close, reporting, controls, IFRS, banking,
 reconciliation, and finance UX route first to `doctrine/skills/` unless a root
 skill adds distinct implementation behavior.
 
+## Validation And Enforcement
+
+The catalogue's invariants are gated, not just documented. Two scripts run in CI
+on every push and PR and fail the build on a violation:
+
+- `skill_catalog_guardrails.py` - structural integrity (count, duplicates,
+  frontmatter, line count, description length, broken references, alias
+  integrity).
+- `routing_smoke_test.py` - routing precision against `routing_fixtures.yml`;
+  catches descriptions drifting into ambiguity.
+
+Implementation work closes with the Delivery Definition of Done pack
+(`skill-composition-standards/references/delivery-definition-of-done.md`), which
+bundles tests, release plan, rollback plan, runbook, and maintenance notes so
+the output is operable by a team that did not write it.
+
 ## Maintenance Flow
 
 1. Read the relevant `SKILL.md`.
 2. Load only necessary local references.
 3. Apply the smallest accurate edit.
 4. Update routing and overview docs if behavior or catalog policy changed.
-5. Run the guardrail report.
+5. Run both gates: the guardrail report and the routing smoke test.
 6. Record significant documentation repairs in `docs/updates/`.
 
 ## Known Constraints

@@ -20,7 +20,11 @@ security, UX, and SDLC documentation.
 
 - Reduce repeated prompt and documentation work.
 - Keep domain rules close to execution guidance.
-- Maintain a skill catalog that is small enough to route reliably.
+- Maintain a skill catalog that is small enough to route reliably, with routing
+  precision measured (not assumed) and guarded in CI.
+- Turn agent output into production-grade work a team can maintain: every
+  meaningful change carries a Delivery Definition of Done pack (tests, release,
+  rollback, runbook, maintenance notes).
 - Preserve deep references without making every skill entrypoint heavy.
 - Support Windows, Ubuntu, and Debian consumers with portable Markdown and
   Python tooling.
@@ -35,9 +39,12 @@ security, UX, and SDLC documentation.
 
 ## Current Risks
 
-- The active skill count is now within target, but future skill additions can
-  easily push the catalog over 170 without alias discipline.
-- Inactive aliases must stay documented in `docs/skill-aliases.yml`; otherwise
-  old skill names become hard to route.
-- `doctrine` appears as a modified path in git and should be handled carefully
-  before unrelated changes touch that area.
+- The active skill count is 171, just above the 150-170 soft target; future
+  additions need alias discipline. The CI guardrail (200 hard cap) and the
+  collision detector keep this from becoming routing noise.
+- Inactive aliases must stay documented in `docs/skill-aliases.yml`; the
+  alias-integrity check now fails CI on a stale or unrouted alias, so this is
+  caught automatically rather than by memory.
+- New skills can shadow a neighbour's routing. Add a fixture to
+  `scripts/routing_fixtures.yml` for any skill a sibling could steal traffic
+  from, so the smoke test guards it.

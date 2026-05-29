@@ -14,7 +14,9 @@ documentation templates, and catalog maintenance tooling.
 | SDLC initialization | `00-meta-initialization/` | Entry-point project documentation workflow and examples. |
 | Routing docs | `docs/skill-routing-index.md` | Human-readable consolidation and routing policy. |
 | Alias data | `docs/skill-aliases.yml` | Machine-readable skill alias map. |
-| Maintenance scripts | `scripts/` | Guardrail checks and setup helpers. |
+| Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
+| CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
+| Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
 | Long-form references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Source material and companion writing. |
 
 ## How To Work In This Repo
@@ -23,10 +25,11 @@ documentation templates, and catalog maintenance tooling.
 2. Read the skill `SKILL.md` and only the references needed for the task.
 3. Keep skill frontmatter concise and accurate.
 4. Update routing docs when a parent skill absorbs or supersedes another skill.
-5. Run the guardrail report before finishing catalog maintenance:
+5. Run both gates before finishing catalog maintenance (CI runs the same two):
 
    ```powershell
    python -X utf8 scripts\skill_catalog_guardrails.py --report-only
+   python -X utf8 scripts\routing_smoke_test.py --report-only
    ```
 
 ## Current Catalog Policy
@@ -35,11 +38,27 @@ documentation templates, and catalog maintenance tooling.
 - Target active catalog size is 150-170 skills.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in `doctrine/skills/`.
-- Current active catalog size is 169 skills.
+- Current active catalog size is 171 skills (collision-checked: 0 true duplicates).
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated
   and route to canonical `doctrine/skills/` targets.
+
+## Enforced Invariants
+
+The catalogue is a gated engine, not just a document set. Two scripts run in CI
+(`.github/workflows/skill-guardrails.yml`) and fail the build on:
+
+- duplicate frontmatter names, over-cap active count, oversized `SKILL.md`,
+  over-length descriptions, malformed frontmatter;
+- broken `references/`/`templates/` links and stale or dangling aliases;
+- a fixtured routing task whose expected skill drifts out of its top matches
+  (routing precision is measured, not assumed).
+
+Meaningful implementation work also carries a Delivery Definition of Done pack
+(`skills/sdlc-meta/skill-composition-standards/references/delivery-definition-of-done.md`):
+tests, release plan, rollback plan, runbook, and maintenance notes, so output is
+operable by a team that did not write it.
 
 ## Related Docs
 
@@ -49,3 +68,6 @@ documentation templates, and catalog maintenance tooling.
 - [Plans index](../plans/INDEX.md)
 - [Next features](../plans/NEXT_FEATURES.md)
 - [Agent guide](../../AGENTS.md)
+- [Using the catalogue in a project](../USING-IN-A-PROJECT.md)
+- [Client value brief](../CLIENT-VALUE-BRIEF.md)
+- [Production-readiness audit](../evaluation/2026-05-30-production-readiness-audit.md)
