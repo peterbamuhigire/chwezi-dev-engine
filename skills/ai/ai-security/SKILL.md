@@ -1,9 +1,9 @@
 ---
 name: ai-security
-description: Security checklist for AI-powered application features — prompt injection
-  defense, PII scrubbing before API calls, output validation, rate limiting, audit
-  logging, adversarial inputs, and DPPA/GDPR compliance for AI data flows. Invoke
-  during...
+description: Use when securing an AI/LLM-powered feature against prompt injection,
+  cross-tenant data leakage and tenant isolation failures, jailbreaks, and adversarial
+  inputs. Covers PII scrubbing before model calls, output validation, rate limiting,
+  audit logging, and DPPA/GDPR compliance for AI data flows.
 metadata:
   portable: true
   compatible_with:

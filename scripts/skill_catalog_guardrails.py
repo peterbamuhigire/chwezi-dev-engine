@@ -29,6 +29,17 @@ DEFAULT_MAX_ACTIVE_SKILLS = 200
 MAX_DESCRIPTION_CHARS = 1024
 MAX_SKILL_MD_LINES = 500
 FRONTMATTER_RE = re.compile(r"^\ufeff?---\r?\n(.*?)\r?\n---\r?\n?", re.DOTALL)
+ALIASES_YML = REPO_ROOT / "docs" / "skill-aliases.yml"
+
+# Relative resource references a SKILL.md may point at (deep-dive material the
+# skill tells the agent to load on demand). A broken one means the skill
+# promises depth it cannot deliver.
+RESOURCE_REF_RE = re.compile(
+    r"(?:\]\(|`)((?:\./)?(?:references|templates|scripts|assets|examples)/[^)`\s]+)"
+)
+# Template/illustrative references (e.g. references/*.md, references/<topic>.md)
+# are documentation examples inside meta-skills, not real targets.
+PLACEHOLDER_REF_RE = re.compile(r"[*<>]")
 
 
 @dataclass(frozen=True)
@@ -258,6 +269,86 @@ def check_line_counts(records: list[SkillRecord]) -> list[Finding]:
     return findings
 
 
+def check_broken_references(roots: list[Path]) -> list[Finding]:
+    """Flag SKILL.md links to references/templates/scripts that do not exist.
+
+    A skill that tells the agent to load `references/foo.md` when that file is
+    absent is a silent dead end: the agent loads nothing and the promised depth
+    never arrives. This is the decay that catalog reorganisations introduce.
+    """
+    findings: list[Finding] = []
+    for root in roots:
+        for skill_md in root.rglob("SKILL.md"):
+            if any(part.startswith(".") for part in skill_md.relative_to(root).parts):
+                continue
+            try:
+                text = skill_md.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                continue  # reported by check via read_skill elsewhere
+            seen: set[str] = set()
+            for match in RESOURCE_REF_RE.finditer(text):
+                ref = match.group(1).lstrip("./")
+                if ref in seen or PLACEHOLDER_REF_RE.search(ref):
+                    continue
+                seen.add(ref)
+                if not (skill_md.parent / ref).exists():
+                    findings.append(
+                        Finding(
+                            "error",
+                            "broken-reference",
+                            relpath(skill_md),
+                            f"references `{ref}` which does not exist",
+                        )
+                    )
+    return findings
+
+
+def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
+    """Keep ALIAS.md files and the alias registry in lockstep.
+
+    Three failure modes: an ALIAS.md on disk with no registry route, a registry
+    route with no ALIAS.md on disk (stale alias), and a route whose target skill
+    no longer exists (dangling redirect).
+    """
+    findings: list[Finding] = []
+    if not ALIASES_YML.exists():
+        return [
+            Finding("error", "alias-registry", relpath(ALIASES_YML), "alias registry is missing")
+        ]
+    try:
+        registry = yaml.safe_load(ALIASES_YML.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError as exc:
+        return [Finding("error", "alias-registry-yaml", relpath(ALIASES_YML), f"invalid YAML: {exc}")]
+
+    routes: dict[str, str] = registry.get("inactive_skill_aliases", {}) or {}
+    on_disk = {p.parent.relative_to(REPO_ROOT).as_posix() for p in REPO_ROOT.rglob("ALIAS.md")}
+    in_registry = set(routes)
+
+    for orphan in sorted(on_disk - in_registry):
+        findings.append(
+            Finding("error", "alias-unrouted", Path(orphan), "ALIAS.md exists but has no route in skill-aliases.yml")
+        )
+    for stale in sorted(in_registry - on_disk):
+        findings.append(
+            Finding("error", "alias-stale", Path(stale), "registry route has no ALIAS.md on disk")
+        )
+
+    skill_dir_names = {r.path.parent.name for r in records}
+    skill_dir_paths = {r.path.parent.relative_to(REPO_ROOT).as_posix() for r in records}
+    for src, target in sorted(routes.items()):
+        target = str(target).strip()
+        resolves = (
+            target in skill_dir_paths
+            or (REPO_ROOT / target / "SKILL.md").exists()
+            or (("/" not in target) and target in skill_dir_names)
+        )
+        if not resolves:
+            findings.append(
+                Finding("error", "alias-dangling", Path(src), f"routes to `{target}` which is not an active skill")
+            )
+    return findings
+
+
 def main() -> int:
     args = parse_args()
     roots = active_roots(args.roots)
@@ -268,6 +359,8 @@ def main() -> int:
     findings.extend(check_duplicate_names(records))
     findings.extend(check_descriptions(records))
     findings.extend(check_line_counts(records))
+    findings.extend(check_broken_references(roots))
+    findings.extend(check_alias_integrity(records))
 
     print("skill-catalog-guardrails:")
     print(f"- repo: {REPO_ROOT}")

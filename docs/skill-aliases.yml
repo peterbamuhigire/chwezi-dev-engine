@@ -8,7 +8,7 @@ active_skill_policy:
     - 00-meta-initialization
   hard_cap: 200
   target_range: 150-170
-  current_active_skill_count: 169
+  current_active_skill_count: 171
   finance_doctrine_canonical: true
   do_not_move_or_delete_skill_directories_from_registry_work: true
 inactive_alias_file: ALIAS.md
@@ -79,6 +79,7 @@ inactive_skill_aliases:
   skills/frontend-ux/ux-principles-101: skills/frontend-ux/practical-ui-design
   skills/backend-databases/database-internals: skills/backend-databases/database-design-engineering
   skills/mobile-cross/mobile-reports: skills/product-business/professional-word-output
+  skills/product-business/premium-product-positioning: skills/product-business/premium-software-product-execution
 planned_routes:
   doctrine/skills/ifrs-standards-suite:
     domain: finance

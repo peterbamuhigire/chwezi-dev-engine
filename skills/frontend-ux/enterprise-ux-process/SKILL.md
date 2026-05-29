@@ -127,7 +127,7 @@ A complete enterprise-ux-process engagement produces:
 ### Operational skills in other engines
 - `website-skills/skills/design-quality-score/` — Category 8 (UX Maturity) scores the same artifacts independently
 - `website-skills/skills/premium-ui-ux-design/references/enterprise-five-outcomes.md` — same 5-outcomes gate applied to website templates
-- `srs-skills/01-strategic-vision/07-premium-product-positioning/` — premium-positioning gate using the same 5+5 model
+- `srs-skills/01-strategic-vision/07-premium-software-product-execution/` — premium-positioning gate using the same 5+5 model
 - `srs-skills/03-design-documentation/05-ux-specification/` — UX spec produced under this process
 
 ### Quick-use checklist

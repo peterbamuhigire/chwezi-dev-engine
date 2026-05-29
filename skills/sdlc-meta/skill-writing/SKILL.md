@@ -149,11 +149,16 @@ Guidelines:
 
 ## Reference Strategy
 
-If a skill covers multiple subdomains, split references by topic. For example:
+If a skill covers multiple subdomains, split references by topic so each file
+has a single clear purpose (for example, one file for security gates, one for a
+schema checklist, and one for a review template). Name each file after the topic
+it owns, keep it loadable on its own, and link it directly from `SKILL.md`.
 
-- `references/security-gates.md`
-- `references/schema-checklist.md`
-- `references/review-template.md`
+Do not reinvent common templates. The `skill-composition-standards` skill already
+ships a reusable template library under its `references/` directory, including a
+`threat-model-template.md` for security gates, an `entity-model-template.md` and
+`normalisation-playbook.md` for schema work, and a `test-plan-template.md` for
+review and verification. Reuse those before creating a new local reference.
 
 Do not bury important files several levels deep. Link them directly from `SKILL.md`.
 

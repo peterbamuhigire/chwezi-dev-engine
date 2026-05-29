@@ -134,7 +134,7 @@ Cross-reference database schemas against project documentation.
 - [ ] Soft-delete support where documented
 - [ ] Character set/collation consistency (utf8mb4_unicode_ci)
 
-**Cross-reference with:** `mysql-engineering` reference `references/mysql-best-practices.md` for schema standards.
+**Cross-reference with:** the `mysql-engineering` skill for schema standards.
 
 #### Pillar 2: Implementation vs. Plan Gap Analysis
 
@@ -165,7 +165,7 @@ Evaluate API contracts and data flow between systems.
 - [ ] Webhook/callback endpoints documented and implemented
 - [ ] Data sync mechanisms between platforms verified
 
-**Cross-reference with:** `api-design-first` reference `references/api-pagination.md`, `api-design-first` reference `references/api-error-handling.md`, `dual-auth-rbac` skills.
+**Cross-reference with:** the `api-design-first` skill (pagination and error-handling standards) and the `dual-auth-rbac` skill.
 
 #### Pillar 4: Technical Risk & Debt Assessment
 
@@ -289,18 +289,18 @@ This auditor leverages other skills for both analysis and recommended actions:
 
 | Audit Area | Analysis Skill | Action Skill |
 |------------|---------------|--------------|
-| Database schema gaps | `mysql-engineering` reference `references/mysql-best-practices.md` | `mysql-engineering` reference `references/mysql-best-practices.md` |
+| Database schema gaps | `mysql-engineering` | `mysql-engineering` |
 | Missing features | `feature-planning` | `feature-planning` |
-| API gaps | `api-design-first` reference `references/api-error-handling.md` | `api-design-first` reference `references/api-pagination.md`, `dual-auth-rbac` |
+| API gaps | `api-design-first` | `api-design-first`, `dual-auth-rbac` |
 | Multi-tenant issues | `multi-tenant-saas-architecture` | `multi-tenant-saas-architecture` |
 | Documentation gaps | `doc-architect` | `update-claude-documentation` |
-| Testing gaps | `sdlc-documentation` reference `references/sdlc-testing.md` | `sdlc-documentation` reference `references/sdlc-testing.md` |
-| Planning gaps | `sdlc-documentation` reference `references/sdlc-planning.md` | `sdlc-documentation` reference `references/sdlc-planning.md` |
+| Testing gaps | `sdlc-documentation` | `sdlc-documentation` |
+| Planning gaps | `sdlc-documentation` | `sdlc-documentation` |
 | UI issues | `webapp-gui-design` | `jetpack-compose-ui` |
 | Mobile integration | `android-development` | `android-saas-planning` |
 | Security concerns | `vibe-security-skill` | `web-app-security-audit` |
 | Code quality tooling | `php-modern-standards` | `php-modern-standards` |
-| User docs missing | `manual-guide` | `sdlc-documentation` reference `references/sdlc-user-deploy.md` |
+| User docs missing | `manual-guide` | `sdlc-documentation` |
 | Module architecture | `modular-saas-architecture` | `modular-saas-architecture` |
 
 ## Iterative Drilling
@@ -309,7 +309,7 @@ After the initial audit, the user can request deep dives:
 
 - **"Drill into {module}"** — Generate detailed `06-module-details/{module}-status.md`
 - **"Show me the API payloads for {feature}"** — Extract expected JSON from schema
-- **"What tests are missing for {module}"** — Cross-reference with `sdlc-documentation` reference `references/sdlc-testing.md`
+- **"What tests are missing for {module}"** — Cross-reference with the `sdlc-documentation` skill
 - **"Generate the completion plan for {phase}"** — Expand blueprint phase into tasks
 
 ## Anti-Patterns

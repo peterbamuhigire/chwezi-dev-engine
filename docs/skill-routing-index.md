@@ -23,7 +23,7 @@ Current guardrail baseline after the 2026-05-17 cleanup:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 169 |
+| Active `SKILL.md` files | 171 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -96,6 +96,7 @@ target instead.
 | `skills/finance-accounting/inventory-management` | `doctrine/skills/inventory-costing-and-stock-accounting` |
 | `skills/architecture/microservices-ai-integration` | `skills/ai/ai-app-architecture` |
 | `skills/mobile-cross/mobile-reports` | `skills/product-business/professional-word-output` |
+| `skills/product-business/premium-product-positioning` | `skills/product-business/premium-software-product-execution` |
 | `skills/finance-accounting/payroll-postings-uganda` | `doctrine/skills/payroll-and-statutory-postings-east-africa` |
 | `skills/frontend-ux/pos-restaurant-ui-standard` | `doctrine/skills/finance-ui-pattern-library` |
 | `skills/frontend-ux/pos-sales-ui-design` | `doctrine/skills/finance-ui-pattern-library` |

@@ -1,7 +1,9 @@
 ---
 name: dpia-generator
-description: Generate Uganda DPPA 2019-compliant DPIA documents. Use when uganda-dppa-compliance
-  flags [DPIA-REQUIRED] or when processing large-scale personal data.
+description: Generate a Data Protection Impact Assessment (DPIA), Uganda DPPA 2019-compliant.
+  Use when producing or reviewing a data protection impact assessment, a privacy impact
+  assessment, when uganda-dppa-compliance flags [DPIA-REQUIRED], or when processing large-scale
+  or sensitive personal data for a new feature.
 metadata:
   compatibility_notes: Uganda-based systems requiring DPPA 2019 compliance
   portable: true

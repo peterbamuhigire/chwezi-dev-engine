@@ -176,7 +176,7 @@ com.company.app/
 - Use `painterResource(R.drawable.<name>)` or `@drawable/<name>`
 - Maintain `PROJECT_ICONS.md` in the project root
 
-Follow `mobile-platform-operations` and `references/mobile-custom-icons.md` for naming, directory rules, and tracking.
+Follow the `mobile-platform-operations` skill (its `mobile-custom-icons` reference) for naming, directory rules, and tracking.
 
 ### Charting (Vico Standard)
 
@@ -188,7 +188,7 @@ Follow `mobile-platform-operations` and `references/mobile-custom-icons.md` for 
 ### Report Tables (25+ Rows)
 
 - Any report that can exceed 25 rows must render as a table, not cards
-- Follow `mobile-reports` and `references/mobile-report-tables.md` for table-first patterns.
+- Follow the `android-ui-ux-design` skill (business reports over 25 rows use table-first or dense list patterns) for table-first guidance, and the `professional-word-output` skill for exported report tables.
 
 ### Three Build Variants (Mandatory)
 
@@ -307,7 +307,7 @@ Before calling an Android feature production-ready:
 
 ### Google Play Review Readiness
 
-- Use `mobile-platform-operations` and `references/google-play-store-review.md` before Play Console submission.
+- Use the `mobile-platform-operations` skill (its `google-play-store-review` reference) before Play Console submission.
 - Keep targetSdk current and background work compliant.
 - Ensure Data Safety form matches SDKs and permissions.
 - Provide a public privacy policy and link it in-app.
@@ -401,7 +401,7 @@ See `android-saas-planning` skill for the complete Phase 1 plan template.
 If this is a **Kotlin Multiplatform** project, this skill governs the
 `composeApp/` module (Android UI and platform integration). The `shared/`
 module is governed by the `kmp-development` skill. Use Hilt for DI in
-`composeApp/` and Koin in `shared/`. Use `kmp-development` and `references/kmp-tdd.md` for shared module tests.
+`composeApp/` and Koin in `shared/`. Use the `kmp-development` skill for shared module test-driven development.
 
 ## Anti-Patterns
 

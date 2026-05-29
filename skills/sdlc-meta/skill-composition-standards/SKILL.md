@@ -198,8 +198,15 @@ The repository defines these standard artifacts. Each has a template in `referen
 | Rollback plan | `references/rollback-plan-template.md` | `deployment-release-engineering` |
 | Runbook | `references/runbook-template.md` | `reliability-engineering`, `observability-monitoring` |
 | Test plan + evidence | `references/test-plan-template.md` | `advanced-testing-strategy` |
+| Delivery Definition of Done | `references/delivery-definition-of-done.md` | `world-class-engineering` (closing gate for any meaningful change) |
 
 A skill that produces one of these artifacts must produce it in the format the template specifies. Downstream skills consume the template-format version.
+
+The Delivery Definition of Done is the terminal artifact: it bundles the
+release-time outputs (tests, release plan, rollback plan, runbook, SLOs,
+maintenance notes) into one checkable handoff so the work can be operated and
+maintained by a team that did not write it. Meaningful changes are not "done"
+until that pack is whole.
 
 ### Contract gates (for review)
 

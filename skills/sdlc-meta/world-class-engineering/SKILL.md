@@ -81,12 +81,21 @@ For meaningful work, produce these artifacts explicitly:
 - validation and release evidence
 - operational and ownership notes
 
+Close meaningful work with the **Delivery Definition of Done** pack
+(`skill-composition-standards/references/delivery-definition-of-done.md`): tests
+plus evidence, release plan, rollback plan, runbook plus ownership, observability
+hooks, and maintenance notes - each linked to its artifact or marked N/A with a
+reason. The work is not done until that pack is whole. This is the gate that
+makes the output operable and maintainable by a team that did not write it, and
+it pairs with `verification-before-completion`: never assert "done" before the
+pack is complete and its evidence is real, not asserted.
+
 ### Artifact standards and cross-skill composition
 
 Every skill in this repository — baseline, specialist, or platform — must follow `skill-composition-standards`. That skill defines:
 
 - **The house style** every SKILL.md must meet (frontmatter, required section order, ≤500 lines, decision rules as tables, concrete anti-patterns, British English, no emojis).
-- **The input and output contracts** every skill declares: what artifacts it consumes from upstream, what it produces for downstream. Standard artifacts have templates — context map, ADR, critical-flow table, entity model, access patterns, migration plan, OpenAPI contract, error model, SLO set, release plan, rollback plan, runbook, threat model, test plan.
+- **The input and output contracts** every skill declares: what artifacts it consumes from upstream, what it produces for downstream. Standard artifacts have templates — context map, ADR, critical-flow table, entity model, access patterns, migration plan, OpenAPI contract, error model, SLO set, release plan, rollback plan, runbook, threat model, test plan, and the closing Delivery Definition of Done pack.
 
 The artifact list above in this section maps directly onto the `skill-composition-standards` templates. When a skill produces "architecture" or "release evidence", it means the template-format version, not free-form prose. This is what makes the repository compose as a system rather than a library of linked documents.
 
