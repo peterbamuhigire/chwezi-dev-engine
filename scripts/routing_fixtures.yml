@@ -86,6 +86,8 @@ fixtures:
   # --- Languages ---
   - task: "Write effective, type-safe TypeScript with sound generics and patterns"
     expect: typescript-effective
+  - task: "Build an ASP.NET Core API in C# with EF Core, async handlers, tests and production logging"
+    expect: csharp-dotnet-development
 
   # --- Meta / SDLC ---
   - task: "Author a new skill that follows the repository house style and contracts"

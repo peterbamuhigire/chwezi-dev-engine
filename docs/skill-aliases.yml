@@ -8,7 +8,7 @@ active_skill_policy:
     - 00-meta-initialization
   hard_cap: 200
   target_range: 150-170
-  current_active_skill_count: 171
+  current_active_skill_count: 173
   finance_doctrine_canonical: true
   do_not_move_or_delete_skill_directories_from_registry_work: true
 inactive_alias_file: ALIAS.md

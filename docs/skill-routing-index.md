@@ -23,7 +23,7 @@ Current guardrail baseline after the 2026-05-17 cleanup:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 171 |
+| Active `SKILL.md` files | 173 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -149,6 +149,7 @@ target instead.
 | APIs | `api-design-first` | `api-error-handling`, `api-pagination`, `api-testing-verification` |
 | JavaScript | `javascript-modern` | `javascript-advanced`, `javascript-patterns` |
 | TypeScript | `typescript-effective` | `typescript-mastery`, `typescript-design-patterns` |
+| C# and .NET | `csharp-dotnet-development` | `csharp`, `dotnet`, `aspnet-core`, `ef-core`, `dotnet-maui`, `dotnet-ai` |
 | Security | `vibe-security-skill` | `dual-auth-rbac`, selected stack security references |
 | GraphQL | `graphql-patterns` | `graphql-security` |
 | CI/CD | `cicd-pipelines` | `cicd-pipeline-design`, `cicd-devsecops`, `cicd-jenkins-debian` |
