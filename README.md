@@ -37,7 +37,7 @@ Current guardrail baseline:
 
 | Metric | Value |
 | --- | ---: |
-| Active `SKILL.md` files | 171 |
+| Active `SKILL.md` files | 173 |
 | Target active catalog size | 150-170 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
@@ -46,10 +46,10 @@ Current guardrail baseline:
 
 The guardrail script is the source of truth for these numbers; the table above is
 a convenience snapshot. Rerun the report after any catalog change rather than
-trusting the prose. The active count sits 1 above the 150-170 soft target (well
+trusting the prose. The active count sits 3 above the 150-170 soft target (well
 under the 200 hard cap). Routing quality is no longer judged by raw count alone:
 `scripts/routing_smoke_test.py` measures routing precision against a task fixture
-(currently precision@1 84%, precision@3 100%) and its `--collisions` mode
+(currently precision@1 87%, precision@3 100%) and its `--collisions` mode
 confirms zero genuine duplicate skills - every remaining high-similarity pair is
 an intentional platform split (iOS/Android) or concern split (engineering/ops).
 The remaining skills are distinct and deliberately retained.
@@ -65,7 +65,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 | Domain | Examples |
 | --- | --- |
 | AI and agent systems | AI architecture, RAG, evaluations, model gateways, agent runtime, HITL, governance, observability, cost controls, and AI UX. |
-| Software engineering | Architecture, APIs, TypeScript, JavaScript, PHP, Python, Node.js, testing, validation, release engineering, and reliability. |
+| Software engineering | Architecture, APIs, C#/.NET, TypeScript, JavaScript, PHP, Python, Node.js, testing, validation, release engineering, and reliability. |
 | SaaS and product | Multi-tenancy, entitlements, pricing, billing, onboarding, metrics, sales operations, product discovery, and product-led growth. |
 | Security and compliance | Web app audits, code safety, network security, Linux hardening, DPIA work, and AI security controls. |
 | Frontend and UX | React, Next.js, Tailwind, app GUI design, forms, interaction patterns, accessibility, premium UI, and motion. |

@@ -6,7 +6,7 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Keep active catalog inside the 150-170 target | The current count is 171, just over the soft target. CI enforces the 200 hard cap and the collision detector confirms no true duplicates, so this is discipline, not an emergency. | Use `docs/skill-routing-index.md` and `docs/skill-aliases.yml` before adding active entrypoints. |
+| Keep active catalog inside the 150-170 target | The current count is 173, three over the soft target. CI enforces the 200 hard cap and the collision detector confirms no true duplicates, so this is discipline, not an emergency. | Use `docs/skill-routing-index.md` and `docs/skill-aliases.yml` before adding active entrypoints. |
 
 ## High Priority
 
@@ -27,6 +27,7 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-05-30 | C#/.NET skill entrypoint | Added `csharp-dotnet-development` with distilled references for modern C#/.NET, ASP.NET Core, EF Core, MAUI, concurrency, operations, and AI integration; added a routing fixture. |
 | 2026-05-30 | Production-readiness hardening | Six-point audit; extended the guardrail to catch broken references and alias drift; added CI running both gates; repaired all 55 broken references to 0; added the Delivery Definition of Done handoff gate; added the routing smoke test (precision@1 84%, @3 100%); merged the one true duplicate (172 -> 171); added integrator and client docs. See `docs/evaluation/2026-05-30-production-readiness-audit.md`. |
 | 2026-05-17 | Catalog alias cleanup | Deactivated 47 legacy entrypoints by renaming `SKILL.md` to `ALIAS.md`, bringing active skills to 169 and clearing duplicate frontmatter names. |
 | 2026-05-17 | README expansion | Replaced the short root landing page with a fuller guide to skill benefits, domains, routing, aliases, and maintenance rules. |

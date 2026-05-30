@@ -10,7 +10,7 @@ docs describe routing, consolidation, planning, and maintenance policy.
 
 | Component | Responsibility |
 | --- | --- |
-| `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, security, UX, product, and operations. |
+| `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, security, UX, product, and operations, including language entrypoints such as C#/.NET. |
 | `doctrine/skills/` | Canonical finance and accounting doctrine. |
 | `00-meta-initialization/` | Entry-point workflow for SDLC documentation setup. |
 | `docs/skill-routing-index.md` | Human routing map for consolidated and legacy skill names. |

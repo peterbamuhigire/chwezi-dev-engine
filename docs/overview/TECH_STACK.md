@@ -4,6 +4,8 @@
 
 This is a documentation and skills repository. Most source files are Markdown
 and YAML, with a small amount of Python and PowerShell for maintenance.
+The catalog now includes C#/.NET implementation guidance, but .NET is not a
+runtime dependency of this repository.
 
 ## Tooling
 

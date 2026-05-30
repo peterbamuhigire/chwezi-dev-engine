@@ -38,7 +38,7 @@ documentation templates, and catalog maintenance tooling.
 - Target active catalog size is 150-170 skills.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in `doctrine/skills/`.
-- Current active catalog size is 171 skills (collision-checked: 0 true duplicates).
+- Current active catalog size is 173 skills (collision-checked: 0 true duplicates).
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated

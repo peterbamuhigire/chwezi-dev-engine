@@ -39,7 +39,7 @@ security, UX, and SDLC documentation.
 
 ## Current Risks
 
-- The active skill count is 171, just above the 150-170 soft target; future
+- The active skill count is 173, three above the 150-170 soft target; future
   additions need alias discipline. The CI guardrail (200 hard cap) and the
   collision detector keep this from becoming routing noise.
 - Inactive aliases must stay documented in `docs/skill-aliases.yml`; the
