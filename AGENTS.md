@@ -30,6 +30,14 @@ accurate, portable, easy to route, and below the active skill cap.
 - Use ASCII unless the existing file already requires another character set.
 - Update docs when changing skill routing, catalog policy, scripts, or active
   skill behavior.
+- For multi-workstream bids or consulting delivery programmes, route control
+  operations through `skills/product-business/consulting-delivery-control-room`.
+- Before promising Word, PDF, Excel, workbook, scoring matrix, application
+  register, budget, or dashboard outputs, route through
+  `skills/product-business/document-spreadsheet-tooling-readiness`.
+- For high-stakes bid submission or donor/client deliverable release gates,
+  route final review through
+  `skills/sdlc-meta/world-class-bid-red-team-and-delivery-qc`.
 
 ## Active Catalog Roots
 

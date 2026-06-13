@@ -40,6 +40,10 @@ fixtures:
     expect: premium-software-product-execution
   - task: "Run product discovery and decide which features to prioritise next"
     expect: product-discovery
+  - task: "Set up a control room for a multi-workstream donor consulting bid with RACI, RAID, deliverables and decision logs"
+    expect: consulting-delivery-control-room
+  - task: "Check whether this machine can generate validated Word, PDF and Excel proposal files before promising them"
+    expect: document-spreadsheet-tooling-readiness
 
   # --- Backend / data / API ---
   - task: "Design the relational data model, tenancy and indexes for a multi-tenant ERP"
@@ -94,3 +98,5 @@ fixtures:
     expect: skill-writing
   - task: "Initialise documentation and a methodology roadmap for a brand new project"
     expect: 00-meta-initialization
+  - task: "Red-team a high-stakes donor proposal against the scoring grid, compliance knockouts, evidence and spreadsheet integrity before submission"
+    expect: world-class-bid-red-team-and-delivery-qc
