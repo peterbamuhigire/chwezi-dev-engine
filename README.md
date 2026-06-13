@@ -37,7 +37,7 @@ Current guardrail baseline:
 
 | Metric | Value |
 | --- | ---: |
-| Active `SKILL.md` files | 175 |
+| Active `SKILL.md` files | 178 |
 | Target active catalog size | 150-170 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
@@ -46,10 +46,10 @@ Current guardrail baseline:
 
 The guardrail script is the source of truth for these numbers; the table above is
 a convenience snapshot. Rerun the report after any catalog change rather than
-trusting the prose. The active count sits 3 above the 150-170 soft target (well
+trusting the prose. The active count sits 8 above the 150-170 soft target (well
 under the 200 hard cap). Routing quality is no longer judged by raw count alone:
 `scripts/routing_smoke_test.py` measures routing precision against a task fixture
-(currently precision@1 87%, precision@3 100%) and its `--collisions` mode
+(currently precision@1 83%, precision@3 100%) and its `--collisions` mode
 confirms zero genuine duplicate skills - every remaining high-similarity pair is
 an intentional platform split (iOS/Android) or concern split (engineering/ops).
 The remaining skills are distinct and deliberately retained.
@@ -72,6 +72,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 | Mobile | Android, iOS, Kotlin Multiplatform, mobile persistence, mobile UX, platform capabilities, app quality, and release workflows. |
 | Finance doctrine | Accounting engines, finance audits, bank and mobile money reconciliation, close, controls, reporting, IFRS, payroll, inventory, and finance UI patterns. |
 | Documentation and operations | SDLC documentation, project requirements, professional document output, catalog maintenance, skill writing, and update records. |
+| Consulting delivery and bid control | Control-room operations, document/spreadsheet tooling readiness, and red-team quality gates for high-stakes bids, donor submissions, workbooks, dashboards, and consulting deliverables. |
 | Quality guardrails (cross-cutting) | `anti-ai-slop` is a real-time guardrail applied continuously on every generated output. `ai-slop-audit` runs after each major iteration and auto-runs on any request to analyse/review/audit/de-slop any artefact type (app, website, business plan, SRS/spec, proposal, blog, social post, document, image, or codebase); a grade-F verdict blocks progression. |
 
 ## How To Use The Catalog

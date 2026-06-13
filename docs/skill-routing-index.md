@@ -23,10 +23,22 @@ Current guardrail baseline after the 2026-05-17 cleanup:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 173 |
+| Active `SKILL.md` files | 178 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
+
+## 2026-06-13 Consulting Delivery Additions
+
+The GIZ 7000012724 skills enhancement added three active global skills because
+they are cross-engine operating controls rather than proposal-, business-plan-,
+social-, or SRS-specific domain skills.
+
+| Trigger | Route |
+|---|---|
+| Multi-workstream bid or consulting delivery control room, RACI, RAID, deliverables register, decision log, evidence register | `skills/product-business/consulting-delivery-control-room` |
+| Word/PDF/Excel, application register, scoring matrix, budget, dashboard, price schedule, report, or annex generation readiness | `skills/product-business/document-spreadsheet-tooling-readiness` |
+| High-stakes bid red-team, evaluator simulation, compliance knockout scan, evidence audit, spreadsheet review, delivery feasibility, final release gate | `skills/sdlc-meta/world-class-bid-red-team-and-delivery-qc` |
 
 ## Finance Doctrine Canonicality
 
