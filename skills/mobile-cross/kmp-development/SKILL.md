@@ -63,6 +63,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - `references/kmp-compose-multiplatform.md` for shared Compose UI across Android, iOS, Desktop, and Web targets.
 - `references/kmp-tdd.md` for shared-module Red-Green-Refactor, common tests, and expect/actual test strategy.
+- For iOS targets in 2026+ Apple toolchains, load `../../ios/ios-development/references/apple-platform-compatibility-wwdc26.md` and keep SwiftUI-native UI, Xcode 27, Swift 6.4, and availability gates in the `iosApp/` module.
 <!-- dual-compat-end -->
 ## Strategy: Shared Logic, Native UI
 
@@ -77,7 +78,7 @@ eliminating business logic duplication.
 |---|---|---|
 | `shared/` | Business logic, data, networking | **This skill** (kmp-development) |
 | `composeApp/` | Android UI, platform integration | android-development |
-| `iosApp/` | iOS UI, platform integration | ios-development |
+| `iosApp/` | iOS UI, platform integration, Apple availability gates, Xcode 27 release evidence | ios-development |
 
 ## Project Structure
 

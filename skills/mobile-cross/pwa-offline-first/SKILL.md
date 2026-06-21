@@ -56,6 +56,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - `references/tooling-and-tests.md` — full Vite + next-pwa configs, Lighthouse CI workflow, Playwright offline test scaffold.
+- `references/safari-webkit-27-pwa-checks.md` for Safari/WebKit 27, iOS/iPadOS PWA limits, Customizable Select, `img sizes="auto"`, layout changes, HTML `<model>`, and web extension watch items.
 <!-- dual-compat-end -->
 
 ## Why Offline-First for East Africa
@@ -313,7 +314,7 @@ The user sees "Saved" immediately; the Service Worker drains the queue on reconn
 
 ## Background Sync API
 
-Feature-detect first; fall back to an `online` listener on platforms without Background Sync (Safari as of iOS 17).
+Feature-detect first; fall back to an `online` listener on platforms without Background Sync, including Safari/WebKit configurations where Background Sync is unavailable or constrained.
 
 ```javascript
 // sw.js
@@ -427,6 +428,8 @@ self.addEventListener('notificationclick', (event) => {
 ## Testing and CI
 
 Run Lighthouse CI on every PR (`@lhci/cli` against the static build) and a Playwright offline test that asserts the "save offline then sync on reconnect" round-trip. Workflow YAML and Playwright scaffold are in `references/tooling-and-tests.md`. Payment and authentication routes must be `NetworkOnly`; a cached 200 on `/api/payments/confirm` is a double-spend waiting to happen.
+
+For iOS/iPadOS/macOS web surfaces, add Safari/WebKit 27 checks from `references/safari-webkit-27-pwa-checks.md` before treating a PWA as ready for Apple users.
 
 ## Performance Budget
 

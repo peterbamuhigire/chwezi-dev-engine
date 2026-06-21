@@ -1,6 +1,7 @@
 # Swift Concurrency Reference
 
-Source: *Practical Swift Concurrency* — Donny Wals, 2025 (Swift 6.2)
+Source: *Practical Swift Concurrency* - Donny Wals, 2025 (Swift 6.2), extended
+with WWDC26 Swift 6.4 migration notes.
 
 ---
 
@@ -177,3 +178,17 @@ func process(completion: @Sendable () -> Void) { }
 | `nonisolated func` (async) | Global executor | Inherits caller |
 | `@concurrent func` (async) | N/A | Always global executor |
 | `@MainActor func` | Main actor always | Main actor always |
+
+## Swift 6.4 Watch Items
+
+- Swift Testing migration improves in both directions: XCTest failures can be
+  reported as Swift Testing issues, and Swift Testing expectations can be used
+  from XCTest helpers. Use this for gradual migration.
+- `Issue.record` severity lets non-blocking diagnostics stay visible. Use
+  warnings for known environmental conditions, not for product defects.
+- Dynamic test cancellation is appropriate for unavailable device, locale,
+  region, or Apple Intelligence conditions.
+- Module selectors (`ModuleName::TypeName`) resolve imported type collisions in
+  shared modules and app targets.
+- Use `anyAppleOS` for shared availability checks only after verifying the
+  project compiles with the selected Swift 6.4 toolchain.

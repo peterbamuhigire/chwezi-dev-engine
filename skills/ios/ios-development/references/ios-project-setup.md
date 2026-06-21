@@ -91,10 +91,25 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Storage | SwiftData (if persistence needed) |
 | Testing | Include Tests + Include UI Tests |
 | Bundle ID | `com.{company}.{appname}` |
-| Minimum deployment | iOS 17.0 |
+| Minimum deployment | Project-specific; use iOS 17.0 only when the product must support that fleet |
 
 **Bundle ID is permanent.** You cannot change it after shipping to the App Store.
 Choose carefully: `com.companyname.appname` (lowercase, no special characters).
+
+## Xcode 27 Project Gate
+
+Before creating or modernizing a project for the latest Apple SDKs:
+
+- Confirm every developer and CI runner that must use Xcode 27 is on Apple
+  Silicon.
+- Keep Dev, Staging, and Production schemes explicit; do not hide environment
+  switching inside runtime flags.
+- Add a Device Hub test record for the minimum supported device, a latest iOS
+  simulator, one resized simulator, and any hardware-only capability.
+- Gate iOS 27/macOS 27 APIs with `#available` when the deployment target is
+  lower than the SDK target.
+- Review Xcode agent access: no signing credentials, App Store Connect tokens,
+  production API keys, or customer data in agent context.
 
 ### Recommended Directory Structure
 

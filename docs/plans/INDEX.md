@@ -8,7 +8,7 @@ This index lists planning documents and their current status.
 | --- | --- | --- |
 | Engine phases | `engine-phases/00-engine-roadmap-index.md` | Active roadmap |
 | Catalog priorities | `NEXT_FEATURES.md` | Active |
-| WWDC26 Apple platform modernization | `2026-06-21-wwdc26-apple-platform-skill-modernization.md` | Proposed |
+| WWDC26 Apple platform modernization | `2026-06-21-wwdc26-apple-platform-skill-modernization.md` | Implemented 2026-06-21 |
 | Production-readiness audit | `../evaluation/2026-05-30-production-readiness-audit.md` | Complete; all six checklist questions PASS |
 | Scaling operations | `../scaling-ops/00-index.md` | Reference |
 

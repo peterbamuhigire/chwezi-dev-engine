@@ -12,7 +12,6 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Modernize Apple/iOS/macOS skills for WWDC26 | Xcode 27, Swift 6.4, Foundation Models, Core AI, App Intents/Siri, Device Hub, Liquid Glass-era UI, and Apple Silicon-only Xcode affect the active iOS/mobile skills. | Start with `docs/plans/2026-06-21-wwdc26-apple-platform-skill-modernization.md`. |
 | Grow the routing fixture set with each new skill | The smoke test only guards routes it has fixtures for. | Add a case to `scripts/routing_fixtures.yml` for any skill a neighbour could shadow. |
 | Review inactive aliases for deeper consolidation | `ALIAS.md` preserves content, but durable material should eventually move into retained parent references. | Start with finance and data aliases from `docs/skill-aliases.yml`. |
 
@@ -28,6 +27,7 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-06-21 | WWDC26 Apple platform skill modernization | Updated active iOS/mobile skills and companion design-system Apple UI guidance for Xcode 27, Swift 6.4, Foundation Models/Core AI, App Intents/Siri, Device Hub, Safari/WebKit 27, SF Symbols 8, and release/security gates. |
 | 2026-06-21 | Active catalog root repair | Removed `doctrine/skills` from default active scanning, kept it as retained reference material, validated aliases against retained/external engines, and brought guardrails to 0 findings at 142 active skills. |
 | 2026-06-13 | GIZ consulting delivery controls | Added `consulting-delivery-control-room`, `document-spreadsheet-tooling-readiness`, and `world-class-bid-red-team-and-delivery-qc` to support high-stakes bid control, validated file-output readiness, and red-team release gates across engines. |
 | 2026-05-30 | C#/.NET skill entrypoint | Added `csharp-dotnet-development` with distilled references for modern C#/.NET, ASP.NET Core, EF Core, MAUI, concurrency, operations, and AI integration; added a routing fixture. |

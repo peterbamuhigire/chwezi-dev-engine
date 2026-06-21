@@ -19,6 +19,7 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | `scripts/routing_smoke_test.py` + `scripts/routing_fixtures.yml` | Routing precision measurement: scores fixtured tasks against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |
 | `.github/workflows/skill-guardrails.yml` | CI: runs both gates on every push and PR touching skills, doctrine, aliases, fixtures, or the scripts. |
 | `skills/sdlc-meta/skill-composition-standards/references/` | Artifact templates (ADR, entity model, threat model, release/rollback plan, runbook, test plan) and the closing Delivery Definition of Done pack. |
+| `skills/ios/` and `skills/mobile-cross/` | Apple/mobile implementation guidance, including WWDC26-era Xcode, Swift, Foundation Models/Core AI, App Intents, StoreKit, PWA/Safari, KMP, release, and security references. |
 | `claude-guides/` | Skill authoring and Claude-specific usage guidance. |
 | `book-extractions/` | Long-form source notes and reference summaries. |
 

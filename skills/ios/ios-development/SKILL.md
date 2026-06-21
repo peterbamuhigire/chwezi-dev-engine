@@ -68,6 +68,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - `references/ios-project-setup.md` for Xcode project structure, SPM, schemes, build settings, and environment configuration.
 - `references/ios-swift-recipes.md` for production Swift recipes, safe conversions, dates, Codable, hashing, and validation.
+- `references/apple-platform-compatibility-wwdc26.md` for Xcode 27, Swift 6.4, iOS/iPadOS/macOS 27 SDK, Device Hub, coding agents, availability gates, and macOS/Safari watch items.
 <!-- dual-compat-end -->
 ## Load Order
 
@@ -77,11 +78,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 4. Load `ios-ui-ux-design` for every user-facing iOS/iPadOS screen, especially premium, dashboard, onboarding, reporting, form, or revenue-critical flows.
 5. Load `ios-security-and-rbac`, `ios-platform-capabilities`, or other focused parent skills as needed.
 
-Production-grade iOS development standards for AI-assisted implementation. Swift-first with SwiftUI, following modern Apple platform best practices.
+Production-grade Apple-platform development standards for AI-assisted implementation. Swift-first with SwiftUI, latest-SDK aware, and availability-gated for older deployment targets.
 
-**Core Stack:** Swift 6.0+ | SwiftUI (default UI) | MVVM + Clean Architecture | Swift Concurrency
-**Min Deployment:** iOS 17+ | **IDE:** Xcode 16+
-**Compatibility:** Must run flawlessly on both the minimum deployment target AND the latest iOS release
+**Current Toolchain:** Xcode 27 on Apple Silicon | Swift 6.4 | latest iOS/iPadOS/macOS SDKs
+**Core Stack:** Swift 6.4-ready | SwiftUI (default UI) | MVVM + Clean Architecture | Swift Concurrency
+**Deployment Policy:** project-specific floor; iOS 17+ remains acceptable only when the app must support that fleet
+**Compatibility:** Must run on both the declared minimum deployment target and the latest Apple OS, with availability gates for SDK-only features
 **Reference App:** Apple's sample code gallery and WWDC sessions — canonical examples of modern SwiftUI patterns
 
 ## Backend Environments
@@ -107,6 +109,7 @@ Use that deep dive for:
 - `State Management (iOS 17+ — No Legacy Patterns)`
 - `Networking Layer`
 - `Build Configuration (3 Environments)`
+- `WWDC26 Apple Platform Compatibility`
 - `Security Standards`
 - `Testing Strategy`
 - `Performance Rules`

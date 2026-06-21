@@ -73,7 +73,7 @@ TDD is a development process where you write tests **before** feature code, foll
 
 **Core Principle:** No production code without a failing test first.
 
-**Preferred Framework:** Swift Testing (`@Test` macro) for all new unit and integration tests. Use XCTest only for UI tests (XCUITest) and legacy test suites.
+**Preferred Framework:** Swift Testing (`@Test` macro) for all new unit and integration tests. Use XCTest for UI tests (XCUITest) and legacy test suites. On Swift 6.4, use Swift Testing/XCTest interoperability for gradual migration instead of big-bang rewrites.
 
 **Dependency Injection:** Protocol-based injection — no DI framework required. Define protocols for all external dependencies, inject via initialiser parameters.
 
@@ -98,6 +98,7 @@ Use that deep dive for:
 - `Test Pyramid (70/20/10)`
 - `TDD Workflow for iOS Features`
 - `Swift Testing Framework`
+- `Swift 6.4 Testing Migration Notes`
 - `Protocol-Based Mocking`
 - `Testing @Observable ViewModels`
 - `URLProtocol for Network Mocking`
@@ -107,3 +108,13 @@ Use that deep dive for:
 - `Patterns and Anti-Patterns`
 - `Integration with Other Skills`
 - Additional deep-dive sections continue in the reference file.
+
+## Swift 6.4 Testing Migration Notes
+
+- Use two-way Swift Testing/XCTest interoperability to migrate helpers and
+  assertions gradually.
+- Use issue severity for non-blocking diagnostics that still need visibility.
+- Use dynamic cancellation for unavailable device, region, language, or Apple
+  Intelligence conditions.
+- Keep XCTest for XCUITest and old suites until there is a real maintenance
+  reason to migrate.

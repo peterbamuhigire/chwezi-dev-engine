@@ -6,6 +6,9 @@ This is a documentation and skills repository. Most source files are Markdown
 and YAML, with a small amount of Python and PowerShell for maintenance.
 The catalog now includes C#/.NET implementation guidance, but .NET is not a
 runtime dependency of this repository.
+It also includes WWDC26-era Apple development guidance, but Xcode, Swift, and
+Apple SDKs are downstream project toolchains rather than runtime dependencies
+of this repository.
 
 ## Tooling
 
@@ -25,7 +28,7 @@ runtime dependency of this repository.
 ```powershell
 rg --files -g "SKILL.md"
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
-python -X utf8 scripts\routing_smoke_test.py --report-only
+python -X utf8 scripts\routing_smoke_test.py
 python -X utf8 scripts\routing_smoke_test.py --collisions
 ```
 

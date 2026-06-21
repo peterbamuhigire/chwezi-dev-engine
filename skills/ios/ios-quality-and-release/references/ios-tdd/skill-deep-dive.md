@@ -111,7 +111,7 @@ Implement `totalPrice`, then refactor both test and production code.
 
 ## Swift Testing Framework
 
-Swift Testing is the modern, preferred test framework for iOS (Xcode 16+). Use `@Test` macro and `#expect` macro instead of XCTest assertions.
+Swift Testing is the modern, preferred test framework for iOS. For 2026 Apple-platform work, use Xcode 27 and Swift 6.4-ready test suites; use `@Test` and `#expect` for new tests while keeping XCTest interoperability where the project still depends on it.
 
 ### Basic Structure
 

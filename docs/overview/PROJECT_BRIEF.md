@@ -7,6 +7,10 @@ coding agents and human operators select reusable workflows for software
 engineering, AI systems, SaaS operations, finance-doctrine orchestration, mobile development,
 security, UX, and SDLC documentation.
 
+The current catalog includes WWDC26-era Apple development guidance across iOS,
+mobile operations, AI, App Intents/Siri/Spotlight, StoreKit, quality/release,
+security, PWA/Safari, and companion design-system routing.
+
 ## Primary Users
 
 | User | Need |
@@ -48,3 +52,5 @@ security, UX, and SDLC documentation.
 - New skills can shadow a neighbour's routing. Add a fixture to
   `scripts/routing_fixtures.yml` for any skill a sibling could steal traffic
   from, so the smoke test guards it.
+- Apple beta-era APIs can change after WWDC26; keep code examples
+  availability-gated and source-labeled until final release notes are reviewed.
