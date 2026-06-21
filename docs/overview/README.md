@@ -5,6 +5,15 @@ supporting documentation. It combines implementation guidance, product strategy,
 security patterns, finance-doctrine orchestration, mobile development guidance, SDLC
 documentation templates, and catalog maintenance tooling.
 
+## Latest Update
+
+The 2026-06-21 WWDC26 modernization updated the existing Apple and mobile skills
+without adding new active entrypoints. The catalog now routes current Apple work
+through iOS development, AI/ML, App Intents/Siri/Spotlight, quality/release,
+security, StoreKit, PWA/Safari, KMP, and mobile operations guidance, while
+presentation-layer Apple UI guidance lives in the external
+`design-system-skills` engine.
+
 ## What Is Here
 
 | Area | Location | Notes |
@@ -40,6 +49,8 @@ documentation templates, and catalog maintenance tooling.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
 - Current active catalog size is 142 skills.
+- Current routing smoke-test baseline is 39 fixtures, precision@1 92%, and
+  precision@3 100%.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated

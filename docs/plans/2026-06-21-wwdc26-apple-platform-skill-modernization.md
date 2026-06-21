@@ -1,8 +1,10 @@
 # WWDC26 Apple Platform Skill Modernization Plan
 
-Status: proposed
+Status: implemented
 Date: 2026-06-21
 Scope: `skills-web-dev` Apple/iOS/macOS/mobile skills, plus required companion updates in `C:\wamp64\www\design-system-skills`
+
+Implementation note: completed on 2026-06-21 by updating existing active skills and references rather than promoting TODOs into new active skills. This preserves the repaired active catalog size while making Apple development guidance current for WWDC26-era standards.
 
 ## Evidence Base
 
@@ -14,11 +16,19 @@ Primary local research input:
 Primary Apple sources verified for planning:
 
 - Apple Newsroom, "Apple accelerates app development with new intelligence frameworks and advanced tools", 2026-06-08.
-- Apple Developer, "WWDC26 iOS guide".
-- Apple Developer, "What's New - Xcode".
-- Apple Developer, "What's new in Swift", WWDC26 session 262.
+- Apple Developer, "WWDC26 iOS guide": `https://developer.apple.com/wwdc26/guides/ios/`.
+- Apple Developer, "WWDC26 Design guide": `https://developer.apple.com/wwdc26/guides/design/`.
+- Apple Developer, "What's New - Xcode": `https://developer.apple.com/xcode/whats-new/`.
+- Apple Developer, "What's new in Swift", WWDC26 session 262: `https://developer.apple.com/videos/play/wwdc2026/262/`.
 
 Planning caveat: the report states that full Apple release-note pages were not fully retrievable. This plan therefore targets confirmed public WWDC26 guidance and requires a release-note pass before code examples are changed to new beta-only APIs.
+
+Implementation summary:
+
+- Updated `ios-development`, `ios-ai-ml`, `ios-platform-capabilities`, `ios-architecture`, `ios-data-persistence`, `ios-quality-and-release`, `ios-security-and-rbac`, `ios-monetization`, and cross-platform mobile skills.
+- Added focused references for Apple platform compatibility, Foundation Models/Core AI, App Intents/Siri/Spotlight, semantic indexing, AI/App Intents security, Xcode 27 quality/release gates, Safari/WebKit 27 PWA checks, and Apple release operations.
+- Updated `design-system-skills` Apple UI guidance for Liquid Glass, SF Symbols 8, accessibility settings, iPhone/iPad/Mac-designed-for-iPhone resizability, platform motion/haptics, token caveats, and pre-launch QA.
+- Added routing fixtures for iOS AI, App Intents/Siri/Spotlight, and iOS release evidence routes.
 
 ## Target Compatibility Definition
 
@@ -285,4 +295,3 @@ The modernization is complete when:
 - Apple Intelligence and Siri AI availability varies by device, language, region, and legal constraints; skills must not imply universal availability.
 - Xcode 27 requiring Apple Silicon can break teams that still depend on Intel Macs for local builds.
 - AI and App Intents features can create privacy and action-authorization failures if they are treated only as UX features.
-

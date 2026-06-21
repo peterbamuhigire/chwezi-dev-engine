@@ -1,6 +1,6 @@
 ---
 name: ios-architecture
-description: iOS architecture orchestration for production apps, modular codebases, Swift patterns, scale practices, and release-ready implementation boundaries.
+description: iOS architecture orchestration for production apps, modular codebases, Swift patterns, App Intents, Foundation Models/Core AI provider boundaries, scale practices, and release-ready implementation boundaries.
 metadata:
   portable: true
   compatible_with:
@@ -15,7 +15,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Designing, reviewing, or refactoring iOS app architecture, modular boundaries, dependency injection, navigation, production patterns, or large-team delivery.
-- The task mentions MVVM, clean architecture, Swift patterns, UIKit/SwiftUI boundaries, modularization, scaling, CI impact, or maintainability.
+- The task mentions MVVM, clean architecture, Swift patterns, UIKit/SwiftUI boundaries, modularization, App Intents, Siri/Spotlight, Foundation Models, Core AI, provider abstraction, scaling, CI impact, or maintainability.
 - A narrow retired iOS architecture skill is referenced by name.
 
 ## Do Not Use When
@@ -58,4 +58,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/ios-at-scale.md` for modularization, large-team workflows, build systems, and CI practices.
 - `references/ios-production-patterns.md` for production UIKit/SwiftUI lifecycle and app-store-proven implementation rules.
 - `references/ios-swift-design-patterns.md` for Swift-idiomatic patterns and reusable implementation recipes.
+- `references/app-intelligence-architecture-wwdc26.md` for App Intents, semantic indexing, Foundation Models/Core AI provider boundaries, evaluation layers, and agent-safe module ownership.
 <!-- dual-compat-end -->

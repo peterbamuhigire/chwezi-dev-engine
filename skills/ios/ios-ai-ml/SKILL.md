@@ -1,8 +1,6 @@
 ---
 name: ios-ai-ml
-description: On-device AI/ML for iOS using Apple's stack — CoreML model integration
-  (generated wrappers, batch prediction, dynamic model loading), Vision framework
-  (face detection, landmarks, barcode, saliency, image similarity, real-time camera...
+description: iOS AI/ML standards for WWDC26 Apple intelligence work, including Foundation Models, Language Model providers, Dynamic Profiles, Core AI, Evaluations, Core ML, Vision, NaturalLanguage, Speech, SoundAnalysis, and privacy-first on-device inference.
 metadata:
   portable: true
   compatible_with:
@@ -10,158 +8,73 @@ metadata:
   - codex
 ---
 
-# iOS AI/ML — On-Device Intelligence with Apple's Stack
+# iOS AI/ML
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
 ## Use When
 
-- On-device AI/ML for iOS using Apple's stack — CoreML model integration (generated wrappers, batch prediction, dynamic model loading), Vision framework (face detection, landmarks, barcode, saliency, image similarity, real-time camera...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
+- Building or reviewing iOS, iPadOS, or macOS AI/ML features using Foundation Models, Core AI, Core ML, Vision, NaturalLanguage, Speech, SoundAnalysis, Create ML, Evaluations, Private Cloud Compute, or a third-party Language Model provider.
+- The work includes on-device inference, custom models, multimodal prompts, agentic model tool use, AI evaluation, model-provider selection, privacy-sensitive AI, or Apple Intelligence availability gates.
 
 ## Do Not Use When
 
-- The task is unrelated to `ios-ai-ml` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The task is plain iOS implementation with no AI/ML path; use `ios-development`.
+- The task is AI product architecture outside Apple platforms; use `ai-app-architecture`, `ai-llm-integration`, or `ai-evaluation`.
+- The task is only AI security, prompt injection, or action authorization; use this skill with `ios-security-and-rbac`.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+- Feature goal, model/provider choices, target Apple platforms, device/OS floor, privacy constraints, offline expectations, data inputs, tools/actions the model may call, and evaluation criteria.
+- Confirm whether the deliverable is design, implementation, migration, review, evaluation plan, or release evidence.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+1. Load `ios-development` for Apple-platform implementation rules and availability policy.
+2. Load `references/apple-intelligence-stack-wwdc26.md` for Foundation Models, Core AI, provider routing, Evaluations, and availability gates.
+3. Load `references/skill-deep-dive.md` only when you need legacy Core ML, Vision, NaturalLanguage, Create ML, or model-optimization recipes.
+4. Choose the lowest-risk model path that solves the task: deterministic API, Core ML/Core AI owned model, on-device Foundation Models, Private Cloud Compute, or third-party provider.
+5. Define privacy, fallback, telemetry, evaluation, and security gates before writing production code.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
+- Every AI feature has a provider boundary, availability gate, privacy path, fallback state, and evaluation set.
+- On-device claims must be true: no network dependency unless the code path is explicitly cloud or third-party.
+- Agentic or tool-calling model features require authorization, audit logging, and security review.
+- Model performance work must include device, latency, memory, battery, and thermal evidence.
 
 ## Anti-Patterns
 
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+- Treating Core ML, Core AI, and Foundation Models as interchangeable.
+- Sending sensitive user data to a cloud model because the on-device path was harder.
+- Shipping prompt-only tests for model behavior that changes by tool, locale, region, model, or data state.
+- Logging prompts, model context, OCR text, tool payloads, or generated sensitive content without a privacy review.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+- AI feature architecture, provider decision matrix, model integration plan, evaluation suite, privacy/fallback checklist, performance budget, or review findings.
 
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
 |----------|----------|--------|---------|
-| Correctness | Core ML inference test plan | Markdown doc covering model load, batch prediction, and dynamic model swap scenarios | `docs/ios/coreml-tests.md` |
-| Performance | On-device inference latency budget | Markdown doc covering per-model latency and memory budgets | `docs/ios/coreml-perf-budget.md` |
+| Correctness | AI evaluation plan | Markdown doc covering prompts, providers, tools, unavailable states, and regression cases | `docs/ios/ai-evaluations-checkout.md` |
+| Performance | On-device inference budget | Markdown doc covering per-device latency, memory, battery, and thermal budget | `docs/ios/ai-perf-budget.md` |
+| Privacy | AI data-flow record | Markdown doc identifying on-device, PCC, third-party, logs, and retention | `docs/ios/ai-data-flow.md` |
 
 ## References
 
-- Use the `references/` directory for deep detail after reading the core workflow below.
+- `references/apple-intelligence-stack-wwdc26.md` for Foundation Models, Core AI, Evaluations, provider routing, availability gates, and security handoffs.
+- `references/skill-deep-dive.md` for Core ML, Vision, NaturalLanguage, Create ML, model updates, optimization, privacy-preserving patterns, and older Apple ML recipes.
 <!-- dual-compat-end -->
-## The Apple AI Stack
 
-```
-CoreML            ← inference engine (all platforms, on-device)
-   ↑
-Vision            ← image analysis (wraps CoreML)
-NaturalLanguage   ← text/language (wraps CoreML)
-Speech            ← audio→text
-SoundAnalysis     ← audio classification
-   ↑
-CreateML          ← training (macOS only, Swift + Xcode app)
-Turi Create       ← training (Python, open source, Apple-maintained)
-CoreML Tools      ← model conversion from Keras/TF/Caffe → CoreML (Python)
-```
+## Quick Apple AI Stack Map
 
-CoreML runs entirely on-device — no network required for inference. Selects optimal compute unit automatically: Neural Engine → GPU → CPU.
-
----
-
-## Section 1: CoreML Model Integration
-
-### Standard 4-Step Workflow
-
-```swift
-// Step 1: Add .mlmodel to Xcode project
-// Step 2: Xcode auto-generates typed wrapper classes
-
-// Step 3: Create input, call prediction()
-let mobileNet = MobileNet()
-let input = MobileNetInput(image: pixelBuffer)  // typed input
-let output = try mobileNet.prediction(input: input)
-
-// Step 4: Read typed output properties
-print(output.classLabel)           // String
-print(output.classLabelProbs)      // [String: Double]
-```
-
-### Batch Prediction
-
-```swift
-let inputs: [MobileNetInput] = [input1, input2, input3]
-let batchIn = MLArrayBatchProvider(array: inputs)
-let batchOut = try mobileNet.model.predictions(from: batchIn)
-```
-
-### Dynamic Model Loading (Downloaded Models)
-
-```swift
-// Compile downloaded model on-device
-let compiledUrl = try MLModel.compileModel(at: downloadedModelUrl)
-
-// Move from temp to permanent location
-let appSupportDir = FileManager.default.urls(
-    for: .applicationSupportDirectory, in: .userDomainMask).first!
-let permanentUrl = appSupportDir.appendingPathComponent("MyModel.mlmodelc")
-try FileManager.default.moveItem(at: compiledUrl, to: permanentUrl)
-
-let model = try MLModel(contentsOf: permanentUrl)
-```
-
-### Low-Level CoreML (Custom/Unusual Models)
-
-```swift
-let input = try MLDictionaryFeatureProvider(dictionary: [
-    "image": MLFeatureValue(pixelBuffer: pixelBuffer)
-])
-let output = try model.prediction(from: input)
-let classLabel = output.featureValue(for: "classLabel")?.stringValue
-```
-
-### MLMultiArray for Numeric Inputs
-
-```swift
-let multiArray = try MLMultiArray(shape: [1, 3, 224, 224], dataType: .float32)
-// Fill array values...
-let input = MLFeatureValue(multiArray: multiArray)
-```
-
-### Compute Unit Configuration
-
-```swift
-let config = MLModelConfiguration()
-config.computeUnits = .cpuOnly  // .all | .cpuAndGPU | .cpuOnly
-let model = try MobileNet(configuration: config)
-// Use .cpuOnly for debugging/testing; .all in production
-```
-
----
-
-## Additional Guidance
-
-Extended guidance for `ios-ai-ml` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
-
-Use that deep dive for:
-- `Section 2: Vision Framework`
-- `Section 3: Natural Language Framework`
-- `Section 4: CreateML Training Workflow`
-- `Section 5: On-Device Model Updates (Personalization)`
-- `Section 6: Model Optimisation`
-- `Section 7: On-Device vs Cloud AI`
-- `Section 8: Privacy-Preserving Patterns`
-- `Section 9: Anti-Patterns`
+| Layer | Use For |
+| --- | --- |
+| Foundation Models | LLM-backed app features using Apple Foundation Models, PCC, Claude, Gemini, or another Language Model provider. |
+| Core AI | Bring-your-own model runtime on Apple Silicon, on-device. |
+| Core ML | Packaged or downloaded `.mlmodel` inference, typed wrappers, batch prediction, classic ML. |
+| Vision | OCR, barcode, image analysis, camera understanding, and model-callable visual tools. |
+| NaturalLanguage | Deterministic language tagging/classification when an LLM is not needed. |
+| Speech/SoundAnalysis/Music Understanding | Audio transcription, classification, and local audio understanding. |

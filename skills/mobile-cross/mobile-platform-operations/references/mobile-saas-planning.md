@@ -133,8 +133,8 @@ The user may request a **subset** of modules. Respect their selection:
 
 **iOS constraints:**
 
-- Minimum iOS version (default: iOS 17)
-- Xcode 16+
+- Minimum iOS/iPadOS version (product-specific; gate current SDK APIs with availability checks)
+- Xcode 27 on Apple Silicon for primary 2026 Apple-platform builds
 - Max IPA size (default: 200MB)
 
 **Shared constraints:**

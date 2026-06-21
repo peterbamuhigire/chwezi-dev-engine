@@ -1,8 +1,8 @@
 ---
 name: ios-monetization
-description: StoreKit 2 in-app purchases, subscriptions, and monetization for iOS
-  apps. Use when implementing consumables, non-consumables, auto-renewable subscriptions,
-  paywall UI, receipt validation, or App Store Connect configuration.
+description: StoreKit 2 in-app purchases, subscriptions, App Store Server API,
+  group and organization subscription watch items, Unity StoreKit plugin routing,
+  paywall UI, transaction verification, and App Store Connect configuration.
 metadata:
   portable: true
   compatible_with:
@@ -16,7 +16,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
 
-- StoreKit 2 in-app purchases, subscriptions, and monetization for iOS apps. Use when implementing consumables, non-consumables, auto-renewable subscriptions, paywall UI, receipt validation, or App Store Connect configuration.
+- StoreKit 2 in-app purchases, subscriptions, and monetization for iOS apps. Use when implementing consumables, non-consumables, auto-renewable subscriptions, group or organization subscription watch items, Unity StoreKit plugin routing, paywall UI, receipt validation, or App Store Connect configuration.
 - The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
@@ -66,6 +66,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Architecture Principles
 
 StoreKit 2 is async/await-native. The entire `SKPaymentQueue`/delegate callback model is abandoned. Every purchase, verification, and entitlement check is a Swift concurrency operation.
+
+## WWDC26 App Store Watch Items
+
+- Review current Apple In-App Purchase and subscription sessions before using new group or organization subscription behavior.
+- Unity projects should review Apple's official Unity StoreKit plugin before building a custom bridge.
+- Treat App Store Small Business Program, Private Cloud Compute model access, and subscription eligibility as separate business rules; do not mix them in entitlement code.
+- Keep StoreKit test scenarios in Xcode 27 current: interrupted purchases, refunds, revocations, billing retry, grace period, Ask to Buy, and restore.
 
 **Transaction observer is not optional.** It must start at app entry point — before any UI renders. Transactions that completed while the app was terminated are delivered via `Transaction.updates` on next launch. Starting this loop in the paywall means you silently drop those deliveries.
 

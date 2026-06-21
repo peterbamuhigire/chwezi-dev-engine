@@ -80,6 +80,12 @@ fixtures:
     expect: ios-data-persistence
   - task: "Implement an iOS app feature in Swift using SwiftUI, async await and Xcode project conventions"
     expect: ios-development
+  - task: "Build an iOS AI feature using Foundation Models, Core AI, on-device evaluation and privacy-preserving fallbacks"
+    expect: ios-ai-ml
+  - task: "Expose app content and actions to Siri using App Intents, App Entities, View Annotations and Spotlight semantic indexing"
+    expect: ios-platform-capabilities
+  - task: "Plan iOS release evidence with Device Hub, Xcode Cloud, TestFlight, Swift Testing and App Store submission gates"
+    expect: ios-quality-and-release
 
   # --- Security / compliance ---
   - task: "Audit a web application for OWASP vulnerabilities and insecure code"

@@ -1,6 +1,6 @@
 ---
 name: ios-quality-and-release
-description: iOS quality and release orchestration for TDD, debugging, stability, App Store review, crash prevention, and release evidence.
+description: iOS quality and release orchestration for Swift Testing 6.4, Device Hub, Xcode 27 agents, Xcode Cloud, AI Evaluations, Instruments, TestFlight, App Store review, stability, and release evidence.
 metadata:
   portable: true
   compatible_with:
@@ -15,7 +15,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Planning, implementing, or reviewing iOS testing, TDD, debugging, stability, crash prevention, App Store readiness, or release evidence.
-- The task mentions Swift Testing, XCTest, LLDB, Instruments, crash triage, regression gates, TestFlight, App Review, privacy labels, or production readiness.
+- The task mentions Swift Testing, XCTest, Device Hub, Xcode agents, Xcode Cloud, AI Evaluations, App Intents Testing, LLDB, Instruments, MetricKit, crash triage, regression gates, TestFlight, App Review, privacy labels, or production readiness.
 - A retired iOS quality/release skill is referenced by name.
 
 ## Do Not Use When
@@ -31,7 +31,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Load `ios-development` for baseline implementation rules.
-2. Choose the quality lane: TDD, debugging, stability hardening, or App Store release.
+2. Choose the quality lane: TDD, debugging, stability hardening, AI/App Intents evaluation, Device Hub testing, or App Store release.
 3. Load only the matching reference.
 4. Produce executable tests, triage steps, release checklist updates, or review findings with concrete evidence.
 
@@ -40,6 +40,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Risky code paths need deterministic tests before sign-off.
 - Debugging guidance must identify reproduction, instrumentation, suspected layer, and validation.
 - Release guidance must include App Store policy, privacy, performance, accessibility, and rollback evidence where applicable.
+- AI, App Intents, and Xcode-agent-assisted work require evaluation/test evidence, not only screenshots or manual review notes.
 
 ## Anti-Patterns
 
@@ -57,4 +58,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/ios-debugging-mastery.md` for LLDB, Instruments, watchpoints, and advanced triage.
 - `references/ios-stability-solutions.md` for crash prevention and resilient production patterns.
 - `references/app-store-review.md` for App Store submission, policy, metadata, privacy, and review evidence.
+- `references/wwdc26-quality-release.md` for Swift Testing 6.4 migration, Device Hub, Xcode 27 agents, Xcode Cloud, Instruments concurrency profiling, AI Evaluations, and release evidence.
 <!-- dual-compat-end -->

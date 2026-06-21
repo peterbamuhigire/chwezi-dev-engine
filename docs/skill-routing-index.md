@@ -147,10 +147,14 @@ target instead.
 | Android UI | `android-ui-ux-design` | `jetpack-compose-ui` |
 | iOS core | `ios-development` | `ios-project-setup`, `ios-swift-recipes` |
 | iOS architecture | `ios-architecture` | `ios-architecture-advanced`, `ios-at-scale`, `ios-production-patterns` |
-| iOS persistence | `ios-data-persistence` | `ios-swiftdata` |
+| iOS AI/ML | `ios-ai-ml` | Foundation Models, Core AI, Core ML, Vision, NaturalLanguage, on-device evaluation |
+| iOS persistence | `ios-data-persistence` | `ios-swiftdata`, semantic indexing, AI local context caches |
 | iOS UI | `ios-ui-ux-design` | `swiftui-design`, `swiftui-pro-patterns`, `ios-uikit-advanced` |
-| iOS capabilities | `ios-platform-capabilities` | `ios-biometric-login`, `ios-bluetooth-printing`, `ios-push-notifications`, `ios-pdf-export`, `ios-networking-advanced` |
-| Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review` |
+| iOS capabilities | `ios-platform-capabilities` | `ios-biometric-login`, `ios-bluetooth-printing`, `ios-push-notifications`, `ios-pdf-export`, `ios-networking-advanced`, App Intents, Siri, Spotlight semantic indexing |
+| iOS quality/release | `ios-quality-and-release` | Swift Testing, Device Hub, Xcode Cloud, TestFlight, App Store release evidence |
+| iOS security/RBAC | `ios-security-and-rbac` | Keychain, App Attest, Trust Insights, App Intents authorization, AI tool security |
+| iOS monetization | `ios-monetization` | StoreKit 2, App Store Server API, subscriptions, Unity StoreKit plugin |
+| Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, Apple TestFlight/Xcode Cloud operations |
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
 | UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
 | UX content | `ux-content-strategy` | `ux-writing` |

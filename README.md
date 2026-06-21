@@ -10,6 +10,29 @@ The catalog is designed to be routed by name. A small active surface keeps
 skill selection reliable, while deeper references stay available without making
 every topic an active entrypoint.
 
+## Latest Update: WWDC26 Apple Platform Modernization
+
+As of 2026-06-21, the active Apple/mobile guidance is current for WWDC26-era
+development while staying under the active catalog cap. Existing iOS and
+cross-platform mobile skills were updated rather than promoted into new active
+entrypoints.
+
+Key Apple updates now covered by the catalog:
+
+- Xcode 27, Apple Silicon build assumptions, Device Hub, Xcode Cloud,
+  TestFlight, and release-evidence gates.
+- Swift 6.4-ready testing/concurrency guidance and latest-SDK availability
+  discipline.
+- Foundation Models, Language Model providers, Dynamic Profiles, Core AI,
+  Core ML, Evaluations, and privacy-preserving AI fallbacks.
+- App Intents, App Entities, App Schemas, View Annotations, Siri, Spotlight
+  semantic indexing, widgets, and App Intents Testing.
+- Safari/WebKit 27 PWA checks and Apple platform operations for mixed
+  Android/iOS delivery.
+- Design-layer routing to `design-system-skills` for current Apple UI:
+  Liquid Glass, SF Symbols 8, Dynamic Type, haptics, accessibility settings,
+  and resizable iPhone/iPad/Mac-designed-for-iPhone QA.
+
 ## Architecture & cross-cutting engines (updated 2026-06-21)
 
 - **Relocated.** This engine (`skills-web-dev`, the engineering catalog) moved on
@@ -81,10 +104,11 @@ target after the 2026-06-21 migration of design/UI/UX skills to the
 `design-system-skills` engine (well under the 200 hard cap). Routing quality is
 no longer judged by raw count alone:
 `scripts/routing_smoke_test.py` measures routing precision against a task fixture
-(currently precision@1 83%, precision@3 100%) and its `--collisions` mode
-confirms zero genuine duplicate skills - every remaining high-similarity pair is
-an intentional platform split (iOS/Android) or concern split (engineering/ops).
-The remaining skills are distinct and deliberately retained.
+(currently 39 fixtures, precision@1 92%, precision@3 100%) and its
+`--collisions` mode reports five known neighbour pairs. Those pairs are
+intentional concern splits such as engineering vs operations, analytics vs AI
+analytics, and SaaS vs AI entitlements. The remaining skills are distinct and
+deliberately retained.
 
 Run the guardrail report with:
 
@@ -101,7 +125,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 | SaaS and product | Multi-tenancy, entitlements, pricing, billing, onboarding, metrics, sales operations, product discovery, and product-led growth. |
 | Security and compliance | Web app audits, code safety, network security, Linux hardening, DPIA work, and AI security controls. |
 | Frontend engineering | React, Next.js, Tailwind, frontend performance, image/asset optimization, and PWA/offline patterns. (Design/typography/UI/UX skills moved to the `design-system-skills` engine — see "Architecture & cross-cutting engines".) |
-| Mobile | Android, iOS, Kotlin Multiplatform, mobile persistence, mobile UX, platform capabilities, app quality, and release workflows. |
+| Mobile | Android, iOS, Kotlin Multiplatform, mobile persistence, Apple WWDC26-era AI/App Intents/platform capabilities, app quality, StoreKit, PWA/Safari checks, and release workflows. |
 | Finance doctrine | Local orchestration skills plus external `chwezi-accounting-doctrine` for accounting, audit, controls, close, reporting, IFRS, payroll, inventory, and finance UX doctrine. |
 | Documentation and operations | SDLC documentation, project requirements, professional document output, catalog maintenance, skill writing, and update records. |
 | Consulting delivery and bid control | Control-room operations, document/spreadsheet tooling readiness, and red-team quality gates for high-stakes bids, donor submissions, workbooks, dashboards, and consulting deliverables. |

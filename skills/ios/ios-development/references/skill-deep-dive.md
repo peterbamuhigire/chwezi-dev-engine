@@ -10,6 +10,7 @@ This file contains the extended guidance moved out of [../SKILL.md](../SKILL.md)
 - `State Management (iOS 17+ — No Legacy Patterns)`
 - `Networking Layer`
 - `Build Configuration (3 Environments)`
+- `WWDC26 Apple Platform Compatibility`
 - `Security Standards`
 - `Testing Strategy`
 - `Performance Rules`
@@ -26,7 +27,7 @@ This file contains the extended guidance moved out of [../SKILL.md](../SKILL.md)
 
 ## Swift Language Standards
 
-- **Swift 6.0+** with strict concurrency checking enabled
+- **Swift 6.4-ready** with strict concurrency checking enabled
 - **Value types preferred** — use structs over classes unless reference semantics are required
 - **Protocol-oriented programming** — define capabilities via protocols, implement with extensions
 - **`async/await`** for all asynchronous work (NOT Combine for networking)
@@ -36,6 +37,8 @@ This file contains the extended guidance moved out of [../SKILL.md](../SKILL.md)
 - **No force unwrapping** in production code — use `guard let`, `if let`, or nil coalescing
 - **Sealed hierarchies:** Use `enum` with associated values for UI state modeling
 - **Extension functions** for utility code — extend existing types rather than creating utility classes
+
+- **Availability discipline:** latest-SDK APIs require `#available` / `@available` gates and tested fallbacks for the declared deployment floor.
 
 ```swift
 // UI State — sealed enum pattern (mirrors Kotlin sealed class)
@@ -278,6 +281,15 @@ Prod.xcconfig:    API_BASE_URL = https://domain.com/api
 4. **Staging** uses TestFlight internal testing for QA
 5. **Production** requires App Store Connect review
 
+## WWDC26 Apple Platform Compatibility
+
+Load `references/apple-platform-compatibility-wwdc26.md` before starting new
+Apple-platform work or modernizing an older app. Current guidance assumes
+Xcode 27 on Apple Silicon, Swift 6.4, latest Apple SDKs, Device Hub for device
+and simulator workflows, and explicit availability gates for iOS 27/macOS 27
+features. Keep iOS 17+ as a deployment floor only when the product's supported
+device fleet requires it.
+
 ## Security Standards
 
 ### Mandatory
@@ -338,6 +350,10 @@ final class KeychainHelper {
 
 **Key rules:**
 - Use **Swift Testing** (`@Test` macro) for all new unit tests
+- Use Swift 6.4 Swift Testing/XCTest interoperability for gradual migration;
+  promote interoperability warnings to failures only after the migration plan is stable.
+- Use dynamic skips/cancellation for unavailable hardware, region, language, or
+  beta-service conditions; never let those hides mask a deterministic defect.
 - `@Observable` ViewModels are testable without SwiftUI — just call methods and assert state
 - Mock repositories via protocols — inject test doubles in ViewModel init
 - Use `XCTest` for integration tests that need setup/teardown lifecycle
@@ -414,9 +430,10 @@ struct ContentView: View {
 
 | Requirement | Value |
 |---|---|
-| **iOS Deployment Target** | 17.0+ |
-| **Swift Version** | 6.0+ |
-| **Xcode** | 16+ |
+| **Current SDK Target** | Latest available iOS/iPadOS/macOS SDKs, currently WWDC26-era SDKs |
+| **Deployment Target** | Product-specific; iOS 17+ remains allowed only when older-device support is required |
+| **Swift Version** | Swift 6.4-ready |
+| **Xcode** | 27 on Apple Silicon for current Apple-platform development |
 | **UI Framework** | SwiftUI-first (UIKit only via `UIViewRepresentable`) |
 | **Concurrency** | `async/await` + actors (strict concurrency) |
 | **Persistence** | SwiftData (Core Data only for migration) |

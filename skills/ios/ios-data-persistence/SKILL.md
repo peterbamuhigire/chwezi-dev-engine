@@ -1,9 +1,6 @@
 ---
 name: ios-data-persistence
-description: iOS data persistence standards with SwiftData as primary local storage
-  and custom API backends for cloud sync. Covers UserDefaults, Keychain, SwiftData
-  (models, queries, relationships, migrations), file storage, offline-first architecture,
-  and...
+description: iOS data persistence standards with SwiftData, Keychain, files, offline sync, Core Spotlight semantic indexing, App Entity data exposure, and AI cache/privacy boundaries.
 metadata:
   portable: true
   compatible_with:
@@ -17,93 +14,69 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
 
-- iOS data persistence standards with SwiftData as primary local storage and custom API backends for cloud sync. Covers UserDefaults, Keychain, SwiftData (models, queries, relationships, migrations), file storage, offline-first architecture, and...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
+- Designing, implementing, or reviewing iOS persistence with SwiftData, Core Data migration, UserDefaults, Keychain, file storage, offline sync, Core Spotlight semantic indexing, App Entity exposure, AI local context, or privacy-sensitive caches.
+- The task mentions local storage, migrations, offline-first sync, search/indexing, Siri/App Entity data exposure, or AI cache retention.
 
 ## Do Not Use When
 
-- The task is unrelated to `ios-data-persistence` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The task is general iOS implementation with no local data or cache concerns; use `ios-development`.
+- The task is only platform capability routing; use `ios-platform-capabilities`.
+- The task is security policy rather than persistence mechanics; use `ios-security-and-rbac` alongside this skill.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+- Data model, sensitivity classification, deployment target, sync/backend contract, offline requirements, account/tenant model, deletion rules, and whether data is exposed to Spotlight, Siri, widgets, or AI context.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+1. Load `ios-development` for Swift and project standards.
+2. Choose storage: UserDefaults, Keychain, SwiftData/Core Data, FileManager, URLCache/NSCache, Core Spotlight, or an AI local-context cache.
+3. Load `references/ios-swiftdata.md` for SwiftData details.
+4. Load `references/semantic-indexing-and-ai-caches-wwdc26.md` when data is exposed to Siri, Spotlight, App Entities, widgets, or AI.
+5. Produce a model spec, migration plan, cache policy, deletion policy, and test plan.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
+- Persistence models must separate stored data, domain entities, DTOs, and search/intent projections when privacy or API shape differs.
+- Secrets belong in Keychain or stronger platform storage, not UserDefaults, SwiftData, Spotlight, or logs.
+- Offline data must have conflict, sync, stale-state, and deletion behavior.
+- Indexed or AI-context data must have retention, invalidation, and user/account cleanup rules.
 
 ## Anti-Patterns
 
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+- Exposing stored models directly as App Entities without reviewing fields.
+- Keeping stale Spotlight entries after logout, role change, tenant switch, or deletion.
+- Using local AI context as a hidden long-term memory without retention and deletion controls.
+- Treating SwiftData migrations as a compile-time concern only.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+- Persistence model spec, storage decision, SwiftData migration plan, offline sync plan, search/index projection, AI cache policy, or review findings.
 
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
 |----------|----------|--------|---------|
-| Data safety | Persistence model spec | Markdown doc per `skill-composition-standards/references/entity-model-template.md` covering Core Data / SwiftData entities | `docs/ios/persistence-model-orders.md` |
-| Correctness | Persistence test plan | Markdown doc listing CRUD and migration test cases | `docs/ios/persistence-tests-orders.md` |
+| Data safety | Persistence model spec | Markdown doc per `skill-composition-standards/references/entity-model-template.md` covering entities, projections, retention, and deletion | `docs/ios/persistence-model-orders.md` |
+| Correctness | Persistence test plan | Markdown doc listing CRUD, migration, sync, index, and deletion test cases | `docs/ios/persistence-tests-orders.md` |
 
 ## References
 
-- Use the `references/` directory for deep detail after reading the core workflow below.
 - `references/ios-swiftdata.md` for SwiftData `@Model`, relationships, model actors, migrations, CloudKit, and testing.
+- `references/semantic-indexing-and-ai-caches-wwdc26.md` for Core Spotlight, App Entities, Siri semantic index privacy, local AI context, and cache invalidation rules.
+- `references/skill-deep-dive.md` for UserDefaults, Keychain, repository pattern, file storage, URLCache/NSCache, offline-first architecture, and cross-skill references.
 <!-- dual-compat-end -->
-## Required Companion Skills
 
-| Skill | When to Apply |
-|---|---|
-| `references/ios-swiftdata.md` | Deep SwiftData API — @Attribute, @Relationship, ModelActor, migrations, 10 anti-patterns |
-| `dual-auth-rbac` | JWT/refresh-token storage and rotation |
-| `api-pagination` | Paginated data fetching with local caching |
-| `vibe-security-skill` | Security baseline for all web/API calls |
-| `api-error-handling` | Consistent error handling in repository layer |
-
----
-
-## 1. Storage Decision Guide
+## Storage Decision Guide
 
 | Data Type | Storage | Example |
 |---|---|---|
 | User preferences | UserDefaults | Theme, language, sort order |
 | Tokens / credentials | Keychain Services | JWT tokens, API keys, passwords |
-| Structured app data | SwiftData (iOS 17+) | Products, orders, customers |
+| Structured app data | SwiftData or Core Data | Products, orders, customers |
+| Searchable safe projections | Core Spotlight / App Entity projection | Title, display date, safe summary |
 | Large files / images | FileManager | Photos, PDFs, exports |
 | Temporary cache | URLCache / NSCache | API response caching |
+| AI local context | App-owned encrypted cache or SwiftData projection | Prompt-safe summaries, never raw secrets |
 
-**Rule of thumb:** simple flag/scalar = UserDefaults. Secret = Keychain. Relationships/querying = SwiftData. Binary blob = FileManager.
-
----
-
-## Additional Guidance
-
-Extended guidance for `ios-data-persistence` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
-
-Use that deep dive for:
-- `2. UserDefaults (Simple Preferences Only)`
-- `3. Keychain Services (Security-Critical Data)`
-- `4. SwiftData (Primary Local Storage — iOS 17+)`
-- `5. Repository Pattern (API-Backed Sync)`
-- `6. Offline-First Architecture`
-- `7. DTO / Domain Model Mapping`
-- `8. File Storage (Images, PDFs, Exports)`
-- `9. iCloud Sync Options`
-- `10. URLCache / NSCache (Temporary Caching)`
-- `11. Cross-Skill References`
-- `12. Anti-Patterns`
+Rule of thumb: simple flag/scalar = UserDefaults. Secret = Keychain. Relationships/querying = SwiftData. Binary blob = FileManager. Search/Siri/AI exposure = separate projection with explicit privacy review.

@@ -1,6 +1,8 @@
 ---
 name: mobile-platform-operations
-description: Cross-platform mobile operations orchestration for app icons, mobile RBAC, SaaS planning, Play Store review, and operational mobile delivery assets.
+description: Cross-platform mobile operations orchestration for app icons, mobile
+  RBAC, SaaS planning, Play Store review, Apple Xcode 27/TestFlight/Xcode Cloud
+  evidence, and operational mobile delivery assets.
 metadata:
   portable: true
   compatible_with:
@@ -14,7 +16,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
 
-- Planning or reviewing mobile delivery assets that span Android/iOS operations, app packaging, custom icons, RBAC, SaaS companion planning, or Google Play readiness.
+- Planning or reviewing mobile delivery assets that span Android/iOS operations, app packaging, custom icons, RBAC, SaaS companion planning, Google Play readiness, App Store/TestFlight readiness, or Xcode Cloud evidence.
 - The task references `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, or `google-play-store-review`.
 - A mobile project needs operational documentation, app-store evidence, or cross-platform implementation coordination.
 
@@ -31,7 +33,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Load platform implementation skills first: `android-development`, `ios-development`, or `kmp-development`.
-2. Choose the operations concern: icon assets, mobile RBAC, SaaS planning, or Play Store review.
+2. Choose the operations concern: icon assets, mobile RBAC, SaaS planning, Play Store review, App Store/TestFlight evidence, or cross-platform release coordination.
 3. Load only the relevant reference below.
 4. Produce the operational artifact, checklist, implementation guidance, or review evidence required for launch.
 
@@ -57,4 +59,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/mobile-rbac.md` for Android/cross-platform permission gates and offline authorization caches.
 - `references/mobile-saas-planning.md` for native mobile SaaS planning documents and implementation sequencing.
 - `references/google-play-store-review.md` for Android Play Store policy, testing, listing, and submission readiness.
+- `references/apple-platform-operations-wwdc26.md` for Apple Silicon, Xcode 27, Device Hub, TestFlight, Xcode Cloud, and App Store evidence readiness.
 <!-- dual-compat-end -->
