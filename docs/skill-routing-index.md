@@ -10,20 +10,21 @@ skills while the catalog is reduced below the active-skill cap.
 
 ## Active Skill Policy
 
-- Active skill roots are `skills/`, `doctrine/skills/`, and `00-meta-initialization/`.
+- Active skill roots are `skills/` and `00-meta-initialization/`.
 - Active skill means a file named `SKILL.md` under an active root.
 - Target active catalog size is 150-170 skills, with a hard cap of 200.
 - Reference material must not be named `SKILL.md`.
 - Inactive aliases retain their original content as `ALIAS.md` in the same
   directory and route through `docs/skill-aliases.yml`.
 - Redirect skills count as active skills and should be temporary if used.
-- Finance doctrine is canonical in the `doctrine/` submodule.
+- Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
+  engine. Local `doctrine/skills/` files are retained reference material only.
 
-Current guardrail baseline after the 2026-05-17 cleanup:
+Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 178 |
+| Active `SKILL.md` files | 142 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -43,10 +44,11 @@ social-, or SRS-specific domain skills.
 ## Finance Doctrine Canonicality
 
 Finance, accounting, tax, inventory, payroll, banking, mobile money, POS,
-statutory compliance, and accounting-record work routes first to
-`doctrine/skills/*` for doctrine-owned rules. Duplicate finance entrypoints under
-`skills/finance-accounting/finance/*` are compatibility aliases only until their durable material is
-absorbed into doctrine references or a small number of orchestration wrappers.
+statutory compliance, and accounting-record work routes first to the external
+`chwezi-accounting-doctrine` engine for doctrine-owned rules. Duplicate finance
+entrypoints under `skills/finance-accounting/finance/*` are compatibility
+aliases only until their durable material is absorbed into retained references
+or a small number of orchestration wrappers.
 
 Root-level finance implementation skills may remain active when they add behavior
 outside doctrine:
@@ -56,7 +58,7 @@ outside doctrine:
 | `skills/finance-accounting/accounting-engine` | Posting engine, ledger integrity, reversals, idempotency, implementation contracts. |
 | `skills/finance-accounting/accounting-finance-controller` | Controller-grade routing, quality gates, finance audit orchestration. |
 | `skills/saas/saas-accounting-system` | SaaS-specific accounting product architecture, if still distinct from `accounting-engine`. |
-| `doctrine/skills/*` | Canonical accounting doctrine, controls, reporting, close, migration, reconciliation, and finance UX. |
+| `doctrine/skills/*` | Retained accounting doctrine reference material; not active in this local engine. |
 
 ## Finance Alias Map
 
@@ -130,7 +132,7 @@ target instead.
 | AI architecture | `ai-app-architecture` | `ai-architecture-patterns`, `ai-on-saas-architecture` |
 | LLM integration | `ai-llm-integration` | `deepseek-integration`, provider adapters |
 | RAG | `ai-rag-patterns` | `rag-implementation`, `ai-rag-multi-tenant`, `vector-databases` |
-| AI evaluation | `ai-evaluation` | `ai-eval-harness`, eval suites, regression gates |
+| AI evaluation | `ai-evaluation` | `ai-eval-suite`, eval suites, regression gates |
 | AI security | `ai-security` | `llm-security`, `ai-prompt-injection-and-tenant-safety` |
 | AI analytics | `ai-analytics` | `ai-analytics-dashboards`, `ai-analytics-saas`, `ai-analytics-strategy`, `ai-nlp-analytics`, `ai-predictive-analytics` |
 | AI cost and billing | `ai-cost-and-metering` | `ai-cost-modeling`, `ai-cost-per-tenant-attribution`, `ai-metering-billing`, `ai-usage-metering-and-billing` |

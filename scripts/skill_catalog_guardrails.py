@@ -22,8 +22,14 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ACTIVE_ROOTS = (
     "skills",
-    "doctrine/skills",
     "00-meta-initialization",
+)
+DEFAULT_REFERENCE_ROOTS = (
+    "doctrine/skills",
+)
+DEFAULT_EXTERNAL_ENGINE_ROOTS = (
+    "../design-system-skills/skills",
+    "../chwezi-accounting-doctrine/skills",
 )
 DEFAULT_MAX_ACTIVE_SKILLS = 200
 MAX_DESCRIPTION_CHARS = 1024
@@ -86,8 +92,9 @@ def parse_args() -> argparse.Namespace:
         dest="roots",
         help=(
             "Active catalog root relative to the repository root. "
-            "May be supplied more than once. Defaults to skills, doctrine/skills, "
-            "and 00-meta-initialization."
+            "May be supplied more than once. Defaults to skills and "
+            "00-meta-initialization. doctrine/skills is retained reference "
+            "material, not part of this engine's active catalog."
         ),
     )
     parser.add_argument(
@@ -108,6 +115,15 @@ def active_roots(root_args: list[str] | None) -> list[Path]:
     roots = root_args if root_args else list(DEFAULT_ACTIVE_ROOTS)
     resolved: list[Path] = []
     for raw in roots:
+        path = (REPO_ROOT / raw).resolve()
+        if path.exists():
+            resolved.append(path)
+    return resolved
+
+
+def reference_roots() -> list[Path]:
+    resolved: list[Path] = []
+    for raw in DEFAULT_REFERENCE_ROOTS + DEFAULT_EXTERNAL_ENGINE_ROOTS:
         path = (REPO_ROOT / raw).resolve()
         if path.exists():
             resolved.append(path)
@@ -335,16 +351,34 @@ def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
 
     skill_dir_names = {r.path.parent.name for r in records}
     skill_dir_paths = {r.path.parent.relative_to(REPO_ROOT).as_posix() for r in records}
+    retained_dir_names: set[str] = set()
+    retained_dir_paths: set[str] = set()
+    for root in reference_roots():
+        for skill_md in root.rglob("SKILL.md"):
+            retained_dir_names.add(skill_md.parent.name)
+            try:
+                retained_dir_paths.add(skill_md.parent.relative_to(REPO_ROOT).as_posix())
+            except ValueError:
+                retained_dir_paths.add(skill_md.parent.as_posix())
+
     for src, target in sorted(routes.items()):
         target = str(target).strip()
+        target_slug = Path(target.replace("\\", "/")).name
         resolves = (
             target in skill_dir_paths
+            or target in retained_dir_paths
             or (REPO_ROOT / target / "SKILL.md").exists()
             or (("/" not in target) and target in skill_dir_names)
+            or target_slug in retained_dir_names
         )
         if not resolves:
             findings.append(
-                Finding("error", "alias-dangling", Path(src), f"routes to `{target}` which is not an active skill")
+                Finding(
+                    "error",
+                    "alias-dangling",
+                    Path(src),
+                    f"routes to `{target}` which is not an active or retained reference skill",
+                )
             )
     return findings
 
@@ -366,6 +400,9 @@ def main() -> int:
     print(f"- repo: {REPO_ROOT}")
     print("- active roots:")
     for root in roots:
+        print(f"  - {relpath(root)}")
+    print("- retained reference roots:")
+    for root in reference_roots():
         print(f"  - {relpath(root)}")
     print(f"- active SKILL.md files: {len(records)}")
     print(f"- max active SKILL.md files: {args.max_active}")

@@ -36,7 +36,7 @@ from pathlib import Path
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-ACTIVE_ROOTS = ("skills", "doctrine/skills", "00-meta-initialization")
+ACTIVE_ROOTS = ("skills", "00-meta-initialization")
 FIXTURES = REPO_ROOT / "scripts" / "routing_fixtures.yml"
 FRONTMATTER_RE = re.compile(r"^\ufeff?---\r?\n(.*?)\r?\n---", re.DOTALL)
 TOKEN_RE = re.compile(r"[a-z0-9]+")

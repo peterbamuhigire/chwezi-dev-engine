@@ -4,7 +4,7 @@ This repository is a curated catalog of reusable AI skills: compact execution
 guides that help agents and humans do higher-quality work with less repeated
 setup. The skills cover software engineering, AI systems, SaaS operations,
 security, product work, mobile platform code, architecture, documentation
-workflows, and canonical finance doctrine.
+workflows, and finance-doctrine orchestration.
 
 The catalog is designed to be routed by name. A small active surface keeps
 skill selection reliable, while deeper references stay available without making
@@ -56,14 +56,18 @@ Active skills are `SKILL.md` files under these roots:
 | Root | Purpose |
 | --- | --- |
 | [`skills/`](skills/) | Main active catalog for engineering, AI, SaaS, mobile, security, UX, product, and operations. |
-| [`doctrine/skills/`](doctrine/skills/) | Canonical finance and accounting doctrine for IFRS, controls, close, audit, payroll, inventory, reporting, and finance UX. |
 | [`00-meta-initialization/`](00-meta-initialization/) | SDLC documentation initialization and new-project entrypoints. |
+
+`doctrine/skills/` remains in this repository as retained reference material.
+It is not part of this engine's active catalog. Current finance/accounting
+doctrine routes through the external `chwezi-accounting-doctrine` engine from
+the global routing table.
 
 Current guardrail baseline:
 
 | Metric | Value |
 | --- | ---: |
-| Active `SKILL.md` files (`skills/`) | 139 |
+| Active `SKILL.md` files (`skills/` + `00-meta-initialization/`) | 142 |
 | Target active catalog size | 150-170 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
@@ -98,7 +102,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 | Security and compliance | Web app audits, code safety, network security, Linux hardening, DPIA work, and AI security controls. |
 | Frontend engineering | React, Next.js, Tailwind, frontend performance, image/asset optimization, and PWA/offline patterns. (Design/typography/UI/UX skills moved to the `design-system-skills` engine — see "Architecture & cross-cutting engines".) |
 | Mobile | Android, iOS, Kotlin Multiplatform, mobile persistence, mobile UX, platform capabilities, app quality, and release workflows. |
-| Finance doctrine | Accounting engines, finance audits, bank and mobile money reconciliation, close, controls, reporting, IFRS, payroll, inventory, and finance UI patterns. |
+| Finance doctrine | Local orchestration skills plus external `chwezi-accounting-doctrine` for accounting, audit, controls, close, reporting, IFRS, payroll, inventory, and finance UX doctrine. |
 | Documentation and operations | SDLC documentation, project requirements, professional document output, catalog maintenance, skill writing, and update records. |
 | Consulting delivery and bid control | Control-room operations, document/spreadsheet tooling readiness, and red-team quality gates for high-stakes bids, donor submissions, workbooks, dashboards, and consulting deliverables. |
 | Quality guardrails (cross-cutting) | `anti-ai-slop` is a real-time guardrail applied continuously on every generated output. `ai-slop-audit` runs after each major iteration and auto-runs on any request to analyse/review/audit/de-slop any artefact type (app, website, business plan, SRS/spec, proposal, blog, social post, document, image, or codebase); a grade-F verdict blocks progression. |
@@ -125,9 +129,10 @@ entrypoints that should no longer compete for routing are retained as
 - [`docs/skill-routing-index.md`](docs/skill-routing-index.md) for human-readable policy.
 - [`docs/skill-aliases.yml`](docs/skill-aliases.yml) for machine-readable routing.
 
-Finance aliases route to `doctrine/skills/` first. Root-level finance skills
-remain active only when they add implementation or orchestration behavior beyond
-canonical doctrine.
+Finance aliases may resolve to retained `doctrine/skills/` reference material,
+but active finance doctrine should be loaded from the external
+`chwezi-accounting-doctrine` engine. Root-level finance skills remain active
+only when they add implementation or orchestration behavior beyond doctrine.
 
 ## Repository Map
 
@@ -145,7 +150,9 @@ canonical doctrine.
 - Do not delete or move skill directories casually.
 - Deactivate legacy entrypoints by renaming `SKILL.md` to `ALIAS.md` and adding
   a route in `docs/skill-aliases.yml`.
-- Keep finance and accounting doctrine canonical under `doctrine/skills/`.
+- Keep finance and accounting doctrine in the external
+  `chwezi-accounting-doctrine` engine; keep local `doctrine/skills/` as retained
+  reference material only.
 - Keep Markdown files below 500 lines where practical.
 - Use ASCII unless an existing file requires another character set.
 - Preserve user edits and inspect the worktree before modifying files.
