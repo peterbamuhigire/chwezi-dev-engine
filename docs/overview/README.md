@@ -2,7 +2,7 @@
 
 This repository is a working catalog of reusable AI-assistant skills and
 supporting documentation. It combines implementation guidance, product strategy,
-security patterns, finance doctrine, mobile development guidance, SDLC
+security patterns, finance-doctrine orchestration, mobile development guidance, SDLC
 documentation templates, and catalog maintenance tooling.
 
 ## What Is Here
@@ -10,7 +10,7 @@ documentation templates, and catalog maintenance tooling.
 | Area | Location | Notes |
 | --- | --- | --- |
 | Main skill catalog | `skills/` | Broad software, AI, SaaS, mobile, security, UX, and product skills. |
-| Finance doctrine | `doctrine/skills/` | Canonical accounting, audit, reporting, IFRS, controls, and close guidance. |
+| Finance doctrine | External `chwezi-accounting-doctrine`; local `doctrine/skills/` reference material | Canonical accounting, audit, reporting, IFRS, controls, and close guidance is loaded from the external engine. |
 | SDLC initialization | `00-meta-initialization/` | Entry-point project documentation workflow and examples. |
 | Routing docs | `docs/skill-routing-index.md` | Human-readable consolidation and routing policy. |
 | Alias data | `docs/skill-aliases.yml` | Machine-readable skill alias map. |
@@ -34,15 +34,16 @@ documentation templates, and catalog maintenance tooling.
 
 ## Current Catalog Policy
 
-- Active roots are `skills/`, `doctrine/skills/`, and `00-meta-initialization/`.
+- Active roots are `skills/` and `00-meta-initialization/`.
 - Target active catalog size is 150-170 skills.
 - The guardrail hard cap is 200 active `SKILL.md` files.
-- Finance doctrine is canonical in `doctrine/skills/`.
-- Current active catalog size is 173 skills (collision-checked: 0 true duplicates).
+- Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
+  engine; local `doctrine/skills/` is retained reference material.
+- Current active catalog size is 142 skills.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated
-  and route to canonical `doctrine/skills/` targets.
+  and route to retained finance references or the external finance engine.
 
 ## Enforced Invariants
 

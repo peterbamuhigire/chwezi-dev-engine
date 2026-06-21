@@ -4,12 +4,17 @@ updated: 2026-05-17
 active_skill_policy:
   active_roots:
     - skills
-    - doctrine/skills
     - 00-meta-initialization
+  retained_reference_roots:
+    - doctrine/skills
+  external_reference_engines:
+    - design-system-skills
+    - chwezi-accounting-doctrine
   hard_cap: 200
   target_range: 150-170
-  current_active_skill_count: 173
-  finance_doctrine_canonical: true
+  current_active_skill_count: 142
+  finance_doctrine_external: true
+  local_doctrine_reference_only: true
   do_not_move_or_delete_skill_directories_from_registry_work: true
 inactive_alias_file: ALIAS.md
 finance_canonical_duplicates:

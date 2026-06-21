@@ -24,7 +24,9 @@ accurate, portable, easy to route, and below the active skill cap.
 
 - Prefer `rg` and `rg --files` for searches.
 - Do not move, delete, or rename skill directories as part of routine docs work.
-- Treat `doctrine/skills/` as canonical for finance and accounting doctrine.
+- Treat `doctrine/skills/` as retained finance reference material. The active
+  finance doctrine engine is `chwezi-accounting-doctrine`, resolved through the
+  global engine-routing table.
 - Preserve user edits. If the worktree is dirty, inspect before editing.
 - Keep Markdown files below 500 lines where practical.
 - Use ASCII unless the existing file already requires another character set.
@@ -44,11 +46,11 @@ accurate, portable, easy to route, and below the active skill cap.
 | Root | Meaning |
 | --- | --- |
 | `skills/` | Main active skills. |
-| `doctrine/skills/` | Canonical finance doctrine skills. |
 | `00-meta-initialization/` | SDLC documentation entry skills. |
 
-An active skill is a `SKILL.md` under one of those roots. Reference material
-should not be named `SKILL.md`.
+An active skill is a `SKILL.md` under one of those roots. `doctrine/skills/`
+is retained reference material for local continuity and is not counted by this
+engine's guardrails.
 
 Inactive aliases are kept as `ALIAS.md` in the original skill directory and
 must be routed through `docs/skill-aliases.yml`.
@@ -61,10 +63,10 @@ Run this after catalog routing or skill frontmatter changes:
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 ```
 
-Known baseline as of 2026-05-30 (verify with the script; do not trust this prose):
+Known baseline as of 2026-06-21 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 171.
-- Target active catalog size: 150-170 (1 over soft target, well under the 200 cap).
+- Active `SKILL.md` files: 142.
+- Target active catalog size: 150-170 (below soft target and well under the 200 cap).
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links

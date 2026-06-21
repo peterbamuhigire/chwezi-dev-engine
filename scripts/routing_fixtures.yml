@@ -68,18 +68,18 @@ fixtures:
   # --- Frontend / UX ---
   - task: "Set up a Tailwind design system with tokens and responsive layout"
     expect: tailwind-css
-  - task: "Apply a rules-based visual UI system for colour, typography and spacing"
-    expect: practical-ui-design
-  - task: "Design accessible, resilient forms with validation and error states"
-    expect: form-ux-design
+  - task: "Improve frontend rendering performance, bundle size and asset loading"
+    expect: frontend-performance
+  - task: "Build a React application with idiomatic hooks, components and state"
+    expect: react-development
 
   # --- Mobile ---
   - task: "Architect an Android app with offline-first Room persistence and sync"
     expect: android-data-persistence
   - task: "Build offline-capable local storage and sync for an iOS app with SwiftData"
     expect: ios-data-persistence
-  - task: "Design the iOS app UI following Apple Human Interface Guidelines"
-    expect: ios-ui-ux-design
+  - task: "Implement an iOS app feature in Swift using SwiftUI, async await and Xcode project conventions"
+    expect: ios-development
 
   # --- Security / compliance ---
   - task: "Audit a web application for OWASP vulnerabilities and insecure code"

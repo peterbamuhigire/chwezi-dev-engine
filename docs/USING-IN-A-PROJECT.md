@@ -24,8 +24,9 @@ the failure mode this guide exists to prevent.
 | Copy a single skill in | Almost never | Forks the skill; it goes stale and drifts from the gate. Avoid. |
 
 Default to a submodule for a repo you own, or a sibling clone for ad-hoc work.
-Expose only the active roots: `skills/`, `doctrine/skills/`, and
-`00-meta-initialization/`. Do not expose `docs/`, `blog-posts/`, or
+Expose only the active roots: `skills/` and `00-meta-initialization/`. Load
+finance doctrine from the separate `chwezi-accounting-doctrine` engine when
+needed. Do not expose `docs/`, `blog-posts/`, or
 `book-extractions/` to the working agent - that is maintainer material and only
 adds routing noise.
 
@@ -50,11 +51,12 @@ If you are routing manually, start from `docs/skill-routing-index.md` (old slug
 |---|---|
 | Cite the skill that informed a decision ("per `database-design-engineering`") | Paste the skill's prose into the target repo's docs |
 | Produce the *artifact* (ADR, migration plan, threat model) into the target repo | Copy the *template* file in as if it were project content |
-| Keep finance rules in `doctrine/skills/` and reference them | Duplicate IFRS doctrine into the app's codebase |
+| Keep finance rules in `chwezi-accounting-doctrine` and reference them | Duplicate IFRS doctrine into the app's codebase |
 | Let the agent read the skill each run | Fork a skill into the project and let it drift |
 
-Finance, accounting, and statutory doctrine is canonical under
-`doctrine/skills/`. Deliverables reference it; they do not embed it.
+Finance, accounting, and statutory doctrine is canonical in the external
+`chwezi-accounting-doctrine` engine. Deliverables reference it; they do not
+embed it.
 
 ## What good application looks like
 

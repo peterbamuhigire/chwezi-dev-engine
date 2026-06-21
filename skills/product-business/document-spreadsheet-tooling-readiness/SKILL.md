@@ -1,6 +1,6 @@
 ---
 name: document-spreadsheet-tooling-readiness
-description: Use before promising, generating, editing, converting, or validating DOCX, PDF, XLSX, spreadsheets, application registers, scoring matrices, price schedules, budgets, dashboards, reports, or annexes.
+description: Check whether this machine can generate and validate Word, PDF, Excel, DOCX, XLSX, spreadsheet, workbook, application register, scoring matrix, price schedule, budget, dashboard, report, proposal, or annex files before promising them.
 metadata:
   portable: true
   compatible_with:

@@ -4,7 +4,7 @@
 
 This repository is a curated AI skills and documentation engine. It helps
 coding agents and human operators select reusable workflows for software
-engineering, AI systems, SaaS operations, finance doctrine, mobile development,
+engineering, AI systems, SaaS operations, finance-doctrine orchestration, mobile development,
 security, UX, and SDLC documentation.
 
 ## Primary Users
@@ -39,9 +39,9 @@ security, UX, and SDLC documentation.
 
 ## Current Risks
 
-- The active skill count is 173, three above the 150-170 soft target; future
-  additions need alias discipline. The CI guardrail (200 hard cap) and the
-  collision detector keep this from becoming routing noise.
+- The active skill count is 142, below the 150-170 soft target; future additions
+  still need alias discipline. The CI guardrail (200 hard cap) and the collision
+  detector keep this from becoming routing noise.
 - Inactive aliases must stay documented in `docs/skill-aliases.yml`; the
   alias-integrity check now fails CI on a stale or unrouted alias, so this is
   caught automatically rather than by memory.
