@@ -3,12 +3,38 @@
 This repository is a curated catalog of reusable AI skills: compact execution
 guides that help agents and humans do higher-quality work with less repeated
 setup. The skills cover software engineering, AI systems, SaaS operations,
-security, product work, UX, mobile development, documentation workflows, and
-canonical finance doctrine.
+security, product work, mobile platform code, architecture, documentation
+workflows, and canonical finance doctrine.
 
 The catalog is designed to be routed by name. A small active surface keeps
 skill selection reliable, while deeper references stay available without making
 every topic an active entrypoint.
+
+## Architecture & cross-cutting engines (updated 2026-06-21)
+
+- **Relocated.** This engine (`skills-web-dev`, the engineering catalog) moved on
+  2026-06-21 from `C:\Users\Peter\.claude\skills` to `C:\wamp64\www\skills-web-dev`.
+- **No native discovery.** No skill engine — this one included — is natively
+  discovered by Claude Code anymore. ALL engines are consulted via the user's
+  global routing table (`~/.claude/CLAUDE.md` / `AGENTS.md`) by globbing their
+  `SKILL.md` files directly (read those files; do not rely on the Skill tool).
+- **What this engine keeps.** Engineering skills only: backend and databases,
+  devops and cloud, security, languages, mobile platform code, architecture, AI
+  systems, SaaS, product, documentation, and finance-doctrine orchestration.
+- **Design moved out.** ALL design / typography / UI/UX / visual-formatting
+  skills plus the anti-AI-slop doctrine now live in the cross-cutting
+  **`design-system-skills`** engine (`C:\wamp64\www\design-system-skills`). It is
+  **referenced, not mirrored** — resolve its path per device from the global
+  routing table and consult it IN ADDITION to this engine for any
+  presentation-layer work. Skills migrated out of here include the frontend-ux
+  design cluster (`design-audit`, `healthcare-ui-design`, `motion-design`,
+  `practical-ui-design`, `webapp-gui-design`, `interaction-design-patterns`,
+  `enterprise-ux-process`), `ai-agent-ux`, `ai-output-design`,
+  `android-ui-ux-design`, `ios-ui-ux-design`, and the dedup canonicals
+  `data-visualization`, `form-ux-design`, and `premium-ui-ux-design`.
+- **Finance is referenced, not mirrored.** Canonical finance/accounting doctrine
+  (`chwezi-accounting-doctrine`) is a separate cross-cutting engine, resolved per
+  device from the global routing table and consulted alongside this one.
 
 ## Why These Skills Matter
 
@@ -37,7 +63,7 @@ Current guardrail baseline:
 
 | Metric | Value |
 | --- | ---: |
-| Active `SKILL.md` files | 178 |
+| Active `SKILL.md` files (`skills/`) | 139 |
 | Target active catalog size | 150-170 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
@@ -46,8 +72,10 @@ Current guardrail baseline:
 
 The guardrail script is the source of truth for these numbers; the table above is
 a convenience snapshot. Rerun the report after any catalog change rather than
-trusting the prose. The active count sits 8 above the 150-170 soft target (well
-under the 200 hard cap). Routing quality is no longer judged by raw count alone:
+trusting the prose. The active `skills/` count now sits below the 150-170 soft
+target after the 2026-06-21 migration of design/UI/UX skills to the
+`design-system-skills` engine (well under the 200 hard cap). Routing quality is
+no longer judged by raw count alone:
 `scripts/routing_smoke_test.py` measures routing precision against a task fixture
 (currently precision@1 83%, precision@3 100%) and its `--collisions` mode
 confirms zero genuine duplicate skills - every remaining high-similarity pair is
@@ -68,7 +96,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 | Software engineering | Architecture, APIs, C#/.NET, TypeScript, JavaScript, PHP, Python, Node.js, testing, validation, release engineering, and reliability. |
 | SaaS and product | Multi-tenancy, entitlements, pricing, billing, onboarding, metrics, sales operations, product discovery, and product-led growth. |
 | Security and compliance | Web app audits, code safety, network security, Linux hardening, DPIA work, and AI security controls. |
-| Frontend and UX | React, Next.js, Tailwind, app GUI design, forms, interaction patterns, accessibility, premium UI, and motion. |
+| Frontend engineering | React, Next.js, Tailwind, frontend performance, image/asset optimization, and PWA/offline patterns. (Design/typography/UI/UX skills moved to the `design-system-skills` engine — see "Architecture & cross-cutting engines".) |
 | Mobile | Android, iOS, Kotlin Multiplatform, mobile persistence, mobile UX, platform capabilities, app quality, and release workflows. |
 | Finance doctrine | Accounting engines, finance audits, bank and mobile money reconciliation, close, controls, reporting, IFRS, payroll, inventory, and finance UI patterns. |
 | Documentation and operations | SDLC documentation, project requirements, professional document output, catalog maintenance, skill writing, and update records. |
