@@ -15,8 +15,13 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | `00-meta-initialization/` | Entry-point workflow for SDLC documentation setup. |
 | `docs/skill-routing-index.md` | Human routing map for consolidated and legacy skill names. |
 | `docs/skill-aliases.yml` | Machine-readable alias registry. |
+| `docs/source-registers/` | Dated official/current sources for volatile AI, Apple, cloud, security, and framework guidance. |
+| `docs/quality-gates/` | Release-blocking gates and engineering anti-slop governance. |
+| `docs/world-class-exemplars/` | Shared running example and benchmark reference outputs. |
+| `examples/full-stack-saas-reference/` | End-to-end SaaS evidence pack exercising architecture, API, security, reliability, and release skills. |
+| `templates/delivery-dod/` | Shared delivery evidence pack template for implementation outputs. |
 | `scripts/skill_catalog_guardrails.py` | Static guardrail scan: active count, duplicate names, frontmatter, UTF-8, description length, `SKILL.md` line count, broken `references/`/`templates/` links, and alias integrity (unrouted, stale, dangling). |
-| `scripts/routing_smoke_test.py` + `scripts/routing_fixtures.yml` | Routing precision measurement: scores fixtured tasks against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |
+| `scripts/routing_smoke_test.py` + fixture YAML files | Routing precision measurement: scores fixtured tasks from `scripts/routing_fixtures.yml` and `tests/routing/edge-fixtures.yml` against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |
 | `.github/workflows/skill-guardrails.yml` | CI: runs both gates on every push and PR touching skills, doctrine, aliases, fixtures, or the scripts. |
 | `skills/sdlc-meta/skill-composition-standards/references/` | Artifact templates (ADR, entity model, threat model, release/rollback plan, runbook, test plan) and the closing Delivery Definition of Done pack. |
 | `skills/ios/` and `skills/mobile-cross/` | Apple/mobile implementation guidance, including WWDC26-era Xcode, Swift, Foundation Models/Core AI, App Intents, StoreKit, PWA/Safari, KMP, release, and security references. |
@@ -62,8 +67,9 @@ on every push and PR and fail the build on a violation:
 - `skill_catalog_guardrails.py` - structural integrity (count, duplicates,
   frontmatter, line count, description length, broken references, alias
   integrity).
-- `routing_smoke_test.py` - routing precision against `routing_fixtures.yml`;
-  catches descriptions drifting into ambiguity.
+- `routing_smoke_test.py` - routing precision against `routing_fixtures.yml`
+  and `tests/routing/edge-fixtures.yml`; catches descriptions drifting into
+  ambiguity.
 
 Implementation work closes with the Delivery Definition of Done pack
 (`skill-composition-standards/references/delivery-definition-of-done.md`), which

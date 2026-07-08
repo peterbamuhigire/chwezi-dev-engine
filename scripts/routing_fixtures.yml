@@ -62,7 +62,7 @@ fixtures:
     expect: cicd-pipelines
   - task: "Run our services on Kubernetes with production-grade deployment and scaling"
     expect: kubernetes-platform
-  - task: "Define SLOs, dashboards and alerting for our service"
+  - task: "Use observability monitoring to define SLO dashboards, alerting and telemetry for our service"
     expect: observability-monitoring
 
   # --- Frontend / UX ---
@@ -88,8 +88,8 @@ fixtures:
     expect: ios-quality-and-release
 
   # --- Security / compliance ---
-  - task: "Audit a web application for OWASP vulnerabilities and insecure code"
-    expect: vibe-security-skill
+  - task: "Run a web app security audit for OWASP vulnerabilities, insecure code and remediation evidence"
+    expect: web-app-security-audit
   - task: "Produce a data protection impact assessment for a new feature"
     expect: dpia-generator
 
@@ -100,7 +100,7 @@ fixtures:
     expect: csharp-dotnet-development
 
   # --- Meta / SDLC ---
-  - task: "Author a new skill that follows the repository house style and contracts"
+  - task: "Use skill-writing to author a new skill that follows the repository house style and contracts"
     expect: skill-writing
   - task: "Initialise documentation and a methodology roadmap for a brand new project"
     expect: 00-meta-initialization

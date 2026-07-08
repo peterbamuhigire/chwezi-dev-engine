@@ -23,6 +23,10 @@ presentation-layer Apple UI guidance lives in the external
 | SDLC initialization | `00-meta-initialization/` | Entry-point project documentation workflow and examples. |
 | Routing docs | `docs/skill-routing-index.md` | Human-readable consolidation and routing policy. |
 | Alias data | `docs/skill-aliases.yml` | Machine-readable skill alias map. |
+| Source registers | `docs/source-registers/` | Dated official/current references for volatile platform, AI, security, and framework facts. |
+| Quality gates | `docs/quality-gates/` | Release blockers and engineering anti-slop governance. |
+| Full workflow example | `examples/full-stack-saas-reference/` | FieldOps Ledger end-to-end SaaS evidence pack. |
+| Delivery templates | `templates/delivery-dod/` | Reusable evidence-pack template for implementation deliverables. |
 | Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
 | CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
@@ -49,7 +53,7 @@ presentation-layer Apple UI guidance lives in the external
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
 - Current active catalog size is 142 skills.
-- Current routing smoke-test baseline is 39 fixtures, precision@1 92%, and
+- Current routing smoke-test baseline is 117 fixtures, precision@1 97%, and
   precision@3 100%.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.

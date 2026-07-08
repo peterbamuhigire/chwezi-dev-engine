@@ -27,6 +27,7 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-07-08 | July 2026 world-class upgrade build | Added root router, source register, release gates, FieldOps Ledger exemplar, delivery evidence-pack template, empty-directory disposition, research integration log, book knowledge map, and 117-fixture routing smoke baseline at precision@1 97% / precision@3 100%. |
 | 2026-06-21 | WWDC26 Apple platform skill modernization | Updated active iOS/mobile skills and companion design-system Apple UI guidance for Xcode 27, Swift 6.4, Foundation Models/Core AI, App Intents/Siri, Device Hub, Safari/WebKit 27, SF Symbols 8, and release/security gates. |
 | 2026-06-21 | Active catalog root repair | Removed `doctrine/skills` from default active scanning, kept it as retained reference material, validated aliases against retained/external engines, and brought guardrails to 0 findings at 142 active skills. |
 | 2026-06-13 | GIZ consulting delivery controls | Added `consulting-delivery-control-room`, `document-spreadsheet-tooling-readiness`, and `world-class-bid-red-team-and-delivery-qc` to support high-stakes bid control, validated file-output readiness, and red-team release gates across engines. |

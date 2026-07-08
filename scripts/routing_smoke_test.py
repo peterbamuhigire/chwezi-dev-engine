@@ -37,7 +37,10 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ACTIVE_ROOTS = ("skills", "00-meta-initialization")
-FIXTURES = REPO_ROOT / "scripts" / "routing_fixtures.yml"
+FIXTURE_FILES = (
+    REPO_ROOT / "scripts" / "routing_fixtures.yml",
+    REPO_ROOT / "tests" / "routing" / "edge-fixtures.yml",
+)
 FRONTMATTER_RE = re.compile(r"^\ufeff?---\r?\n(.*?)\r?\n---", re.DOTALL)
 TOKEN_RE = re.compile(r"[a-z0-9]+")
 
@@ -118,7 +121,10 @@ def rank(task: str, vectors, vec) -> list[tuple[str, float]]:
 def run_fixtures(report_only: bool) -> int:
     signals = load_skills()
     vectors, _idf, vec = build_index(signals)
-    fixtures = yaml.safe_load(FIXTURES.read_text(encoding="utf-8"))["fixtures"]
+    fixtures = []
+    for fixture_file in FIXTURE_FILES:
+        if fixture_file.exists():
+            fixtures.extend(yaml.safe_load(fixture_file.read_text(encoding="utf-8"))["fixtures"])
 
     p1 = p3 = 0
     failures: list[str] = []

@@ -1,0 +1,179 @@
+# Edge routing fixtures for near-collision and high-risk neighbour skills.
+#
+# Loaded by scripts/routing_smoke_test.py alongside scripts/routing_fixtures.yml.
+# The goal is >= 100 realistic tasks with precision@1 >= 95% and precision@3 100%.
+
+fixtures:
+  # AI and agent systems
+  - task: "Define model gateway routing, provider fallbacks, request logging and tenant-safe LLM access"
+    expect: ai-model-gateway
+  - task: "Design human approval gates for agent actions that can spend money or change customer data"
+    expect: ai-agent-tooling-and-hitl
+  - task: "Set step budgets, spending limits and blast-radius controls for autonomous agents"
+    expect: ai-agent-governance-and-limits
+  - task: "Create replayable traces and evaluation evidence for an AI agent workflow"
+    expect: ai-agent-observability-evaluation
+  - task: "Use AI incident response for an LLM outage, customer communication and rollback after bad AI output ships"
+    expect: ai-incident-response
+  - task: "Design prompt templates and structured prompts for reliable LLM output"
+    expect: ai-prompt-engineering
+  - task: "Plan a controlled rollout and experiment for an AI feature with holdout metrics"
+    expect: ai-feature-rollout-and-experimentation
+  - task: "Use ai-feature-spec to create a feature specification for an AI product capability"
+    expect: ai-feature-spec
+  - task: "Design commercial operations for agent billing by completed tasks and refund policy"
+    expect: ai-agent-commercial-operations
+  - task: "Define customer SLA promises for an AI agent service"
+    expect: ai-agent-sla-and-customer-commitments
+
+  # Architecture, API, and data
+  - task: "Use distributed systems patterns for consistency, queues, retries and failure modes"
+    expect: distributed-systems-patterns
+  - task: "Create GraphQL schema patterns with resolver boundaries and authorization"
+    expect: graphql-patterns
+  - task: "Audit ecommerce platform requirements for checkout, catalog, payment and fulfillment"
+    expect: ecommerce-platform-audit-requirements
+  - task: "Define a validation contract with evidence categories and release gates"
+    expect: validation-contract
+  - task: "Use database design engineering for tables, constraints, indexes and core product entities"
+    expect: database-design-engineering
+  - task: "Plan database reliability, replication lag, backup restore and operational failure handling"
+    expect: database-reliability
+  - task: "Tune MySQL schema design and query patterns for application development"
+    expect: mysql-engineering
+  - task: "Operate MySQL backups, replication, slow query logs and production maintenance"
+    expect: mysql-operations
+  - task: "Write PostgreSQL schema, indexes, functions and advanced SQL for a product backend"
+    expect: postgresql-engineering
+  - task: "Run PostgreSQL vacuum, backups, replication, monitoring and operational maintenance"
+    expect: postgresql-operations
+
+  # DevOps and reliability
+  - task: "Design cloud architecture with environments, networking, managed services and deployment pattern"
+    expect: cloud-architecture
+  - task: "Create deployment release plan, rollback plan and promotion gates"
+    expect: deployment-release-engineering
+  - task: "Build a Docker development environment with compose services and local dependencies"
+    expect: docker-development
+  - task: "Write infrastructure as code modules with state management and review gates"
+    expect: infrastructure-as-code
+  - task: "Use reliability engineering for service reliability objectives, error budgets and SRE release decisions"
+    expect: reliability-engineering
+  - task: "Create observability dashboards, logs, traces and alerts for production services"
+    expect: observability-monitoring
+
+  # Frontend and mobile
+  - task: "Build a Next.js App Router application with server components and route handlers"
+    expect: nextjs-app-router
+  - task: "Use image compression to compress uploaded images and define quality metrics for frontend assets"
+    expect: image-compression
+  - task: "Write UX microcopy, empty states and form completion content"
+    expect: ux-content-strategy
+  - task: "Build an Avalonia desktop application with MVVM patterns"
+    expect: avalonia-desktop-development
+  - task: "Implement Android features with Kotlin, app architecture and platform APIs"
+    expect: android-development
+  - task: "Write test-driven Android code with unit and UI tests"
+    expect: android-tdd
+  - task: "Build iOS monetization with StoreKit subscriptions and server notifications"
+    expect: ios-monetization
+  - task: "Secure iOS app data with Keychain, App Attest and authorization rules"
+    expect: ios-security-and-rbac
+  - task: "Build Kotlin Multiplatform shared mobile code"
+    expect: kmp-development
+  - task: "Design a progressive web app with offline-first caching and sync"
+    expect: pwa-offline-first
+
+  # Languages
+  - task: "Build modern JavaScript modules with async code and browser APIs"
+    expect: javascript-modern
+  - task: "Create Node.js backend services with routing, workers and production logging"
+    expect: nodejs-development
+  - task: "Modernize PHP code with OOP, security, database access and testing"
+    expect: php-modern-standards
+  - task: "Build Python ETL pipelines with validation, orchestration and data quality checks"
+    expect: python-data-pipelines
+  - task: "Build predictive machine learning in Python for forecasting or classification"
+    expect: python-ml-predictive
+  - task: "Write production Python with typing, packaging, logging, testing and security"
+    expect: python-modern-standards
+  - task: "Build a full-stack TypeScript app with backend and frontend contracts"
+    expect: typescript-full-stack
+
+  # SaaS and product
+  - task: "Design modular SaaS architecture with modules, extension points and tenant-aware boundaries"
+    expect: modular-saas-architecture
+  - task: "Design a multi-tenant SaaS with tenant context propagation and isolation"
+    expect: multi-tenant-saas-architecture
+  - task: "Build a SaaS accounting system with operational events and ledger handoff"
+    expect: saas-accounting-system
+  - task: "Create SaaS admin backoffice tooling for support, operations and tenant management"
+    expect: saas-admin-backoffice-tooling
+  - task: "Define SaaS architecture strategy, deployment models and maturity roadmap"
+    expect: saas-architecture-strategy
+  - task: "Calculate SaaS business metrics like MRR, ARR, churn and expansion"
+    expect: saas-business-metrics
+  - task: "Design SaaS lifecycle email orchestration for onboarding and retention"
+    expect: saas-lifecycle-email-orchestration
+  - task: "Design SaaS sales organization structure, pipeline roles and operating cadence"
+    expect: saas-sales-organization
+  - task: "Use saas-seeder to seed a SaaS starter project with architecture defaults and production conventions"
+    expect: saas-seeder
+  - task: "Integrate Stripe payments, webhooks and checkout behavior"
+    expect: stripe-payments
+
+  # Product-business and docs
+  - task: "Specify a BDS intake and monitoring system with users, workflows and reporting"
+    expect: bds-intake-and-monitoring-system-spec
+  - task: "Use content-writing to write blog or long-form content using the catalog's editorial standards"
+    expect: content-writing
+  - task: "Improve customer service quality and measure service outcomes"
+    expect: customer-service-excellence
+  - task: "Use excel-spreadsheets to create a professional spreadsheet with formulas, checks and presentation standards"
+    expect: excel-spreadsheets
+  - task: "Use it-proposal-writing for an IT proposal with methodology, team, workplan and commercial logic"
+    expect: it-proposal-writing
+  - task: "Plan product-led growth onboarding, activation and retention"
+    expect: product-led-growth
+  - task: "Define product strategy, vision and capability roadmap"
+    expect: product-strategy-vision
+  - task: "Create a professional Word document with quality checks"
+    expect: professional-word-output
+  - task: "Use software-business-models to choose a software business model and commercial packaging"
+    expect: software-business-models
+  - task: "Set software pricing strategy and value metric"
+    expect: software-pricing-strategy
+
+  # Security
+  - task: "Run a code safety scan for insecure patterns, dependency risks and secrets"
+    expect: code-safety-scanner
+  - task: "Use linux-security-hardening to harden a Linux server with firewall, SSH, packages and baseline controls"
+    expect: linux-security-hardening
+  - task: "Assess network security, segmentation, firewall rules and exposure"
+    expect: network-security
+  - task: "Audit web app security with OWASP issues and practical remediation"
+    expect: web-app-security-audit
+
+  # Meta
+  - task: "Plan advanced testing strategy across unit, integration, contract and e2e layers"
+    expect: advanced-testing-strategy
+  - task: "Use AI-assisted development while preserving review quality and tests"
+    expect: ai-assisted-development
+  - task: "Use doc-architect to create a documentation architecture for a software project"
+    expect: doc-architect
+  - task: "Set git collaboration workflow, branching, review and merge rules"
+    expect: git-collaboration-workflow
+  - task: "Audit implementation status against claims and evidence"
+    expect: implementation-status-auditor
+  - task: "Clean markdown lint issues and normalize documentation style"
+    expect: markdown-lint-cleanup
+  - task: "Gather and structure project requirements before design"
+    expect: project-requirements
+  - task: "Write complete SDLC documentation for planning, design, testing and deployment"
+    expect: sdlc-documentation
+  - task: "Use skill-safety-audit to audit a skill engine for safety, routing and hallucination risks"
+    expect: skill-safety-audit
+  - task: "Update Claude documentation files and module headers"
+    expect: update-claude-documentation
+  - task: "Apply world-class engineering gates to a software delivery"
+    expect: world-class-engineering
