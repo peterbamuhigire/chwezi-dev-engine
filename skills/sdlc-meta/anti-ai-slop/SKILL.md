@@ -1,13 +1,11 @@
 ---
 name: anti-ai-slop
-description: NON-NEGOTIABLE real-time guardrail. Apply on EVERY generated output (text, document, UI, code, image brief, social post) continuously as you generate AND before it is delivered, so the output cannot be recognised as "AI slop". Carries the verified definition, the seven universal slop markers each paired with an avoidance rule, the banned-vocabulary list, and a ship-gate checklist. Load first; it overrides stylistic preferences.
+description: Use when producing any human-facing artefact. Applies real-time anti-slop controls for specificity, verification, authored intent, hard cases, language, code, UI, and release quality.
 metadata:
   portable: true
   compatible_with:
   - claude-code
-  - Codex
   - codex
-  - generic-agent
   priority: critical
   source: digital-research-engine / ai-slop-detector (2026-06-07), verified per EVIDENCE-AUDIT.md
 ---
@@ -31,8 +29,6 @@ The guardrail that governs **production** — writing/designing/coding so slop n
 
 - The artefact being produced and its output type (so the right domain block applies).
 - Any verifiable facts, names, numbers, citations, packages, or APIs the artefact references.
-<!-- dual-compat-end -->
-
 ## Real-time application (this is a LIVE constraint, not only a final gate)
 
 Apply these rules **continuously, as you generate** — to every sentence, component, function, slide, or frame at the moment it is written, not only in one pass at the end. The moment you reach for a banned word, a generic placeholder, an unverified figure, or a template default, stop and correct it in place. The ship-gate checklist at the end is the final confirmation, not the first time these rules are consulted. If you are mid-draft and notice slop accumulating, fix it then — do not defer to a cleanup pass.
@@ -107,3 +103,60 @@ If any box is unticked, the output is not ready to ship.
 ## See also
 - `ai-slop-audit` — the detection/evaluation/audit companion (analyse any artefact for slop).
 - The host engine's house-style / language-standards skill (apply on top of this).
+
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Output being produced | yes | Apply the correct domain guardrails |
+| Verifiable facts and dependencies | conditional | Prevent confident wrongness |
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Guarded output | Requesting workflow | Ship gate passes with no fabricated evidence |
+
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Anti-slop ship-gate result | Completed checklist with verification gaps and blocking fixes | Inline release note |
+
+<!-- dual-compat-end -->
+
+## Capability contract
+
+Apply with the capabilities authorised for the parent task. Verification may use search, execution, or network access when available; otherwise mark unverifiable claims and remove unsupported specificity.
+
+## Degraded mode
+
+Fallback when a fact, dependency, citation, or visual property cannot be checked: do not present it as verified. Return the narrowest useful output with the verification gap named.
+
+## Decision rules
+
+| Finding | Action | Failure avoided |
+|---|---|---|
+| Blocking factual, security, dependency, or accessibility defect | Stop and fix | Shipping harmful slop |
+| Generic but non-blocking language | Rewrite or cut | Superficial competence |
+| Specific, verified, purposeful content | Preserve | Destructive over-editing |
+
+## Workflow
+
+Apply the seven guardrails while producing each unit, run the output-type checks, then complete the ship gate before release.
+
+## Quality Standards
+
+Every claim is verified or qualified, every section earns its place, and blocking security, dependency, citation, or accessibility defects stop release.
+
+## Anti-Patterns
+
+- Adding specificity by inventing a number. Fix: verify it or remove it.
+- Keeping a polished paragraph with no decision or evidence. Fix: add substance or cut it.
+- Treating the final audit as the first quality pass. Fix: apply controls during generation.
+- Rewriting an authored phrase merely because it is unusual. Fix: preserve intentional voice.
+- Hiding an unavailable check. Fix: name the verification gap and its consequence.
+
+## References
+
+- `ai-slop-audit` supplies the independent detection and grading pass.

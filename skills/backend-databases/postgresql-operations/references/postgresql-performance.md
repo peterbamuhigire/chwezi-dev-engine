@@ -135,7 +135,7 @@ Nested Loop  (cost=0.43..16.49 rows=3 width=120)
 ```
 Sort  (cost=...) (actual time=...) (actual rows=...) (loops=1)
   Sort Key: created_at
-  Sort Method: external merge  Disk: 48280kB    â† spilling!
+  Sort Method: external merge  Disk: 48280kB    ← spilling!
 ```
 
 Fix: increase `work_mem` for the session or globally:

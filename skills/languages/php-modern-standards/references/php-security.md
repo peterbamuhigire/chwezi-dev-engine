@@ -119,7 +119,7 @@ session.save_path = "/var/lib/php/sessions"
 
 ### Session Fixation & Hijacking Prevention
 
-ðŸ“– **See `references/security-code-patterns.md` for complete SecureSession, InputValidator, OutputEncoder, CsrfGuard, and SecureUpload class implementations.**
+📖 **See `references/security-code-patterns.md` for complete SecureSession, InputValidator, OutputEncoder, CsrfGuard, and SecureUpload class implementations.**
 
 ```php
 // Key patterns (full classes in references/security-code-patterns.md):

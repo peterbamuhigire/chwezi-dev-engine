@@ -87,14 +87,14 @@ Without a circuit breaker, a failing service causes a cascade: all callers wait,
 ### The Three States
 
 ```
-              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              ┌─────────────────────────────┐
               │         CLOSED              │
               │   Normal operation          │
               │   All requests pass through │
               └──────────┬──────────────────┘
                          │ failures > threshold
                          ▼
-              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              ┌─────────────────────────────┐
               │          OPEN               │
               │   Service is failing        │
               │   All requests blocked      │
@@ -102,7 +102,7 @@ Without a circuit breaker, a failing service causes a cascade: all callers wait,
               └──────────┬──────────────────┘
                          │ after timeout, try again
                          ▼
-              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              ┌─────────────────────────────┐
               │       HALF-OPEN             │
               │   One probe request allowed │
               │   Success → CLOSED          │

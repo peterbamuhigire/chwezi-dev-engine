@@ -147,9 +147,9 @@ const dashboard = await loadDashboard(user, permissions);
 /*
 STEP 1 (user data)
   ↓
-STEP 2 (permissions) â† depends on STEP 1
+STEP 2 (permissions) ← depends on STEP 1
   ↓
-STEP 3 (dashboard) â† depends on STEP 1 + STEP 2
+STEP 3 (dashboard) ← depends on STEP 1 + STEP 2
 */
 ```
 
@@ -428,7 +428,7 @@ const [user, products, categories] = await Promise.all([
 // Show parallelization in comments:
 /*
 PARALLELIZATION:
-├─ fetchUser â”€â”€â”
+├─ fetchUser ──┐
 ├─ fetchProducts ──┼─→ All run together (100ms)
 └─ fetchCategories ──┘
 

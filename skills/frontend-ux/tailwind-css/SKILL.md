@@ -1,13 +1,10 @@
 ---
 name: tailwind-css
-description: Tailwind CSS v3 utility-first styling — setup, responsive design, dark
-  mode, event/state modifiers, tailwind.config.js customization (colors, spacing,
-  screens, plugins), @apply and @layer directives, flexbox/grid classes, and best
-  practices. Use...
+description: Use when implementing or reviewing Tailwind CSS styling, responsive layouts, state variants, theme tokens, layers, grids, or build configuration. Use a design-system skill for visual direction and accessibility-wcag for formal accessibility review.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Tailwind CSS v3 utility-first styling — setup, responsive design, dark mode, event/state modifiers, tailwind.config.js customization (colors, spacing, screens, plugins), @apply and @layer directives, flexbox/grid classes, and best practices. Use...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `tailwind-css` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -467,3 +430,33 @@ Usage: `<article class="prose lg:prose-xl">`, `<input class="form-input" />`
 ---
 
 *Source: Bhat — Ultimate Tailwind CSS Handbook (BPB, 2023)*
+
+## Decision rules
+
+| Condition | Choice | Failure avoided |
+|---|---|---|
+| Value is a reusable product token | Add a named theme token | Scattered arbitrary values |
+| Value is a one-off mathematical constraint | Use an arbitrary value | Polluting the theme |
+| Utility sequence repeats with stable semantics | Extract a component | Copy-paste drift |
+
+## Anti-Patterns
+
+- Constructing dynamic fragments such as `bg-${color}-500`. Fix: map to complete class strings.
+- Replacing the default theme accidentally. Fix: extend it unless the design system owns every token.
+- Using `@apply` for every component. Fix: extract only stable repetition.
+- Choosing arbitrary spacing without rationale. Fix: use tokens or a documented proportional constraint.
+- Styling only the default state. Fix: cover focus, disabled, error, loading, empty, and dark states.
+
+## Capability contract
+
+Read and search markup, configuration, and tokens first. Edit only when authorised; execute the existing build, lint, responsive checks, and accessibility checks when available.
+
+## Degraded mode
+
+If the build or rendered interface is unavailable, provide exact changes and mark purge, contrast, responsive, and interaction-state checks as unverified.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Design tokens, responsive layouts, component states, and Tailwind version | yes | Map design to maintainable utilities |
+## Outputs
+- Produce Tailwind implementation with responsive, state, accessibility, and consistency evidence.

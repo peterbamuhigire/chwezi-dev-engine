@@ -1,10 +1,10 @@
 ---
 name: api-design-first
-description: Use when designing or building HTTP APIs — spec-first OpenAPI workflow, REST conventions, versioning, auth model, rate limiting, idempotency keys, error envelope, and observability notes. Produces the OpenAPI contract plus error/auth/idempotency/observability artifacts that frontend, mobile, security, and reliability skills consume. For endpoint-level security review load `vibe-security-skill`; for GraphQL-specific hardening load `graphql-patterns`.
+description: Use when designing HTTP APIs with OpenAPI, versioning, authentication, rate limits, idempotency, error contracts, and observability requirements.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -263,3 +263,8 @@ Detail, status-code mapping, and pagination mechanics live in `references/rest-c
 - [references/skill-deep-dive.md](references/skill-deep-dive.md) — index redirect for the legacy deep-dive; kept for backward compatibility.
 - [references/api-error-handling.md](references/api-error-handling.md), [references/api-pagination.md](references/api-pagination.md), and [references/api-testing-verification.md](references/api-testing-verification.md) - absorbed API specialist entrypoints.
 
+## Capability contract
+Default to contract design and validation. Write specifications or generate clients only when authorised; do not deploy gateways, rotate credentials, or change production routes without approval.
+
+## Degraded mode
+If consumers, traffic evidence, or the current contract are unavailable, produce a read-only draft with assumptions and unresolved compatibility risks; do not claim implementation readiness.

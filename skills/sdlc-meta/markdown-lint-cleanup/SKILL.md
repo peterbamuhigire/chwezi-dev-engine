@@ -1,11 +1,10 @@
 ---
 name: markdown-lint-cleanup
-description: Fix markdown lint warnings by enforcing headings, blank lines around
-  lists, and language-tagged code fences for clean documentation.
+description: Use when fixing Markdown lint failures, heading structure, list spacing, code-fence languages, or local formatting consistency without changing document meaning.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -20,40 +19,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Fix markdown lint warnings by enforcing headings, blank lines around lists, and language-tagged code fences for clean documentation.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `markdown-lint-cleanup` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -154,3 +119,33 @@ php scripts/verify_uom_system.php
 - No markdown lint warnings
 - No content meaning changes
 - Consistent formatting across documents
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Fix is mechanical and meaning-preserving | Apply narrowly |
+| Rule conflicts with repository style | Follow repository configuration |
+| Fix alters meaning | Stop and report separately |
+
+## Capability Contract
+
+Read and search are required. Editing and lint execution require authorisation.
+
+## Degraded Mode
+
+Fallback: without execution, return the patch and name the lint command still required.
+
+## Domain Anti-Patterns
+
+- Rewording prose during formatting cleanup.
+- Renumbering headings without checking links.
+- Guessing a code-fence language.
+- Formatting vendored files unintentionally.
+- Claiming a clean run without evidence.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Markdown scope, lint rules, repository conventions, and protected content | yes | Bound safe cleanup |
+## Outputs
+- Produce cleaned Markdown, lint results, and a note of intentionally retained exceptions.

@@ -4,7 +4,7 @@ description: Use when provisioning or changing cloud infrastructure with Terrafo
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -16,7 +16,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Provisioning or changing cloud infrastructure with Terraform or Ansible — modules, remote state, workspaces, AWS patterns, idempotent Ansible roles, GitOps with ArgoCD/Flux, drift detection, Vault secret injection.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
@@ -41,16 +40,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Preserve existing project conventions unless this skill requires a stronger standard.
 - Prefer deterministic, reviewable steps over tool-specific magic.
 
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
 ## Outputs
 
 - Concrete result fitted to the task: implementation guidance, review findings, ADR-style decisions, templates, or generated artifacts.
 - Explicit assumptions, tradeoffs, or unresolved gaps when context is incomplete.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## References
 
@@ -61,6 +54,33 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 
 ## Why IaC
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Desired resources and environment | yes | Bound change |
+| Existing state and provider versions | yes | Prevent drift damage |
+| Identity and approval policy | yes | Set execution boundary |
+
+## Capability contract
+Author and validate code by default. Apply, destroy, import, state edits, and secret writes require explicit environment authority and a reviewed plan.
+
+## Degraded mode
+If credentials or state are unavailable, run static validation and return an unverified plan checklist; never simulate apply results.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Plan replaces stateful resource | Require recovery plan |
+| Existing resource lacks state ownership | Import or document exception |
+| Secret would enter source or state | Use external secret boundary |
+
+## Domain Anti-Patterns
+- Editing remote state manually. Fix: use supported commands with backup.
+- Applying an unreviewed plan. Fix: approve a saved plan.
+- Hardcoding secrets. Fix: inject references at runtime.
+- Copying divergent environment modules. Fix: share versioned modules.
+- Ignoring drift. Fix: schedule read-only plans.
 
 Snowflake servers — hand-configured, undocumented, irreplaceable — cause outages nobody can recover from. IaC puts environments in version-controlled code, making drift a diffable artifact and rebuilds a routine operation.
 

@@ -1,56 +1,54 @@
 ---
 name: modular-saas-architecture
-description: Build SAAS platforms with pluggable business modules (Advanced Inventory,
-  Restaurant, Pharmacy, etc.) that can be enabled/disabled per tenant without breaking
-  the system. Use when designing modular SAAS features, implementing module toggles...
+description: Use when designing tenant-selectable SaaS modules, dependency contracts, module toggles, lifecycle hooks, or safe enable and disable behaviour.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # Modular SAAS Architecture
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Build SAAS platforms with pluggable business modules (Advanced Inventory, Restaurant, Pharmacy, etc.) that can be enabled/disabled per tenant without breaking the system. Use when designing modular SAAS features, implementing module toggles...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `modular-saas-architecture` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references, examples, documentation` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -359,3 +357,12 @@ UPDATE tbl_franchise_modules SET is_enabled = 0, disabled_at = NOW() WHERE franc
 - [ ] Isolation tests + integration tests
 
 📖 See `references/implementation.md` for full lifecycle code, testing patterns, anti-patterns.
+## Quality Standards
+
+A module is acceptable only when ownership, dependencies, activation state, migrations, tenant isolation, observability, failure containment, and disable behaviour can be tested independently.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Module boundary and lifecycle specification | Platform and feature teams | Dependencies, tenant enablement states, data ownership, hooks, rollback path, and disable semantics are explicit and testable |

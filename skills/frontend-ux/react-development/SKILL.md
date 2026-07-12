@@ -1,12 +1,10 @@
 ---
 name: react-development
-description: 'Comprehensive React patterns and best practices: functional components,
-  all hooks (useState, useEffect, useCallback, useMemo, useRef, useContext, useReducer),
-  custom hooks, state management (local/Context/external), performance optimisation...'
+description: Use when implementing or reviewing React components, hooks, state ownership, forms, rendering performance, error boundaries, or component tests. Use nextjs-app-router for Next.js server boundaries and ux-content-strategy for product content systems.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Comprehensive React patterns and best practices: functional components, all hooks (useState, useEffect, useCallback, useMemo, useRef, useContext, useReducer), custom hooks, state management (local/Context/external), performance optimisation...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `react-development` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -179,3 +143,33 @@ Use that deep dive for:
 - `9. Testing`
 - `10. Anti-Patterns Checklist`
 - `11. Architecture Checklist`
+
+## Decision rules
+
+| Condition | Choice | Failure avoided |
+|---|---|---|
+| State is used by one component | Keep it local | Premature global state |
+| State is shared by a tight subtree | Lift it or use focused context | Global-store coupling |
+| Value is derived from props or state | Compute during render | Synchronisation effects |
+
+## Anti-Patterns
+
+- Mirroring derived values in state. Fix: compute them during render.
+- Using an effect for user-triggered logic. Fix: use the event handler.
+- Mutating state arrays or objects. Fix: create a new value through the setter.
+- Keying changing lists by array index. Fix: use a stable domain identifier.
+- Adding context for state used by one component. Fix: keep ownership local.
+
+## Capability contract
+
+Read and search the component tree and tests first. Edit only when authorised; execute type-checks, component tests, accessibility checks, and the production build when available.
+
+## Degraded mode
+
+If the repository or test runner is unavailable, return a component-level plan and mark rendering, accessibility, and regression behaviour as unverified.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Component behaviour, state/data boundaries, accessibility, and project conventions | yes | Shape React implementation |
+## Outputs
+- Produce React code or findings with state coverage, accessibility, tests, and performance evidence.

@@ -4,7 +4,7 @@ description: Use when authoring or normalising a specialist skill, or preparing 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -152,6 +152,39 @@ When a feature or release is ready to ship, the reviewer produces a single filla
 The rollout in [references/integration-rollout.md](references/integration-rollout.md) lists every edit made to other skills when this skill was introduced. Future edits that touch this contract should update that file.
 
 ## Companion Skills
+
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Claimed release evidence | yes | Establish what can be verified |
+| Category requirements | yes | Determine mandatory proof |
+
+## Capability contract
+
+Read and search are required to trace evidence producers and consumers. Execution is required only for machine-verifiable gates. Editing is permitted only when contract repair is authorised.
+
+## Degraded mode
+
+Fallback when evidence cannot be executed or retrieved: mark the category `unverified`; never convert missing evidence into a pass.
+
+## Decision rules
+
+| Evidence state | Release status | Action |
+|---|---|---|
+| Required category has verified passing evidence | Pass category | Attach artefact to bundle |
+| Evidence exists but is stale or incomplete | Conditional | Refresh before release |
+| Required evidence is missing or failing | Block | Do not ship |
+
+## Domain anti-patterns
+
+- Accepting a prose claim as test evidence. Fix: require the named artefact or command result.
+- Reusing stale evidence after relevant code changed. Fix: rerun the producing check.
+- Marking inaccessible evidence as passed. Fix: record `unverified`.
+- Allowing one category to substitute for another. Fix: satisfy each mandatory category independently.
+- Shipping an incomplete evidence bundle. Fix: block until required artefacts and provenance are present.
+
+## Companion skills
 
 - `skill-composition-standards` — Standards 1 and 2. Load this before `validation-contract`.
 - `world-class-engineering` — repository production-readiness bar. This contract makes the evidence of meeting that bar a first-class artifact.

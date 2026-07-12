@@ -1,6 +1,6 @@
 ---
 name: ios-platform-capabilities
-description: iOS platform capability orchestration for App Intents, Siri, Spotlight semantic indexing, widgets, biometrics, Bluetooth printing, push notifications, native PDF export, networking, media, and Apple framework entitlements.
+description: Use when integrating iOS system capabilities such as App Intents, widgets, Spotlight, biometrics, notifications, Bluetooth, media, or PDF export; use ios-development for ordinary app features.
 metadata:
   portable: true
   compatible_with:
@@ -52,7 +52,30 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Capability implementation guidance, framework integration checklist, entitlement/privacy notes, test plan, or review findings.
 
-## References
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Capability use case and fallback | Product owner | required | Prevents unnecessary entitlement requests |
+| Privacy and threat assessment | `ios-security-and-rbac` | required for sensitive capabilities | Defines permission and data boundaries |
+| Supported device/OS matrix | `ios-quality-and-release` | required | Establishes availability branches |
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Capability works without permission | Do not request the permission |
+| Permission is contextual | Ask immediately before the user action that needs it |
+| Device or OS lacks the framework | Provide a documented in-app fallback |
+| Entitlement is not approved or provisioned | Stop release of that capability |
+
+## Domain Anti-Patterns
+
+- Requesting every permission at launch. Fix: ask in context after explaining value.
+- Assuming an entitlement exists because code compiles. Fix: verify provisioning and device behaviour.
+- Indexing sensitive content into Spotlight. Fix: classify and exclude private records.
+- Making Siri or widgets the only path. Fix: retain an accessible in-app workflow.
+- Treating Bluetooth transport success as print success. Fix: confirm protocol response and retry state.
 
 - `references/ios-biometric-login.md` for Face ID/Touch ID launch gates and LocalAuthentication.
 - `references/ios-bluetooth-printing.md` for CoreBluetooth ESC/POS thermal printing.
@@ -62,3 +85,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/app-intents-siri-spotlight-wwdc26.md` for App Intents, App Entities, App Schemas, View Annotations, Spotlight semantic indexing, App Intents Testing, and widget customization.
 - `references/apple-framework-watch-items-wwdc26.md` for NowPlaying, Music Understanding, RAW, camera/media, Background Assets, Game Porting Toolkit, Unity plugins, and specialty follow-up routing.
 <!-- dual-compat-end -->
+## Read next
+- `ios-security-and-rbac` for protected capabilities; `ios-quality-and-release` for entitlement and device verification.

@@ -1,12 +1,10 @@
 ---
 name: git-collaboration-workflow
-description: Use when planning branch strategy, making commits, reviewing diffs, resolving
-  conflicts, preparing pull requests, or shipping releases. Covers trunk-friendly
-  collaboration, commit hygiene, conflict recovery, and CI-linked release discipline.
+description: Use when planning branch strategy, making commits, reviewing diffs, resolving conflicts, preparing pull requests, or shipping releases. Covers trunk-friendly collaboration, commit hygiene, conflict recovery, and CI-linked release discipline.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,40 +15,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when planning branch strategy, making commits, reviewing diffs, resolving conflicts, preparing pull requests, or shipping releases. Covers trunk-friendly collaboration, commit hygiene, conflict recovery, and CI-linked release discipline.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `git-collaboration-workflow` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Repository status and current branch | yes | Establish integration state |
+| Intended scope and release target | yes | Bound commits and review |
 
 ## References
 
@@ -172,3 +143,13 @@ See [references/review-and-release.md](references/review-and-release.md) for PR 
 - [references/review-and-release.md](references/review-and-release.md): Pull request, merge, and release checklists.
 - [references/trunk-based-delivery.md](references/trunk-based-delivery.md): Short-lived branch and integration rules.
 - [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): Git workflows derived from the supplied PDFs.
+
+## Degraded Mode
+
+If Git execution is unavailable, provide non-destructive commands and expected checks; do not claim commit, push, merge, or release success.
+## Outputs
+- Produce a scoped branch/commit/merge workflow with review evidence, conflict handling, and repository-safe commands.
+## Workflow
+Inspect status and diff, isolate scope, validate changes, commit intentionally, push only when requested, and report unresolved conflicts or checks.
+## Capability contract
+Read-only Git inspection is allowed by default. Commit, push, merge, rebase, force-update, or branch deletion requires explicit workflow authority and protected-branch awareness.

@@ -236,7 +236,7 @@ Multi-service transactions without two-phase commit. Each step emits an event or
 ```
 OrderPlaced → [Payment] PaymentAuthorized → [Inventory] InventoryReserved → [Shipping] ShipmentScheduled
                     ↓ PaymentFailed                ↓ OutOfStock
-               OrderCancelled â†â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ PaymentRefunded
+               OrderCancelled ←──────────── PaymentRefunded
 ```
 
 Low coupling but the full flow is implicit — document it explicitly in the event catalogue.
@@ -314,9 +314,9 @@ Multiple services share event schemas. Without discipline, a change breaks every
 - ✅ Add optional field with default.
 - ✅ Remove optional field (consumers ignore it).
 - ✅ Add new event type.
-- âŒ Rename field.
-- âŒ Change field type (string → int).
-- âŒ Make optional field required.
+- ❌ Rename field.
+- ❌ Change field type (string → int).
+- ❌ Make optional field required.
 
 Any breaking change bumps the major version: `order.placed.v2`. Run v1 and v2 topics in parallel until all consumers have migrated. Retire v1 with a dated deprecation notice.
 

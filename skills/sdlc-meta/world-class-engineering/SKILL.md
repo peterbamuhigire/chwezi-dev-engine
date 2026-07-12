@@ -1,13 +1,10 @@
 ---
 name: world-class-engineering
-description: Use when designing, building, reviewing, or upgrading production software
-  systems that must be secure, performant, maintainable, scalable, and user-centered.
-  Apply before writing specs, code, architecture, APIs, databases, mobile apps, SaaS
-  platforms, or ERP systems.
+description: Use when designing, building, reviewing, or upgrading production software systems that must be secure, performant, maintainable, scalable, and user-centered. Apply before writing specs, code, architecture, APIs, databases, mobile apps, SaaS platforms, or ERP systems.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,41 +15,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing, building, reviewing, or upgrading production software systems that must be secure, performant, maintainable, scalable, and user-centered. Apply before writing specs, code, architecture, APIs, databases, mobile apps, SaaS platforms, or ERP systems.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `world-class-engineering` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 - For premium, commercial, executive-facing, website, SaaS, ERP, POS, dashboard, or agency-delivery work, pair with `premium-software-product-execution` before locking scope, pricing, UX, reporting, or proof assets.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## References
 
@@ -328,3 +294,35 @@ Use these prompts while working:
 - [references/source-patterns.md](references/source-patterns.md): Book-to-practice workflows derived from the supplied PDFs.
 - [references/executable-engineering-system.md](references/executable-engineering-system.md): Delivery-system rules, artifacts, and operating loops derived from the supplied books.
 - [references/world-class-gates.md](references/world-class-gates.md): Release gates for engineering, security, performance, UX, and operations.
+
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Change scope and acceptance criteria | yes | Define the quality target |
+| Architecture and risk context | yes | Select applicable gates |
+| Existing tests and operational evidence | conditional | Establish current readiness |
+
+## Capability contract
+
+Require read and search. Editing and execution follow the implementation scope. Without execution, label checks unverified and return the commands or evidence still required.
+
+## Decision rules
+
+| Risk | Gate depth | Failure avoided |
+|---|---|---|
+| Local, reversible, no data or auth effect | Focused checks | Process overhead without risk reduction |
+| Cross-module, data, auth, or deployment effect | Full evidence pack | Hidden integration or rollback gaps |
+| Production mutation or irreversible action | Explicit approval and rollback proof | Unbounded blast radius |
+
+## Domain anti-patterns
+
+- Applying every gate to a trivial local edit. Fix: scale evidence to risk.
+- Skipping rollback because tests pass. Fix: prove recovery for deployment-affecting work.
+- Treating a checklist tick as evidence. Fix: link the command result or artefact.
+- Optimising one quality attribute while hiding another regression. Fix: record trade-offs.
+- Declaring production-ready with unverified checks. Fix: label gaps and block when material.
+## Outputs
+- Produce the risk-scaled engineering gate, evidence pack, release verdict, and residual-risk handoff.
+## Degraded mode
+Fallback without execution or operational evidence: issue a conditional verdict, list unverified gates, and block release when a material risk cannot be assessed.

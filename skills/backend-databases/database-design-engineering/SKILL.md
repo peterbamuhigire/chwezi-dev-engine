@@ -1,13 +1,10 @@
 ---
 name: database-design-engineering
-description: Use when designing or reviewing relational or document-backed data architecture
-  for SaaS platforms, ERP systems, APIs, analytics stores, or mobile sync. Covers
-  domain modeling, tenancy, indexing, migrations, integrity, retention, and performance
-  tradeoffs.
+description: Use when designing or reviewing relational or document-backed data architecture for SaaS platforms, ERP systems, APIs, analytics stores, or mobile sync. Covers domain modeling, tenancy, indexing, migrations, integrity, retention, and performance tradeoffs.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing or reviewing relational or document-backed data architecture for SaaS platforms, ERP systems, APIs, analytics stores, or mobile sync. Covers domain modeling, tenancy, indexing, migrations, integrity, retention, and performance tradeoffs.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `database-design-engineering` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The task is query tuning or production incident diagnosis without a schema-design decision; use the database operations or reliability skill.
+- The datastore is a search index, cache, or vector store whose source-of-truth semantics belong elsewhere.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Domain entities, invariants, and lifecycle rules | yes | Determines tables, keys, constraints, and valid state transitions |
+| Read and write access patterns | yes | Drives indexes, transaction boundaries, and denormalization choices |
+| Data volume, growth, and retention expectations | yes | Exposes scaling and archival constraints |
+| Existing schema and migration constraints | conditional | Enables safe evolution without data loss or prolonged locking |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Model invariants and ownership, choose keys and relationships, enforce integrity in the database, design indexes from verified access paths, plan reversible expand-contract migrations, then test concurrency, rollback, and representative query plans.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+The schema enforces material invariants with types, constraints, and transactions rather than application convention alone. Each index supports a named query, and every migration states lock, backfill, compatibility, rollback, and validation behavior.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Logical and physical schema | Application and data engineers | Identifies ownership, keys, constraints, relationships, types, and intentional denormalization |
+| Index and transaction plan | Implementers | Links access patterns to indexes and defines concurrency behavior |
+| Migration packet | Release and operations teams | Includes sequencing, compatibility window, backfill, validation, rollback, and risk notes |
 
 ## Evidence Produced
 
@@ -218,4 +211,17 @@ For substantive database work, produce:
 
 - [references/data-review-checklist.md](references/data-review-checklist.md): Schema and migration review prompts.
 - [references/live-data-evolution.md](references/live-data-evolution.md): Expand-contract, backfills, verification, and rollback posture.
-- [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): Source-derived patterns for design quality and website/data analysis.
+- [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Source-derived patterns for design quality and website/data analysis.
+
+## Capability contract
+Design schemas and migration plans by default. Apply DDL, backfills, retention jobs, or production queries only with explicit database and environment authority.
+
+## Degraded mode
+If workload samples or schema access are unavailable, provide a read-only logical design and mark index, capacity, and migration claims unverified.
+
+## Domain Anti-Patterns
+- Omitting foreign-key or application integrity rules. Fix: state enforcement explicitly.
+- Indexing every column. Fix: derive indexes from measured access paths.
+- Mixing tenant data without a tenant key. Fix: enforce isolation in schema and queries.
+- Shipping destructive migrations in one step. Fix: use expand-contract.
+- Retaining data indefinitely. Fix: define retention and deletion ownership.

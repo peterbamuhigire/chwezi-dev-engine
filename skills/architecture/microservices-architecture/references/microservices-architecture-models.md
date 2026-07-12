@@ -158,7 +158,7 @@ Cluster 1 handles external traffic (caching, SSL, rate limiting). Cluster 2 is a
 
 **Architecture:**
 ```
-Client → [NGINX Plus — Ingress] → [Container: NGINX Plus sidecar + Service] â†â†’ [Container: NGINX Plus sidecar + Service]
+Client → [NGINX Plus — Ingress] → [Container: NGINX Plus sidecar + Service] ←→ [Container: NGINX Plus sidecar + Service]
 ```
 
 **The key difference:** NGINX Plus runs *inside every container*, acting as both forward and reverse proxy for each service. Services talk to `localhost` for all outbound requests; the local NGINX Plus instance handles service discovery, load balancing, and SSL/TLS.

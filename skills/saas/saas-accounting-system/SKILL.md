@@ -1,13 +1,10 @@
 ---
 name: saas-accounting-system
-description: Implement a complete double-entry accounting system inside any SaaS app.
-  Users enter transactions naturally (sales, expenses, inventory) while the system
-  auto-posts journal entries under the hood. Produces both user-friendly reports and
-  technical...
+description: Use when designing double-entry accounting inside SaaS, including automated postings, ledgers, controls, reconciliations, and reports.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,44 +15,44 @@ metadata:
 # SaaS Accounting System
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Implement a complete double-entry accounting system inside any SaaS app. Users enter transactions naturally (sales, expenses, inventory) while the system auto-posts journal entries under the hood. Produces both user-friendly reports and technical...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `saas-accounting-system` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -384,3 +381,12 @@ Every implementation MUST pass these tests:
 - `references/financial-statements.md` — Report SQL queries and formats
 - `references/schema-design.md` — Complete database schema with constraints
 - `references/accounting-bookkeeping-erp-patterns.md` — bookkeeping, subledger control, ERP finance configuration, cost accounting, management reporting, and acceptance tests
+## Quality Standards
+
+No posting design passes unless entries balance, source events are idempotent, periods and tenants are isolated, reversals preserve history, and control evidence reconciles to reports.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| SaaS accounting architecture and posting contract | Finance controller and engineering team | Every business event maps to balanced entries, tenant and period controls are enforced, reversals are traceable, and reconciliation evidence is defined |

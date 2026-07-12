@@ -1,14 +1,48 @@
 ---
 name: stripe-payments
-description: Use when integrating Stripe one-time payments, PaymentIntents, SetupIntents, Checkout, and webhook-driven flows in PHP or Node.js. Covers integration-model selection, SCA / 3D Secure handling, multi-currency, Stripe Tax basics, idempotency, and signed-webhook receivers. Recurring subscriptions, dunning, and metered billing live in subscription-billing.
+description: Use when integrating Stripe one-time payments, PaymentIntents, SetupIntents, Checkout, SCA, multi-currency, idempotency, or webhooks.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # Stripe Payments
+
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
 
 <!-- dual-compat-start -->
 ## Use When
@@ -381,7 +415,7 @@ The CLI prints a webhook signing secret on first run; pass it as the `endpoint_s
 - [references/webhook-handling.md](references/webhook-handling.md) — event catalogue, dedup rules, idempotent state updates.
 - [../subscription-billing/SKILL.md](../subscription-billing/SKILL.md) — recurring billing, dunning, metered billing, revenue ops.
 - [../saas-accounting-system/SKILL.md](../saas-accounting-system/SKILL.md) — accounting integration for Stripe settlements.
-- [../web-app-security-audit/SKILL.md](../web-app-security-audit/SKILL.md) — security audit for payment endpoints.
+- [../../security/web-app-security-audit/SKILL.md](../../security/web-app-security-audit/SKILL.md) — security audit for payment endpoints.
 - Stripe Payments overview: `docs.stripe.com/payments`
 - Stripe "Accept a payment": `docs.stripe.com/payments/accept-a-payment`
 - Stripe Payment Intents overview: `docs.stripe.com/payments/payment-intents`

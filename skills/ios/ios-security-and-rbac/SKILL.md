@@ -1,6 +1,6 @@
 ---
 name: ios-security-and-rbac
-description: iOS security and authorization orchestration for Keychain, Secure Enclave, App Attest, Trust Insights watch items, privacy manifests, agentic AI, App Intents, tamper resistance, permissions, RBAC, and tenant-safe mobile access.
+description: Use when designing or reviewing iOS authentication, Keychain, App Attest, privacy manifests, permissions, RBAC, tenant isolation, or AI security; use ios-development for general implementation.
 metadata:
   portable: true
   compatible_with:
@@ -52,9 +52,34 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - iOS threat model, security checklist, RBAC matrix, permission-gate implementation notes, review findings, or verification evidence.
 
-## References
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Threat model and abuse cases | Security owner | required | Sets trust boundaries |
+| Role and tenant policy | Backend/product owner | required | Defines server-enforced authorisation |
+| Data classification | Privacy owner | required | Controls storage, logging, and disclosure |
+
+## Decision Rules
+
+| Finding | Required action |
+|---|---|
+| Client role differs from server response | Server decision wins; deny and refresh policy |
+| Secret must survive reinstall | Reassess requirement; use narrowly scoped Keychain only if justified |
+| High-value request lacks attestation | Step up verification or reject according to risk policy |
+| Privacy purpose or retention is undefined | Stop collection |
+
+## Domain Anti-Patterns
+
+- Enforcing RBAC only in the UI. Fix: authorise every backend operation server-side.
+- Storing bearer tokens in UserDefaults. Fix: use constrained Keychain access controls.
+- Logging credentials, prompts, or tenant identifiers. Fix: redact at the logging boundary.
+- Treating App Attest as user authentication. Fix: combine device integrity with authenticated identity.
+- Allowing cross-tenant cache keys. Fix: partition and clear storage by tenant and account.
 
 - `references/ios-app-security.md` for Keychain, Secure Enclave, ATS, pinning, signing, privacy manifests, and tamper resistance.
 - `references/ios-rbac.md` for permission models, SwiftUI gates, offline caches, and tenant-safe authorization UX.
 - `references/agentic-ai-and-app-intents-security.md` for prompt/tool injection, App Intents authorization, semantic index privacy, App Attest, Trust Insights watch items, and AI action audit.
 <!-- dual-compat-end -->
+## Read next
+- `ios-development` for implementation; `vibe-security-skill` for system-level threat modelling.

@@ -78,7 +78,7 @@ direct references. Data access lives in repositories, not scattered `fetch` call
 
 For complex or long-lived JavaScript, choose patterns from a problem statement, not from taste. A pattern is justified only when it reduces coupling, clarifies object creation, stabilizes event flow, supports testability, or prevents repeated code decay.
 
-✅ Vanilla JS ✅ PHP SaaS ✅ ES2020+ ✅ No framework | âŒ React/Vue âŒ Node.js server-side
+✅ Vanilla JS ✅ PHP SaaS ✅ ES2020+ ✅ No framework | ❌ React/Vue ❌ Node.js server-side
 
 ---
 

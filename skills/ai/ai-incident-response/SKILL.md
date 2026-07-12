@@ -1,7 +1,6 @@
 ---
 name: ai-incident-response
-description: >-
-  Use when preventing, detecting, triaging, communicating, recovering from, or reviewing AI incidents, AI errors, RCA, and postmortems.
+description: Use when preventing, detecting, triaging, communicating, recovering from, or reviewing AI incidents, AI errors, RCA, and postmortems.
 metadata:
   portable: true
   compatible_with:
@@ -10,6 +9,44 @@ metadata:
 ---
 
 # AI Incident Response
+
+## Operating contract
+
+## Inputs
+
+| Input | Required | Purpose |
+|---|---|---|
+| Domain evidence | yes | incident signal, affected model or feature versions, tenant scope, traces, severity criteria, and response contacts |
+
+## Outputs
+
+- Produce: severity verdict, containment actions, evidence timeline, recovery checks, communications, and post-incident actions.
+
+## Capability and permission boundaries
+
+Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
+
+## Degraded mode
+
+When required telemetry, evidence, execution, network access, or write authority is unavailable, return a partial result with each unassessed item labelled, preserve the safest existing state, and state the evidence or approval needed to continue. Never convert missing evidence into a pass.
+
+## Decision rules
+
+| Condition | Action |
+|---|---|
+| Scope, owner, or threshold is missing | Stop the affected decision and request it |
+| Evidence is incomplete but read-only analysis is safe | Produce a qualified partial result and gap list |
+| A mutation exceeds authority or tenant boundary | Block it and route for approval |
+| Evidence meets the stated threshold | Issue the output with provenance and owner |
+
+## Anti-Patterns
+
+- Treating absent evidence as success. Fix: mark the check unassessed and name the missing source.
+- Expanding one tenant or workflow to all tenants. Fix: enforce supplied scope at every query and action.
+- Performing a production write during analysis. Fix: emit a reviewed change plan until authority is explicit.
+- Reporting a metric without population, window, or source. Fix: attach all three.
+- Hiding a failed threshold inside an average. Fix: report failure slices and the remediation owner.
+
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->

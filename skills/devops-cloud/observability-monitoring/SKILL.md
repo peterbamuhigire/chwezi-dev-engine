@@ -1,13 +1,10 @@
 ---
 name: observability-monitoring
-description: Use when designing or reviewing logs, metrics, traces, alerts, SLOs,
-  dashboards, audit events, or production telemetry for web apps, APIs, SaaS platforms,
-  mobile backends, and AI systems. Covers instrumentation strategy, diagnosis-first
-  telemetry, alert quality, and operational visibility.
+description: Use when designing or reviewing logs, metrics, traces, alerts, SLOs, dashboards, audit events, or production telemetry for web apps, APIs, SaaS platforms, mobile backends, and AI systems. Covers instrumentation strategy, diagnosis-first telemetry, alert quality, and operational visibility.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing or reviewing logs, metrics, traces, alerts, SLOs, dashboards, audit events, or production telemetry for web apps, APIs, SaaS platforms, mobile backends, and AI systems. Covers instrumentation strategy, diagnosis-first telemetry, alert quality, and operational visibility.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `observability-monitoring` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The request is business analytics without a production diagnosis, service-level, audit, or operator-response requirement.
+- The task only asks to install a monitoring product; first define the operational questions and service outcomes this skill requires.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Critical user and system flows | yes | Determines what must be observable |
+| Service ownership and escalation paths | yes | Connects signals to accountable action |
+| Architecture, dependencies, and async boundaries | yes | Defines correlation and trace coverage |
+| Data sensitivity, retention, and cost limits | conditional | Constrains event fields, sampling, and storage |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Start from critical flows and operator questions, define service outcomes and SLOs, map logs, metrics, traces, and audit events, set correlation and cardinality rules, create actionable alerts and dashboards, then test diagnosis using a known failure.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+Every page has a named owner, user-impact rationale, and first action. Signals carry enough version, environment, tenant, and dependency context to diagnose safely, while secrets and sensitive payloads remain excluded or redacted.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Telemetry map | Developers and operators | Links each critical flow and failure mode to logs, metrics, traces, audit events, and correlation fields |
+| SLO and alert catalogue | Service owner and on-call team | Defines measurement, target, window, severity, owner, runbook, and paging action |
+| Diagnostic dashboard and verification record | Incident responders | Answers impact, location, change, and next-action questions during an injected or known failure |
 
 ## Evidence Produced
 
@@ -60,6 +53,23 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Operability | SLO record | Markdown doc per `skill-composition-standards/references/slo-template.md` | `docs/slo/checkout-service.md` |
 | Operability | Observability wiring note | Markdown doc listing logs, metrics, traces, and dashboards wired | `docs/observability/checkout-wiring.md` |
 | Operability | Alert catalogue | Markdown doc listing alert name, threshold, and runbook link | `docs/observability/checkout-alerts.md` |
+
+## Capability contract
+Inspect telemetry read-only by default. Deploy collectors, change retention, create paging rules, or access sensitive logs only with explicit authority.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Signal has no operator action | Do not page |
+| Label cardinality is unbounded | Remove or aggregate it |
+| SLO absent | Define service outcome first |
+
+## Domain Anti-Patterns
+- Logging secrets. Fix: redact at collection.
+- Paging on CPU alone. Fix: alert on user impact.
+- Using request IDs as metric labels. Fix: keep them in traces.
+- Building ownerless dashboards. Fix: assign a decision and owner.
+- Treating missing telemetry as healthy. Fix: alert on collection gaps.
 
 ## References
 

@@ -1,13 +1,10 @@
 ---
 name: system-architecture-design
-description: Use when defining or reviewing software architecture for web apps, mobile
-  backends, SaaS platforms, APIs, distributed systems, or major features. Covers bounded
-  contexts, module decomposition, contracts, failure handling, ADRs, and scalability
-  tradeoffs.
+description: Use when defining or reviewing software architecture for web apps, mobile backends, SaaS platforms, APIs, distributed systems, or major features. Covers bounded contexts, module decomposition, contracts, failure handling, ADRs, and scalability tradeoffs.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when defining or reviewing software architecture for web apps, mobile backends, SaaS platforms, APIs, distributed systems, or major features. Covers bounded contexts, module decomposition, contracts, failure handling, ADRs, and scalability tradeoffs.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `system-architecture-design` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The request is limited to an isolated endpoint, query, UI component, or deployment script with no system-level trade-off.
+- The architecture is already decided and the task only needs implementation; use the relevant engineering skill and preserve recorded decisions.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Business capabilities and critical journeys | yes | Anchors boundaries in real system responsibilities |
+| Quality attributes with measurable scenarios | yes | Makes performance, security, availability, and changeability testable |
+| Constraints and existing-system context | yes | Prevents an unbuildable greenfield design |
+| Scale, data, integration, and deployment assumptions | conditional | Supports sizing and topology decisions |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Clarify drivers and constraints, model context and containers, assign data and responsibility boundaries, compare viable options, record decisions, then test the design against failure, evolution, security, and operational scenarios.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+Decisions link a driver to a chosen option, rejected alternatives, consequences, and verification evidence. Diagrams and prose agree on ownership, trust boundaries, data flow, and deployment topology.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Architecture description | Engineering stakeholders | Includes context, responsibilities, data ownership, integrations, trust boundaries, and deployment view |
+| Decision records | Future maintainers | Capture rationale, alternatives, consequences, and revisit triggers |
+| Quality-attribute verification plan | Delivery and operations teams | Maps each material scenario to a test, measurement, or operational check |
 
 ## References
 
@@ -231,4 +224,21 @@ Split a service or module when:
 
 - [references/adr-template.md](references/adr-template.md): Decision record format and architecture review prompts.
 - [references/architecture-execution-model.md](references/architecture-execution-model.md): Architecture artifacts, release-aware boundaries, and flow design.
-- [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): Architecture review patterns derived from the supplied books.
+- [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Architecture review patterns derived from the supplied books.
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Capabilities and quality attributes | yes | Set drivers |
+| Current topology and constraints | yes | Ground design |
+| Workload and failure assumptions | yes | Test choices |
+
+## Degraded mode
+If workload evidence or stakeholder decisions are unavailable, return read-only options with assumptions and proposed ADRs; do not present a target as approved.
+
+## Domain Anti-Patterns
+- Choosing technology before drivers. Fix: rank quality attributes first.
+- Drawing components without contracts. Fix: specify interfaces and owners.
+- Ignoring failure paths. Fix: model timeouts and recovery.
+- Treating estimates as measured capacity. Fix: label and test assumptions.
+- Approving irreversible change without an ADR. Fix: record consequences.

@@ -1,13 +1,10 @@
 ---
 name: python-ml-predictive
-description: Use when adding forecasting, classification, regression, or anomaly detection
-  to a SaaS feature — demand/sales/cash-flow forecasting, churn and risk scoring,
-  anomaly detection — with scikit-learn, Prophet, and statsmodels. Covers data prep,
-  model serving, monitoring, and explainability.
+description: Use when adding forecasting, classification, regression, or anomaly detection to a SaaS feature — demand/sales/cash-flow forecasting, churn and risk scoring, anomaly detection — with scikit-learn, Prophet, and statsmodels. Covers data prep, model serving, monitoring, and explainability.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when adding forecasting, classification, regression, or anomaly detection to a SaaS feature — demand/sales/cash-flow forecasting, churn and risk scoring, anomaly detection — with scikit-learn, Prophet, and statsmodels. Covers data prep, model serving, monitoring, and explainability.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `python-ml-predictive` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -302,3 +265,25 @@ See `references/explainability.md`.
 - `ai-predictive-analytics` — LLM-based prediction (use when features are unstructured text).
 - `ai-evaluation` — for LLM output quality; ML evaluation is different (this skill).
 - `saas-business-metrics` — to decide which outcome to model.
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Stable explicit rules meet the need | Use rules, not a model |
+| Labelled data and measurable target exist | Compare a simple baseline first |
+| Leakage, consent, or evaluation data is unresolved | Stop and repair the data contract |
+
+## Capability Contract
+
+Read access to data definitions is required. Execution is required to claim measured quality; editing and deployment require authorisation.
+
+## Degraded Mode
+
+Fallback: without executable data, return an experiment design and serving contract only. Label metrics as targets or examples.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Prediction objective, labelled data, baseline, evaluation metric, and deployment constraints | yes | Prevent target and validation errors |
+## Outputs
+- Produce a reproducible model workflow, evaluation evidence, limitations, and monitoring plan.

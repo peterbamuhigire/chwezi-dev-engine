@@ -102,6 +102,10 @@ fixtures:
   # --- Meta / SDLC ---
   - task: "Use skill-writing to author a new skill that follows the repository house style and contracts"
     expect: skill-writing
+  - task: "Design one vendor-neutral library of specialist roles and skills with thin Claude, Codex and Copilot adapters"
+    expect: skill-writing
+  - task: "Turn this role Markdown into a capability-scoped agent definition with triggers, permissions and an output contract"
+    expect: skill-writing
   - task: "Initialise documentation and a methodology roadmap for a brand new project"
     expect: 00-meta-initialization
   - task: "Red-team a high-stakes donor proposal against the scoring grid, compliance knockouts, evidence and spreadsheet integrity before submission"

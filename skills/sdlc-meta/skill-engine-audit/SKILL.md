@@ -1,11 +1,11 @@
 ---
 name: skill-engine-audit
-description: Audit a whole skills engine (a repo of routed SKILL.md files such as design-system-skills, chwezi-accounting-doctrine, srs-skills, business-plan-skills, social-media-skills, linux-skills, digital-research-engine) against a world-class bar. Ranks EVERY aspect out of 100 — taxonomy, doctrine, skill depth, worked examples, standards currency, coverage, redundancy, discovery/routing, safety — plus per-output-type readiness (web, iOS, Android, web apps, cross-platform, websites, documents, presentations, brand, data products). Produces a comprehensive multi-file report with a strict scorecard and a prioritized roadmap. Use when asked to audit, grade, benchmark, or find gaps in a skills engine/catalog and plan how to make it world-class.
+description: Use when auditing, grading, benchmarking, or conforming an entire skills engine. Measures taxonomy, doctrine, contracts, depth, routing, safety, references, output readiness, and normalisation priorities.
 metadata:
   portable: true
   compatible_with:
-    - claude-code
-    - codex
+  - claude-code
+  - codex
 ---
 
 # Skill Engine Audit
@@ -35,6 +35,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
 ## Workflow
 
+0. **Inventory compliance first.** For conformance work, run `scripts/engine_compliance.py`
+   before reading individual skill bodies. Use its compact exception register to minimise context loading.
 1. **Scope it.** Read the engine's router(s) (`README.md` / `CLAUDE.md` / `AGENTS.md`) and its
    doctrine. Glob `skills/**/SKILL.md` to list every group and skill. Identify the output types
    the engine is responsible for (audit ALL of them — web, iOS, Android, web apps, cross-platform,
@@ -85,10 +87,39 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
 ## References
 
+- `references/compliance-normalisation-workflow.md` - reusable, token-efficient conformance process.
+- `scripts/engine_compliance.py` - read-only inventory by default; narrowly scoped safe fixes with `--fix-safe`.
 - `references/scoring-rubric.md` — the strict bar and bands.
 - `references/audit-dimensions.md` — every aspect to rank + the output-type checklist.
 - `references/parallel-agent-method.md` — the audit-agent fleet and how to brief it.
 - `references/report-structure.md` — the multi-file report template.
 - Sibling skills: `skill-safety-audit`, `skill-writing`, `skill-taxonomy-and-routing`,
   `ai-slop-audit`.
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Engine router and policies | yes | Establish scope and local rules |
+| Active skill roots | yes | Define the audited catalogue |
+| Compliance bar | yes | Keep re-audits comparable |
+
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Release evidence | Engine compliance report | Scanner summary or JSON exception register with before/after counts | `engine-compliance.json` |
+| Correctness | Normalisation evidence pack | Validator, routing, safety, diff, and remaining-exception results | `docs/audits/<engine>/evidence.md` |
+
 <!-- dual-compat-end -->
+
+## Capability contract
+
+Read and search are required. Execution is optional but preferred for scanners and validators. Editing requires an explicit conformance request; network research is separate and source-disciplined.
+
+## Decision rules
+
+| Condition | Action | Failure avoided |
+|---|---|---|
+| Structural question spans the catalogue | Run machine inventory first | Token-heavy manual reading |
+| Safe syntax defect has deterministic repair | Use `--fix-safe`, then inspect diff | Repetitive manual edits |
+| Contract or domain judgement is missing | Normalise individually | Fabricated boilerplate compliance |

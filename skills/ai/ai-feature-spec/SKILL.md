@@ -1,56 +1,58 @@
 ---
 name: ai-feature-spec
-description: Design a single AI-powered feature end-to-end — model selection, prompt
-  engineering, context window, output schema, fallback behaviour, human oversight,
-  and UX integration. Invoke for each opportunity identified in ai-opportunity-canvas.
+description: Use when specifying one AI-powered feature end to end, including model choice, prompt and context contracts, output schema, fallbacks, human oversight, UX states, and evaluation.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # AI Feature Specification
+
+## Operating contract
+
+## Inputs
+
+| Input | Required | Purpose |
+|---|---|---|
+| Domain evidence | yes | named user problem, workflow context, data sensitivity, acceptance criteria, budget, latency target, and oversight need |
+
+## Outputs
+
+- Produce: feature blueprint, model and prompt contract, output schema, fallback states, oversight path, and test plan.
+
+## Capability and permission boundaries
+
+Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
+
+## Degraded mode
+
+When required telemetry, evidence, execution, network access, or write authority is unavailable, return a partial result with each unassessed item labelled, preserve the safest existing state, and state the evidence or approval needed to continue. Never convert missing evidence into a pass.
+
+## Decision rules
+
+| Condition | Action |
+|---|---|
+| Scope, owner, or threshold is missing | Stop the affected decision and request it |
+| Evidence is incomplete but read-only analysis is safe | Produce a qualified partial result and gap list |
+| A mutation exceeds authority or tenant boundary | Block it and route for approval |
+| Evidence meets the stated threshold | Issue the output with provenance and owner |
+
+## Anti-Patterns
+
+- Treating absent evidence as success. Fix: mark the check unassessed and name the missing source.
+- Expanding one tenant or workflow to all tenants. Fix: enforce supplied scope at every query and action.
+- Performing a production write during analysis. Fix: emit a reviewed change plan until authority is explicit.
+- Reporting a metric without population, window, or source. Fix: attach all three.
+- Hiding a failed threshold inside an average. Fix: report failure slices and the remediation owner.
+
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
 ## Use When
 
 - Design a single AI-powered feature end-to-end — model selection, prompt engineering, context window, output schema, fallback behaviour, human oversight, and UX integration. Invoke for each opportunity identified in ai-opportunity-canvas.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `ai-feature-spec` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 

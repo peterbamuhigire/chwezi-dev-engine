@@ -27,8 +27,10 @@ Use this parent skill as the active SDLC documentation entrypoint. Keep the phas
 
 ## Required Inputs
 
-- Gather the concrete system, repository, environment, constraints, and deliverable before loading references.
-- Identify which absorbed reference file is needed; do not load every migrated reference by default.
+| Artefact | Required? | Purpose |
+|---|---|---|
+| System, repository, environment, and constraints | yes | Ground the document in actual delivery context |
+| Requested lifecycle phase and audience | yes | Select only the needed reference and output |
 ## Workflow
 
 1. Load `world-class-engineering` for baseline delivery quality.
@@ -56,7 +58,43 @@ Use this parent skill as the active SDLC documentation entrypoint. Keep the phas
 
 - SDLC document, review findings, traceability notes, phase gate checklist, or handoff package.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Traceability results | Matrix | Requirement-to-test mapping |
+| Security | Security review | Findings register | Unresolved authorization risk |
+| Data safety | Data-control evidence | Checklist | Recovery verification |
+| Performance | Performance verification | Test record | SLO result |
+| Operability | Operational handoff | Runbook and checklist | Monitoring ownership |
+| UX quality | User validation | Acceptance record | Accessibility result |
+| Release evidence | Release decision | Approval record | Signed gate outcome |
+
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| One lifecycle phase is requested | Load only its absorbed reference |
+| Evidence conflicts with an older document | Flag and reconcile before update |
+| Required operational fact is unknown | Mark it open; do not invent it |
+
+## Capability Contract
+
+Read and search are required. Editing and validation execution require authorisation.
+
+## Degraded Mode
+
+Fallback: without repository evidence, return a document skeleton and open-question register.
+
+## Domain Anti-Patterns
+
+- Copying every phase template into one document.
+- Presenting planned behaviour as implemented.
+- Omitting owner or acceptance evidence.
+- Leaving stale cross-document contradictions.
+- Inventing deployment or maintenance facts.

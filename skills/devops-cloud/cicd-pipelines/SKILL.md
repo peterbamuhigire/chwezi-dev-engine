@@ -1,10 +1,10 @@
 ---
 name: cicd-pipelines
-description: Use when designing or implementing a CI/CD pipeline — stage gates, GitHub Actions production patterns (matrix, reusable workflows, environments), OIDC federation to AWS/GCP/Vault, dependency and Docker-layer caching, fan-out/fan-in orchestration, blue/green and canary deployment, pipeline observability (DORA metrics, queue time), and choosing between GitHub Actions and GitLab CI.
+description: Use when designing CI/CD pipelines, stage gates, reusable workflows, short-lived cloud authentication, caching, deployment strategies, and pipeline telemetry.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -333,6 +333,30 @@ Pick one per repo and document in `CONTRIBUTING.md`. Conventional commits drive 
 - `cloud-architecture` — traffic-shifting plumbing for the deployment strategies invoked here.
 - `ios-development`, `android-development` — app build config upstream of the mobile pipelines.
 
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Repository, environments, and release policy | yes | Design stages |
+| Test, artifact, and deployment commands | yes | Make gates executable |
+| Credential and approval boundaries | yes | Prevent privilege spread |
+
+## Degraded mode
+If runners or environments are unavailable, validate workflow syntax and return a read-only dry-run plan; do not claim deployment success.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Required test or scan fails | Block promotion |
+| Production target | Require protected approval |
+| Artifact changes between stages | Promote one immutable artifact |
+
+## Domain Anti-Patterns
+- Using long-lived cloud keys. Fix: use short-lived federation.
+- Deploying untested artifacts. Fix: bind promotion to immutable digests.
+- Hiding failures with continue-on-error. Fix: fail required gates.
+- Sharing unrestricted runners. Fix: isolate trust boundaries.
+- Allowing concurrent production releases. Fix: serialize them.
+
 ## Sources
 
 - Continuous Delivery, Humble & Farley, Addison-Wesley, 2010, ISBN 978-0-321-60191-9.
@@ -341,4 +365,3 @@ Pick one per repo and document in `CONTRIBUTING.md`. Conventional commits drive 
 - Automatic token authentication: [docs.github.com/en/actions/security-guides/automatic-token-authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
 - GitLab CI docs: [docs.gitlab.com/ci](https://docs.gitlab.com/ci); Docker Build cache: [docs.docker.com/build/cache](https://docs.docker.com/build/cache).
 - Trivy: [aquasecurity.github.io/trivy](https://aquasecurity.github.io/trivy); semantic-release: [semantic-release.gitbook.io](https://semantic-release.gitbook.io); Fastlane: [docs.fastlane.tools](https://docs.fastlane.tools).
-

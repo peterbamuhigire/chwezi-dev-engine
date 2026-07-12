@@ -1,13 +1,10 @@
 ---
 name: reliability-engineering
-description: Use when designing or reviewing production reliability for APIs, SaaS
-  platforms, background jobs, distributed workflows, mobile backends, or AI-enabled
-  systems. Covers timeout and retry policy, degradation, queue safety, incident readiness,
-  and recovery-aware design.
+description: Use when designing or reviewing production reliability for APIs, SaaS platforms, background jobs, distributed workflows, mobile backends, or AI-enabled systems. Covers timeout and retry policy, degradation, queue safety, incident readiness, and recovery-aware design.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing or reviewing production reliability for APIs, SaaS platforms, background jobs, distributed workflows, mobile backends, or AI-enabled systems. Covers timeout and retry policy, degradation, queue safety, incident readiness, and recovery-aware design.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `reliability-engineering` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The system has no meaningful uptime, recovery, data-loss, dependency, or asynchronous-work risk.
+- The task is active incident command; use the applicable incident procedure, then apply this skill to remediation and prevention.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Critical workflows and impact tiers | yes | Focuses protection on costly failures |
+| Dependency and asynchronous processing map | yes | Exposes timeout, retry, queue, and partial-failure boundaries |
+| Availability, latency, RPO, and RTO expectations | conditional | Makes reliability decisions measurable |
+| Current telemetry and incident evidence | conditional | Grounds improvements in observed failure behavior |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Classify workflow criticality, enumerate failure modes, allocate timeout and retry budgets, design idempotency and degradation, define recovery ownership, then exercise duplicate, overload, dependency-loss, queue-replay, and rollback scenarios.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+Reliability claims use user-visible outcomes and tested recovery behavior. Retries are bounded and safe, queues have overload and poison-message policies, degraded states are explicit, and every critical recovery path has an owner and evidence.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Reliability model | Architecture and service owners | Ranks workflows and maps failure modes to prevention, detection, degradation, and recovery |
+| Policy set | Implementers | Specifies timeout, retry, idempotency, queue, load-shedding, and replay rules |
+| Exercise and remediation record | Operations and delivery leaders | Captures scenario, safety bounds, observations, recovery timing, gaps, owners, and follow-up verification |
 
 ## Evidence Produced
 
@@ -60,6 +53,20 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Operability | Runbook | Markdown doc per `skill-composition-standards/references/runbook-template.md` | `docs/runbooks/payment-failures.md` |
 | Operability | Rollback plan | Markdown doc per `skill-composition-standards/references/rollback-plan-template.md` | `docs/releases/2026-04-16-rollback.md` |
 | Operability | Failure-mode catalogue | Markdown doc listing known failure modes and mitigations | `docs/reliability/failure-modes-checkout.md` |
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Retry safety unknown | Do not retry automatically |
+| Dependency exceeds latency budget | Time out and degrade |
+| Error budget exhausted | Pause risky releases |
+
+## Domain Anti-Patterns
+- Retrying every failure. Fix: classify errors.
+- Aligning all retry intervals. Fix: add backoff and jitter.
+- Queueing without bounds. Fix: set overload policy.
+- Defining SLOs from host uptime. Fix: measure user outcomes.
+- Running drills without abort controls. Fix: set safety limits.
 
 ## References
 

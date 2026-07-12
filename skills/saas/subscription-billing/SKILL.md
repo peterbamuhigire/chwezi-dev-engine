@@ -1,17 +1,48 @@
 ---
 name: subscription-billing
-description: Use when designing or reviewing recurring subscription lifecycle on
-  Stripe Billing — plans/Prices, trials, proration, upgrades/downgrades, cancel/pause,
-  Smart Retries dunning, metered usage, automatic tax, multi-currency, and the
-  strategy choice between subscription vs perpetual and monthly vs annual.
+description: Use when designing or reviewing recurring subscription lifecycle on Stripe Billing — plans/Prices, trials, proration, upgrades/downgrades, cancel/pause, Smart Retries dunning, metered usage, automatic tax, multi-currency, and the strategy choice between subscription vs perpetual and monthly vs annual.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # Subscription Billing
+
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
 
 <!-- dual-compat-start -->
 
@@ -405,10 +436,10 @@ A common anti-pattern is one negative line "Discount". The four patterns have **
 ## Companion Skills
 
 - [../stripe-payments/SKILL.md](../stripe-payments/SKILL.md): Stripe primitives — PaymentIntents, webhook signature verification, 3DS / SCA, idempotency.
-- [../saas-subscription-mastery/SKILL.md](../saas-subscription-mastery/SKILL.md): Broader subscription lifecycle, retention strategy, and cancellation playbooks.
+- `saas-architecture-strategy`: Broader lifecycle and platform strategy.
 - [../saas-accounting-system/SKILL.md](../saas-accounting-system/SKILL.md): Double-entry accounting, deferred revenue ledgers, and billing-to-GL reconciliation.
-- [../saas-growth-metrics/SKILL.md](../saas-growth-metrics/SKILL.md): MRR/ARR, NRR, cohort retention, churn analysis.
-- [../software-pricing-strategy/SKILL.md](../software-pricing-strategy/SKILL.md): Value-based pricing, B2B vs B2C plan architecture.
+- [../saas-business-metrics/SKILL.md](../saas-business-metrics/SKILL.md): MRR/ARR, NRR, cohort retention, churn analysis.
+- [../../product-business/software-pricing-strategy/SKILL.md](../../product-business/software-pricing-strategy/SKILL.md): Value-based pricing and plan architecture.
 
 ## References
 

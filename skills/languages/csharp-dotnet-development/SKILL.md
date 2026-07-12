@@ -1,6 +1,6 @@
 ---
 name: csharp-dotnet-development
-description: Use when building, reviewing, modernizing, or debugging C# and .NET applications across .NET 8/9/10, C# 12/13/14, ASP.NET Core APIs, EF Core data access, background services, concurrency, .NET MAUI, Azure-integrated services, testing, packaging, or .NET AI integration. Covers project structure, language idioms, runtime choices, secure service design, performance, observability, and release readiness.
+description: Use when building, reviewing, modernising, or debugging C# and .NET applications, including ASP.NET Core, EF Core, background services, concurrency, .NET MAUI, testing, packaging, and AI integration.
 metadata:
   portable: true
   compatible_with:
@@ -18,20 +18,19 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Choosing .NET target frameworks, SDK versions, project layout, dependency boundaries, or deployment shape.
 - Implementing ASP.NET Core endpoints, EF Core repositories, background jobs, async/parallel code, MAUI UI, Azure services, or .NET AI features.
 - Modernizing older .NET Framework, Web Forms, WPF, WinForms, or early .NET Core code to current .NET.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
 - The work is only Avalonia UI; use `avalonia-desktop-development` for AXAML, Avalonia MVVM, styling, and packaging.
 - The work is only generic architecture, data modelling, security, or CI/CD with no .NET-specific decisions; use the specialist skill first and return here for implementation details.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
 
 ## Required Inputs
 
-- Current target framework, SDK, hosting model, package manager, and deployment target.
-- Existing solution layout, project files, runtime errors, logs, tests, and relevant `.csproj`/`.sln` files.
-- Data stores, external integrations, security model, scale assumptions, and platform targets.
-- Desired deliverable: implementation, review findings, modernization plan, architecture decision, migration, test plan, or release evidence.
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Target framework, SDK, hosting model, and deployment target | yes | Fix runtime and compatibility boundaries |
+| Solution, failures, logs, and tests | yes | Ground work in repository evidence |
+| Integrations, security model, and scale assumptions | conditional | Shape operational decisions |
 
 ## Workflow
 
@@ -117,3 +116,19 @@ Prefer this baseline unless the target project already has stronger conventions:
 - Are database queries projected, indexed, bounded, and observable?
 - Are tests proving domain rules, API contracts, persistence behaviour, and critical failure paths?
 - Can production operators diagnose startup, dependency failure, queue backlog, request latency, and release version quickly?
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Supported target framework exists | Improve in place and preserve public contracts |
+| Upgrade crosses compatibility boundaries | Stage migration with rollback points |
+| Failure is runtime-specific | Reproduce against the pinned SDK first |
+
+## Capability Contract
+
+Read and search are required. Editing and execution require task authorisation; network access is optional for documentation and package verification.
+
+## Degraded Mode
+
+If execution is unavailable, return a code review and exact verification commands without claiming build or test success.

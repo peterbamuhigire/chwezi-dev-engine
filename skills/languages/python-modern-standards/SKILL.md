@@ -1,13 +1,10 @@
 ---
 name: python-modern-standards
-description: Use when writing or reviewing any Python code in our SaaS projects —
-  defines Python version, project layout, tooling (uv, ruff, mypy), typing, Pydantic
-  v2, logging, configuration, async rules, error handling, testing, and security baseline.
-  Load this before any other Python skill.
+description: Use when writing or reviewing any Python code in our SaaS projects — defines Python version, project layout, tooling (uv, ruff, mypy), typing, Pydantic v2, logging, configuration, async rules, error handling, testing, and security baseline. Load this before any other Python skill.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,42 +15,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when writing or reviewing any Python code in our SaaS projects — defines Python version, project layout, tooling (uv, ruff, mypy), typing, Pydantic v2, logging, configuration, async rules, error handling, testing, and security baseline. Load this before any other Python skill.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `python-modern-standards` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
 - For Python sidecars, FastAPI services, workers, queue consumers, or API integrations, load `references/api-container-sidecar-engineering.md`.
 - For containerized Python work, pair with `docker-development`.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -348,3 +314,32 @@ When the task requires it, load:
 - `references/anti-patterns.md`
 - `references/api-container-sidecar-engineering.md`
 
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Work is I/O-bound and dependencies support async | Use one coherent async boundary |
+| Value crosses an external boundary | Validate it with an explicit typed model |
+| Tooling conflicts with repository policy | Preserve policy and document the exception |
+
+## Capability Contract
+
+Read and search are required. Editing, dependency changes, and execution require authorisation; network access is optional.
+
+## Degraded Mode
+
+Fallback: without execution, provide exact formatter, type-checker, security, and test commands; do not claim compatibility.
+
+## Domain Anti-Patterns
+
+- Adding an untyped dictionary at a trust boundary.
+- Mixing blocking calls into an async path.
+- Catching broad exceptions without recovery.
+- Reading secrets from committed configuration.
+- Changing tooling without checking the lockfile.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Python version, project layout, dependency policy, and code scope | yes | Apply compatible standards |
+## Outputs
+- Produce Python code or findings with typing, lint, test, configuration, logging, and security evidence.

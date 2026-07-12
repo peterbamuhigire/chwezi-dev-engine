@@ -120,7 +120,7 @@ School Management System
 ├── academic-service        (grades, reports, transcripts)
 ├── finance-service         (fees, payments, invoices)
 ├── communication-service   (notifications, messages)
-├── ai-service              (analytics, predictions)   â† separate, gated
+├── ai-service              (analytics, predictions)   ← separate, gated
 └── identity-service        (auth, roles, tenants)
 ```
 
@@ -164,7 +164,7 @@ Incrementally replace a monolith:
 **The cardinal rule:** Each service owns its data. No other service may read or write that data directly.
 
 ```
-âŒ WRONG — finance-service queries enrollment DB directly
+❌ WRONG — finance-service queries enrollment DB directly
 SELECT balance FROM enrollment.student_accounts WHERE student_id = 42;
 
 ✅ CORRECT — finance-service calls enrollment-service API
@@ -189,7 +189,7 @@ Services must not hold state in memory between requests.
 
 **Stateful (bad):**
 ```php
-// âŒ — session stored in service memory; breaks horizontal scaling
+// ❌ — session stored in service memory; breaks horizontal scaling
 $_SESSION['cart'] = $cartItems;
 ```
 

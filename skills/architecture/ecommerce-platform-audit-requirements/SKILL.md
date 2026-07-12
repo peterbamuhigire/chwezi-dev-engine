@@ -76,3 +76,20 @@ Use this skill to define a requirements-level audit protocol for e-commerce plat
 - `references/eac-data-protection-table.md`: Verified EAC data-protection status table and legal-use rules.
 - `references/remediation-backlog-template.md`: Backlog fields, severity, business impact, and acceptance criteria.
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Markets, actors, and data flows | yes | Bound the audit |
+| Payment, integration, and hosting inventory | yes | Identify controls |
+| Evidence access and legal constraints | conditional | Set assurance depth |
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Payment or personal-data scope unclear | Stop and resolve scope |
+| Evidence supports a conclusion | Record finding and evidence |
+| Evidence absent | Mark not assessed |
+
+## Degraded mode
+If systems or evidence are unavailable, issue a document-only gap assessment with untested controls separated from findings; do not provide compliance assurance.

@@ -150,7 +150,7 @@ Initialize file structures, routing, and database models required by The Plan.
 For each task in The Plan, execute this cycle:
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+┌─────────────────────────────────────────────┐
 │  RED: Write failing test                    │
 │  ↓                                          │
 │  GREEN: Write minimum code to pass          │

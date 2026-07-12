@@ -1,13 +1,10 @@
 ---
 name: web-app-security-audit
-description: Use when auditing a PHP/JavaScript/HTML web application for security
-  vulnerabilities. Covers configuration, authentication, authorization, input validation,
-  XSS, API security, HTTP headers, and dependency scanning. Produces a severity-rated
-  audit...
+description: Use when auditing a PHP/JavaScript/HTML web application for security vulnerabilities. Covers configuration, authentication, authorization, input validation, XSS, API security, HTTP headers, and dependency scanning. Produces a severity-rated audit...
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,12 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when auditing a PHP/JavaScript/HTML web application for security vulnerabilities. Covers configuration, authentication, authorization, input validation, XSS, API security, HTTP headers, and dependency scanning. Produces a severity-rated audit...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `web-app-security-audit` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
 
 ## Required Inputs
 
@@ -490,3 +481,14 @@ When user invokes this skill:
 3. Launch all 8 layer scans
 4. Generate report
 5. Ask: "Ready to start fixing? I'll begin with [N] CRITICAL findings."
+## Degraded mode
+
+Fallback without execution or a runnable environment: complete static review, mark dynamic checks unverified, and provide exact reproduction steps.
+
+## Decision rules
+
+| Finding | Release decision | Evidence required |
+|---|---|---|
+| Auth bypass, injection, cross-tenant access, secret, or exploitable XSS | block | Reproduction and passing remediation test |
+| High-risk dependency or configuration exposure | block or documented exception | Version/configuration proof |
+| Defence-in-depth gap without exploit path | conditional | Owner and remediation date |

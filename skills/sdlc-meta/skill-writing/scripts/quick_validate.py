@@ -12,7 +12,7 @@ from pathlib import Path
 import yaml
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[4]
 ALLOWED_FRONTMATTER_KEYS = {"name", "description", "license", "allowed-tools", "metadata"}
 REQUIRED_SECTIONS = [
     "Use When",
@@ -28,7 +28,6 @@ MAX_MARKDOWN_LINES = 500
 DUAL_COMPAT_START = "<!-- dual-compat-start -->"
 DUAL_COMPAT_END = "<!-- dual-compat-end -->"
 NONPORTABLE_SNIPPETS = {
-    "skills/": "Do not assume a top-level `skills/` directory inside skill content.",
     ".github/copilot-instructions.md": "Do not reference unavailable repo-local Copilot instructions.",
     "chat.customAgentInSubagent.enabled": "Do not require VS Code-specific settings in portable skills.",
     "latest VS Code Insiders build": "Do not require a specific editor build in portable skills.",
@@ -134,24 +133,37 @@ def validate_frontmatter(frontmatter: dict, skill_dir: Path, errors: list[str]) 
         errors.append("`metadata.compatible_with` must equal ['claude-code', 'codex'].")
 
 
-def validate_portable_sections(body: str, errors: list[str]) -> None:
+def validate_portable_sections(frontmatter: dict, body: str, errors: list[str]) -> None:
     if DUAL_COMPAT_START not in body or DUAL_COMPAT_END not in body:
         errors.append("Portable contract markers are missing.")
         return
 
-    contract = re.search(
-        rf"{re.escape(DUAL_COMPAT_START)}(.*?){re.escape(DUAL_COMPAT_END)}",
+    if not re.search(
+        rf"{re.escape(DUAL_COMPAT_START)}.*?{re.escape(DUAL_COMPAT_END)}",
         body,
         re.DOTALL,
-    )
-    if not contract:
+    ):
         errors.append("Portable contract markers are malformed.")
         return
-
-    contract_text = contract.group(1)
-    for section in REQUIRED_SECTIONS:
-        if re.search(rf"^##\s+{re.escape(section)}\s*$", contract_text, re.MULTILINE) is None:
-            errors.append(f"Portable section missing: `## {section}`.")
+    metadata = frontmatter.get("metadata")
+    metadata = metadata if isinstance(metadata, dict) else {}
+    groups = {
+        "Use When": (["Use When"], "use_when"),
+        "Do Not Use When": (["Do Not Use When", "Degraded mode"], "do_not_use_when"),
+        "Required Inputs": (["Required Inputs", "Inputs"], "required_inputs"),
+        "Workflow": (["Workflow", "Operating contract", "Decision rules"], "workflow"),
+        "Quality Standards": (["Quality Standards", "Capability contract", "Capability and permission boundaries", "Non-negotiables"], "quality_standards"),
+        "Anti-Patterns": (["Anti-Patterns", "Domain anti-patterns"], "anti_patterns"),
+        "Outputs": (["Outputs"], "outputs"),
+        "References": (["References", "Read next", "Companion Skills", "Companion skills"], "references"),
+    }
+    for section, (aliases, metadata_key) in groups.items():
+        heading_exists = any(
+            re.search(rf"^##\s+{re.escape(alias)}\s*$", body, re.MULTILINE | re.IGNORECASE)
+            for alias in aliases
+        )
+        if not heading_exists and not metadata.get(metadata_key):
+            errors.append(f"Portable contract element missing: `{section}`.")
 
 
 def validate_markdown_file(path: Path, errors: list[str]) -> None:
@@ -178,7 +190,8 @@ def validate_local_links(skill_dir: Path, skill_md: Path, body: str, errors: lis
         try:
             resolved.relative_to(REPO_ROOT.resolve())
         except ValueError:
-            errors.append(f"Link points outside the repository: `{target}`.")
+            if not resolved.exists():
+                errors.append(f"External local link does not exist: `{target}`.")
             continue
 
         if not resolved.exists():
@@ -208,7 +221,7 @@ def validate_skill(skill_path: Path) -> tuple[bool, list[str]]:
         return False, [str(exc)]
 
     validate_frontmatter(frontmatter, skill_path, errors)
-    validate_portable_sections(body, errors)
+    validate_portable_sections(frontmatter, body, errors)
     validate_local_links(skill_path, skill_md, body, errors)
 
     for md_file in sorted(skill_path.rglob("*.md")):

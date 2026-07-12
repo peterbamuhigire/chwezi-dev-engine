@@ -1,15 +1,49 @@
 ---
 name: premium-software-product-execution
-description: Use when designing, building, pricing, packaging, or reviewing premium software products, SaaS systems, ERP/POS tools, dashboards, websites, or agency-built applications for executive, enterprise, affluent, high-ticket, or elite buyers. Converts premium marketing, selling, product, UX, pricing, proof, onboarding, and delivery principles into concrete software requirements and quality gates.
+description: Use when designing, pricing, packaging, building, or reviewing premium software for executive, enterprise, affluent, or high-ticket buyers.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # Premium Software Product Execution
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
+
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Decision, audience, and deliverable | yes | Bound the business outcome |
+| Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
+| Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
+
+## Capability and permission contract
+
+Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
+
+## Degraded mode
+
+If evidence, stakeholder decisions, specialist tooling, or authoritative commercial data are unavailable, deliver a labelled draft, checklist, or decision memo. State what was not verified and do not claim approval, publication, financial accuracy, or customer acceptance.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Output creates a commercial, customer, or delivery commitment | Obtain named approval before release | Authority or terms are unclear |
+| Evidence supports a reversible draft | Produce it with assumptions and owner | Required evidence conflicts |
+| Tooling or data is incomplete | Specify validation | A final executable artefact is expected |
+
+## Domain Anti-Patterns
+
+- Inventing customer evidence, prices, benchmarks, or approvals. Fix: cite the source or mark the gap.
+- Publishing or sending a draft without authority. Fix: retain draft status and name the approver.
+- Hiding assumptions inside polished prose. Fix: expose them beside each affected decision.
+- Polishing presentation while the decision remains unclear. Fix: resolve audience, owner, and acceptance criteria.
+- Treating unavailable tooling as passed validation. Fix: record the unassessed check.
+
 
 <!-- dual-compat-start -->
 ## Use When

@@ -1,14 +1,10 @@
 ---
 name: skill-composition-standards
-description: Use when authoring a new skill, normalising an older skill, or reviewing
-  a skill PR — defines the repository-wide house style (frontmatter, decision rules,
-  anti-patterns, references), the output contracts each baseline-skill type must produce,
-  and the input contracts each specialist skill must declare. This is the enforcement
-  spine that makes the repository compose as a system, not a library of linked documents.
+description: Use when authoring, normalising, or reviewing skills that must follow the repository house style, capability boundaries, input/output contracts, decision rules, references, and composition gates.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -19,45 +15,34 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when authoring a new skill, normalising an older skill, or reviewing a skill PR — defines the repository-wide house style (frontmatter, decision rules, anti-patterns, references), the output contracts each baseline-skill type must produce, and the input contracts each specialist skill must declare. This is the enforcement spine that makes the repository compose as a system, not a library of linked documents.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `skill-composition-standards` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- A narrower neighbouring skill owns the task or this workflow would not change the result.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+- Use the task-specific inputs declared in the core workflow below; identify missing required inputs before acting.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+- Follow the ordered core workflow below and load only the references needed for the current branch.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
+- Apply the domain gates, evidence requirements, and acceptance criteria defined below.
 
 ## Anti-Patterns
 
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+- Do not replace the domain-specific rules below with generic advice or load unrelated references.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+- Produce the named artefacts and evidence specified by the core output contract below.
 
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
-- Load `references/orchestration-best-practices.md` when coordinating multi-skill workflows, handoffs, routing, or agent orchestration policy.
 <!-- dual-compat-end -->
 The rules that make every skill in this repository compose cleanly with every other skill. Two concerns in one skill, because they are two faces of the same question: "what does this skill promise, and what is it allowed to expect?"
 
@@ -177,6 +162,10 @@ If a skill does not depend on any upstream artifact, its Inputs section says so:
 
 None. This skill is a foundational baseline.
 ```
+
+Every skill that expects runner capabilities must also declare the minimum capability contract in its workflow or non-negotiables. Express it by capability (`read`, `search`, `edit`, `execute`, `network`, `delegate`) and define safe fallback behaviour when an optional capability is absent. Keep vendor tool names and model settings in adapters. Analysis and review default to read-only; mutation requires the task to authorise it.
+
+Role definitions are not interchangeable with skills. A role describes the specialised worker, permission boundary, and handoff; a skill describes a reusable procedure. Keep them separate when either can be reused independently.
 
 ### Standard artifact types
 
@@ -306,6 +295,9 @@ Future work: a CI hook that parses Inputs / Outputs tables and warns when a clai
 - Anti-patterns section that lists principles ("avoid tight coupling") rather than concrete before/after examples.
 - Neighbour skill not mentioned anywhere, leaving overlap ambiguous.
 - Skill over 500 lines with no `references/` directory.
+- Canonical instructions coupled to one runner's command names, model names, or directory conventions.
+- A role persona presented as a skill without a repeatable procedure and output contract.
+- An adapter that duplicates the canonical instruction body and can drift from it.
 
 ## Read next
 
@@ -329,3 +321,19 @@ Future work: a CI hook that parses Inputs / Outputs tables and warns when a clai
 - `references/rollback-plan-template.md`
 - `references/runbook-template.md`
 - `references/test-plan-template.md`
+
+## Capability contract
+
+Read and search are required. Editing is allowed only for an authorised normalisation task. Execution is limited to repository validators; network access and delegation are optional.
+
+## Degraded mode
+
+Without editing or execution, return a scored gap list and exact proposed changes. Never claim compliance without validator evidence.
+
+## Decision rules
+
+| Condition | Action | Wrong-choice failure |
+|---|---|---|
+| Existing scope is sound | Normalise in place | Unnecessary split fragments routing |
+| Two independent triggers or outputs exist | Split after collision analysis | One oversized skill loads irrelevant context |
+| Neighbour owns the same trigger and contract | Merge or alias | Duplicate routes compete indefinitely |

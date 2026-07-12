@@ -1,14 +1,10 @@
 ---
 name: graphql-patterns
-description: Use when designing, building, or operating GraphQL APIs with Apollo Server +
-  TypeScript — covers schema-first SDL design, resolver architecture, DataLoader, JWT and
-  directive-based authz, Relay cursor pagination, typed error payloads, federation v2,
-  graphql-codegen, and production hardening (depth/complexity limits, timeouts, persisted
-  queries). Load references/graphql-security.md for hostile-input defence.
+description: Use when designing or operating GraphQL APIs with schemas, resolvers, authorization, pagination, federation, code generation, and hostile-input controls.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,24 +13,20 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
 ## Use When
-
 - Designing a new GraphQL API or migrating from REST
 - Building Apollo Server + TypeScript with typed resolvers and clients
 - Adopting Relay pagination, DataLoader, directive auth, or federation
 - Hardening a GraphQL service for production
 
 ## Do Not Use When
-
 - Pure REST/gRPC — use `api-design-first`
 - Threat-modelling GraphQL against malicious input — load `references/graphql-security.md` first
 - Single canonical UI shape, CDN caching dominant — REST is simpler
 
 ## Required Inputs
-
 Domain entities + UI shapes; auth model (JWT/roles/tenants); federation needs; target clients and pagination style.
 
 ## Workflow
-
 1. Draft SDL against real UI shapes before resolvers.
 2. Model relationships in the schema, not in resolvers.
 3. Wire `context` (auth + loaders) before the first resolver.
@@ -43,7 +35,6 @@ Domain entities + UI shapes; auth model (JWT/roles/tenants); federation needs; t
 6. Ship with `formatError` masking production stack traces.
 
 ## Quality Standards
-
 - Lists are `[T!]!` unless partial failure is legal.
 - Every mutation takes `input: XxxInput!` and returns a payload type.
 - Every resolver is pure: reads `context`, calls services/loaders, returns the schema shape.
@@ -51,7 +42,6 @@ Domain entities + UI shapes; auth model (JWT/roles/tenants); federation needs; t
 - Production always has depth limit, complexity limit, error masking.
 
 ## Anti-Patterns
-
 Monolithic `schema.js`/`index.js`; mixed auth patterns across resolvers; client-supplied `userId` trusted; introspection on with no cost analysis; bare `throw new Error`; `String` for dates.
 
 ## Outputs
@@ -488,6 +478,19 @@ Load `references/graphql-security.md` for the adversarial checklist (alias/direc
 ---
 
 ## 15. When Not to Use GraphQL
+
+## Capability contract
+Design and review schemas by default. Modify resolvers or generated clients only when authorised; never deploy a graph or alter production authorization implicitly.
+## Degraded mode
+If registry, telemetry, or identity policy is unavailable, produce a read-only review and flag complexity, compatibility, and authorization checks as unverified.
+## Decision rules
+Protected fields require field-level authorization; unbounded queries require pagination and complexity limits; breaking changes require deprecation before removal.
+## Domain Anti-Patterns
+- Authorizing only at the HTTP endpoint. Fix: enforce resolver policy.
+- Returning unbounded lists. Fix: require cursor pagination.
+- Creating loaders per item. Fix: scope DataLoader per request.
+- Exposing internal exceptions. Fix: map typed public errors.
+- Removing fields without usage evidence. Fix: deprecate and measure first.
 
 - Single canonical client, HTTP caching dominates, no N+1 pain → REST is cheaper.
 - Heavy binary uploads or server-sent file streams → HTTP native.

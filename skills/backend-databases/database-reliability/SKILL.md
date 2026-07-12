@@ -1,15 +1,10 @@
 ---
 name: database-reliability
-description: 'Database reliability engineering: SLI/SLO design and error-budget policy
-  for the data tier, blameless postmortems, escalation tiers and on-call hand-off,
-  game days for MySQL/PostgreSQL, operational runbooks, change management, capacity
-  planning, and backup verification. Use when setting up production database SRE
-  practice, defining database SLOs/error budgets, running database postmortems, or
-  hardening on-call for MySQL/PostgreSQL.'
+description: Use when defining database SLOs, error budgets, backup verification, capacity policy, incident response, game days, or MySQL and PostgreSQL on-call practice.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -20,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Database reliability engineering: SLOs for databases, operational runbooks, change management, capacity planning, backup verification, incident response, and monitoring strategies for production MySQL. Use when setting up production database...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `database-reliability` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The request concerns logical schema design without recovery, availability, or operational risk; use `database-design-engineering`.
+- The task asks for a vendor command copied into production without an approved maintenance window, tested backup, and rollback path.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Business RPO and RTO by datastore | yes | Sets backup frequency and recovery architecture |
+| Topology, engine version, and data size | yes | Constrains replication, restore, and failover procedures |
+| Backup, retention, encryption, and access configuration | yes | Establishes whether recoverable copies exist |
+| Incident history and capacity trends | conditional | Reveals recurring failure and saturation modes |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Translate RPO and RTO into controls, map failure modes, inspect backup and replication paths, perform a controlled restore, validate recovered data and application behavior, then record gaps, owners, and the next exercise date.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+Backup presence is not recovery evidence. Claims require a timed restore or failover exercise, integrity checks, documented dependencies, and measured RPO and RTO results against the stated target.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Recovery design | Platform and database owners | Maps each failure class to backup, replication, failover, and corruption controls |
+| Restore or failover evidence | Risk and operations reviewers | Records timestamps, recovered point, integrity checks, observed RPO and RTO, and deviations |
+| Remediation register | Accountable owners | Prioritizes gaps with owner, deadline, operational risk, and verification step |
 
 ## Evidence Produced
 
@@ -371,3 +362,23 @@ Use that deep dive for:
 - `12. Planned Maintenance Checklist`
 - `13. Chaos Engineering for Databases`
 - Additional deep-dive sections continue in the reference file.
+
+## Capability contract
+Assess SLOs, backups, capacity, and incident controls read-only by default. Do not fail over, restore, kill sessions, change replication, or run chaos tests without production approval and a rollback plan.
+
+## Degraded mode
+If telemetry or restore evidence is unavailable, mark the SLO or recovery objective unverified and return the exact validation runbook.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Restore has not been tested | Treat backup recoverability as unknown |
+| Error budget exhausted | Freeze risky database changes |
+| Replica lag threatens correctness | Route or shed affected reads |
+
+## Domain Anti-Patterns
+- Calling backup success recovery proof. Fix: test restores.
+- Alerting on every transient spike. Fix: alert on user-impacting symptoms.
+- Failing over without a fencing plan. Fix: prevent split brain.
+- Running game days without abort criteria. Fix: predefine stop conditions.
+- Hiding capacity assumptions. Fix: record headroom and growth evidence.

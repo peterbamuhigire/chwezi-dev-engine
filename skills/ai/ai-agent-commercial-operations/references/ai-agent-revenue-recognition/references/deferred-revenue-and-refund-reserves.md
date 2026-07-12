@@ -6,7 +6,7 @@ Both are required by ASC 606 / IFRS 15 (see `asc-606-for-agents.md`). Both are a
 
 ---
 
-## 1. Deferred Revenue â€” Prepaid Task Credits
+## 1. Deferred Revenue — Prepaid Task Credits
 
 ### 1.1 When deferred revenue is created
 
@@ -67,7 +67,7 @@ For a $9.00 unit price:
 
 ```
 DR Deferred Revenue (liability)    $9
-CR Revenue â€” Agent Resolutions     $9
+CR Revenue — Agent Resolutions     $9
 
 posting_type='consumption', amount_minor=-900,
 resolution_event_id=<event_id>, period_yyyymm=current
@@ -77,7 +77,7 @@ resolution_event_id=<event_id>, period_yyyymm=current
 
 **At TTL with `breakage_pct` applied (event: `prepaid_credit_pack.expired`):**
 
-Two acceptable models â€” pick one in the policy doc, never mix:
+Two acceptable models — pick one in the policy doc, never mix:
 
 - **Conservative (recommended):** breakage recognized as revenue **only when statutorily allowed** (escheatment rules vary by US state and EU country). If allowed:
   - `DR Deferred Revenue / CR Revenue` for `units_remaining * unit_price`.
@@ -109,7 +109,7 @@ The customer dashboard (see `ai-agent-customer-sla-dashboard`) shows:
 - Expiry date
 - Average burn rate (for capacity-planning prompts)
 
-The customer never sees "deferred revenue" â€” that's an internal accounting view.
+The customer never sees "deferred revenue" — that's an internal accounting view.
 
 ---
 
@@ -117,11 +117,11 @@ The customer never sees "deferred revenue" â€” that's an internal accountin
 
 ### 2.1 Why a reserve
 
-ASC 606 requires that variable consideration (refunds, SLA credits) be **estimated and constrained** at recognition time. We cannot wait until the refund happens â€” by then the revenue has been booked and the books are wrong.
+ASC 606 requires that variable consideration (refunds, SLA credits) be **estimated and constrained** at recognition time. We cannot wait until the refund happens — by then the revenue has been booked and the books are wrong.
 
 The refund reserve is a balance-sheet liability that absorbs estimated future refunds against revenue **already booked**.
 
-### 2.2 Reserve sizing â€” rolling 90-day rate
+### 2.2 Reserve sizing — rolling 90-day rate
 
 The reserve sits in the GL as a single liability per tenant per currency:
 
@@ -160,7 +160,7 @@ def compute_rolling_refund_rate(tenant_id: str, currency: str, window_days: int 
     today = date.today()
     start = today - timedelta(days=window_days)
 
-    # Sum of refunded amounts in window (technical + out-of-scope only â€” see abandonment-and-refund-policy)
+    # Sum of refunded amounts in window (technical + out-of-scope only — see abandonment-and-refund-policy)
     refunds = sum_refunds_minor(tenant_id, currency, start, today)
     # Sum of agent-resolution revenue billed in window
     revenue = sum_agent_revenue_minor(tenant_id, currency, start, today)
@@ -171,7 +171,7 @@ def compute_rolling_refund_rate(tenant_id: str, currency: str, window_days: int 
 
     rate = Decimal(refunds) / Decimal(revenue)
 
-    # Constraint: floor to the 80th-percentile-conservative figure â€” see asc-606-for-agents.md.
+    # Constraint: floor to the 80th-percentile-conservative figure — see asc-606-for-agents.md.
     # Practical heuristic: take max(rolling_rate, prior_rate * 0.95, tier_floor).
     return max(rate, prior_rate(tenant_id) * Decimal("0.95"), tier_floor(tenant_id))
 ```
@@ -224,10 +224,10 @@ Continuous alerts:
 
 The four abandonment classes (see `ai-agent-abandonment-and-refund-policy/references/abandonment-taxonomy.md`) have different refund rates. Track them separately:
 
-- `technical_failure` â†’ high refund rate, full refund expected.
-- `out_of_scope` â†’ moderate refund rate, full refund expected.
-- `user_abort` â†’ no refund. Excluded from reserve.
-- `budget_exceeded` â†’ no refund. Excluded from reserve.
+- `technical_failure` → high refund rate, full refund expected.
+- `out_of_scope` → moderate refund rate, full refund expected.
+- `user_abort` → no refund. Excluded from reserve.
+- `budget_exceeded` → no refund. Excluded from reserve.
 
 Aggregating into one rate hides regressions in one class behind improvements in another.
 
@@ -239,7 +239,7 @@ SLA credits are a separate variable-consideration line. They behave like the ref
 
 ```python
 def sla_credit_reserve_size(tier: str, base_revenue_minor: int) -> int:
-    # Pro: 5% of base, Business: 10%, Enterprise: 15% â€” see sla-class-table.md
+    # Pro: 5% of base, Business: 10%, Enterprise: 15% — see sla-class-table.md
     pct = {"pro": Decimal("0.05"), "business": Decimal("0.10"), "enterprise": Decimal("0.15")}[tier]
     return int(Decimal(base_revenue_minor) * pct)
 ```
@@ -252,13 +252,13 @@ Postings mirror the refund-reserve flow (`accrual` / `utilization` / `true_up`) 
 
 | Account | Type | Normal balance |
 |---|---|---|
-| `2150 Deferred Revenue â€” Prepaid Agent Credits` | Liability | Credit |
-| `2160 Refund Reserve â€” Agent Resolutions` | Liability | Credit |
-| `2170 SLA Credit Reserve â€” Agent` | Liability | Credit |
-| `4100 Revenue â€” Agent Resolutions` | Revenue | Credit |
-| `4110 Revenue â€” Agent Subscription Base` | Revenue | Credit |
-| `4910 Refund Expense â€” Agent` (contra-revenue) | Contra-revenue | Debit |
-| `4920 SLA Credits Issued â€” Agent` (contra-revenue) | Contra-revenue | Debit |
+| `2150 Deferred Revenue — Prepaid Agent Credits` | Liability | Credit |
+| `2160 Refund Reserve — Agent Resolutions` | Liability | Credit |
+| `2170 SLA Credit Reserve — Agent` | Liability | Credit |
+| `4100 Revenue — Agent Resolutions` | Revenue | Credit |
+| `4110 Revenue — Agent Subscription Base` | Revenue | Credit |
+| `4910 Refund Expense — Agent` (contra-revenue) | Contra-revenue | Debit |
+| `4920 SLA Credits Issued — Agent` (contra-revenue) | Contra-revenue | Debit |
 
 ---
 

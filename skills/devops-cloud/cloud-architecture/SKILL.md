@@ -4,7 +4,7 @@ description: Use when designing cloud deployments, Dockerising applications, lay
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -16,7 +16,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing cloud deployments, Dockerising applications, laying out AWS or GCP environments, choosing a deployment pattern, or moving a workload from a single VM to a resilient multi-AZ topology.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
@@ -41,8 +40,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Anti-Patterns
 
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
 - Jumping to Kubernetes when EC2 + Compose or ECS Fargate would meet the requirement.
 - Baking secrets or environment-specific URLs into images.
 
@@ -375,6 +372,20 @@ Design VPC across ≥3 AZs for production, 2 for non-production. Allocate /16; c
 | Use case | Web APIs, microservices | High-throughput TCP, static IPs, PrivateLink |
 
 Health checks hit a dedicated `/healthz` path; verify dependencies shallowly — deep checks cause cascading failures evicting healthy targets. Full networking and AWS-core CLI: `references/aws-core-services.md`.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Single-zone failure breaches SLO | Use multi-zone placement |
+| Managed service fits need and budget | Prefer managed service |
+| Data residency uncertain | Stop region selection |
+
+## Domain Anti-Patterns
+- Adding multi-region without recovery need. Fix: derive it from RTO/RPO.
+- Exposing databases publicly. Fix: use private networking.
+- Giving workloads broad IAM roles. Fix: scope permissions.
+- Treating autoscaling as capacity planning. Fix: test limits.
+- Ignoring egress and idle cost. Fix: model traffic costs.
 
 ## Platform Notes
 

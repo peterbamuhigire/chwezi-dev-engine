@@ -4,7 +4,7 @@ description: Use when designing systems where multiple agents collaborate on one
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -227,3 +227,26 @@ When budget hits 100%, the task transitions `BUDGET_EXCEEDED` regardless of whic
 - Shared scratchpad in process memory. Lost on crash.
 - Agents writing to the same external resource without coordination. Race conditions become "hallucinations".
 - "Agents will figure it out." They will not.
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Decomposable task and dependency graph | yes | Identify safe parallel work |
+| Worker scopes, permissions, and output schemas | yes | Prevent overlap |
+| Reconciliation owner and conflict policy | yes | Produce one decision |
+
+## Capability contract
+
+Delegation is optional and runner-dependent. Workers receive minimum scope. Shared-file edits require ownership or an explicit merge strategy.
+
+## Degraded mode
+
+Fallback without parallel workers: execute the same bounded workstreams sequentially and preserve separate evidence before synthesis.
+
+## Decision rules
+
+| Task relationship | Coordination mode | Failure avoided |
+|---|---|---|
+| Independent questions or review lenses | Parallel workers | Unnecessary latency |
+| Output B depends on decision A | Sequential handoff | Contradictory assumptions |
+| Overlapping file mutations | Single owner or explicit merge | Conflicting edits |

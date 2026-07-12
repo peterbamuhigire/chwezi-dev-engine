@@ -1,7 +1,6 @@
 ---
 name: ai-agent-tooling-and-hitl
-description: >-
-  Use when designing agent tool catalogs, tool schemas, action gating, human approval, and human-in-the-loop control for agentic AI systems.
+description: Use when designing agent tool catalogs, tool schemas, action gating, human approval, and human-in-the-loop control for agentic AI systems.
 metadata:
   portable: true
   compatible_with:
@@ -62,3 +61,34 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
 <!-- dual-compat-end -->
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Tool schemas and side-effect classification | yes | Define callable actions |
+| Identity, tenant, approval, and budget policy | yes | Enforce authority |
+| Reversal and audit requirements | yes | Bound consequences |
+
+## Capability contract
+
+Default to read-only tool design. Tool invocation, approval simulation, and side-effect testing require isolated fixtures and explicit execution authority.
+
+## Degraded mode
+
+Fallback without executable tools: validate schemas, permission scopes, approval policy, and reversal design statically; mark runtime enforcement unverified.
+
+## Decision rules
+
+| Action class | Gate | Failure avoided |
+|---|---|---|
+| Read-only, low sensitivity | Policy-scoped automatic call | Approval fatigue |
+| Reversible mutation | Confirm policy and log result | Silent unwanted change |
+| Irreversible, financial, external, or privileged | Just-in-time human approval | Unauthorised impact |
+
+## Domain anti-patterns
+
+- Giving one tool broad multi-action scope. Fix: expose narrow, typed actions.
+- Trusting prompt text for authorisation. Fix: enforce identity and policy outside the model.
+- Asking approval after execution. Fix: gate before side effects.
+- Omitting idempotency and reversal. Fix: define both for every mutation.
+- Logging arguments without protecting secrets. Fix: redact and classify audit fields.

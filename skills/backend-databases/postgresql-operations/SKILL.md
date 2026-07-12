@@ -55,5 +55,32 @@ Use this parent skill as the active PostgreSQL operations entrypoint. Keep opera
 
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| PostgreSQL version, topology, and workload | yes | Bound operations |
+| SLO, RPO, and RTO | yes | Set recovery policy |
+| Metrics, logs, and backup inventory | yes | Ground diagnosis |
+
+## Capability contract
+Diagnose read-only by default. Failover, restore, vacuum changes, session termination, replication repair, and configuration reloads require explicit authority and rollback criteria.
+
+## Degraded mode
+If telemetry or privileged access is unavailable, return inspection commands and ranked hypotheses; do not infer root cause or recoverability.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Transaction blocks vacuum | Identify owner before termination |
+| Replica lag threatens recovery | Protect WAL retention and investigate |
+| Restore is untested | Report recovery objectives unverified |
+
+## Domain Anti-Patterns
+- Killing sessions without owner review. Fix: assess impact first.
+- Disabling autovacuum globally. Fix: tune per table from evidence.
+- Treating replication as backup. Fix: keep independent tested backups.
+- Reindexing a hot table blindly. Fix: choose an online-safe method.
+- Deleting WAL to free disk. Fix: preserve recovery and repair retention.

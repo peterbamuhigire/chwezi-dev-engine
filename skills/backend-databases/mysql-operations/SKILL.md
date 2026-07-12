@@ -55,5 +55,32 @@ Use this parent skill as the active MySQL operations entrypoint. Operational adv
 
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| MySQL version, topology, and workload | yes | Bound operations |
+| SLO, RPO, and RTO | yes | Set recovery policy |
+| Metrics, logs, and backup inventory | yes | Ground diagnosis |
+
+## Capability contract
+Diagnose read-only by default. Configuration changes, failover, restores, session termination, and replication repair require explicit production authority and rollback criteria.
+
+## Degraded mode
+If telemetry or privileged access is unavailable, return safe inspection commands and ranked hypotheses; do not infer root cause or recovery readiness.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Data loss is possible | Preserve evidence and stop writes if authorised |
+| Replica lag is growing | Find workload cause before tuning buffers |
+| Restore is untested | Report RTO and RPO as unverified |
+
+## Domain Anti-Patterns
+- Restarting before evidence capture. Fix: collect logs and status.
+- Tuning global buffers by folklore. Fix: measure memory and workload.
+- Repairing replication by skipping errors. Fix: reconcile data first.
+- Keeping backups on the same host. Fix: isolate and test copies.
+- Running unbounded maintenance on primary. Fix: throttle and monitor.

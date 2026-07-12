@@ -1,12 +1,10 @@
 ---
 name: distributed-systems-patterns
-description: Use when designing or reviewing multi-service, message-driven, or eventually
-  consistent systems. Covers service boundaries, consistency tradeoffs, event workflows,
-  outbox and inbox patterns, sagas, ordering, and idempotency.
+description: Use when designing or reviewing multi-service, message-driven, or eventually consistent systems. Covers service boundaries, consistency tradeoffs, event workflows, outbox and inbox patterns, sagas, ordering, and idempotency.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing or reviewing multi-service, message-driven, or eventually consistent systems. Covers service boundaries, consistency tradeoffs, event workflows, outbox and inbox patterns, sagas, ordering, and idempotency.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `distributed-systems-patterns` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The change is a single-process transaction with no remote dependency, asynchronous delivery, or independently failing component.
+- The task is mainly service decomposition or API shape; use `system-architecture-design` or `api-design-first` and return here for cross-boundary failure semantics.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Workflow steps and system boundaries | yes | Identifies where atomicity ends and partial failure begins |
+| Delivery, ordering, and consistency requirements | yes | Determines idempotency, sequencing, and reconciliation choices |
+| Failure and recovery expectations | yes | Sets timeout, retry, compensation, and operator intervention rules |
+| Throughput and latency constraints | conditional | Tests whether the coordination pattern is viable |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Draw state transitions and ownership boundaries, enumerate failure windows, choose consistency and coordination patterns, define idempotency and recovery, then verify duplicate, reordered, delayed, and partially applied events.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+Every remote interaction has a timeout and failure policy. Every retried side effect has an idempotency rule. Consistency claims state their scope, and recovery does not assume exactly-once delivery.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Distributed workflow model | Architecture and implementation teams | Shows state ownership, message boundaries, consistency guarantees, and failure windows |
+| Failure-handling contract | Service owners | Defines timeout, retry, deduplication, compensation, replay, and reconciliation behavior |
+| Verification scenarios | Test and operations teams | Cover duplicates, reordering, concurrency, dependency outage, and partial completion |
 
 ## Evidence Produced
 
@@ -179,3 +173,16 @@ For distributed-system work, produce:
 
 - [references/consistency-decision-matrix.md](references/consistency-decision-matrix.md): How to choose synchronous, asynchronous, strong, or eventual consistency.
 - [references/messaging-checklist.md](references/messaging-checklist.md): Event, queue, and saga review prompts.
+
+## Capability contract
+Model boundaries, messages, and failure semantics by default. Do not provision brokers, replay events, or mutate production state unless explicitly authorised.
+
+## Degraded mode
+If topology or failure evidence is unavailable, return a read-only pattern comparison and assumptions register; withhold recommendations dependent on unknown delivery guarantees.
+
+## Domain Anti-Patterns
+- Assuming exactly-once delivery. Fix: define idempotency and deduplication.
+- Sharing one database across autonomous services. Fix: assign data ownership.
+- Publishing before the state change commits. Fix: use a transactional outbox.
+- Retrying non-idempotent commands blindly. Fix: add keys and retry limits.
+- Omitting poison-message handling. Fix: define dead-letter and replay controls.

@@ -27,10 +27,7 @@ DEFAULT_ACTIVE_ROOTS = (
 DEFAULT_REFERENCE_ROOTS = (
     "doctrine/skills",
 )
-DEFAULT_EXTERNAL_ENGINE_ROOTS = (
-    "../design-system-skills/skills",
-    "../chwezi-accounting-doctrine/skills",
-)
+DEFAULT_EXTERNAL_ENGINE_ROOTS: tuple[str, ...] = ()
 DEFAULT_MAX_ACTIVE_SKILLS = 200
 MAX_DESCRIPTION_CHARS = 1024
 MAX_SKILL_MD_LINES = 500
@@ -124,7 +121,8 @@ def active_roots(root_args: list[str] | None) -> list[Path]:
 def reference_roots() -> list[Path]:
     resolved: list[Path] = []
     for raw in DEFAULT_REFERENCE_ROOTS + DEFAULT_EXTERNAL_ENGINE_ROOTS:
-        path = (REPO_ROOT / raw).resolve()
+        candidate = Path(raw)
+        path = candidate.resolve() if candidate.is_absolute() else (REPO_ROOT / candidate).resolve()
         if path.exists():
             resolved.append(path)
     return resolved
@@ -337,6 +335,7 @@ def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
         return [Finding("error", "alias-registry-yaml", relpath(ALIASES_YML), f"invalid YAML: {exc}")]
 
     routes: dict[str, str] = registry.get("inactive_skill_aliases", {}) or {}
+    external_prefixes: dict[str, str] = registry.get("external_target_prefixes", {}) or {}
     on_disk = {p.parent.relative_to(REPO_ROOT).as_posix() for p in REPO_ROOT.rglob("ALIAS.md")}
     in_registry = set(routes)
 
@@ -370,6 +369,10 @@ def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
             or (REPO_ROOT / target / "SKILL.md").exists()
             or (("/" not in target) and target in skill_dir_names)
             or target_slug in retained_dir_names
+            or any(
+                target == prefix.rstrip("/") or target.startswith(prefix.rstrip("/") + "/")
+                for prefix in external_prefixes
+            )
         )
         if not resolves:
             findings.append(

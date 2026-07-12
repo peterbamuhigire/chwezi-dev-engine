@@ -200,7 +200,7 @@ $role     = $request->header('X-Role');
 
 ```
 ✅ Correct: finance-service calls enrollment-service HTTP API to get student status
-âŒ Wrong:   finance-service runs SELECT on enrollment_db.student_accounts
+❌ Wrong:   finance-service runs SELECT on enrollment_db.student_accounts
 ```
 
 ### Cross-Service Query Patterns
@@ -212,7 +212,7 @@ $role     = $request->header('X-Role');
 **Option A — API Aggregation (BFF)**
 Create a Backend for Frontend service that fans out to multiple services and stitches results.
 ```
-report-service → enrollments API  â”
+report-service → enrollments API  ┐
 report-service → finance API      ├→ aggregate → response
 report-service → grades API       ┘
 ```
@@ -236,8 +236,8 @@ Services must not break their callers. Contract discipline is essential.
 ### Versioning
 
 ```
-/api/v1/students/{id}   â† stable, never broken
-/api/v2/students/{id}   â† new version with breaking changes
+/api/v1/students/{id}   ← stable, never broken
+/api/v2/students/{id}   ← new version with breaking changes
 ```
 
 Run both versions simultaneously during migration. Deprecate v1 only after all callers have migrated.

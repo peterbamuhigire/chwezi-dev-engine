@@ -55,5 +55,32 @@ Use this parent skill as the active MySQL engineering entrypoint. It keeps routi
 
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| MySQL version and schema | yes | Select valid features |
+| Query shapes and cardinalities | yes | Design indexes |
+| Migration and availability constraints | yes | Plan safe change |
+
+## Capability contract
+Review SQL and propose DDL by default. Execute migrations, routines, or data changes only with authorised credentials, environment scope, backup evidence, and rollback.
+
+## Degraded mode
+If EXPLAIN plans or production statistics are unavailable, provide read-only hypotheses and validation SQL; do not claim a query is tuned.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Scan is selective and frequent | Evaluate a covering index |
+| DDL may lock a hot table | Use an online or staged migration |
+| Constraint encodes business truth | Enforce it in the database |
+
+## Domain Anti-Patterns
+- Using SELECT star in stable contracts. Fix: name columns.
+- Building SQL by interpolation. Fix: bind parameters.
+- Adding indexes without write-cost review. Fix: measure both paths.
+- Using zero dates as missing values. Fix: use nullable semantics.
+- Changing a hot table without lock analysis. Fix: test the DDL plan.

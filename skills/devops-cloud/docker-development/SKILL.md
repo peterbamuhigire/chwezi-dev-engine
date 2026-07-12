@@ -1,10 +1,10 @@
 ---
 name: docker-development
-description: Docker and Docker Compose standards for PHP, Python, JavaScript, and API services. Use when containerizing development environments, production images, CI builds, PHP-FPM/Nginx stacks, Python sidecars, Node/JS services, or multi-service SaaS deployments.
+description: Use when containerizing PHP, Python, JavaScript, or API services with Dockerfiles, multi-stage images, Compose, CI builds, runtime permissions, and persistent dependencies.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -65,6 +65,23 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/php-python-js-container-delivery.md`
 - `references/source-register.md`
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Runtime, build context, and platform | yes | Build image |
+| Dependencies and ports | yes | Define runtime |
+| Secret and persistence boundaries | yes | Avoid embedded state |
+
+## Degraded mode
+If Docker or the target architecture is unavailable, perform static review and provide unverified build commands.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Build tool not needed at runtime | Use multi-stage build |
+| Process needs persistent state | Mount managed storage |
+| Root is not justified | Redesign permissions |
 
 ## Pair With
 

@@ -1,13 +1,10 @@
 ---
 name: android-data-persistence
-description: Android data persistence standards with Room as primary local storage
-  and custom API backends for cloud sync. Covers SharedPreferences, DataStore, Room
-  (entities, DAOs, relations, migrations), file storage, offline-first architecture,
-  and...
+description: Use when designing Android local storage, Room migrations, DataStore preferences, or offline API synchronisation; use android-development for broader application structure.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -22,40 +19,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Android data persistence standards with Room as primary local storage and custom API backends for cloud sync. Covers SharedPreferences, DataStore, Room (entities, DAOs, relations, migrations), file storage, offline-first architecture, and...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `android-data-persistence` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -425,3 +388,34 @@ android-tdd → DAO tests, migration tests, SyncWorker tests
 - **Room Guide**: developer.android.com/training/data-storage/room
 - **DataStore**: developer.android.com/topic/libraries/architecture/datastore
 - **Architecture Samples**: github.com/android/architecture-samples
+
+## Decision Rules
+
+| Data or failure mode | Required choice |
+|---|---|
+| Structured records queried offline | Room with exported schemas and explicit migrations |
+| Small non-secret preferences | DataStore |
+| Credentials or cryptographic material | Keystore-backed encrypted storage, never a Room plaintext column |
+| Financial or stock conflict | Server-authoritative reconciliation with an idempotency key |
+
+## Capability Contract And Degraded Mode
+
+Read and search the data layer before recommending schema changes. Edit and execute migration tests only when authorised. Without execution, return the proposed entity, migration SQL, rollback risk, and unverified test commands.
+
+## Domain Anti-Patterns
+
+- Using destructive migration in production. Fix: write and test every version hop.
+- Treating network data as the UI source of truth. Fix: observe Room and synchronise behind the repository.
+- Storing secrets in DataStore or Room. Fix: use Keystore-backed encryption.
+- Retrying writes without idempotency keys. Fix: persist an outbox identifier through acknowledgement.
+- Resolving monetary conflicts with client timestamps. Fix: make the ledger service authoritative.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Data model, access patterns, offline/sync, migration, and retention requirements | yes | Select persistence design |
+## Outputs
+- Produce Android persistence architecture, schemas, migrations, tests, and recovery evidence.
+## Degraded mode
+Fallback without a device/database test environment: produce schemas and migration tests as unverified plans; do not claim upgrade safety.
+## Capability contract
+Database writes, destructive migrations, and device-state resets require explicit test scope and recoverable fixtures.

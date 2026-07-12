@@ -1,15 +1,49 @@
 ---
 name: customer-service-excellence
-description: Use when handling a customer service interaction (especially recovery, escalation, or public complaint), drafting service language (apology, empathy, ownership, escalation, confirmation), measuring service quality, aligning frontline empowerment with escalation paths, or designing a service-failure prevention loop. Encodes the recovery-and-retention loop, difficult-interaction frameworks, and CX-EX alignment rules.
+description: Use when handling service recovery, escalations, complaints, apology language, frontline empowerment, CX measurement, or prevention loops.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # Customer Service Excellence
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
+
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Decision, audience, and deliverable | yes | Bound the business outcome |
+| Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
+| Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
+
+## Capability and permission contract
+
+Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
+
+## Degraded mode
+
+If evidence, stakeholder decisions, specialist tooling, or authoritative commercial data are unavailable, deliver a labelled draft, checklist, or decision memo. State what was not verified and do not claim approval, publication, financial accuracy, or customer acceptance.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Output creates a commercial, customer, or delivery commitment | Obtain named approval before release | Authority or terms are unclear |
+| Evidence supports a reversible draft | Produce it with assumptions and owner | Required evidence conflicts |
+| Tooling or data is incomplete | Specify validation | A final executable artefact is expected |
+
+## Domain Anti-Patterns
+
+- Inventing customer evidence, prices, benchmarks, or approvals. Fix: cite the source or mark the gap.
+- Publishing or sending a draft without authority. Fix: retain draft status and name the approver.
+- Hiding assumptions inside polished prose. Fix: expose them beside each affected decision.
+- Polishing presentation while the decision remains unclear. Fix: resolve audience, owner, and acceptance criteria.
+- Treating unavailable tooling as passed validation. Fix: record the unassessed check.
+
 
 <!-- dual-compat-start -->
 ## Use When
