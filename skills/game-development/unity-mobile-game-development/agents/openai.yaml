@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity Mobile Game Development"
+  short_description: "Build production Unity mobile games"
+  default_prompt: "Implement and verify this Unity mobile-game capability."

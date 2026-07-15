@@ -1,6 +1,6 @@
 ---
 name: ai-feature-rollout-and-experimentation
-description: Use when rolling out AI features safely in a multi-tenant SaaS — feature flags scoped per tenant/user, percentage rollouts gated by eval and SLO budget, canary cohorts, A/B testing of prompts/models, automatic rollback on quality regression, tenant-level opt-out and consent, and shadow-mode for risky changes.
+description: "Use when planning a controlled AI-feature rollout or experiment in multi-tenant SaaS: tenant/user feature flags, percentage and canary cohorts, holdout metrics, A/B tests of prompts or models, eval and SLO gates, automatic rollback, tenant opt-out and consent, or shadow mode for risky changes."
 metadata:
   portable: true
   compatible_with:

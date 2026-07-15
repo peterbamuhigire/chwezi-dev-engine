@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile Game Design"
+  short_description: "Design mobile-first play and progression"
+  default_prompt: "Design the mobile game loop, controls, UX, progression and tests."

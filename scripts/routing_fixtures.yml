@@ -87,6 +87,34 @@ fixtures:
   - task: "Plan iOS release evidence with Device Hub, Xcode Cloud, TestFlight, Swift Testing and App Store submission gates"
     expect: ios-quality-and-release
 
+  # --- Game development ---
+  - task: "Plan our complete 3D mobile game from concept through prototype, vertical slice, production and launch"
+    expect: game-development-orchestration
+  - task: "Turn our riskiest game assumptions into falsifiable hypotheses, choose the smallest prototypes, define evidence thresholds and decide go pivot or stop"
+    expect: lean-game-product-development
+  - task: "Design the core loop, touch controls, first session, progression and ethical economy for a mobile game"
+    expect: mobile-game-design
+  - task: "Build a Unity C# Android game with additive scenes, prefabs, the Input System, saves and device tests"
+    expect: unity-mobile-game-development
+  - task: "Build and export a Godot mobile game using scenes, resources, signals and typed scripts"
+    expect: godot-mobile-game-development
+  - task: "Architect combat, quests, dialogue, AI, inventory and versioned save state for a game"
+    expect: gameplay-systems-architecture
+  - task: "Specify coordinate spaces, vector and quaternion operations, fixed timestep simulation, seeded randomness and numerical tolerance tests for gameplay"
+    expect: game-math-and-simulation
+  - task: "Design the mobile render pipeline, shaders, materials, lighting, shadows, visibility and GPU diagnostics for a real-time game"
+    expect: real-time-game-graphics
+  - task: "Create a mobile-ready 3D character pipeline from concept through Maya, Substance, rigging, LOD and engine import"
+    expect: game-3d-asset-pipeline
+  - task: "Implement adaptive game music, Foley, dialogue, audio buses, localisation and performer rights"
+    expect: game-audio-implementation
+  - task: "Profile our mobile game for frame pacing, CPU GPU memory heat battery and loading on low-end phones"
+    expect: mobile-game-performance
+  - task: "Create the playtest, device QA, balance, polish, alpha beta and release-candidate gates for our game"
+    expect: game-testing-polish
+  - task: "Prepare game signing, Google Play and App Store submission, privacy, staged rollout, rollback and live events"
+    expect: mobile-game-release-liveops
+
   # --- Security / compliance ---
   - task: "Run a web app security audit for OWASP vulnerabilities, insecure code and remediation evidence"
     expect: web-app-security-audit

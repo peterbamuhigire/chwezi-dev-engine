@@ -191,6 +191,27 @@ domain — they sit above domain skills.
 
 ## Registry Maintenance
 
+## Game development family
+
+Route complete game initiatives through `skills/game-development/game-development-orchestration/SKILL.md`, then load only the required specialists:
+
+| Intent | Skill |
+|---|---|
+| Inception, risky assumptions, hypotheses, prototype choice, experiment gates, pivot or stop decisions | `lean-game-product-development` |
+| Player fantasy, loop, touch controls, sessions, onboarding, accessibility, progression or economy | `mobile-game-design` |
+| Unity C# project, scenes, prefabs, input, saves, Android/iOS build | `unity-mobile-game-development` |
+| Godot scenes, nodes, resources, signals, scripts or mobile export | `godot-mobile-game-development` |
+| Combat, AI, quests, dialogue, inventory, progression or world/save state | `gameplay-systems-architecture` |
+| Coordinate spaces, transforms, vectors, quaternions, curves, probability, fixed-step simulation or numerical stability | `game-math-and-simulation` |
+| Render pipeline, shaders, materials, lighting, shadows, visibility, post-processing or graphics API diagnosis | `real-time-game-graphics` |
+| Concepts, models, UVs, textures, rigs, animation, LODs, colliders or imports | `game-3d-asset-pipeline` |
+| Music, ambience, Foley, voice, buses, spatial/adaptive audio or audio rights | `game-audio-implementation` |
+| Frame pacing, CPU/GPU, memory, loading, battery, heat or device budgets | `mobile-game-performance` |
+| QA, playtesting, balance, accessibility/localisation regression, alpha/beta/RC | `game-testing-polish` |
+| Signing, stores, privacy, ratings, IAP, rollout, rollback, support or live events | `mobile-game-release-liveops` |
+
+For historical, cultural, market, legal or version-sensitive claims, pair this family with the external Digital Research Skills Engine. For interface appearance, pair it with `design-system-skills`. For native store operations, reuse the existing Android/iOS/mobile-platform skills.
+
 - Update this file when a retained parent skill changes.
 - Add the same mapping to `docs/skill-aliases.yml` when a route needs to be machine-readable.
 - Do not remove old directories as part of registry maintenance.

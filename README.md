@@ -1,20 +1,20 @@
 # Skills Web Dev
 
-`skills-web-dev` is the Chwezi Core Systems software-engineering skills engine. It gives agents a routed catalog for AI systems, SaaS, architecture, APIs, databases, security, frontend engineering, mobile, DevOps, reliability, product engineering, and SDLC documentation.
+`skills-web-dev` is the Chwezi Core Systems software-engineering skills engine. It gives agents a routed catalog for AI systems, SaaS, architecture, APIs, databases, security, frontend engineering, mobile and game development, DevOps, reliability, product engineering, and SDLC documentation.
 
 The engine is file-based. Active skills live as `SKILL.md` files under `skills/` and `00-meta-initialization/`. Deep guidance lives in references, templates, examples, source registers, and quality gates so the active routing surface stays small enough to select accurately.
 
 ## Current Status
 
-Last upgraded: 2026-07-08
+Last upgraded: 2026-07-15
 
 | Metric | Current value |
 |---|---:|
-| Active `SKILL.md` files | 142 |
+| Active `SKILL.md` files | 155 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
-| Routing fixtures | 117 |
-| Routing precision@1 | 97% |
+| Routing fixtures | 132 |
+| Routing precision@1 | 94% |
 | Routing precision@3 | 100% |
 | Guardrail findings | 0 |
 
@@ -46,6 +46,7 @@ Use the smallest accurate skill. Load its `SKILL.md` first, then only the refere
 | DevOps, cloud, containers, reliability | `skills/devops-cloud/` |
 | Frontend engineering | `skills/frontend-ux/` |
 | Android, iOS, KMP, PWA | `skills/android/`, `skills/ios/`, `skills/mobile-cross/` |
+| Mobile and 3D game development, including lean validation, simulation mathematics and real-time graphics | `skills/game-development/` |
 | Languages | `skills/languages/` |
 | SaaS product architecture | `skills/saas/` |
 | Security | `skills/security/` |

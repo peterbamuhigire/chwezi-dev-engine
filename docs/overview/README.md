@@ -2,17 +2,16 @@
 
 This repository is a working catalog of reusable AI-assistant skills and
 supporting documentation. It combines implementation guidance, product strategy,
-security patterns, finance-doctrine orchestration, mobile development guidance, SDLC
+security patterns, finance-doctrine orchestration, mobile and game-development guidance, SDLC
 documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
-The 2026-06-21 WWDC26 modernization updated the existing Apple and mobile skills
-without adding new active entrypoints. The catalog now routes current Apple work
-through iOS development, AI/ML, App Intents/Siri/Spotlight, quality/release,
-security, StoreKit, PWA/Safari, KMP, and mobile operations guidance, while
-presentation-layer Apple UI guidance lives in the external
-`design-system-skills` engine.
+The 2026-07-15 game-development deepening added focused entrypoints for lean
+game-product experiments, game mathematics and deterministic simulation, and
+real-time graphics. These sit between orchestration/design and engine-specific
+implementation, with explicit evidence, device-performance and ethical-
+engagement gates.
 
 ## What Is Here
 
@@ -52,9 +51,9 @@ presentation-layer Apple UI guidance lives in the external
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 142 skills.
-- Current routing smoke-test baseline is 117 fixtures, precision@1 97%, and
-  precision@3 100%.
+- Current active catalog size is 155 skills.
+- Current routing smoke-test suite contains 132 fixtures, with 94% precision@1
+  and 100% precision@3.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated

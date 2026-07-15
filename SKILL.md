@@ -30,6 +30,7 @@ When a task requires external research, use the Digital Research Skills Engine a
 | CI/CD, cloud, containers, Kubernetes, release engineering, observability, reliability | `skills/devops-cloud/*` |
 | React, Next.js, Tailwind implementation, frontend performance, image compression, content UX | `skills/frontend-ux/*` |
 | Android, iOS, Kotlin Multiplatform, PWA, mobile operations | `skills/android/*`, `skills/ios/*`, `skills/mobile-cross/*` |
+| Mobile/3D game inception, design, math/simulation, rendering, Unity, Godot, gameplay systems, 3D assets, audio, optimisation, QA, release or live operations | `skills/game-development/*` |
 | TypeScript, JavaScript, Python, PHP, C#/.NET | `skills/languages/*` |
 | SaaS tenancy, pricing, billing, entitlements, SSO/SCIM, portability, admin tooling | `skills/saas/*` |
 | Security audit, code safety, DPIA, Linux hardening, network security | `skills/security/*` |
