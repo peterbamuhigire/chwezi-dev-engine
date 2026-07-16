@@ -25,7 +25,7 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | `.github/workflows/skill-guardrails.yml` | CI: runs both gates on every push and PR touching skills, doctrine, aliases, fixtures, or the scripts. |
 | `skills/sdlc-meta/skill-composition-standards/references/` | Artifact templates (ADR, entity model, threat model, release/rollback plan, runbook, test plan) and the closing Delivery Definition of Done pack. |
 | `skills/ios/` and `skills/mobile-cross/` | Apple/mobile implementation guidance, including WWDC26-era Xcode, Swift, Foundation Models/Core AI, App Intents, StoreKit, PWA/Safari, KMP, release, and security references. |
-| `skills/game-development/` | Game orchestration, lean product experiments, mobile design, mathematics/simulation, real-time graphics, Unity, Godot, gameplay systems, 3D assets, audio, performance, testing/polish, and mobile-game release/live operations. |
+| `skills/game-development/` | Game orchestration, lean experiments, design, mathematics/simulation, graphics, Unity/Godot/Unreal, Apple delivery, multiplayer/backend, security, 2D/3D content, audio, performance, build/release, testing, data/live economy, accessibility/player safety, studio operations, and live operations. |
 | `claude-guides/` | Skill authoring and Claude-specific usage guidance. |
 | `book-extractions/` | Long-form source notes and reference summaries. |
 

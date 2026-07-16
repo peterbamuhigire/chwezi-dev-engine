@@ -41,6 +41,7 @@ Art bible; reference/rights ledger; asset inventory and briefs; budget profile; 
 ## References
 - [Concept-to-engine 3D pipeline](references/concept-to-engine-pipeline.md)
 - [Asset acceptance and mobile budgets](references/asset-acceptance-mobile-budgets.md)
+- [Practical 3D scene evidence](references/practical-3d-scene-evidence.md)
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Choice |

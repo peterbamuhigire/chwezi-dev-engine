@@ -104,5 +104,7 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 - `mobile-game-design` for interaction, sessions, controls, UX, accessibility, economy, and player testing.
 - `lean-game-product-development` for inception, hypotheses, prototypes, learning and gate decisions.
 - `game-math-and-simulation` and `real-time-game-graphics` for mathematical and rendering contracts.
-- `unity-mobile-game-development` or `godot-mobile-game-development` after the engine decision.
+- `unity-mobile-game-development`, `godot-mobile-game-development`, or `unreal-game-development` after the engine decision.
+- `apple-game-platform-delivery`, `online-multiplayer-and-game-backend`, `game-build-release-engineering`, and `game-security-anti-cheat-and-abuse` for their platform, online, release, and trust boundaries.
+- `game-2d-art-animation-and-vfx-pipeline`, `level-world-and-content-production`, `game-data-analytics-and-live-economy`, `game-studio-delivery-and-commercial-operations`, and `game-accessibility-localisation-and-player-safety` when those production lines are in scope.
 - `game-testing-polish` and `mobile-game-release-liveops` before any ship claim.

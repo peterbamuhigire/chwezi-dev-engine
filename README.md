@@ -10,7 +10,7 @@ Last upgraded: 2026-07-15
 
 | Metric | Current value |
 |---|---:|
-| Active `SKILL.md` files | 155 |
+| Active `SKILL.md` files | 165 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Routing fixtures | 132 |
@@ -46,7 +46,7 @@ Use the smallest accurate skill. Load its `SKILL.md` first, then only the refere
 | DevOps, cloud, containers, reliability | `skills/devops-cloud/` |
 | Frontend engineering | `skills/frontend-ux/` |
 | Android, iOS, KMP, PWA | `skills/android/`, `skills/ios/`, `skills/mobile-cross/` |
-| Mobile and 3D game development, including lean validation, simulation mathematics and real-time graphics | `skills/game-development/` |
+| Mobile, desktop and online game development, including Unity, Godot, Unreal, Apple delivery, multiplayer/backend, content pipelines, security, build/release, data/live economy and studio operations | `skills/game-development/` |
 | Languages | `skills/languages/` |
 | SaaS product architecture | `skills/saas/` |
 | Security | `skills/security/` |

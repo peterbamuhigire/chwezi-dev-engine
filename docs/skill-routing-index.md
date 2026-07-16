@@ -209,6 +209,16 @@ Route complete game initiatives through `skills/game-development/game-developmen
 | Frame pacing, CPU/GPU, memory, loading, battery, heat or device budgets | `mobile-game-performance` |
 | QA, playtesting, balance, accessibility/localisation regression, alpha/beta/RC | `game-testing-polish` |
 | Signing, stores, privacy, ratings, IAP, rollout, rollback, support or live events | `mobile-game-release-liveops` |
+| iOS/iPadOS/macOS game services, Metal diagnosis, controllers, haptics, cloud saves, Mac windowing, signing or notarisation | `apple-game-platform-delivery` |
+| Multiplayer authority, replication, RPCs, prediction, matchmaking, sessions, reconnect, backend state or protocol evolution | `online-multiplayer-and-game-backend` |
+| Reproducible Unity/Godot/Unreal builds, manifests, symbols, signing boundaries, promotion, certification or rollback | `game-build-release-engineering` |
+| Game trust boundaries, anti-cheat, tampering, economy fraud, bots, abuse investigation, enforcement or appeals | `game-security-anti-cheat-and-abuse` |
+| Unreal Engine C++, Blueprints, Gameplay Framework, assets, automation, packaging or Unreal profiling | `unreal-game-development` |
+| Sprites, atlases, tile sets, 2D rigs/animation, UI art, particles, VFX or resolution variants | `game-2d-art-animation-and-vfx-pipeline` |
+| Levels, worlds, encounters, missions, narrative content, procedural generation, streaming or content throughput | `level-world-and-content-production` |
+| Game telemetry, metrics, experiments, remote config, economy sources/sinks, live events or data quality | `game-data-analytics-and-live-economy` |
+| Game discovery, estimation, staffing/RACI, SOW, greenlight, milestones, outsourcing, launch command or case evidence | `game-studio-delivery-and-commercial-operations` |
+| Accessible gameplay, remapping, sensory alternatives, localisation, cultural review, moderation or player safety | `game-accessibility-localisation-and-player-safety` |
 
 For historical, cultural, market, legal or version-sensitive claims, pair this family with the external Digital Research Skills Engine. For interface appearance, pair it with `design-system-skills`. For native store operations, reuse the existing Android/iOS/mobile-platform skills.
 

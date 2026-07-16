@@ -114,6 +114,66 @@ fixtures:
     expect: game-testing-polish
   - task: "Prepare game signing, Google Play and App Store submission, privacy, staged rollout, rollback and live events"
     expect: mobile-game-release-liveops
+  - task: "Integrate Game Center and controllers, test Metal on Apple Silicon, then sign and notarise our macOS game"
+    expect: apple-game-platform-delivery
+  - task: "Our Unity game targets iPhone and Mac: decide cloud-save fallback, haptics, Retina windowing and direct notarised distribution"
+    expect: apple-game-platform-delivery
+  - task: "Implement an ordinary Swift application feature with SwiftUI forms and navigation, not a game"
+    expect: ios-development
+  - task: "Design server authority, replication, matchmaking, reconnect and version-skew tests for a four-player online game"
+    expect: online-multiplayer-and-game-backend
+  - task: "Our Unreal listen-server prototype must become regional dedicated sessions with durable progression and packet-loss tests"
+    expect: online-multiplayer-and-game-backend
+  - task: "Architect combat, quests and inventory for a completely offline single-player game"
+    expect: gameplay-systems-architecture
+  - task: "Create clean reproducible Unity Godot and Unreal builds with manifests symbols checksums signing promotion and rollback"
+    expect: game-build-release-engineering
+  - task: "Our macOS and mobile release train needs clean-machine builds, artifact promotion, crash symbols and failed-rollout rehearsal"
+    expect: game-build-release-engineering
+  - task: "Profile frame pacing GPU memory heat and loading on low-end phones without changing the release pipeline"
+    expect: mobile-game-performance
+  - task: "Threat-model the untrusted game client, validate combat and economy actions, detect cheats and design proportionate appeals"
+    expect: game-security-anti-cheat-and-abuse
+  - task: "Design game anti-cheat and abuse controls for bots, tampering, economy fraud, forged match messages, toxic chat, enforcement and appeals"
+    expect: game-security-anti-cheat-and-abuse
+  - task: "Run a standard OWASP audit of our public account-management web application, not game behaviour"
+    expect: web-app-security-audit
+  - task: "Build an Unreal Engine C++ and Blueprint game with Gameplay Framework classes asset validation automation and packaging"
+    expect: unreal-game-development
+  - task: "Restructure our Unreal Engine C++ and Blueprints Gameplay Framework project with Unreal assets automation packaging and profiling"
+    expect: unreal-game-development
+  - task: "Build a Unity C# Android game with additive scenes prefabs saves and device tests"
+    expect: unity-mobile-game-development
+  - task: "Create sprites texture atlases tile sets frame animation and readable pooled VFX with source-to-import provenance"
+    expect: game-2d-art-animation-and-vfx-pipeline
+  - task: "Validate 2D game sprites, texture atlases, tile sets, frame animation, particles and VFX including pivots overdraw and photosensitivity"
+    expect: game-2d-art-animation-and-vfx-pipeline
+  - task: "Create a mobile-ready 3D character pipeline with rigging LOD collision and engine import"
+    expect: game-3d-asset-pipeline
+  - task: "Design and produce levels encounters missions checkpoints streaming partitions and deterministic procedural content"
+    expect: level-world-and-content-production
+  - task: "Turn our greybox into a content pipeline with sequence-break tests playtest questions and measured throughput"
+    expect: level-world-and-content-production
+  - task: "Architect reusable combat quests dialogue AI and versioned save state rather than producing levels"
+    expect: gameplay-systems-architecture
+  - task: "Define trustworthy game telemetry funnels remote config experiments and a reconciled virtual economy"
+    expect: game-data-analytics-and-live-economy
+  - task: "Plan a reversible live event with typed config expiry kill switch economy simulation and data-quality thresholds"
+    expect: game-data-analytics-and-live-economy
+  - task: "Prepare store signing privacy rollout rollback support and patches without designing analytics metrics"
+    expect: mobile-game-release-liveops
+  - task: "Run client game discovery estimation staffing RACI greenlight milestones outsourcing change control and launch command"
+    expect: game-studio-delivery-and-commercial-operations
+  - task: "Run game studio delivery and commercial operations: estimate content throughput and contingency, define SOW acceptance and vendor governance"
+    expect: game-studio-delivery-and-commercial-operations
+  - task: "Turn risky game assumptions into prototypes with evidence thresholds and go pivot or stop decisions"
+    expect: lean-game-product-development
+  - task: "Design accessible gameplay remapping redundant cues localisation pseudo-localisation moderation reporting and appeals"
+    expect: game-accessibility-localisation-and-player-safety
+  - task: "Test core combat with alternate input captions motion controls translated text and player-safety failure paths"
+    expect: game-accessibility-localisation-and-player-safety
+  - task: "Create the general alpha beta release-candidate bug and balance gates for a game"
+    expect: game-testing-polish
 
   # --- Security / compliance ---
   - task: "Run a web app security audit for OWASP vulnerabilities, insecure code and remediation evidence"

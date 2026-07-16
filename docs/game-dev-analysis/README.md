@@ -1,5 +1,7 @@
 # Game-development capability audit
 
+> **Implementation update — 2026-07-16:** The ten high-separation skills proposed in phases 1–3 now exist, are registered in the router, and have positive, ambiguous, and negative routing fixtures. The active catalog is 165 skills; catalog guardrails report zero findings; all 162 routing fixtures pass within the top three. The four supplied books are evaluated in [the source register](source-register.md). This changes the engine's routing and doctrine coverage, but it does not satisfy phase 4: no reference title, signed multi-platform build, online load/chaos run, operational rollback rehearsal, or independent second-team replication was supplied. The original 59/100 baseline below is retained as the pre-implementation audit; a higher capability score must be awarded by a fresh evidence audit, not inferred from new Markdown.
+
 **Audit date:** 2026-07-15  
 **Engine assessed:** `skills-web-dev` at `C:\Users\Peter\.claude\skills`  
 **Decision:** whether the engine can support a world-class game-development agency delivering for Android, iOS and macOS  

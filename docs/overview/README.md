@@ -51,7 +51,7 @@ engagement gates.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 155 skills.
+- Current active catalog size is 165 skills.
 - Current routing smoke-test suite contains 132 fixtures, with 94% precision@1
   and 100% precision@3.
 - Inactive aliases are retained as `ALIAS.md` and routed through
