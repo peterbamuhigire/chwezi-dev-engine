@@ -29,7 +29,7 @@ engagement gates.
 | Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
 | CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
-| Long-form references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Source material and companion writing. |
+| Distilled study references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Concise operational synthesis and companion writing; never raw books or whole-work conversions. |
 
 ## How To Work In This Repo
 

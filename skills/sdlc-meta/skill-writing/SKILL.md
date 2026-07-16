@@ -222,6 +222,11 @@ Load [universal agent and skill architecture](references/universal-agent-skill-a
 When the user provides books, EPUBs, PDFs, course notes, long articles, or other
 source files while creating or upgrading a skill:
 
+- Load and follow [source distillation and copyright gate](references/source-distillation-and-copyright.md).
+- Never commit the source, a whole-work conversion, OCR output, page images, or
+  a chapter-sequential substitute. Process raw material only in a temporary
+  directory outside the repository and delete temporary conversions after use.
+
 - Treat the source files as temporary inputs. The finished skill must remain
   useful after those files are deleted, moved, or renamed.
 - Do not merely link to the source file path. Distill the practical knowledge
@@ -231,6 +236,8 @@ source files while creating or upgrading a skill:
 - Keep `SKILL.md` concise. Put durable depth in directly linked reference files.
 - Avoid copying long passages. Summarize, synthesize, and convert book knowledge
   into reusable execution rules.
+- Record bibliographic attribution, not local download paths or piracy-site
+  metadata. Lawful access does not imply republication rights.
 - Add a short note in the reference file saying it is self-contained and was
   prepared from provided source material, so future agents do not depend on the
   original file.
@@ -263,9 +270,11 @@ After creating or updating a skill:
 
 1. Run `python -X utf8 skill-writing/scripts/quick_validate.py <skill-dir>` (frontmatter, required sections, dual-compat markers, line limits).
 2. Run `python -X utf8 skill-writing/scripts/contract_gate.py --skill <skill-dir>` (Evidence Produced contract from `validation-contract`). Use `--all` to scan the whole repo, `--bundle <path>` to validate a Release Evidence Bundle, and `--strict` to treat warnings as errors.
-3. Fix any frontmatter, structure, or contract issues.
-4. Sanity-check the skill against a realistic prompt.
-5. Ensure the skill still reads cleanly when loaded on its own.
+3. Run `python -X utf8 scripts/skill_catalog_guardrails.py`; any raw-source or
+   likely full-text finding blocks release.
+4. Fix any frontmatter, structure, contract, or source-ingestion issues.
+5. Sanity-check the skill against a realistic prompt.
+6. Ensure the skill still reads cleanly when loaded on its own.
 
 ## Anti-Patterns
 
@@ -273,6 +282,8 @@ After creating or updating a skill:
 - Trigger descriptions that are too broad to be useful.
 - Skills that duplicate existing skills without raising the quality bar.
 - Example-heavy files with little operational guidance.
+- Raw books, ebook conversions, OCR dumps, or chapter-by-chapter paraphrases in
+  a skill repository.
 - Instructions that ignore security, performance, testing, or maintainability.
 - Calling a Markdown file an autonomous agent without naming the runner, capabilities, and execution lifecycle.
 - Copying full specialist instructions into `AGENTS.md`, Claude adapters, Codex adapters, and Copilot files.

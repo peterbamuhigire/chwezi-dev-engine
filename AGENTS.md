@@ -71,6 +71,9 @@ Known baseline as of 2026-06-21 (verify with the script; do not trust this prose
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links
   and on stale or dangling aliases, and runs in CI on every push and PR.
+- The same gate rejects raw ebook formats, large files under book-extraction
+  paths, and marker-rich full-text conversions. Books are temporary inputs:
+  commit only concise, attributed, independently structured synthesis.
 - `scripts/routing_smoke_test.py` measures routing precision against
   `scripts/routing_fixtures.yml` and runs in the same CI job; `--collisions`
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour

@@ -25,6 +25,11 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py --report-only
 ```
 
+The catalog guardrail also enforces source hygiene. Do not commit books, ebook
+files, OCR output, or whole-work Markdown conversions. Book-informed skills may
+retain only concise attribution and independently structured operational
+synthesis.
+
 ## How To Route Work
 
 Start with the root router:

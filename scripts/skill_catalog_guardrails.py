@@ -18,6 +18,8 @@ from typing import Iterable
 
 import yaml
 
+from source_ingestion_guardrail import scan as scan_source_ingestion
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ACTIVE_ROOTS = (
@@ -283,6 +285,13 @@ def check_line_counts(records: list[SkillRecord]) -> list[Finding]:
     return findings
 
 
+def check_source_ingestion(root: Path = REPO_ROOT) -> list[Finding]:
+    return [
+        Finding("error", item.code, item.path, item.message)
+        for item in scan_source_ingestion(root)
+    ]
+
+
 def check_broken_references(roots: list[Path]) -> list[Finding]:
     """Flag SKILL.md links to references/templates/scripts that do not exist.
 
@@ -396,6 +405,7 @@ def main() -> int:
     findings.extend(check_duplicate_names(records))
     findings.extend(check_descriptions(records))
     findings.extend(check_line_counts(records))
+    findings.extend(check_source_ingestion())
     findings.extend(check_broken_references(roots))
     findings.extend(check_alias_integrity(records))
 

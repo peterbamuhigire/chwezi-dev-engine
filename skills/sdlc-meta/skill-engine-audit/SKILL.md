@@ -37,6 +37,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
 0. **Inventory compliance first.** For conformance work, run `scripts/engine_compliance.py`
    before reading individual skill bodies. Use its compact exception register to minimise context loading.
+   Also run the repository's source-ingestion guardrail and block the audit on
+   raw ebooks, large book-extraction files, or likely reconstructive full text.
 1. **Scope it.** Read the engine's router(s) (`README.md` / `CLAUDE.md` / `AGENTS.md`) and its
    doctrine. Glob `skills/**/SKILL.md` to list every group and skill. Identify the output types
    the engine is responsible for (audit ALL of them — web, iOS, Android, web apps, cross-platform,
@@ -70,6 +72,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 - Cited where external: standards/benchmarks/reading verified under a no-hallucination rule.
 - Actionable: ends with a prioritized roadmap and a believable target score per phase.
 - Reproducible: the rubric and dimensions are fixed references, so re-audits are comparable.
+- Rights-aware: source provenance is recorded, raw books are absent, and
+  book-informed skills contain independent operational synthesis rather than a
+  substitute for the source.
 
 ## Anti-Patterns
 
@@ -78,6 +83,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 - Skipping output types ("we only checked web") — audit every aspect the engine is for.
 - A single monolithic opinion instead of independent parallel concerns + synthesis.
 - A report with scores but no roadmap, or a roadmap with no target numbers.
+- Treating committed book/OCR dumps as harmless research evidence.
 
 ## Outputs
 
