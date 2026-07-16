@@ -150,6 +150,12 @@ fixtures:
     expect: game-2d-art-animation-and-vfx-pipeline
   - task: "Create a mobile-ready 3D character pipeline with rigging LOD collision and engine import"
     expect: game-3d-asset-pipeline
+  - task: "Build and validate a Blender character source file with export skeleton shape keys clips FBX preset and clean Unity re-import"
+    expect: blender-game-asset-production
+  - task: "Design an interactive story spine with character wants branching choices story-state persistence dialogue interruption and setup payoff tests"
+    expect: game-narrative-and-interactive-story-design
+  - task: "Implement NPC perception behaviour trees navigation path recovery reservations and worst-case agent profiling"
+    expect: game-ai-behaviour-and-navigation
   - task: "Design and produce levels encounters missions checkpoints streaming partitions and deterministic procedural content"
     expect: level-world-and-content-production
   - task: "Turn our greybox into a content pipeline with sequence-break tests playtest questions and measured throughput"

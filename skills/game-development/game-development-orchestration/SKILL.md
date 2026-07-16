@@ -49,7 +49,7 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 4. Create the concept brief, design pillars, fact/fiction ledger, high-risk assumption register, and prototype questions.
 5. Slice work into paper test, technical spike, playable prototype, vertical slice, pre-production, production, alpha, beta, release candidate, launch, and support.
 6. Route hypotheses, prototypes and learning gates to `lean-game-product-development`; do not use a feature list as proof of viability.
-7. Route mechanics and content to `mobile-game-design` and `gameplay-systems-architecture`; route mathematical contracts to `game-math-and-simulation`; route technology to Unity or Godot, not both after the bake-off gate.
+7. Route mechanics to `mobile-game-design` and `gameplay-systems-architecture`; route interactive narrative, agent AI/navigation and Blender production to their specialist skills; route mathematical contracts to `game-math-and-simulation`; route technology to one approved engine after the bake-off gate.
 8. Route graphics to `real-time-game-graphics`, then route assets, audio, performance, QA, and release to their specialist skills before approving their budgets.
 9. Hold a gate at every phase. Advance only when the named evidence exists; otherwise narrow scope or run another experiment.
 10. Close each milestone with the repository Delivery Definition of Done evidence pack.
@@ -106,5 +106,5 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 - `game-math-and-simulation` and `real-time-game-graphics` for mathematical and rendering contracts.
 - `unity-mobile-game-development`, `godot-mobile-game-development`, or `unreal-game-development` after the engine decision.
 - `apple-game-platform-delivery`, `online-multiplayer-and-game-backend`, `game-build-release-engineering`, and `game-security-anti-cheat-and-abuse` for their platform, online, release, and trust boundaries.
-- `game-2d-art-animation-and-vfx-pipeline`, `level-world-and-content-production`, `game-data-analytics-and-live-economy`, `game-studio-delivery-and-commercial-operations`, and `game-accessibility-localisation-and-player-safety` when those production lines are in scope.
+- `game-2d-art-animation-and-vfx-pipeline`, `game-3d-asset-pipeline`, `blender-game-asset-production`, `game-narrative-and-interactive-story-design`, `game-ai-behaviour-and-navigation`, `level-world-and-content-production`, `game-data-analytics-and-live-economy`, `game-studio-delivery-and-commercial-operations`, and `game-accessibility-localisation-and-player-safety` when those production lines are in scope.
 - `game-testing-polish` and `mobile-game-release-liveops` before any ship claim.

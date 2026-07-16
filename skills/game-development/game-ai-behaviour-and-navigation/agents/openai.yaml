@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game AI Behaviour and Navigation"
+  short_description: "Design and test game AI systems"
+  default_prompt: "Specify and verify game AI decisions, perception, navigation, and failure behaviour."

@@ -201,10 +201,12 @@ Route complete game initiatives through `skills/game-development/game-developmen
 | Player fantasy, loop, touch controls, sessions, onboarding, accessibility, progression or economy | `mobile-game-design` |
 | Unity C# project, scenes, prefabs, input, saves, Android/iOS build | `unity-mobile-game-development` |
 | Godot scenes, nodes, resources, signals, scripts or mobile export | `godot-mobile-game-development` |
-| Combat, AI, quests, dialogue, inventory, progression or world/save state | `gameplay-systems-architecture` |
+| Combat, quests, inventory, progression or world/save state | `gameplay-systems-architecture` |
+| NPC behaviour, behaviour/state trees, perception, navigation, crowds, reservations or AI profiling | `game-ai-behaviour-and-navigation` |
 | Coordinate spaces, transforms, vectors, quaternions, curves, probability, fixed-step simulation or numerical stability | `game-math-and-simulation` |
 | Render pipeline, shaders, materials, lighting, shadows, visibility, post-processing or graphics API diagnosis | `real-time-game-graphics` |
 | Concepts, models, UVs, textures, rigs, animation, LODs, colliders or imports | `game-3d-asset-pipeline` |
+| Blender source files, rig controls, shape keys, export presets, FBX/glTF, clean re-import or Blender automation | `blender-game-asset-production` |
 | Music, ambience, Foley, voice, buses, spatial/adaptive audio or audio rights | `game-audio-implementation` |
 | Frame pacing, CPU/GPU, memory, loading, battery, heat or device budgets | `mobile-game-performance` |
 | QA, playtesting, balance, accessibility/localisation regression, alpha/beta/RC | `game-testing-polish` |
@@ -215,7 +217,8 @@ Route complete game initiatives through `skills/game-development/game-developmen
 | Game trust boundaries, anti-cheat, tampering, economy fraud, bots, abuse investigation, enforcement or appeals | `game-security-anti-cheat-and-abuse` |
 | Unreal Engine C++, Blueprints, Gameplay Framework, assets, automation, packaging or Unreal profiling | `unreal-game-development` |
 | Sprites, atlases, tile sets, 2D rigs/animation, UI art, particles, VFX or resolution variants | `game-2d-art-animation-and-vfx-pipeline` |
-| Levels, worlds, encounters, missions, narrative content, procedural generation, streaming or content throughput | `level-world-and-content-production` |
+| Levels, worlds, encounters, missions, procedural generation, streaming or content throughput | `level-world-and-content-production` |
+| Interactive story, characters, dialogue, quests, choices, story state, environmental narrative or setup/payoff | `game-narrative-and-interactive-story-design` |
 | Game telemetry, metrics, experiments, remote config, economy sources/sinks, live events or data quality | `game-data-analytics-and-live-economy` |
 | Game discovery, estimation, staffing/RACI, SOW, greenlight, milestones, outsourcing, launch command or case evidence | `game-studio-delivery-and-commercial-operations` |
 | Accessible gameplay, remapping, sensory alternatives, localisation, cultural review, moderation or player safety | `game-accessibility-localisation-and-player-safety` |

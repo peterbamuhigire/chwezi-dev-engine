@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Narrative and Interactive Story Design"
+  short_description: "Design testable interactive game narratives"
+  default_prompt: "Design and validate an interactive narrative tied to player action."
