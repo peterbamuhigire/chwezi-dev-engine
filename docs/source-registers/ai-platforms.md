@@ -1,6 +1,6 @@
 # AI, Platform, Security, and Framework Source Register
 
-Last verified: 2026-07-08
+Last verified: 2026-07-17
 Standard/version: Skills Web Dev July 2026 source-register protocol
 Research support: Digital Research Skills Engine `source-evaluation` and `source-verification`
 
@@ -31,6 +31,11 @@ This register is the first stop before writing or modifying skills that depend o
 | React docs | https://react.dev/ | React component, hooks, compiler, and framework guidance | 2026-07-08 | 2026-10-08 |
 | Apple Developer Documentation | https://developer.apple.com/documentation/ | iOS, Swift, Xcode, App Intents, StoreKit, privacy, and release facts | 2026-07-08 | 2026-09-08 |
 | W3C WCAG | https://www.w3.org/TR/WCAG22/ | Accessibility conformance references when frontend skills touch usability | 2026-07-08 | 2026-10-08 |
+| PyInstaller | https://pyinstaller.org/en/stable/ | Frozen-runtime semantics, one-folder and one-file modes, spec files, multipackage bundles, and subprocess guidance | 2026-07-17 | 2026-10-17 |
+| auto-py-to-exe | https://github.com/brentvollebregt/auto-py-to-exe | Confirm its role as a PyInstaller graphical interface and its exportable configuration surface | 2026-07-17 | 2026-10-17 |
+| Nuitka | https://nuitka.net/user-documentation/user-manual.html | Standalone and one-file alternatives when measured requirements justify a compiler-based packager | 2026-07-17 | 2026-10-17 |
+| Microsoft Windows app signing | https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/smartscreen-reputation | SmartScreen reputation, publisher identity, Store distribution, and non-Store signing expectations | 2026-07-17 | 2026-10-17 |
+| Inno Setup | https://jrsoftware.org/ishelp/ | Windows installer compilation and signed-uninstaller behaviour | 2026-07-17 | 2026-10-17 |
 
 ## Skills That Must Link Here
 
@@ -39,6 +44,7 @@ This register is the first stop before writing or modifying skills that depend o
 - `skills/devops-cloud/*` when naming cloud managed services, Kubernetes behavior, CI/CD permissions, or deployment limits.
 - `skills/security/*` when naming OWASP, cloud identity, web vulnerability, or privacy-compliance baselines.
 - `skills/frontend-ux/nextjs-app-router`, `react-development`, `frontend-performance`, and `tailwind-css` when naming framework behavior or accessibility standards.
+- `skills/languages/python-modern-standards` when naming PyInstaller, Nuitka, Windows signing, installer, or GitHub Actions behaviour for desktop distribution.
 
 ## Re-Verification Triggers
 

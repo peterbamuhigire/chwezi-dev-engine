@@ -1,6 +1,6 @@
 ---
 name: python-modern-standards
-description: Use when writing or reviewing any Python code in our SaaS projects — defines Python version, project layout, tooling (uv, ruff, mypy), typing, Pydantic v2, logging, configuration, async rules, error handling, testing, and security baseline. Load this before any other Python skill.
+description: Use when writing, reviewing, or distributing Python applications, including PyInstaller, auto-py-to-exe, Nuitka, frozen desktop executables, multi-tool suites, installers, and CI release builds. Defines the Python baseline and routes executable packaging to its desktop-distribution automation.
 metadata:
   portable: true
   compatible_with:
@@ -20,17 +20,20 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - For Python sidecars, FastAPI services, workers, queue consumers, or API integrations, load `references/api-container-sidecar-engineering.md`.
 - For containerized Python work, pair with `docker-development`.
+- For PyInstaller, auto-py-to-exe, Nuitka, frozen desktop applications, multi-executable suites, portable ZIPs, Windows installers, or code signing, load `references/python-desktop-distribution.md` and use `scripts/desktop_suite_packager.py`.
 
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
 |----------|----------|--------|---------|
 | Correctness | Test plan | Markdown doc per `skill-composition-standards/references/test-plan-template.md` covering pytest layout, type checks, and coverage targets | `docs/python/test-plan.md` |
+| Release | Desktop distribution evidence | Manifest, generated build files, artifact inventory, hashes, smoke results, and signing status | `release/desktop-suite-evidence.json` |
 
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Use `references/api-container-sidecar-engineering.md` when Python participates in APIs, workers, queues, sidecars, or Dockerized service delivery.
+- Use `references/python-desktop-distribution.md` when Python must ship without a separately installed interpreter.
 <!-- dual-compat-end -->
 The house style for Python in our PHP + Android + iOS SaaS stack. Every Python file in our projects must follow this skill. Other Python skills (saas-integration, data-analytics, document-generation, ml-predictive, data-pipelines) assume you have read this first.
 
@@ -110,6 +113,20 @@ uv lock --upgrade         # upgrade lockfile
 ```
 
 Never mix uv with pip, poetry, or pipenv in the same project. See `references/tooling-uv-ruff.md`.
+
+## Frozen desktop distribution
+
+Treat executable distribution as a release pipeline, not a GUI conversion step. For a suite of tools, prefer a PyInstaller one-folder multipackage build with a generated launcher, shared collection directory, portable ZIP, and platform installer. Keep the product and application list in a committed manifest; generate the spec, launcher, installer, CI workflow, and verification script from it.
+
+Load `references/python-desktop-distribution.md`, then run:
+
+```powershell
+python -X utf8 scripts/desktop_suite_packager.py init --project-root <project> --product-name "Example Suite" --publisher "Example Ltd" --app "editor=editor.py" --app "converter=converter.py"
+python -X utf8 scripts/desktop_suite_packager.py generate --config <project>/packaging/desktop-suite.toml
+python -X utf8 scripts/desktop_suite_packager.py doctor --config <project>/packaging/desktop-suite.toml
+```
+
+The script path above is relative to this skill directory. Commit generated project files so CI does not depend on the skills engine being installed on the runner.
 
 ## Formatting + linting — ruff
 
@@ -299,6 +316,7 @@ When the task requires it, load:
 - `python-document-generation` — Excel, Word, PDF output.
 - `python-ml-predictive` — forecasting, classification, anomaly detection.
 - `python-data-pipelines` — ETL, OCR, image processing, API syncs.
+- `references/python-desktop-distribution.md` — executable suites, installers, signing, CI, and clean-machine release checks.
 
 ## References
 
@@ -313,6 +331,8 @@ When the task requires it, load:
 - `references/security-baseline.md`
 - `references/anti-patterns.md`
 - `references/api-container-sidecar-engineering.md`
+- `references/python-desktop-distribution.md`
+- `scripts/desktop_suite_packager.py`
 
 ## Decision Rules
 

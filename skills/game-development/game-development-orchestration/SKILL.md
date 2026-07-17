@@ -45,14 +45,15 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 
 1. Load `world-class-engineering`, `anti-ai-slop`, and `ai-slop-audit`.
 2. For culturally grounded, historical, legal, market, or current-platform work, use the Digital Research Skills Engine and preserve its source and claim trail.
-3. Frame the player promise, core interaction, target platform, business model, safety boundaries, and definition of success.
-4. Create the concept brief, design pillars, fact/fiction ledger, high-risk assumption register, and prototype questions.
+3. Frame the player promise, core interaction, target platform, age/education posture, business model, safety/wellbeing boundaries, and definition of success.
+4. Create the concept brief, design pillars, fact/fiction/permission ledger, high-risk assumption register, evidence-class map, and prototype questions.
 5. Slice work into paper test, technical spike, playable prototype, vertical slice, pre-production, production, alpha, beta, release candidate, launch, and support.
 6. Route hypotheses, prototypes and learning gates to `lean-game-product-development`; do not use a feature list as proof of viability.
 7. Route mechanics to `mobile-game-design` and `gameplay-systems-architecture`; route interactive narrative, agent AI/navigation and Blender production to their specialist skills; route mathematical contracts to `game-math-and-simulation`; route technology to one approved engine after the bake-off gate.
-8. Route graphics to `real-time-game-graphics`, then route assets, audio, performance, QA, and release to their specialist skills before approving their budgets.
-9. Hold a gate at every phase. Advance only when the named evidence exists; otherwise narrow scope or run another experiment.
-10. Close each milestone with the repository Delivery Definition of Done evidence pack.
+8. Route graphics implementation to `real-time-game-graphics`; route player-facing HUD, art direction, game feel and children's/educational experience to the game route in `design-system-skills`. Route lifecycle requirements and traceability to `srs-skills`; do not duplicate either engine's craft.
+9. If advertising is a candidate, apply the non-intrusive-ad gate before vendor or placement selection: clearly label it, require explicit choice or a predictable non-critical break, cap and pace it, preserve core play and exit/save/recovery, and define a no-ads/degraded path. Apply stricter child, privacy, store and owner rules.
+10. Hold a gate at every phase. Advance only when the named evidence exists; otherwise narrow scope or run another experiment.
+11. Close each milestone with the repository Delivery Definition of Done evidence pack.
 
 ## Quality Standards
 
@@ -61,6 +62,8 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 - Maintain one decision register, one dependency map, one playable build lineage, and one prioritised backlog.
 - Make every milestone answer a decision. Do not fund activity without a learning or delivery outcome.
 - Preserve version-sensitive engine and store facts as dated, verified constraints.
+- Keep documentation, prototype, build, device, observed-player and accountable-expert evidence separate; never promote one class into another.
+- Keep learning, engagement, retention, wellbeing and commercial measures separate. A retention pass fails when regret, harmful spend, inability to stop, sleep disruption, child-safety incidents, refunds or trust materially worsen.
 
 ## Anti-Patterns
 
@@ -71,6 +74,7 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 - Planning every feature as mandatory. Fix: use must/should/could/will-not and define the smallest complete player promise.
 - Hiding uncertainty inside precise schedules. Fix: use ranges, confidence, dependencies, and contingency.
 - Letting discipline plans diverge. Fix: reconcile them at milestone and change-control reviews.
+- Calling a platform-compliant ad non-intrusive. Fix: also test expectation, interruption, accidental-tap risk, decline/recovery, frequency, wellbeing and trust in the actual game.
 
 ## Outputs
 
@@ -96,6 +100,8 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 | Core player action is not enjoyable or understood | Iterate or stop; do not increase content |
 | Art direction works but target-device frame and memory budgets fail | Simplify pipeline and content before staffing up |
 | Cultural or rights gate is unresolved | Use a fictional substitute, obtain permission, or remove the content |
+| Learning claim lacks an age/construct/measure/comparator | Keep it a hypothesis; obtain educational-method approval and evidence |
+| Ad interrupts play, learning, narrative, save, recovery, stopping, or safety | Remove or redesign it; platform minimums do not override the Chwezi gate |
 | Vertical slice meets player, pipeline, device, cost, and governance gates | Approve bounded pre-production or production |
 | Budget runway cannot cover milestone plus contingency | Reduce scope or fund the gate before committing |
 

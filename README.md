@@ -6,15 +6,15 @@ The engine is file-based. Active skills live as `SKILL.md` files under `skills/`
 
 ## Current Status
 
-Last upgraded: 2026-07-15
+Last upgraded: 2026-07-17
 
 | Metric | Current value |
 |---|---:|
-| Active `SKILL.md` files | 165 |
+| Active `SKILL.md` files | 168 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
-| Routing fixtures | 132 |
-| Routing precision@1 | 94% |
+| Routing fixtures | 167 |
+| Routing precision@1 | 92% |
 | Routing precision@3 | 100% |
 | Guardrail findings | 0 |
 
@@ -87,6 +87,7 @@ Use those engines in addition to this one when the task crosses their boundary.
 | `tests/routing/edge-fixtures.yml` | Edge routing fixtures for near-collision skills |
 | `tests/quality/negative-fixtures.md` | Negative examples that must fail release gates |
 | `references/engineering-standards.md` | Benchmark and cross-engine ownership reference |
+| `skills/languages/python-modern-standards/scripts/desktop_suite_packager.py` | Manifest-driven PyInstaller suite, installer, CI, signing-hook, and evidence generator for reusable Python desktop distribution |
 
 ## Running Example
 

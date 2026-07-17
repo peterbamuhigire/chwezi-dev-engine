@@ -32,6 +32,9 @@ security, PWA/Safari, and companion design-system routing.
 - Preserve deep references without making every skill entrypoint heavy.
 - Support Windows, Ubuntu, and Debian consumers with portable Markdown and
   Python tooling.
+- Give downstream Python projects a repeatable path from multiple scripts or
+  GUIs to a launcher, shared executable suite, portable archive, installer,
+  signing boundary, CI build, and release evidence.
 
 ## Non-Goals
 
@@ -43,7 +46,7 @@ security, PWA/Safari, and companion design-system routing.
 
 ## Current Risks
 
-- The active skill count is 142, below the 150-170 soft target; future additions
+- The active skill count is 168, within the 150-170 soft target; future additions
   still need alias discipline. The CI guardrail (200 hard cap) and the collision
   detector keep this from becoming routing noise.
 - Inactive aliases must stay documented in `docs/skill-aliases.yml`; the

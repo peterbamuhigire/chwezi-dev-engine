@@ -63,9 +63,9 @@ Run this after catalog routing or skill frontmatter changes:
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 ```
 
-Known baseline as of 2026-06-21 (verify with the script; do not trust this prose):
+Known baseline as of 2026-07-17 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 142.
+- Active `SKILL.md` files: 168.
 - Target active catalog size: 150-170 (below soft target and well under the 200 cap).
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.

@@ -6,7 +6,7 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Keep active catalog changes intentional | The current count is 142 after treating finance doctrine and design/UI doctrine as external or retained-reference engines. CI enforces the 200 hard cap and the collision detector should be used to keep future additions intentional. | Use `docs/skill-routing-index.md` and `docs/skill-aliases.yml` before adding active entrypoints. |
+| Keep active catalog changes intentional | The current count is 168 after treating finance doctrine and design/UI doctrine as external or retained-reference engines. CI enforces the 200 hard cap and the collision detector should be used to keep future additions intentional. | Use `docs/skill-routing-index.md` and `docs/skill-aliases.yml` before adding active entrypoints. |
 
 ## High Priority
 
@@ -27,6 +27,7 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-07-17 | Python desktop-suite distribution automation | Extended `python-modern-standards` with a PyInstaller/Inno Setup reference and a manifest-driven generator that emits a launcher, shared multipackage spec, installer, PowerShell build, Windows CI workflow, signing hooks, smoke checks, and artifact evidence. |
 | 2026-07-08 | July 2026 world-class upgrade build | Added root router, source register, release gates, FieldOps Ledger exemplar, delivery evidence-pack template, empty-directory disposition, research integration log, book knowledge map, and 117-fixture routing smoke baseline at precision@1 97% / precision@3 100%. |
 | 2026-06-21 | WWDC26 Apple platform skill modernization | Updated active iOS/mobile skills and companion design-system Apple UI guidance for Xcode 27, Swift 6.4, Foundation Models/Core AI, App Intents/Siri, Device Hub, Safari/WebKit 27, SF Symbols 8, and release/security gates. |
 | 2026-06-21 | Active catalog root repair | Removed `doctrine/skills` from default active scanning, kept it as retained reference material, validated aliases against retained/external engines, and brought guardrails to 0 findings at 142 active skills. |

@@ -45,6 +45,8 @@ Load `game-development-orchestration`, the product thesis, current risk/assumpti
 7. Review evidence, contradictions and cost. Decide `go`, `narrow`, `pivot`, `repeat` or `stop`; update the assumption, decision and knowledge registers.
 8. Consolidate what was learned into requirements, tests, reusable assets and production estimates before expanding content.
 
+For educational claims, specify age/cohort, construct, comparator, measure, duration and transfer boundary; engagement is not a learning proxy. For advertising, prototype the least intrusive plausible placement and test expectation, decline, interruption, accidental taps, fairness, no-fill/failure, wellbeing and trust before revenue optimisation. A rewarded ad is not voluntary when progression or recovery makes declining punitive.
+
 ## Quality Standards
 
 - Make every experiment answer a decision; activity, downloads and compliments are not evidence by themselves.
@@ -62,6 +64,8 @@ Load `game-development-orchestration`, the product thesis, current risk/assumpti
 | System may be technically infeasible | isolated spike plus profiler/test harness | worst-case path fits provisional budget with known margin |
 | Content/cultural premise may cause harm | research, consultation and low-cost representation review | disposition permits bounded prototype |
 | Production pipeline may not scale | vertical slice with representative disciplines | throughput, rework, cost and quality evidence support expansion |
+| Ad model may damage play or trust | instrumented placement prototype with decline/no-fill/kill-switch paths | all safety/privacy/access/trust gates pass before commercial interpretation |
+| Educational outcome may be unsupported | bounded learning study reviewed by accountable specialist | prespecified construct measure supports only the stated population and transfer limit |
 
 ## Capability Contract
 

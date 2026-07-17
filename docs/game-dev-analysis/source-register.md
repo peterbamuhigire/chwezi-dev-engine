@@ -1,6 +1,6 @@
 # Game-development source register
 
-**Assessment date:** 2026-07-16  
+**Assessment date:** 2026-07-17
 **Purpose:** claim-level admission record for the capability implementation in this repository.
 
 These locally supplied books are tier-4 secondary/tertiary technical sources under the Digital Research Engine credibility ladder. They are suitable for durable concepts and workflow orientation. They are not sufficient authority for current engine APIs, Apple/Google/store rules, SDK services, signing, security, privacy, certification, or performance targets. Those claims must be verified against pinned official documentation at execution time.
@@ -34,3 +34,18 @@ These locally supplied books are tier-4 secondary/tertiary technical sources und
 | `game-ai-behaviour-and-navigation`, `unreal-game-development` | GD-12 | Engine-neutral architecture separated from the Unreal adapter; official docs override the book |
 
 No direct quotation from the books is required by the implementation. Exact book prose and code remain in the user-provided files and were not copied into the skill engine.
+
+## Chwezi Games knowledge-engine upgrade trace
+
+The controlled claim, locator, contradiction and gap records for the Markdown-only 2026 corpus live outside this repository at `C:\wamp64\www\digital-research-skills\projects\chwezi-games-knowledge-engine-upgrade-2026`. Skills consume only the independently written syntheses below; they do not depend on book files at execution time.
+
+| Verified synthesis | Engine use | Current authority class |
+|---|---|---|
+| VCLAIM-0001 | Separate document, prototype, build, device, player and expert evidence | Current Android device/performance guidance plus book-method synthesis |
+| VCLAIM-0002 to VCLAIM-0005 | Pattern trade-offs, multiplayer authority/security, pinned versions and device proof | Current Unity, Unreal, Blender, Android and OWASP primary sources |
+| VCLAIM-0006 to VCLAIM-0008 | Game accessibility, multimodal feedback and bounded learning claims | Xbox XAG, Apple HIG, W3C and peer-reviewed meta-analyses |
+| VCLAIM-0009 to VCLAIM-0013 | Healthy engagement, non-intrusive ads, child protection and separate SDK privacy | Google Play, Apple, Unity, FTC, Uganda law and peer-reviewed review evidence |
+| VCLAIM-0014 | Fact/fiction/permission and accountable cultural review | Corpus cultural scholarship plus UNESCO Uganda community-based safeguarding practice |
+| VCLAIM-0015 to VCLAIM-0016 | Hypothesis discipline and copyright-safe transfer | Research-engine evidence and ingestion governance |
+
+Current official URLs, accessed dates and precise verification methods are retained in the external research source registry. Refresh the relevant `SRC-*` record before using a store, SDK, legal, privacy, performance, rating, price or market claim.

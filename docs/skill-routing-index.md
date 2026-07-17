@@ -24,7 +24,7 @@ Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 142 |
+| Active `SKILL.md` files | 168 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -168,6 +168,7 @@ target instead.
 | JavaScript | `javascript-modern` | `javascript-advanced`, `javascript-patterns` |
 | TypeScript | `typescript-effective` | `typescript-mastery`, `typescript-design-patterns` |
 | C# and .NET | `csharp-dotnet-development` | `csharp`, `dotnet`, `aspnet-core`, `ef-core`, `dotnet-maui`, `dotnet-ai` |
+| Python executable and desktop-suite distribution | `python-modern-standards` | PyInstaller, auto-py-to-exe, Nuitka, frozen applications, multi-executable suites, portable ZIPs, Inno Setup installers, signing, and Windows packaging CI |
 | Security | `vibe-security-skill` | `dual-auth-rbac`, selected stack security references |
 | GraphQL | `graphql-patterns` | `graphql-security` |
 | CI/CD | `cicd-pipelines` | `cicd-pipeline-design`, `cicd-devsecops`, `cicd-jenkins-debian` |

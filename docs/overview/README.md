@@ -7,11 +7,11 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
-The 2026-07-15 game-development deepening added focused entrypoints for lean
-game-product experiments, game mathematics and deterministic simulation, and
-real-time graphics. These sit between orchestration/design and engine-specific
-implementation, with explicit evidence, device-performance and ethical-
-engagement gates.
+The 2026-07-17 Python desktop-distribution upgrade added a manifest-driven
+generator for PyInstaller one-folder multipackage suites. It produces a safe
+launcher, shared-collection spec, Inno Setup definition, PowerShell build,
+Windows CI workflow, artifact hashes, smoke evidence, and signing gates without
+adding another active skill.
 
 ## What Is Here
 
@@ -27,6 +27,7 @@ engagement gates.
 | Full workflow example | `examples/full-stack-saas-reference/` | FieldOps Ledger end-to-end SaaS evidence pack. |
 | Delivery templates | `templates/delivery-dod/` | Reusable evidence-pack template for implementation deliverables. |
 | Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
+| Python desktop-suite automation | `skills/languages/python-modern-standards/scripts/desktop_suite_packager.py` | Generates committed, project-local PyInstaller, installer, CI, and verification files from one TOML manifest. |
 | CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
 | Distilled study references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Concise operational synthesis and companion writing; never raw books or whole-work conversions. |
@@ -51,8 +52,8 @@ engagement gates.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 165 skills.
-- Current routing smoke-test suite contains 132 fixtures, with 94% precision@1
+- Current active catalog size is 168 skills.
+- Current routing smoke-test suite contains 167 fixtures, with 92% precision@1
   and 100% precision@3.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.

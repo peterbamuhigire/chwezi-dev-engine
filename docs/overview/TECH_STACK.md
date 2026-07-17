@@ -22,6 +22,7 @@ of this repository.
 | ripgrep | Fast file and text search. |
 | Markdown | Skill bodies, plans, references, guides, and docs. |
 | YAML | Skill frontmatter, alias registry, and routing fixtures. |
+| PyInstaller/Inno Setup guidance | Downstream Windows executable-suite generation; neither tool is a runtime dependency of this repository. |
 
 ## Important Commands
 
@@ -30,6 +31,7 @@ rg --files -g "SKILL.md"
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py
 python -X utf8 scripts\routing_smoke_test.py --collisions
+python -X utf8 skills\languages\python-modern-standards\scripts\desktop_suite_packager.py --help
 ```
 
 The routing smoke test has no external dependency beyond PyYAML; it models the
@@ -53,6 +55,9 @@ powershell -ExecutionPolicy Bypass -File scripts\install-pdf-binaries.ps1
 There is no repository-owned application runtime, database server, web server,
 or package manager manifest. Database references inside skills describe
 downstream project patterns rather than this repository's infrastructure.
+The desktop-suite packager is a standard-library generator; PyInstaller, uv,
+Inno Setup, and signing tools are validated in the downstream project where the
+generated release pipeline runs.
 
 ## Cross-Platform Rules
 

@@ -7,7 +7,7 @@ description: Top-level router for the Chwezi Core Systems web-development and so
 
 This is the entrypoint for the `skills-web-dev` engine. It routes engineering work to the smallest accurate active skill, applies quality gates, and records evidence so outputs can be reviewed by a team that did not write them.
 
-Standard implemented: Skills Web Dev July 2026 upgrade baseline. Last verified: 2026-07-08.
+Standard implemented: Skills Web Dev July 2026 upgrade baseline. Last verified: 2026-07-17.
 
 ## Non-negotiable foundation
 

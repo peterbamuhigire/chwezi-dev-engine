@@ -97,6 +97,10 @@ fixtures:
     expect: python-ml-predictive
   - task: "Write production Python with typing, packaging, logging, testing and security"
     expect: python-modern-standards
+  - task: "Turn a Python launcher and several GUI tools into a repeatable PyInstaller multi-executable Windows suite with an installer, signing and CI"
+    expect: python-modern-standards
+  - task: "My auto-py-to-exe launcher cannot open the other bundled Python apps; create a reproducible executable distribution workflow"
+    expect: python-modern-standards
   - task: "Build a full-stack TypeScript app with backend and frontend contracts"
     expect: typescript-full-stack
 
