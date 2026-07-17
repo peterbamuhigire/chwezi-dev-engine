@@ -94,6 +94,8 @@ Markdown source (structured content)
 Final .docx → PDF export
 ```
 
+Before using LibreOffice for a background PDF export or render, load `document-spreadsheet-tooling-readiness` and follow its isolated-profile, cross-platform conversion contract. Do not construct a raw `soffice` command or reuse the interactive user's LibreOffice profile.
+
 ### Project export contract
 
 Every project that generates `.docx` deliverables must include these project-root paths:
@@ -400,6 +402,8 @@ Before every delivery, run `references/quality-checklist.md` in full. The minimu
 4. File → Print → verify print preview (no widows, no blank pages)
 5. Export PDF with accessibility tags enabled
 6. Name file: `ProjectName_DocumentType_v1.0_YYYY-MM-DD.docx`
+
+When the PDF was produced by LibreOffice, retain the readiness result and conversion diagnostics with the delivery evidence, then inspect the rendered output rather than assuming the DOCX layout survived export.
 
 ---
 

@@ -71,6 +71,7 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 - File-output claims are factual claims.
 - Fallbacks are explicit, not silent.
 - PDF conversion route must be known before promising PDF.
+- Background LibreOffice work uses one isolated profile per job through the shared cross-platform launcher.
 
 ## Anti-Patterns
 
@@ -86,6 +87,7 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 - `references/toolchain-checks.md`: Commands and package/binary checklist.
 - `references/fallback-routes.md`: Output routes and fallback decision tree.
+- `references/libreoffice-headless.md`: Required cross-platform headless conversion, diagnosis, and validation contract.
 <!-- dual-compat-end -->
 
 ## Core Workflow
@@ -94,6 +96,7 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 2. Prefer built-in document/spreadsheet plugins where available.
 3. Check Python packages: openpyxl, XlsxWriter, pandas, python-docx, docxtpl, docxcompose, pypandoc, markdown, beautifulsoup4, lxml, pillow, PyMuPDF, pypdf, pdfplumber, reportlab.
 4. Check binaries: pandoc, soffice/LibreOffice, wkhtmltopdf where needed, and tesseract for OCR tasks.
-5. Run a minimal DOCX and XLSX smoke test before production output on a new machine.
-6. Pick the generation route and record it in the deliverable notes.
-7. Open, parse, or otherwise validate the generated file before telling the user it was created.
+5. For a LibreOffice conversion or render, read `references/libreoffice-headless.md`, run the shared launcher `--check`, and use its isolated-profile conversion path rather than a hand-built `soffice` command.
+6. Run a minimal DOCX and XLSX smoke test before production output on a new machine.
+7. Pick the generation route and record it in the deliverable notes.
+8. Open, parse, or otherwise validate the generated file before telling the user it was created.

@@ -6,7 +6,7 @@
 |---|---|---|
 | DOCX | Documents plugin or python-docx/docxtpl | Markdown with clear structure. |
 | XLSX | Spreadsheets plugin or openpyxl/XlsxWriter/pandas | CSV files plus Markdown data dictionary. |
-| PDF from DOCX | LibreOffice/soffice when available | Pandoc route, reportlab direct PDF, or provide DOCX/Markdown and state PDF not generated. |
+| PDF from DOCX | LibreOffice through the shared isolated-profile launcher when readiness passes | Pandoc route, reportlab direct PDF, or provide DOCX/Markdown and state PDF not generated. |
 | PDF report | Pandoc or reportlab | Markdown plus print instructions if no converter works. |
 | OCR/PDF extraction | PyMuPDF, pypdf, pdfplumber, tesseract where needed | Manual extraction note with limitations. |
 

@@ -44,6 +44,8 @@ fixtures:
     expect: consulting-delivery-control-room
   - task: "Check whether this machine can generate validated Word, PDF and Excel proposal files before promising them"
     expect: document-spreadsheet-tooling-readiness
+  - task: "Set up reliable headless LibreOffice conversion for DOCX and PDF on Windows, macOS, Debian and Fedora"
+    expect: document-spreadsheet-tooling-readiness
 
   # --- Backend / data / API ---
   - task: "Design the relational data model, tenancy and indexes for a multi-tenant ERP"
