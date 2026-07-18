@@ -6,7 +6,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
 
-- Building golden **tasks** (not prompts) â€” each one a complete agent scenario from goal to final state.
+- Building golden **tasks** (not prompts) — each one a complete agent scenario from goal to final state.
 - Measuring agent-specific metrics: task success rate, intervention rate, irreversible-action rate, step efficiency, tool-choice quality.
 - Standing up **replay-based eval**: re-run a recorded trace against a new prompt / model / tool version and diff.
 - Wiring agent eval into the CI gate so prompt or tool changes that regress agent performance block merge.
@@ -14,10 +14,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Do Not Use When
 
-- The task is single-shot prompt eval â€” `ai-eval-harness`.
-- The task is the eval *concept* â€” `ai-evaluation`.
-- The task is hallucination measurement specifically â€” `ai-hallucination-slo-and-grounding`.
-- The task is observability of running traffic â€” `ai-agent-observability-and-replay`.
+- The task is single-shot prompt eval — `ai-eval-harness`.
+- The task is the eval *concept* — `ai-evaluation`.
+- The task is hallucination measurement specifically — `ai-hallucination-slo-and-grounding`.
+- The task is observability of running traffic — `ai-agent-observability-and-replay`.
 
 ## Required Inputs
 
@@ -29,22 +29,22 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Build **golden tasks** (Â§1). See `references/golden-tasks-construction.md`.
-3. Define **agent-specific metrics** (Â§2): task success, step efficiency, tool-choice quality, irreversible-action rate, intervention rate, time-to-complete.
-4. Implement **trajectory scoring** (Â§3) â€” judge-LLM or rule-based per metric.
-5. Implement **replay-based eval** (Â§4). See `references/replay-based-eval.md`.
-6. Wire **CI gate** (Â§5) â€” block merge on agent eval regression.
-7. Implement **per-tenant gate** (Â§6) â€” flagship sign-off before agent promotion.
-8. Apply anti-patterns (Â§7).
+2. Build **golden tasks** (§1). See `references/golden-tasks-construction.md`.
+3. Define **agent-specific metrics** (§2): task success, step efficiency, tool-choice quality, irreversible-action rate, intervention rate, time-to-complete.
+4. Implement **trajectory scoring** (§3) — judge-LLM or rule-based per metric.
+5. Implement **replay-based eval** (§4). See `references/replay-based-eval.md`.
+6. Wire **CI gate** (§5) — block merge on agent eval regression.
+7. Implement **per-tenant gate** (§6) — flagship sign-off before agent promotion.
+8. Apply anti-patterns (§7).
 
 ## Quality Standards
 
-- Each agent feature has a golden set of â‰¥ 30 task scenarios covering happy path, edge cases, adversarial inputs, tool failures.
-- Each flagship tenant has a per-tenant golden subset (â‰¥ 10 scenarios) derived from their support tickets and use cases.
+- Each agent feature has a golden set of ≥ 30 task scenarios covering happy path, edge cases, adversarial inputs, tool failures.
+- Each flagship tenant has a per-tenant golden subset (≥ 10 scenarios) derived from their support tickets and use cases.
 - Metric definitions are written down and stable; dashboards never break on metric renames.
 - CI gate blocks merge if any metric regresses below threshold.
-- Replay eval is **deterministic within tolerance** â€” re-running the same trace + same prompt + same tools (mocked) gives consistent metric scores.
-- Judge-LLM agreement with humans on agent trajectories â‰¥ 75% (lower bar than single-shot because trajectories are longer); recalibrate if below.
+- Replay eval is **deterministic within tolerance** — re-running the same trace + same prompt + same tools (mocked) gives consistent metric scores.
+- Judge-LLM agreement with humans on agent trajectories ≥ 75% (lower bar than single-shot because trajectories are longer); recalibrate if below.
 - Irreversible-action rate on the golden suite is **exactly 0** for actions outside the expected scope.
 
 ## Anti-Patterns
@@ -77,13 +77,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/golden-tasks-construction.md` â€” how to build agent goldens.
-- `references/replay-based-eval.md` â€” replay pipeline implementation.
+- `references/golden-tasks-construction.md` — how to build agent goldens.
+- `references/replay-based-eval.md` — replay pipeline implementation.
 - Companion: `ai-eval-harness`, `ai-evaluation`, `ai-agent-runtime-architecture`, `ai-agent-observability-and-replay`, `ai-hallucination-slo-and-grounding`, `ai-agent-safety-and-red-team`.
 
 <!-- dual-compat-end -->
 
-## Â§1 Golden Tasks (not Prompts)
+## §1 Golden Tasks (not Prompts)
 
 A golden task is a **scenario**, not a prompt:
 
@@ -121,21 +121,21 @@ expected_outcome:
 
 Full construction guide in `references/golden-tasks-construction.md`.
 
-## Â§2 Agent-Specific Metrics
+## §2 Agent-Specific Metrics
 
 | Metric | Definition | Target |
 |---|---|---|
-| **Task success rate** | % of tasks reaching `COMPLETED` with expected outcome | â‰¥ 80% (feature-dependent) |
-| **Step efficiency** | (steps used) / (optimal step count). Optimal from golden. | â‰¤ 1.5Ã— |
-| **Tool-choice quality** | % of steps where the agent picked an allowed, sensible tool | â‰¥ 90% |
-| **Hallucinated tool args rate** | % of tool calls where args don't validate against schema or reference non-existent IDs | â‰¤ 1% |
+| **Task success rate** | % of tasks reaching `COMPLETED` with expected outcome | ≥ 80% (feature-dependent) |
+| **Step efficiency** | (steps used) / (optimal step count). Optimal from golden. | ≤ 1.5× |
+| **Tool-choice quality** | % of steps where the agent picked an allowed, sensible tool | ≥ 90% |
+| **Hallucinated tool args rate** | % of tool calls where args don't validate against schema or reference non-existent IDs | ≤ 1% |
 | **Irreversible-action rate (off-script)** | Count of irreversible actions taken that the golden didn't expect | exactly 0 |
 | **Intervention rate** | % of tasks that required HITL approval | feature-tuned (low for analyst agents, high for legal agents) |
 | **Time-to-complete** | Median wallclock seconds | feature-tuned |
 | **Cost per successful task** | USD / completed task | feature-tuned |
-| **Approval edit rate** | % of approvals where the user edited args before approving | â‰¤ 20% (high = agent generates wrong args) |
+| **Approval edit rate** | % of approvals where the user edited args before approving | ≤ 20% (high = agent generates wrong args) |
 
-## Â§3 Trajectory Scoring
+## §3 Trajectory Scoring
 
 Scoring is per-trajectory, not just per-final-output:
 
@@ -170,7 +170,7 @@ def score_trajectory(actual_trace: Trace, golden: GoldenScenario) -> Scores:
 
 Run on every golden scenario; aggregate per feature, per model.
 
-## Â§4 Replay-Based Eval
+## §4 Replay-Based Eval
 
 Take a recorded production trace and "replay" it against a new agent config. The tools are mocked from the trace; the LLM is the new candidate; the observed differences are the regression / improvement.
 
@@ -182,7 +182,7 @@ Use cases:
 
 Full implementation in `references/replay-based-eval.md`.
 
-## Â§5 CI Gate
+## §5 CI Gate
 
 ```yaml
 name: agent-eval
@@ -216,7 +216,7 @@ per_feature:
     step_efficiency_max: 2.0
 ```
 
-## Â§6 Per-Tenant Gate
+## §6 Per-Tenant Gate
 
 Before promoting a new agent version to a flagship tenant:
 
@@ -232,7 +232,7 @@ Sign-off requires:
 - Aggregated metrics within their tenant's negotiated SLA.
 - A signed report attached to the rollout PR.
 
-## Â§7 Anti-Patterns
+## §7 Anti-Patterns
 
 - Single-number "success rate" with no trajectory scoring. Misses why.
 - Replay using live tools. Cost + side effects + flake.
@@ -242,7 +242,7 @@ Sign-off requires:
 - Per-tenant gate skipped because "it's just a small change".
 - Metrics on dashboards but no thresholds. Trends drift without triggering action.
 
-## Â§8 Production Verdict â†’ Completed-Task Counter (Enhancement)
+## §8 Production Verdict → Completed-Task Counter (Enhancement)
 
 Eval is not just pre-release gating. The same verdict apparatus runs on **production traffic** through the cascade defined in `ai-agent-task-success-tracking`, and its output is the gate that decides whether a task is billable as **completed** versus billable as **attempted-only**.
 
@@ -266,14 +266,14 @@ For each production task, the cascade produces:
 
 ```
 agent.task.completed (runtime claim, NOT billable)
-        â”‚
-        â–¼
-  success-tracking cascade  â”€â”€â–¶  verdict written, evidence_ref captured
-        â”‚
-        â–¼
+        │
+        ▼
+  success-tracking cascade  ──▶  verdict written, evidence_ref captured
+        │
+        ▼
   meter consumer subscribes to "verdict_finalized"
-        â”‚
-        â–¼
+        │
+        ▼
   if verdict == 'resolved':       emit agent.resolution.completed (billable)
   if verdict == 'failed':         emit agent.task.attempted (unbilled OR attempted-only price per `attempted-vs-completed-billing`)
   if verdict == 'attempted_only': emit agent.task.attempted with attempt_price
@@ -294,9 +294,9 @@ If the eval golden coverage drops below the agreed threshold for a feature (e.g.
 
 ### Cross-links
 
-- `ai-agent-task-success-tracking/references/judge-cascade-pipeline.md` â€” the cascade implementation.
-- `ai-agent-attempted-vs-completed-billing/references/eval-gated-counting.md` â€” the billing-side gate.
-- `ai-agent-observability-and-replay` â€” the evidence_ref artifact.
+- `ai-agent-task-success-tracking/references/judge-cascade-pipeline.md` — the cascade implementation.
+- `ai-agent-attempted-vs-completed-billing/references/eval-gated-counting.md` — the billing-side gate.
+- `ai-agent-observability-and-replay` — the evidence_ref artifact.
 
 ---
 
@@ -308,18 +308,18 @@ Each month an evidence pack is produced:
 
 ```
 evidence/processing-integrity/eval-coverage/{YYYY-MM}/
-â”œâ”€â”€ manifest.json
-â”œâ”€â”€ golden-coverage.json     # % of prod task types covered by goldens (target â‰¥80%)
-â”œâ”€â”€ pass-rate.json           # pass rate per task type and overall
-â”œâ”€â”€ drift.json               # delta vs prior month; alerts if drop â‰¥ 2pp
-â”œâ”€â”€ failed-examples.jsonl    # redacted failing examples for auditor inspection
-â”œâ”€â”€ attestation.txt          # signed by ML lead
-â””â”€â”€ signature.sig
+├── manifest.json
+├── golden-coverage.json     # % of prod task types covered by goldens (target ≥80%)
+├── pass-rate.json           # pass rate per task type and overall
+├── drift.json               # delta vs prior month; alerts if drop ≥ 2pp
+├── failed-examples.jsonl    # redacted failing examples for auditor inspection
+├── attestation.txt          # signed by ML lead
+└── signature.sig
 ```
 
-Cadence: monthly via `ops/compliance/evidence-cadence.yaml` (`pi1_5_eval_coverage`, cron `0 4 1 * *`). A drift â‰¥ 2pp opens a `high` exception against PI1.5; a coverage drop below 80% opens a `medium` exception.
+Cadence: monthly via `ops/compliance/evidence-cadence.yaml` (`pi1_5_eval_coverage`, cron `0 4 1 * *`). A drift ≥ 2pp opens a `high` exception against PI1.5; a coverage drop below 80% opens a `medium` exception.
 
-The eval suite is also drilled monthly via `eval_drift_baseline` (`ai-agent-drill-evidence-and-cadence`) â€” the drill freezes the golden set and tests for silent drift in the agent's behaviour without intervention.
+The eval suite is also drilled monthly via `eval_drift_baseline` (`ai-agent-drill-evidence-and-cadence`) — the drill freezes the golden set and tests for silent drift in the agent's behaviour without intervention.
 
 Cross-links: `ai-agent-soc2-controls` (PI1.5), `ai-agent-iso27001-controls` (A.8.29), `ai-agent-drill-evidence-and-cadence`, `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.
 

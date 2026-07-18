@@ -1,13 +1,10 @@
 ---
 name: ai-security
-description: Use when securing an AI/LLM-powered feature against prompt injection,
-  cross-tenant data leakage and tenant isolation failures, jailbreaks, and adversarial
-  inputs. Covers PII scrubbing before model calls, output validation, rate limiting,
-  audit logging, and DPPA/GDPR compliance for AI data flows.
+description: Use when securing an AI/LLM-powered feature against prompt injection, cross-tenant data leakage and tenant isolation failures, jailbreaks, and adversarial inputs. Covers PII scrubbing before model calls, output validation, rate limiting, audit logging, and DPPA/GDPR compliance for AI data flows.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Security checklist for AI-powered application features — prompt injection defense, PII scrubbing before API calls, output validation, rate limiting, audit logging, adversarial inputs, and DPPA/GDPR compliance for AI data flows. Invoke during...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `ai-security` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The request is a general application-security review with no model, retrieval, prompt, or agent boundary; route it to the security skills.
+- The task is model-quality evaluation without an abuse, privacy, authorization, or data-isolation question; use `ai-evaluation`.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| AI data-flow and trust boundaries | yes | Locates untrusted content, model calls, tools, stores, and tenant crossings |
+| Data classification and retention rules | yes | Determines what may leave the application and what may be logged |
+| Model, retrieval, and tool interfaces | yes | Exposes injection paths and privileged side effects |
+| Existing auth, rate-limit, and audit controls | conditional | Prevents the AI layer from bypassing platform controls |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Map the AI data flow, classify each boundary, enumerate abuse cases, select preventive and detective controls, then verify tenant isolation, output handling, logging, and failure behavior with adversarial tests.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+Findings name the affected boundary, attack path, impact, control, and verification evidence. Never claim prompt injection is eliminated; document residual risk and keep privileged actions behind deterministic authorization.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| AI threat model | Engineering and security reviewers | Covers injection, data leakage, unsafe output, tool abuse, denial of wallet, and provider risk |
+| Control and test matrix | Implementers | Maps each material threat to an owner, control, adversarial test, and residual risk |
+| Release security decision | Release owner | Records blockers, accepted risks, and evidence for isolation and privileged-action controls |
 
 ## Evidence Produced
 
@@ -330,4 +323,22 @@ Cross-references:
 ## Consolidated Child References
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+## Capability contract
 
+Default to read-only threat analysis. Adversarial execution, provider calls, retrieval poisoning, and tool probes require isolated data, explicit scope, budgets, and stop controls.
+
+## Decision rules
+
+| Threat | Required control | Release effect |
+|---|---|---|
+| Prompt or retrieval injection reaches privileged action | External policy enforcement and approval | Block until contained |
+| Cross-tenant retrieval or memory leakage | Tenant-scoped storage, filters, and regression test | Block release |
+| Unverified model output enters a critical workflow | Schema, business-rule validation, and human gate | Block affected path |
+
+## Domain anti-patterns
+
+- Treating the system prompt as a security boundary. Fix: enforce policy outside the model.
+- Filtering only direct user prompts. Fix: inspect retrieved and tool-supplied content.
+- Sharing vector or memory namespaces across tenants. Fix: enforce tenant isolation at storage and query layers.
+- Passing raw model output to actions. Fix: validate schema, authority, and business rules.
+- Red-teaming without permanent regression cases. Fix: add every confirmed exploit to CI evaluation.

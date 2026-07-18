@@ -7,15 +7,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Building the evidence-capture pipeline for AI incidents in a multi-tenant SaaS.
-- Responding to an AI incident â€” calling the exporter to freeze state at T+5.
+- Responding to an AI incident — calling the exporter to freeze state at T+5.
 - Preparing regulator submission (EU AI Act serious-incident report, GDPR breach, sector regulator).
 - Producing the evidence pack for a postmortem.
 
 ## Do Not Use When
 
-- The task is generic platform forensics â€” use SOC2 incident-response procedures.
-- The task is the trace schema â€” `ai-observability-and-debugging`.
-- The task is the audit log spine â€” `saas-control-plane-engineering`.
+- The task is generic platform forensics — use SOC2 incident-response procedures.
+- The task is the trace schema — `ai-observability-and-debugging`.
+- The task is the audit log spine — `saas-control-plane-engineering`.
 
 ## Required Inputs
 
@@ -29,17 +29,17 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Define the **evidence bundle spec** (Â§1) â€” exactly what's in it.
-3. Build the **one-command exporter** (Â§2) â€” `ai-evidence-export`.
-4. Define **chain-of-custody** (Â§3) â€” who can read, where it lives, how it's signed.
-5. Build the **reproduce-script generator** (Â§4) â€” from a trace, generate a runnable script.
-6. Define **redaction and retention** (Â§5).
-7. Apply anti-patterns (Â§6).
+2. Define the **evidence bundle spec** (§1) — exactly what's in it.
+3. Build the **one-command exporter** (§2) — `ai-evidence-export`.
+4. Define **chain-of-custody** (§3) — who can read, where it lives, how it's signed.
+5. Build the **reproduce-script generator** (§4) — from a trace, generate a runnable script.
+6. Define **redaction and retention** (§5).
+7. Apply anti-patterns (§6).
 
 ## Quality Standards
 
 - Evidence bundle export runs in < 5 minutes for any AI incident.
-- The bundle is captured **at T+5** of the incident â€” before mitigations change state.
+- The bundle is captured **at T+5** of the incident — before mitigations change state.
 - Bundle is content-addressed and signed; chain-of-custody is verifiable.
 - A reproduce script is generated for at least 10 representative failing requests.
 - Bundle is retained per the longest applicable clock (regulatory window, customer contract, internal policy).
@@ -48,11 +48,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Anti-Patterns
 
 - Evidence captured after the incident, when state has changed and traces have aged out.
-- Bundle is "whatever the on-call thought to grab" â€” unstructured, incomplete, unreproducible.
+- Bundle is "whatever the on-call thought to grab" — unstructured, incomplete, unreproducible.
 - Bundle stored in Slack DMs or engineering laptops. Not legally defensible.
-- No redaction â€” leaks customer PII into the evidence vault and into the postmortem.
-- Reproduce script calls live providers â€” distorts cost, rate-limits, replays the bug into production again.
-- Retention shorter than regulatory window â€” evidence destroyed before the regulator requests it.
+- No redaction — leaks customer PII into the evidence vault and into the postmortem.
+- Reproduce script calls live providers — distorts cost, rate-limits, replays the bug into production again.
+- Retention shorter than regulatory window — evidence destroyed before the regulator requests it.
 
 ## Outputs
 
@@ -73,35 +73,35 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/evidence-bundle-spec.md` â€” full bundle contents and manifest schema.
-- `references/chain-of-custody.md` â€” access control, signing, audit, legal hold.
-- `references/reproduce-script-template.md` â€” generator pattern and an example.
+- `references/evidence-bundle-spec.md` — full bundle contents and manifest schema.
+- `references/chain-of-custody.md` — access control, signing, audit, legal hold.
+- `references/reproduce-script-template.md` — generator pattern and an example.
 - Companion: `ai-observability-and-debugging`, `ai-on-saas-architecture`, `ai-eval-harness`, `ai-agents-tools`, `ai-incident-response-runbook`, `ai-incident-customer-comms`, `saas-control-plane-engineering`.
 
 <!-- dual-compat-end -->
 
-## Â§1 Evidence Bundle Spec (Summary)
+## §1 Evidence Bundle Spec (Summary)
 
 A bundle is one tar.gz with a manifest. Required entries:
 
-- `manifest.json` â€” incident id, severity, failure class, window, time of export, exporter version, sha256 of every file.
-- `traces/` â€” exported trace records (OTel JSON) for representative failing requests (10â€“50).
-- `prompts/` â€” exact prompt versions resolved at request time, including system message, developer messages, retrieved context.
-- `models/` â€” model id + provider + version + region per request.
-- `tools/` â€” agent tool calls (request + response), per request.
-- `retrieval/` â€” retrieval set per request (chunk ids, scores, source documents) and the active index snapshot id.
-- `eval/` â€” eval suite output for the affected feature for the day of incident + last 7 days.
-- `affected.json` â€” list of affected tenants, request count, severity per tenant.
-- `audit/` â€” AI audit log for the window.
-- `agent_actions/` â€” action audit log for the window (if agent-class incident).
-- `prices/` â€” provider price-table snapshot at incident time.
-- `mitigations/` â€” `ai_incident_mitigation_log` entries (what was flipped, when, by whom).
-- `reproduce/` â€” reproduce scripts.
-- `signature.txt` â€” detached signature over manifest.json.
+- `manifest.json` — incident id, severity, failure class, window, time of export, exporter version, sha256 of every file.
+- `traces/` — exported trace records (OTel JSON) for representative failing requests (10–50).
+- `prompts/` — exact prompt versions resolved at request time, including system message, developer messages, retrieved context.
+- `models/` — model id + provider + version + region per request.
+- `tools/` — agent tool calls (request + response), per request.
+- `retrieval/` — retrieval set per request (chunk ids, scores, source documents) and the active index snapshot id.
+- `eval/` — eval suite output for the affected feature for the day of incident + last 7 days.
+- `affected.json` — list of affected tenants, request count, severity per tenant.
+- `audit/` — AI audit log for the window.
+- `agent_actions/` — action audit log for the window (if agent-class incident).
+- `prices/` — provider price-table snapshot at incident time.
+- `mitigations/` — `ai_incident_mitigation_log` entries (what was flipped, when, by whom).
+- `reproduce/` — reproduce scripts.
+- `signature.txt` — detached signature over manifest.json.
 
 See `references/evidence-bundle-spec.md` for the full schema.
 
-## Â§2 One-Command Exporter
+## §2 One-Command Exporter
 
 The exporter is a CLI and a service endpoint:
 
@@ -143,7 +143,7 @@ def export_bundle(incident_id: str, signal: str, feature: str,
     bundle.add("snapshots/prices.json", PriceTable.snapshot(window_end))
     bundle.add("snapshots/eval.json", EvalHarness.results(feature, window_end - timedelta(days=7), window_end))
 
-    # 2. Pull traces â€” sample failing requests
+    # 2. Pull traces — sample failing requests
     failing = TraceStore.query(feature=feature, signal=signal,
                                 start=window_start, end=window_end,
                                 limit=sample_size)
@@ -179,7 +179,7 @@ def export_bundle(incident_id: str, signal: str, feature: str,
     return EvidenceVault.upload(bundle, retention_years=7)
 ```
 
-## Â§3 Chain of Custody (Summary)
+## §3 Chain of Custody (Summary)
 
 - Bundle written to object-lock storage; retention set per policy (7 years default; 10 years for high-risk-AI features under EU AI Act).
 - Bundle is signed at creation; signature stored alongside.
@@ -189,12 +189,12 @@ def export_bundle(incident_id: str, signal: str, feature: str,
 
 See `references/chain-of-custody.md`.
 
-## Â§4 Reproduce-Script Generator
+## §4 Reproduce-Script Generator
 
 Each failing request gets a Python script that re-runs the exact request offline, using a mock provider that replays the recorded response. This makes the bug reproducible during the postmortem without re-hitting production providers (cost, rate-limit, side effects) and without making the failure recurrent for customers.
 
 ```python
-# evidence/inc-1923/reproduce_req_abc.py â€” auto-generated
+# evidence/inc-1923/reproduce_req_abc.py — auto-generated
 from ai_replay import MockProvider, Replay
 
 REPLAY = Replay.from_file("traces/req_abc.json")
@@ -206,32 +206,32 @@ result = provider.chat(model=REPLAY.model_id, messages=prompt, context=context)
 
 print("Expected (recorded):", REPLAY.output)
 print("Got:                 ", result.output)
-assert result.output == REPLAY.output, "Replay drift â€” provider non-determinism or schema change."
+assert result.output == REPLAY.output, "Replay drift — provider non-determinism or schema change."
 ```
 
 The script is part of the bundle and is used both in the postmortem and as the seed for a regression golden.
 
 See `references/reproduce-script-template.md`.
 
-## Â§5 Redaction and Retention
+## §5 Redaction and Retention
 
 - PII in prompts and outputs: masked (`<email>`, `<phone>`, `<name>`) in the standard bundle.
 - An unredacted "vault" version exists for regulator submission; access requires legal approval.
 - Tenant data classes treated per the data classification: any data class with redaction policy applies.
 - Retention: default 7 years; high-risk AI features 10 years; legal hold overrides.
 
-## Â§6 Anti-Patterns
+## §6 Anti-Patterns
 
-- "Just download the traces" â€” without a manifest, without snapshots of mutable state, without a signature.
-- Bundle has prompts but not the *resolved* prompt at request time â€” different prompt registry state today vs the incident.
-- Reproduce script hits live providers â€” re-triggers the bug, distorts metrics.
-- No retention policy â€” evidence destroyed in the routine 30-day cleanup before postmortem completes.
-- Redaction is "responder removed what they thought was PII" â€” inconsistent, sometimes too much, sometimes too little.
-- Unredacted vault accessible to every engineer â€” privacy violation by way of incident response.
+- "Just download the traces" — without a manifest, without snapshots of mutable state, without a signature.
+- Bundle has prompts but not the *resolved* prompt at request time — different prompt registry state today vs the incident.
+- Reproduce script hits live providers — re-triggers the bug, distorts metrics.
+- No retention policy — evidence destroyed in the routine 30-day cleanup before postmortem completes.
+- Redaction is "responder removed what they thought was PII" — inconsistent, sometimes too much, sometimes too little.
+- Unredacted vault accessible to every engineer — privacy violation by way of incident response.
 
 ---
 
-## Â§7 Compliance-Evidence Superset (Enhancement)
+## §7 Compliance-Evidence Superset (Enhancement)
 
 The incident-evidence-bundle pipeline generalises into the **compliance-evidence superset** consumed by `ai-agent-evidence-automation`. There are two triggers:
 
@@ -240,7 +240,7 @@ The incident-evidence-bundle pipeline generalises into the **compliance-evidence
 | **Incident** (page, sev1-3) | Per-incident bundle (this skill's primary use case) |
 | **Cadence** (cron) | Per-control evidence pack (`ai-agent-soc2-controls`, ISO, HIPAA) |
 
-Both share the **same pack format** (manifest + files + signature), the **same evidence vault**, and the **same auditor portal** index. The difference is metadata: `trigger_kind âˆˆ {incident, cadence, ad_hoc_request}` and `control_id` (cadence) vs `incident_id` (incident).
+Both share the **same pack format** (manifest + files + signature), the **same evidence vault**, and the **same auditor portal** index. The difference is metadata: `trigger_kind ∈ {incident, cadence, ad_hoc_request}` and `control_id` (cadence) vs `incident_id` (incident).
 
 Implementation: factor the `EvidencePack` writer out of the incident pipeline into `compliance.evidence_pack` (shared with `ai-agent-evidence-automation`); the incident pipeline becomes one consumer. An incident bundle that is **also** material to a SOC 2 control (e.g. a kill-switch flip during an incident) is cross-linked via `related_control_ids` and is sampled by the auditor when reviewing that control window.
 

@@ -1,8 +1,6 @@
 ---
 name: android-development
-description: Android development standards for AI agent implementation. Kotlin-first,
-  Jetpack Compose UI, MVVM + Clean Architecture, Hilt DI, comprehensive security,
-  testing, and performance patterns. Use when building or reviewing Android applications...
+description: Use when building or reviewing native Android applications with Kotlin, Compose, Hilt, and layered architecture; use android-data-persistence or android-tdd for focused data and test work.
 metadata:
   portable: true
   compatible_with:
@@ -21,40 +19,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Android development standards for AI agent implementation. Kotlin-first, Jetpack Compose UI, MVVM + Clean Architecture, Hilt DI, comprehensive security, testing, and performance patterns. Use when building or reviewing Android applications...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `android-development` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -442,6 +406,19 @@ Use `mobile-platform-operations` when preparing Play Console submissions.
 
 ## Reference Implementations
 
+## Decision Rules
+
+| Condition | Choice |
+|---|---|
+| New user interface | Compose; isolate an existing View system behind a stable boundary |
+| Business rule shared across screens | Pure Kotlin domain use case |
+| Android framework dependency | Keep it outside the domain layer |
+| Release behaviour differs by environment | Typed build flavour configuration; no runtime hard-coded URL |
+
+## Degraded Mode
+
+When builds or devices are unavailable, provide a reviewable patch and list the exact Gradle, unit, instrumentation, accessibility, and min-SDK checks still requiring execution. Do not claim device compatibility from static inspection alone.
+
 Google maintains three official reference repos. Use them as canonical examples:
 
 ### Now in Android ([github.com/android/nowinandroid](https://github.com/android/nowinandroid))
@@ -466,3 +443,11 @@ Collection of focused Compose apps. **Use for specific UI patterns:**
 | **JetLagged** | Custom layouts, graphics, Canvas/Path drawing               |
 
 When in doubt about how to implement something, check these repos first.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Android requirements, supported API levels, architecture, UX, and backend contracts | yes | Bound implementation |
+## Outputs
+- Produce Android code or design with lifecycle, accessibility, test, performance, and release evidence.
+## Capability contract
+Read/search and local builds follow task scope; signing, store publication, backend mutation, and device-data destruction require explicit authority.

@@ -1,8 +1,6 @@
 ---
 name: code-safety-scanner
-description: Scan any codebase for 14 critical safety issues across security vulnerabilities,
-  server stability (500 errors), and payment misconfigurations. Use when auditing
-  code before deployment, reviewing AI-generated code for production readiness, or...
+description: Use when scanning a codebase before deployment for critical vulnerabilities, server-error risks, unsafe AI-generated code, dependency problems, or payment misconfiguration.
 metadata:
   portable: true
   compatible_with:
@@ -17,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Scan any codebase for 14 critical safety issues across security vulnerabilities, server stability (500 errors), and payment misconfigurations. Use when auditing code before deployment, reviewing AI-generated code for production readiness, or...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `code-safety-scanner` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -350,3 +314,39 @@ When used passively during code review, check each file against relevant items:
 - **Payment code** -> Check 14
 - **Long-running processes** -> Checks 10, 11
 - **Async/concurrent code** -> Checks 12, 13
+## Decision rules
+
+| Finding | Severity | Action |
+|---|---|---|
+| Exploitable secret, injection, auth bypass, or payment defect | blocking | Stop release and remediate |
+| Reachable stability failure or unsafe dependency | high | Fix before production |
+| Defensive improvement without current exploit path | medium/low | Record with evidence and owner |
+
+## Inputs
+
+## Do Not Use When
+
+Do not treat this pattern scan as a penetration test, execute untrusted repository code by default, or claim coverage for excluded paths and unavailable dependency resolution.
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Repository scope, manifests, and deployment path | yes | Bound the scan and resolve reachable dependencies and runtime entry points |
+| Payment, authentication, and exclusion context | conditional | Apply money-loss and access-control checks without overstating unscanned coverage |
+
+## Quality Standards
+
+Findings require a reachable path and exact evidence; secrets, injection, authorization bypass, unsafe dependencies, and duplicate-charge risks block release until remediated or formally accepted.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Severity-rated code safety report | Release owner and remediation engineer | Each finding cites a reachable file and line, explains impact, proposes a concrete fix, and lists exclusions and unexecuted checks |
+
+## Domain anti-patterns
+
+- Reporting a scanner hit without checking reachability. Fix: verify the execution path.
+- Treating a clean pattern scan as a security proof. Fix: combine static results with targeted review.
+- Running untrusted project scripts during inspection. Fix: default to static, read-only analysis.
+- Hiding unscanned directories. Fix: state exclusions and their risk.
+- Collapsing payment defects into generic warnings. Fix: block on money-loss or duplicate-charge paths.

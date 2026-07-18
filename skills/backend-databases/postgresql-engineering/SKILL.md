@@ -59,5 +59,32 @@ Use this parent skill as the active PostgreSQL engineering entrypoint. Keep impl
 
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| PostgreSQL version and schema | yes | Select valid features |
+| Query plans and cardinalities | yes | Design indexes |
+| Migration and availability constraints | yes | Plan safe change |
+
+## Capability contract
+Review SQL and propose DDL by default. Execute migrations, extensions, routines, or data changes only with authorised scope and rollback.
+
+## Degraded mode
+If EXPLAIN ANALYZE or statistics are unavailable, provide read-only hypotheses and validation SQL; do not claim measured improvement.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Planner estimate is materially wrong | Refresh or improve statistics |
+| Index build may block writes | Use a compatible concurrent path |
+| Constraint encodes business truth | Enforce it in the database |
+
+## Domain Anti-Patterns
+- Running EXPLAIN ANALYZE on unsafe writes. Fix: use a rollback-safe test.
+- Adding extensions without trust review. Fix: verify source and privileges.
+- Indexing without workload evidence. Fix: compare read and write cost.
+- Hiding null semantics in application code. Fix: define them in schema.
+- Combining expand and contract in one release. Fix: stage compatibility.

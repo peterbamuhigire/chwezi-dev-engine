@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Audio Implementation"
+  short_description: "Build rights-aware adaptive game audio"
+  default_prompt: "Design, implement and verify the game audio system."

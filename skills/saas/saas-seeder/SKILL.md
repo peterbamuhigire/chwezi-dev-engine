@@ -1,8 +1,6 @@
 ---
 name: saas-seeder
-description: 'Bootstrap a new SaaS from the SaaS Seeder Template: setup database,
-  configure environment, create super admin user, and verify three-tier panel structure.
-  Use when initializing a new multi-tenant SaaS project from this template.'
+description: Use when bootstrapping a multi-tenant SaaS Seeder Template, including environment, database, super admin, and panel verification.
 metadata:
   portable: true
   compatible_with:
@@ -16,45 +14,30 @@ metadata:
 
 # SaaS Seeder Template Bootstrap
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
-
+## Required Inputs
+| Input | Required | Use |
+|---|---|---|
+| Tenant scope and target environment | yes | Bound bootstrap changes |
+| Approved configuration and credentials | yes | Create the intended instance |
+## Capability and permission contract
+Default to read-only or dry-run. Bootstrap only with explicit authority, least privilege, tenant scope, rollback, and auditable approval; never expose secrets.
+## Degraded mode
+If database, credentials, or target environment are unavailable, return a dry-run plan and do not claim initialization or verification.
+## Decision rules
+| Condition | Action |
+|---|---|
+| Target and authority are verified | Bootstrap, test, and record |
+| Any required access is missing | Stop at dry-run |
+## Domain Anti-Patterns
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
 <!-- dual-compat-start -->
 ## Use When
 
 - Bootstrap a new SaaS from the SaaS Seeder Template: setup database, configure environment, create super admin user, and verify three-tier panel structure. Use when initializing a new multi-tenant SaaS project from this template.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `saas-seeder` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -495,3 +478,12 @@ composer quality && git commit -m "feat: description"
 - [ ] Enable HTTPS (session cookies require it)
 - [ ] Review all queries for franchise_id filtering
 - [ ] Set proper file permissions on `.env` (600)
+## Quality Standards
+
+Seeding must be deterministic, rerunnable without duplication, safe outside production, explicit about credentials, and verified across migrations, tenant boundaries, roles, and panels.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Seeded SaaS baseline and verification record | Application team | Environment, migrations, tenant isolation, super-admin access, panels, and repeatable seed execution pass the documented smoke checks |

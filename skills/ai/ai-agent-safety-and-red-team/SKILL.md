@@ -1,10 +1,10 @@
 ---
 name: ai-agent-safety-and-red-team
-description: Use when hardening agentic features against agent-specific attack surfaces — indirect prompt injection (via tool output, retrieved chunk, web page), action escalation (chain a low-privilege tool's output into a high-privilege tool's args), tenant data exfil via tool chain, recursive self-modification, and the CI red-team suite that catches regressions. Distinct from `ai-prompt-injection-and-tenant-safety` (direct user-input injection) by focusing on the agent's *tool-and-data perimeter*.
+description: Use when red-teaming agent tool and data perimeters for indirect prompt injection, action escalation, tenant exfiltration, unsafe tool chains, self-modification, or containment regressions.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -307,3 +307,26 @@ Outputs go into the drill evidence pack and the quarterly compliance rollup. Fai
 The red-team suite **must** evolve every quarter; a suite unchanged for >180 days is itself an exception (auditors will catch staleness). The suite changelog is the artefact tying CC9.1 to ongoing threat intelligence.
 
 Cross-links: `ai-agent-drill-evidence-and-cadence`, `ai-agent-soc2-controls` (CC7.3, CC9.1), `ai-agent-iso27001-controls` (A.5.7, A.8.29), `ai-agent-evidence-automation`.
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Agent instructions, tool schemas, and permissions | yes | Define attack surface |
+| Tenant/data boundaries and approval policy | yes | Test prohibited crossings |
+| Test environment and stop controls | yes | Contain adversarial execution |
+
+## Capability contract
+
+Default to isolated, non-production testing. Tool execution, network access, destructive probes, and sensitive-data fixtures require explicit scope, synthetic data, budgets, and emergency stop authority.
+
+## Degraded mode
+
+Fallback without a safe test environment: perform static threat analysis and provide test cases; do not execute adversarial payloads against production.
+
+## Decision rules
+
+| Result | Severity | Action |
+|---|---|---|
+| Approval bypass, tenant escape, data exfiltration, or irreversible unsafe action | critical | Block release |
+| Tool misuse contained by effective guardrail | high | Fix and rerun regression |
+| Refusal or containment works with evidence | pass | Add case to permanent suite |

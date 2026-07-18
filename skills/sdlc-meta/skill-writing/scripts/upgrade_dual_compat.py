@@ -14,7 +14,8 @@ from pathlib import Path
 import yaml
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[4]
+ACTIVE_ROOTS = (REPO_ROOT / "skills", REPO_ROOT / "00-meta-initialization")
 MARKER_START = "<!-- dual-compat-start -->"
 MARKER_END = "<!-- dual-compat-end -->"
 
@@ -110,10 +111,6 @@ def build_contract(skill_dir: Path, description: str) -> str:
         if (skill_dir / folder).exists():
             available.append(folder)
 
-    input_note = "relevant project context, constraints, and the concrete problem to solve"
-    if available:
-        input_note += f"; load `{', '.join(available)}` only as needed"
-
     references_lines = []
     if (skill_dir / "references").exists():
         references_lines.append("- Use the `references/` directory for deep detail after reading the core workflow below.")
@@ -138,40 +135,30 @@ def build_contract(skill_dir: Path, description: str) -> str:
             "## Use When",
             "",
             f"- {description}",
-            "- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.",
             "",
             "## Do Not Use When",
             "",
-            f"- The task is unrelated to `{skill_dir.name}` or would be better handled by a more specific companion skill.",
-            "- The request only needs a trivial answer and none of this skill's constraints or references materially help.",
+            "- A narrower neighbouring skill owns the task or this workflow would not change the result.",
             "",
             "## Required Inputs",
             "",
-            f"- Gather {input_note}.",
-            "- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.",
+            "- Use the task-specific inputs declared in the core workflow below; identify missing required inputs before acting.",
             "",
             "## Workflow",
             "",
-            "- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.",
-            "- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.",
-            "- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.",
+            "- Follow the ordered core workflow below and load only the references needed for the current branch.",
             "",
             "## Quality Standards",
             "",
-            "- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.",
-            "- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.",
-            "- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.",
+            "- Apply the domain gates, evidence requirements, and acceptance criteria defined below.",
             "",
             "## Anti-Patterns",
             "",
-            "- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.",
-            "- Loading every reference file by default instead of using progressive disclosure.",
+            "- Do not replace the domain-specific rules below with generic advice or load unrelated references.",
             "",
             "## Outputs",
             "",
-            "- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.",
-            "- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.",
-            "- References used, companion skills, or follow-up actions when they materially improve execution.",
+            "- Produce the named artefacts and evidence specified by the core output contract below.",
             "",
             "## References",
             "",
@@ -184,12 +171,9 @@ def build_contract(skill_dir: Path, description: str) -> str:
 
 def inject_contract(body: str, contract: str) -> str:
     if MARKER_START in body and MARKER_END in body:
-        body = re.sub(
-            rf"{re.escape(MARKER_START)}.*?{re.escape(MARKER_END)}\n*",
-            contract,
-            body,
-            flags=re.DOTALL,
-        )
+        # Existing marker blocks may contain substantive domain instructions,
+        # not just generated compatibility prose. Never replace them wholesale.
+        # Use engine_compliance.py for exact known-boilerplate removal.
         return body
 
     heading_match = re.search(r"^# .+$", body, re.MULTILINE)
@@ -211,7 +195,8 @@ def upgrade_skill(skill_md: Path) -> None:
 
 
 def main() -> None:
-    for skill_md in sorted(REPO_ROOT.glob("*/SKILL.md")):
+    skill_files = (skill_md for root in ACTIVE_ROOTS for skill_md in root.rglob("SKILL.md"))
+    for skill_md in sorted(skill_files):
         upgrade_skill(skill_md)
 
 

@@ -1,6 +1,6 @@
 ---
 name: product-discovery
-description: Structured product discovery before building. Covers the four product risks, opportunity assessment, customer discovery, prototype selection, discovery sprints, and evidence-based build / pivot / kill decisions. Use when evaluating whether a product, feature, or workflow deserves delivery investment.
+description: Use when testing whether a product, feature, or workflow deserves investment through risk framing, prototypes, research, and build-pivot-kill decisions.
 metadata:
   portable: true
   compatible_with:
@@ -10,6 +10,40 @@ metadata:
 
 # Product Discovery
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
+
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Decision, audience, and deliverable | yes | Bound the business outcome |
+| Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
+| Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
+
+## Capability and permission contract
+
+Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
+
+## Degraded mode
+
+If evidence, stakeholder decisions, specialist tooling, or authoritative commercial data are unavailable, deliver a labelled draft, checklist, or decision memo. State what was not verified and do not claim approval, publication, financial accuracy, or customer acceptance.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Output creates a commercial, customer, or delivery commitment | Obtain named approval before release | Authority or terms are unclear |
+| Evidence supports a reversible draft | Produce it with assumptions and owner | Required evidence conflicts |
+| Tooling or data is incomplete | Specify validation | A final executable artefact is expected |
+
+## Domain Anti-Patterns
+
+- Inventing customer evidence, prices, benchmarks, or approvals. Fix: cite the source or mark the gap.
+- Publishing or sending a draft without authority. Fix: retain draft status and name the approver.
+- Hiding assumptions inside polished prose. Fix: expose them beside each affected decision.
+- Polishing presentation while the decision remains unclear. Fix: resolve audience, owner, and acceptance criteria.
+- Treating unavailable tooling as passed validation. Fix: record the unassessed check.
+
 
 <!-- dual-compat-start -->
 ## Use When
@@ -31,7 +65,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
 - Use the four risks to decide what needs evidence, then choose the cheapest prototype or test that can answer the risk.
 - End with a concrete recommendation and the evidence supporting it.
 - For premium products, test willingness to pay, proof threshold, perceived quality, decision process, and buyer commitment before treating positive feedback as demand.

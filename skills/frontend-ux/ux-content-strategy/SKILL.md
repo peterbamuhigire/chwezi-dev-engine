@@ -121,6 +121,21 @@ Derived from Metts and Welfle (2020) *Strategic Writing for UX*, Wroblewski (200
 
 ## Operating Cadence
 
+## Inputs
+
+| Artifact | Produced by | Required? | Why |
+|---|---|---|---|
+| Product purpose, audience, and critical flows | Product brief or research | required | Anchors voice and content priorities |
+| Current interface copy and performance evidence | Repository and analytics | optional | Reveals drift and measurable failure points |
+
+## Capability contract
+
+Read and search current product copy and approved research first. Editing requires authorisation; do not publish copy or alter production content without explicit approval.
+
+## Degraded mode
+
+If product copy, research, or metrics are unavailable, return a provisional brief, list needed evidence, and avoid claiming that decisions are validated.
+
 - Weekly: review content tickets against voice and pattern library; flag drift.
 - Monthly: review measurement dashboard against targets; retire content that fails to move its metric.
 - Quarterly: refresh voice chart only if evidence shows the audience or product purpose has shifted; otherwise leave it alone.

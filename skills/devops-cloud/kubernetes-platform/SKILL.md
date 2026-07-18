@@ -46,6 +46,20 @@ Load the sibling that owns a specific topic. This skill owns the bootstrap, gove
 - Tenant or team list for namespace and RBAC design.
 - Compliance and data-residency constraints that drive self-managed vs managed.
 
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Cluster version, topology, tenancy | yes | Bound design |
+| Workload resources and security needs | yes | Set policies |
+| Upgrade and recovery constraints | yes | Plan lifecycle |
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Workload lacks resource bounds | Block shared admission |
+| Namespace isolation is insufficient | Use separate cluster |
+| Upgrade skips supported versions | Sequence minor upgrades |
+
 ## Prerequisite Skills
 
 - `cloud-architecture` — for the network substrate.

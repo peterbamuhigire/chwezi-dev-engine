@@ -1,13 +1,10 @@
 ---
 name: javascript-modern
-description: 'Modern JavaScript (ES6+) patterns for PHP+JavaScript SaaS apps: modules,
-  async/await, destructuring, Proxy/Reflect, generators, WeakMap/WeakSet, optional
-  chaining, error handling, and performance patterns. Use when writing JavaScript
-  for web...'
+description: Use when writing or reviewing modern JavaScript for browser or PHP-backed SaaS applications, including modules, asynchronous flows, error handling, language features, and performance.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,42 +15,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Modern JavaScript (ES6+) patterns for PHP+JavaScript SaaS apps: modules, async/await, destructuring, Proxy/Reflect, generators, WeakMap/WeakSet, optional chaining, error handling, and performance patterns. Use when writing JavaScript for web...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `javascript-modern` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
 - For OOP-heavy browser modules, reusable UI widgets, or complex stateful workflows, pair with `references/javascript-patterns.md` and load `references/javascript-patterns.md`.
 - For Node/runtime container work, pair with `docker-development`.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -130,3 +96,32 @@ Use that deep dive for:
 - `13. `const` / `let` and Arrow Function `this``
 - Additional deep-dive sections continue in the reference file.
 
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Code is shared across features | Use explicit ES modules with narrow exports |
+| Work is CPU-bound | Move it off the main thread or backend |
+| Legacy IIFE is stable and isolated | Preserve it unless tested conversion adds value |
+
+## Capability Contract
+
+Read and search are required. Editing and browser or test execution require authorisation; network access is optional.
+
+## Degraded Mode
+
+Fallback: without execution, provide a patch plus exact lint, unit, and browser checks still required.
+
+## Domain Anti-Patterns
+
+- Starting asynchronous work without handling rejection.
+- Using global mutable state instead of module scope.
+- Adding a dependency for a native language operation.
+- Blocking the main thread with large synchronous transforms.
+- Changing module format without checking runtime compatibility.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| JavaScript target, runtime, code, and project conventions | yes | Select compatible language and module patterns |
+## Outputs
+- Produce reviewed JavaScript, findings, tests, and compatibility notes.

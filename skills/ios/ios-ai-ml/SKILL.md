@@ -1,10 +1,10 @@
 ---
 name: ios-ai-ml
-description: iOS AI/ML standards for WWDC26 Apple intelligence work, including Foundation Models, Language Model providers, Dynamic Profiles, Core AI, Evaluations, Core ML, Vision, NaturalLanguage, Speech, SoundAnalysis, and privacy-first on-device inference.
+description: Use when implementing or reviewing iOS AI and ML features with Apple on-device frameworks, model evaluation, and privacy controls; use ios-architecture for general module boundaries.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -69,6 +69,35 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 
 ## Quick Apple AI Stack Map
+
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Use-case and harm definition | Product and security review | required | Bounds model behaviour and prohibited outcomes |
+| Representative evaluation set | Domain owner | required | Measures quality on real inputs |
+| Device and OS support matrix | `ios-quality-and-release` | required | Selects framework and fallback paths |
+
+## Decision Rules
+
+| Constraint | Choice |
+|---|---|
+| Sensitive input and supported on-device task | On-device framework |
+| Unsupported device or unavailable model | Deterministic non-AI fallback |
+| Safety-critical or irreversible action | Require human confirmation; AI may only propose |
+| Quality cannot be measured on representative data | Stop before release |
+
+## Capability Contract
+
+Read and search are required; model downloads, network calls, device execution, and edits require task authority. Never upload private input merely because local inference is unavailable.
+
+## Domain Anti-Patterns
+
+- Shipping a demo prompt as an evaluation. Fix: use versioned representative cases and failure thresholds.
+- Hiding model unavailability behind a spinner. Fix: expose a deterministic fallback state.
+- Letting generated output perform irreversible actions. Fix: validate and confirm structured intent.
+- Logging prompts containing personal data. Fix: redact or disable payload logging.
+- Claiming support from simulator results alone. Fix: test the declared physical-device matrix.
 
 | Layer | Use For |
 | --- | --- |

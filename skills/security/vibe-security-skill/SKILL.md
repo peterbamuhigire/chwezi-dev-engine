@@ -1,6 +1,6 @@
 ---
 name: vibe-security-skill
-description: Use when designing or reviewing security for a web application, API, or multi-tenant SaaS — produces threat model, abuse case list, auth/authz matrix, and secret handling plan; covers OWASP Top 10 2025 and the AI-code-generation blind spots. Neighbours — api-design-first owns auth model fields, deployment-release-engineering owns secret rotation choreography, ai-security and llm-security own model-specific threats.
+description: Use when designing or reviewing application, API, or multi-tenant SaaS security. Produces threat models, abuse cases, authorisation matrices, secret plans, and OWASP-aligned evidence.
 metadata:
   portable: true
   compatible_with:
@@ -403,3 +403,14 @@ CREATE POLICY tenant_isolation ON orders
 - `references/appsec-principles-97.md` — 97 Things Every Application Security Professional Should Know condensed.
 - `references/grokking-fundamentals.md` — fundamentals primer.
 <!-- dual-compat-end -->
+## Degraded mode
+
+Fallback when code, architecture, or data flows are unavailable: return a provisional threat model, clearly mark assumptions, and withhold a release verdict.
+
+## Domain anti-patterns
+
+- Threat-modelling only the happy path. Fix: enumerate abuse and cross-tenant paths.
+- Treating authentication as authorisation. Fix: map subject, action, resource, and tenant checks.
+- Listing generic OWASP labels without code evidence. Fix: cite the component and exploit path.
+- Approving secrets because they are environment variables. Fix: inspect lifecycle, scope, rotation, and logging.
+- Ignoring AI-generated dependency names. Fix: verify every package against its registry.

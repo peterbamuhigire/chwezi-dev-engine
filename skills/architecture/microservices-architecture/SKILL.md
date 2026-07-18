@@ -56,5 +56,32 @@ Use this parent skill as the active microservices entrypoint. It should help dec
 
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Inputs
+| Input | Required | Purpose |
+|---|---|---|
+| Domain capabilities and ownership | yes | Draw boundaries |
+| Workload and availability targets | yes | Set communication tradeoffs |
+| Data ownership and change constraints | yes | Plan migration |
+
+## Capability contract
+Recommend boundaries and migration sequences by default. Do not split repositories, databases, deployments, or production traffic without explicit change authority.
+
+## Degraded mode
+If ownership or runtime evidence is unavailable, provide a read-only candidate map and retain a modular monolith as the default.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Independent scale or ownership absent | Keep a module |
+| Cross-service transaction required | Redesign or specify a saga |
+| Extraction lacks rollback | Block migration |
+
+## Domain Anti-Patterns
+- Splitting by technical layer. Fix: split by business capability.
+- Sharing tables between services. Fix: assign one data owner.
+- Building long synchronous chains. Fix: shorten or decouple them.
+- Treating a broker as transaction magic. Fix: define compensation.
+- Creating services without owners. Fix: record ownership first.

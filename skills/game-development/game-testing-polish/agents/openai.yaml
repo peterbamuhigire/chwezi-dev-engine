@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Testing and Polish"
+  short_description: "Gate game quality with evidence"
+  default_prompt: "Create and execute the game QA, playtest and polish gates."

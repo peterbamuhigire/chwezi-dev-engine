@@ -1,0 +1,5 @@
+# Practical 3D scene evidence
+
+Theresa Hill's *3D Game Development Practical Introduction* is a legacy, OCR-derived introductory source. It supports the durable dependency chain among transform hierarchies, renderers, materials, textures, shaders, lights, cameras, colliders, physics, and scripted components. It also demonstrates testing different control and gameplay archetypes in bounded scenes. It does not establish current Unity APIs, production asset budgets, modern render-pipeline behaviour, or release performance targets.
+
+Use a greybox acceptance scene to verify scale/axes, pivots and parent-child transforms, collider and rigid-body fit, material/shader assignment, lighting response, camera readability, input interaction, and deterministic trigger behaviour before detailed art is accepted. Retain the source asset, export settings, engine import profile, scene revision, target build, and device capture. Any numeric budget must come from the project's measured target-hardware envelope, not this source.

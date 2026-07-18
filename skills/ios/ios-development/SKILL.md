@@ -1,8 +1,6 @@
 ---
 name: ios-development
-description: iOS development standards for AI agent implementation. Swift-first, SwiftUI,
-  MVVM + Clean Architecture, async/await, comprehensive security, testing, and performance
-  patterns. Use when building or reviewing iOS applications, generating Swift...
+description: Use when building or reviewing native iOS applications with Swift, SwiftUI, structured concurrency, security, tests, and performance gates; use focused iOS skills for persistence, release, or monetisation.
 metadata:
   portable: true
   compatible_with:
@@ -21,40 +19,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - iOS development standards for AI agent implementation. Swift-first, SwiftUI, MVVM + Clean Architecture, async/await, comprehensive security, testing, and performance patterns. Use when building or reviewing iOS applications, generating Swift...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `ios-development` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -100,6 +64,27 @@ Configure base URLs using Xcode build configurations and `.xcconfig` files so ea
 
 ## Additional Guidance
 
+## Decision Rules
+
+| Condition | Choice |
+|---|---|
+| New interface on supported OS versions | SwiftUI |
+| Legacy UIKit surface with stable behaviour | Wrap and migrate by feature, not by file |
+| Concurrent mutable resource | Actor ownership or MainActor for UI state |
+| Unsupported OS capability | Explicit availability branch and useful fallback |
+
+## Degraded Mode
+
+Without Xcode or devices, return code plus an execution matrix for compile, Swift Testing, UI, accessibility, Instruments, and oldest-supported-OS checks. Static review is not release evidence.
+
+## Domain Anti-Patterns
+
+- Launching unstructured tasks without ownership. Fix: bind work to a lifecycle or actor.
+- Force-unwrapping external data. Fix: validate and expose typed failure states.
+- Blocking the main actor with I/O. Fix: isolate work and measure UI responsiveness.
+- Hiding availability failures. Fix: render an explicit supported fallback.
+- Treating simulator success as device readiness. Fix: exercise the physical-device matrix.
+
 Extended guidance for `ios-development` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
@@ -119,3 +104,11 @@ Use that deep dive for:
 - Additional deep-dive sections continue in the reference file.
 
 For screen quality, visual polish, native interaction, Dynamic Type, VoiceOver, iPad adaptation, and premium UX gates, load `ios-ui-ux-design` alongside this implementation skill.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| iOS requirements, supported OS/devices, architecture, UX, and service contracts | yes | Bound implementation |
+## Outputs
+- Produce iOS code or design with lifecycle, accessibility, tests, performance, and release evidence.
+## Capability contract
+Read/search and local builds follow task scope; signing, provisioning, TestFlight/App Store publication, and destructive data operations require explicit authority.

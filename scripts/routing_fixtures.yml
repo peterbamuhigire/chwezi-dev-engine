@@ -44,6 +44,8 @@ fixtures:
     expect: consulting-delivery-control-room
   - task: "Check whether this machine can generate validated Word, PDF and Excel proposal files before promising them"
     expect: document-spreadsheet-tooling-readiness
+  - task: "Set up reliable headless LibreOffice conversion for DOCX and PDF on Windows, macOS, Debian and Fedora"
+    expect: document-spreadsheet-tooling-readiness
 
   # --- Backend / data / API ---
   - task: "Design the relational data model, tenancy and indexes for a multi-tenant ERP"
@@ -62,7 +64,7 @@ fixtures:
     expect: cicd-pipelines
   - task: "Run our services on Kubernetes with production-grade deployment and scaling"
     expect: kubernetes-platform
-  - task: "Define SLOs, dashboards and alerting for our service"
+  - task: "Use observability monitoring to define SLO dashboards, alerting and telemetry for our service"
     expect: observability-monitoring
 
   # --- Frontend / UX ---
@@ -87,9 +89,103 @@ fixtures:
   - task: "Plan iOS release evidence with Device Hub, Xcode Cloud, TestFlight, Swift Testing and App Store submission gates"
     expect: ios-quality-and-release
 
+  # --- Game development ---
+  - task: "Plan our complete 3D mobile game from concept through prototype, vertical slice, production and launch"
+    expect: game-development-orchestration
+  - task: "Turn our riskiest game assumptions into falsifiable hypotheses, choose the smallest prototypes, define evidence thresholds and decide go pivot or stop"
+    expect: lean-game-product-development
+  - task: "Design the core loop, touch controls, first session, progression and ethical economy for a mobile game"
+    expect: mobile-game-design
+  - task: "Build a Unity C# Android game with additive scenes, prefabs, the Input System, saves and device tests"
+    expect: unity-mobile-game-development
+  - task: "Build and export a Godot mobile game using scenes, resources, signals and typed scripts"
+    expect: godot-mobile-game-development
+  - task: "Architect combat, quests, dialogue, AI, inventory and versioned save state for a game"
+    expect: gameplay-systems-architecture
+  - task: "Specify coordinate spaces, vector and quaternion operations, fixed timestep simulation, seeded randomness and numerical tolerance tests for gameplay"
+    expect: game-math-and-simulation
+  - task: "Design the mobile render pipeline, shaders, materials, lighting, shadows, visibility and GPU diagnostics for a real-time game"
+    expect: real-time-game-graphics
+  - task: "Create a mobile-ready 3D character pipeline from concept through Maya, Substance, rigging, LOD and engine import"
+    expect: game-3d-asset-pipeline
+  - task: "Implement adaptive game music, Foley, dialogue, audio buses, localisation and performer rights"
+    expect: game-audio-implementation
+  - task: "Profile our mobile game for frame pacing, CPU GPU memory heat battery and loading on low-end phones"
+    expect: mobile-game-performance
+  - task: "Create the playtest, device QA, balance, polish, alpha beta and release-candidate gates for our game"
+    expect: game-testing-polish
+  - task: "Prepare game signing, Google Play and App Store submission, privacy, staged rollout, rollback and live events"
+    expect: mobile-game-release-liveops
+  - task: "Integrate Game Center and controllers, test Metal on Apple Silicon, then sign and notarise our macOS game"
+    expect: apple-game-platform-delivery
+  - task: "Our Unity game targets iPhone and Mac: decide cloud-save fallback, haptics, Retina windowing and direct notarised distribution"
+    expect: apple-game-platform-delivery
+  - task: "Implement an ordinary Swift application feature with SwiftUI forms and navigation, not a game"
+    expect: ios-development
+  - task: "Design server authority, replication, matchmaking, reconnect and version-skew tests for a four-player online game"
+    expect: online-multiplayer-and-game-backend
+  - task: "Our Unreal listen-server prototype must become regional dedicated sessions with durable progression and packet-loss tests"
+    expect: online-multiplayer-and-game-backend
+  - task: "Architect combat, quests and inventory for a completely offline single-player game"
+    expect: gameplay-systems-architecture
+  - task: "Create clean reproducible Unity Godot and Unreal builds with manifests symbols checksums signing promotion and rollback"
+    expect: game-build-release-engineering
+  - task: "Our macOS and mobile release train needs clean-machine builds, artifact promotion, crash symbols and failed-rollout rehearsal"
+    expect: game-build-release-engineering
+  - task: "Profile frame pacing GPU memory heat and loading on low-end phones without changing the release pipeline"
+    expect: mobile-game-performance
+  - task: "Threat-model the untrusted game client, validate combat and economy actions, detect cheats and design proportionate appeals"
+    expect: game-security-anti-cheat-and-abuse
+  - task: "Design game anti-cheat and abuse controls for bots, tampering, economy fraud, forged match messages, toxic chat, enforcement and appeals"
+    expect: game-security-anti-cheat-and-abuse
+  - task: "Run a standard OWASP audit of our public account-management web application, not game behaviour"
+    expect: web-app-security-audit
+  - task: "Build an Unreal Engine C++ and Blueprint game with Gameplay Framework classes asset validation automation and packaging"
+    expect: unreal-game-development
+  - task: "Restructure our Unreal Engine C++ and Blueprints Gameplay Framework project with Unreal assets automation packaging and profiling"
+    expect: unreal-game-development
+  - task: "Build a Unity C# Android game with additive scenes prefabs saves and device tests"
+    expect: unity-mobile-game-development
+  - task: "Create sprites texture atlases tile sets frame animation and readable pooled VFX with source-to-import provenance"
+    expect: game-2d-art-animation-and-vfx-pipeline
+  - task: "Validate 2D game sprites, texture atlases, tile sets, frame animation, particles and VFX including pivots overdraw and photosensitivity"
+    expect: game-2d-art-animation-and-vfx-pipeline
+  - task: "Create a mobile-ready 3D character pipeline with rigging LOD collision and engine import"
+    expect: game-3d-asset-pipeline
+  - task: "Build and validate a Blender character source file with export skeleton shape keys clips FBX preset and clean Unity re-import"
+    expect: blender-game-asset-production
+  - task: "Design an interactive story spine with character wants branching choices story-state persistence dialogue interruption and setup payoff tests"
+    expect: game-narrative-and-interactive-story-design
+  - task: "Implement NPC perception behaviour trees navigation path recovery reservations and worst-case agent profiling"
+    expect: game-ai-behaviour-and-navigation
+  - task: "Design and produce levels encounters missions checkpoints streaming partitions and deterministic procedural content"
+    expect: level-world-and-content-production
+  - task: "Turn our greybox into a content pipeline with sequence-break tests playtest questions and measured throughput"
+    expect: level-world-and-content-production
+  - task: "Architect reusable combat quests dialogue AI and versioned save state rather than producing levels"
+    expect: gameplay-systems-architecture
+  - task: "Define trustworthy game telemetry funnels remote config experiments and a reconciled virtual economy"
+    expect: game-data-analytics-and-live-economy
+  - task: "Plan a reversible live event with typed config expiry kill switch economy simulation and data-quality thresholds"
+    expect: game-data-analytics-and-live-economy
+  - task: "Prepare store signing privacy rollout rollback support and patches without designing analytics metrics"
+    expect: mobile-game-release-liveops
+  - task: "Run client game discovery estimation staffing RACI greenlight milestones outsourcing change control and launch command"
+    expect: game-studio-delivery-and-commercial-operations
+  - task: "Run game studio delivery and commercial operations: estimate content throughput and contingency, define SOW acceptance and vendor governance"
+    expect: game-studio-delivery-and-commercial-operations
+  - task: "Turn risky game assumptions into prototypes with evidence thresholds and go pivot or stop decisions"
+    expect: lean-game-product-development
+  - task: "Design accessible gameplay remapping redundant cues localisation pseudo-localisation moderation reporting and appeals"
+    expect: game-accessibility-localisation-and-player-safety
+  - task: "Test core combat with alternate input captions motion controls translated text and player-safety failure paths"
+    expect: game-accessibility-localisation-and-player-safety
+  - task: "Create the general alpha beta release-candidate bug and balance gates for a game"
+    expect: game-testing-polish
+
   # --- Security / compliance ---
-  - task: "Audit a web application for OWASP vulnerabilities and insecure code"
-    expect: vibe-security-skill
+  - task: "Run a web app security audit for OWASP vulnerabilities, insecure code and remediation evidence"
+    expect: web-app-security-audit
   - task: "Produce a data protection impact assessment for a new feature"
     expect: dpia-generator
 
@@ -100,7 +196,11 @@ fixtures:
     expect: csharp-dotnet-development
 
   # --- Meta / SDLC ---
-  - task: "Author a new skill that follows the repository house style and contracts"
+  - task: "Use skill-writing to author a new skill that follows the repository house style and contracts"
+    expect: skill-writing
+  - task: "Design one vendor-neutral library of specialist roles and skills with thin Claude, Codex and Copilot adapters"
+    expect: skill-writing
+  - task: "Turn this role Markdown into a capability-scoped agent definition with triggers, permissions and an output contract"
     expect: skill-writing
   - task: "Initialise documentation and a methodology roadmap for a brand new project"
     expect: 00-meta-initialization

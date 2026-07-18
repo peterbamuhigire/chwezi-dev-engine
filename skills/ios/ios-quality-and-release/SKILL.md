@@ -1,6 +1,6 @@
 ---
 name: ios-quality-and-release
-description: iOS quality and release orchestration for Swift Testing 6.4, Device Hub, Xcode 27 agents, Xcode Cloud, AI Evaluations, Instruments, TestFlight, App Store review, stability, and release evidence.
+description: Use when planning or gating iOS tests, performance, TestFlight, App Store review, CI, device coverage, or release evidence; use ios-development for implementation before the release gate.
 metadata:
   portable: true
   compatible_with:
@@ -52,7 +52,35 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - iOS test plan, failing/passing tests, debug notes, crash RCA, stability checklist, App Store readiness checklist, or release evidence pack.
 
-## References
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Release candidate and change set | Delivery team | required | Defines the test scope |
+| Risk-based test plan | Testing owner | required | Maps checks to failure impact |
+| Privacy, entitlement, and store metadata | Security and product owners | required | Prevents submission blockers |
+
+## Decision Rules
+
+| Finding | Gate |
+|---|---|
+| Crash, data loss, entitlement, privacy, or purchase defect | Block release |
+| Unsupported oldest-OS or required-device path | Block release |
+| Flaky critical-flow test | Treat as failure until root cause is isolated |
+| Non-critical cosmetic defect with owner and date | May ship only through explicit risk acceptance |
+
+## Degraded Mode
+
+Without Xcode Cloud, TestFlight, devices, or App Store access, return a release exception register. Never convert missing evidence into a pass.
+If execution is unavailable, retain every runtime gate as open.
+
+## Domain Anti-Patterns
+
+- Testing only the latest simulator. Fix: cover the declared OS and physical-device matrix.
+- Retrying flaky tests until green. Fix: quarantine with an owner and diagnose the race.
+- Shipping without rollback or feature disablement. Fix: document containment before approval.
+- Using screenshots as purchase evidence. Fix: retain signed transaction and server-event traces.
+- Submitting stale privacy metadata. Fix: reconcile manifests, SDK declarations, and store answers.
 
 - `references/ios-tdd.md` for Swift Testing/XCTest TDD workflow and test pyramid.
 - `references/ios-debugging-mastery.md` for LLDB, Instruments, watchpoints, and advanced triage.
@@ -60,3 +88,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/app-store-review.md` for App Store submission, policy, metadata, privacy, and review evidence.
 - `references/wwdc26-quality-release.md` for Swift Testing 6.4 migration, Device Hub, Xcode 27 agents, Xcode Cloud, Instruments concurrency profiling, AI Evaluations, and release evidence.
 <!-- dual-compat-end -->
+## Read next
+- `ios-development` for implementation fixes; `ios-platform-capabilities` for entitlement-specific validation.

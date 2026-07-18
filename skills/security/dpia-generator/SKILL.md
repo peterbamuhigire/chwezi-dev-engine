@@ -1,14 +1,11 @@
 ---
 name: dpia-generator
-description: Generate a Data Protection Impact Assessment (DPIA), Uganda DPPA 2019-compliant.
-  Use when producing or reviewing a data protection impact assessment, a privacy impact
-  assessment, when uganda-dppa-compliance flags [DPIA-REQUIRED], or when processing large-scale
-  or sensitive personal data for a new feature.
+description: Use when producing or reviewing a Data Protection Impact Assessment (DPIA) for a new feature or for Uganda DPPA-regulated, large-scale, sensitive, monitored, or high-risk personal-data processing.
 metadata:
   compatibility_notes: Uganda-based systems requiring DPPA 2019 compliance
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -19,40 +16,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Generate Uganda DPPA 2019-compliant DPIA documents. Use when uganda-dppa-compliance flags [DPIA-REQUIRED] or when processing large-scale personal data.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `dpia-generator` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -250,3 +213,38 @@ Before marking this skill complete:
 - `domains/uganda/references/regulations.md`
 - `domains/uganda/references/dppa-pii-classification.md`
 - `uganda-dppa-compliance/SKILL.md` — prerequisite skill
+## Capability contract
+
+Default to read-only access to requirements, data flows, vendors, controls, and policies. Network research is required only for current law or regulator guidance; implementation edits need separate authority.
+
+## Degraded mode
+
+Fallback when data flows, retention, vendors, or controls are unknown: issue a draft marked incomplete and list the evidence required before approval.
+
+## Decision rules
+
+| Processing condition | DPIA decision | Action |
+|---|---|---|
+| Sensitive, systematic, large-scale, or high-impact processing | required | Complete assessment before launch |
+| Material uncertainty about harm or lawful basis | required pending evidence | Escalate to privacy owner |
+| Low-risk processing with documented controls | record rationale | Monitor for scope change |
+
+## Domain anti-patterns
+
+- Inventing a lawful basis. Fix: obtain the controller's documented basis.
+- Listing controls that are only planned. Fix: distinguish implemented, planned, and absent.
+- Omitting processors or cross-border transfers. Fix: map every recipient and location.
+- Treating consent as the universal answer. Fix: assess the correct lawful basis.
+- Approving with unknown retention. Fix: block until retention and deletion are defined.
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Processing purpose, data inventory, data subjects, systems, recipients, retention, and jurisdictions | yes | Establish the actual processing operation and applicable risk context |
+| Existing controls, contracts, and incident history | conditional | Test residual risk and avoid crediting controls that are only planned |
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| DPIA with risk and action register | Data protection officer and accountable owner | Necessity, proportionality, data flows, rights impacts, control evidence, residual risks, owners, and consultation triggers are documented |

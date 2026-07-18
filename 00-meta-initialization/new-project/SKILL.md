@@ -1,18 +1,54 @@
 ---
-name: "new-project"
-description: "Use when the task matches skill: new project scaffold and this skill's local workflow."
+name: new-project
+description: 'Use when the task matches skill: new project scaffold and this skill''s local workflow.'
 metadata:
-  use_when: "Use when the task matches skill: new project scaffold and this skill's local workflow."
-  do_not_use_when: "Do not use when a more specific upstream or downstream skill owns the task, or when the required project context has not been prepared."
-  required_inputs: "Provide the target project or document, the relevant context files, scope constraints, and any domain or standards inputs referenced here."
-  workflow: "Follow the ordered steps, review gates, and local generation logic in this file before consulting deeper support files as needed."
-  quality_standards: "Keep outputs grounded in source context, traceable to stated standards, and specific enough to review or verify."
-  anti_patterns: "Do not fabricate missing requirements, skip human review gates, or substitute vague prose for verifiable documentation."
-  outputs: "Produce or update the document, scaffold, analysis, or phase artifact that this skill defines."
-  references: "Use sibling files in this directory when deeper detail is needed."
+  use_when: 'Use when the task matches skill: new project scaffold and this skill''s local workflow.'
+  do_not_use_when: Do not use when a more specific upstream or downstream skill owns the task, or when the required project context has not been prepared.
+  required_inputs: Provide the target project or document, the relevant context files, scope constraints, and any domain or standards inputs referenced here.
+  workflow: Follow the ordered steps, review gates, and local generation logic in this file before consulting deeper support files as needed.
+  quality_standards: Keep outputs grounded in source context, traceable to stated standards, and specific enough to review or verify.
+  anti_patterns: Do not fabricate missing requirements, skip human review gates, or substitute vague prose for verifiable documentation.
+  outputs: Produce or update the document, scaffold, analysis, or phase artifact that this skill defines.
+  references: Use sibling files in this directory when deeper detail is needed.
+  portable: true
+  compatible_with:
+  - claude-code
+  - codex
 ---
 
 # Skill: New Project Scaffold
+
+<!-- dual-compat-start --><!-- dual-compat-end -->
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Approved project profile and roadmap | yes | Drive scaffold scope |
+| Repository conventions and existing files | yes | Preserve local structure |
+
+## Outputs
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Project documentation scaffold | Project team | No destructive overwrite, links resolve, roadmap represented |
+
+## Capability contract
+Read/search are required. File creation requires explicit scaffold authority. Do not install tools, initialise remote services, or publish artefacts implicitly.
+
+## Degraded mode
+Fallback without write access: return the directory tree and file templates as a proposed patch.
+
+## Decision rules
+| State | Action | Failure avoided |
+|---|---|---|
+| Empty project | Create approved minimal scaffold | Context overload |
+| Existing partial documentation | Fill gaps and preserve content | Destructive replacement |
+| Conflicting methodology files | Stop and reconcile with roadmap | Contradictory process |
+
+## Domain anti-patterns
+- Creating empty placeholder documents. Fix: include purpose, owner, and next action.
+- Copying a universal scaffold. Fix: derive files from the approved roadmap.
+- Replacing existing project rules. Fix: preserve and reconcile them.
+- Adding tool-specific adapters as canonical truth. Fix: keep sources model-neutral.
+- Claiming setup is complete without link checks. Fix: validate the scaffold and references.
 
 ## Trigger
 User says any of: "start a new project", "create a new project",

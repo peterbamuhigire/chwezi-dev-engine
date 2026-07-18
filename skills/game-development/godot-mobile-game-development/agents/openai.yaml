@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Mobile Game Development"
+  short_description: "Build production Godot mobile games"
+  default_prompt: "Implement and verify this Godot mobile-game capability."

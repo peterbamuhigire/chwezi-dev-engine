@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Math and Simulation"
+  short_description: "Specify reliable game maths and simulation"
+  default_prompt: "Use $game-math-and-simulation to specify and verify the mathematics for this gameplay or rendering system."

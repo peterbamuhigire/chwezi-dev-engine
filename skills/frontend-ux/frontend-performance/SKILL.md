@@ -1,6 +1,6 @@
 ---
 name: frontend-performance
-description: Use when defining, implementing, or auditing frontend performance for web apps and SaaS frontends — produces a performance budget per critical flow, a measurement plan tied to SLOs, and a regression gate for CI. Covers Core Web Vitals (LCP, INP, CLS), loading, rendering, and framework-specific recipes. Not for backend latency, API shape (see api-design-first), or server SLOs (see observability-monitoring).
+description: Use when defining, implementing, or auditing frontend performance for web apps and SaaS frontends; produces a per-flow performance budget, measurement plan tied to SLOs, and CI regression gate. Use api-design-first for API shape and observability-monitoring for server SLOs.
 metadata:
   portable: true
   compatible_with:
@@ -67,7 +67,9 @@ Specialist frontend skill. Produces the three deliverables that give a team an o
 | Performance | Performance budget document | Markdown doc stating page, API, and interaction budgets | `docs/performance/budgets-checkout.md` |
 | Performance | Real-user and synthetic metrics evidence | Dashboard link plus archived snapshot | `docs/performance/rum-snapshot-2026-04-16.md` |
 
-## References
+## Capability contract
+
+Read and search the application and measurement configuration first. Editing and execution require authorisation; when available, run the existing build, bundle analysis, lab checks, and relevant tests. Network access is optional for current browser guidance.
 
 - `references/budgets-and-regression-gate.md`
 - `references/loading-performance.md`

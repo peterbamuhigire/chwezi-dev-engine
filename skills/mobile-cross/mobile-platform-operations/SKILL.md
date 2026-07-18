@@ -1,8 +1,6 @@
 ---
 name: mobile-platform-operations
-description: Cross-platform mobile operations orchestration for app icons, mobile
-  RBAC, SaaS planning, Play Store review, Apple Xcode 27/TestFlight/Xcode Cloud
-  evidence, and operational mobile delivery assets.
+description: Use when coordinating cross-platform mobile store assets, signing, RBAC operations, release planning, and Android/iOS evidence; use native release skills for platform-specific gates.
 metadata:
   portable: true
   compatible_with:
@@ -53,7 +51,35 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Mobile operations checklist, app asset manifest, RBAC matrix, SaaS companion app plan, Play Store review checklist, or release evidence.
 
-## References
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Signed release candidates | Android and iOS teams | required | Establishes shippable binaries |
+| Store metadata and visual assets | Product/design owners | required | Supports review and listing consistency |
+| Role, privacy, and support policies | Security/operations owners | required | Defines operational controls |
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Platform evidence differs | Track separate Android and iOS exceptions; do not average readiness |
+| Signing credential custody is unclear | Stop release and assign an accountable owner |
+| Store claim lacks matching in-app behaviour | Correct the claim or implementation before submission |
+| Critical operational path has no support runbook | Block launch |
+
+## Degraded Mode
+
+Without store-console, signing, CI, or device access, produce a missing-evidence register with owners. A document-only check cannot approve a mobile release.
+If a required operational capability is unavailable, keep the corresponding release gate open.
+
+## Domain Anti-Patterns
+
+- Reusing one platform's screenshots for the other. Fix: capture each supported device family.
+- Sharing signing secrets through project files. Fix: use controlled credential custody and rotation.
+- Treating store approval as production readiness. Fix: verify monitoring, support, rollback, and RBAC.
+- Publishing inconsistent privacy claims. Fix: reconcile manifests, disclosures, and runtime collection.
+- Combining platform failures into one status. Fix: report readiness and blockers per platform.
 
 - `references/mobile-custom-icons.md` for custom PNG icon naming, asset directories, and tracking.
 - `references/mobile-rbac.md` for Android/cross-platform permission gates and offline authorization caches.
@@ -61,3 +87,5 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/google-play-store-review.md` for Android Play Store policy, testing, listing, and submission readiness.
 - `references/apple-platform-operations-wwdc26.md` for Apple Silicon, Xcode 27, Device Hub, TestFlight, Xcode Cloud, and App Store evidence readiness.
 <!-- dual-compat-end -->
+## Read next
+- Platform-specific Android and iOS release skills for signing, store, and device evidence.

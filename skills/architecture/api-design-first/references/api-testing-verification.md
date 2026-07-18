@@ -84,8 +84,8 @@ Enforce thorough API endpoint testing before declaring any API-dependent feature
 ✅ **Before committing and pushing API-dependent features**
 ✅ **When integrating frontend with existing backend APIs**
 
-âŒ Don't use for pure UI-only features with no backend
-âŒ Don't use for unit tests that mock API responses
+❌ Don't use for pure UI-only features with no backend
+❌ Don't use for unit tests that mock API responses
 
 ## The Problem This Solves
 
@@ -262,7 +262,7 @@ curl <endpoint>?agent_id=99999
 3. Write API service interface
 4. Write repository implementation
 5. Write unit tests (with mocked responses)
-6. âš ï¸ BEFORE DECLARING COMPLETE:
+6. [WARNING] BEFORE DECLARING COMPLETE:
    - Run through Pre-Completion Checklist above
    - Test with actual backend
    - Fix any mismatches
@@ -272,46 +272,46 @@ curl <endpoint>?agent_id=99999
 
 ### Red Flags to Watch For
 
-ðŸš© **"All unit tests pass" is NOT sufficient** - unit tests mock API responses
-ðŸš© **"Build successful" is NOT sufficient** - build doesn't test actual APIs
-ðŸš© **Never assume field names** - always verify backend response JSON
-ðŸš© **Never assume endpoint exists** - check backend routing first
-ðŸš© **Never skip manual testing** - run the app with real backend before committing
+🚩 **"All unit tests pass" is NOT sufficient** - unit tests mock API responses
+🚩 **"Build successful" is NOT sufficient** - build doesn't test actual APIs
+🚩 **Never assume field names** - always verify backend response JSON
+🚩 **Never assume endpoint exists** - check backend routing first
+🚩 **Never skip manual testing** - run the app with real backend before committing
 
 ## Common Backend-Frontend Mismatches
 
 ### 1. Field Name Case Mismatch
 ```
 Backend: total_revenue
-Android without @Json: totalRevenue âŒ (won't match)
+Android without @Json: totalRevenue ❌ (won't match)
 Android with @Json: @Json(name = "total_revenue") val totalRevenue ✅
 ```
 
 ### 2. Field Name Semantic Mismatch
 ```
 Backend returns: total_sales
-Android expects: totalRevenue âŒ
+Android expects: totalRevenue ❌
 Fix: Update DTO to expect total_sales OR fix backend
 ```
 
 ### 3. Missing Endpoint
 ```
 Android calls: agent-commissions.php?action=get_commissions
-Backend: Endpoint doesn't exist âŒ
+Backend: Endpoint doesn't exist ❌
 Fix: Add the action to backend routing
 ```
 
 ### 4. Wrong Pagination Structure
 ```
 Backend returns: { items: [...], page: 1, total: 100 }
-Android expects: { items: [...], pagination: { page: 1, total: 100 } } âŒ
+Android expects: { items: [...], pagination: { page: 1, total: 100 } } ❌
 Fix: Normalize one or the other
 ```
 
 ### 5. Nullable Mismatches
 ```
 Backend returns: phone_number: null
-Android DTO: val phoneNumber: String âŒ (should be String?)
+Android DTO: val phoneNumber: String ❌ (should be String?)
 Fix: Make DTO field nullable: String?
 ```
 
@@ -365,7 +365,7 @@ update-Codex-documentation → Document API contract in completion report
 ## Summary
 
 **The Golden Rule:**
-> "All unit tests passing" + "Build successful" â‰  Feature complete
+> "All unit tests passing" + "Build successful" != Feature complete
 >
 > You MUST test with actual backend before declaring completion.
 

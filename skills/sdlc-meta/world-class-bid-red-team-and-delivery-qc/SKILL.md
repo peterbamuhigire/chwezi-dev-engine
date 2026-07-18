@@ -1,6 +1,6 @@
 ---
 name: world-class-bid-red-team-and-delivery-qc
-description: Use as the final quality gate for high-stakes bids, donor submissions, consulting deliverables, score predictions, compliance knockout scans, evidence audits, spreadsheet reviews, and delivery-feasibility checks.
+description: Use when applying the final quality gate to high-stakes bids, donor submissions, consulting deliverables, compliance knockout scans, evidence audits, spreadsheets, and delivery feasibility.
 metadata:
   portable: true
   compatible_with:
@@ -25,7 +25,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Required Inputs
 
-- Draft pack, compliance matrix, scoring grid, source evidence, workplan, budget/workbook, assumptions, and tooling validation notes.
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Draft pack and compliance matrix | yes | Test mandatory requirements and coherence |
+| Scoring grid and source evidence | yes | Support evaluator simulation and claims |
+| Workplan, budget, assumptions, and validation notes | conditional | Test delivery and financial feasibility |
 
 ## Workflow
 
@@ -54,6 +58,18 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Evaluator simulation, score prediction, knockout scan, evidence audit, spreadsheet review, feasibility review, and final sign-off record.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Compliance assessment | Scored matrix | Requirement reconciliation |
+| Security | Submission-risk review | Findings register | Confidentiality control |
+| Data safety | Evidence integrity review | Checklist | Workbook provenance |
+| Performance | Delivery feasibility | Capacity table | Staffing against deadlines |
+| Operability | Delivery control record | Ownership matrix | Approval dependency |
+| UX quality | Evaluator-readability review | Annotated checklist | Navigation finding |
+| Release evidence | Final ship decision | Sign-off record | Four-eyes approval |
+
 ## References
 
 - `references/red-team-scorecard.md`: Evaluator simulation and scoring prediction.
@@ -71,3 +87,27 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 7. Test delivery feasibility against team capacity, fee-days, calendar, approvals, data access, travel, and reporting cadence.
 8. Record required fixes and block release until critical findings are resolved.
 9. Obtain independent four-eyes sign-off for release.
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Mandatory requirement is unmet | Block release |
+| Claim lacks attributable evidence | Remove, qualify, or source it |
+| Budget and method disagree | Reconcile before scoring |
+
+## Capability Contract
+
+Read and search are required. Editing and workbook execution require authorisation; final release requires an independent approver.
+
+## Degraded Mode
+
+Without source files or executable tooling, issue a provisional read-only verdict and list checks that prevent release.
+
+## Domain Anti-Patterns
+
+- Scoring from presentation quality alone.
+- Accepting a compliance claim without location evidence.
+- Ignoring spreadsheet formulas and hidden assumptions.
+- Treating an unresolved knockout as minor.
+- Self-approving the final release gate.

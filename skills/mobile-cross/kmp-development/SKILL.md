@@ -1,12 +1,10 @@
 ---
 name: kmp-development
-description: Kotlin Multiplatform shared module development standards for sharing
-  business logic across Android and iOS while keeping native UI. Covers project structure
-  (shared/composeApp/iosApp), source sets, targets, expect/actual, DI (Koin)...
+description: Use when sharing Kotlin business logic across Android and iOS with Kotlin Multiplatform while retaining deliberate platform boundaries; use native development skills for platform UI and release work.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Kotlin Multiplatform shared module development standards for sharing business logic across Android and iOS while keeping native UI. Covers project structure (shared/composeApp/iosApp), source sets, targets, expect/actual, DI (Koin)...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `kmp-development` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -112,6 +76,28 @@ project-root/
 
 ## Additional Guidance
 
+## Decision Rules
+
+| Code concern | Location |
+|---|---|
+| Pure domain rule, validation, or API model | `commonMain` |
+| Stable platform service with distinct implementations | Narrow expect/actual or injected interface |
+| Native navigation, accessibility, or platform interaction | Platform source set and native UI |
+| Library lacks supported targets | Choose an alternative or isolate it; do not leak it into common code |
+
+## Capability Contract And Degraded Mode
+
+Read and search all target source sets before moving code. Edits and builds require authority. Without both Android and iOS toolchains, return the target-specific checks still outstanding and do not claim parity.
+If either target toolchain is unavailable, mark cross-platform parity unverified.
+
+## Domain Anti-Patterns
+
+- Moving UI wholesale into shared code by default. Fix: share stable logic and keep native experiences intentional.
+- Spreading expect/actual across domain types. Fix: inject one narrow platform service.
+- Choosing dependencies from Android support alone. Fix: verify every declared target.
+- Catching platform errors as generic strings. Fix: map them into a shared typed error model.
+- Declaring parity after one target builds. Fix: run shared and platform tests on both targets.
+
 Extended guidance for `kmp-development` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
@@ -127,3 +113,13 @@ Use that deep dive for:
 - `Tooling`
 - `Mandatory Rules`
 - `Anti-Patterns`
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Shared-domain scope, platform capabilities, API contracts, and native UX boundaries | yes | Choose KMP sharing boundaries |
+## Outputs
+- Produce KMP architecture or code with shared/native separation, tests, and platform integration evidence.
+## Degraded mode
+Fallback without both platform toolchains: validate shared code and mark native integration unverified.
+## Capability contract
+Builds and tests follow task scope; signing, store release, backend mutation, and destructive device actions require explicit authority.

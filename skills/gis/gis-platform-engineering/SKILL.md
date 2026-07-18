@@ -27,8 +27,10 @@ Use this parent skill as the active GIS implementation entrypoint. Keep enterpri
 
 ## Required Inputs
 
-- Gather the concrete system, repository, environment, constraints, and deliverable before loading references.
-- Identify which absorbed reference file is needed; do not load every migrated reference by default.
+| Artifact | Produced by | Required? | Why |
+|---|---|---|---|
+| System, users, spatial workflows, and constraints | Product or architecture brief | required | Defines map, API, and data requirements |
+| Dataset inventory with CRS, accuracy, and ownership | Data owner | required | Prevents invalid transformations and false precision |
 ## Workflow
 
 1. Load `gis-enterprise-domain` for domain boundaries, organisational concepts, and GIS vocabulary.
@@ -46,14 +48,32 @@ Use this parent skill as the active GIS implementation entrypoint. Keep enterpri
 
 ## Anti-Patterns
 
-- Treating absorbed reference files as active skills or separate routing entrypoints.
-- Loading every migrated child reference instead of the one that matches the task.
-- Producing generic advice without constraints, evidence, or next verification steps.
+- Treating references as active skills. Fix: route here and load only the matched reference.
+- Loading every migrated reference. Fix: select mapping, integration, or PostGIS depth from the deliverable.
+- Ignoring CRS or axis order. Fix: record source and target SRID and test a known coordinate.
+- Running spatial predicates without suitable indexes. Fix: inspect query plans and add the appropriate index.
+- Returning unbounded geometries. Fix: filter by viewport, simplify for zoom, and cap payloads.
 ## Outputs
 
 - GIS implementation plan, map UI spec, spatial API/schema, integration notes, or PostGIS review.
 
 ## References
 
-- Load only the eferences/<old-skill>.md files named in the workflow when their depth is required.
+- Load only the references/<old-skill>.md files named in the workflow when their depth is required.
 <!-- dual-compat-end -->
+
+## Decision rules
+
+| Condition | Choice | Failure avoided |
+|---|---|---|
+| Distance and area must be accurate | Use geography or a suitable projected CRS | Misleading measurements |
+| Client needs only the current viewport | Query by bounding box and zoom-dependent detail | Oversized payloads |
+| Provider integration is replaceable | Put it behind an application adapter | Vendor lock-in |
+
+## Capability contract
+
+Read and search schema, sample data, API, and map client first. Edit only when authorised; execute geometry-validity, CRS, query-plan, API, and map checks when available.
+
+## Degraded mode
+
+If datasets, database execution, or a rendered map are unavailable, return a read-only design and mark query performance, geometry validity, provider behaviour, and visual interaction as unverified.

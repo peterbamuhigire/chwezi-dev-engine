@@ -10,14 +10,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Designing per-tier budgets: Free 5 steps / $0.05; Pro 20 steps / $1.00; Enterprise 100 steps / $10.00.
 - Implementing **refusal-on-budget**: when budget hits, the agent stops cleanly, summarises progress, and asks the user.
 - Computing **cost-per-completed-task** (sum of LLM + tool costs / count of `COMPLETED` tasks) and attributing it to the tenant in `ai-cost-per-tenant-attribution`.
-- Detecting cost anomalies *at the task level* (a single task spending 50Ã— the median).
+- Detecting cost anomalies *at the task level* (a single task spending 50× the median).
 
 ## Do Not Use When
 
-- The task is the platform cost-attribution pipeline â€” `ai-cost-per-tenant-attribution`. This skill is the per-task enforcement; that skill is the rollup.
-- The task is general SaaS quotas / rate limiting â€” `saas-rate-limiting-and-quotas`.
-- The task is tool side-effect budgets (count of emails, etc.) â€” `ai-agent-tool-catalogue-and-action-gating`.
-- The task is plan-tier entitlements â€” `ai-entitlements-and-feature-gating` (this skill enforces *runtime budgets*; that skill enforces *eligibility*).
+- The task is the platform cost-attribution pipeline — `ai-cost-per-tenant-attribution`. This skill is the per-task enforcement; that skill is the rollup.
+- The task is general SaaS quotas / rate limiting — `saas-rate-limiting-and-quotas`.
+- The task is tool side-effect budgets (count of emails, etc.) — `ai-agent-tool-catalogue-and-action-gating`.
+- The task is plan-tier entitlements — `ai-entitlements-and-feature-gating` (this skill enforces *runtime budgets*; that skill enforces *eligibility*).
 
 ## Required Inputs
 
@@ -29,13 +29,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Define the **four budget dimensions** (Â§1): step, token, wallclock, tool-cost.
-3. Map **plan tiers â†’ budgets** (Â§2).
-4. Implement the **enforcement pipeline** (Â§3). See `references/budget-enforcement-pipeline.md`.
-5. Implement **refusal-on-budget** UX (Â§4): clean stop, summarise, ask.
-6. Wire **cost-per-completed-task** attribution (Â§5).
-7. Implement **anomaly detection at task level** (Â§6).
-8. Apply anti-patterns (Â§7).
+2. Define the **four budget dimensions** (§1): step, token, wallclock, tool-cost.
+3. Map **plan tiers → budgets** (§2).
+4. Implement the **enforcement pipeline** (§3). See `references/budget-enforcement-pipeline.md`.
+5. Implement **refusal-on-budget** UX (§4): clean stop, summarise, ask.
+6. Wire **cost-per-completed-task** attribution (§5).
+7. Implement **anomaly detection at task level** (§6).
+8. Apply anti-patterns (§7).
 
 ## Quality Standards
 
@@ -44,7 +44,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - A task that breaches any budget transitions cleanly to `BUDGET_EXCEEDED`, emits an event, summarises progress, and informs the user.
 - Cost-per-completed-task is computed and stored on the task row; rolled up daily into `ai-cost-per-tenant-attribution`.
 - Per-tenant overrides are time-boxed, audited, and surfaced in the admin console.
-- Task-level anomaly detector catches a 10Ã— median spike within < 5 minutes.
+- Task-level anomaly detector catches a 10× median spike within < 5 minutes.
 - The Free tier has hard budgets; Pro has soft + hard; Enterprise has soft + hard with notification escalation.
 
 ## Anti-Patterns
@@ -60,7 +60,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Outputs
 
 - Four-dimension budget schema on `agent_tasks`.
-- Plan-tier Ã— feature Ã— budget catalogue.
+- Plan-tier × feature × budget catalogue.
 - Enforcement pipeline implementation.
 - Refusal-on-budget UX components.
 - Cost-per-task COGS pipeline.
@@ -77,23 +77,23 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/budget-enforcement-pipeline.md` â€” implementation, including atomic Redis counters + DB persistence.
+- `references/budget-enforcement-pipeline.md` — implementation, including atomic Redis counters + DB persistence.
 - Companion: `ai-agent-runtime-architecture`, `ai-cost-per-tenant-attribution`, `ai-model-gateway`, `ai-entitlements-and-feature-gating`, `ai-usage-metering-and-billing`, `saas-rate-limiting-and-quotas`, `ai-agent-eval`.
 
 <!-- dual-compat-end -->
 
-## Â§1 Four Budget Dimensions
+## §1 Four Budget Dimensions
 
 | Budget | What it caps | Why |
 |---|---|---|
-| **Step budget** | Number of `PLANNING â†’ ACTING â†’ OBSERVING` cycles | Compound-accuracy decay; runaway loops |
+| **Step budget** | Number of `PLANNING → ACTING → OBSERVING` cycles | Compound-accuracy decay; runaway loops |
 | **Token budget** | Sum of input + output tokens across all LLM calls in the task | LLM cost cap |
 | **Wallclock budget** | Real elapsed seconds | Async tasks must not run forever |
 | **Tool-cost budget** | Sum of usd cost from tools that bill (e.g., paid third-party APIs) | Non-LLM cost cap |
 
 All four are required. A task without all four is rejected at creation.
 
-## Â§2 Plan-Tier Ã— Feature Budget Catalogue
+## §2 Plan-Tier × Feature Budget Catalogue
 
 Budgets vary by **feature** as well as tier. A "draft an email" task has very different complexity than "investigate 30 days of logs".
 
@@ -113,7 +113,7 @@ default_budgets:
 
 Per-tenant overrides live in `tenant_agent_budget_overrides` with `expires_at` and `reason`.
 
-## Â§3 Enforcement Pipeline (Outline)
+## §3 Enforcement Pipeline (Outline)
 
 ```
 1. Task created:
@@ -147,7 +147,7 @@ Per-tenant overrides live in `tenant_agent_budget_overrides` with `expires_at` a
 
 Full implementation in `references/budget-enforcement-pipeline.md`.
 
-## Â§4 Refusal-on-Budget UX
+## §4 Refusal-on-Budget UX
 
 When a budget breaches, the agent **never** silently stops. It:
 
@@ -156,7 +156,7 @@ When a budget breaches, the agent **never** silently stops. It:
 3. Returns to the user:
    ```
    I've used my safety limit for this task. Here's what I found before stopping:
-   â€¢ <progress summary>
+   • <progress summary>
    
    To continue: [Add more budget]   [Restart with adjusted scope]   [Hand off to a human]
    ```
@@ -165,7 +165,7 @@ When a budget breaches, the agent **never** silently stops. It:
 
 The "Add more budget" affordance only appears for Pro and Enterprise; Free hard-stops.
 
-## Â§5 Cost-Per-Completed-Task
+## §5 Cost-Per-Completed-Task
 
 On `COMPLETED`, write:
 
@@ -182,7 +182,7 @@ Daily rollup feeds `ai-cost-per-tenant-attribution`:
 - Per-tenant `tasks_completed / tasks_attempted` (success rate).
 - Per-tenant cost share = (sum of agent task cost) / (tenant's total AI cost).
 
-## Â§6 Task-Level Anomaly Detection
+## §6 Task-Level Anomaly Detection
 
 ```sql
 -- Median task cost per (feature, tenant_plan) in the last 7 days
@@ -192,11 +192,11 @@ WHERE completed_at > NOW() - INTERVAL 7 DAY
 GROUP BY feature, tenant_plan;
 ```
 
-Alert when a single task's `usd_total > 10 Ã— median(feature, plan)`. The dashboard surfaces top-10 task cost in last hour.
+Alert when a single task's `usd_total > 10 × median(feature, plan)`. The dashboard surfaces top-10 task cost in last hour.
 
-## Â§7 Anti-Patterns
+## §7 Anti-Patterns
 
-- Step budget = 50 "to be safe" â€” high enough to never bite; effectively no budget.
+- Step budget = 50 "to be safe" — high enough to never bite; effectively no budget.
 - Budgets set globally rather than per-feature. Inflates the cap for cheap features, breaks expensive ones.
 - Token budget without wallclock budget. A slow task with low token rate runs for hours.
 - Budget exceeded leaves the task `ACTING` forever. Agent inbox lies about state.
@@ -204,9 +204,9 @@ Alert when a single task's `usd_total > 10 Ã— median(feature, plan)`. The das
 - Cost-per-task missing from the cost dashboard. Cannot find which tasks are expensive.
 - Per-tenant override granted by a SQL UPDATE with no audit row.
 
-## Â§8 Budget Breach â†’ SLA-Credit Eligibility (Enhancement)
+## §8 Budget Breach → SLA-Credit Eligibility (Enhancement)
 
-A budget breach is not just a kill signal. It is a **commercial event** that may entitle the customer to an SLA credit, may trigger a refund, or may be silently expected â€” depending on which budget and which tier.
+A budget breach is not just a kill signal. It is a **commercial event** that may entitle the customer to an SLA credit, may trigger a refund, or may be silently expected — depending on which budget and which tier.
 
 ### Classification matrix
 
@@ -215,7 +215,7 @@ A budget breach is not just a kill signal. It is a **commercial event** that may
 | Step budget | Pro / Business / Enterprise | Yes if it caused `verdict='failed'` and the SLA-class commits a resolution-rate floor | No (failed task is unbilled in eval-gated billing) |
 | Token budget | All | Same as step | No |
 | Wallclock budget | Business / Enterprise (TTR commitment) | Yes if it caused a TTR p95 breach for the period | No |
-| Tool cost budget | All | No â€” this is platform self-protection, not a customer commitment | No |
+| Tool cost budget | All | No — this is platform self-protection, not a customer commitment | No |
 | Budget set unusually low by the tenant | All | No (customer-caused exclusion; see `ai-agent-sla-and-commitments`) | No |
 
 ### Handoff event
@@ -239,7 +239,7 @@ On a budget breach that terminates a task, the budget enforcer must emit:
 }
 ```
 
-`ai-agent-sla-credit-automation` subscribes to this event, runs the eligibility-rules pipeline, and (if eligible) opens an SLA-credit case automatically. The budget-enforcement layer does **not** issue the credit â€” it just emits the signal with enough context for the downstream pipeline to decide.
+`ai-agent-sla-credit-automation` subscribes to this event, runs the eligibility-rules pipeline, and (if eligible) opens an SLA-credit case automatically. The budget-enforcement layer does **not** issue the credit — it just emits the signal with enough context for the downstream pipeline to decide.
 
 ### Implementation note
 
@@ -247,7 +247,7 @@ The `configured_by` field is critical: a tenant who set a step budget of 5 on a 
 
 ### Cross-links
 
-- `ai-agent-sla-credit-automation/references/eligibility-rules.md` â€” consumes the `eligibility_hint` field.
-- `ai-agent-sla-and-commitments/references/sla-class-table.md` â€” defines which budgets map to which committed dimensions per tier.
-- `ai-agent-abandonment-and-refund-policy/references/abandonment-taxonomy.md` â€” `budget-exceeded` class definition.
+- `ai-agent-sla-credit-automation/references/eligibility-rules.md` — consumes the `eligibility_hint` field.
+- `ai-agent-sla-and-commitments/references/sla-class-table.md` — defines which budgets map to which committed dimensions per tier.
+- `ai-agent-abandonment-and-refund-policy/references/abandonment-taxonomy.md` — `budget-exceeded` class definition.
 

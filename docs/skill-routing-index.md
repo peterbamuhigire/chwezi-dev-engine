@@ -24,7 +24,7 @@ Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 142 |
+| Active `SKILL.md` files | 168 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -168,6 +168,7 @@ target instead.
 | JavaScript | `javascript-modern` | `javascript-advanced`, `javascript-patterns` |
 | TypeScript | `typescript-effective` | `typescript-mastery`, `typescript-design-patterns` |
 | C# and .NET | `csharp-dotnet-development` | `csharp`, `dotnet`, `aspnet-core`, `ef-core`, `dotnet-maui`, `dotnet-ai` |
+| Python executable and desktop-suite distribution | `python-modern-standards` | PyInstaller, auto-py-to-exe, Nuitka, frozen applications, multi-executable suites, portable ZIPs, Inno Setup installers, signing, and Windows packaging CI |
 | Security | `vibe-security-skill` | `dual-auth-rbac`, selected stack security references |
 | GraphQL | `graphql-patterns` | `graphql-security` |
 | CI/CD | `cicd-pipelines` | `cicd-pipeline-design`, `cicd-devsecops`, `cicd-jenkins-debian` |
@@ -190,6 +191,40 @@ domain — they sit above domain skills.
 | `skills/sdlc-meta/ai-slop-audit` | Detection / scoring auditor | After EACH major iteration of work (logs a verdict; blocks progression on grade F), as the final gate, and auto-runs when the user asks to analyse/review/evaluate/audit/critique/de-slop ANY project, app, website, plan, spec, document, image, or codebase, or asks "does this look AI-generated?". |
 
 ## Registry Maintenance
+
+## Game development family
+
+Route complete game initiatives through `skills/game-development/game-development-orchestration/SKILL.md`, then load only the required specialists:
+
+| Intent | Skill |
+|---|---|
+| Inception, risky assumptions, hypotheses, prototype choice, experiment gates, pivot or stop decisions | `lean-game-product-development` |
+| Player fantasy, loop, touch controls, sessions, onboarding, accessibility, progression or economy | `mobile-game-design` |
+| Unity C# project, scenes, prefabs, input, saves, Android/iOS build | `unity-mobile-game-development` |
+| Godot scenes, nodes, resources, signals, scripts or mobile export | `godot-mobile-game-development` |
+| Combat, quests, inventory, progression or world/save state | `gameplay-systems-architecture` |
+| NPC behaviour, behaviour/state trees, perception, navigation, crowds, reservations or AI profiling | `game-ai-behaviour-and-navigation` |
+| Coordinate spaces, transforms, vectors, quaternions, curves, probability, fixed-step simulation or numerical stability | `game-math-and-simulation` |
+| Render pipeline, shaders, materials, lighting, shadows, visibility, post-processing or graphics API diagnosis | `real-time-game-graphics` |
+| Concepts, models, UVs, textures, rigs, animation, LODs, colliders or imports | `game-3d-asset-pipeline` |
+| Blender source files, rig controls, shape keys, export presets, FBX/glTF, clean re-import or Blender automation | `blender-game-asset-production` |
+| Music, ambience, Foley, voice, buses, spatial/adaptive audio or audio rights | `game-audio-implementation` |
+| Frame pacing, CPU/GPU, memory, loading, battery, heat or device budgets | `mobile-game-performance` |
+| QA, playtesting, balance, accessibility/localisation regression, alpha/beta/RC | `game-testing-polish` |
+| Signing, stores, privacy, ratings, IAP, rollout, rollback, support or live events | `mobile-game-release-liveops` |
+| iOS/iPadOS/macOS game services, Metal diagnosis, controllers, haptics, cloud saves, Mac windowing, signing or notarisation | `apple-game-platform-delivery` |
+| Multiplayer authority, replication, RPCs, prediction, matchmaking, sessions, reconnect, backend state or protocol evolution | `online-multiplayer-and-game-backend` |
+| Reproducible Unity/Godot/Unreal builds, manifests, symbols, signing boundaries, promotion, certification or rollback | `game-build-release-engineering` |
+| Game trust boundaries, anti-cheat, tampering, economy fraud, bots, abuse investigation, enforcement or appeals | `game-security-anti-cheat-and-abuse` |
+| Unreal Engine C++, Blueprints, Gameplay Framework, assets, automation, packaging or Unreal profiling | `unreal-game-development` |
+| Sprites, atlases, tile sets, 2D rigs/animation, UI art, particles, VFX or resolution variants | `game-2d-art-animation-and-vfx-pipeline` |
+| Levels, worlds, encounters, missions, procedural generation, streaming or content throughput | `level-world-and-content-production` |
+| Interactive story, characters, dialogue, quests, choices, story state, environmental narrative or setup/payoff | `game-narrative-and-interactive-story-design` |
+| Game telemetry, metrics, experiments, remote config, economy sources/sinks, live events or data quality | `game-data-analytics-and-live-economy` |
+| Game discovery, estimation, staffing/RACI, SOW, greenlight, milestones, outsourcing, launch command or case evidence | `game-studio-delivery-and-commercial-operations` |
+| Accessible gameplay, remapping, sensory alternatives, localisation, cultural review, moderation or player safety | `game-accessibility-localisation-and-player-safety` |
+
+For historical, cultural, market, legal or version-sensitive claims, pair this family with the external Digital Research Skills Engine. For interface appearance, pair it with `design-system-skills`. For native store operations, reuse the existing Android/iOS/mobile-platform skills.
 
 - Update this file when a retained parent skill changes.
 - Add the same mapping to `docs/skill-aliases.yml` when a route needs to be machine-readable.

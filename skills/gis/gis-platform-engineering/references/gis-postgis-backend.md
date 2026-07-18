@@ -305,7 +305,7 @@ See `references/tenant-isolation-rls.md`.
 ## Anti-patterns
 
 - Storing lat/lng as two separate `double precision` columns and computing distance manually.
-- Computing distance in degrees (1° latitude â‰  1° longitude, and neither equals metres).
+- Computing distance in degrees (1 degree latitude != 1 degree longitude, and neither equals metres).
 - No GIST index on a spatial column.
 - SRID mismatch between table and query — no index use, no error, silently wrong.
 - Mixing `geometry` and `geography` in the same query without explicit casts.

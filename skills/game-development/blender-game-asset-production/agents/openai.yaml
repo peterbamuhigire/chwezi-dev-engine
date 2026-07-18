@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blender Game Asset Production"
+  short_description: "Build and validate Blender-to-engine assets"
+  default_prompt: "Plan and verify a version-pinned Blender game-asset pipeline."

@@ -1,13 +1,10 @@
 ---
 name: advanced-testing-strategy
-description: Use when designing or reviewing test strategy for production systems,
-  APIs, mobile apps, SaaS platforms, ERP workflows, and AI-enabled systems. Covers
-  unit, integration, contract, end-to-end, regression, release-gate, and risk-based
-  testing decisions.
+description: Use when designing or reviewing test strategy for production systems, APIs, mobile apps, SaaS platforms, ERP workflows, and AI-enabled systems. Covers unit, integration, contract, end-to-end, regression, release-gate, and risk-based testing decisions.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing or reviewing test strategy for production systems, APIs, mobile apps, SaaS platforms, ERP workflows, and AI-enabled systems. Covers unit, integration, contract, end-to-end, regression, release-gate, and risk-based testing decisions.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `advanced-testing-strategy` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -216,3 +179,31 @@ See [references/test-matrix-template.md](references/test-matrix-template.md).
 - [references/risk-driven-testing.md](references/risk-driven-testing.md): Test-layer selection, determinism, and flake policy.
 - [references/test-matrix-template.md](references/test-matrix-template.md): Test plan by risk and layer.
 - [references/release-evidence.md](references/release-evidence.md): What must be true before shipping.
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Failure has high impact or likelihood | Test earlier and at multiple boundaries |
+| Contract spans services | Add consumer/provider contract tests |
+| Release evidence is incomplete | Block release or record an authorised exception |
+
+## Capability Contract
+
+Read and search are required. Test execution and edits require authorisation.
+
+## Domain Anti-Patterns
+
+- Counting test cases instead of covering named risks.
+- Using end-to-end tests for isolated logic.
+- Mocking the contract under test on both sides.
+- Accepting flaky tests without an owner and deadline.
+- Claiming readiness without retained evidence.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Requirements, risk model, architecture, change diff, and existing tests | yes | Select risk-based coverage |
+## Outputs
+- Produce a test plan, coverage map, executable checks, evidence, and residual-risk statement.
+## Degraded mode
+Fallback without a runnable environment: produce the risk-based plan and mark every unexecuted test as unverified rather than passed.

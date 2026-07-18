@@ -1,15 +1,49 @@
 ---
 name: saas-lifecycle-email-orchestration
-description: Use when designing the six core lifecycle email sequences (welcome/onboarding, behavioral/feature-discovery, upgrade/upsell, retention, reactivation, referral) — trigger contracts, branched automation, suppression rules, PQL/churn-risk triggers, and revenue attribution. Built on top of `saas-transactional-email-infrastructure`. Distinct from `tabler-email-templates` (HTML) and `subscription-billing` (raw billing events).
+description: Use when designing SaaS lifecycle email triggers, branches, suppression, churn signals, upgrades, reactivation, referrals, or attribution.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
 # SaaS Lifecycle Email Orchestration
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
+
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
 
 <!-- dual-compat-start -->
 ## Use When
