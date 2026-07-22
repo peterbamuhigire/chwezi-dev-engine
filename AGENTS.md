@@ -63,14 +63,17 @@ Run this after catalog routing or skill frontmatter changes:
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 ```
 
-Known baseline as of 2026-06-21 (verify with the script; do not trust this prose):
+Known baseline as of 2026-07-17 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 142.
+- Active `SKILL.md` files: 168.
 - Target active catalog size: 150-170 (below soft target and well under the 200 cap).
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links
   and on stale or dangling aliases, and runs in CI on every push and PR.
+- The same gate rejects raw ebook formats, large files under book-extraction
+  paths, and marker-rich full-text conversions. Books are temporary inputs:
+  commit only concise, attributed, independently structured synthesis.
 - `scripts/routing_smoke_test.py` measures routing precision against
   `scripts/routing_fixtures.yml` and runs in the same CI job; `--collisions`
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour

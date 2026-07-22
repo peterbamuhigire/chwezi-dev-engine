@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game 3D Asset Pipeline"
+  short_description: "Produce optimised game-ready 3D assets"
+  default_prompt: "Plan and verify the complete 3D asset pipeline."

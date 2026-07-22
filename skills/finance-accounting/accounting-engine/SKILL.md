@@ -1,12 +1,61 @@
 ---
 name: accounting-engine
-description: Use when designing, implementing, or reviewing an embedded accounting engine inside a SaaS, ERP, POS, inventory, payroll, school, clinic, NGO, marketplace, or mobile-money-heavy system. Covers one append-only general ledger, one LedgerPostingService write path, mapping-layer account resolution, IFRS/IFRS for SMEs defaults, subledger tagging, idempotent posting, reversing journals, period locks, audit trails, report projections, and accounting integrity tests.
+description: Use when designing, implementing, or reviewing an embedded accounting engine with append-only ledgers, mapped postings, idempotency, reversals, period locks, audit trails, and integrity tests.
 metadata:
   portable: true
+  required_inputs: Provide the transaction event, tenant, accounting policy, chart mapping, and existing ledger contract.
+  workflow: Follow the posting invariants, mapping, idempotency, reversal, lock, and verification workflow in this file.
+  quality_standards: Preserve double-entry balance, tenant isolation, immutability, traceability, and tested failure handling.
+  anti_patterns: Do not post directly from feature code, mutate journals, bypass locks, or infer accounts without mappings.
+  outputs: Produce posting contracts, journal evidence, mapping decisions, controls, and integrity tests.
   default_standard: IFRS for SMEs
+  compatible_with:
+  - claude-code
+  - codex
 ---
 
 # Accounting Engine
+
+<!-- dual-compat-start --><!-- dual-compat-end -->
+
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Transaction event and tenant context | yes | Define the event and isolation boundary |
+| Account mapping and doctrine policy | yes | Resolve balanced ledger accounts |
+| Existing ledger and lock state | yes | Prevent duplicate or closed-period posting |
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Posting contract and journal evidence | Feature services and finance review | Balanced, idempotent, traceable, tenant-scoped |
+
+## Capability contract
+
+Read and search are required. Database writes, migrations, backfills, reversals, and period operations require explicit authority and a verified compensating path.
+
+## Degraded mode
+
+Fallback without doctrine, mappings, or database access: return a posting design and unresolved control list; do not invent accounts or claim ledger correctness.
+
+## Decision rules
+
+| Condition | Posting action | Failure avoided |
+|---|---|---|
+| New valid economic event | Append balanced journal | Missing financial record |
+| Duplicate idempotency key | Return prior result | Double posting |
+| Error in posted journal | Post linked reversal/correction | Destruction of audit history |
+| Closed period | Reject or use authorised later-period adjustment | Period integrity breach |
+
+## Domain anti-patterns
+
+- Posting directly from controllers. Fix: use one posting service and contract.
+- Updating or deleting journals. Fix: reverse and repost with links.
+- Guessing accounts from feature names. Fix: require mapping-layer resolution.
+- Retrying without idempotency. Fix: persist and enforce the event key.
+- Mixing tenants in one posting context. Fix: require tenant scope on every ledger operation.
 
 ## Use When
 

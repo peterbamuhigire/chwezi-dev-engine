@@ -1,12 +1,10 @@
 ---
 name: php-modern-standards
-description: Modern PHP development standards for maintainable, testable, object-oriented
-  code. Use when writing PHP 8+ applications, implementing OOP patterns, ensuring
-  security, following PSR standards, optimizing performance, or building Laravel...
+description: Use when writing or reviewing PHP 8+ applications, object-oriented domain code, Laravel services, PSR-compliant packages, secure request handling, tests, or performance-sensitive PHP.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,42 +15,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Modern PHP development standards for maintainable, testable, object-oriented code. Use when writing PHP 8+ applications, implementing OOP patterns, ensuring security, following PSR standards, optimizing performance, or building Laravel...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `php-modern-standards` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references, examples` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
 - For long-lived PHP application work, load `references/world-class-php-oop-clean-architecture.md` before designing controllers, services, repositories, or domain objects.
 - For containerized PHP work, pair with `docker-development`.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -88,7 +55,7 @@ Production-grade PHP patterns for maintainable, testable, secure, high-performan
 **Examples:** `examples/modern-php-patterns.php`, `examples/laravel-patterns.php`
 **Security:** Load `references/php-security.md` for comprehensive security patterns.
 
-✅ PHP 8+ ✅ OOP ✅ Security ✅ Testing ✅ Performance ✅ Laravel | âŒ Legacy PHP (<7.4) âŒ WordPress
+- Use for PHP 8+, OOP, security, testing, performance, and Laravel; do not use for legacy PHP below 7.4 or WordPress-specific work.
 
 ---
 
@@ -156,3 +123,30 @@ Use that deep dive for:
 - `Anti-Patterns`
 - `Checklist`
 
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Boundary accepts external data | Validate into typed input before domain logic |
+| Framework convention is secure and testable | Prefer it over a custom abstraction |
+| Change affects persistence or queues | Define transaction, retry, and idempotency behaviour |
+
+## Degraded Mode
+
+Fallback: without execution, provide exact Composer, static-analysis, and test commands. Do not assume framework support without dependency metadata.
+
+## Domain Anti-Patterns
+
+- Concatenating user input into SQL.
+- Hiding domain behaviour in controllers.
+- Catching `Throwable` without recovery policy.
+- Adding mutable service-locator dependencies.
+- Claiming compatibility without checking Composer constraints.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| PHP version, framework, code, and repository standards | yes | Apply compatible typing, security, and tooling rules |
+## Outputs
+- Produce PHP code or findings with static-analysis, test, security, and compatibility evidence.
+## Capability contract
+Read/search and local static checks are allowed. Dependency changes, migrations, deployment, and production execution require explicit task authority.

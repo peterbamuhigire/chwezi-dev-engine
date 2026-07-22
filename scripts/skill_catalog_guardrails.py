@@ -18,6 +18,8 @@ from typing import Iterable
 
 import yaml
 
+from source_ingestion_guardrail import scan as scan_source_ingestion
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ACTIVE_ROOTS = (
@@ -27,10 +29,7 @@ DEFAULT_ACTIVE_ROOTS = (
 DEFAULT_REFERENCE_ROOTS = (
     "doctrine/skills",
 )
-DEFAULT_EXTERNAL_ENGINE_ROOTS = (
-    "../design-system-skills/skills",
-    "../chwezi-accounting-doctrine/skills",
-)
+DEFAULT_EXTERNAL_ENGINE_ROOTS: tuple[str, ...] = ()
 DEFAULT_MAX_ACTIVE_SKILLS = 200
 MAX_DESCRIPTION_CHARS = 1024
 MAX_SKILL_MD_LINES = 500
@@ -124,7 +123,8 @@ def active_roots(root_args: list[str] | None) -> list[Path]:
 def reference_roots() -> list[Path]:
     resolved: list[Path] = []
     for raw in DEFAULT_REFERENCE_ROOTS + DEFAULT_EXTERNAL_ENGINE_ROOTS:
-        path = (REPO_ROOT / raw).resolve()
+        candidate = Path(raw)
+        path = candidate.resolve() if candidate.is_absolute() else (REPO_ROOT / candidate).resolve()
         if path.exists():
             resolved.append(path)
     return resolved
@@ -285,6 +285,13 @@ def check_line_counts(records: list[SkillRecord]) -> list[Finding]:
     return findings
 
 
+def check_source_ingestion(root: Path = REPO_ROOT) -> list[Finding]:
+    return [
+        Finding("error", item.code, item.path, item.message)
+        for item in scan_source_ingestion(root)
+    ]
+
+
 def check_broken_references(roots: list[Path]) -> list[Finding]:
     """Flag SKILL.md links to references/templates/scripts that do not exist.
 
@@ -337,6 +344,7 @@ def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
         return [Finding("error", "alias-registry-yaml", relpath(ALIASES_YML), f"invalid YAML: {exc}")]
 
     routes: dict[str, str] = registry.get("inactive_skill_aliases", {}) or {}
+    external_prefixes: dict[str, str] = registry.get("external_target_prefixes", {}) or {}
     on_disk = {p.parent.relative_to(REPO_ROOT).as_posix() for p in REPO_ROOT.rglob("ALIAS.md")}
     in_registry = set(routes)
 
@@ -370,6 +378,10 @@ def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
             or (REPO_ROOT / target / "SKILL.md").exists()
             or (("/" not in target) and target in skill_dir_names)
             or target_slug in retained_dir_names
+            or any(
+                target == prefix.rstrip("/") or target.startswith(prefix.rstrip("/") + "/")
+                for prefix in external_prefixes
+            )
         )
         if not resolves:
             findings.append(
@@ -393,6 +405,7 @@ def main() -> int:
     findings.extend(check_duplicate_names(records))
     findings.extend(check_descriptions(records))
     findings.extend(check_line_counts(records))
+    findings.extend(check_source_ingestion())
     findings.extend(check_broken_references(roots))
     findings.extend(check_alias_integrity(records))
 

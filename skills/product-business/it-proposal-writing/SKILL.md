@@ -1,9 +1,6 @@
 ---
 name: it-proposal-writing
-description: Framework for writing persuasive IT project proposals that win work.
-  Covers Basis of Decision (BOD), Unique Selling Points (USP), proposal strategy,
-  document structure, persuasive prose techniques, the 5-level destruction model,
-  grammar rules...
+description: Use when planning, drafting, reviewing, or strengthening an IT proposal, win strategy, decision basis, pricing narrative, or persuasive structure.
 metadata:
   portable: true
   compatible_with:
@@ -14,45 +11,48 @@ metadata:
 # IT Proposal Writing
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Decision, audience, and deliverable | yes | Bound the business outcome |
+| Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
+| Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
+
+## Capability and permission contract
+
+Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
+
+## Degraded mode
+
+If evidence, stakeholder decisions, specialist tooling, or authoritative commercial data are unavailable, deliver a labelled draft, checklist, or decision memo. State what was not verified and do not claim approval, publication, financial accuracy, or customer acceptance.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Output creates a commercial, customer, or delivery commitment | Obtain named approval before release | Authority or terms are unclear |
+| Evidence supports a reversible draft | Produce it with assumptions and owner | Required evidence conflicts |
+| Tooling or data is incomplete | Specify validation | A final executable artefact is expected |
+
+## Domain Anti-Patterns
+
+- Inventing customer evidence, prices, benchmarks, or approvals. Fix: cite the source or mark the gap.
+- Publishing or sending a draft without authority. Fix: retain draft status and name the approver.
+- Hiding assumptions inside polished prose. Fix: expose them beside each affected decision.
+- Polishing presentation while the decision remains unclear. Fix: resolve audience, owner, and acceptance criteria.
+- Treating unavailable tooling as passed validation. Fix: record the unassessed check.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Framework for writing persuasive IT project proposals that win work. Covers Basis of Decision (BOD), Unique Selling Points (USP), proposal strategy, document structure, persuasive prose techniques, the 5-level destruction model, grammar rules...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `it-proposal-writing` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 - For premium software or website proposals, load `premium-software-product-execution` and show how value, proof, risk reduction, delivery process, controls, content/SEO, UX, and support justify the fee.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -338,3 +338,12 @@ Use this checklist to score a draft proposal before submission. Score 1–5 on e
 - **Upstream:** `software-business-models` (services model depends on winning proposals), `software-pricing-strategy` (pricing section in proposals)
 - **Downstream:** `sdlc-planning` (winning the proposal triggers SDLC planning), `project-requirements` (requirements gathering follows after project award)
 - **Related:** `technology-grant-writing` (grants are specialised proposals with different evaluation criteria)
+## Quality Standards
+
+Every scored requirement must have a locatable response and evidence; commercial assumptions, exclusions, dependencies, and approval status must remain visible.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Decision-ready IT proposal | Client evaluator and bid owner | Requirements map to a specific response, evidence supports each material claim, and scope, price assumptions, risks, and approvals are explicit |

@@ -1,10 +1,6 @@
 ---
 name: network-security
-description: Use when designing, hardening, or auditing network-layer security for
-  self-managed Debian/Ubuntu SaaS infrastructure — firewalls (nftables/UFW), WAF (ModSecurity
-  + OWASP CRS), VPN (WireGuard, OpenVPN, IPsec), TLS/PKI ops, IDS/IPS (Suricata, Fail2ban),
-  zero-trust, SSH hardening, DDoS mitigation, DNS security. Complements web-app-security-audit
-  (app layer) and cicd-devsecops (secrets/CI).
+description: Use when designing, hardening, or auditing network security for self-managed SaaS infrastructure, including firewalls, WAF, VPN, TLS/PKI, IDS/IPS, SSH, segmentation, DDoS, and DNS controls.
 metadata:
   portable: true
   compatible_with:
@@ -19,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing, hardening, or auditing network-layer security for self-managed Debian/Ubuntu SaaS infrastructure — firewalls (nftables/UFW), WAF (ModSecurity + OWASP CRS), VPN (WireGuard, OpenVPN, IPsec), TLS/PKI ops, IDS/IPS (Suricata, Fail2ban), zero-trust, SSH hardening, DDoS mitigation, DNS security. Complements web-app-security-audit (app layer) and cicd-devsecops (secrets/CI).
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `network-security` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -419,3 +381,30 @@ The full 50-point audit is in `references/audit-checklist.md`. Headline items:
 - `microservices-architecture-models` — service mesh, gateway patterns
 - `realtime-systems` — WSS/TLS for WebSocket connections
 - `dual-auth-rbac` — session + JWT authentication patterns
+## Capability contract
+
+Read and search are required. Packet capture, active scanning, firewall changes, VPN changes, and external probing require explicit scope and authorisation. Default audits to non-invasive inspection.
+
+## Degraded mode
+
+Fallback without network or privileged access: assess configuration evidence, mark live controls unverified, and provide an authorised validation plan.
+
+## Decision rules
+
+| Risk surface | Control priority | Failure avoided |
+|---|---|---|
+| Public administrative or data service | deny-by-default plus strong identity | Direct compromise |
+| East-west sensitive traffic | segmentation and service identity | Lateral movement |
+| Unverified emergency rule | time-bound exception with rollback | Permanent exposure |
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Network diagram, trust zones, assets, data flows, ingress/egress paths, and administration channels | yes | Identify reachable attack paths and required communications |
+| Firewall, DNS, VPN, cloud-network, and monitoring configuration | conditional | Verify enforcement and detection rather than infer them from architecture diagrams |
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Network security assessment and change plan | Network owner and security operations | Findings map to assets and flows, proposed rules use least privilege, management access is protected, validation and rollback steps are stated, and residual exposure has an owner |

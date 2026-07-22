@@ -1,13 +1,10 @@
 ---
 name: pwa-offline-first
-description: Use when building offline-first Progressive Web Apps — Service Worker lifecycle,
-  Workbox caching strategies, IndexedDB via Dexie.js, Background Sync for queued writes,
-  Web Push notifications, Lighthouse gates, and Next.js PWA integration. Default for
-  apps that must work on EDGE/2G or intermittent connectivity.
+description: Use when building offline-first Progressive Web Apps — Service Worker lifecycle, Workbox caching strategies, IndexedDB via Dexie.js, Background Sync for queued writes, Web Push notifications, Lighthouse gates, and Next.js PWA integration. Default for apps that must work on EDGE/2G or intermittent connectivity.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when building offline-first Progressive Web Apps — Service Worker lifecycle, Workbox caching strategies, IndexedDB via Dexie.js, Background Sync for queued writes, Web Push notifications, Lighthouse gates, and Next.js PWA integration. Default for apps that must work on EDGE/2G or intermittent connectivity.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `pwa-offline-first` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## References
 
@@ -60,6 +23,31 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 
 ## Why Offline-First for East Africa
+
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| API, error, and idempotency contract | `api-design-first` | required for queued writes | Defines safe replay and conflict handling |
+| Data classification and retention rules | Security/product owners | required | Controls browser storage and caching |
+| Offline critical-flow list | Product owner | required | Establishes what must work without connectivity |
+
+## Decision Rules
+
+| Request or asset | Strategy |
+|---|---|
+| Hashed immutable asset | Cache-first with bounded expiry |
+| Navigation or refreshable read | Network-first with tested offline fallback |
+| Mutation, authentication, or payment | Network-only transport; persist a separate idempotent outbox where allowed |
+| Conflict involving money or stock | Server-authoritative resolution |
+
+## Domain Anti-Patterns
+
+- Caching POST responses. Fix: queue an idempotent mutation record instead.
+- Calling `skipWaiting()` without an update UX. Fix: coordinate activation and reload safely.
+- Treating `navigator.onLine` as server reachability. Fix: handle real request failures and captive portals.
+- Storing tokens or sensitive payloads in Cache Storage. Fix: minimise storage and apply the data policy.
+- Testing offline reads without replaying writes. Fix: verify save, restart, reconnect, deduplicate, and conflict paths.
 
 Connectivity in Uganda, Kenya, and Tanzania is bimodal: urban fibre and 4G in Kampala CBD, Westlands, or Masaki, then EDGE/2G the moment a user boards a boda, enters a Bushenyi cooperative, or works inside a hospital ward with poor indoor coverage. Field workers counting inventory in Mbale, community health workers in Arua, and agents confirming MTN MoMo or Airtel Money disbursements in village kiosks all tolerate zero bars for minutes at a time. Co-working spaces on Kampala Road and Ngong Road suffer 30-second uplink stalls mid-upload. Every write path must queue locally and sync when connectivity returns; every read path must fall back to a cached response rather than a spinner.
 
@@ -454,3 +442,13 @@ Enforce via Lighthouse CI assertions; a red budget fails the build rather than w
 - MDN Service Worker API — `developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API`
 - web.dev PWA — `web.dev/progressive-web-apps`; Lighthouse CI — `github.com/GoogleChrome/lighthouse-ci`
 - *Building Progressive Web Apps* — Tal Ater (O'Reilly)
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Critical offline flows, data consistency, cache policy, sync conflicts, and install target | yes | Design offline behaviour |
+## Outputs
+- Produce PWA offline architecture or implementation with cache, sync, update, recovery, and test evidence.
+## Degraded mode
+Fallback without browser/network simulation: provide cache and sync tests but mark offline recovery unverified.
+## Capability contract
+Service-worker registration and cache tests may run locally; production cache invalidation and deployment require explicit release authority.

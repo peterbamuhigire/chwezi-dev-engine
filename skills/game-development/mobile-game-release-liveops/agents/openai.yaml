@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile Game Release and Live Operations"
+  short_description: "Ship and sustain mobile games safely"
+  default_prompt: "Prepare and operate the mobile-game release and live-ops plan."

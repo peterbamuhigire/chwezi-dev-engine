@@ -10,7 +10,7 @@ docs describe routing, consolidation, planning, and maintenance policy.
 
 | Component | Responsibility |
 | --- | --- |
-| `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, security, UX, product, and operations, including language entrypoints such as C#/.NET. |
+| `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, game development, security, UX, product, and operations, including language entrypoints such as C#/.NET. |
 | `doctrine/skills/` | Retained finance reference material; not an active local catalog root. |
 | `00-meta-initialization/` | Entry-point workflow for SDLC documentation setup. |
 | `docs/skill-routing-index.md` | Human routing map for consolidated and legacy skill names. |
@@ -24,7 +24,9 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | `scripts/routing_smoke_test.py` + fixture YAML files | Routing precision measurement: scores fixtured tasks from `scripts/routing_fixtures.yml` and `tests/routing/edge-fixtures.yml` against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |
 | `.github/workflows/skill-guardrails.yml` | CI: runs both gates on every push and PR touching skills, doctrine, aliases, fixtures, or the scripts. |
 | `skills/sdlc-meta/skill-composition-standards/references/` | Artifact templates (ADR, entity model, threat model, release/rollback plan, runbook, test plan) and the closing Delivery Definition of Done pack. |
+| `skills/languages/python-modern-standards/scripts/desktop_suite_packager.py` | Model-neutral project generator for a committed desktop-suite manifest, generated launcher/spec/installer/CI files, stale-generation check, and release evidence. |
 | `skills/ios/` and `skills/mobile-cross/` | Apple/mobile implementation guidance, including WWDC26-era Xcode, Swift, Foundation Models/Core AI, App Intents, StoreKit, PWA/Safari, KMP, release, and security references. |
+| `skills/game-development/` | Game orchestration, lean experiments, design, mathematics/simulation, graphics, Unity/Godot/Unreal, Apple delivery, multiplayer/backend, security, 2D/3D content, audio, performance, build/release, testing, data/live economy, accessibility/player safety, studio operations, and live operations. |
 | `claude-guides/` | Skill authoring and Claude-specific usage guidance. |
 | `book-extractions/` | Long-form source notes and reference summaries. |
 

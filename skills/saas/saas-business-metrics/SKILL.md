@@ -1,9 +1,6 @@
 ---
 name: saas-business-metrics
-description: Complete SaaS metrics framework covering revenue (MRR/ARR/ARPU), growth
-  (CAC/LTV/payback), retention (churn/NRR/GRR), engagement, customer satisfaction
-  (NPS/CSAT/CES), unit economics, the Rule of 40, and SaaS finance basics. Use when
-  measuring...
+description: Use when defining or reviewing SaaS revenue, growth, retention, engagement, satisfaction, unit economics, or Rule-of-40 metrics.
 metadata:
   portable: true
   compatible_with:
@@ -14,44 +11,44 @@ metadata:
 # SaaS Business Metrics
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Complete SaaS metrics framework covering revenue (MRR/ARR/ARPU), growth (CAC/LTV/payback), retention (churn/NRR/GRR), engagement, customer satisfaction (NPS/CSAT/CES), unit economics, the Rule of 40, and SaaS finance basics. Use when measuring...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `saas-business-metrics` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -358,3 +355,12 @@ If close time drops and re-open rate rises, support agents are closing tickets p
 - **Upstream:** `product-strategy-vision` (OKR Key Results should be drawn from leading metrics)
 - **Downstream:** `software-pricing-strategy` (MRR and churn data drive pricing decisions)
 - **Related:** `competitive-analysis-pm` (win rate and churn by segment are competitive intelligence), `lean-ux-validation` (metrics design for UX experiments)
+## Quality Standards
+
+Every reported metric must fix its grain, denominator, currency, time boundary, source, owner, exclusions, and reconciliation rule before comparison or target-setting.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| SaaS metric dictionary and operating scorecard | Executive, finance, and growth teams | MRR movements reconcile, cohort and denominator rules are fixed, source systems are named, and each metric has an owner and decision threshold |

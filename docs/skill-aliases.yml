@@ -17,6 +17,9 @@ active_skill_policy:
   local_doctrine_reference_only: true
   do_not_move_or_delete_skill_directories_from_registry_work: true
 inactive_alias_file: ALIAS.md
+external_target_prefixes:
+  doctrine/skills: chwezi-accounting-doctrine
+  design-system/skills: design-system-skills
 finance_canonical_duplicates:
   skills/finance-accounting/finance/audit-ready-reporting-pack: doctrine/skills/audit-ready-reporting-pack
   skills/finance-accounting/finance/bank-and-mobile-money-reconciliation: doctrine/skills/bank-and-mobile-money-reconciliation
@@ -64,7 +67,7 @@ inactive_skill_aliases:
   skills/finance-accounting/chart-of-accounts-templates: doctrine/skills/ledger-posting-engine-core
   skills/ai/rag-implementation: skills/ai/ai-rag-patterns
   skills/backend-databases/vector-databases: skills/ai/ai-rag-patterns
-  skills/ai/ux-for-ai: skills/ai/ai-agent-ux
+  skills/ai/ux-for-ai: design-system/skills/ai-ux
   skills/architecture/microservices-ai-integration: skills/ai/ai-app-architecture
   skills/finance-accounting/demand-forecasting: skills/languages/python-ml-predictive
   skills/product-business/growth-telemetry-pipeline: skills/languages/python-data-analytics
@@ -81,7 +84,7 @@ inactive_skill_aliases:
   skills/sdlc-meta/continuous-improvement-system: skills/sdlc-meta/world-class-engineering
   skills/sdlc-meta/engineering-strategy: skills/sdlc-meta/world-class-engineering
   skills/sdlc-meta/engineering-management-system: skills/sdlc-meta/world-class-engineering
-  skills/frontend-ux/ux-principles-101: skills/frontend-ux/practical-ui-design
+  skills/frontend-ux/ux-principles-101: design-system/skills/ux-foundations
   skills/backend-databases/database-internals: skills/backend-databases/database-design-engineering
   skills/mobile-cross/mobile-reports: skills/product-business/professional-word-output
   skills/product-business/premium-product-positioning: skills/product-business/premium-software-product-execution

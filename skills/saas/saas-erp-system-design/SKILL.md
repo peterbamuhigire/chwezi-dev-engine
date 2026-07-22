@@ -1,9 +1,6 @@
 ---
 name: saas-erp-system-design
-description: Use when designing configurable SaaS or ERP platforms with multi-step
-  business workflows, domain modules, approvals, auditability, pricing and entitlements,
-  operational reporting, and tenant-specific variation. Covers domain boundaries,
-  workflow states, extension points, and control design.
+description: Use when designing configurable SaaS or ERP platforms with multi-step business workflows, domain modules, approvals, auditability, pricing and entitlements, operational reporting, and tenant-specific variation. Covers domain boundaries, workflow states, extension points, and control design.
 metadata:
   portable: true
   compatible_with:
@@ -14,44 +11,44 @@ metadata:
 # SaaS ERP System Design
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Use when designing configurable SaaS or ERP platforms with multi-step business workflows, domain modules, approvals, auditability, pricing and entitlements, operational reporting, and tenant-specific variation. Covers domain boundaries, workflow states, extension points, and control design.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `saas-erp-system-design` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -196,6 +193,15 @@ For ERP projects with billing, fees, POS, payroll, inventory valuation, grants, 
 ## References
 
 - [references/domain-modeling.md](references/domain-modeling.md): Core entities, controls, and workflow review prompts.
-- [../inventory-management/references/cltd-logistics-inventory-patterns.md](../inventory-management/references/cltd-logistics-inventory-patterns.md): Logistics network, inventory policy, transportation, carrier/fleet, trade documentation, and shipment exception patterns for ERP systems.
+- Load the external `chwezi-accounting-doctrine` inventory and logistics skill for inventory policy, transportation, trade documentation, and shipment exception patterns.
 - [../saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md](../saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md): Double-entry bookkeeping, subledgers, ERP finance configuration, cost accounting, controls, reconciliations, and close patterns.
 - Load `modular-saas-architecture`, `multi-tenant-saas-architecture`, and `database-design-engineering` when implementing the design.
+## Quality Standards
+
+The design must expose authoritative records, valid transitions, approval segregation, tenant extensions, audit events, integration failures, and reporting ownership without shared-table ambiguity.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| ERP domain and workflow design | Product architects and implementation teams | Domain ownership, state transitions, approvals, extension points, tenant variation, audit events, and reporting boundaries are unambiguous |

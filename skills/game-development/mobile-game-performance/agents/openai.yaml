@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile Game Performance"
+  short_description: "Profile and optimise games on real phones"
+  default_prompt: "Diagnose and close this mobile-game performance risk."

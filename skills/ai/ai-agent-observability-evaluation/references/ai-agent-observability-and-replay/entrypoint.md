@@ -9,14 +9,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Designing the **trace schema for agent tasks** (one trace = one task; sub-spans = steps; sub-sub-spans = LLM call, tool call).
 - Wiring tool I/O capture so support can see exactly what the agent did in < 2 minutes.
 - Building **deterministic replay** so a recorded task can be re-run with a new prompt/model/tool version.
-- Building "what would the agent do differently" debugging â€” given a trace, run it through a candidate config and surface the diff.
+- Building "what would the agent do differently" debugging — given a trace, run it through a candidate config and surface the diff.
 - Wiring the agent inbox and admin console to per-task traces.
 
 ## Do Not Use When
 
-- The task is single-request AI observability â€” `ai-observability-and-debugging`.
-- The task is the eval pipeline â€” `ai-eval-harness`, `ai-agent-eval`.
-- The task is general OTel setup â€” `observability-monitoring`.
+- The task is single-request AI observability — `ai-observability-and-debugging`.
+- The task is the eval pipeline — `ai-eval-harness`, `ai-agent-eval`.
+- The task is general OTel setup — `observability-monitoring`.
 
 ## Required Inputs
 
@@ -28,14 +28,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Define the **agent trace schema** (Â§1). See `references/trace-schema-agent.md`.
-3. Implement **per-step span emission** in the runtime (Â§2).
-4. Implement **tool I/O capture** with sensitive-field redaction (Â§3).
-5. Build the **task viewer** in the admin console (Â§4).
-6. Build **deterministic replay** (Â§5).
-7. Build "**what would the agent do differently**" debugging (Â§6).
-8. Wire **task-level dashboards** (Â§7).
-9. Apply anti-patterns (Â§8).
+2. Define the **agent trace schema** (§1). See `references/trace-schema-agent.md`.
+3. Implement **per-step span emission** in the runtime (§2).
+4. Implement **tool I/O capture** with sensitive-field redaction (§3).
+5. Build the **task viewer** in the admin console (§4).
+6. Build **deterministic replay** (§5).
+7. Build "**what would the agent do differently**" debugging (§6).
+8. Wire **task-level dashboards** (§7).
+9. Apply anti-patterns (§8).
 
 ## Quality Standards
 
@@ -77,12 +77,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/trace-schema-agent.md` â€” full OTel schema and conventions.
+- `references/trace-schema-agent.md` — full OTel schema and conventions.
 - Companion: `ai-observability-and-debugging`, `ai-agent-runtime-architecture`, `ai-agent-eval`, `ai-model-gateway`, `observability-monitoring`, `saas-admin-backoffice-tooling`.
 
 <!-- dual-compat-end -->
 
-## Â§1 Trace Schema
+## §1 Trace Schema
 
 ```
 trace: agent.task
@@ -105,7 +105,7 @@ Convention: span names are stable strings; attribute keys are dotted; redaction 
 
 Full schema in `references/trace-schema-agent.md`.
 
-## Â§2 Per-Step Span Emission
+## §2 Per-Step Span Emission
 
 ```python
 def run_step(task):
@@ -125,9 +125,9 @@ def run_step(task):
         step.set_attribute("state_after", task.state)
 ```
 
-## Â§3 Tool I/O Capture and Redaction
+## §3 Tool I/O Capture and Redaction
 
-Tool args and observations are captured to a separate store (not the trace attributes â€” they would blow attribute size limits and leak):
+Tool args and observations are captured to a separate store (not the trace attributes — they would blow attribute size limits and leak):
 
 ```sql
 CREATE TABLE agent_tool_io (
@@ -156,52 +156,52 @@ Redaction rules:
 
 Retention: 90 days default. Configurable per tenant (Enterprise can ask for longer; legal hold extends).
 
-## Â§4 Task Viewer
+## §4 Task Viewer
 
 Admin / support UI per task:
 
 ```
-â”Œâ”€ Task tsk_abc123 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ Tenant: ACME  Feature: support_copilot  State: COMPLETED              â”‚
-â”‚ Steps: 6 / 12   Tokens: 8.4k   Cost: $0.18   Wallclock: 14s           â”‚
-â”‚ Model: claude-x-flagship v2  Prompt: v2.3  Tools: v1.5                â”‚
-â”‚ Trace: [open in Honeycomb]   Replay: [run with...]                    â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ User: "I think I was charged twice..."                                â”‚
-â”‚                                                                       â”‚
-â”‚ â–¼ Step 1 â€” PLANNING â€” 280ms / $0.02                                   â”‚
-â”‚   thought: "Need to check both invoices. Will look up charges."       â”‚
-â”‚   plan: call charge_lookup(invoice_id=1234)                           â”‚
-â”‚                                                                       â”‚
-â”‚ â–¼ Step 2 â€” ACTING â€” 320ms                                              â”‚
-â”‚   tool: charge_lookup  args: {invoice_id: 1234}                       â”‚
-â”‚   observation: {amount: $89, status: paid, charged_at: ...}           â”‚
-â”‚                                                                       â”‚
-â”‚ â–¼ Step 3 â€” ACTING â€” 290ms                                              â”‚
-â”‚   tool: charge_lookup  args: {invoice_id: 1235}                       â”‚
-â”‚   observation: {amount: $89, status: paid, note: "second charge"}     â”‚
-â”‚                                                                       â”‚
-â”‚ â–¼ Step 4 â€” PLANNING â€” 420ms / $0.03                                   â”‚
-â”‚   thought: "Both same amount within 2 min. Likely duplicate.          â”‚
-â”‚            Will check KB for refund policy then propose refund."      â”‚
-â”‚                                                                       â”‚
-â”‚ â–¼ Step 5 â€” AWAITING_APPROVAL                                          â”‚
-â”‚   tool proposed: payment_refund  args: {invoice_id: 1235, amount: 89} â”‚
-â”‚   approval: APPROVED by user@acme  at 10:00:34Z                       â”‚
-â”‚                                                                       â”‚
-â”‚ â–¼ Step 6 â€” ACTING â€” 1.2s                                              â”‚
-â”‚   tool: payment_refund  args: {invoice_id: 1235, amount: 89}          â”‚
-â”‚   observation: {status: ok, refund_id: rf_...}                        â”‚
-â”‚                                                                       â”‚
-â”‚ âœ“ COMPLETED                                                           â”‚
-â”‚ Final response: "I've refunded $89 for invoice 1235. The original     â”‚
-â”‚   charge for 1234 is unchanged. You'll see the refund in 5-7 days."   â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─ Task tsk_abc123 ─────────────────────────────────────────────────────┐
+│ Tenant: ACME  Feature: support_copilot  State: COMPLETED              │
+│ Steps: 6 / 12   Tokens: 8.4k   Cost: $0.18   Wallclock: 14s           │
+│ Model: claude-x-flagship v2  Prompt: v2.3  Tools: v1.5                │
+│ Trace: [open in Honeycomb]   Replay: [run with...]                    │
+├───────────────────────────────────────────────────────────────────────┤
+│ User: "I think I was charged twice..."                                │
+│                                                                       │
+│ ▼ Step 1 — PLANNING — 280ms / $0.02                                   │
+│   thought: "Need to check both invoices. Will look up charges."       │
+│   plan: call charge_lookup(invoice_id=1234)                           │
+│                                                                       │
+│ ▼ Step 2 — ACTING — 320ms                                              │
+│   tool: charge_lookup  args: {invoice_id: 1234}                       │
+│   observation: {amount: $89, status: paid, charged_at: ...}           │
+│                                                                       │
+│ ▼ Step 3 — ACTING — 290ms                                              │
+│   tool: charge_lookup  args: {invoice_id: 1235}                       │
+│   observation: {amount: $89, status: paid, note: "second charge"}     │
+│                                                                       │
+│ ▼ Step 4 — PLANNING — 420ms / $0.03                                   │
+│   thought: "Both same amount within 2 min. Likely duplicate.          │
+│            Will check KB for refund policy then propose refund."      │
+│                                                                       │
+│ ▼ Step 5 — AWAITING_APPROVAL                                          │
+│   tool proposed: payment_refund  args: {invoice_id: 1235, amount: 89} │
+│   approval: APPROVED by user@acme  at 10:00:34Z                       │
+│                                                                       │
+│ ▼ Step 6 — ACTING — 1.2s                                              │
+│   tool: payment_refund  args: {invoice_id: 1235, amount: 89}          │
+│   observation: {status: ok, refund_id: rf_...}                        │
+│                                                                       │
+│ ✓ COMPLETED                                                           │
+│ Final response: "I've refunded $89 for invoice 1235. The original     │
+│   charge for 1234 is unchanged. You'll see the refund in 5-7 days."   │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
-Filterable, searchable. Linked from support ticket â†’ trace.
+Filterable, searchable. Linked from support ticket → trace.
 
-## Â§5 Deterministic Replay
+## §5 Deterministic Replay
 
 Given a `task_id`, re-execute the task with the same or a candidate config:
 
@@ -218,11 +218,11 @@ def replay(task_id, candidate=None, mock_tools=True):
     return diff(original, new_trace)
 ```
 
-`mock_tools=True` is mandatory in production replay UI â€” never re-execute side effects.
+`mock_tools=True` is mandatory in production replay UI — never re-execute side effects.
 
 LLM calls use the provider's `seed` parameter where supported. Non-determinism residual (top-k sampling) is acceptable; replay aims for "close enough for diagnosis".
 
-## Â§6 "What Would Differ" Debugger
+## §6 "What Would Differ" Debugger
 
 A side-by-side view:
 
@@ -231,8 +231,8 @@ Original (trace tsk_abc)          | Candidate (prompt v2.4)
 ----------------------------------|----------------------------------
 Step 1: charge_lookup(1234)       | Step 1: charge_lookup(1234)
 Step 2: charge_lookup(1235)       | Step 2: charge_lookup(1235)
-Step 3: kb_search("refund")       | Step 3: payment_refund(1235, 89)  âš  off-script irreversible
-Step 4: payment_refund(1235, 89)  | (terminal â€” completed in 3 steps)
+Step 3: kb_search("refund")       | Step 3: payment_refund(1235, 89)  [WARNING: off-script irreversible]
+Step 4: payment_refund(1235, 89)  | (terminal — completed in 3 steps)
 Step 5: respond(...)              |
 ```
 
@@ -245,7 +245,7 @@ Highlights:
 
 This is the engineering surface for prompt-tuning, model upgrades, and tool changes.
 
-## Â§7 Task-Level Dashboards
+## §7 Task-Level Dashboards
 
 | Dashboard | What it answers |
 |---|---|
@@ -258,7 +258,7 @@ This is the engineering surface for prompt-tuning, model upgrades, and tool chan
 
 Every dashboard links into the task viewer for drill-down.
 
-## Â§8 Anti-Patterns
+## §8 Anti-Patterns
 
 - Single span per task. Cannot diagnose.
 - Tool args in plaintext. PII / cards in traces.
@@ -268,9 +268,9 @@ Every dashboard links into the task viewer for drill-down.
 - "Show me why" surface that's just the LLM's chain-of-thought, no tool spans. Misleading.
 - Dashboards that aggregate without drill-down. Trends without diagnosis.
 
-## Â§9 Task-Success Evidence as a First-Class Trace Field (Enhancement)
+## §9 Task-Success Evidence as a First-Class Trace Field (Enhancement)
 
-The trace bundle is the **evidence pack** the SLA credit pipeline, the dispute-resolution flow, and the auditor all read. Task-success evidence is not a side artifact â€” it lives in the trace.
+The trace bundle is the **evidence pack** the SLA credit pipeline, the dispute-resolution flow, and the auditor all read. Task-success evidence is not a side artifact — it lives in the trace.
 
 ### Required trace fields
 
@@ -280,7 +280,7 @@ Every task trace adds these top-level fields once the success-tracking cascade h
 |---|---|---|
 | `task.success.verdict` | enum | `resolved` / `failed` / `attempted_only` / `abandoned` |
 | `task.success.verdict_source` | enum | `heuristic` / `llm_judge` / `human_verifier` |
-| `task.success.confidence` | float | 0.0â€“1.0 (judge output) |
+| `task.success.confidence` | float | 0.0–1.0 (judge output) |
 | `task.success.evidence_ref` | string | URI to the evidence JSON in object storage |
 | `task.success.policy_version` | string | success-contract version pinned for the verdict |
 | `task.success.verdict_at` | ISO-8601 | when the verdict was finalized |
@@ -326,9 +326,9 @@ Every task trace adds these top-level fields once the success-tracking cascade h
 
 ### Cross-links
 
-- `ai-agent-task-success-tracking` â€” produces the verdict and the evidence ref.
-- `ai-agent-sla-credit-automation/references/credit-issuance-pipeline.md` â€” consumes the evidence ref.
-- `ai-agent-revenue-recognition/references/month-end-close-pipeline.md` â€” requires `verdict_ref` on every revenue line.
+- `ai-agent-task-success-tracking` — produces the verdict and the evidence ref.
+- `ai-agent-sla-credit-automation/references/credit-issuance-pipeline.md` — consumes the evidence ref.
+- `ai-agent-revenue-recognition/references/month-end-close-pipeline.md` — requires `verdict_ref` on every revenue line.
 
 ---
 
@@ -339,22 +339,21 @@ Replay availability is an auditable control for SOC 2 **Availability (A1.3, reco
 A monthly **replay-availability test** picks a random sample of N=50 historical tasks (stratified by tool class and tenant) and re-runs them through the replay harness. Pass criteria:
 
 - 100% of tasks resolve to a deterministic trajectory or to a documented non-determinism reason (provider-side randomness, retired tool).
-- Median replay latency â‰¤ 1.5Ã— the original task latency.
+- Median replay latency ≤ 1.5× the original task latency.
 - No replay attempt fails to fetch prompt registry / tool registry state at task time.
 
 The test emits an evidence pack:
 
 ```
 evidence/availability/replay/{YYYY-MM}/
-â”œâ”€â”€ manifest.json
-â”œâ”€â”€ sample.jsonl                # the 50 sampled tasks
-â”œâ”€â”€ replay-results.jsonl        # per-task: deterministic / drifted / unreplayable
-â”œâ”€â”€ latency-distribution.json
-â”œâ”€â”€ attestation.txt
-â””â”€â”€ signature.sig
+├── manifest.json
+├── sample.jsonl                # the 50 sampled tasks
+├── replay-results.jsonl        # per-task: deterministic / drifted / unreplayable
+├── latency-distribution.json
+├── attestation.txt
+└── signature.sig
 ```
 
 Cadence: monthly, recorded in `ops/compliance/evidence-cadence.yaml` as `availability_replay_test`. Failed runs open a `high` exception against A1.3 and PI1.5.
 
 Cross-links: `ai-agent-soc2-controls` (A1.3, PI1.5), `ai-agent-iso27001-controls` (A.12.4, A.17.1), `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.
-

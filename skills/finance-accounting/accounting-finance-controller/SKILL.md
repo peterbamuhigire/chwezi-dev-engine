@@ -1,14 +1,59 @@
 ---
 name: accounting-finance-controller
-description: Use for accounting, bookkeeping, ERP finance, POS, inventory, payroll, billing, financial reporting, IFRS-aware workflows, management accounting, cost accounting, budgeting, valuation, controls, reconciliations, and finance-system design. Produces controller-grade requirements, implementation guidance, review findings, and financial logic so business software can replace QuickBooks/Tally-class workflows where appropriate.
+description: Use when coordinating accounting and finance implementation reviews, doctrine routing, control evidence, remediation priorities, and release decisions across a software system.
 metadata:
   portable: true
+  do_not_use_when: Do not use for accounting doctrine alone or for a narrow posting implementation owned by accounting-engine.
+  required_inputs: Provide system scope, finance risks, doctrine sources, implementation evidence, and release decision.
+  quality_standards: Require traceable doctrine, balanced postings, controls, reconciliation, auditability, and explicit gaps.
+  anti_patterns: Do not approve from prose claims, mix doctrine with unverified implementation, or hide unresolved control failures.
+  outputs: Produce the controller assessment, routed workstreams, evidence gaps, remediation priorities, and release verdict.
   compatible_with:
   - Codex
   - codex
 ---
 
 # Accounting Finance Controller
+
+<!-- dual-compat-start --><!-- dual-compat-end -->
+
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| System scope and finance risk register | yes | Select doctrine and controls |
+| Implementation and reconciliation evidence | yes | Determine actual readiness |
+| Release decision and owners | yes | Assign remediation and approval |
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Controller assessment and routed work plan | Engineering and finance owners | Evidence-backed findings, owners, priorities, verdict |
+
+## Capability contract
+
+Default to read-only coordination. Ledger mutation, migration, close, filing, or production correction requires separately authorised execution through the owning skill and finance approver.
+
+## Degraded mode
+
+Fallback without doctrine or implementation evidence: issue `Needs Evidence`; do not approve the system or fabricate compliance.
+
+## Decision rules
+
+| Finding | Route | Release effect |
+|---|---|---|
+| Doctrine uncertainty | External accounting doctrine | Hold affected decision |
+| Posting or reconciliation defect | `accounting-engine` | Block affected financial flow |
+| Evidence complete and controls effective | Controller approval | Proceed with recorded residual risks |
+
+## Domain anti-patterns
+
+- Approving from design prose alone. Fix: require implementation and reconciliation evidence.
+- Mixing policy ownership with code ownership. Fix: route doctrine and implementation separately.
+- Treating an unreconciled balance as immaterial by default. Fix: quantify and approve thresholds.
+- Hiding unresolved findings in a narrative. Fix: record owner, severity, due date, and release effect.
+- Performing production corrections during review. Fix: use a separately authorised remediation workflow.
 
 ## Use When
 

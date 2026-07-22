@@ -1,10 +1,10 @@
 ---
 name: ios-data-persistence
-description: iOS data persistence standards with SwiftData, Keychain, files, offline sync, Core Spotlight semantic indexing, App Entity data exposure, and AI cache/privacy boundaries.
+description: Use when designing iOS persistence, SwiftData migrations, Keychain storage, files, offline sync, or searchable app entities; use ios-architecture for broader module design.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -68,6 +68,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 
 ## Storage Decision Guide
+
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Entity and retention model | Product and backend owners | required | Defines durable records and deletion duties |
+| API conflict contract | `api-design-first` | conditional | Governs offline reconciliation |
+| Data classification | `ios-security-and-rbac` | required | Selects Keychain, file protection, or database storage |
+
+## Decision Rules
+
+| Data | Storage |
+|---|---|
+| Credential or private key | Keychain or Secure Enclave reference |
+| Queryable application records | SwiftData with an explicit migration plan |
+| Large media or export | Protected file with metadata in SwiftData |
+| Financial offline conflict | Server-authoritative merge with idempotency |
+
+## Degraded Mode
+
+Without a runnable schema, provide the model delta, migration stages, backup/rollback path, and fixtures required for validation. Do not assert migration safety without testing old stores.
+If execution is unavailable, report migration safety as unverified.
+
+## Domain Anti-Patterns
+
+- Storing tokens in UserDefaults. Fix: use an access-group-scoped Keychain item.
+- Changing a persistent model without old-store fixtures. Fix: test each supported migration path.
+- Caching private AI input indefinitely. Fix: define purpose-bound retention and deletion.
+- Treating Spotlight as authoritative storage. Fix: rebuild the index from the source database.
+- Resolving ledger conflicts by last-write-wins. Fix: reconcile against server versions.
 
 | Data Type | Storage | Example |
 |---|---|---|

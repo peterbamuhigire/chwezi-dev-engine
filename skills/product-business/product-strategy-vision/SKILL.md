@@ -1,9 +1,6 @@
 ---
 name: product-strategy-vision
-description: Frameworks for defining a compelling product vision and a focused product
-  strategy. Covers the 10 principles of product vision, product strategy principles,
-  OKR technique for product teams, outcome-based roadmaps, product principles, and
-  product...
+description: Use when defining product vision, strategic choices, product principles, OKRs, outcome roadmaps, or an innovation-of-meaning direction.
 metadata:
   portable: true
   compatible_with:
@@ -14,44 +11,44 @@ metadata:
 # Product Strategy & Vision
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Decision, audience, and deliverable | yes | Bound the business outcome |
+| Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
+| Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
+
+## Capability and permission contract
+
+Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
+
+## Degraded mode
+
+If evidence, stakeholder decisions, specialist tooling, or authoritative commercial data are unavailable, deliver a labelled draft, checklist, or decision memo. State what was not verified and do not claim approval, publication, financial accuracy, or customer acceptance.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Output creates a commercial, customer, or delivery commitment | Obtain named approval before release | Authority or terms are unclear |
+| Evidence supports a reversible draft | Produce it with assumptions and owner | Required evidence conflicts |
+| Tooling or data is incomplete | Specify validation | A final executable artefact is expected |
+
+## Domain Anti-Patterns
+
+- Inventing customer evidence, prices, benchmarks, or approvals. Fix: cite the source or mark the gap.
+- Publishing or sending a draft without authority. Fix: retain draft status and name the approver.
+- Hiding assumptions inside polished prose. Fix: expose them beside each affected decision.
+- Polishing presentation while the decision remains unclear. Fix: resolve audience, owner, and acceptance criteria.
+- Treating unavailable tooling as passed validation. Fix: record the unassessed check.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Frameworks for defining a compelling product vision and a focused product strategy. Covers the 10 principles of product vision, product strategy principles, OKR technique for product teams, outcome-based roadmaps, product principles, and product...
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `product-strategy-vision` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -307,3 +304,12 @@ Verganti's process for innovation of meaning:
 5. **Customers** — meet *last*, after a vision exists, to test the new framework rather than to source it.
 
 Use innovation-of-meaning work as a separate track from solution work. A team that ships only solution improvements eventually loses the category to a meaning shift it didn't see coming.
+## Quality Standards
+
+The strategy must make a customer and advantage choice, name what will not be pursued, and connect roadmap outcomes to evidence and review dates.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Product strategy and outcome roadmap | Product leadership and delivery teams | Target customer, chosen advantage, explicit trade-offs, measurable outcomes, product principles, and review horizon form one coherent decision system |

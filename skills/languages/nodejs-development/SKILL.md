@@ -1,10 +1,6 @@
 ---
 name: nodejs-development
-description: Production Node.js development — async patterns, streams, design patterns,
-  HTTP APIs, testing, scaling, and deployment. Synthesised from Node.js Design Patterns
-  (Casciaro & Mammino 3rd ed.), Node.js Recipes (Gackenheimer), Fullstack Node.js
-  (Murray), and Node.js Fundamentals. Use when building scalable servers, REST APIs,
-  CLI tools, real-time systems, or fullstack JavaScript applications.
+description: Use when building or reviewing Node.js servers, APIs, CLI tools, streams, asynchronous workflows, real-time systems, tests, scaling, or production deployment.
 metadata:
   portable: true
   compatible_with:
@@ -19,41 +15,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Production Node.js development — async patterns, streams, design patterns, HTTP APIs, testing, scaling, and deployment. Synthesised from Node.js Design Patterns (Casciaro & Mammino 3rd ed.), Node.js Recipes (Gackenheimer), Fullstack Node.js (Murray), and Node.js Fundamentals. Use when building scalable servers, REST APIs, CLI tools, real-time systems, or fullstack JavaScript applications.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `nodejs-development` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
 - Pair with `javascript-patterns` for advanced object/module pattern selection and `docker-development` for containerized runtime or asset build delivery.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -456,3 +421,33 @@ pm2 start src/server.js --instances max --name myapp
 - *Node.js Fundamentals* — Machine Learning
 - *Accelerating Server-Side Development with Fastify* — Manuel Spigolon (Packt)
 - *Next.js 13 + Prisma* — Greg Lim
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Payload is large or continuous | Stream with backpressure instead of buffering |
+| Work is CPU-bound | Use a worker or separate service |
+| Operation may be retried | Require idempotency and bounded retries |
+
+## Capability Contract
+
+Read and search are required. Editing, package installation, and execution require authorisation; network access is optional for verification.
+
+## Degraded Mode
+
+Fallback: if dependencies or tests cannot run, return exact verification commands and mark runtime assumptions unverified.
+
+## Domain Anti-Patterns
+
+- Buffering an unbounded request or file.
+- Catching an error and continuing with corrupted state.
+- Performing CPU-heavy loops on the event loop.
+- Retrying non-idempotent writes without deduplication.
+- Shipping an unverified package or runtime version.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Node runtime, service boundary, dependencies, and operational requirements | yes | Shape implementation and lifecycle controls |
+## Outputs
+- Produce service code or review findings with tests, error handling, observability, and shutdown behaviour.

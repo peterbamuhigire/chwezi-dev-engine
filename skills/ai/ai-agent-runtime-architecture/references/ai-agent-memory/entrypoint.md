@@ -8,15 +8,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Designing what an agent remembers across turns, across sessions, and across conversations.
 - Implementing **short-term** turn buffers (the last N exchanges), **working** episode memory (this task's scratchpad), and **long-term** semantic memory (facts the agent has learned about this tenant over time).
-- Ensuring memory is **per-tenant isolated** â€” agent never recalls one tenant's facts in another tenant's session.
+- Ensuring memory is **per-tenant isolated** — agent never recalls one tenant's facts in another tenant's session.
 - Wiring memory into the **forget-on-erase** cascade so a GDPR Article 17 request deletes derived memory too.
 - Deciding what is too dangerous to remember (passwords, PII, anything not explicitly tagged for retention).
 
 ## Do Not Use When
 
-- The task is the customer's knowledge-base ingestion (uploaded docs) â€” `ai-rag-multi-tenant`.
-- The task is the platform's general data erasure cascade â€” `saas-tenant-data-portability-and-erasure`. This skill is the *AI-specific* leaf that the cascade traverses.
-- The task is short-term conversation state for a single-shot chatbot (no agent, no long horizon) â€” that's just a session.
+- The task is the customer's knowledge-base ingestion (uploaded docs) — `ai-rag-multi-tenant`.
+- The task is the platform's general data erasure cascade — `saas-tenant-data-portability-and-erasure`. This skill is the *AI-specific* leaf that the cascade traverses.
+- The task is short-term conversation state for a single-shot chatbot (no agent, no long horizon) — that's just a session.
 
 ## Required Inputs
 
@@ -29,19 +29,19 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Define **three memory tiers** (Â§1): short-term, working, long-term. See `references/memory-tiers.md`.
-3. Pick **what is and is not eligible for long-term storage** (Â§2).
-4. Implement **per-tenant isolation** (Â§3) â€” every read is tenant-scoped.
-5. Implement **forget-on-erase cascade** (Â§4). See `references/forget-on-erase-cascade.md`.
-6. Implement **cross-conversation guard** (Â§5) â€” memory of one conversation cannot leak into a different conversation.
-7. Implement **memory-write gating** (Â§6) â€” agent doesn't auto-write everything to long-term; user controls.
-8. Apply anti-patterns (Â§7).
+2. Define **three memory tiers** (§1): short-term, working, long-term. See `references/memory-tiers.md`.
+3. Pick **what is and is not eligible for long-term storage** (§2).
+4. Implement **per-tenant isolation** (§3) — every read is tenant-scoped.
+5. Implement **forget-on-erase cascade** (§4). See `references/forget-on-erase-cascade.md`.
+6. Implement **cross-conversation guard** (§5) — memory of one conversation cannot leak into a different conversation.
+7. Implement **memory-write gating** (§6) — agent doesn't auto-write everything to long-term; user controls.
+8. Apply anti-patterns (§7).
 
 ## Quality Standards
 
 - Memory has **three explicit tiers** with separate stores, separate TTLs, separate query interfaces.
 - Every memory row carries `tenant_id`, `user_id` (where relevant), `source`, `confidence`, `expires_at`, `consented_at`.
-- Long-term memory writes are **gated** â€” either by user consent ("Should I remember this?") or by a deterministic rule (entity resolution: "this is a customer record", not "this is a fact").
+- Long-term memory writes are **gated** — either by user consent ("Should I remember this?") or by a deterministic rule (entity resolution: "this is a customer record", not "this is a fact").
 - Long-term memory reads are tenant-scoped at the query boundary; **no** index spans tenants without an enforced filter.
 - An erasure request for a user removes their memory rows in all three tiers within the platform-wide SLA (default 30 days).
 - An erasure request for a tenant cascades through embeddings, vector stores, and any fine-tunes / adapters trained on that tenant's data.
@@ -50,7 +50,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Anti-Patterns
 
-- Long-term memory implemented as a global vector index with `tenant_id` as one of many filters â€” the filter is a defence in depth, not the only defence.
+- Long-term memory implemented as a global vector index with `tenant_id` as one of many filters — the filter is a defence in depth, not the only defence.
 - Memory rows persisted with no consent timestamp, no source, no confidence. Compliance later cannot defend the retention.
 - Agent decides what to remember; the user has no visibility and no control.
 - Memory wiped on tenant erasure, but the fine-tune trained on that tenant's chats remains in production.
@@ -78,13 +78,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/memory-tiers.md` â€” short / working / long schemas + lifecycle.
-- `references/forget-on-erase-cascade.md` â€” GDPR cascade through memory tiers.
+- `references/memory-tiers.md` — short / working / long schemas + lifecycle.
+- `references/forget-on-erase-cascade.md` — GDPR cascade through memory tiers.
 - Companion: `ai-rag-multi-tenant`, `ai-tenant-isolation-patterns`, `ai-on-saas-architecture`, `saas-tenant-data-portability-and-erasure`, `ai-agent-runtime-architecture`, `dpia-generator`.
 
 <!-- dual-compat-end -->
 
-## Â§1 Three Tiers
+## §1 Three Tiers
 
 | Tier | Scope | Storage | TTL | Use case |
 |---|---|---|---|---|
@@ -96,7 +96,7 @@ Each tier has its own client API. The agent does not see them as one. Mixing tie
 
 Full schemas in `references/memory-tiers.md`.
 
-## Â§2 What is Memorable
+## §2 What is Memorable
 
 Long-term memory is for **stable, durable facts**, not for raw conversation. Memorise:
 
@@ -112,9 +112,9 @@ Do **not** memorise:
 - Inferences with low confidence (e.g., "user is in finance" inferred from one message).
 - Anything the user did not consent to remember.
 
-Confidence threshold for long-term write: â‰¥ 0.8. Writes below threshold go to working memory only.
+Confidence threshold for long-term write: ≥ 0.8. Writes below threshold go to working memory only.
 
-## Â§3 Per-Tenant Isolation
+## §3 Per-Tenant Isolation
 
 Default: one **logical store per tenant**.
 
@@ -122,7 +122,7 @@ Vector store options:
 - **Silo**: dedicated index per tenant (highest isolation, highest cost).
 - **Pool with mandatory filter**: one index, `tenant_id` filter enforced at the query API layer that the agent cannot bypass.
 
-If pool: the query is wrapped â€” the agent's "search memory" tool does NOT accept `tenant_id` as an arg. The runtime injects it from `ctx.tenant_id`. The agent cannot ask for another tenant's memory because the tool surface doesn't permit it.
+If pool: the query is wrapped — the agent's "search memory" tool does NOT accept `tenant_id` as an arg. The runtime injects it from `ctx.tenant_id`. The agent cannot ask for another tenant's memory because the tool surface doesn't permit it.
 
 ```python
 def search_memory(args: dict, ctx: ToolContext) -> dict:
@@ -135,9 +135,9 @@ def search_memory(args: dict, ctx: ToolContext) -> dict:
     return {"status": "ok", "memories": [serialize(r) for r in results]}
 ```
 
-Tests: every release runs a cross-tenant probe â€” given tenant A's memory and tenant B's session, confirm no overlap.
+Tests: every release runs a cross-tenant probe — given tenant A's memory and tenant B's session, confirm no overlap.
 
-## Â§4 Forget-on-Erase Cascade
+## §4 Forget-on-Erase Cascade
 
 When a user invokes erasure (GDPR Art 17 / CCPA), the cascade:
 
@@ -147,11 +147,11 @@ When a user invokes erasure (GDPR Art 17 / CCPA), the cascade:
    - Delete vector embeddings keyed to those rows.
 3. Conversation history: delete `agent_conversations` and `agent_messages` for the user.
 4. Audit / trace: redact PII (do not delete; immutable audit log required by SOC2). Replace user identifiers with tombstones.
-5. Fine-tunes / adapters trained on user data: see `ai-tenant-isolation-patterns` â€” if any model was tuned on this user's data, mark for retraining without the user.
+5. Fine-tunes / adapters trained on user data: see `ai-tenant-isolation-patterns` — if any model was tuned on this user's data, mark for retraining without the user.
 
 Full procedure in `references/forget-on-erase-cascade.md`.
 
-## Â§5 Cross-Conversation Guard
+## §5 Cross-Conversation Guard
 
 Within the same tenant, memory of conversation A should not surface in conversation B by default. The guard:
 
@@ -161,30 +161,30 @@ Within the same tenant, memory of conversation A should not surface in conversat
 
 This prevents the "agent appears to know things it shouldn't" UX failure that erodes trust.
 
-## Â§6 Memory-Write Gating
+## §6 Memory-Write Gating
 
 Three modes per tenant:
 
 | Mode | Behaviour | Default for |
 |---|---|---|
 | `off` | No long-term memory writes | Free tier |
-| `prompt` | Agent proposes "I'd like to remember X. OK?" â†’ user approves | Pro tier |
+| `prompt` | Agent proposes "I'd like to remember X. OK?" → user approves | Pro tier |
 | `auto` | Agent writes high-confidence entity attributes automatically; surfaces a "Memory" view for review/edit | Enterprise tier (opt-in) |
 
 `auto` mode still excludes credentials, IDs, low-confidence inferences. Audit trail every write.
 
-## Â§7 Anti-Patterns
+## §7 Anti-Patterns
 
 - One global vector index with tenant_id as one of many filter fields. One day someone forgets the filter and leaks.
 - Storing raw chat as long-term memory. GDPR exposure, retrieval pollution.
 - "Auto" memory mode without a user-visible memory view. Users discover what's remembered only when it surfaces wrongly.
 - Memory shared across the customer's org without scoping. User A's preferences applied to user B's session.
 - Erasure that deletes the user but leaves vector embeddings (foreign keys, anyone?).
-- Memory writes with no confidence score â€” every later retrieval treats them as ground truth.
+- Memory writes with no confidence score — every later retrieval treats them as ground truth.
 
 ---
 
-## Â§8 Retention and Erasure (Enhancement)
+## §8 Retention and Erasure (Enhancement)
 
 Each memory tier carries a **retention class** consumed by the compliance pipeline.
 
@@ -198,12 +198,12 @@ Each memory tier carries a **retention class** consumed by the compliance pipeli
 | Uploads | configurable per tenant | per data class |
 | Derivatives | parallel to source tier | parallel |
 
-Per-tier deletion functions **must** be idempotent and **must** wait on replication drain â€” they are invoked by the 9-step cascade in `ai-agent-memory-erasure-proof`. After every cascade run, the independent verification probes (separate code path) must return residue=0; otherwise the erasure request is held back from notification.
+Per-tier deletion functions **must** be idempotent and **must** wait on replication drain — they are invoked by the 9-step cascade in `ai-agent-memory-erasure-proof`. After every cascade run, the independent verification probes (separate code path) must return residue=0; otherwise the erasure request is held back from notification.
 
 Cross-links:
 
-- **`ai-agent-memory-erasure-proof`** â€” the verification job and the proof-of-erasure pack consumer.
-- **`saas-tenant-data-portability-and-erasure`** â€” whole-tenant erasure that fans into agent-memory leg.
-- **`ai-agent-soc2-controls`** â€” C1.2 (confidential disposal), P5 (retention and disposal).
-- **`ai-agent-hipaa-security-controls`** â€” PHI-tier constraints.
+- **`ai-agent-memory-erasure-proof`** — the verification job and the proof-of-erasure pack consumer.
+- **`saas-tenant-data-portability-and-erasure`** — whole-tenant erasure that fans into agent-memory leg.
+- **`ai-agent-soc2-controls`** — C1.2 (confidential disposal), P5 (retention and disposal).
+- **`ai-agent-hipaa-security-controls`** — PHI-tier constraints.
 

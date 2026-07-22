@@ -1,12 +1,10 @@
 ---
 name: android-tdd
-description: Android Test-Driven Development standards. Enforces Red-Green-Refactor
-  cycle, test pyramid (70/20/10), layer-specific testing strategies, and CI integration.
-  Use when building or reviewing Android apps with TDD methodology.
+description: Use when developing Android behaviour test-first across Kotlin, Room, repositories, ViewModels, and Compose; use android-development for architecture not centred on a test workflow.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -21,40 +19,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Android Test-Driven Development standards. Enforces Red-Green-Refactor cycle, test pyramid (70/20/10), layer-specific testing strategies, and CI integration. Use when building or reviewing Android apps with TDD methodology.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `android-tdd` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -63,7 +27,27 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Correctness | Android TDD test plan | Markdown doc per `skill-composition-standards/references/test-plan-template.md` covering Red-Green-Refactor cycles per layer | `docs/android/tdd-plan-checkout.md` |
 | Correctness | Test pyramid coverage report | Markdown doc showing 70/20/10 distribution and per-layer coverage | `docs/android/tdd-coverage-2026-04-16.md` |
 
-## References
+## Decision Rules
+
+| Behaviour | First test boundary |
+|---|---|
+| Pure business rule | JVM unit test |
+| DAO query or migration | Instrumented Room test |
+| Repository coordination | Integration test with deterministic fakes |
+| User-visible navigation or semantics | Compose UI test |
+
+## Capability Contract And Degraded Mode
+
+Read access to production and test code is required. Execute the narrowest failing test before editing when authorised. Without execution, supply the red test, expected failure, minimal production change, and commands the owner must run.
+If execution is unavailable, treat every test result as pending rather than passed.
+
+## Domain Anti-Patterns
+
+- Writing the implementation before observing red. Fix: make the smallest behavioural test fail first.
+- Mocking Room SQL. Fix: use an in-memory database and migration fixtures.
+- Testing private methods. Fix: assert public behaviour and observable state.
+- Using delays for coroutine tests. Fix: inject dispatchers and advance the test scheduler.
+- Treating coverage percentage as correctness. Fix: map tests to risks and failure paths.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 <!-- dual-compat-end -->
@@ -336,3 +320,13 @@ jobs:
 - **Mockito Kotlin**: github.com/mockito/mockito-kotlin
 - **Espresso**: developer.android.com/training/testing/espresso
 - **Architecture Samples**: github.com/android/architecture-samples
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Behaviour requirement, risk, architecture boundary, and existing test suite | yes | Drive test-first slices |
+## Outputs
+- Produce failing-then-passing Android tests, implementation evidence, and residual coverage gaps.
+## Degraded mode
+Fallback without an emulator/device: write test cases and mark instrumentation behaviour unverified.
+## Capability contract
+Test execution may use isolated fixtures; production services, accounts, signing, and destructive device operations are out of scope without approval.

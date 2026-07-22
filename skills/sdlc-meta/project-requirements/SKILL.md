@@ -1,12 +1,10 @@
 ---
 name: project-requirements
-description: Guided interview to create comprehensive project requirements documentation
-  (requirements.md, business-rules.md, user-types.md, workflows.md) for a new SaaS
-  project. Use before bootstrapping the SaaS Seeder Template.
+description: Use when interviewing stakeholders and producing traceable SaaS requirements, business rules, user types, workflows, assumptions, and acceptance criteria before implementation.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -21,46 +19,32 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Guided interview to create comprehensive project requirements documentation (requirements.md, business-rules.md, user-types.md, workflows.md) for a new SaaS project. Use before bootstrapping the SaaS Seeder Template.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `project-requirements` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
 |----------|----------|--------|---------|
 | Release evidence | Requirements documentation set | Markdown docs covering requirements.md, business-rules.md, and user-types.md per the guided interview | `docs/requirements/requirements.md` |
+
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Requirement is ambiguous | Ask for an observable outcome |
+| Stakeholders conflict | Record conflict and decision owner |
+| Detail is implementation-specific | Separate constraint from design choice |
+
+## Degraded Mode
+
+If stakeholders or sources are unavailable, produce a question register and labelled assumptions, not invented requirements.
+
+## Domain Anti-Patterns
+
+- Writing requirements as vague aspirations.
+- Omitting actor, trigger, or acceptance condition.
+- Treating an assumption as an approved rule.
+- Hiding unresolved scope conflict.
+- Mixing solution design into every requirement.
 
 ## References
 
@@ -273,8 +257,6 @@ AI: "For each feature, let's capture:
   Let's start with your first feature..."
 ```
 
-## Quality Standards
-
 ### Good Requirements
 
 ✅ **Specific:** "Student email must be unique within franchise" not "email must be valid"
@@ -285,10 +267,10 @@ AI: "For each feature, let's capture:
 
 ### Red Flags
 
-âŒ **Too vague:** "The system should be user-friendly"
-âŒ **Missing details:** "User can edit data" (which data? which users?)
-âŒ **Assumptions:** "Obviously students can't delete grades" (document it!)
-âŒ **No examples:** Formula without sample calculation
+- **Too vague:** "The system should be user-friendly"
+- **Missing details:** "User can edit data" (which data? which users?)
+- **Assumptions:** "Obviously students can't delete grades" (document it!)
+- **No examples:** Formula without sample calculation
 
 ## Template Usage
 
@@ -466,3 +448,11 @@ sdlc-documentation (testing stage)
 sdlc-documentation (user and deployment stage)
     -> User Manual, Ops Guide, Training, Release Notes, Maintenance, README
 ```
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Stakeholders, objectives, constraints, current system, and evidence sources | yes | Establish requirement provenance |
+## Outputs
+- Produce prioritised, testable requirements with assumptions, traceability, acceptance criteria, and open questions.
+## Capability contract
+Default to read-only discovery. Editing requirement artefacts requires an authorised deliverable scope; external interviews, messages, or system changes require separate approval.

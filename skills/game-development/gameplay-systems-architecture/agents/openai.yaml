@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gameplay Systems Architecture"
+  short_description: "Architect testable gameplay systems"
+  default_prompt: "Specify and implement this gameplay system with tests."

@@ -95,4 +95,6 @@ Use this checklist before delivering any .docx or PDF. A document passes only wh
 - [ ] Watermark applied if document is DRAFT or CONFIDENTIAL
 - [ ] Saved as .docx for editable delivery; PDF exported for final distribution
 - [ ] PDF exported with accessibility tags enabled
+- [ ] If LibreOffice produced the PDF, the cross-platform readiness check passed and an isolated temporary profile was used
+- [ ] Every required PDF page was rendered and inspected after conversion; no stale page image is being treated as current output
 - [ ] File named according to convention: `ProjectName_DocumentType_v1.0_YYYY-MM-DD.docx`

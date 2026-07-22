@@ -1,12 +1,10 @@
 ---
 name: ios-monetization
-description: StoreKit 2 in-app purchases, subscriptions, App Store Server API,
-  group and organization subscription watch items, Unity StoreKit plugin routing,
-  paywall UI, transaction verification, and App Store Connect configuration.
+description: Use when implementing iOS purchases, subscriptions, StoreKit 2 verification, entitlement delivery, paywalls, or App Store server events; use ios-development for non-commerce features.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -17,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - StoreKit 2 in-app purchases, subscriptions, and monetization for iOS apps. Use when implementing consumables, non-consumables, auto-renewable subscriptions, group or organization subscription watch items, Unity StoreKit plugin routing, paywall UI, receipt validation, or App Store Connect configuration.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `ios-monetization` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -479,6 +443,28 @@ class SubscriptionTests: XCTestCase {
 
 ## Launch Checklist
 
+## Decision Rules
+
+| Product | StoreKit choice |
+|---|---|
+| Durable unlock | Non-consumable |
+| Renewable time-based access | Auto-renewable subscription with server entitlement state |
+| Repeatable unit consumed by use | Consumable with idempotent delivery ledger |
+| Purchase cannot be cryptographically verified | Withhold entitlement and retry verification |
+
+## Degraded Mode
+
+Without App Store Connect, sandbox accounts, or server notifications, produce configuration and test matrices but mark purchase, restore, renewal, refund, grace-period, and revocation paths unverified.
+If a required capability is unavailable, withhold launch approval for the affected purchase path.
+
+## Domain Anti-Patterns
+
+- Granting entitlement before transaction verification. Fix: verify first, then record delivery atomically.
+- Trusting only local subscription state. Fix: reconcile signed server events and current status.
+- Delivering a consumable twice after retry. Fix: key delivery by transaction identifier.
+- Omitting restore behaviour. Fix: expose and test a restore path.
+- Hiding price or renewal terms. Fix: display StoreKit-localised terms before purchase.
+
 - [ ] `Transaction.updates` loop started at app entry point, not in paywall
 - [ ] All transactions finished with `transaction.finish()` after delivery
 - [ ] `Transaction.currentEntitlements` queried on app launch to restore entitlement state
@@ -493,3 +479,11 @@ class SubscriptionTests: XCTestCase {
 - [ ] Server-side JWS validation implemented for high-value entitlements
 - [ ] Subscription group configured in App Store Connect before testing
 - [ ] All product localisations complete — missing localisation silently drops product
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Product catalogue, entitlement rules, StoreKit configuration, pricing, and server contract | yes | Design purchase lifecycle |
+## Outputs
+- Produce monetisation implementation or design with entitlement, receipt, restore, refund, and test evidence.
+## Capability contract
+Store configuration, price changes, sandbox purchases, receipt validation, and entitlement mutation require explicit environment and account authority.

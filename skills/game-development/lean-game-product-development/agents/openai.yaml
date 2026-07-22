@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean Game Product Development"
+  short_description: "Run evidence-gated game product experiments"
+  default_prompt: "Use $lean-game-product-development to plan the smallest game experiments that can prove fun, feasibility, and value."

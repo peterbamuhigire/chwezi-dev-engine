@@ -1,13 +1,10 @@
 ---
 name: gis-enterprise-domain
-description: Use when administering ArcGIS Enterprise or building real-estate-specific
-  GIS features — ArcGIS components, publishing services, security/roles, backup/DR,
-  plus property search, neighbourhood analysis, catchment/isochrones, market heatmaps,
-  and real-estate-SaaS integration.
+description: Use when administering ArcGIS Enterprise or building real-estate-specific GIS features — ArcGIS components, publishing services, security/roles, backup/DR, plus property search, neighbourhood analysis, catchment/isochrones, market heatmaps, and real-estate-SaaS integration.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when administering ArcGIS Enterprise or building real-estate-specific GIS features — ArcGIS components, publishing services, security/roles, backup/DR, plus property search, neighbourhood analysis, catchment/isochrones, market heatmaps, and real-estate-SaaS integration.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `gis-enterprise-domain` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -240,6 +203,22 @@ See `references/real-estate-saas-integration.md`.
 
 ## Read next
 
+## Decision rules
+
+| Condition | Choice | Failure avoided |
+|---|---|---|
+| Governed internal services need ArcGIS tooling | Use ArcGIS Enterprise with explicit HA and backup design | Unsupported single-node production |
+| Public workload is an application-specific spatial API | Prefer PostGIS platform engineering | Excess licensing and operational coupling |
+| Analysis is expensive but inputs change slowly | Precompute and cache by versioned inputs | Repeated isochrone or heatmap cost |
+
+## Capability contract
+
+Read and search the service inventory, topology rules, roles, and recovery requirements first. Administrative changes require explicit authorisation; execute non-destructive checks only in an approved environment.
+
+## Degraded mode
+
+If the ArcGIS environment or service metadata is unavailable, provide a read-only assessment and mark publishing, topology, security, capacity, and recovery conclusions as unverified.
+
 - `gis-platform-engineering` skill (its `gis-postgis-backend` reference) — spatial backbone.
 - `gis-platform-engineering` skill (its `gis-maps-integration` reference) — client mapping.
 - `multi-tenant-saas-architecture` — tenant isolation end-to-end.
@@ -257,3 +236,9 @@ See `references/real-estate-saas-integration.md`.
 - `references/market-heatmaps.md`
 - `references/real-estate-saas-integration.md`
 - `references/arcgis-pro-workflows.md` — geodatabase invariants, topology rules for parcels, branch vs traditional versioning, georeferencing with RMS targets, service pre-flight checklist
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Domain entities, spatial operations, coordinate systems, accuracy, and governance requirements | yes | Model enterprise GIS behaviour |
+## Outputs
+- Produce GIS domain model, spatial rules, data quality controls, and operational evidence.

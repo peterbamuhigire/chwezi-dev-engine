@@ -1,3 +1,5 @@
 
 # finance-doctrine mirror (separate repo; do not track here)
 doctrine/
+__pycache__/
+*.pyc

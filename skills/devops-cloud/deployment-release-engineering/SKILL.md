@@ -1,9 +1,6 @@
 ---
 name: deployment-release-engineering
-description: Use when designing or reviewing deployment pipelines, rollout strategies,
-  release gates, rollback plans, migration-safe releases, and post-deploy verification
-  for production systems. Covers build promotion, environment strategy, release evidence,
-  and operational safety.
+description: Use when designing or reviewing deployment pipelines, rollout strategies, release gates, rollback plans, migration-safe releases, and post-deploy verification for production systems. Covers build promotion, environment strategy, release evidence, and operational safety.
 metadata:
   portable: true
   compatible_with:
@@ -18,40 +15,36 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when designing or reviewing deployment pipelines, rollout strategies, release gates, rollback plans, migration-safe releases, and post-deploy verification for production systems. Covers build promotion, environment strategy, release evidence, and operational safety.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
 
 ## Do Not Use When
 
-- The task is unrelated to `deployment-release-engineering` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- The task is local development setup with no shared environment, promotion, or production-change concern.
+- The request is an incident response already in progress; follow the incident runbook first and use this skill for the corrective release after stabilization.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+| Input | Required | Why it matters |
+|---|---|---|
+| Release artifact and change inventory | yes | Establishes exactly what is being promoted |
+| Environment and pipeline topology | yes | Identifies gates, credentials, dependencies, and drift risk |
+| Migration and compatibility requirements | conditional | Determines safe sequencing across mixed application versions |
+| Rollback triggers, owner, and observation signals | yes | Makes reversal an executable decision rather than a promise |
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+Classify release risk, bind the release to an immutable artifact, define promotion gates, sequence migrations and rollout, rehearse rollback where risk warrants it, deploy, then verify critical journeys and telemetry through the observation window.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+The deployed artifact is the tested artifact. Evidence identifies commit and artifact digest, approvals, migration state, rollout status, verification results, and rollback decision. Destructive data changes require a separate recovery plan.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+| Output | Consumer | Acceptance condition |
+|---|---|---|
+| Release plan | Release owner and implementers | Defines artifact, environments, gates, rollout, migration sequence, owners, and schedule |
+| Rollback plan | On-call and change approvers | Names triggers, decision authority, executable steps, data consequences, and verification |
+| Release evidence record | Operations and auditors | Captures artifact identity, approvals, deployment events, checks, observations, and final disposition |
 
 ## Evidence Produced
 
@@ -60,6 +53,23 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Release evidence | Release plan | Markdown doc per `skill-composition-standards/references/release-plan-template.md` | `docs/releases/2026-04-16-release-plan.md` |
 | Release evidence | Rollback plan | Markdown doc per `skill-composition-standards/references/rollback-plan-template.md` | `docs/releases/2026-04-16-rollback-plan.md` |
 | Release evidence | Change record | PR range or tagged commit list | `docs/releases/2026-04-16-change-record.md` |
+
+## Degraded mode
+If staging, telemetry, or rollback execution is unavailable, produce a read-only release plan and mark deployment verification incomplete.
+
+## Decision rules
+| Condition | Action |
+|---|---|
+| Rollback unsafe | Use tested roll-forward mitigation |
+| Migration breaks old code | Apply expand-contract first |
+| Guardrail regresses | Halt or reverse rollout |
+
+## Domain Anti-Patterns
+- Rebuilding artifacts per environment. Fix: promote one digest.
+- Releasing incompatible schema and code together. Fix: stage compatibility.
+- Using process exit as health proof. Fix: test outcomes.
+- Rolling out without abort thresholds. Fix: define guardrails.
+- Declaring success before observation. Fix: require a post-deploy window.
 
 ## References
 

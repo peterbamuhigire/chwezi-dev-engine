@@ -1,57 +1,52 @@
 ---
-name: "meta-initialization"
-description: "Detect project type, recommend documentation methodology (Waterfall/Agile/Hybrid), and generate documentation roadmap. Use this as the FIRST skill when starting documentation for any project."
+name: 00-meta-initialization
+description: Use when starting project documentation to detect project type, select Waterfall, Agile, or Hybrid delivery, and generate the documentation roadmap.
 metadata:
-  use_when: "Use when the task matches meta-initialization skill and this skill's local workflow."
-  do_not_use_when: "Do not use when a more specific upstream or downstream skill owns the task, or when the required project context has not been prepared."
-  required_inputs: "Provide the target project or document, the relevant context files, scope constraints, and any domain or standards inputs referenced here."
-  workflow: "Follow the ordered steps, review gates, and local generation logic in this file before consulting deeper support files as needed."
-  quality_standards: "Keep outputs grounded in source context, traceable to stated standards, and specific enough to review or verify."
-  anti_patterns: "Do not fabricate missing requirements, skip human review gates, or substitute vague prose for verifiable documentation."
-  outputs: "Produce or update the document, scaffold, analysis, or phase artifact that this skill defines."
-  references: "Use `references/`, `templates/`, `README.md` when deeper detail is needed."
+  use_when: Use when the task matches meta-initialization skill and this skill's local workflow.
+  do_not_use_when: Do not use when a more specific upstream or downstream skill owns the task, or when the required project context has not been prepared.
+  required_inputs: Provide the target project or document, the relevant context files, scope constraints, and any domain or standards inputs referenced here.
+  workflow: Follow the ordered steps, review gates, and local generation logic in this file before consulting deeper support files as needed.
+  quality_standards: Keep outputs grounded in source context, traceable to stated standards, and specific enough to review or verify.
+  anti_patterns: Do not fabricate missing requirements, skip human review gates, or substitute vague prose for verifiable documentation.
+  outputs: Produce or update the document, scaffold, analysis, or phase artifact that this skill defines.
+  references: Use `references/`, `templates/`, `README.md` when deeper detail is needed.
+  portable: true
+  compatible_with:
+  - claude-code
+  - codex
 ---
-
 # Meta-Initialization Skill
+<!-- dual-compat-start --><!-- dual-compat-end -->
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Project objective, stakeholders, constraints, and delivery context | yes | Classify project and method |
+| Existing documents and standards | conditional | Avoid duplicate or conflicting scaffolds |
 
-## Overview
+## Outputs
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Project profile and documentation roadmap | Project team | Method justified, phases ordered, owners and gates explicit |
 
-This is the **entry point** for the SDLC-Docs-Engine. It analyzes your project, recommends the appropriate documentation methodology, and generates a customized documentation roadmap.
+## Capability contract
+Read/search are required. Creating directories or documents requires explicit project-initialisation scope; never overwrite existing artefacts without inspection.
 
-**Always run this skill FIRST** before executing any other documentation generation skills.
+## Degraded mode
+Fallback with incomplete context: produce a provisional profile and question register, not a falsely definitive methodology.
 
-## When to Use This Skill
+## Decision rules
+| Condition | Method | Failure avoided |
+|---|---|---|
+| Stable regulated scope and formal approvals | Waterfall | Missing governance evidence |
+| Evolving product with iterative discovery | Agile | Premature specification lock-in |
+| Formal gates plus iterative delivery | Hybrid | False either/or method choice |
 
-✅ **USE when:**
-- Starting documentation for a new project
-- Migrating from v2.x to v3.0 of this engine
-- Switching methodologies mid-project (e.g., Waterfall → Agile)
-- Setting up documentation standards for a team
-
-❌ **DO NOT USE when:**
-- You've already run this skill and have `projects/<ProjectName>/_context/methodology.md`
-- You're just updating existing documentation (use specific phase skills instead)
-
-## Input Requirements
-
-This skill requires **minimal input** and will prompt for missing information:
-
-| Input | Source | Required? |
-|-------|--------|-----------|
-| Project directory | Parent project root (`../`) | ✅ Yes (auto-detected) |
-| User responses | Interactive prompts | ✅ Yes |
-| Existing context files | `projects/<ProjectName>/_context/` | Optional (will be detected) |
-
-## Output Files
-
-This skill creates/updates files in `projects/<ProjectName>/_context/`:
-
-| File | Purpose | Format |
-|------|---------|--------|
-| `methodology.md` | Selected methodology and rationale | Markdown |
-| `doc_roadmap.md` | Documentation plan with phases and priorities | Markdown |
-| `project_profile.md` | Project characteristics and constraints | Markdown |
-
+## Domain anti-patterns
+- Selecting Agile because requirements are missing. Fix: gather minimum project facts first.
+- Generating every possible document. Fix: justify each artefact by risk and audience.
+- Overwriting an existing roadmap. Fix: inspect and propose a merge.
+- Treating the method as a label. Fix: define gates, cadence, owners, and evidence.
+- Marking provisional assumptions as decisions. Fix: keep an explicit question register.
 ## Process Workflow
 
 ```mermaid

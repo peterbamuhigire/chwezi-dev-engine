@@ -1,10 +1,6 @@
 ---
 name: linux-security-hardening
-description: Use when hardening a Debian/Ubuntu server — user/group/sudo hardening,
-  file permission audits, PAM password policy + MFA, AppArmor mandatory access control,
-  auditd system call logging, kernel sysctl hardening, file integrity monitoring (AIDE),
-  rootkit detection (rkhunter/chkrootkit), unattended security patching, GRUB + UEFI
-  + LUKS boot security, and CIS benchmark compliance.
+description: Use when hardening or auditing Debian and Ubuntu hosts for identity, sudo, PAM, MFA, permissions, AppArmor, auditd, kernel, patching, integrity, boot, encryption, and CIS controls.
 metadata:
   portable: true
   compatible_with:
@@ -19,40 +15,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when hardening a Debian/Ubuntu server — user/group/sudo hardening, file permission audits, PAM password policy + MFA, AppArmor mandatory access control, auditd system call logging, kernel sysctl hardening, file integrity monitoring (AIDE), rootkit detection (rkhunter/chkrootkit), unattended security patching, GRUB + UEFI + LUKS boot security, and CIS benchmark compliance.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `linux-security-hardening` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
-
-## Workflow
-
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -361,3 +323,30 @@ Log findings and track remediation in a ticket.
 - `cicd-jenkins-debian` — Debian server provisioning for CI/CD
 - `database-reliability` — DB-specific hardening, backup, failover
 - `web-app-security-audit` — application-layer vulnerabilities
+## Degraded mode
+
+Fallback without privileged execution: produce a read-only findings report and exact commands for an authorised operator. Never claim a control was applied without post-change evidence.
+
+## Decision rules
+
+| Change | Execution mode | Failure avoided |
+|---|---|---|
+| Read-only inventory or configuration review | inspect directly | Unnecessary host mutation |
+| Reversible hardening with tested access path | stage and verify | Administrator lockout |
+| Firewall, PAM, SSH, boot, or encryption change | require console/rollback plan | Loss of remote access or boot failure |
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Host role, distribution/version, exposed services, access method, and change window | yes | Select controls without locking out administrators or breaking the workload |
+| Current configuration and approved baseline | conditional | Compare observed state with the intended CIS or organisation-specific profile |
+
+## Quality Standards
+
+Hardening must preserve emergency access and workload availability, produce before-and-after evidence, validate each affected service, and retain a tested rollback for lockout-sensitive changes.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Hardening plan, applied-change record, and rollback evidence | System owner and operations team | Each change has pre-check, command or configuration evidence, service validation, lockout-safe rollback, and residual exception owner |

@@ -1,7 +1,6 @@
 ---
 name: ai-agent-governance-and-limits
-description: >-
-  Use when defining agent budgets, step limits, reversibility, blast-radius controls, kill switches, and governance policy for agentic AI systems.
+description: Use when defining agent budgets, step limits, reversibility, blast-radius controls, kill switches, and governance policy for agentic AI systems.
 metadata:
   portable: true
   compatible_with:
@@ -62,3 +61,34 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
 <!-- dual-compat-end -->
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Agent task and tool catalogue | yes | Identify actions and costs |
+| Step, token, time, money, and blast-radius policy | yes | Define limits |
+| Escalation and termination policy | yes | Stop unsafe runs |
+
+## Capability contract
+
+Read and search are required. Budget enforcement tests may execute only in controlled environments. Changing production limits or kill switches requires explicit operational authority.
+
+## Degraded mode
+
+Fallback without telemetry or enforcement access: produce the limit policy and gap register; do not claim limits are enforced.
+
+## Decision rules
+
+| Limit event | Runtime response | Failure avoided |
+|---|---|---|
+| Soft threshold reached | Warn, checkpoint, or degrade | Abrupt failure |
+| Hard cost/step/time threshold reached | Stop safely and preserve state | Runaway execution |
+| Blast-radius or policy boundary reached | Deny and escalate | Unsafe autonomy |
+
+## Domain anti-patterns
+
+- Limits documented only in prompts. Fix: enforce outside the model.
+- One global budget for every tenant and task. Fix: scope by risk and entitlement.
+- Retrying after a hard limit. Fix: require continuation authority.
+- Kill switch without state preservation. Fix: checkpoint and record termination reason.
+- Measuring attempted steps as completed value. Fix: separate attempts and success.

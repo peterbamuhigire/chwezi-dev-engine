@@ -1,6 +1,6 @@
 ---
 name: avalonia-desktop-development
-description: Building cross-platform .NET desktop apps with Avalonia UI (Windows/macOS/Linux). Use when working with Avalonia, AXAML/XAML UI, MVVM in Avalonia (CommunityToolkit.Mvvm or ReactiveUI), compiled bindings (x:DataType), styling/control themes/Fluent theming, data binding, DataTemplates and virtualization for large lists, asset/PNG image bundling (avares://), localization, accessibility, hosting a WebView (WebView2/WKWebView) in Avalonia, headless testing, or packaging an Avalonia app for Windows and macOS.
+description: Use when building or reviewing cross-platform .NET desktop apps with Avalonia UI, AXAML, MVVM, compiled bindings, virtualised lists, accessibility, headless tests, WebViews, or Windows and macOS packaging. Use csharp-dotnet-development for non-UI .NET architecture.
 metadata:
   portable: true
   compatible_with:
@@ -227,7 +227,30 @@ Use Skia-backed shapes (`Rectangle`/`Ellipse`/`Path`), `Style.Animations` keyfra
 - Avalonia view (`.axaml`) + view model, styles/`ControlTheme`, or a review of existing Avalonia code against these standards.
 - Concrete, prescriptive guidance ("do X, avoid Y") with build-safe compiled-binding and virtualization defaults.
 
-## References
+## Inputs
+
+| Artifact | Produced by | Required? | Why |
+|---|---|---|---|
+| Target platforms and user flows | Product or project brief | required | Defines controls, accessibility, and packaging constraints |
+| Existing solution and UI conventions | Repository inspection | optional | Preserves architecture and styling decisions |
+
+## Decision rules
+
+| Condition | Choice | Failure avoided |
+|---|---|---|
+| Large or frequently updated collection | Use a virtualising control with compiled bindings | UI stalls and excess allocation |
+| Shared logic has no UI dependency | Keep it in a view model or service | Platform coupling |
+| Platform API is unavoidable | Isolate it behind an interface | Broken cross-platform builds |
+
+## Capability contract
+
+Read and search the solution first. Edit only when authorised; execute the narrowest build and headless tests available. Network access is optional for version-specific documentation.
+
+## Degraded mode
+
+If repository access or execution is unavailable, provide a file-level plan and mark build, binding, packaging, and accessibility checks as unverified.
 
 - This skill is self-contained. Load project files, Avalonia documentation, or related .NET skills only when the task needs version-specific API details or broader C#/.NET architecture guidance.
 <!-- dual-compat-end -->
+## Read next
+- `csharp-dotnet-development` for language/runtime depth and `world-class-engineering` for release evidence.

@@ -1,12 +1,10 @@
 ---
 name: skill-writing
-description: Use when creating or upgrading skills in this repository. Covers repository-specific
-  frontmatter rules, progressive disclosure, reference-file strategy, validation,
-  and the quality bar required for production-grade engineering skills.
+description: Use when creating or upgrading reusable skills, specialist-role instructions, or vendor adapters. Covers agent-versus-skill boundaries, model-neutral canonical sources, triggers, capability and output contracts, progressive disclosure, validation, and repository quality gates.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -16,48 +14,49 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
 
-- Use when creating or upgrading skills in this repository. Covers repository-specific frontmatter rules, progressive disclosure, reference-file strategy, validation, and the quality bar required for production-grade engineering skills.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
+- Use when creating or upgrading reusable skills, specialist-role instructions, or vendor adapters. Covers agent-versus-skill boundaries, model-neutral canonical sources, triggers, capability and output contracts, progressive disclosure, validation, and repository quality gates.
 
 ## Do Not Use When
 
-- The task is unrelated to `skill-writing` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
+- A narrower neighbouring skill owns the task or this workflow would not change the result.
 
 ## Required Inputs
 
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references, scripts` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
+- Use the task-specific inputs declared in the core workflow below; identify missing required inputs before acting.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
+- Follow the ordered core workflow below and load only the references needed for the current branch.
 
 ## Quality Standards
 
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
+- Apply the domain gates, evidence requirements, and acceptance criteria defined below.
 
 ## Anti-Patterns
 
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
+- Do not replace the domain-specific rules below with generic advice or load unrelated references.
 
 ## Outputs
 
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+- Produce the named artefacts and evidence specified by the core output contract below.
 
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Use the `scripts/` directory for repository-native automation before inventing new tooling.
 <!-- dual-compat-end -->
-Use this skill for repository-native skill authoring. The goal is not to create generic instructional files; it is to encode reusable, high-signal operational knowledge for Codex.
+Use this skill for repository-native skill authoring. A Markdown file is an instruction artefact, not an autonomous agent: it becomes part of an agent only when a runner loads it into a model context, grants capabilities, and executes work. Encode reusable operational knowledge independently from any one runner, then add thin vendor adapters only where needed.
+
+## Core Model
+
+| Concept | Meaning | Canonical content |
+|---|---|---|
+| Agent | A specialised worker instantiated by a runner with context, tools, permissions, and an execution lifecycle | Role, responsibility boundary, capability policy, handoff contract |
+| Skill | A reusable procedure or standard an agent can apply | Trigger, workflow, decision rules, checks, output contract |
+| Tool | Equipment exposed by the runner | Capability requirements and safety constraints, not vendor command syntax |
+| Workflow | An assignment that sequences one or more agents and skills | Routing, dependencies, reconciliation, stop conditions |
+
+Do not label every role Markdown file an agent. State whether the artefact is a role definition, skill, project instruction file, workflow, standard, or vendor adapter.
 
 ## Repository Rules
 
@@ -66,6 +65,20 @@ Use this skill for repository-native skill authoring. The goal is not to create 
 - Make `description` the trigger: what the skill does and when to use it.
 - Put deep detail in `references/`; keep `SKILL.md` focused on execution logic.
 - Do not add meta-docs inside skills such as `README.md` or `CHANGELOG.md`.
+- Keep shared expertise in one canonical, model-neutral source. Adapters may point to it but must not copy its full content.
+- Keep project-wide instruction files short: project rules, routing, safety, and links belong there; specialist bodies do not.
+
+## Five-Part Instruction Contract
+
+Every reusable specialist instruction must define:
+
+1. **Role or procedure** — the specialised responsibility or repeatable job.
+2. **Trigger** — positive and negative activation conditions, including neighbouring routes.
+3. **Instructions** — ordered workflow, decision rules, failure handling, and stop conditions.
+4. **Capabilities and permissions** — what must or may be read, edited, executed, accessed, or delegated.
+5. **Output contract** — named artefacts, required sections, evidence, acceptance criteria, and handoff target.
+
+For capability-based wording, write "when repository search is available, inspect the code before answering" rather than naming a vendor command. Put runner-specific tool names, model selection, directories, and delegation syntax only in adapters.
 
 ## Authoring Workflow
 
@@ -86,6 +99,25 @@ Use one of these structures:
 - Workflow skill: step-by-step execution for fragile or sequential work.
 - Standards skill: decision rules, checklists, and gates for quality-sensitive domains.
 - Domain skill: business concepts, invariants, and recurring implementation patterns.
+
+If the request is primarily for a specialised worker rather than a procedure, create or update a role definition and keep its reusable procedures as separate skills. One role may use several skills; one skill may be used by several roles.
+
+### 2A. Choose the Source and Adapter Boundary
+
+Use the hierarchy appropriate to the target project:
+
+```text
+AGENTS.md / CLAUDE.md     project-wide operating and routing rules
+.ai/standards/            shared model-neutral standards
+.ai/agents/               model-neutral specialist roles
+.ai/workflows/            model-neutral multi-step assignments
+.ai/procedures/           model-neutral reusable procedures, when used
+.claude/agents/           Claude-specific adapters
+.agents/<skill>/SKILL.md  Codex/open-agent skill adapters
+.github/                  Copilot-specific adapters
+```
+
+This repository's active skill-root `SKILL.md` files remain canonical unless a project explicitly adopts `.ai/` as its canonical library. Never create parallel copies without naming which location owns the source of truth.
 
 ### 3. Keep the Core Lean
 
@@ -115,6 +147,27 @@ Good skills tell Codex:
 - What "done" means
 
 Bad skills just restate obvious framework syntax or dump long tutorials.
+
+### 5. Design for Graceful Capability Degradation
+
+- If search or file access exists, require inspection before advice.
+- If execution exists, require relevant checks and inspection of their results.
+- If editing is unavailable, return a patch or implementation plan.
+- If web access is unavailable, identify facts that remain unverified.
+- If parallel workers exist, delegate only independent, bounded work and reconcile their findings.
+- Never assume a tool, edit, command, or delegated task succeeded without evidence.
+- Preserve a read-only default for analysis/review roles; grant write or destructive capabilities only when the task requires them.
+
+### 6. Test the Routing and Contract
+
+Test at least:
+
+- A clear positive trigger.
+- A near-neighbour prompt that must route elsewhere.
+- An ambiguous prompt that should request or gather context.
+- A limited-capability run.
+- A failure or stop-condition case.
+- The required output shape and evidence fields.
 
 ## Quality Standard
 
@@ -162,10 +215,17 @@ review and verification. Reuse those before creating a new local reference.
 
 Do not bury important files several levels deep. Link them directly from `SKILL.md`.
 
+Load [universal agent and skill architecture](references/universal-agent-skill-architecture.md) when designing a canonical role library, vendor adapters, capability policies, or multi-agent workflows.
+
 ### Book and Source-File Distillation Rule
 
 When the user provides books, EPUBs, PDFs, course notes, long articles, or other
 source files while creating or upgrading a skill:
+
+- Load and follow [source distillation and copyright gate](references/source-distillation-and-copyright.md).
+- Never commit the source, a whole-work conversion, OCR output, page images, or
+  a chapter-sequential substitute. Process raw material only in a temporary
+  directory outside the repository and delete temporary conversions after use.
 
 - Treat the source files as temporary inputs. The finished skill must remain
   useful after those files are deleted, moved, or renamed.
@@ -176,6 +236,8 @@ source files while creating or upgrading a skill:
 - Keep `SKILL.md` concise. Put durable depth in directly linked reference files.
 - Avoid copying long passages. Summarize, synthesize, and convert book knowledge
   into reusable execution rules.
+- Record bibliographic attribution, not local download paths or piracy-site
+  metadata. Lawful access does not imply republication rights.
 - Add a short note in the reference file saying it is self-contained and was
   prepared from provided source material, so future agents do not depend on the
   original file.
@@ -196,6 +258,11 @@ When improving an existing skill:
 - Tighten the activation description.
 - Link to other skills only when the dependency is genuinely useful.
 - Re-check line counts after editing.
+- Separate worker identity from reusable procedure.
+- Replace vendor-specific commands in canonical content with capability-based instructions.
+- Define permissions, read-only/write boundaries, stop conditions, output schema, and handoff target.
+- Ensure adapters reference the canonical source and contain only runner-specific metadata or commands.
+- Add positive, negative, collision, limited-capability, and failure-path test prompts.
 
 ## Validation
 
@@ -203,9 +270,11 @@ After creating or updating a skill:
 
 1. Run `python -X utf8 skill-writing/scripts/quick_validate.py <skill-dir>` (frontmatter, required sections, dual-compat markers, line limits).
 2. Run `python -X utf8 skill-writing/scripts/contract_gate.py --skill <skill-dir>` (Evidence Produced contract from `validation-contract`). Use `--all` to scan the whole repo, `--bundle <path>` to validate a Release Evidence Bundle, and `--strict` to treat warnings as errors.
-3. Fix any frontmatter, structure, or contract issues.
-4. Sanity-check the skill against a realistic prompt.
-5. Ensure the skill still reads cleanly when loaded on its own.
+3. Run `python -X utf8 scripts/skill_catalog_guardrails.py`; any raw-source or
+   likely full-text finding blocks release.
+4. Fix any frontmatter, structure, contract, or source-ingestion issues.
+5. Sanity-check the skill against a realistic prompt.
+6. Ensure the skill still reads cleanly when loaded on its own.
 
 ## Anti-Patterns
 
@@ -213,9 +282,40 @@ After creating or updating a skill:
 - Trigger descriptions that are too broad to be useful.
 - Skills that duplicate existing skills without raising the quality bar.
 - Example-heavy files with little operational guidance.
+- Raw books, ebook conversions, OCR dumps, or chapter-by-chapter paraphrases in
+  a skill repository.
 - Instructions that ignore security, performance, testing, or maintainability.
+- Calling a Markdown file an autonomous agent without naming the runner, capabilities, and execution lifecycle.
+- Copying full specialist instructions into `AGENTS.md`, Claude adapters, Codex adapters, and Copilot files.
+- Hard-coding model names without a measured cost, latency, or reasoning requirement.
+- Granting broad write, shell, network, or production access to a role that only analyses or reviews.
+- Multi-agent workflows that split dependent tasks, omit reconciliation, or allow workers to make conflicting edits.
 
 ## Companion Skills
 
 - Load `world-class-engineering` when authoring engineering skills.
 - Load `skill-safety-audit` before sharing high-impact or security-sensitive skills.
+
+## Inputs
+
+| Artefact | Required? | Why |
+|---|---|---|
+| Reusable problem and trigger examples | yes | Establish scope and routing |
+| Neighbouring skill descriptions | yes | Prevent collisions |
+| Runner capabilities and permission boundary | yes | Define safe execution |
+
+## Decision rules
+
+| Condition | Authoring choice | Failure avoided |
+|---|---|---|
+| Repeatable procedure used by multiple roles | Create or update a skill | Persona-procedure coupling |
+| Specialist identity with distinct permissions and handoff | Create a role definition | Treating Markdown as an autonomous agent |
+| Runner-specific metadata or commands only | Create a thin adapter | Canonical-source drift |
+
+## Domain anti-patterns
+
+- Copying canonical expertise into every adapter. Fix: link to one source and keep only runner metadata.
+- Giving review roles write access. Fix: default analysis and review to read-only.
+- Naming tools in model-neutral instructions. Fix: specify capabilities and put command names in adapters.
+- Testing only positive triggers. Fix: add neighbour, collision, degraded-mode, and failure prompts.
+- Declaring success without evidence. Fix: inspect tool results, diffs, and contract artefacts.

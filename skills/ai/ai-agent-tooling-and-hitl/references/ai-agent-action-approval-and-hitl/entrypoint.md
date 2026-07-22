@@ -8,18 +8,18 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Adding approval to agent actions that are irreversible or above a blast-radius threshold.
 - Designing the **plan preview** UX (show the user the full plan before any action runs).
-- Designing **bulk approval** ("approve all 12 outgoing emails" â€” with edit / drop per item).
+- Designing **bulk approval** ("approve all 12 outgoing emails" — with edit / drop per item).
 - Designing **just-in-time approval** ("this step needs approval now"); choosing between blocking the agent vs background continuation.
-- Designing **undo windows** for reversible actions ("Sending in 8s â€” Undo").
+- Designing **undo windows** for reversible actions ("Sending in 8s — Undo").
 - Building the **agent inbox** where pending approvals queue when the user isn't actively in the conversation.
-- Mobile-safe approval flows (notification â†’ one-tap approve / preview).
+- Mobile-safe approval flows (notification → one-tap approve / preview).
 
 ## Do Not Use When
 
-- The task is the tool's reversibility classification itself â€” `ai-agent-tool-catalogue-and-action-gating`.
-- The task is the agent loop state machine â€” `ai-agent-runtime-architecture`.
-- The task is generic SaaS approval workflows (PO approval, leave approval) â€” use `saas-erp-system-design`.
-- The task is the back-office approval (staff overriding tenant approvals) â€” `saas-admin-backoffice-tooling`.
+- The task is the tool's reversibility classification itself — `ai-agent-tool-catalogue-and-action-gating`.
+- The task is the agent loop state machine — `ai-agent-runtime-architecture`.
+- The task is generic SaaS approval workflows (PO approval, leave approval) — use `saas-erp-system-design`.
+- The task is the back-office approval (staff overriding tenant approvals) — `saas-admin-backoffice-tooling`.
 
 ## Required Inputs
 
@@ -32,25 +32,25 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 1. Read this `SKILL.md`.
-2. Pick the **approval pattern** per feature (Â§1). See `references/approval-ux-patterns.md`.
-3. Define the **approval state machine** (Â§2). Includes timeouts, expiry, escalation.
-4. Implement **plan preview** (Â§3) â€” what the user sees before approving.
-5. Implement **bulk approval with per-item edit/drop** (Â§4).
-6. Implement **just-in-time approval** (Â§5) and decide blocking vs background. See `references/just-in-time-approval-flow.md`.
-7. Implement **undo window** for reversible auto-executed actions (Â§6).
-8. Wire the **agent inbox** (Â§7) where pending approvals queue.
-9. Apply **mobile-safe approval flow** (Â§8).
-10. Apply anti-patterns (Â§9).
+2. Pick the **approval pattern** per feature (§1). See `references/approval-ux-patterns.md`.
+3. Define the **approval state machine** (§2). Includes timeouts, expiry, escalation.
+4. Implement **plan preview** (§3) — what the user sees before approving.
+5. Implement **bulk approval with per-item edit/drop** (§4).
+6. Implement **just-in-time approval** (§5) and decide blocking vs background. See `references/just-in-time-approval-flow.md`.
+7. Implement **undo window** for reversible auto-executed actions (§6).
+8. Wire the **agent inbox** (§7) where pending approvals queue.
+9. Apply **mobile-safe approval flow** (§8).
+10. Apply anti-patterns (§9).
 
 ## Quality Standards
 
 - Every irreversible action passes through an explicit approval; no auto-execute.
-- Plan preview is **complete** â€” every action the agent will take is shown, in order, with concrete arguments.
+- Plan preview is **complete** — every action the agent will take is shown, in order, with concrete arguments.
 - Approval payload shows **what** the agent will do, **why** (one-line rationale), and **what cannot be undone**.
 - Bulk approval allows per-item edit and per-item drop without re-running the agent.
 - Just-in-time approval offers two paths: block-and-wait or background-and-notify; user chooses on first approval.
 - Reversible actions have an undo window of at least 5 seconds (configurable per feature).
-- Mobile approval works from a push notification â†’ one-tap approve or one-tap "show details".
+- Mobile approval works from a push notification → one-tap approve or one-tap "show details".
 - Expired approvals do **not** auto-deny; they queue and notify so the user finishes the task on their schedule.
 
 ## Anti-Patterns
@@ -61,8 +61,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Just-in-time approval that holds the agent thread open for 24 hours, blocking other tasks.
 - Mobile approval flow that requires the user to load a 4MB chat page to see context.
 - Undo window with no actual undo wired up (button is fake or 500s).
-- "Approve all future actions of this kind" â€” escalation of consent without scope (and without an expiry).
-- Approval persisted in user session only â€” refresh loses it.
+- "Approve all future actions of this kind" — escalation of consent without scope (and without an expiry).
+- Approval persisted in user session only — refresh loses it.
 
 ## Outputs
 
@@ -86,13 +86,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/approval-ux-patterns.md` â€” six patterns with when-to-use, screenshots/wireframes, anti-patterns.
-- `references/just-in-time-approval-flow.md` â€” JIT implementation, blocking vs background, mobile.
+- `references/approval-ux-patterns.md` — six patterns with when-to-use, screenshots/wireframes, anti-patterns.
+- `references/just-in-time-approval-flow.md` — JIT implementation, blocking vs background, mobile.
 - Companion: `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-runtime-architecture`, `ai-agent-reversibility-and-blast-radius`, `ai-agent-mobile-and-web-ux-patterns`, `ai-agentic-ui`, `premium-ui-ux-design`.
 
 <!-- dual-compat-end -->
 
-## Â§1 Approval Patterns at a Glance
+## §1 Approval Patterns at a Glance
 
 | Pattern | Best for | Friction |
 |---|---|---|
@@ -105,41 +105,41 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 See `references/approval-ux-patterns.md` for the full taxonomy and selection rule.
 
-## Â§2 Approval State Machine
+## §2 Approval State Machine
 
 ```
               created
-        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-        â–¼                â”‚
-   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”    edit   â”‚
-   â”‚ pending â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚
-   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜           â”‚
-        â”‚ â”Œâ”€â”€â”€â”€ reject â”€â”€â”˜
-        â”‚ â”‚
-        â”‚ â–¼
-        â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”
-        â”‚ â”‚rejectedâ”‚   terminal
-        â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-        â”‚ approve
-        â–¼
-   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    undo (within window)
-   â”‚ approved â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º canceled (terminal)
-   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
-        â”‚ executed
-        â–¼
-   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-   â”‚ executed â”‚   terminal
-   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-        â–²
-        â”‚ expire (no decision)
-   â”Œâ”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”
-   â”‚ expired  â”‚   terminal (does NOT auto-execute, does NOT auto-deny)
-   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+        ┌────────────────┐
+        ▼                │
+   ┌─────────┐    edit   │
+   │ pending │ ─────────►│
+   └────┬────┘           │
+        │ ┌──── reject ──┘
+        │ │
+        │ ▼
+        │ ┌────────┐
+        │ │rejected│   terminal
+        │ └────────┘
+        │ approve
+        ▼
+   ┌──────────┐    undo (within window)
+   │ approved │ ────────────► canceled (terminal)
+   └────┬─────┘
+        │ executed
+        ▼
+   ┌──────────┐
+   │ executed │   terminal
+   └──────────┘
+        ▲
+        │ expire (no decision)
+   ┌────┴─────┐
+   │ expired  │   terminal (does NOT auto-execute, does NOT auto-deny)
+   └──────────┘
 ```
 
 Key invariants:
 
-- An expired approval is **inert**. It does not run, and it does not block â€” but the agent task is paused awaiting a fresh approval cycle.
+- An expired approval is **inert**. It does not run, and it does not block — but the agent task is paused awaiting a fresh approval cycle.
 - `undo` is only valid within `undo_window_seconds`. After that, undo becomes a compensating action (a new agent task or manual flow).
 - `executed` is the terminal success. Anything that wants to "undo executed" creates a compensating task; the original approval row is immutable.
 
@@ -166,43 +166,43 @@ CREATE TABLE agent_approvals (
 );
 ```
 
-## Â§3 Plan Preview Component
+## §3 Plan Preview Component
 
 A plan preview is **not** the agent's chat output. It is a structured component:
 
 ```
-â”Œâ”€ Plan â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚  Goal: send invoice to ACME for May hours                â”‚
-â”‚                                                          â”‚
-â”‚  1. Look up ACME's billing contact   (read-only)         â”‚
-â”‚  2. Calculate hours from time entries (read-only)        â”‚
-â”‚  3. Create invoice draft #INV-1234   (reversible)        â”‚
-â”‚  4. Send invoice to ben@acme.example (irreversible)  âš    â”‚
-â”‚                                                          â”‚
-â”‚  Estimated cost: $0.12                                   â”‚
-â”‚  Will email: ben@acme.example                            â”‚
-â”‚                                                          â”‚
-â”‚  [Approve all]  [Edit step 4]  [Approve through step 3]  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─ Plan ───────────────────────────────────────────────────┐
+│  Goal: send invoice to ACME for May hours                │
+│                                                          │
+│  1. Look up ACME's billing contact   (read-only)         │
+│  2. Calculate hours from time entries (read-only)        │
+│  3. Create invoice draft #INV-1234   (reversible)        │
+│  4. Send invoice to ben@acme.example (irreversible) [!]   │
+│                                                          │
+│  Estimated cost: $0.12                                   │
+│  Will email: ben@acme.example                            │
+│                                                          │
+│  [Approve all]  [Edit step 4]  [Approve through step 3]  │
+└──────────────────────────────────────────────────────────┘
 ```
 
 - Each step lists tool name, business label, classification, expected effect.
-- Irreversible steps marked visually (âš ).
-- "Approve through step N" allows partial approval â€” the agent will run to step N and pause for replanning.
+- Irreversible steps marked visually with `[!]`.
+- "Approve through step N" allows partial approval — the agent will run to step N and pause for replanning.
 
-## Â§4 Bulk Approval
+## §4 Bulk Approval
 
 For "send 12 emails" cases:
 
 ```
-â˜ Approve all   12 items selected
-â”Œâ”€ #1  Email to ben@acme.example â”€ "May invoice" â”€â”€â”€â”€ [edit] [drop]
-â”‚   To: ben@acme.example
-â”‚   Subject: ACME â€” May 2026 invoice
-â”‚   Preview: Hi Ben, attached is the invoice for hours...
-â”œâ”€ #2  Email to ana@beta.example â”€ "May invoice" â”€â”€â”€â”€ [edit] [drop]
-â”‚   To: ana@beta.example
-â”‚   ...
+☐ Approve all   12 items selected
+┌─ #1  Email to ben@acme.example ─ "May invoice" ──── [edit] [drop]
+│   To: ben@acme.example
+│   Subject: ACME — May 2026 invoice
+│   Preview: Hi Ben, attached is the invoice for hours...
+├─ #2  Email to ana@beta.example ─ "May invoice" ──── [edit] [drop]
+│   To: ana@beta.example
+│   ...
 ```
 
 Per item:
@@ -210,9 +210,9 @@ Per item:
 - Drop: removes from the bulk; doesn't fire.
 - Selection: only ticked items execute. Default all ticked.
 
-The agent does not re-plan on a drop â€” it skips that item. If the user edits, the edit is applied to the args; the tool runs with the edited args.
+The agent does not re-plan on a drop — it skips that item. If the user edits, the edit is applied to the args; the tool runs with the edited args.
 
-## Â§5 Just-In-Time Approval
+## §5 Just-In-Time Approval
 
 When an irreversible action emerges mid-task:
 
@@ -223,27 +223,27 @@ When an irreversible action emerges mid-task:
    - **Approve and run in background**: agent continues, notification on completion or next approval.
    - **Approve and auto-approve similar for this task**: standing approval within this task's scope.
 
-After 24h with no decision â†’ `expired`; agent stays paused, queued in agent inbox.
+After 24h with no decision → `expired`; agent stays paused, queued in agent inbox.
 
 Full implementation in `references/just-in-time-approval-flow.md`.
 
-## Â§6 Undo Window
+## §6 Undo Window
 
 For **reversible** auto-executed actions only. The action fires; UI shows:
 
 ```
-[ âœ“ Tagged 15 leads ]    Undo (8s)
+[ ✓ Tagged 15 leads ]    Undo (8s)
 ```
 
 Implementation:
 1. Tool executes the action with a `staged_until` timestamp.
 2. UI starts a countdown.
 3. If user clicks Undo within the window, the agent runtime calls the tool's compensating action.
-4. After the window, the tool transitions `staged â†’ committed`. Undo becomes "create a new compensating task".
+4. After the window, the tool transitions `staged → committed`. Undo becomes "create a new compensating task".
 
 Tools that support undo register a `compensate(args, original_result)` function.
 
-## Â§7 Agent Inbox
+## §7 Agent Inbox
 
 Where pending approvals queue when the user is not actively in the agent's conversation:
 
@@ -256,7 +256,7 @@ Where pending approvals queue when the user is not actively in the agent's conve
 
 Component spec in `references/agent-inbox-spec.md` (under `ai-agent-mobile-and-web-ux-patterns`).
 
-## Â§8 Mobile Approval
+## §8 Mobile Approval
 
 Push notification payload:
 
@@ -276,10 +276,10 @@ Push notification payload:
 `approve` / `reject` from the notification require: app installed, user signed in, biometric or PIN re-auth for irreversible.
 `view` deep-links to the plan preview screen.
 
-## Â§9 Anti-Patterns
+## §9 Anti-Patterns
 
 - Approval phrased as "Do you want me to proceed?" with no concrete args.
-- Bulk approval that runs all items as a single transaction â€” one item's failure rolls back everything (often not desired).
+- Bulk approval that runs all items as a single transaction — one item's failure rolls back everything (often not desired).
 - JIT approval that blocks the agent's thread holding a database transaction open.
 - Expired approvals auto-execute "because the user probably meant yes".
 - Undo button that's actually a delete-after-the-fact (sends two emails: one wrong, one correction).
@@ -289,7 +289,7 @@ Push notification payload:
 
 ---
 
-## Â§10 Approval Events as Compliance Evidence (Enhancement)
+## §10 Approval Events as Compliance Evidence (Enhancement)
 
 Every approval event is a **compliance evidence point** for SOC 2 PI1.1 (system processing complete, accurate, timely, and authorised) and ISO 27001 A.9.4.1 (information access restriction). The approval record is the proof.
 
@@ -307,14 +307,13 @@ ALTER TABLE approvals ADD COLUMN dual_approver_signature TEXT;
 When an approval is granted:
 
 1. Compute the canonical bytes (sorted keys, deterministic field set).
-2. Sign with the approver's per-session key (delegated from SSO + 2FA; key validity â‰¤ 24h).
+2. Sign with the approver's per-session key (delegated from SSO + 2FA; key validity ≤ 24h).
 3. Capture `linked_action_chain_pos` from the audit log emitter so completeness checks can verify chain linkage (see `ai-agent-approval-audit-completeness`).
 4. Emit `approval_received` event onto the action audit log with the signature embedded in `payload_summary`.
 
 Approvals where:
-- `approver_id == initiator_id` â†’ reject (self-approval).
-- `approver_id NOT IN allowlist_at(tenant_id, policy_version)` â†’ reject (unauthorised).
-- `dual_approver_required AND dual_approver_id IS NULL` â†’ reject (incomplete).
+- `approver_id == initiator_id` → reject (self-approval).
+- `approver_id NOT IN allowlist_at(tenant_id, policy_version)` → reject (unauthorised).
+- `dual_approver_required AND dual_approver_id IS NULL` → reject (incomplete).
 
 Cross-links: `ai-agent-approval-audit-completeness` (the completeness check that consumes these rows), `ai-agent-audit-log-integrity` (chain storage), `ai-agent-soc2-controls` (PI1.1).
-

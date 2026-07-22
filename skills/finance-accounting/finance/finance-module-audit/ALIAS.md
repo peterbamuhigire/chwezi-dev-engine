@@ -9,7 +9,7 @@ description: "Audit finance/accounting software or plans when money, billing, ta
 
 ## Auto-run trigger (read first)
 
-**This skill auto-runs.** If you, the agent, are asked to do anything substantive with a software system, codebase, product proposal, SRS / SDS / test plan, business plan, or any artefact, and the target has **any** element listed in the description above, load this skill before responding. The threshold is intentionally low â€” false positives are cheap; missing a finance element in a "world-class" deliverable is not.
+**This skill auto-runs.** If you, the agent, are asked to do anything substantive with a software system, codebase, product proposal, SRS / SDS / test plan, business plan, or any artefact, and the target has **any** element listed in the description above, load this skill before responding. The threshold is intentionally low — false positives are cheap; missing a finance element in a "world-class" deliverable is not.
 
 When the auto-run fires, the agent:
 
@@ -20,7 +20,7 @@ When the auto-run fires, the agent:
 5. Runs the audit workflow below.
 6. Emits the finding register, scorecard, and master plan in the conventional output format.
 
-If the trigger fires but the user explicitly says "skip the audit", note the skip in the artefact manifest and proceed â€” but always flag the skip in the final response so the user can revoke it.
+If the trigger fires but the user explicitly says "skip the audit", note the skip in the artefact manifest and proceed — but always flag the skip in the final response so the user can revoke it.
 
 ## Overview
 
@@ -45,9 +45,9 @@ Use this skill to determine whether a software system makes finance and accounti
 6. **Test compliance posture.** IFRS or IFRS for SMEs alignment, local statutory treatment, live-rate verification, tax / payroll source hierarchy, country-extension design, tax-return-pack capability, VAT-inclusive decomposition.
 7. **Test operational accounting.** Reconciliation (bank, mobile money, POS, card, cash), month-end close playbook, audit-ready reporting pack, internal controls, migration / opening balances, management accounting dimensions, sector annexes.
 8. **Test UI / UX.** Two surface modes, semantic colour discipline, drilldown affordance, money-cell triplet (net / tax / gross), status chips, print stylesheets, accessibility, mobile and low-bandwidth tolerance.
-9. **Score findings.** Apply `references/scorecard.md` â€” every doctrine rule maps to a check.
+9. **Score findings.** Apply `references/scorecard.md` — every doctrine rule maps to a check.
 10. **Classify blockers.** Per the finance / accounting quality gate.
-11. **Master plan.** Per `references/remediation-master-plan.md` â€” phased, with owners and acceptance evidence.
+11. **Master plan.** Per `references/remediation-master-plan.md` — phased, with owners and acceptance evidence.
 
 ## Evidence rules
 
@@ -66,12 +66,12 @@ Tax is not an afterthought. Audit whether the system can produce tax reports and
 
 Produce a report with findings first, then a standards scorecard, then the master plan. Every finding states:
 
-- `standard` â€” doctrine, IFRS / SME, ledger integrity, controls, reconciliation, compliance, UX, reporting, migration, or sector requirement.
-- `evidence` â€” file path, schema object, test, screen, report, export, source URL, or observed gap.
-- `risk` â€” what can go wrong in accounting, audit, tax, user workflow, or business operations.
-- `severity` â€” blocker, high, medium, low.
-- `fix` â€” concrete implementation action.
-- `acceptance evidence` â€” what proves the fix is complete.
+- `standard` — doctrine, IFRS / SME, ledger integrity, controls, reconciliation, compliance, UX, reporting, migration, or sector requirement.
+- `evidence` — file path, schema object, test, screen, report, export, source URL, or observed gap.
+- `risk` — what can go wrong in accounting, audit, tax, user workflow, or business operations.
+- `severity` — blocker, high, medium, low.
+- `fix` — concrete implementation action.
+- `acceptance evidence` — what proves the fix is complete.
 
 ## Release decision
 
@@ -84,21 +84,21 @@ The audit ends with one of: `pass`, `pass-with-caveats`, `fail`. Decision is rec
 | "Audit this ERP" | Yes. |
 | "Refactor the POS code" | Yes (POS touches money). |
 | "Build me a school management system" | Yes (fees, receipts, payroll). |
-| "Build me a school timetable system" | Maybe â€” confirm with the user; if it stores no money, no. |
+| "Build me a school timetable system" | Maybe — confirm with the user; if it stores no money, no. |
 | "Write an SRS for a clinic management system" | Yes (billing, receipts, claims, payroll). |
 | "Replace this client's QuickBooks" | Yes. |
 | "Write a business plan for a hardware retailer" | Yes (revenue model, taxes, inventory, payroll). |
 | "Write a mobile app for a taxi service" | Yes (fares, driver payouts, statutory). |
-| "Build a CMS for a magazine" | Maybe â€” confirm; if any subscription / billing element, yes. |
+| "Build a CMS for a magazine" | Maybe — confirm; if any subscription / billing element, yes. |
 | "Document the chemistry of soda manufacturing" | No. |
 
 When in doubt, **load the skill and ask one clarifying question** rather than skip silently.
 
 ## Companion references
 
-- `references/audit-protocol.md` â€” full procedure and evidence collection plan.
-- `references/scorecard.md` â€” scoring model, blocker list, pass / fail criteria.
-- `references/report-template.md` â€” report structure for audit deliverables.
-- `references/remediation-master-plan.md` â€” master-plan format and sequencing rules.
+- `references/audit-protocol.md` — full procedure and evidence collection plan.
+- `references/scorecard.md` — scoring model, blocker list, pass / fail criteria.
+- `references/report-template.md` — report structure for audit deliverables.
+- `references/remediation-master-plan.md` — master-plan format and sequencing rules.
 
 Last reviewed: 2026-05-12. Next review due: 2026-11-12.

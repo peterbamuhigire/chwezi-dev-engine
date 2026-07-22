@@ -1,0 +1,4 @@
+interface:
+  display_name: "Real-Time Game Graphics"
+  short_description: "Design and verify real-time game rendering"
+  default_prompt: "Use $real-time-game-graphics to design and verify the rendering pipeline and graphics budgets for this game."

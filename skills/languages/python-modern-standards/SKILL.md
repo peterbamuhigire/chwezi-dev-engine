@@ -1,13 +1,10 @@
 ---
 name: python-modern-standards
-description: Use when writing or reviewing any Python code in our SaaS projects —
-  defines Python version, project layout, tooling (uv, ruff, mypy), typing, Pydantic
-  v2, logging, configuration, async rules, error handling, testing, and security baseline.
-  Load this before any other Python skill.
+description: Use when writing, reviewing, or distributing Python applications, including PyInstaller, auto-py-to-exe, Nuitka, frozen desktop executables, multi-tool suites, installers, and CI release builds. Defines the Python baseline and routes executable packaging to its desktop-distribution automation.
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -18,53 +15,25 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Use When
 
 - Use when writing or reviewing any Python code in our SaaS projects — defines Python version, project layout, tooling (uv, ruff, mypy), typing, Pydantic v2, logging, configuration, async rules, error handling, testing, and security baseline. Load this before any other Python skill.
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `python-modern-standards` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
 - For Python sidecars, FastAPI services, workers, queue consumers, or API integrations, load `references/api-container-sidecar-engineering.md`.
 - For containerized Python work, pair with `docker-development`.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
+- For PyInstaller, auto-py-to-exe, Nuitka, frozen desktop applications, multi-executable suites, portable ZIPs, Windows installers, or code signing, load `references/python-desktop-distribution.md` and use `scripts/desktop_suite_packager.py`.
 
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
 |----------|----------|--------|---------|
 | Correctness | Test plan | Markdown doc per `skill-composition-standards/references/test-plan-template.md` covering pytest layout, type checks, and coverage targets | `docs/python/test-plan.md` |
+| Release | Desktop distribution evidence | Manifest, generated build files, artifact inventory, hashes, smoke results, and signing status | `release/desktop-suite-evidence.json` |
 
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Use `references/api-container-sidecar-engineering.md` when Python participates in APIs, workers, queues, sidecars, or Dockerized service delivery.
+- Use `references/python-desktop-distribution.md` when Python must ship without a separately installed interpreter.
 <!-- dual-compat-end -->
 The house style for Python in our PHP + Android + iOS SaaS stack. Every Python file in our projects must follow this skill. Other Python skills (saas-integration, data-analytics, document-generation, ml-predictive, data-pipelines) assume you have read this first.
 
@@ -144,6 +113,20 @@ uv lock --upgrade         # upgrade lockfile
 ```
 
 Never mix uv with pip, poetry, or pipenv in the same project. See `references/tooling-uv-ruff.md`.
+
+## Frozen desktop distribution
+
+Treat executable distribution as a release pipeline, not a GUI conversion step. For a suite of tools, prefer a PyInstaller one-folder multipackage build with a generated launcher, shared collection directory, portable ZIP, and platform installer. Keep the product and application list in a committed manifest; generate the spec, launcher, installer, CI workflow, and verification script from it.
+
+Load `references/python-desktop-distribution.md`, then run:
+
+```powershell
+python -X utf8 scripts/desktop_suite_packager.py init --project-root <project> --product-name "Example Suite" --publisher "Example Ltd" --app "editor=editor.py" --app "converter=converter.py"
+python -X utf8 scripts/desktop_suite_packager.py generate --config <project>/packaging/desktop-suite.toml
+python -X utf8 scripts/desktop_suite_packager.py doctor --config <project>/packaging/desktop-suite.toml
+```
+
+The script path above is relative to this skill directory. Commit generated project files so CI does not depend on the skills engine being installed on the runner.
 
 ## Formatting + linting — ruff
 
@@ -333,6 +316,7 @@ When the task requires it, load:
 - `python-document-generation` — Excel, Word, PDF output.
 - `python-ml-predictive` — forecasting, classification, anomaly detection.
 - `python-data-pipelines` — ETL, OCR, image processing, API syncs.
+- `references/python-desktop-distribution.md` — executable suites, installers, signing, CI, and clean-machine release checks.
 
 ## References
 
@@ -347,4 +331,35 @@ When the task requires it, load:
 - `references/security-baseline.md`
 - `references/anti-patterns.md`
 - `references/api-container-sidecar-engineering.md`
+- `references/python-desktop-distribution.md`
+- `scripts/desktop_suite_packager.py`
 
+## Decision Rules
+
+| Condition | Action |
+|---|---|
+| Work is I/O-bound and dependencies support async | Use one coherent async boundary |
+| Value crosses an external boundary | Validate it with an explicit typed model |
+| Tooling conflicts with repository policy | Preserve policy and document the exception |
+
+## Capability Contract
+
+Read and search are required. Editing, dependency changes, and execution require authorisation; network access is optional.
+
+## Degraded Mode
+
+Fallback: without execution, provide exact formatter, type-checker, security, and test commands; do not claim compatibility.
+
+## Domain Anti-Patterns
+
+- Adding an untyped dictionary at a trust boundary.
+- Mixing blocking calls into an async path.
+- Catching broad exceptions without recovery.
+- Reading secrets from committed configuration.
+- Changing tooling without checking the lockfile.
+## Inputs
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Python version, project layout, dependency policy, and code scope | yes | Apply compatible standards |
+## Outputs
+- Produce Python code or findings with typing, lint, test, configuration, logging, and security evidence.

@@ -1,4 +1,4 @@
-﻿# Month-End Close Pipeline â€” Agent Revenue
+﻿# Month-End Close Pipeline — Agent Revenue
 
 This reference specifies the **deterministic, idempotent, auditable** month-end close pipeline for agent revenue. It runs as a sequence of Airflow / Dagster / Prefect tasks (engine-agnostic; the contracts matter, not the orchestrator).
 
@@ -6,7 +6,7 @@ Target: agent-revenue close completes within **3 business days** of period end. 
 
 ---
 
-## 1. Pre-Close Checklist (Day âˆ’3 to Day 0)
+## 1. Pre-Close Checklist (Day −3 to Day 0)
 
 Run nightly during the last 3 days of the period. Failures must be resolved before close starts.
 
@@ -14,7 +14,7 @@ Run nightly during the last 3 days of the period. Failures must be resolved befo
 |---|---|---|
 | Verdict lag | `count(*) where verdict_status='pending' and resolution_at < now() - interval '24h'` | < 0.5% of period resolutions |
 | Pricing-rule version drift | `select distinct pricing_rule_version from billing_events where period=P` | Exactly one version per `(tenant, feature)` pair |
-| Deferred-revenue reconciliation | per Â§1.4 of `deferred-revenue-and-refund-reserves.md` | Within 0.5% per tenant |
+| Deferred-revenue reconciliation | per §1.4 of `deferred-revenue-and-refund-reserves.md` | Within 0.5% per tenant |
 | Reserve rate freshness | `max(updated_at)` on `refund_reserve_balances` | < 24h old |
 | Stripe webhook backlog | unprocessed `invoice.*` events | 0 |
 | FX rate fixed | `fx_rates_period(period=P)` | All currencies populated |
@@ -23,11 +23,11 @@ If any check fails, the close pipeline refuses to start. No "we'll fix it during
 
 ---
 
-## 2. Close Pipeline â€” Stage by Stage
+## 2. Close Pipeline — Stage by Stage
 
 The pipeline runs as 8 stages, each idempotent on `(period_yyyymm, stage_name, run_id)`.
 
-### Stage 1 â€” Freeze the period
+### Stage 1 — Freeze the period
 
 ```python
 def freeze_period(period_yyyymm: int, run_id: str) -> None:
@@ -50,9 +50,9 @@ def freeze_period(period_yyyymm: int, run_id: str) -> None:
 
 Effect: new billing-event rows for `period_yyyymm` are rejected by the application layer. Late events go to `late_event_quarantine` for triage.
 
-### Stage 2 â€” Drain pending verdicts (3-business-day allowance)
+### Stage 2 — Drain pending verdicts (3-business-day allowance)
 
-Any resolution event whose verdict is still pending at freeze gets up to **3 business days** to post a verdict that books against the closing period. Verdicts arriving after the allowance book to the current open period (see Â§4).
+Any resolution event whose verdict is still pending at freeze gets up to **3 business days** to post a verdict that books against the closing period. Verdicts arriving after the allowance book to the current open period (see §4).
 
 ```python
 def drain_pending_verdicts(period: int, run_id: str) -> None:
@@ -69,20 +69,20 @@ def drain_pending_verdicts(period: int, run_id: str) -> None:
         # else: wait
 ```
 
-### Stage 3 â€” Booking journal: per-resolution revenue
+### Stage 3 — Booking journal: per-resolution revenue
 
 For every `billing_event` in the period with `verdict='resolved'`:
 
 ```
 DR  AR / Stripe Pending (customer balance)   <amount>
-CR  4100 Revenue â€” Agent Resolutions          <amount>
+CR  4100 Revenue — Agent Resolutions          <amount>
 ```
 
 For `verdict='attempted_only'` (see `ai-agent-attempted-vs-completed-billing`):
 
 ```
 DR  AR / Stripe Pending                      <attempt_price>
-CR  4100 Revenue â€” Agent Resolutions          <attempt_price>
+CR  4100 Revenue — Agent Resolutions          <attempt_price>
 ```
 
 Implementation:
@@ -107,7 +107,7 @@ def post_resolution_revenue(period: int, run_id: str) -> None:
                     idempotency_key=idem_key,
                     period=period,
                     dr_account="1200 AR",
-                    cr_account="4100 Revenue â€” Agent Resolutions",
+                    cr_account="4100 Revenue — Agent Resolutions",
                     amount_minor=ev.amount_minor,
                     currency=ev.currency,
                     source_event=ev.event_id,
@@ -116,65 +116,65 @@ def post_resolution_revenue(period: int, run_id: str) -> None:
                 t.update("billing_events", set={"revenue_posted": True}, where={"event_id": ev.event_id})
 ```
 
-### Stage 4 â€” Deferred revenue consumption journal
+### Stage 4 — Deferred revenue consumption journal
 
 For prepaid-pack-funded resolutions (`pricing_source='prepaid_pack'`):
 
 ```
-DR  2150 Deferred Revenue â€” Prepaid Agent Credits   <amount>
-CR  4100 Revenue â€” Agent Resolutions                 <amount>
+DR  2150 Deferred Revenue — Prepaid Agent Credits   <amount>
+CR  4100 Revenue — Agent Resolutions                 <amount>
 ```
 
 Postings derive from `deferred_revenue_postings` where `posting_type='consumption'` and `period_yyyymm=P`.
 
-### Stage 5 â€” Refund-reserve accrual + utilization
+### Stage 5 — Refund-reserve accrual + utilization
 
 Two sub-stages:
 
-**5a Accrual** â€” for every resolution-revenue line booked in stage 3, accrue the expected refund:
+**5a Accrual** — for every resolution-revenue line booked in stage 3, accrue the expected refund:
 
 ```
-DR  4910 Refund Expense â€” Agent (contra-revenue)    <rolling_rate * revenue>
-CR  2160 Refund Reserve â€” Agent Resolutions          <rolling_rate * revenue>
+DR  4910 Refund Expense — Agent (contra-revenue)    <rolling_rate * revenue>
+CR  2160 Refund Reserve — Agent Resolutions          <rolling_rate * revenue>
 ```
 
-**5b Utilization** â€” for every refund executed in the period:
+**5b Utilization** — for every refund executed in the period:
 
 ```
 DR  2160 Refund Reserve                              <refund_amount>
 CR  AR / Customer balance                            <refund_amount>
 ```
 
-Then run the **true-up** logic from `deferred-revenue-and-refund-reserves.md` Â§2.4.
+Then run the **true-up** logic from `deferred-revenue-and-refund-reserves.md` §2.4.
 
-### Stage 6 â€” SLA-credit journal
+### Stage 6 — SLA-credit journal
 
 Mirrors stage 5 but for SLA credits:
 
 ```
-DR  4920 SLA Credits Issued â€” Agent (contra-revenue) <credit_amount>
-CR  2170 SLA Credit Reserve â€” Agent                  <credit_amount>
+DR  4920 SLA Credits Issued — Agent (contra-revenue) <credit_amount>
+CR  2170 SLA Credit Reserve — Agent                  <credit_amount>
 ```
 
 For each credit-note issued via the pipeline in `ai-agent-sla-credit-automation`, post the utilization side.
 
-### Stage 7 â€” FX revaluation (multi-currency tenants)
+### Stage 7 — FX revaluation (multi-currency tenants)
 
 For each non-base-currency revenue posting in the period:
 
 - Use the **period-end** rate fixed in pre-close.
-- Post FX gain/loss to `7100 FX Adjustment â€” Agent`.
+- Post FX gain/loss to `7100 FX Adjustment — Agent`.
 - Document the corridor policy (no retroactive re-translation of prior periods).
 
-### Stage 8 â€” Reconciliation + sign-off
+### Stage 8 — Reconciliation + sign-off
 
 Three reconciliations, each producing a delta report:
 
-1. **Stripe â†” GL**: sum of Stripe invoice line items (agent-related SKUs) for the period vs sum of `ledger_entries` revenue lines.
-2. **Billing-events ledger â†” GL revenue**: every `billing_events.amount_minor` with `verdict in ('resolved','attempted_only')` must equal the booked revenue.
-3. **Deferred-revenue ledger â†” GL liability**: per `deferred-revenue-and-refund-reserves.md` Â§1.4.
+1. **Stripe ↔ GL**: sum of Stripe invoice line items (agent-related SKUs) for the period vs sum of `ledger_entries` revenue lines.
+2. **Billing-events ledger ↔ GL revenue**: every `billing_events.amount_minor` with `verdict in ('resolved','attempted_only')` must equal the booked revenue.
+3. **Deferred-revenue ledger ↔ GL liability**: per `deferred-revenue-and-refund-reserves.md` §1.4.
 
-Tolerance: 0.1% per reconciliation. Out-of-tolerance fails the close â€” no override without controller approval + audit-log row.
+Tolerance: 0.1% per reconciliation. Out-of-tolerance fails the close — no override without controller approval + audit-log row.
 
 Sign-off artifact: a markdown report committed to `finance/close-runs/{period_yyyymm}.md` with:
 
@@ -188,7 +188,7 @@ Sign-off artifact: a markdown report committed to `finance/close-runs/{period_yy
 
 ---
 
-## 3. Late Verdicts â€” Post-Close Handling
+## 3. Late Verdicts — Post-Close Handling
 
 A verdict arriving after the 3-business-day allowance:
 
@@ -207,10 +207,10 @@ A dispute filed after close (see `ai-agent-task-success-tracking/references/disp
 
 ```
 Period P: revenue $X recognized for event E (verdict='resolved')
-Period P+2: dispute upheld â€” verdict flips to 'failed', refund issued
+Period P+2: dispute upheld — verdict flips to 'failed', refund issued
 
 Period P+2 journal:
-  DR  4100 Revenue â€” Agent Resolutions    $X      (de-recognition)
+  DR  4100 Revenue — Agent Resolutions    $X      (de-recognition)
   CR  2160 Refund Reserve                 $X      (or DR Refund Reserve / CR Cash if reserve insufficient)
 ```
 
@@ -263,7 +263,7 @@ Each `@op` is idempotent on `(period_yyyymm, op_name, run_id)` and emits a struc
 - True-ups posted to historical periods after sign-off. Reopens audited books.
 - Multiple `pricing_rule_version` values in one period for one tenant/feature pair. Customer math doesn't reconcile.
 - FX rate captured at start of period instead of period-end. Auditor finding.
-- Reconciliation tolerance treated as "round-off" â€” material drift hidden.
+- Reconciliation tolerance treated as "round-off" — material drift hidden.
 - Stripe-side adjustments (manual credit notes) not mirrored to GL. Liability ghost.
 - Sign-off done verbally / via Slack. No artifact = no audit defense.
 - Close pipeline as a single 4-hour script. Debugging a failure means re-running everything; should be 8 idempotent ops.

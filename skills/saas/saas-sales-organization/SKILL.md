@@ -1,9 +1,6 @@
 ---
 name: saas-sales-organization
-description: Use when designing or scaling a SaaS sales organisation — sales motions,
-  roles (SDR/BDR/AE/CSM/SE), pipeline stages, lead-to-cash, territory design, quota/commission,
-  sales ops fundamentals, onboarding/ramp, and hiring rubrics. Sourced from "Blueprints
-  for a SaaS Sales Organization" (van der Kooij, Pizarro).
+description: Use when designing or scaling a SaaS sales organisation — sales motions, roles (SDR/BDR/AE/CSM/SE), pipeline stages, lead-to-cash, territory design, quota/commission, sales ops fundamentals, onboarding/ramp, and hiring rubrics. Sourced from "Blueprints for a SaaS Sales Organization" (van der Kooij, Pizarro).
 metadata:
   portable: true
   compatible_with:
@@ -14,45 +11,48 @@ metadata:
 # SaaS Sales Organization
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+
+## Required Inputs
+
+| Input | Required | Use |
+|---|---|---|
+| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
+| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
+| Production data or verified evidence | conditional | Validate thresholds and migrations |
+
+## Capability and permission contract
+
+Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
+
+## Degraded mode
+
+If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
+
+## Decision rules
+
+| Condition | Action | Stop condition |
+|---|---|---|
+| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
+| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
+| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
+
+## Domain Anti-Patterns
+
+- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
+- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
+- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
+- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
+- Treating a missing dependency as successful. Fix: name the blocked verification.
+
+
 <!-- dual-compat-start -->
 ## Use When
 
 - Use when designing or scaling a SaaS sales organisation — sales motions, roles (SDR/BDR/AE/CSM/SE), pipeline stages, lead-to-cash, territory design, quota/commission, sales ops fundamentals, onboarding/ramp, and hiring rubrics. Sourced from "Blueprints for a SaaS Sales Organization" (van der Kooij, Pizarro).
-- The task needs reusable judgment, domain constraints, or a proven workflow rather than ad hoc advice.
-
-## Do Not Use When
-
-- The task is unrelated to `saas-sales-organization` or would be better handled by a more specific companion skill.
-- The request only needs a trivial answer and none of this skill's constraints or references materially help.
-
-## Required Inputs
-
-- Gather relevant project context, constraints, and the concrete problem to solve; load `references` only as needed.
-- Confirm the desired deliverable: design, code, review, migration plan, audit, or documentation.
 
 ## Workflow
 
-- Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
-- Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 - For premium or enterprise offers, align the sales motion with account research, executive problem framing, proof assets, business case, stakeholder mapping, and concrete next-step commitments.
-
-## Quality Standards
-
-- Keep outputs execution-oriented, concise, and aligned with the repository's baseline engineering standards.
-- Preserve compatibility with existing project conventions unless the skill explicitly requires a stronger standard.
-- Prefer deterministic, reviewable steps over vague advice or tool-specific magic.
-
-## Anti-Patterns
-
-- Treating examples as copy-paste truth without checking fit, constraints, or failure modes.
-- Loading every reference file by default instead of using progressive disclosure.
-
-## Outputs
-
-- A concrete result that fits the task: implementation guidance, review findings, architecture decisions, templates, or generated artifacts.
-- Clear assumptions, tradeoffs, or unresolved gaps when the task cannot be completed from available context alone.
-- References used, companion skills, or follow-up actions when they materially improve execution.
 
 ## Evidence Produced
 
@@ -262,3 +262,12 @@ See `references/hiring-rubrics.md`.
 - `references/forecasting-accuracy.md`
 - `references/onboarding-ramp.md`
 - `references/hiring-rubrics.md`
+## Quality Standards
+
+Role design, stage exits, capacity, quota, compensation, handoffs, and ramp measures must derive from one declared sales motion and named customer segment.
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| SaaS sales operating model | Revenue leadership and sales operations | Sales motion, role handoffs, stage exits, territory rules, capacity assumptions, quota logic, and ramp measures align with the chosen market segment |

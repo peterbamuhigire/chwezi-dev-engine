@@ -16,6 +16,7 @@ This index lists planning documents and their current status.
 
 | Date | File |
 | --- | --- |
+| 2026-07-17 | `../updates/2026-07-17-python-desktop-suite-automation.md` |
 | 2026-05-30 | `../updates/2026-05-30-csharp-dotnet-skill.md` |
 | 2026-03-04 | `2026-03-04-mysql-database-skill-design.md` |
 | 2026-03-04 | `2026-03-04-php-modern-standards-enhancement.md` |

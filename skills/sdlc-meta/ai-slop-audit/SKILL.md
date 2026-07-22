@@ -1,13 +1,11 @@
 ---
 name: ai-slop-audit
-description: Analyse, evaluate, and audit any artefact for AI slop and score it. Runs after EACH major iteration of work and AUTO-RUNS whenever the user asks to analyse, review, evaluate, audit, critique, or de-slop any project, app, website, business plan, SRS or spec, proposal, blog post, social post, document, image, or codebase, or asks whether something looks AI-generated. Produces a graded slop report giving per-marker findings with severity, evidence, and a concrete fix. Pairs with anti-ai-slop, which prevents slop during production.
+description: Use when auditing or scoring an artefact for AI slop after a major iteration or before release. Produces evidence-backed findings, severity, fixes, genericness score, and an A/B/C/F verdict.
 metadata:
   portable: true
   compatible_with:
   - claude-code
-  - Codex
   - codex
-  - generic-agent
   priority: high
   source: digital-research-engine / ai-slop-detector (2026-06-07), verified per EVIDENCE-AUDIT.md
 ---
@@ -33,8 +31,6 @@ The detector. Given any artefact, it decides how much it reads as AI slop, names
 
 - The artefact itself (text, files, screenshots, repo path, or URL) and its claimed purpose/audience.
 - For code: access to the dependency manifest so packages can be resolved against their registry.
-<!-- dual-compat-end -->
-
 ## When this runs
 
 **Cadence — run after EACH major iteration of work on the project at hand.** This is the default mode: whenever a meaningful unit of work is completed — a drafted section, a finished feature or module, a completed slide deck, a significant revision, a milestone — run this audit on what was just produced before moving on. Log the verdict. If the verdict is **F (Blocked)**, do not progress to the next iteration until the blocking findings are fixed. Treat it like a test suite that runs at every checkpoint, not a one-time final review.
@@ -129,6 +125,66 @@ Artefact type(s): <...>
 - Every finding cites concrete evidence from the artefact (a quote, a line number, a colour value, a screenshot region, a URL). No finding without evidence.
 - Do not invent a flaw to pad the report. "This artefact is clean" is a valid, wanted verdict.
 - Mark inferences "(inference)"; never present a guess as a measured fact.
+
+## See also
+
+## Inputs
+
+| Artefact | Required? | Purpose |
+|---|---|---|
+| Concrete artefact and intended audience | yes | Ground every finding |
+| Source or dependency evidence | conditional | Verify citations, packages, and claims |
+
+## Outputs
+
+| Artefact | Consumer | Acceptance condition |
+|---|---|---|
+| Graded audit report | Author or release owner | Every finding cites concrete evidence and a fix |
+
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | AI slop audit report | A/B/C/F verdict, genericness score, evidence, fixes, and unassessed checks | `docs/audits/ai-slop-<artefact>.md` |
+
+<!-- dual-compat-end -->
+
+## Capability contract
+
+Default to read-only. Use search, execution, visual inspection, or network verification only when available and authorised. Never edit the audited artefact unless remediation is separately requested.
+
+## Degraded mode
+
+Mark inaccessible checks `not assessed`; do not lower their risk silently or invent findings to complete the template.
+
+## Decision rules
+
+| Evidence | Grade effect | Action |
+|---|---|---|
+| Any blocking marker | F | Block release and name the fix |
+| Multiple non-blocking markers or weak substance | C | Rework before release |
+| Minor isolated markers | B | Apply targeted fixes |
+| No blockers, low genericness, clear intent | A | Ship |
+
+## Workflow
+
+Classify the artefact, run applicable automated checks, assess substance and intent, grade it, and cite evidence for every finding.
+
+## Quality Standards
+
+Do not invent findings, collapse unassessed checks into passes, or report a grade that contradicts a blocking marker.
+
+## Anti-Patterns
+
+- Reporting a vague “AI feel”. Fix: cite the exact phrase, line, colour, import, or state gap.
+- Padding a clean audit with invented flaws. Fix: allow an A verdict.
+- Editing during a read-only audit. Fix: separate diagnosis from remediation authority.
+- Treating an inaccessible check as passed. Fix: mark it `not assessed`.
+- Removing useful authored material during cleanup. Fix: record what must be preserved.
+
+## References
+
+- `anti-ai-slop` supplies the production-time prevention controls.
 
 ## See also
 - `anti-ai-slop` — prevention companion (write/design/code so slop never appears).

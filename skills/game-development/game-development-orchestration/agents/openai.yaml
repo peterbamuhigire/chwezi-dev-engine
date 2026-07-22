@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Development Orchestration"
+  short_description: "Plan and govern complete game production"
+  default_prompt: "Plan this game from concept through verified release gates."

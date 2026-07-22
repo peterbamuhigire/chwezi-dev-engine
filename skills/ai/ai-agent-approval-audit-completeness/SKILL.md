@@ -1,6 +1,6 @@
 ---
 name: ai-agent-approval-audit-completeness
-description: Use when proving that every irreversible agent action in the audit window had a documented, signed approval — completeness check (gap-detection job), approval-evidence cross-link to the hash-chained action audit log, and evidence pack for SOC 2 Processing Integrity (PI1.1). Pairs with `ai-agent-action-approval-and-hitl` (mechanism) and `ai-agent-audit-log-integrity` (storage).
+description: Use when checking that every irreversible agent action has signed approval evidence linked to the action audit log, and producing an approval-gap register or audit evidence pack.
 metadata:
   portable: true
   compatible_with:
@@ -9,6 +9,44 @@ metadata:
 ---
 
 # AI Agent Approval-Audit Completeness
+
+## Operating contract
+
+## Inputs
+
+| Input | Required | Purpose |
+|---|---|---|
+| Domain evidence | yes | approval-audit window, irreversible-action export, approval records, signer identities, and hash-chain witness |
+
+## Outputs
+
+- Produce: approval completeness report, gap register, exception dispositions, and signed evidence-pack manifest.
+
+## Capability and permission boundaries
+
+Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
+
+## Degraded mode
+
+When required telemetry, evidence, execution, network access, or write authority is unavailable, return a partial result with each unassessed item labelled, preserve the safest existing state, and state the evidence or approval needed to continue. Never convert missing evidence into a pass.
+
+## Decision rules
+
+| Condition | Action |
+|---|---|
+| Scope, owner, or threshold is missing | Stop the affected decision and request it |
+| Evidence is incomplete but read-only analysis is safe | Produce a qualified partial result and gap list |
+| A mutation exceeds authority or tenant boundary | Block it and route for approval |
+| Evidence meets the stated threshold | Issue the output with provenance and owner |
+
+## Anti-Patterns
+
+- Treating absent evidence as success. Fix: mark the check unassessed and name the missing source.
+- Expanding one tenant or workflow to all tenants. Fix: enforce supplied scope at every query and action.
+- Performing a production write during analysis. Fix: emit a reviewed change plan until authority is explicit.
+- Reporting a metric without population, window, or source. Fix: attach all three.
+- Hiding a failed threshold inside an average. Fix: report failure slices and the remediation owner.
+
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
