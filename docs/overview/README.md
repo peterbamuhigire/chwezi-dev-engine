@@ -2,16 +2,17 @@
 
 This repository is a working catalog of reusable AI-assistant skills and
 supporting documentation. It combines implementation guidance, product strategy,
-security patterns, finance-doctrine orchestration, mobile and game-development guidance, SDLC
+security patterns, finance-doctrine orchestration, mobile development guidance, SDLC
 documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
-The 2026-07-17 Python desktop-distribution upgrade added a manifest-driven
-generator for PyInstaller one-folder multipackage suites. It produces a safe
-launcher, shared-collection spec, Inno Setup definition, PowerShell build,
-Windows CI workflow, artifact hashes, smoke evidence, and signing gates without
-adding another active skill.
+The 2026-06-21 WWDC26 modernization updated the existing Apple and mobile skills
+without adding new active entrypoints. The catalog now routes current Apple work
+through iOS development, AI/ML, App Intents/Siri/Spotlight, quality/release,
+security, StoreKit, PWA/Safari, KMP, and mobile operations guidance, while
+presentation-layer Apple UI guidance lives in the external
+`design-system-skills` engine.
 
 ## What Is Here
 
@@ -27,10 +28,9 @@ adding another active skill.
 | Full workflow example | `examples/full-stack-saas-reference/` | FieldOps Ledger end-to-end SaaS evidence pack. |
 | Delivery templates | `templates/delivery-dod/` | Reusable evidence-pack template for implementation deliverables. |
 | Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
-| Python desktop-suite automation | `skills/languages/python-modern-standards/scripts/desktop_suite_packager.py` | Generates committed, project-local PyInstaller, installer, CI, and verification files from one TOML manifest. |
 | CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
-| Distilled study references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Concise operational synthesis and companion writing; never raw books or whole-work conversions. |
+| Long-form references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Source material and companion writing. |
 
 ## How To Work In This Repo
 
@@ -52,9 +52,9 @@ adding another active skill.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 168 skills.
-- Current routing smoke-test suite contains 167 fixtures, with 92% precision@1
-  and 100% precision@3.
+- Current active catalog size is 142 skills.
+- Current routing smoke-test baseline is 117 fixtures, precision@1 97%, and
+  precision@3 100%.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated
