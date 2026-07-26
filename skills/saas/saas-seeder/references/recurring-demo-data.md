@@ -26,6 +26,9 @@ before rolling activity.
 - Use stable natural keys/idempotency keys for staff/login, patients, visits,
   OPD, IPD, labs, procedures, prescriptions, inventory/pharmacy, bills, and
   payments.
+- Use a deterministic, realistic name pool for fictional people. Enforce
+  unique full names across demo history, reserve canonical walkthrough names,
+  and audit the generated name pool after each refresh.
 - Never truncate, delete, or alter non-demo rows.
 - Refuse production by default; require explicit opt-in for any override.
 - Store each window in a run ledger with tenant, profile, dates, status,
