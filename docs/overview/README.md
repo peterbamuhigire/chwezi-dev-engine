@@ -7,11 +7,9 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
-The 2026-07-17 Python desktop-distribution upgrade added a manifest-driven
-generator for PyInstaller one-folder multipackage suites. It produces a safe
-launcher, shared-collection spec, Inno Setup definition, PowerShell build,
-Windows CI workflow, artifact hashes, smoke evidence, and signing gates without
-adding another active skill.
+The 2026-08-02 coding-agent optimisation addition added a device-aware workflow
+for safely tuning Codex and Claude Code, with a secret-free inventory script,
+thin runner adapters, routing fixtures, and rollback-aware verification.
 
 ## What Is Here
 
@@ -52,8 +50,8 @@ adding another active skill.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 168 skills.
-- Current routing smoke-test suite contains 167 fixtures, with 92% precision@1
+- Current active catalog size is 169 skills.
+- Current routing smoke-test suite contains 171 fixtures, with 91% precision@1
   and 100% precision@3.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.

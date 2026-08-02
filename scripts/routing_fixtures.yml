@@ -24,6 +24,8 @@ fixtures:
     expect: ai-cost-and-metering
   - task: "Gate which AI model tier and how many generations a plan unlocks"
     expect: ai-entitlements-and-feature-gating
+  - task: "Audit this Windows device and safely tune Codex and Claude Code for context, token, model and subagent efficiency"
+    expect: coding-agent-optimization
 
   # --- SaaS / product ---
   - task: "Build the entitlements engine that enforces plan limits like seats and API calls"

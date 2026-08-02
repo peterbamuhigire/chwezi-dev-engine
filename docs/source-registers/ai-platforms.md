@@ -21,8 +21,10 @@ This register is the first stop before writing or modifying skills that depend o
 | Area | Canonical source | Use for | Last verified | Next review |
 |---|---|---|---:|---:|
 | OpenAI API and agents | https://developers.openai.com/api/docs/ | Responses API, tools, Agents SDK, prompt caching, deployment checklist, model availability | 2026-07-08 | 2026-10-08 |
+| OpenAI Codex | https://developers.openai.com/codex/ | Codex CLI/app behaviour, local configuration, skills, agents, and current product guidance | 2026-08-02 | 2026-11-02 |
 | OpenAI changelog | https://platform.openai.com/docs/changelog | Current model, API, and deprecation checks before naming OpenAI capabilities | 2026-07-08 | 2026-08-08 |
 | Anthropic Claude Platform | https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview | Tool use, server tools, MCP, prompt caching, context management | 2026-07-08 | 2026-10-08 |
+| Anthropic Claude Code | https://docs.anthropic.com/en/docs/claude-code/ | Claude Code installation, CLI, settings, permissions, and agent behaviour | 2026-08-02 | 2026-11-02 |
 | Google Gemini API | https://ai.google.dev/gemini-api/docs/function-calling | Function calling, tool schemas, Gemini integration behavior | 2026-07-08 | 2026-10-08 |
 | Amazon Bedrock Agents | https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html | Bedrock agent orchestration, knowledge bases, guardrails, AWS deployment facts | 2026-07-08 | 2026-10-08 |
 | OWASP Top 10 | https://owasp.org/www-project-top-ten/ | Web application risk taxonomy and security-audit baseline | 2026-07-08 | 2026-10-08 |

@@ -25,6 +25,10 @@ fixtures:
     expect: ai-agent-commercial-operations
   - task: "Define customer SLA promises for an AI agent service"
     expect: ai-agent-sla-and-customer-commitments
+  - task: "Port a Codex config and Claude Code agent policy to this laptop after checking installed versions, supported models and local resources"
+    expect: coding-agent-optimization
+  - task: "Design a supervisor-worker protocol with handoff schemas, shared state and deadlock recovery for an in-product agent system"
+    expect: ai-agent-multi-agent-coordination
 
   # Architecture, API, and data
   - task: "Use distributed systems patterns for consistency, queues, retries and failure modes"

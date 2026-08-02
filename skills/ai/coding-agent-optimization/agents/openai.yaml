@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coding Agent Optimisation"
+  short_description: "Audit and tune Codex and Claude safely"
+  default_prompt: "Use $coding-agent-optimization to audit this device and apply safe Codex and Claude Code optimisations."

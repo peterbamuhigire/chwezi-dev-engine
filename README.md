@@ -6,15 +6,15 @@ The engine is file-based. Active skills live as `SKILL.md` files under `skills/`
 
 ## Current Status
 
-Last upgraded: 2026-07-17
+Last upgraded: 2026-08-02
 
 | Metric | Current value |
 |---|---:|
-| Active `SKILL.md` files | 168 |
+| Active `SKILL.md` files | 169 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
-| Routing fixtures | 167 |
-| Routing precision@1 | 92% |
+| Routing fixtures | 171 |
+| Routing precision@1 | 91% |
 | Routing precision@3 | 100% |
 | Guardrail findings | 0 |
 
