@@ -7,7 +7,7 @@ description: Top-level router for the Chwezi Core Systems web-development and so
 
 This is the entrypoint for the `skills-web-dev` engine. It routes engineering work to the smallest accurate active skill, applies quality gates, and records evidence so outputs can be reviewed by a team that did not write them.
 
-Standard implemented: Skills Web Dev July 2026 upgrade baseline. Last verified: 2026-07-17.
+Standard implemented: Skills Web Dev July 2026 upgrade baseline. Last verified: 2026-07-08.
 
 ## Non-negotiable foundation
 
@@ -30,7 +30,6 @@ When a task requires external research, use the Digital Research Skills Engine a
 | CI/CD, cloud, containers, Kubernetes, release engineering, observability, reliability | `skills/devops-cloud/*` |
 | React, Next.js, Tailwind implementation, frontend performance, image compression, content UX | `skills/frontend-ux/*` |
 | Android, iOS, Kotlin Multiplatform, PWA, mobile operations | `skills/android/*`, `skills/ios/*`, `skills/mobile-cross/*` |
-| Mobile/desktop/online game inception, design, math/simulation, rendering, Unity, Godot, Unreal, Apple delivery, multiplayer/backend, build/release, security, 2D/3D content, accessibility, analytics/live economy, studio operations, QA or live operations | `skills/game-development/*` |
 | TypeScript, JavaScript, Python, PHP, C#/.NET | `skills/languages/*` |
 | SaaS tenancy, pricing, billing, entitlements, SSO/SCIM, portability, admin tooling | `skills/saas/*` |
 | Security audit, code safety, DPIA, Linux hardening, network security | `skills/security/*` |

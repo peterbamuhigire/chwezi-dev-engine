@@ -1,6 +1,6 @@
 ---
 name: saas-seeder
-description: Use when bootstrapping a multi-tenant SaaS Seeder Template, including environment, database, super admin, and panel verification.
+description: Use when bootstrapping a multi-tenant SaaS Seeder Template, including environment, database, super admin, panel verification, recurring demo activity refreshes, and demo-login shortcuts.
 metadata:
   portable: true
   compatible_with:
@@ -482,6 +482,17 @@ composer quality && git commit -m "feat: description"
 
 Seeding must be deterministic, rerunnable without duplication, safe outside production, explicit about credentials, and verified across migrations, tenant boundaries, roles, and panels.
 
+## Recurring Demo Activity Standard
+
+Every demo SaaS MUST keep a stable baseline and a fictional, tenant-scoped
+rolling activity refresh (normally the latest 14 days). The refresh contract
+requires deterministic keys, `--from`/`--to`/`--days`, `--dry-run`, a production
+guard, a run ledger, coverage verification, no destructive changes, and
+second-server portability. Demo login buttons and shortcut accounts must use
+the same explicit development-only configuration as the seeder.
+
+See [`references/recurring-demo-data.md`](references/recurring-demo-data.md)
+for the full contract, verification checklist, and command pattern.
 ## Outputs
 
 | Artefact | Consumer | Acceptance condition |

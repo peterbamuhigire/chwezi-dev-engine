@@ -42,6 +42,7 @@ Unity architecture map; project/version manifest; system and scene specification
 ## References
 - [Unity project architecture](references/unity-project-architecture.md)
 - [Legacy Unity migration and mobile build gates](references/unity-mobile-build-gates.md)
+- [Unity 6 MCP and runtime UI notes](references/unity-6-mcp-and-runtime-ui-notes.md)
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Choice |

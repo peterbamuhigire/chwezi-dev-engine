@@ -1,6 +1,6 @@
 # Skills Web Dev
 
-`skills-web-dev` is the Chwezi Core Systems software-engineering skills engine. It gives agents a routed catalog for AI systems, SaaS, architecture, APIs, databases, security, frontend engineering, mobile and game development, DevOps, reliability, product engineering, and SDLC documentation.
+`skills-web-dev` is the Chwezi Core Systems software-engineering skills engine. It gives agents a routed catalog for AI systems, SaaS, architecture, APIs, databases, security, frontend engineering, mobile, DevOps, reliability, product engineering, and SDLC documentation.
 
 The engine is file-based. Active skills live as `SKILL.md` files under `skills/` and `00-meta-initialization/`. Deep guidance lives in references, templates, examples, source registers, and quality gates so the active routing surface stays small enough to select accurately.
 
@@ -13,8 +13,8 @@ Last upgraded: 2026-08-02
 | Active `SKILL.md` files | 169 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
-| Routing fixtures | 171 |
-| Routing precision@1 | 91% |
+| Routing fixtures | 120 |
+| Routing precision@1 | 92% |
 | Routing precision@3 | 100% |
 | Guardrail findings | 0 |
 
@@ -24,11 +24,6 @@ Run the two gates after routing, frontmatter, template, source-register, or cata
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py --report-only
 ```
-
-The catalog guardrail also enforces source hygiene. Do not commit books, ebook
-files, OCR output, or whole-work Markdown conversions. Book-informed skills may
-retain only concise attribution and independently structured operational
-synthesis.
 
 ## How To Route Work
 
@@ -51,7 +46,6 @@ Use the smallest accurate skill. Load its `SKILL.md` first, then only the refere
 | DevOps, cloud, containers, reliability | `skills/devops-cloud/` |
 | Frontend engineering | `skills/frontend-ux/` |
 | Android, iOS, KMP, PWA | `skills/android/`, `skills/ios/`, `skills/mobile-cross/` |
-| Mobile, desktop and online game development, including Unity, Godot, Unreal, Apple delivery, multiplayer/backend, content pipelines, security, build/release, data/live economy and studio operations | `skills/game-development/` |
 | Languages | `skills/languages/` |
 | SaaS product architecture | `skills/saas/` |
 | Security | `skills/security/` |
@@ -87,7 +81,6 @@ Use those engines in addition to this one when the task crosses their boundary.
 | `tests/routing/edge-fixtures.yml` | Edge routing fixtures for near-collision skills |
 | `tests/quality/negative-fixtures.md` | Negative examples that must fail release gates |
 | `references/engineering-standards.md` | Benchmark and cross-engine ownership reference |
-| `skills/languages/python-modern-standards/scripts/desktop_suite_packager.py` | Manifest-driven PyInstaller suite, installer, CI, signing-hook, and evidence generator for reusable Python desktop distribution |
 
 ## Running Example
 

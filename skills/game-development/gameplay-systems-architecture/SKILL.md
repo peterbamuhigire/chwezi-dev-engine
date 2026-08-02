@@ -39,6 +39,7 @@ System specification; state/sequence diagrams; data schema; interfaces/events; i
 ## References
 - [Gameplay systems patterns](references/gameplay-systems-patterns.md)
 - [Save, quest and narrative state](references/persistence-narrative-state.md)
+- [Resource vitality and carrying capacity systems](references/resource-vitality-carrying-capacity.md)
 <!-- dual-compat-end -->
 ## Decision Rules
 | Need | Pattern |
