@@ -46,7 +46,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 2. **Lock the rubric.** Use `references/scoring-rubric.md`. The bar is the top 0.1% of the domain.
    **Default scores 45–65; any 70+ needs extraordinary, specific justification. If tempted to
    score 70+, you were not strict enough — find what is missing.** Every score is justified with
-   concrete deficiencies, never vibes.
+   concrete deficiencies, never vibes. For product audits, also load
+   `references/engine-and-product-audit-evidence-matrix.md` and score the
+   engine-to-output chain, not only repository structure.
 3. **Fan out parallel audit agents** (see `references/parallel-agent-method.md`) — one per concern,
    so strict scores emerge independently before synthesis. Standard fleet:
    (a) **standards benchmark** — what world-class looks like NOW for this domain, cited via a

@@ -237,4 +237,5 @@ For significant releases, produce:
 - [references/release-checklist.md](references/release-checklist.md): Pre-deploy and post-deploy checks.
 - [references/rollout-selection.md](references/rollout-selection.md): Choosing rolling, blue-green, or canary.
 - [references/devops-book-patterns.md](references/devops-book-patterns.md): Value-stream, pipeline, observability, DevSecOps, PHP, cloud-native, and GitOps patterns from the supplied DevOps books.
+- [references/delivery-feedback-evidence.md](references/delivery-feedback-evidence.md): Book-derived release hypotheses, model lineage, independent verification, guardrails, and post-release learning.
 - [../docker-development/references/php-python-js-container-delivery.md](../docker-development/references/php-python-js-container-delivery.md): Docker image, Compose, CI, registry, and runtime promotion standards for PHP, Python, and JavaScript services.

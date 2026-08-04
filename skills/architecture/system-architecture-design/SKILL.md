@@ -224,6 +224,7 @@ Split a service or module when:
 
 - [references/adr-template.md](references/adr-template.md): Decision record format and architecture review prompts.
 - [references/architecture-execution-model.md](references/architecture-execution-model.md): Architecture artifacts, release-aware boundaries, and flow design.
+- [references/platform-as-product-feedback.md](references/platform-as-product-feedback.md): Platform-as-product ownership, decision rights, consumer feedback, and sustainability checks.
 - [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Architecture review patterns derived from the supplied books.
 
 ## Inputs

@@ -91,6 +91,9 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 
 - [Project lifecycle and gates](references/project-lifecycle-and-gates.md)
 - [Game documentation set](references/game-documentation-set.md)
+- [Kaizen game production loop](references/kaizen-game-production-loop.md)
+- [Narrative and gameplay playtest loop](../game-narrative-and-interactive-story-design/references/narrative-playtest-loop.md)
+- [Behaviour telemetry and tuning](../game-ai-behaviour-and-navigation/references/behaviour-telemetry-and-tuning.md)
 <!-- dual-compat-end -->
 
 ## Decision Rules

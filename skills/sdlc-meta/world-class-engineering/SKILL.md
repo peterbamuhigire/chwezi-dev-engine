@@ -22,6 +22,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
+- [Tech-lead learning loop](references/tech-lead-learning-loop.md): role clarity,
+  implement-reflect-adjust, trust, communication, and ownership transfer.
+
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Load `references/language-standards.md` when implementation or documentation needs explicit language, localisation, naming, or terminology standards.
 <!-- dual-compat-end -->

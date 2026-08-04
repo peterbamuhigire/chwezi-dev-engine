@@ -125,6 +125,15 @@ Produce a complete, implementation-ready blueprint for one AI-powered feature. T
 
 ---
 
+## Problem-first and control addendum
+
+Before selecting a model, state the user/system problem, compare a non-AI
+alternative, and map human actors, system controls, model, inputs, outputs,
+affected non-users, and failure consequences. For every action, specify preview,
+uncertainty, correction, contest, undo or safe fallback, escalation, consent or
+notice, and an audit event. Send current legal or platform claims to
+`digital-research-skills` for verification.
+
 ## Model Selection Guide
 
 Choose the cheapest model that reliably handles the task.

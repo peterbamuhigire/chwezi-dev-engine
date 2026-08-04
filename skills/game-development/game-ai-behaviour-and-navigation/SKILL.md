@@ -49,6 +49,10 @@ Load `world-class-engineering`, `gameplay-systems-engineering`, `level-world-and
 8. Instrument decision transitions, perception changes, path requests/failures, stuck recovery, reservation lifecycle and per-archetype cost without shipping noisy debug output.
 9. Test single-agent correctness, adversarial geometry, simultaneous worst case, save/load, network authority, difficulty variants and target hardware. Retain seeds, scenario, build and trace.
 10. Stop on unbounded search/polling, missing recovery, unstable experimental dependency, unfair information access, unreachable state or budget failure.
+11. Load `references/behaviour-telemetry-and-tuning.md` before tuning behaviour. Retain
+    the exact build, seed, configuration, scenario, state trace, path failures, and
+    guardrail result for every experiment; never promote learned or probabilistic
+    behaviour without a deterministic fallback and rollback path.
 
 ## Outputs
 
@@ -109,4 +113,5 @@ Changing navigation generation, runtime authority or experimental plugins requir
 
 - [AI architecture and runtime contract](references/ai-architecture-and-runtime-contract.md)
 - [AI verification matrix](references/ai-verification-matrix.md)
+- [Behaviour telemetry and tuning](references/behaviour-telemetry-and-tuning.md)
 - [Game-development source register](../../../docs/game-dev-analysis/source-register.md)

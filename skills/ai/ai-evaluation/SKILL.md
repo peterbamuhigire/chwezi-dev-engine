@@ -111,6 +111,12 @@ Every production AI feature needs an evaluation contract before release:
 7. Retrain/reprompt when drift detected
 ```
 
+For features that recommend, generate, rank, automate, or trigger consequential
+actions, load [references/ai-human-oversight-evaluation.md](references/ai-human-oversight-evaluation.md).
+Evaluate the problem, human, system, model, inputs, and outputs separately. Do not
+call a model-quality pass a product-quality pass. Require evidence for correction,
+contest, undo or safe fallback, escalation, consent/notice, and the audit event.
+
 ## Evaluation Dataset Design
 
 - Build separate sets for development, release gating, adversarial testing, and production monitoring.

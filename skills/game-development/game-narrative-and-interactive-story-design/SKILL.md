@@ -47,6 +47,10 @@ Load `world-class-engineering`, `game-design-and-experience`, `level-world-and-c
 7. Track setups, reminders and payoffs; separate essential comprehension from optional depth. Never place a critical fact in one fragile channel.
 8. Prototype with the cheapest faithful form, then test comprehension, motivation, pacing, choice legibility and cultural interpretation with named builds and audiences.
 9. Stop on broken causality, unreachable state, missing cultural approval, inaccessible critical information, uncontrolled scope, or an untestable emotional claim.
+10. Load `references/narrative-playtest-loop.md` for the cross-discipline contract. Retain
+    failed-path, branch, audio-off, localisation-expansion, and accessibility evidence;
+    standardise only a change that improves the player hypothesis without breaking
+    gameplay, performance, rights, or safety constraints.
 
 ## Outputs
 
@@ -106,4 +110,5 @@ Editing canon, dialogue, localisation source or runtime content requires task au
 
 - [Narrative system contract](references/narrative-system-contract.md)
 - [Narrative verification matrix](references/narrative-verification-matrix.md)
+- [Narrative and gameplay playtest loop](references/narrative-playtest-loop.md)
 - [Game-development source register](../../../docs/game-dev-analysis/source-register.md)
