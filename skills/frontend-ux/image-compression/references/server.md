@@ -1,148 +1,45 @@
-# Server-Side Compression (Sharp)
+# Authoritative Server Image Processing
 
-## Middleware: imageUploadMiddleware.ts
+Parent skill: [`image-compression`](../SKILL.md).
 
-```typescript
-import sharp from 'sharp';
-import { Request, Response, NextFunction } from 'express';
-import multer from 'multer';
+Use Sharp, GD, ImageMagick, or another maintained decoder/encoder available in the target stack.
+The library name is secondary to the contract: bounded ingress, content detection, bounded decode,
+canonical re-encode, and final limit enforcement.
 
-export const upload = multer({
-  storage: multer.memoryStorage(),
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) cb(null, true);
-    else cb(new Error('Only image files allowed'));
-  },
-  limits: { fileSize: 10 * 1024 * 1024 }
-});
+## Processing profile
 
-export const compressImageMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  if (!req.file) return res.status(400).json({ error: 'No image file provided' });
+Define each usage profile explicitly:
 
-  try {
-    const startTime = Date.now();
-    const originalSize = req.file.size;
+| Profile | Geometry | Preferred output | Alpha | Typical concern |
+|---|---|---|---|---|
+| Auth/content background | Fit inside 1920 px long edge, no upscale | WebP/JPEG | no | LCP bandwidth and photographic quality |
+| Light/dark logo | Fit inside product envelope, no upscale | PNG/WebP | yes | crisp edges and transparency |
+| Favicon/app mark | Square canonical sizes | PNG/WebP/ICO as platform requires | yes | small-size legibility |
 
-    const compressedBuffer = await sharp(req.file.buffer)
-      .resize(1920, 1920, {
-        fit: 'inside',
-        withoutEnlargement: true
-      })
-      .jpeg({
-        quality: 75,
-        progressive: true,
-        mozjpeg: true,
-        optimizeScans: true
-      })
-      .toBuffer();
+The common background starting point is quality 75 and 512 KB maximum. Iterate quality within a
+documented floor and reject when output still exceeds policy. Do not silently change geometry or
+quality below the accepted visual threshold merely to force success.
 
-    let finalBuffer = compressedBuffer;
+## Ordered server flow
 
-    if (finalBuffer.length > 512 * 1024) {
-      finalBuffer = await sharp(req.file.buffer)
-        .resize(1920, 1920, {
-          fit: 'inside',
-          withoutEnlargement: true
-        })
-        .jpeg({
-          quality: 60,
-          progressive: true,
-          mozjpeg: true,
-          optimizeScans: true
-        })
-        .toBuffer();
-
-      if (finalBuffer.length > 512 * 1024) {
-        return res.status(413).json({
-          error: 'Image too large even after compression',
-          details: {
-            original: originalSize,
-            compressed: finalBuffer.length,
-            maxAllowed: 512 * 1024
-          }
-        });
-      }
-    }
-
-    req.file.buffer = finalBuffer;
-    req.file.size = finalBuffer.length;
-
-    (req as any).compressionStats = {
-      original: originalSize,
-      compressed: finalBuffer.length,
-      ratio: ((finalBuffer.length / originalSize) * 100).toFixed(1),
-      saved: originalSize - finalBuffer.length,
-      processingTime: Date.now() - startTime
-    };
-
-    next();
-  } catch (error) {
-    console.error('Image compression error:', error);
-    res.status(500).json({ error: 'Image processing failed' });
-  }
-};
-
-export const validateImageDimensions = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  if (!req.file) return res.status(400).json({ error: 'No image file provided' });
-
-  try {
-    const metadata = await sharp(req.file.buffer).metadata();
-
-    if ((metadata.width || 0) < 200 || (metadata.height || 0) < 200) {
-      return res.status(400).json({
-        error: 'Image too small',
-        minDimensions: '200x200'
-      });
-    }
-
-    next();
-  } catch (error) {
-    console.error('Dimension validation error:', error);
-    res.status(400).json({ error: 'Invalid image format' });
-  }
-};
+```text
+authorization -> bounded ingress -> private quarantine -> byte detection -> decoder probe
+-> width/height/pixel/frame budgets -> full decode -> orientation -> metadata strip
+-> resize without enlargement -> profile-aware canonical encode -> final size/dimension check
+-> optional scan/hash -> immutable storage -> metadata commit -> quarantine cleanup
 ```
 
-## Routes: imageRoutes.ts
+Apply timeout and memory budgets to probe and full decode. Where processing cannot safely fit the
+request budget, enqueue a job and keep the candidate unavailable until completion. A processing
+failure is a client-visible recoverable error, not permission to save the original.
 
-```typescript
-import express from 'express';
-import { upload, compressImageMiddleware, validateImageDimensions } from '../middleware/imageUploadMiddleware';
-import { saveImageToStorage } from '../services/storageService';
+## Response and evidence
 
-const router = express.Router();
+Return the opaque asset ID/URL, canonical MIME, width, height, byte size, original byte size,
+compression ratio, and a stable result/error code. Avoid exposing storage paths, decoder stack
+traces, or signed origin credentials. Measure processing duration by stage so operations can
+distinguish ingress, decode, encode, scan, storage, and metadata latency.
 
-router.post(
-  '/api/upload/image',
-  upload.single('image'),
-  compressImageMiddleware,
-  validateImageDimensions,
-  async (req, res) => {
-    try {
-      if (!req.file) return res.status(400).json({ error: 'No image file provided' });
-
-      const savedImageUrl = await saveImageToStorage(
-        req.file.buffer,
-        req.file.originalname,
-        req.file.mimetype
-      );
-
-      const stats = (req as any).compressionStats;
-      res.json({ success: true, url: savedImageUrl, compression: stats });
-    } catch (error) {
-      console.error('Image upload error:', error);
-      res.status(500).json({ error: 'Failed to save image' });
-    }
-  }
-);
-
-export default router;
-```
+Tests must use the production decoder and profile configuration. Include representative visual
+comparison, malformed corpus, alpha, orientation, exact boundary dimensions/bytes, quality-floor
+failure, resource exhaustion, storage failure, and retry/idempotency cases.

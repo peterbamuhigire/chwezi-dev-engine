@@ -65,8 +65,10 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 
 Known baseline as of 2026-08-02 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 169.
-- Target active catalog size: 150-170 (below soft target and well under the 200 cap).
+- Active `SKILL.md` files: 171.
+- Target active catalog size: 150-170. The managed-visual-assets addition leaves the catalogue
+  one skill above that soft target and well under the enforced 200 cap; the next safe alias or
+  consolidation review should return it to range without deleting knowledge.
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links

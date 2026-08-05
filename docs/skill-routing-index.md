@@ -24,7 +24,7 @@ Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 169 |
+| Active `SKILL.md` files | 171 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -156,6 +156,7 @@ target instead.
 | iOS security/RBAC | `ios-security-and-rbac` | Keychain, App Attest, Trust Insights, App Intents authorization, AI tool security |
 | iOS monetization | `ios-monetization` | StoreKit 2, App Store Server API, subscriptions, Unity StoreKit plugin |
 | Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, Apple TestFlight/Xcode Cloud operations |
+| SaaS managed visual assets | `saas-managed-visual-assets` | Authentication background pools, light/dark logos, favicons, secure admin lifecycle, fallback, and audit |
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
 | UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
 | UX content | `ux-content-strategy` | `ux-writing` |

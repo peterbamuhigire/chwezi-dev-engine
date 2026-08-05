@@ -6,7 +6,7 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Keep active catalog changes intentional | The current count is 169 after treating finance doctrine and design/UI doctrine as external or retained-reference engines. CI enforces the 200 hard cap and the collision detector should be used to keep future additions intentional. | Use `docs/skill-routing-index.md` and `docs/skill-aliases.yml` before adding active entrypoints. |
+| Return the active catalogue to its soft target | The current count is 171 after the intentional managed-visual-assets addition. CI enforces the 200 hard cap; the next safe alias or consolidation review should return the catalogue to 150-170 without deleting knowledge. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
 
 ## High Priority
 

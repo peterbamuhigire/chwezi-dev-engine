@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-05 - Managed SaaS Visual Assets
+
+- Added `saas-managed-visual-assets` as the engineering owner for scoped background pools,
+  light/dark logos, favicons, admin lifecycle, concurrency-safe quotas, audit, and rollback.
+- Strengthened `image-compression` so browser preflight is explicitly non-authoritative and the
+  server must bound, detect, decode, canonicalize, preserve alpha where needed, and store private
+  random-keyed output.
+- Added positive and collision routing fixtures plus an end-to-end worked example.
+
 ## 2026-07-08 - Engine Upgrade Foundation
 
 - Added root `SKILL.md` router for the active engineering catalog, cross-engine handoffs, evidence-pack workflow, and stop conditions.

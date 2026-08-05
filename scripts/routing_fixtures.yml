@@ -38,6 +38,8 @@ fixtures:
     expect: saas-sso-scim-enterprise-auth
   - task: "Let a tenant export all their data and handle a GDPR erasure request"
     expect: saas-tenant-data-portability-and-erasure
+  - task: "Build a Super Admin manager for up to 20 SaaS login backgrounds, light and dark logos, and a favicon with secure upload and audit history"
+    expect: saas-managed-visual-assets
   - task: "Position, package and price a premium high-ticket software product for executive buyers"
     expect: premium-software-product-execution
   - task: "Run product discovery and decide which features to prioritise next"

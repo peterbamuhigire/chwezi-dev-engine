@@ -113,6 +113,10 @@ fixtures:
     expect: saas-accounting-system
   - task: "Create SaaS admin backoffice tooling for support, operations and tenant management"
     expect: saas-admin-backoffice-tooling
+  - task: "Implement platform-managed authentication background pools, logo slots, favicon replacement, ordering, deletion and audited secure upload"
+    expect: saas-managed-visual-assets
+  - task: "Use image compression to optimise an uploaded photo in the browser and canonically resize and re-encode it on the server"
+    expect: image-compression
   - task: "Define SaaS architecture strategy, deployment models and maturity roadmap"
     expect: saas-architecture-strategy
   - task: "Calculate SaaS business metrics like MRR, ARR, churn and expansion"

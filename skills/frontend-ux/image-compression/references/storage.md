@@ -1,61 +1,41 @@
-# Storage Adapters
+# Canonical Image Storage
 
-## S3 Storage
+Parent skill: [`image-compression`](../SKILL.md).
 
-```typescript
-import AWS from 'aws-sdk';
-import crypto from 'crypto';
+## Storage contract
 
-const s3 = new AWS.S3();
+- Generate a cryptographically random opaque key after canonical encoding. Derive the extension
+  and content type from the encoder, not from the original filename.
+- Keep quarantine, originals, and private canonical objects outside a public web root or in a
+  private bucket/container. Do not make an entire upload prefix public.
+- Write immutable objects. Replacement writes a new object and swaps metadata only after the new
+  object is durable.
+- Publish through a controlled endpoint, signed URL/CDN policy, or manifest of opaque immutable
+  URLs. Set the canonical MIME, `X-Content-Type-Options: nosniff`, and bounded cache headers.
+- Store width, height, bytes, MIME, checksum, processing profile/version, creator/scope, and audit
+  timestamps. Keep original filenames only as protected metadata when there is a real requirement.
+- Scope keys and metadata by server-derived tenant/platform context; never concatenate an
+  untrusted tenant, path, or filename into a durable location.
 
-export async function saveImageToStorage(
-  buffer: Buffer,
-  originalFilename: string,
-  mimeType: string
-): Promise<string> {
-  const hash = crypto.randomBytes(16).toString('hex');
-  const ext = originalFilename.split('.').pop() || 'jpg';
-  const filename = `${hash}.${ext}`;
+## Commit and cleanup sequence
 
-  const params = {
-    Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: `images/${filename}`,
-    Body: buffer,
-    ContentType: mimeType,
-    CacheControl: 'max-age=31536000',
-    Metadata: {
-      'original-name': originalFilename,
-      'compressed': 'true'
-    }
-  };
+1. Create private quarantine object.
+2. Canonicalize and write a new immutable object under a random key.
+3. Commit metadata/reference in the database or authoritative manifest.
+4. Mark a superseded object for a documented rollback grace period.
+5. Delete asynchronously only after verifying that no current metadata references the object.
 
-  const result = await s3.upload(params).promise();
-  return result.Location;
-}
-```
+If metadata commit fails, remove or enqueue cleanup of the new orphan and keep the prior reference.
+If cleanup fails after a successful commit, retain the logical result and retry with alerting.
+Never delete the current object before replacement commit.
 
-## Local Storage
+## Local and object-store safeguards
 
-```typescript
-import fs from 'fs/promises';
-import path from 'path';
-import crypto from 'crypto';
+For local storage, resolve the destination and verify it remains under the configured asset root
+before writes or deletes; use restrictive directory/file permissions. For object stores, use a
+fixed application prefix, least-privilege service identity, encryption, lifecycle policy, access
+logging, and explicit public-delivery rules. In both cases, deletion consumes a trusted stored key,
+not a client path.
 
-const UPLOAD_DIR = process.env.UPLOAD_DIR || '/var/uploads/images';
-
-export async function saveImageToStorage(
-  buffer: Buffer,
-  originalFilename: string,
-  mimeType: string
-): Promise<string> {
-  await fs.mkdir(UPLOAD_DIR, { recursive: true });
-
-  const hash = crypto.randomBytes(16).toString('hex');
-  const ext = originalFilename.split('.').pop() || 'jpg';
-  const filename = `${hash}.${ext}`;
-  const filepath = path.join(UPLOAD_DIR, filename);
-
-  await fs.writeFile(filepath, buffer);
-  return `/images/${filename}`;
-}
-```
+Test path traversal, prefix escape, wrong-tenant IDs, stale signed URLs, cache invalidation,
+metadata/object divergence, storage write failure, duplicate retries, and orphan reconciliation.
