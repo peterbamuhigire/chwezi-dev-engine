@@ -37,7 +37,7 @@ No direct quotation from the books is required by the implementation. Exact book
 
 ## Chwezi Games knowledge-engine upgrade trace
 
-The controlled claim, locator, contradiction and gap records for the Markdown-only 2026 corpus live outside this repository at `C:\wamp64\www\digital-research-skills\projects\chwezi-games-knowledge-engine-upgrade-2026`. Skills consume only the independently written syntheses below; they do not depend on book files at execution time.
+The controlled claim, locator, contradiction and gap records for the Markdown-only 2026 corpus live outside this repository at `C:\wamp64\www\digital-research-engine\projects\chwezi-games-knowledge-engine-upgrade-2026`. Skills consume only the independently written syntheses below; they do not depend on book files at execution time.
 
 | Verified synthesis | Engine use | Current authority class |
 |---|---|---|

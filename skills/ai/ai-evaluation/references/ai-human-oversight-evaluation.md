@@ -46,4 +46,4 @@ Retain the prompt/model/system version, cohort, test set, thresholds, failed
 examples, reviewer decision, and rollback result. Do not infer legal compliance
 from this reference. The Designing for AI input is an early release with later
 chapters unavailable; verify current law, policy, vendor behavior, and standards
-through `digital-research-skills`.
+through `digital-research-engine`.

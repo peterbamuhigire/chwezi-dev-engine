@@ -8,7 +8,7 @@
 | Root path | `C:\wamp64\www\skills-web-dev` |
 | Upgrade date | 2026-07-08 |
 | Running example | FieldOps Ledger, a Chwezi Core Systems field-service SaaS |
-| Research engine used | `C:\wamp64\www\digital-research-skills` |
+| Research engine used | `C:\wamp64\www\digital-research-engine` |
 
 ## Pre-Upgrade State
 
@@ -114,7 +114,7 @@ All invocations are recorded in `research-engine-integration-log.md`.
 - Add a routing fixture when adding or editing any skill that has a nearby neighbor.
 - Extend FieldOps Ledger examples when adding new architecture, data, security, mobile, AI, or DevOps skill examples.
 - Keep finance/statutory values in `chwezi-accounting-doctrine`; keep design and visual rules in `design-system-skills`.
-- Invoke `digital-research-skills` for current-source verification before writing benchmark, legal, statutory, vendor, or "latest" claims.
+- Invoke `digital-research-engine` for current-source verification before writing benchmark, legal, statutory, vendor, or "latest" claims.
 
 ## Recommended Next Upgrade Trigger
 

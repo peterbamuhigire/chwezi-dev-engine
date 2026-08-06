@@ -2,7 +2,7 @@
 
 Engine upgraded: `skills-web-dev`
 Research engine requested by prompt: `C:\Users\Peter\Documents\Claude Projects\digital-research-engine`
-Verified local research engine used: `C:\wamp64\www\digital-research-skills`
+Verified local research engine used: `C:\wamp64\www\digital-research-engine`
 Initialized: 2026-07-08
 
 The verified Digital Research Skills Engine provides source evaluation, source verification, research orchestration, research techniques, analytic tradecraft, executive communication, academic reporting standards, web scraping, dataset analysis, due diligence, OSINT, primary research, and report-generation skills. For this upgrade it is used as an evidence and verification layer: source-evaluation supplies the no-hallucination discipline, research-techniques supplies search and gap-fill methods, source-verification supplies claim and URL release checks, and anti-slop governance supplies professional output quality constraints. The prompt path under `C:\Users\Peter\...` was not present on this machine, so the verified local engine path above is the operational source.

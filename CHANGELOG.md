@@ -15,7 +15,7 @@
 - Added July 2026 upgrade directories for source registers, quality gates, world-class exemplars, shared templates, full-workflow examples, and routing tests.
 - Added empty-directory disposition guidance for the remaining active-looking empty paths without deleting user-visible compatibility directories.
 - Added the FieldOps Ledger running example for architecture, API, database, security, reliability, and release-evidence artifacts.
-- Added Digital Research Skills Engine integration logging and path correction from the prompt's unavailable path to the verified local engine at `C:\wamp64\www\digital-research-skills`.
+- Added Digital Research Skills Engine integration logging and path correction from the prompt's unavailable path to the verified local engine at `C:\wamp64\www\digital-research-engine`.
 
 ## 2026-07-08 - Engine Upgrade Completion
 

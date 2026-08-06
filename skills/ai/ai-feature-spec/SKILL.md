@@ -132,7 +132,7 @@ alternative, and map human actors, system controls, model, inputs, outputs,
 affected non-users, and failure consequences. For every action, specify preview,
 uncertainty, correction, contest, undo or safe fallback, escalation, consent or
 notice, and an audit event. Send current legal or platform claims to
-`digital-research-skills` for verification.
+`digital-research-engine` for verification.
 
 ## Model Selection Guide
 

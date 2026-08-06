@@ -21,7 +21,7 @@ Close structural gaps so the engine is coherent, navigable, and ready for enrich
 
 ## Research Engine Use
 
-The prompt's requested path was unavailable on this machine. The verified local Digital Research Skills Engine at `C:\wamp64\www\digital-research-skills` was loaded instead. Its root router, `source-evaluation`, `source-verification`, `research-techniques`, and anti-slop governance informed the source-register and evidence-discipline files. The path correction and invocation record are logged in `research-engine-integration-log.md`.
+The prompt's requested path was unavailable on this machine. The verified local Digital Research Skills Engine at `C:\wamp64\www\digital-research-engine` was loaded instead. Its root router, `source-evaluation`, `source-verification`, `research-techniques`, and anti-slop governance informed the source-register and evidence-discipline files. The path correction and invocation record are logged in `research-engine-integration-log.md`.
 
 ## Score Assessment
 

@@ -27,7 +27,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
 ## Workflow
 
-1. Read `docs/continuous-improvement/kaizen-adoption-2026-08.md` and the portfolio standard at `C:\wamp64\www\digital-research-skills\docs\continuous-improvement\portfolio-kaizen-standard-2026-08.md`.
+1. Read `docs/continuous-improvement/kaizen-adoption-2026-08.md` and the portfolio standard at `C:\wamp64\www\digital-research-engine\docs\continuous-improvement\portfolio-kaizen-standard-2026-08.md`.
 2. Inventory routes, active skills, references, validators, output types, and known failure evidence before reading deeply.
 3. Score every applicable dimension with named evidence. Publish `min(raw score, 65)`; keep raw scores visible and record blockers.
 4. For a product, audit requirements, architecture/code or document correctness, security/privacy, accessibility, reliability, performance, user value, deployment/handoff, and rollback evidence as applicable.
@@ -58,6 +58,6 @@ No 70+ score without extraordinary proof. No claim of production readiness witho
 ## References
 
 - [Local adoption plan](../../../docs/continuous-improvement/kaizen-adoption-2026-08.md)
-- [Portfolio standard](C:/wamp64/www/digital-research-skills/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md)
+- [Portfolio standard](C:/wamp64/www/digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md)
 - `skills/sdlc-meta/skill-engine-audit/`
 - `skills/sdlc-meta/skill-safety-audit/`

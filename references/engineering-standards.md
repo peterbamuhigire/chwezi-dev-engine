@@ -22,7 +22,7 @@ This reference records the stable standards and professional benchmarks used by 
 |---|---|
 | Finance, accounting, IFRS, tax, payroll, statutory rates | `chwezi-accounting-doctrine` |
 | Visual design, typography, UI/UX, document visual formatting | `design-system-skills` |
-| Research, source verification, benchmarking, current-source checks | `digital-research-skills` |
+| Research, source verification, benchmarking, current-source checks | `digital-research-engine` |
 | Software engineering routing, implementation evidence, release gates | `skills-web-dev` |
 
 ## Re-Verification

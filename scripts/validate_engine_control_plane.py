@@ -20,7 +20,7 @@ ENGINE_DIRS = {
     "proposal": "proposal-skills",
     "accounting": "chwezi-accounting-doctrine",
     "design": "design-system-skills",
-    "digital-research": "digital-research-skills",
+    "digital-research": "digital-research-engine",
     "skills-web-dev": "skills-web-dev",
 }
 
