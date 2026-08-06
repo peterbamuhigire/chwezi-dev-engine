@@ -37,3 +37,6 @@ jobs:
       # outside its top-N matches - i.e. a description drifted into ambiguity.
       - name: Run routing smoke test
         run: python -X utf8 scripts/routing_smoke_test.py
+
+      - name: Validate engine control plane
+        run: python -X utf8 scripts/validate_engine_control_plane.py

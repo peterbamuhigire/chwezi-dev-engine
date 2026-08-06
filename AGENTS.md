@@ -81,6 +81,19 @@ Known baseline as of 2026-08-02 (verify with the script; do not trust this prose
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour
   could steal traffic from.
 
+## Ten-engine control plane
+
+The shared agent, command, hook, evidence, and handoff contract is defined in
+`docs/engine-control-plane.md` and registered in
+`docs/engine-control-plane.json`. Validate it with
+`python scripts/validate_engine_control_plane.py`; use
+`--workspace-root C:\wamp64\www` for the local ten-engine router check.
+
+Domain engines remain the source of truth for their doctrine. This engine owns
+the cross-engine orchestration vocabulary and implementation patterns. Native
+hooks are optional; scripts, CI gates, or explicit skill steps must preserve
+the same fail-closed and NOT ASSESSED semantics.
+
 ## Quality Guardrails (always-on)
 
 Two cross-cutting skills under `skills/sdlc-meta/` govern output quality for every

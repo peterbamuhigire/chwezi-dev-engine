@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Validate the shared ten-engine control-plane registry."""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+REGISTRY = ROOT / "docs" / "engine-control-plane.json"
+EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", "proposal", "accounting", "design", "digital-research", "skills-web-dev"}
+REQUIRED_KEYS = {"id", "domain", "router", "agents", "commands", "hooks", "evidence"}
+ALLOWED_HOOKS = {"preflight", "context", "before_write", "after_write", "release", "stop"}
+ENGINE_DIRS = {
+    "srs": "srs-skills",
+    "business-plan": "business-plan-skills",
+    "website": "website-skills",
+    "social-media": "social-media-skills",
+    "linux": "linux-skills",
+    "proposal": "proposal-skills",
+    "accounting": "chwezi-accounting-doctrine",
+    "design": "design-system-skills",
+    "digital-research": "digital-research-skills",
+    "skills-web-dev": "skills-web-dev",
+}
+
+
+def validate_registry(workspace_root: Path | None = None) -> list[str]:
+    errors: list[str] = []
+    try:
+        payload = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"cannot read registry: {exc}"]
+    if payload.get("schema_version") != 1:
+        errors.append("schema_version must be 1")
+    engines = payload.get("engines")
+    if not isinstance(engines, list):
+        return ["engines must be a list"]
+    ids = [engine.get("id") for engine in engines if isinstance(engine, dict)]
+    if set(ids) != EXPECTED_ENGINES:
+        errors.append(f"engine IDs must be exactly {sorted(EXPECTED_ENGINES)}; found {sorted(set(ids))}")
+    if len(ids) != len(set(ids)):
+        errors.append("engine IDs must be unique")
+    for engine in engines:
+        if not isinstance(engine, dict):
+            errors.append("each engine entry must be an object")
+            continue
+        engine_id = engine.get("id", "<unknown>")
+        for key in sorted(REQUIRED_KEYS - set(engine)):
+            errors.append(f"{engine_id}: missing {key}")
+        for key in ("agents", "commands", "hooks", "evidence"):
+            values = engine.get(key)
+            if not isinstance(values, list) or not values or any(not isinstance(item, str) or not item.strip() for item in values):
+                errors.append(f"{engine_id}: {key} must be a non-empty list of strings")
+        hooks = engine.get("hooks", [])
+        if isinstance(hooks, list):
+            unknown = set(hooks) - ALLOWED_HOOKS
+            if unknown:
+                errors.append(f"{engine_id}: unsupported hooks {sorted(unknown)}")
+        if workspace_root is not None:
+            engine_dir = workspace_root / ENGINE_DIRS[engine_id] if engine_id != "skills-web-dev" else ROOT
+            router = engine_dir / str(engine.get("router", ""))
+            if not router.is_file():
+                errors.append(f"{engine_id}: router not found at {router}")
+    return errors
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--workspace-root", type=Path, help="Optional parent containing the ten local engine directories")
+    args = parser.parse_args()
+    errors = validate_registry(args.workspace_root.resolve() if args.workspace_root else None)
+    print("engine-control-plane-validator:")
+    print(f"- registry: {REGISTRY}")
+    print(f"- engines: {len(EXPECTED_ENGINES)}")
+    print(f"- findings: {len(errors)}")
+    for error in errors:
+        print(f"[FAIL] {error}")
+    if not errors:
+        print("PASS: control-plane registry is valid")
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

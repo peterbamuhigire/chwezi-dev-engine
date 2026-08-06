@@ -180,6 +180,14 @@ target instead.
 | SDLC docs | `sdlc-documentation` | `sdlc-design`, `sdlc-maintenance`, `sdlc-planning`, `sdlc-post-deployment`, `sdlc-testing`, `sdlc-user-deploy` |
 | GIS | `gis-platform-engineering` | `gis-mapping`, `gis-maps-integration`, `gis-postgis-backend` |
 
+## Ten-engine control plane
+
+Use `skills/sdlc-meta/engine-control-plane` when the work concerns cross-engine
+routing, agent roles, thin commands, lifecycle hooks, evidence contracts,
+handoffs, bounded recovery, or adapter design. The registry lives at
+`docs/engine-control-plane.json`; its validator is
+`scripts/validate_engine_control_plane.py`.
+
 ## Quality Guardrails (always-on, cross-cutting)
 
 These two skills under `skills/sdlc-meta/` apply to every artefact type the catalogue

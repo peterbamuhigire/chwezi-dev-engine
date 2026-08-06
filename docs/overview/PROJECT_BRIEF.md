@@ -20,6 +20,9 @@ security, PWA/Safari, and companion design-system routing.
 | Product and operations teams | Product, SaaS, documentation, and governance playbooks. |
 | Finance implementers | Canonical accounting, controls, close, audit, and reporting doctrine. |
 
+The shared control-plane layer coordinates routing and evidence across the ten
+local engines. See `docs/engine-control-plane.md`.
+
 ## Outcomes
 
 - Reduce repeated prompt and documentation work.

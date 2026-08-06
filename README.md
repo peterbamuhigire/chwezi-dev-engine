@@ -28,6 +28,7 @@ The active count is produced by the guardrail script. Do not update this table a
 3. Use [`docs/skill-routing-index.md`](docs/skill-routing-index.md) to select the smallest accurate route.
 4. Read the selected domain `SKILL.md`, then only the references, templates, and examples it names.
 5. For an engine audit, product audit, book-driven upgrade, or post-iteration learning cycle, load [`skills/sdlc-meta/kaizen-improvement-system/SKILL.md`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md).
+6. For multi-engine agents, commands, hooks, evidence, or handoffs, load [`skills/sdlc-meta/engine-control-plane/SKILL.md`](skills/sdlc-meta/engine-control-plane/SKILL.md) and validate [`docs/engine-control-plane.json`](docs/engine-control-plane.json).
 
 ## Capability map
 
@@ -156,6 +157,8 @@ Expected current results are 170 active skills, zero catalog findings, 120/120 r
 | `references/` | Shared engineering standards and ownership references |
 | `scripts/` | Catalog guardrails and routing smoke tests |
 | `tests/` | Routing fixtures and negative quality fixtures |
+| `docs/engine-control-plane.json` | Ten-engine agent/command/hook/evidence registry |
+| `scripts/validate_engine_control_plane.py` | Deterministic registry and local-router validator |
 
 ## Maintenance rules
 

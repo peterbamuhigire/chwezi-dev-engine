@@ -27,6 +27,10 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-08-06 | Ten-engine control plane | Added shared agent, command, hook, evidence, handoff, and bounded-recovery registry with deterministic validation. |
+
+| Date | Work | Summary |
+| --- | --- | --- |
 | 2026-08-02 | Coding-agent environment optimisation | Added a device-aware Codex and Claude Code optimisation skill with secret-free inventory, thin runner adapters, portability rules, routing fixtures, and rollback-aware validation. |
 | 2026-07-17 | Python desktop-suite distribution automation | Extended `python-modern-standards` with a PyInstaller/Inno Setup reference and a manifest-driven generator that emits a launcher, shared multipackage spec, installer, PowerShell build, Windows CI workflow, signing hooks, smoke checks, and artifact evidence. |
 | 2026-07-08 | July 2026 world-class upgrade build | Added root router, source register, release gates, FieldOps Ledger exemplar, delivery evidence-pack template, empty-directory disposition, research integration log, book knowledge map, and 117-fixture routing smoke baseline at precision@1 97% / precision@3 100%. |
