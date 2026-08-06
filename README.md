@@ -10,11 +10,11 @@ Last verified: 2026-08-04.
 
 | Measure | Result |
 |---|---:|
-| Active `SKILL.md` files | 170 |
+| Active `SKILL.md` files | 172 |
 | Guardrail maximum | 200 |
-| Routing fixtures | 120 |
-| Routing precision@1 | 92% (111/120) |
-| Routing precision@3 | 100% (120/120) |
+| Routing fixtures | 123 |
+| Routing precision@1 | 92% (114/123) |
+| Routing precision@3 | 100% (123/123) |
 | Catalog guardrail findings | 0 |
 | July portfolio audit baseline | 63/100, capped |
 | Improvement-plan target | 95/100 |
@@ -133,12 +133,12 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py --report-only
 ```
 
-Expected current results are 170 active skills, zero catalog findings, 120/120 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
+Expected current results are 172 active skills, zero catalog findings, 123/123 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
 
 ## Honest limitations
 
 - Routing precision@1 is 92%; precision@3 is 100%. The engine still requires human review for close domain collisions.
-- The 170 active skills remain below the hard cap of 200, but catalog size alone is not proof of quality or production readiness.
+- The 172 active skills remain below the hard cap of 200, but catalog size alone is not proof of quality or production readiness.
 - Some book inputs are historical, partial early releases, or have unusable extraction. They inform patterns only where the available text supports them; current claims require independent verification.
 - `AI for Game Developers` contains durable algorithmic foundations but dated APIs and production assumptions. Treat it as conceptual input, not current platform documentation.
 - Game and design guidance does not replace hands-on playtesting, visual review, accessibility testing, security testing, or production telemetry.
