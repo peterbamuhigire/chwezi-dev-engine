@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs" / "engine-control-plane.json"
 EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", "proposal", "accounting", "design", "digital-research", "skills-web-dev"}
-REQUIRED_KEYS = {"id", "domain", "router", "agents", "commands", "hooks", "evidence"}
+REQUIRED_KEYS = {"id", "domain", "router", "adoption_doc", "agents", "commands", "hooks", "evidence"}
 ALLOWED_HOOKS = {"preflight", "context", "before_write", "after_write", "release", "stop"}
 ENGINE_DIRS = {
     "srs": "srs-skills",
@@ -62,6 +62,9 @@ def validate_registry(workspace_root: Path | None = None) -> list[str]:
             router = engine_dir / str(engine.get("router", ""))
             if not router.is_file():
                 errors.append(f"{engine_id}: router not found at {router}")
+            adoption_doc = engine_dir / str(engine.get("adoption_doc", ""))
+            if not adoption_doc.is_file():
+                errors.append(f"{engine_id}: adoption document not found at {adoption_doc}")
     return errors
 
 

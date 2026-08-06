@@ -42,9 +42,9 @@ validation result, and an owner.
 ## Adoption matrix
 
 Each engine registry entry identifies its domain agents, thin command surfaces,
-minimum hooks, and evidence types. The registry validator checks all ten
-engines and, when run with `--workspace-root C:\wamp64\www`, verifies their
-routers are present:
+minimum hooks, evidence types, and adoption document. The registry validator
+checks all ten engines and, when run with `--workspace-root C:\wamp64\www`,
+verifies their routers and adoption documents are present:
 
 ```powershell
 python scripts/validate_engine_control_plane.py --workspace-root C:\wamp64\www
