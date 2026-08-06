@@ -116,11 +116,11 @@ This engine owns engineering implementation and SDLC quality. It does not replac
 
 | Need | Route with this engine to |
 |---|---|
-| Current web, AI, cloud, security, framework, standards, or market evidence | `C:\wamp64\www\digital-research-engine` |
-| IFRS, accounting, tax, payroll, treasury, close, audit, or statutory values | `C:\wamp64\www\chwezi-accounting-doctrine` |
-| Typography, visual design, UI appearance, design systems, document/slides/spreadsheet presentation | `C:\wamp64\www\design-system-skills` |
-| Premium website strategy, content, SEO, conversion, launch operations, and website orchestration | `C:\wamp64\www\website-skills` |
-| Formal standards-driven SRS, requirements, architecture, testing, deployment, and governance artifacts | `C:\wamp64\www\srs-skills` |
+| Current web, AI, cloud, security, framework, standards, or market evidence | [Digital Research Engine](https://github.com/peterbamuhigire/digital-research-skills) |
+| IFRS, accounting, tax, payroll, treasury, close, audit, or statutory values | [Chwezi Accounting Doctrine](https://github.com/peterbamuhigire/chwezi-accounting-doctrine) |
+| Typography, visual design, UI appearance, design systems, document/slides/spreadsheet presentation | [Design System Skills](https://github.com/peterbamuhigire/design-system-skills) |
+| Premium website strategy, content, SEO, conversion, launch operations, and website orchestration | [Website Skills](https://github.com/peterbamuhigire/website-skills) |
+| Formal standards-driven SRS, requirements, architecture, testing, deployment, and governance artifacts | [SRS Skills](https://github.com/peterbamuhigire/srs-skills) |
 
 Current claims must be verified through Digital Research. Do not infer current platform capabilities from a historical book or an early-release book chapter.
 
