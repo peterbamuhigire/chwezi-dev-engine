@@ -47,6 +47,16 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
 No 70+ score without extraordinary proof. No claim of production readiness without executable or rendered evidence. Product findings must distinguish defects, risks, assumptions, and unassessed areas. Current platform, security, AI, legal, or standards claims require Digital Research verification.
 
+## Mandatory 65-to-95 gate
+
+The first pass is an initial analysis: calculate raw findings, publish only
+`min(raw_score, 65)`, and keep blockers and unassessed dimensions visible. Freeze
+that baseline before improvement. Then target 95/100 through one reversible change
+at a time, with root cause, exact skill/reference/fixture/test, owner, measure,
+guardrails, stop/rollback rule, acceptance evidence, standardisation decision, and
+re-audit date. This applies at two levels: the skills engine and each product it
+produces.
+
 ## Anti-patterns
 
 - Adding skills without proving a routing gap. Fix: inventory first.

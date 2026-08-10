@@ -93,6 +93,7 @@ Changing navigation generation, runtime authority or experimental plugins requir
 - Do not mutate decision-node configuration at runtime; keep changing state in typed runtime data.
 - AI difficulty changes decision quality, timing, resources or coordination explicitly—not hidden omniscience.
 - Measure worst cases with actual agents, geometry, animation and target hardware.
+- Record time and memory complexity, update frequency, worst-case path/search cost, and invariants for critical behaviours. Test a bounded degraded path before standardising a Kaizen change.
 
 ## Anti-Patterns
 

@@ -160,6 +160,7 @@ target instead.
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
 | UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
 | UX content | `ux-content-strategy` | `ux-writing` |
+| Frontend architecture | `frontend-architecture` | Component boundaries, tokens, state/content contracts, design-system implementation, frontend quality and migration decisions |
 | Design audit | `design-audit` | `lean-ux-validation`, heuristic review workflows |
 | Database PostgreSQL | `postgresql-engineering` | `postgresql-fundamentals`, `postgresql-patterns`, `postgresql-advanced-sql`, `postgresql-server-programming` |
 | PostgreSQL operations | `postgresql-operations` | `postgresql-administration`, `postgresql-performance` |

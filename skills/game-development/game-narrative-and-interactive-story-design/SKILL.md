@@ -91,6 +91,8 @@ Editing canon, dialogue, localisation source or runtime content requires task au
 - Interactive flow outranks screenplay shape: the player must understand what to do, why, and what changed.
 - Preserve player control or specify the exact, tested reason for taking it away.
 - Treat the supplied story text as a design source, not a substitute for cultural evidence or project canon.
+- Complete the mechanics-to-meaning matrix for consequential mechanics; agency, feedback, state transitions, and player interpretation must be evidenced rather than assumed.
+- Publish the initial product audit at `min(raw_score, 65)` before any improvement claim; the chosen change targets 95/100 and has a reversible test, guardrails, and re-audit evidence.
 
 ## Anti-Patterns
 
@@ -111,4 +113,5 @@ Editing canon, dialogue, localisation source or runtime content requires task au
 - [Narrative system contract](references/narrative-system-contract.md)
 - [Narrative verification matrix](references/narrative-verification-matrix.md)
 - [Narrative and gameplay playtest loop](references/narrative-playtest-loop.md)
+- [Narrative mechanics learning matrix](references/narrative-mechanics-learning-matrix.md)
 - [Game-development source register](../../../docs/game-dev-analysis/source-register.md)
