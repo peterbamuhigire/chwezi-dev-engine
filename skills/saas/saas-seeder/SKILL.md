@@ -7,13 +7,13 @@ metadata:
   - Codex
   - codex
 ---
-
 ## Platform Notes
 
 - Optional helper plugins may help in some environments, but they must not be treated as required for this skill.
 
 # SaaS Seeder Template Bootstrap
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
+> **Scope boundary:** This template bootstrap skill is not the full-coverage business-data workflow. Use `saas/full-coverage-saas-seeding` for application-boundary demo activity; keep global categories, coding lists, units, statuses, permissions, and similar reference data separate.
 ## Required Inputs
 | Input | Required | Use |
 |---|---|---|

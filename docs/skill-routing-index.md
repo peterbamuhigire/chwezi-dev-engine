@@ -157,6 +157,7 @@ target instead.
 | iOS monetization | `ios-monetization` | StoreKit 2, App Store Server API, subscriptions, Unity StoreKit plugin |
 | Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, Apple TestFlight/Xcode Cloud operations |
 | SaaS managed visual assets | `saas-managed-visual-assets` | Authentication background pools, light/dark logos, favicons, secure admin lifecycle, fallback, and audit |
+| Full-coverage SaaS seeding | `full-coverage-saas-seeding` | Synthetic tenant demonstrations, application-boundary seeding, full module journeys, replay, reset, isolation, reconciliation, and evidence |
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
 | UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
 | UX content | `ux-content-strategy` | `ux-writing` |
