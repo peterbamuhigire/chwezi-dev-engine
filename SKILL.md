@@ -22,7 +22,7 @@ Always apply these before domain work:
    book-driven improvement, and post-iteration learning cycle. Published audits are capped at
    65/100; improvement plans target 95/100 and require evidence.
 
-When a task requires external research, use the Digital Research Skills Engine at `C:\wamp64\www\digital-research-engine`, beginning with its `source-evaluation` and `source-verification` skills.
+When a task requires external research, use the Digital Research Skills Engine at `C:\wamp64\www\digital-research-skills`, beginning with its `source-evaluation` and `source-verification` skills.
 
 ## Route by intent
 

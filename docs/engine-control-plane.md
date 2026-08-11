@@ -11,7 +11,7 @@ handoffs, and bounded recovery. Its registry is
 |---|---|
 | Domain doctrine and specialist output | The routed domain engine |
 | Agent topology and handoff protocol | `skills-web-dev` control plane |
-| Source/currentness verification | `digital-research-engine` |
+| Source/currentness verification | `digital-research-skills` |
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
 | Visual/presentation controls | `design-system-skills` |
 | Tool adapters and native hooks | Host adapter or CI; never duplicated in domain doctrine |

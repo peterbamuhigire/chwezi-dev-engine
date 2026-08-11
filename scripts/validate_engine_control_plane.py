@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,9 +21,41 @@ ENGINE_DIRS = {
     "proposal": "proposal-skills",
     "accounting": "chwezi-accounting-doctrine",
     "design": "design-system-skills",
-    "digital-research": "digital-research-engine",
+    "digital-research": "digital-research-skills",
     "skills-web-dev": "skills-web-dev",
 }
+
+
+def engine_candidates(workspace_root: Path, engine_id: str) -> list[Path]:
+    """Return current local candidates without requiring one checkout layout."""
+    env_name = f"SKILL_ENGINE_ROOT_{engine_id.upper().replace('-', '_')}"
+    candidates: list[Path] = []
+    override = os.environ.get(env_name)
+    if override:
+        candidates.append(Path(override).expanduser())
+
+    candidates.append(workspace_root / ENGINE_DIRS[engine_id])
+
+    # The canonical finance checkout is maintained in source/repos on the
+    # development machine, while the other engines normally sit under the
+    # shared workspace root. Keep this as a fallback so the registry does not
+    # validate an obsolete duplicate checkout.
+    if engine_id == "accounting":
+        candidates.append(Path.home() / "source" / "repos" / "chwezi-accounting-doctrine")
+
+    unique: list[Path] = []
+    for candidate in candidates:
+        resolved = candidate.expanduser()
+        if resolved not in unique:
+            unique.append(resolved)
+    return unique
+
+
+def resolve_engine_dir(workspace_root: Path, engine_id: str, router: str, adoption_doc: str) -> Path | None:
+    for candidate in engine_candidates(workspace_root, engine_id):
+        if (candidate / router).is_file() and (candidate / adoption_doc).is_file():
+            return candidate
+    return None
 
 
 def validate_registry(workspace_root: Path | None = None) -> list[str]:
@@ -58,13 +91,18 @@ def validate_registry(workspace_root: Path | None = None) -> list[str]:
             if unknown:
                 errors.append(f"{engine_id}: unsupported hooks {sorted(unknown)}")
         if workspace_root is not None:
-            engine_dir = workspace_root / ENGINE_DIRS[engine_id] if engine_id != "skills-web-dev" else ROOT
-            router = engine_dir / str(engine.get("router", ""))
-            if not router.is_file():
-                errors.append(f"{engine_id}: router not found at {router}")
-            adoption_doc = engine_dir / str(engine.get("adoption_doc", ""))
-            if not adoption_doc.is_file():
-                errors.append(f"{engine_id}: adoption document not found at {adoption_doc}")
+            if engine_id == "skills-web-dev":
+                engine_dir = ROOT
+            else:
+                engine_dir = resolve_engine_dir(
+                    workspace_root,
+                    engine_id,
+                    str(engine.get("router", "")),
+                    str(engine.get("adoption_doc", "")),
+                )
+            if engine_dir is None:
+                candidates = ", ".join(str(path) for path in engine_candidates(workspace_root, engine_id))
+                errors.append(f"{engine_id}: no candidate contains router and adoption document ({candidates})")
     return errors
 
 

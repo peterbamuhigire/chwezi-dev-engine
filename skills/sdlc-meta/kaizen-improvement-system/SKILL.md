@@ -103,7 +103,7 @@ proof, standards currency, output readiness, hygiene, safety, and integrity.
 ## References
 
 - `docs/continuous-improvement/kaizen-adoption-2026-08.md` - local adoption plan.
-- `C:/wamp64/www/digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md` - cross-engine standard.
+- `C:/wamp64/www/digital-research-skills/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md` - cross-engine standard.
 - `skills/sdlc-meta/skill-engine-audit/` - audit dimensions, scoring, and report structure.
 - `skills/sdlc-meta/skill-safety-audit/` - safety and source-ingestion gate.
 <!-- dual-compat-end -->
