@@ -24,7 +24,7 @@ Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 172 |
+| Active `SKILL.md` files | 174 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |

@@ -57,7 +57,7 @@ presentation-layer Apple UI guidance lives in the external
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 172 skills. This is two above the 150-170 soft target after the
+- Current active catalog size is 174 skills. This is four above the 150-170 soft target after the
   intentional managed-visual-assets and engine-control-plane additions and remains below the enforced hard cap of 200.
 - Current routing smoke-test suite contains 123 fixtures, with 92% precision@1
   and 100% precision@3.

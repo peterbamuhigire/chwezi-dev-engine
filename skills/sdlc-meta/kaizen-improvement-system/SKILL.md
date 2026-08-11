@@ -1,73 +1,140 @@
 ---
 name: kaizen-improvement-system
-description: Use when auditing or improving this engineering engine or any website, app, AI system, SaaS, database, DevOps, mobile, desktop, or game product it produces.
+description: Use when auditing or improving this engineering engine or a product it produces. Coordinates evidence-backed baselines, small experiments, standardisation, and re-audits without replacing domain skills.
+metadata:
+  portable: true
+  compatible_with:
+  - claude-code
+  - codex
 ---
 
 # Kaizen Improvement System
-Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
-## Use when
+Use this skill to turn observed defects, incidents, feedback, source changes,
+or audit gaps into small, reversible, evidence-backed improvements. It keeps
+domain judgement with the owning engine and makes learning discoverable.
 
-- Auditing the engineering catalogue or a product made with it.
-- Turning defects, incidents, user feedback, playtest evidence, or new books into a tested improvement.
-- Planning a quarterly engine review or a product release improvement cycle.
+<!-- dual-compat-start -->
+## Use When
 
-## Do not use when
+- Auditing or grading the engineering catalogue or a product made with it.
+- Turning defects, incidents, user feedback, or new evidence into a tested improvement.
+- Planning a major iteration, quarterly engine review, or post-release re-audit.
 
-- A single skill safety review is the only task; use `skill-safety-audit`.
-- A current external claim is needed without first routing through Digital Research Skills Engine source evaluation and verification.
+## Do Not Use When
 
-## Required inputs
+- A single-skill safety review is the only task; use `skill-safety-audit`.
+- A current external claim is needed before source evaluation and verification.
+- The proposed change is cosmetic and has no measurable effect on routing, quality, safety, or delivery.
 
-| Input | Required | Purpose |
-|---|---:|---|
-| Engine/product path and intended output types | Yes | Sets the audit scope |
-| Evidence, tests, user feedback, and current references | Yes | Prevents opinion-only scoring |
-| Target and constraints | Yes | Defines the 95/100 improvement plan |
+## Required Inputs
+
+- Engine or product path, intended audience, output types, owner, and constraints.
+- Current routes, references, tests, user or product evidence, and known failure modes.
+- Baseline scoring method, improvement target, acceptance evidence, rollback condition, and re-audit date.
+
+## Prerequisites
+
+- Read `docs/continuous-improvement/kaizen-adoption-2026-08.md`.
+- For portfolio or current-standards claims, use the Digital Research engine's source-evaluation and source-verification routes.
 
 ## Workflow
 
-1. Read `docs/continuous-improvement/kaizen-adoption-2026-08.md` and the portfolio standard at `C:\wamp64\www\digital-research-engine\docs\continuous-improvement\portfolio-kaizen-standard-2026-08.md`.
-2. Inventory routes, active skills, references, validators, output types, and known failure evidence before reading deeply.
-3. Score every applicable dimension with named evidence. Publish `min(raw score, 65)`; keep raw scores visible and record blockers.
-4. For a product, audit requirements, architecture/code or document correctness, security/privacy, accessibility, reliability, performance, user value, deployment/handoff, and rollback evidence as applicable.
-5. Build a P0/P1/P2 plan to 95/100. Each action names the exact skill/reference/fixture/test to change, owner, measure, acceptance evidence, and rollback.
-6. Run one small reversible experiment. Check it with the relevant engineering tests, anti-slop gate, evidence pack, and independent review.
-7. Standardise successful learning in a skill, reference, template, fixture, router, or release gate; record the next review date.
+1. **Observe.** Inspect the real route, output, users, constraints, evidence, and failure mode.
+2. **Baseline.** Inventory applicable dimensions and score them with named evidence. Keep raw scores, blockers, uncertainty, and `NOT ASSESSED` items visible. Publish the repository policy cap of `min(raw_score, 65)` for permanent audits.
+3. **Select.** Choose the smallest high-leverage root cause. Prefer repeated defects, user harm, safety issues, missing proof, and routing failures over added prose.
+4. **Experiment.** Name the exact skill, reference, fixture, validator, or gate; hypothesis; owner; measure; risk; rollback; stop condition; and re-audit date.
+5. **Check.** Re-run relevant validators, tests, source checks, user or product checks, and independent review. Preserve negative evidence.
+6. **Standardise.** Promote a successful result into the owning skill, reference, template, fixture, router, or release gate. Do not promote a one-off observation.
+7. **Teach and re-measure.** Update discoverability and handoffs, re-score the changed dimensions, and leave the next improvement visible.
+
+## Core content
+
+For a product, assess the applicable combination of requirements, architecture
+or document correctness, security and privacy, accessibility, reliability,
+performance, user value, deployment or handoff, rollback, and evidence quality.
+For an engine, assess doctrine, taxonomy and routing, skill depth, applied
+proof, standards currency, output readiness, hygiene, safety, and integrity.
+
+## Quality Standards
+
+- Scores cite concrete evidence and a one-line deficiency statement.
+- A target of 95/100 is an improvement target, not an achievement claim.
+- Do not award 70+ without extraordinary, specific proof or claim production readiness without executable or rendered evidence.
+- Structural, behavioural, render, system, and production evidence are labelled separately.
+- Missing execution, source, approval, or artefact evidence is `NOT ASSESSED`.
+- A safety, legal, financial, privacy, security, or release blocker remains a blocker regardless of score.
+- Lessons are stored only when repeatable, generalisable, significant, actionable, and likely to prevent recurrence.
+
+## Anti-Patterns
+
+- Adding a skill without a demonstrated routing or ownership gap. Fix: inventory and test the collision first.
+- Awarding a high score because headings or checkboxes exist. Fix: require outcome-level evidence.
+- Treating a green unit or structural test as product proof. Fix: add the smallest relevant behavioural, failure, render, or handoff check.
+- Closing an action because prose changed. Fix: close only when named acceptance evidence exists and a fresh agent can find the result.
+- Hiding an unavailable check inside an overall score. Fix: mark it `NOT ASSESSED` with an owner and date.
+- Keeping every retrospective note forever. Fix: promote durable learning and remove redundant narrative.
 
 ## Outputs
 
-- capped engine or product scorecard;
-- evidence and blocker register;
-- 95/100 improvement plan;
-- experiment result and standardisation record;
-- re-audit date and cross-engine handoffs.
+| Artifact | Consumed by | Template |
+|---|---|---|
+| Capped scorecard and evidence register | Maintainer and reviewer | Kaizen adoption plan and local report |
+| Improvement action record | Owner and implementer | Gap, root cause, change, hypothesis, measure, risk, rollback, evidence |
+| Standardisation record | Future agents and router | Skill, reference, fixture, validator, or gate change |
+| Re-audit handoff | Next reviewer | Date, owner, remaining gaps, and required checks |
 
-## Quality standards
+## Evidence Produced
 
-No 70+ score without extraordinary proof. No claim of production readiness without executable or rendered evidence. Product findings must distinguish defects, risks, assumptions, and unassessed areas. Current platform, security, AI, legal, or standards claims require Digital Research verification.
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Baseline and re-score | Markdown table | Raw dimensions, cap, blockers, and evidence |
+| Security | Safety and integrity review | Markdown | Permission, provenance, and harmful-output findings |
+| Operability | Rollback and re-audit handoff | Markdown | Owner, stop condition, recovery, and next date |
+| Release evidence | Validator and test record | Command output or Markdown | Positive, negative, and unavailable checks |
 
-## Mandatory 65-to-95 gate
+## Read next
 
-The first pass is an initial analysis: calculate raw findings, publish only
-`min(raw_score, 65)`, and keep blockers and unassessed dimensions visible. Freeze
-that baseline before improvement. Then target 95/100 through one reversible change
-at a time, with root cause, exact skill/reference/fixture/test, owner, measure,
-guardrails, stop/rollback rule, acceptance evidence, standardisation decision, and
-re-audit date. This applies at two levels: the skills engine and each product it
-produces.
-
-## Anti-patterns
-
-- Adding skills without proving a routing gap. Fix: inventory first.
-- Calling a feature “AI-ready” without model/system/input/output controls. Fix: require evals, limits, and fallback paths.
-- Treating a green unit test as product proof. Fix: add user, failure-path, security, and handoff evidence.
-- Closing an action when prose changed only. Fix: require named acceptance evidence.
-- Keeping lessons in chat. Fix: standardise them in the owning skill or reference.
+- `skill-engine-audit` for the engine rubric and evidence matrix.
+- `skill-safety-audit` for changed or imported skill safety review.
+- `advanced-testing-strategy` for risk-scaled validation.
+- `world-class-engineering` for delivery gates and operational handoff.
 
 ## References
 
-- [Local adoption plan](../../../docs/continuous-improvement/kaizen-adoption-2026-08.md)
-- [Portfolio standard](C:/wamp64/www/digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md)
-- `skills/sdlc-meta/skill-engine-audit/`
-- `skills/sdlc-meta/skill-safety-audit/`
+- `docs/continuous-improvement/kaizen-adoption-2026-08.md` - local adoption plan.
+- `C:/wamp64/www/digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md` - cross-engine standard.
+- `skills/sdlc-meta/skill-engine-audit/` - audit dimensions, scoring, and report structure.
+- `skills/sdlc-meta/skill-safety-audit/` - safety and source-ingestion gate.
+<!-- dual-compat-end -->
+
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Engine or product path and output types | Router or task owner | yes | Fixes the audit boundary |
+| Current evidence and failure history | Validators, tests, users, or operators | yes | Prevents opinion-only scoring |
+| Target and constraints | Task owner | yes | Defines the experiment and rollback |
+
+## Capability contract
+
+Read and search are required. Execution is preferred for validators and tests;
+editing requires an authorised improvement scope. Without execution, report the
+exact checks as `NOT ASSESSED`. Network research is optional and must use
+source-disciplined routes.
+
+## Degraded mode
+
+If a validator, source, user result, render, system environment, or independent
+review is unavailable, keep the gap visible and state its consequence. Return a
+conditional plan or verdict; never convert unavailable evidence into a pass.
+
+## Decision rules
+
+| Condition | Action | Failure avoided |
+|---|---|---|
+| A repeated defect has a clear owning skill or gate | Patch that source of truth and add a focused regression check | Symptom-only fixes and recurrence |
+| The proposed change adds only prose or a duplicate route | Do not change the catalogue; record the gap or route to the existing owner | Kaizen bloat and routing noise |
+| The result changes a cross-engine handoff | Require source owner, receiving owner, artefacts, uncertainty contract, and fallback | Silent ownership drift |
+| A material outcome, render, system, or production check cannot run | Mark it `NOT ASSESSED` and retain the blocker | False readiness |
+| The experiment passes its acceptance evidence | Standardise the result and schedule re-measurement | Learning lost in a one-off patch |

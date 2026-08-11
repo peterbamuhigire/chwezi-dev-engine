@@ -1,103 +1,164 @@
 ---
 name: engine-control-plane
-description: "Coordinate routed skill engines through explicit agents, thin commands, lifecycle hooks, evidence contracts, handoffs, and bounded recovery. Use when designing or auditing multi-engine workflows, agent orchestration, command surfaces, hooks, presets, adapters, or release controls."
+description: Use when coordinating or auditing multi-engine workflows, agent roles, command surfaces, hooks, evidence contracts, handoffs, or bounded recovery. Keeps domain doctrine in the owning engines.
+metadata:
+  portable: true
+  compatible_with:
+  - claude-code
+  - codex
 ---
 
 # Engine Control Plane
 
 Use this skill as the shared operating layer above domain engines. Domain
-skills remain authoritative for content and technical doctrine. The control
-plane decides who acts, what entrypoint is used, which always-on controls run,
-what evidence is required, and when work may advance.
+skills remain authoritative for content and technical doctrine; the control
+plane governs ownership, lifecycle, evidence, handoff, and recovery.
 
-## Contract
+<!-- dual-compat-start -->
+## Use When
 
-Every registered engine exposes:
+- Designing or auditing a workflow that crosses two or more skill engines.
+- Defining agent roles, thin commands, lifecycle hooks, evidence contracts, or handoffs.
+- Reviewing release controls, bounded recovery, or a control-plane registry.
 
-| Surface | Required contract |
+## Do Not Use When
+
+- A single domain skill can own the work without an orchestration decision.
+- The task needs domain doctrine rather than routing, ownership, or release control.
+- A safety-only review is required; load `skill-safety-audit` instead.
+
+## Required Inputs
+
+- The participating engines, authoritative routers, intended output, and decision owner.
+- Required capabilities, permissions, dependencies, evidence, stop conditions, and recovery constraints.
+- The applicable registry or adoption document, if the workflow is already registered.
+
+## Prerequisites
+
+- Read the primary domain skill for each participating engine.
+- Load `skill-writing` and `skill-composition-standards` when changing a reusable contract.
+
+## Workflow
+
+1. **Preflight.** Confirm scope, routers, permissions, dependencies, risk, and the exact mutation boundary.
+2. **Assign ownership.** Select one coordinator and the smallest set of independent domain workers. Give each worker a single decision or artefact owner.
+3. **Load context.** Carry forward requirements, decisions, constraints, evidence gaps, open risks, and the next owner. Do not reload unrelated doctrine.
+4. **Execute thinly.** Use commands and hooks as entrypoints to canonical skills. Keep vendor adapters and command syntax outside model-neutral doctrine.
+5. **Check evidence.** Require source, check, result, reviewer, timestamp, and release consequence for each material gate.
+6. **Recover or stop.** Preserve the last safe state. Retry only with a named changed approach; escalate after two zero-progress cycles or when authority is missing.
+7. **Handoff and learn.** Publish the artefact, evidence, unresolved risks, recovery path, and next owner. Promote a successful repeated lesson only after an independent check.
+
+## Core content
+
+### Required control surfaces
+
+| Surface | Minimum contract |
 |---|---|
-| Router | One authoritative router and a discoverable skill catalogue |
-| Agent | Role, inputs, outputs, permission boundary, stop condition |
-| Command | Thin entrypoint that routes to a skill; no duplicated doctrine |
-| Hook | Event, action, failure mode, implementation adapter, and evidence |
-| Handoff | Context, decisions, artifacts, open risks, next owner |
-| Evidence | Source, check, result, reviewer, timestamp, release consequence |
+| Router | One authoritative router and a discoverable catalogue |
+| Agent | Role, inputs, outputs, permission boundary, and stop condition |
+| Command | Thin entrypoint to a canonical skill; no duplicated doctrine |
+| Hook | Event, action, failure mode, adapter, and evidence |
+| Handoff | Context, decisions, artefacts, open risks, and next owner |
+| Evidence | Source, check, result, reviewer, timestamp, and release consequence |
 
-The machine-readable registry is `docs/engine-control-plane.json`. Validate it
-with:
+### Agent topology
 
-```powershell
-python scripts/validate_engine_control_plane.py
-python scripts/validate_engine_control_plane.py --workspace-root C:\wamp64\www
-```
+Use one coordinator. Assign independent decisions to a Router/Planner, Domain
+Worker, Evidence Collector, Adversarial Reviewer, Gatekeeper/Release Captain,
+or Librarian as needed. Never assign two agents the same decision; the
+coordinator carries decisions, constraints, risks, and artefact paths forward.
 
-The second form also checks the ten local engine routers.
+### Hook semantics
 
-## Routing sequence
+Implement the same contract through native hooks, scripts, CI, or explicit
+steps. The minimum lifecycle is `preflight`, `context`, `before_write`,
+`after_write`, `release`, and `stop`. Advisory telemetry may fail open; safety,
+evidence, destructive-action, and release gates fail closed or return
+`NOT ASSESSED`.
 
-1. Identify the primary domain engine and additive cross-cutting engines.
-2. Select the smallest accurate skill from the engine router.
-3. Select only the agents needed for the decision or deliverable.
-4. Run the preflight and context hooks before external research or writes.
-5. Use thin commands to invoke the canonical skill workflow.
-6. Require an evidence record before handoff or release.
-7. On failure, preserve state, retry only within the declared budget, and
-   escalate with a structured handoff when progress stops.
+## Non-negotiables
 
-## Agent topology
+- Keep domain rules in their owning engine; do not create a second source of truth.
+- Treat missing tools, sources, screenshots, tests, or approvals as `NOT ASSESSED`, never as `PASS`.
+- Default review and analysis to read-only. Require explicit authority for mutation or external side effects.
+- Make stop conditions, rollback or recovery, and release consequences visible before work advances.
 
-Use one coordinator only. Run independent specialists in parallel, then pass
-their evidence to a reviewer or gatekeeper. Never ask two agents to own the
-same decision. A coordinator must provide each agent with the minimum context
-needed and must carry forward decisions, constraints, unresolved risks, and
-artifact paths.
+## Quality Standards
 
-Preferred roles are:
+- A router is authoritative, discoverable, and checked against the registered catalogue.
+- An agent has a role, inputs, outputs, permission boundary, and stop condition.
+- A command is a thin entrypoint and does not duplicate domain doctrine.
+- A hook names its event, action, failure mode, adapter, and retained evidence.
+- A handoff names context, decisions, artefacts, open risks, and the next owner.
 
-- **Router/Planner** — selects the route, scope, dependencies, and work plan.
-- **Domain Worker** — produces the domain artifact or implementation.
-- **Evidence Collector** — verifies sources, tests, calculations, renders, or
-  operational results.
-- **Adversarial Reviewer** — looks for contradictions, omissions, unsafe
-  assumptions, and false readiness claims.
-- **Gatekeeper/Release Captain** — issues PASS, FAIL, or NOT ASSESSED and
-  records the release consequence.
-- **Librarian** — proposes skill updates from repeated failures; never silently
-  edits or promotes a new skill.
+## Anti-Patterns
 
-## Hook semantics
+- Two agents own the same decision. Fix: assign one accountable owner and make the other a reviewer.
+- A command copies a specialist workflow. Fix: route to the canonical skill and keep the command thin.
+- A missing approval is treated as an implicit approval. Fix: stop and record `NOT ASSESSED`.
+- A retry repeats the same failed approach. Fix: preserve the prior result and name the changed approach.
+- A handoff contains prose but no evidence or next owner. Fix: use the evidence and handoff fields as a release gate.
+- A hook mutates a domain it does not own. Fix: require an explicit cross-engine handoff.
 
-Native hooks are optional. Where a host cannot run event hooks, implement the
-same contract through a script, CI job, pre-commit check, or explicit skill
-step. Hooks must be fail-open only for advisory telemetry; safety, evidence,
-destructive-action, and release gates fail closed or produce an explicit
-NOT ASSESSED result.
+## Outputs
 
-Minimum hook set:
+| Artifact | Consumed by | Template |
+|---|---|---|
+| Ownership and routing plan | Coordinator and domain owners | `docs/engine-control-plane.json` plus inline rationale |
+| Evidence record | Reviewer or gatekeeper | Evidence contract in `docs/engine-control-plane.md` |
+| Handoff record | Next owner or release captain | Inline: context, decisions, artefacts, risks, recovery |
+| Release verdict | Maintainer and operator | `PASS`, `FAIL`, or `NOT ASSESSED` with consequence |
 
-- `preflight`: verify router, workspace, permissions, dependencies, and risk.
-- `context`: load the canonical context and avoid duplicate or stale reads.
-- `before_write`: verify scope, backup/reversibility, and required approval.
-- `after_write`: run targeted validation and update the evidence record.
-- `release`: require tests, security, accessibility/quality, operations,
-  source/currency, rollback, and reviewer evidence as applicable.
-- `stop`: write a resumable handoff when work is incomplete or interrupted.
+## Evidence Produced
 
-## Recovery and learning
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Registry and route validation result | Command output | `python scripts/validate_engine_control_plane.py` |
+| Security | Permission and mutation-boundary record | Markdown | Preflight and before-write evidence |
+| Operability | Recovery or stop handoff | Markdown | Last safe state and next owner |
+| Release evidence | Gate verdict with residual risk | Markdown | `PASS`, `FAIL`, or `NOT ASSESSED` |
 
-Use a bounded loop: observe → classify → fix → verify → record. Do not count a
-model confidence statement as evidence. A retry must identify the failed check,
-preserve the prior attempt, and use a changed approach. Two consecutive
-zero-progress cycles require escalation or deferral. Successful changes become
-references, fixtures, routing rules, or release gates only after an independent
-check.
+## Read next
 
-## Safety
+- `skill-engine-audit` for whole-engine inventory and scoring.
+- `skill-safety-audit` for unsafe instructions, dependencies, and provenance.
+- `advanced-testing-strategy` for risk-based test depth and retained evidence.
+- `world-class-engineering` for implementation and release gates.
 
-- Never bypass a gate only in conversation.
-- Never treat missing tools, sources, screenshots, tests, or approvals as
-  PASS.
-- Never let an agent mutate a domain it does not own without an explicit
-  handoff.
-- Never create a second source of truth for requirements, accounting doctrine,
-  design doctrine, research evidence, or release state.
+## References
+
+- `docs/engine-control-plane.md` - shared vocabulary and lifecycle contract.
+- `docs/engine-control-plane.json` - machine-readable ten-engine registry.
+- `../../../scripts/validate_engine_control_plane.py` - deterministic registry validator.
+- `skill-writing` and `skill-composition-standards` - authoring and composition rules.
+<!-- dual-compat-end -->
+
+## Inputs
+
+| Artefact | Produced by | Required? | Why |
+|---|---|---|---|
+| Participating engines and authoritative routers | Task owner or coordinator | yes | Establishes ownership and routing |
+| Required capabilities, permissions, and recovery constraints | Preflight or risk owner | yes | Bounds execution and side effects |
+| Registered control-plane contract | Maintainer | conditional | Keeps registry and adoption evidence aligned |
+
+## Capability contract
+
+Read and search are required. Editing and execution require an authorised
+implementation scope. Network access is optional and must remain source-
+disciplined. Delegation is optional and must use disjoint ownership.
+
+## Degraded mode
+
+If a router, registry, tool, source, approval, or test is unavailable, return a
+scoped plan with the unavailable check marked `NOT ASSESSED`. Do not infer
+success from a declaration, model confidence, or an unexecuted hook.
+
+## Decision rules
+
+| Condition | Action | Failure avoided |
+|---|---|---|
+| One engine owns the decision | Route directly and keep orchestration out | Duplicate doctrine and unnecessary hops |
+| Two or more engines contribute independent artefacts | Use one coordinator, named owners, and a reconciled handoff | Conflicting edits and lost context |
+| Mutation, external side effect, or irreversible action | Require explicit authority, exact target, recovery, and evidence before execution | Unbounded blast radius |
+| Required evidence or approval is unavailable | Stop or issue `NOT ASSESSED` with an owner and next check | False release confidence |
+| A failure repeats with no changed approach | Escalate or defer after the bounded retry budget | Retry loops and hidden failure |

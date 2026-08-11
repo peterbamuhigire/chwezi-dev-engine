@@ -63,9 +63,9 @@ Run this after catalog routing or skill frontmatter changes:
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 ```
 
-Known baseline as of 2026-08-06 (verify with the script; do not trust this prose):
+Known baseline as of 2026-08-11 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 172.
+- Active `SKILL.md` files: 174.
 - Target active catalog size: 150-170. The managed-visual-assets and engine-control-plane additions leave the catalogue
   two skills above that soft target and well under the enforced 200 cap; the next safe alias or
   consolidation review should return it to range without deleting knowledge.
