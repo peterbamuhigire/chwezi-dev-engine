@@ -49,6 +49,8 @@ The active count is produced by the guardrail script. Do not update this table a
 
 ## Kaizen operating contract
 
+For a ready-to-run product or project operation, use [`prompts/full-kaizen-operation.md`](prompts/full-kaizen-operation.md).
+
 Continuous improvement is part of the engine, not an optional review activity. Apply this cycle to the engine and to products it produces:
 
 `Observe -> Baseline -> Select -> Experiment -> Check -> Standardise -> Teach -> Re-measure`
