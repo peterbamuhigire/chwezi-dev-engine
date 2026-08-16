@@ -10,6 +10,8 @@ metadata:
 
 # Full-Coverage SaaS Seeding
 
+<!-- dual-compat-start -->
+
 ## Use when
 
 - A SaaS needs a believable, end-to-end demo tenant and a repeatable system-test fixture.
@@ -24,11 +26,11 @@ metadata:
 
 ## Non-negotiable execution rules
 
-1. Never use direct database injection for business or demo activity: no raw DML, table truncation, manual journals, arbitrary SQL in fixtures, direct database handles, repository shortcuts, or ORM bypasses from the seeding layer.
-2. Use the same authenticated UI actions, supported APIs, domain commands, services, workflow handlers, posting services, and event/outbox boundaries available to real users. A CLI may orchestrate them but may not bypass them.
+1. Never use direct database injection to imitate supported business activity: no raw DML for procurement, stock, production, sales, payroll, billing, payments, approvals, journals, or other stateful workflows; no table truncation or ORM/repository bypass for those journeys.
+2. Use the same authenticated UI actions, supported APIs, domain commands, services, workflow handlers, posting services, and event/outbox boundaries available to real users. A CLI may orchestrate them but may not bypass them. For the narrow, classified exception covering reference/bootstrap, tenant configuration, compatibility repair, or missing-writer infrastructure, load `references/operational-seeding-patterns.md` and record the gap and controls.
 3. Inspect the repository and running product before designing fixtures: routes, contracts, permissions, state machines, migrations for understanding only, reference bootstrap, tests, reports, integrations, and existing seeders.
 4. Separate standard/reference data, tenant configuration, disposable demo activity, and isolated fault-probe records. Never delete standard data or unrelated tenant data during reset.
-5. Use deterministic manifests, stable natural keys, collision registries, actor/tenant/scenario IDs, idempotency keys, correlation IDs, run and entity ledgers, target guards, dry-run, replay, verification, and controlled reset.
+5. Use deterministic manifests, stable natural keys, collision registries, actor/tenant/scenario IDs, idempotency keys, correlation IDs, explicit as-of windows, schema fingerprints, run and entity ledgers, target guards, dry-run, replay, verification, and controlled reset. Random run IDs are metadata; random business fixtures are not deterministic.
 6. Mark capabilities `SUPPORTED`, `PARTIAL`, `BLOCKED`, or `NOT_ASSESSED`. A menu, table, migration, or screenshot alone is not evidence of a working capability.
 7. Use fictional, synthetic, culturally appropriate identities. Never store reusable production secrets or real regulated data.
 
@@ -56,7 +58,7 @@ must reference the default catalogue; it must not replace or become the catalogu
 | PRD/SRS/HLD, routes/screens, API contracts, application services, permissions, states, reports, integrations, tests, existing seeders, and reference bootstrap | Yes | Discover real capabilities and boundaries |
 | Finance/accounting doctrine and jurisdictional source register | When money, tax, payroll, stock, billing, assets, or accounting apply | Preserve financial invariants and current-source controls |
 
-## Required outputs
+## Outputs
 
 1. Discovery report with scope, capability matrix, dependencies, gaps, and stop conditions.
 2. Data classification register for default/reference data, tenant configuration, demo activity, and fault probes.
@@ -64,23 +66,25 @@ must reference the default catalogue; it must not replace or become the catalogu
 4. Facility/organisation roster with hard minimums and target volumes per tenant/facility.
 5. Scenario catalogue covering every supported module and its happy, failure, permission, duplicate, replay, boundary, rollback, isolation, reporting, and audit journeys.
 6. Application execution plan naming the write boundary and actor for each scenario family.
-7. Verification and reconciliation plan, defect loop, refresh/reset runbook, evidence pack, and skill-contract test results.
+7. Verification and reconciliation plan, defect loop, refresh/reset runbook, schema-compatibility record, controlled-persistence exception register where needed, evidence pack, and skill-contract test results.
 
-## Ordered workflow
+## Workflow
 
 1. **Establish authority and target.** Refuse production or an ambiguous target. Confirm non-production secrets, encrypted PHI/PII handling, test payment/integration adapters, no real outbound messages or money, ownership, retention, and recoverable reset boundary.
-2. **Discover capabilities.** Build the capability matrix from implementation and executed boundary evidence. Distinguish implemented, partial, configured-off, externally dependent, and unimplemented features; create blockers instead of fake rows.
-3. **Define data boundaries.** Record standard/reference-data source, version, install path, preservation check, tenant configuration, demo ownership, retention, reset rule, and manifest tags.
-4. **Design volumes and cohorts.** Set measurable per-tenant/facility minimums and higher targets. Include new/returning, active/inactive, complete/incomplete, normal/exception, high/low volume, privacy-restricted, and other domain-relevant cohorts. Ensure each later workflow has a valid actor and source entity.
-5. **Design identities and separation of duties.** Create fictional stable fixture keys, roles, departments, supervisors, facility grants, account states, preparer/approver pairs, suspension/offboarding cases, and preserved historical attribution.
-6. **Design chained scenarios.** For each discovered module record prerequisites, boundary, actor, input, state transitions, entities, audit events, downstream effects, reports, negative cases, duplicate/replay, partial failure, and compensation or rollback. Chain source events into billing, stock, payroll, claims, finance, and reports where supported.
-7. **Implement a narrow execution adapter.** Carry actor, tenant, scenario, idempotency, correlation, and manifest checksum through every command. Add a static guard rejecting SQL/DML, table names, direct database handles, arbitrary repositories, and private persistence shortcuts in seeding code.
-8. **Preflight and dry-run.** Validate manifest schema, tenant/facility codes, actor permissions, prerequisites, reference data, timezones, amounts/quantities, natural-key collisions, environment, secrets, dependency order, and target safety. Dry-run performs zero business writes and reports planned commands, unsupported capabilities, counts, and invariants.
-9. **Execute in dependency order.** Apply configuration, identities, reference links, master data, primary records, source transactions, downstream effects, reports, and verification. Do not parallelise dependent writes. Record results in run and entity ledgers.
-10. **Run fault and security probes.** Test invalid input, missing prerequisite, duplicate submit, replay, stale version, forbidden role, cross-tenant ID, locked period, negative stock, expiry, overpayment, failed payment, mismatched documents, unapproved payroll, self-approval, cancellation, empty report, export restriction, timeout/retry, and forced mid-run failure as applicable.
-11. **Verify and reconcile.** Check counts, state machines, permissions, idempotency, audit lineage, tenant isolation, privacy, reports, source-to-output links, stock, payroll, AP/AR, cash/bank/mobile money, and accounting invariants. Every pass points to machine-readable evidence or a reproducible route.
-12. **Repair and retest.** Fix the owning application module or configuration, never the seeded rows. Rerun the smallest failing scenario, affected journey, and impacted verification set; preserve failed evidence.
-13. **Replay, reset, and hand off.** Replay to prove no duplicates. Reset only owned fictional activity through the approved application cleanup boundary, prove standard/reference and unrelated tenant data are unchanged, reproduce on a second clean target, and issue the evidence-backed verdict.
+2. **Classify the work.** Separate reference bootstrap, tenant configuration, business activity, compatibility repair, and verification/refresh. Split mixed responsibilities into ordered steps with separate evidence and reset rules.
+3. **Discover capabilities.** Build the capability matrix from implementation and executed boundary evidence. Distinguish implemented, partial, configured-off, externally dependent, and unimplemented features; create blockers instead of fake rows.
+4. **Define data boundaries.** Record standard/reference-data source, version, install path, preservation check, tenant configuration, demo ownership, retention, reset rule, and manifest tags.
+5. **Design volumes and cohorts.** Set measurable per-tenant/facility minimums and higher targets. Include new/returning, active/inactive, complete/incomplete, normal/exception, high/low volume, privacy-restricted, and other domain-relevant cohorts. Ensure each later workflow has a valid actor and source entity.
+6. **Design identities and separation of duties.** Create fictional stable fixture keys, roles, departments, supervisors, facility grants, account states, preparer/approver pairs, suspension/offboarding cases, and preserved historical attribution.
+7. **Design chained scenarios.** For each discovered module record prerequisites, boundary, actor, input, state transitions, entities, audit events, downstream effects, reports, negative cases, duplicate/replay, partial failure, and compensation or rollback. Chain source events into billing, stock, payroll, claims, finance, and reports where supported.
+8. **Implement a narrow execution adapter.** Carry actor, tenant, branch/facility, scenario, idempotency, correlation, and manifest checksum through every command. Add a static guard rejecting unclassified SQL/DML, unscoped deletes, hard-coded foreign keys, arbitrary repositories, and private persistence shortcuts in business-activity seeding code.
+9. **Run the schema-compatibility gate.** Apply and verify versioned migrations, required columns/indexes/triggers/procedures/enums, tenant ownership of closure or summary tables, and a schema fingerprint before business activity. Do not hide compatibility repair inside a replay.
+10. **Preflight and dry-run.** Validate manifest schema, tenant/facility codes, actor permissions, prerequisites, reference data, timezones, explicit as-of windows, amounts/quantities, natural-key collisions, environment, secrets, dependency order, and target safety. Dry-run performs zero business writes and reports planned commands, unsupported capabilities, counts, and invariants.
+11. **Execute in dependency order.** Apply configuration, identities, reference links, master data, primary records, source transactions, downstream effects, reports, and verification. Do not parallelise dependent writes. Record results in run and entity ledgers, including committed partial work when services own their transactions.
+12. **Run fault and security probes.** Test invalid input, missing prerequisite, duplicate submit, replay, stale version, forbidden role, cross-tenant ID, cross-branch/facility ID, locked period, negative stock, expiry, overpayment, failed payment, mismatched documents, unapproved payroll, self-approval, cancellation, empty report, export restriction, timeout/retry, and forced mid-run failure as applicable.
+13. **Verify and reconcile.** Check counts, state machines, permissions, idempotency, audit lineage, tenant and branch isolation, privacy, reports, source-to-output links, stock, payroll, AP/AR, cash/bank/mobile money, hierarchy closure, and accounting invariants. Every pass points to machine-readable evidence or a reproducible route; screenshots are supplementary.
+14. **Repair and retest.** Fix the owning application module or configuration, never the seeded rows. Rerun the smallest failing scenario, affected journey, and impacted verification set; preserve failed evidence and classify missing writers or migrations explicitly.
+15. **Replay, reset, and hand off.** Replay to prove no duplicates. Reset only owned fictional activity through the approved application cleanup boundary, prove standard/reference and unrelated tenant data are unchanged, reproduce on a second clean target, and issue the evidence-backed verdict.
 
 ## Finance, stock, privacy, and side-effect controls
 
@@ -103,7 +107,23 @@ limitations; and one verdict: `PASS`, `PASS_WITH_CAVEATS`, `BLOCKED`, or `FAIL`.
 Never claim “fully seeded”, “all modules tested”, “production-ready”, or “accounting
 reconciles” without the corresponding measured evidence.
 
+## Quality Standards
+
+Evidence must distinguish application execution from compatibility repair,
+show tenant and operational-scope isolation, and include replay, failure,
+reconciliation, and reset results where the capability applies.
+
+## Anti-Patterns
+
+- Do not use a screenshot as proof of a workflow; retain machine-readable evidence.
+- Do not silently replace a missing writer with direct business-table inserts; classify the gap.
+- Do not reset a shared table without proving its ownership scope.
+- Do not use wall-clock dates or random business identity in a replayable fixture.
+- Do not report a module as supported from schema or menu presence alone.
+
 ## References
+
+- `references/operational-seeding-patterns.md` - run classification, controlled persistence exceptions, schema compatibility, temporal determinism, branch/facility scope, hierarchy closure, partial failure, and per-runner tests.
 
 - `references/seed-manifest-contract.md` — manifest fields, classifications, keys, and execution metadata.
 - `references/module-coverage-matrix.md` — module journey and invariant prompts.
@@ -111,3 +131,5 @@ reconciles” without the corresponding measured evidence.
 - `references/contract-test-matrix.md` — routing, refusal, replay, reset, and limited-capability tests.
 - `saas/saas-seeder` — legacy/template bootstrap only; do not use it for full-coverage business activity when its boundary conflicts with this skill.
 - `saas/multi-tenant-saas-architecture`, `security/vibe-security-skill`, `languages/typescript-full-stack`, and `sdlc-meta/kaizen-improvement-system` as applicable.
+
+<!-- dual-compat-end -->

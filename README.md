@@ -6,15 +6,15 @@ Use this engine for software engineering, AI systems, SaaS, APIs, databases, arc
 
 ## Current status
 
-Last verified: 2026-08-11.
+Last verified: 2026-08-16.
 
 | Measure | Result |
 |---|---:|
-| Active `SKILL.md` files | 174 |
+| Active `SKILL.md` files | 175 |
 | Guardrail maximum | 200 |
-| Routing fixtures | 123 |
-| Routing precision@1 | 92% (114/123) |
-| Routing precision@3 | 100% (123/123) |
+| Routing fixtures | 127 |
+| Routing precision@1 | 91% (116/127) |
+| Routing precision@3 | 100% (127/127) |
 | Catalog guardrail findings | 0 |
 | July portfolio audit baseline | 63/100, capped |
 | Improvement-plan target | 95/100 |
@@ -135,7 +135,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py --report-only
 ```
 
-Expected current results are 174 active skills, zero catalog findings, 123/123 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
+Expected current results are 175 active skills, zero catalog findings, 127/127 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
 
 ## Honest limitations
 

@@ -27,6 +27,8 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-08-16 | ERP POS sales operations | Added the live engineering route for tenant defaults, three POS surfaces, product-to-finished-stock identity, stock timing, canonical posting, permissions, idempotency, and reconciliation. |
+| 2026-08-16 | Phased seeding retrospective | Added operational seeding guidance for schema-compatibility gates, controlled persistence exceptions, branch/facility scope, temporal determinism, hierarchy closure, partial failure, and per-runner contract tests. |
 | 2026-08-06 | Ten-engine control plane | Added shared agent, command, hook, evidence, handoff, and bounded-recovery registry with deterministic validation. |
 | 2026-08-02 | Coding-agent environment optimisation | Added a device-aware Codex and Claude Code optimisation skill with secret-free inventory, thin runner adapters, portability rules, routing fixtures, and rollback-aware validation. |
 | 2026-07-17 | Python desktop-suite distribution automation | Extended `python-modern-standards` with a PyInstaller/Inno Setup reference and a manifest-driven generator that emits a launcher, shared multipackage spec, installer, PowerShell build, Windows CI workflow, signing hooks, smoke checks, and artifact evidence. |

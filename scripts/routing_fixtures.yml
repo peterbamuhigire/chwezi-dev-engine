@@ -38,6 +38,12 @@ fixtures:
     expect: saas-sso-scim-enterprise-auth
   - task: "Let a tenant export all their data and handle a GDPR erasure request"
     expect: saas-tenant-data-portability-and-erasure
+  - task: "Populate a non-production SaaS tenant with linked synthetic procurement, inventory, production, sales, finance and reporting journeys through the supported application boundaries, then verify replay and tenant isolation"
+    expect: full-coverage-saas-seeding
+  - task: "Refresh a dated synthetic demo window, prove no duplicate activity on replay, and reset only the owned fixture records"
+    expect: full-coverage-saas-seeding
+  - task: "Bootstrap a new SaaS from the template with environment setup, database schema, super admin creation and panel verification"
+    expect: saas-seeder
   - task: "Build a Super Admin manager for up to 20 SaaS login backgrounds, light and dark logos, and a favicon with secure upload and audit history"
     expect: saas-managed-visual-assets
   - task: "Position, package and price a premium high-ticket software product for executive buyers"
@@ -70,6 +76,8 @@ fixtures:
     expect: observability-monitoring
 
   # --- Frontend / UX ---
+  - task: "Implement a tenant-aware ERP POS with pos.php, agent-pos.php and encode-sales.php, a Walk-in customer default, product-to-finished-stock mapping, atomic payment posting and idempotent retries"
+    expect: pos-sales-operations-engineering
   - task: "Set up a Tailwind design system with tokens and responsive layout"
     expect: tailwind-css
   - task: "Improve frontend rendering performance, bundle size and asset loading"

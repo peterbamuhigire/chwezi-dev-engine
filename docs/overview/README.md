@@ -7,6 +7,16 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The 2026-08-16 seeding retrospective strengthened full-coverage SaaS seeding
+with explicit run classes, schema-compatibility gates, controlled writer-gap
+exceptions, branch/facility scope, deterministic time windows, hierarchy
+closure checks, partial-failure ledgers, and per-runner replay/reset tests.
+
+The 2026-08-16 POS operations addition established a live ERP POS engineering
+route for the three operational POS surfaces, tenant-wide default customers,
+product-to-finished-stock identity, manufacturing-versus-sale stock timing,
+canonical posting, permissions, idempotency, and reconciliation evidence.
+
 The 2026-08-02 coding-agent optimisation addition added a device-aware workflow
 for safely tuning Codex and Claude Code, with a secret-free inventory script,
 thin runner adapters, routing fixtures, and rollback-aware verification.
@@ -57,9 +67,9 @@ presentation-layer Apple UI guidance lives in the external
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine; local `doctrine/skills/` is retained reference material.
-- Current active catalog size is 174 skills. This is four above the 150-170 soft target after the
+- Current active catalog size is 175 skills. This is five above the 150-170 soft target after the
   intentional managed-visual-assets and engine-control-plane additions and remains below the enforced hard cap of 200.
-- Current routing smoke-test suite contains 123 fixtures, with 92% precision@1
+- Current routing smoke-test suite contains 127 fixtures, with 91% precision@1
   and 100% precision@3.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
