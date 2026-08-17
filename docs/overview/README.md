@@ -26,14 +26,14 @@ without adding new active entrypoints. The catalog now routes current Apple work
 through iOS development, AI/ML, App Intents/Siri/Spotlight, quality/release,
 security, StoreKit, PWA/Safari, KMP, and mobile operations guidance, while
 presentation-layer Apple UI guidance lives in the external
-`design-system-skills` engine.
+<a href="https://github.com/peterbamuhigire/design-system-skills" target="_blank" rel="noopener noreferrer">Design System Skills Engine</a>.
 
 ## What Is Here
 
 | Area | Location | Notes |
 | --- | --- | --- |
 | Main skill catalog | `skills/` | Broad software, AI, SaaS, mobile, security, UX, and product skills. |
-| Finance doctrine | External `chwezi-accounting-doctrine`; local `doctrine/skills/` reference material | Canonical accounting, audit, reporting, IFRS, controls, and close guidance is loaded from the external engine. |
+| Finance doctrine | External <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>; local `doctrine/skills/` reference material | Canonical accounting, audit, reporting, IFRS, controls, and close guidance is loaded from the external engine. |
 | SDLC initialization | `00-meta-initialization/` | Entry-point project documentation workflow and examples. |
 | Routing docs | `docs/skill-routing-index.md` | Human-readable consolidation and routing policy. |
 | Alias data | `docs/skill-aliases.yml` | Machine-readable skill alias map. |
@@ -65,7 +65,7 @@ presentation-layer Apple UI guidance lives in the external
 - Active roots are `skills/` and `00-meta-initialization/`.
 - Target active catalog size is 150-170 skills.
 - The guardrail hard cap is 200 active `SKILL.md` files.
-- Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
+- Finance doctrine is canonical in the external <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>
   engine; local `doctrine/skills/` is retained reference material.
 - Current active catalog size is 175 skills. This is five above the 150-170 soft target after the
   intentional managed-visual-assets and engine-control-plane additions and remains below the enforced hard cap of 200.

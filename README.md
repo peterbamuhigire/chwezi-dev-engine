@@ -1,8 +1,10 @@
 # Skills Web Dev
 
-`skills-web-dev` is the Chwezi Core Systems software-engineering skills engine. It routes work to the smallest accurate skill and supplies the evidence, safety, delivery, and learning controls needed to take software from decision to operation.
+`skills-web-dev` is the Chwezi Core Systems software-engineering engine for routing software work to the smallest accurate skill and connecting implementation guidance with evidence, safety, delivery, and learning controls. It provides the shared engineering route for teams taking a software change from a decision to operation.
 
-Use this engine for software engineering, AI systems, SaaS, APIs, databases, architecture, frontend and mobile development, game development, security, DevOps, cloud, reliability, product engineering, and SDLC documentation. Use the companion engines when work crosses ownership boundaries.
+Engineers, architects, product and delivery teams, and operators use it for AI systems, SaaS, APIs, databases, frontend and mobile applications, games, security, DevOps, cloud, reliability, and SDLC documentation. The route helps them frame the problem, choose system boundaries, make changes, and verify normal and failure paths.
+
+Use it for engineering implementation and SDLC quality; bring in companion engines when ownership moves to visual design, finance and accounting, current external research, premium website operations, or formal requirements and governance. Its boundary is deliberate: it provides the engineering route and evidence expectations, while those specialist engines retain their own domain rules and outputs.
 
 ## Current status
 
@@ -118,11 +120,11 @@ This engine owns engineering implementation and SDLC quality. It does not replac
 
 | Need | Route with this engine to |
 |---|---|
-| Current web, AI, cloud, security, framework, standards, or market evidence | [Digital Research Engine](https://github.com/peterbamuhigire/digital-research-skills) |
-| IFRS, accounting, tax, payroll, treasury, close, audit, or statutory values | [Chwezi Accounting Doctrine](https://github.com/peterbamuhigire/chwezi-accounting-doctrine) |
-| Typography, visual design, UI appearance, design systems, document/slides/spreadsheet presentation | [Design System Skills](https://github.com/peterbamuhigire/design-system-skills) |
-| Premium website strategy, content, SEO, conversion, launch operations, and website orchestration | [Website Skills](https://github.com/peterbamuhigire/website-skills) |
-| Formal standards-driven SRS, requirements, architecture, testing, deployment, and governance artifacts | [SRS Skills](https://github.com/peterbamuhigire/srs-skills) |
+| Current web, AI, cloud, security, framework, standards, or market evidence | <a href="https://github.com/peterbamuhigire/digital-research-skills" target="_blank" rel="noopener noreferrer">Digital Research Engine</a> |
+| IFRS, accounting, tax, payroll, treasury, close, audit, or statutory values | <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a> |
+| Typography, visual design, UI appearance, design systems, document/slides/spreadsheet presentation | <a href="https://github.com/peterbamuhigire/design-system-skills" target="_blank" rel="noopener noreferrer">Design System Skills</a> |
+| Premium website strategy, content, SEO, conversion, launch operations, and website orchestration | <a href="https://github.com/peterbamuhigire/website-skills" target="_blank" rel="noopener noreferrer">Website Skills</a> |
+| Formal standards-driven SRS, requirements, architecture, testing, deployment, and governance artifacts | <a href="https://github.com/peterbamuhigire/srs-skills" target="_blank" rel="noopener noreferrer">SRS Skills</a> |
 
 Current claims must be verified through Digital Research. Do not infer current platform capabilities from a historical book or an early-release book chapter.
 

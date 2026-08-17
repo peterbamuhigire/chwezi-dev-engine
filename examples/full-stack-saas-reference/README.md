@@ -20,7 +20,7 @@ This example shows how `skills-web-dev` composes into a complete delivery workfl
 2. Route through `SKILL.md` to SaaS, architecture, API, database, security, and reliability skills.
 3. Use `templates/delivery-dod/evidence-pack.md` as the required release wrapper.
 4. Consult `docs/source-registers/ai-platforms.md` before naming current vendor behavior.
-5. Route statutory accounting behavior to `chwezi-accounting-doctrine`; do not hardcode tax rules here.
+5. Route statutory accounting behavior to the <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>; do not hardcode tax rules here.
 
 ## Completion Standard
 
