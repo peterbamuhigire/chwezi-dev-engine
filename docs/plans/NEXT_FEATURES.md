@@ -27,6 +27,7 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-08-20 | Eleven-engine control plane | Registered `windows-admin-engine-skills` as the eleventh canonical engine, added its adoption contract, and extended deterministic registry validation. |
 | 2026-08-16 | ERP POS sales operations | Added the live engineering route for tenant defaults, three POS surfaces, product-to-finished-stock identity, stock timing, canonical posting, permissions, idempotency, and reconciliation. |
 | 2026-08-16 | Phased seeding retrospective | Added operational seeding guidance for schema-compatibility gates, controlled persistence exceptions, branch/facility scope, temporal determinism, hierarchy closure, partial failure, and per-runner contract tests. |
 | 2026-08-06 | Ten-engine control plane | Added shared agent, command, hook, evidence, handoff, and bounded-recovery registry with deterministic validation. |

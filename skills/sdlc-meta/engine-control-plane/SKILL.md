@@ -128,7 +128,7 @@ evidence, destructive-action, and release gates fail closed or return
 ## References
 
 - `docs/engine-control-plane.md` - shared vocabulary and lifecycle contract.
-- `docs/engine-control-plane.json` - machine-readable ten-engine registry.
+- `docs/engine-control-plane.json` - machine-readable eleven-engine registry.
 - `../../../scripts/validate_engine_control_plane.py` - deterministic registry validator.
 - `skill-writing` and `skill-composition-standards` - authoring and composition rules.
 <!-- dual-compat-end -->

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the shared ten-engine control-plane registry."""
+"""Validate the shared eleven-engine control-plane registry."""
 from __future__ import annotations
 
 import argparse
@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs" / "engine-control-plane.json"
-EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", "proposal", "accounting", "design", "digital-research", "skills-web-dev"}
+EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", "proposal", "accounting", "design", "digital-research", "skills-web-dev", "windows-admin"}
 REQUIRED_KEYS = {"id", "domain", "router", "adoption_doc", "agents", "commands", "hooks", "evidence"}
 ALLOWED_HOOKS = {"preflight", "context", "before_write", "after_write", "release", "stop"}
 ENGINE_DIRS = {
@@ -23,6 +23,7 @@ ENGINE_DIRS = {
     "design": "design-system-skills",
     "digital-research": "digital-research-skills",
     "skills-web-dev": "skills-web-dev",
+    "windows-admin": "windows-admin-engine-skills",
 }
 
 
@@ -108,7 +109,7 @@ def validate_registry(workspace_root: Path | None = None) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--workspace-root", type=Path, help="Optional parent containing the ten local engine directories")
+    parser.add_argument("--workspace-root", type=Path, help="Optional parent containing the eleven local engine directories")
     args = parser.parse_args()
     errors = validate_registry(args.workspace_root.resolve() if args.workspace_root else None)
     print("engine-control-plane-validator:")

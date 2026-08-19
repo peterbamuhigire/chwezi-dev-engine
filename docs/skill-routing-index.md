@@ -183,7 +183,7 @@ target instead.
 | SDLC docs | `sdlc-documentation` | `sdlc-design`, `sdlc-maintenance`, `sdlc-planning`, `sdlc-post-deployment`, `sdlc-testing`, `sdlc-user-deploy` |
 | GIS | `gis-platform-engineering` | `gis-mapping`, `gis-maps-integration`, `gis-postgis-backend` |
 
-## Ten-engine control plane
+## Eleven-engine control plane
 
 Use `skills/sdlc-meta/engine-control-plane` when the work concerns cross-engine
 routing, agent roles, thin commands, lifecycle hooks, evidence contracts,

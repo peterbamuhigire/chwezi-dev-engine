@@ -42,7 +42,7 @@ presentation-layer Apple UI guidance lives in the external
 | Full workflow example | `examples/full-stack-saas-reference/` | FieldOps Ledger end-to-end SaaS evidence pack. |
 | Delivery templates | `templates/delivery-dod/` | Reusable evidence-pack template for implementation deliverables. |
 | Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
-| Engine control plane | `docs/engine-control-plane.json`, `skills/sdlc-meta/engine-control-plane/` | Shared agents, commands, hooks, evidence, handoffs, and bounded recovery across ten engines. |
+| Engine control plane | `docs/engine-control-plane.json`, `skills/sdlc-meta/engine-control-plane/` | Shared agents, commands, hooks, evidence, handoffs, and bounded recovery across eleven engines. |
 | CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
 | Long-form references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Source material and companion writing. |

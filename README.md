@@ -161,7 +161,7 @@ Expected current results are 175 active skills, zero catalog findings, 127/127 r
 | `references/` | Shared engineering standards and ownership references |
 | `scripts/` | Catalog guardrails and routing smoke tests |
 | `tests/` | Routing fixtures and negative quality fixtures |
-| `docs/engine-control-plane.json` | Ten-engine agent/command/hook/evidence registry |
+| `docs/engine-control-plane.json` | Eleven-engine agent/command/hook/evidence registry |
 | `scripts/validate_engine_control_plane.py` | Deterministic registry and local-router validator |
 
 ## Maintenance rules

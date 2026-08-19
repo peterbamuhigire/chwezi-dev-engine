@@ -1,6 +1,6 @@
-# Ten-Engine Control Plane
+# Eleven-Engine Control Plane
 
-The ten local engines remain separate sources of truth. This control plane
+The eleven local engines remain separate sources of truth. This control plane
 provides the shared operating vocabulary for agents, commands, hooks, evidence,
 handoffs, and bounded recovery. Its registry is
 [`engine-control-plane.json`](engine-control-plane.json).
@@ -14,6 +14,7 @@ handoffs, and bounded recovery. Its registry is
 | Source/currentness verification | `digital-research-skills` |
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
 | Visual/presentation controls | `design-system-skills` |
+| Windows host, domain, fleet, and hybrid administration | `windows-admin-engine-skills` |
 | Tool adapters and native hooks | Host adapter or CI; never duplicated in domain doctrine |
 
 ## Hook implementation policy
@@ -43,7 +44,7 @@ validation result, and an owner.
 
 Each engine registry entry identifies its domain agents, thin command surfaces,
 minimum hooks, evidence types, and adoption document. The registry validator
-checks all ten engines and, when run with `--workspace-root C:\wamp64\www`,
+checks all eleven engines and, when run with `--workspace-root C:\wamp64\www`,
 verifies their routers and adoption documents are present:
 
 ```powershell

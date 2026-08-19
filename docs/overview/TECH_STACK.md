@@ -22,7 +22,7 @@ of this repository.
 | ripgrep | Fast file and text search. |
 | Markdown | Skill bodies, plans, references, guides, and docs. |
 | YAML | Skill frontmatter, alias registry, and routing fixtures. |
-| JSON | Machine-readable ten-engine control-plane registry. |
+| JSON | Machine-readable eleven-engine control-plane registry. |
 | PyInstaller/Inno Setup guidance | Downstream Windows executable-suite generation; neither tool is a runtime dependency of this repository. |
 
 ## Important Commands
