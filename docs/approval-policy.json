@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "policy_version": "approval-policy-1.0.0",
+  "default_action_class": "L3",
+  "action_classes": {
+    "L0": {
+      "description": "Read-only observation with no external communication or mutation.",
+      "preview_required": false,
+      "explicit_approval_required": false,
+      "approval_ttl_seconds": null
+    },
+    "L1": {
+      "description": "Reversible local or sandboxed preparation.",
+      "preview_required": true,
+      "explicit_approval_required": false,
+      "approval_ttl_seconds": null
+    },
+    "L2": {
+      "description": "Consequential but reversible change to a real system, audience, record, workflow, or cost.",
+      "preview_required": true,
+      "explicit_approval_required": true,
+      "approval_ttl_seconds": 900
+    },
+    "L3": {
+      "description": "Irreversible, destructive, privileged, financial, regulated, external, or high-impact action.",
+      "preview_required": true,
+      "explicit_approval_required": true,
+      "approval_ttl_seconds": 900
+    }
+  },
+  "required_action_fields": [
+    "action_type",
+    "class",
+    "owner",
+    "allowed_approver_roles",
+    "preview_required",
+    "approval_ttl_seconds",
+    "idempotency_required",
+    "rollback",
+    "verification"
+  ],
+  "required_approval_fields": [
+    "approval_id",
+    "action_id",
+    "approver_id",
+    "approver_role",
+    "approved_at",
+    "expires_at",
+    "policy_version",
+    "scope_hash",
+    "action_nonce",
+    "approval_text"
+  ],
+  "default_deny": true,
+  "separation_of_duties": true,
+  "audit_required_before_execution": true
+}

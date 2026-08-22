@@ -53,3 +53,14 @@ python scripts/validate_engine_control_plane.py --workspace-root C:\wamp64\www
 
 This is intentionally a small control plane. It prevents duplicated persona
 catalogues while making missing controls visible and testable.
+
+## Human approval enforcement
+
+Side-effecting tools must also use the versioned policy and executable gate in
+[`approval-contract.md`](approval-contract.md), [`approval-policy.json`](approval-policy.json),
+and [`../tools/approval_control_plane.py`](../tools/approval_control_plane.py).
+Each domain adapter is validated by `scripts/validate_approval_adapters.py`.
+The registry and skill text alone do not claim runtime enforcement: every host
+path must route through the gate and pass the no-approval, stale-approval,
+scope-change, self-approval, audit, kill-switch, idempotency, and verification
+tests before it is marked enforced.
