@@ -88,6 +88,26 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 ## References
 
 - Use `enterprise-ux-process` when the work has enterprise constraints, stakeholder churn, or requirement ambiguity.
+## Evidence ladder and scale gate
+
+Before recruiting or building, run a lightweight market preflight: define the
+problem and target segment, inspect demand and alternatives, and distinguish
+search/interest signals from observed behaviour. Then escalate evidence only as
+the decision requires: interviews/observation, a concept or landing test, a
+click-through or workflow prototype, concierge/manual delivery, and finally
+real use, payment, renewal, or another material commitment. Predeclare the
+threshold, guardrail, time window, denominator, and persevere/pivot/kill rule.
+
+For SaaS or product-scale decisions, do not treat acquisition or a polished
+prototype as product-market fit. Require a named activation event, repeat
+behaviour/retention evidence, a viable delivery and support path, and capacity
+to maintain the product/design system before recommending scale. If an
+AI-assisted workflow is used, preserve source context, record decisions, verify
+research against the original product/source, and review scoped prototype
+deltas before adoption.
+
+Practitioner cross-checks: [Eleken product-idea validation](https://www.eleken.co/blog-posts/how-to-validate-product-ideas), [SaaS launch](https://www.eleken.co/blog-posts/how-to-launch-a-saas-business), [startup scaling](https://www.eleken.co/blog-posts/scaling-your-startup-how-it-looks-from-the-product-design-perspective), and [AI design workflow](https://www.eleken.co/blog-posts/ai-design-workflow). Use as prompts, not as proof of market size, outcomes, or tool performance.
+
 <!-- dual-compat-end -->
 
 Based on Cagan (2017) *INSPIRED: How to Create Tech Products Customers Love*, 2nd ed.
