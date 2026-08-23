@@ -28,7 +28,9 @@ fictional facility policy is `tenant_configuration`; patients and encounters are
 
 ## Entity and scenario rules
 
-- Prefer natural fixture keys such as `DEMO-HOSP-A-PATIENT-001`; resolve server IDs from application responses and store them in the entity ledger.
+- Prefer stable technical fixture keys such as `DEMO-HOSP-A-PATIENT-001`; resolve server IDs from application responses and store them in the entity ledger. Fixture keys and seed-ownership markers are metadata and must not be copied into displayed names, titles, descriptions, notes, complaints, or narratives.
+- Use natural, culturally appropriate, domain-realistic human-facing content. Do not prefix or suffix display content with `DEMO`, `TEST`, `SAMPLE`, sequence labels, lorem ipsum, or other placeholder/gibberish text merely to signal that a record is synthetic.
+- Put the literal marker `DEMO` inside values that could be mistaken for authentic legal, regulatory, identity, tax, or financial identifiers, including national IDs, passports, TINs, bank accounts, and equivalent account numbers. When an ordinary production validator rejects `DEMO`, require an explicit sandbox/test identifier contract or mark the capability `BLOCKED`; never emit a realistic unmarked substitute.
 - Every write carries tenant, actor, scenario, idempotency, correlation, and manifest checksum metadata where the application supports it.
 - Every dependency is a fixture key or scenario key, never a guessed database ID.
 - Expected state and invariant assertions must be independently verifiable.

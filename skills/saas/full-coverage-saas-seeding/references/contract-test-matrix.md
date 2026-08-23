@@ -12,6 +12,8 @@ engine validation evidence.
 | Capability present only in schema/menu | Mark `NOT_ASSESSED`; do not invent a boundary |
 | Required capability has no supported application boundary | Return `BLOCKED_CAPABILITY`; never use SQL/DML/private repositories |
 | Duplicate fixture key, natural-key collision, or cross-tenant identifier | Preflight refuses before business writes |
+| Human-facing fixture content contains `DEMO`/`TEST`/`SAMPLE`, placeholder labels, lorem ipsum, or gibberish | Manifest/content lint refuses before business writes and identifies the field |
+| National ID, passport, TIN, bank account, or equivalent sensitive identifier lacks `DEMO` | Preflight refuses; use an explicit sandbox identifier contract or return `BLOCKED_CAPABILITY` when the validator cannot accept the marker |
 | Replayed manifest | Idempotency evidence shows no duplicate business effects |
 | Forced mid-run failure | Run ledger identifies partial state; supported rollback/compensation or explicit blocker is shown |
 | Reset after demo run | Owned demo activity is removed or reversed through the approved boundary; reference and unrelated tenant data remain unchanged |
