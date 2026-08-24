@@ -27,6 +27,7 @@ register and tests.
 3. Select the surname from `english.csv` for `western` or `arabic.csv` for `arabic`.
 4. Record the combined asset checksum in the manifest and run ledger.
 5. Keep a collision registry scoped to the target fixture. If a generated full name is already used, advance deterministically and document the collision rule; never call a runtime random function.
+6. When a synthetic person email is required, derive it from the first two name tokens as `firstname.lastname@demoemail.local`; keep company mailbox addresses separate.
 
 ## Validation gate
 
