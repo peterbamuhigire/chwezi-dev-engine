@@ -483,7 +483,6 @@ composer quality && git commit -m "feat: description"
 Seeding must be deterministic, rerunnable without duplication, safe outside production, explicit about credentials, and verified across migrations, tenant boundaries, roles, and panels.
 
 ## Recurring Demo Activity Standard
-
 Every demo SaaS MUST keep a stable baseline and a fictional, tenant-scoped
 rolling activity refresh (normally the latest 14 days). The refresh contract
 requires deterministic keys, `--from`/`--to`/`--days`, `--dry-run`, a production
@@ -491,6 +490,7 @@ guard, a run ledger, coverage verification, no destructive changes, and
 second-server portability. Demo login buttons and shortcut accounts must use
 the same explicit development-only configuration as the seeder.
 
+Use `../full-coverage-saas-seeding/references/synthetic-name-bank-standard.md` for fictional, culturally scoped, deterministic, checksum-recorded four-CSV identity pools; never use a tiny repeated list or runtime-random names.
 See [`references/recurring-demo-data.md`](references/recurring-demo-data.md)
 for the full contract, verification checklist, and command pattern.
 ## Outputs
