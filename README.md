@@ -120,7 +120,7 @@ This engine owns engineering implementation and SDLC quality. It does not replac
 
 | Need | Route with this engine to |
 |---|---|
-| Current web, AI, cloud, security, framework, standards, or market evidence | <a href="https://github.com/peterbamuhigire/digital-research-skills" target="_blank" rel="noopener noreferrer">Digital Research Engine</a> |
+| Current web, AI, cloud, security, framework, standards, or market evidence | <a href="https://github.com/peterbamuhigire/digital-research-skills" target="_blank" rel="noopener noreferrer">Digital Research Engine</a> at `C:\wamp64\www\digital-research-engine` |
 | IFRS, accounting, tax, payroll, treasury, close, audit, or statutory values | <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a> |
 | Typography, visual design, UI appearance, design systems, document/slides/spreadsheet presentation | <a href="https://github.com/peterbamuhigire/design-system-skills" target="_blank" rel="noopener noreferrer">Design System Skills</a> |
 | Premium website strategy, content, SEO, conversion, launch operations, and website orchestration | <a href="https://github.com/peterbamuhigire/website-skills" target="_blank" rel="noopener noreferrer">Website Skills</a> |
