@@ -22,6 +22,7 @@ ENGINE_DIRS = {
     "accounting": "chwezi-accounting-doctrine",
     "design": "design-system-skills",
     "digital-research": "digital-research-skills",
+    "digital-research": "digital-research-engine",
     "skills-web-dev": "skills-web-dev",
     "windows-admin": "windows-admin-engine-skills",
 }
