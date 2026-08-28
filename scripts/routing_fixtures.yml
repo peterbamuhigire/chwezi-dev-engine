@@ -60,6 +60,8 @@ fixtures:
     expect: database-design-engineering
   - task: "Define an API contract first with versioning, idempotency and error model"
     expect: api-design-first
+  - task: "Design a jurisdiction-neutral electronic fiscal taxing integration with Uganda EFRIS, tenant-scoped TINs, offline queues, fiscal document mapping and reconciliation"
+    expect: electronic-fiscal-taxing
   - task: "Split a monolith into microservices and decide service boundaries and communication"
     expect: microservices-architecture
   - task: "Write advanced PostgreSQL queries, partitioning and server-side functions"

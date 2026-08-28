@@ -6,7 +6,7 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Return the active catalogue to its soft target | The current count is 174 after the intentional managed-visual-assets, full-coverage SaaS seeding, and engine-control-plane additions. CI enforces the 200 hard cap; the next safe alias or consolidation review should return the catalogue to 150-170 without deleting knowledge. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
+| Return the active catalogue to its soft target | The current count is 176 after the intentional managed-visual-assets, full-coverage SaaS seeding, engine-control-plane, and electronic-fiscal-taxing additions. CI enforces the 200 hard cap; the next safe alias or consolidation review should return the catalogue to 150-170 without deleting knowledge. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
 
 ## High Priority
 
@@ -14,6 +14,7 @@ This file tracks the next practical work for the skills repository.
 | --- | --- | --- |
 | Grow the routing fixture set with each new skill | The smoke test only guards routes it has fixtures for. | Add a case to `scripts/routing_fixtures.yml` for any skill a neighbour could shadow. |
 | Review inactive aliases for deeper consolidation | `ALIAS.md` preserves content, but durable material should eventually move into retained parent references. | Start with finance and data aliases from `docs/skill-aliases.yml`. |
+| Complete Uganda EFRIS adapter and UAT evidence | The reusable engineering route now exists, but the authenticated URA contract, credentials, sandbox acceptance, and BIRDC production evidence are still provider-gated. | `skills/finance-accounting/electronic-fiscal-taxing/` and the ERP `docs/plans/efris-aug-26/` programme |
 
 ## Medium Priority
 

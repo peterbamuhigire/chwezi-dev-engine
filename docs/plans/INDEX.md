@@ -11,6 +11,7 @@ This index lists planning documents and their current status.
 | WWDC26 Apple platform modernization | `2026-06-21-wwdc26-apple-platform-skill-modernization.md` | Implemented 2026-06-21 |
 | Production-readiness audit | `../evaluation/2026-05-30-production-readiness-audit.md` | Complete; all six checklist questions PASS |
 | Eleven-engine control plane | `../updates/2026-08-20-eleven-engine-control-plane.md` | Implemented; Windows engine registered and local-router checks PASS |
+| Electronic fiscal taxing | `../updates/2026-08-28-electronic-fiscal-taxing.md` | Implemented skill and Uganda EFRIS reference pack; provider activation remains source/UAT gated |
 | Ten-engine control plane | `../updates/2026-08-06-engine-control-plane.md` | Implemented; registry and local-router checks PASS |
 | Scaling operations | `../scaling-ops/00-index.md` | Reference |
 
