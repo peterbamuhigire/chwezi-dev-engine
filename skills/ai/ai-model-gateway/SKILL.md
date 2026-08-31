@@ -71,6 +71,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Cost ceiling policy per plan (hard caps vs soft caps).
 - Residency commitments per tenant region.
 
+## Book-derived additions
+
+When the gateway is part of a wider AI data foundation, load [AI data foundation selection and operations](references/ai-data-foundation-selection-and-operations.md) for data-product contracts, portability, trust, and session-level operations.
+
 ## Workflow
 
 1. Read this `SKILL.md`.

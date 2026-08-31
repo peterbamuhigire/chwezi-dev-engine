@@ -207,3 +207,8 @@ Read and search are required. Test execution and edits require authorisation.
 - Produce a test plan, coverage map, executable checks, evidence, and residual-risk statement.
 ## Degraded mode
 Fallback without a runnable environment: produce the risk-based plan and mark every unexecuted test as unverified rather than passed.
+
+## Book-derived additions
+
+When a metadata-driven platform or AI feature can create cascading workflow,
+permission, data, or model changes, load [metadata-platform-and-ai-quality](references/metadata-platform-and-ai-quality.md).

@@ -136,3 +136,8 @@ Fallback: without delegation, execute sequentially. Without execution, return pa
 | Development task, repository context, AI-use policy, and review boundary | yes | Bound AI-assisted work |
 ## Outputs
 - Produce reviewed code or guidance with provenance, tests, human decisions, and unresolved risks.
+
+## Book-derived additions
+
+For interaction modes, execution records, prompt/context discipline, and trust
+ramps, load [book-informed AI collaboration and execution](references/book-informed-ai-collaboration-and-execution.md).

@@ -12,7 +12,7 @@ Last verified: 2026-08-28.
 
 | Measure | Result |
 |---|---:|
-| Active `SKILL.md` files | 176 |
+| Active `SKILL.md` files | 177 |
 | Guardrail maximum | 200 |
 | Routing fixtures | 128 |
 | Routing precision@1 | 91% (117/128) |
@@ -100,6 +100,11 @@ Book-derived references include:
 
 The implementation record and adoption plan are in [`docs/continuous-improvement/`](docs/continuous-improvement/). The historical upgrade records remain in [`docs/engine-upgrade-july-2026/`](docs/engine-upgrade-july-2026/).
 
+## September 2026 book-driven Kaizen wave
+
+The portfolio study and implementation record is in
+[`docs/continuous-improvement/book-driven-kaizen-2026-09-01.md`](docs/continuous-improvement/book-driven-kaizen-2026-09-01.md). It adds algorithm selection as a routed capability and strengthens AI collaboration, data-foundation, and metadata-platform quality references.
+
 ## Delivery workflow
 
 For any substantial deliverable:
@@ -137,12 +142,12 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py --report-only
 ```
 
-Expected current results are 176 active skills, zero catalog findings, 128/128 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
+Expected current results are 177 active skills, zero catalog findings, 129/129 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
 
 ## Honest limitations
 
 - Routing precision@1 is 91%; precision@3 is 100%. The engine still requires human review for close domain collisions.
-- The 176 active skills remain below the hard cap of 200, but catalog size alone is not proof of quality or production readiness.
+- The 177 active skills remain below the hard cap of 200, but catalog size alone is not proof of quality or production readiness.
 - Some book inputs are historical, partial early releases, or have unusable extraction. They inform patterns only where the available text supports them; current claims require independent verification.
 - `AI for Game Developers` contains durable algorithmic foundations but dated APIs and production assumptions. Treat it as conceptual input, not current platform documentation.
 - Game and design guidance does not replace hands-on playtesting, visual review, accessibility testing, security testing, or production telemetry.

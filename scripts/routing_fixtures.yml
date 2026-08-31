@@ -68,6 +68,8 @@ fixtures:
     expect: postgresql-engineering
   - task: "Compute cohort retention and funnel metrics and IRR in Python where SQL is unwieldy"
     expect: python-data-analytics
+  - task: "Choose and review an algorithm for matching, graph search, optimisation or caching under explicit time and memory constraints"
+    expect: algorithm-selection-and-complexity
 
   # --- DevOps ---
   - task: "Build a CI/CD pipeline with build, test and deployment stages"
