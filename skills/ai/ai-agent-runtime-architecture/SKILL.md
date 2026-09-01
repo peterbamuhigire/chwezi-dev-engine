@@ -239,4 +239,5 @@ Cross-links: `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls`, `ai-agent
 ## Consolidated Child References
 
 - Load `references/routing.md` to map retired AI child skill slugs to their reference modules.
+- Load `../../sdlc-meta/references/book-driven-system-decision-and-agent-orchestration.md` for autonomy, side-effect, escalation, rollback, and currentness controls.
 

@@ -49,7 +49,7 @@ local engines. See `docs/engine-control-plane.md`.
 
 ## Current Risks
 
-- The active skill count is 174, four above the 150-170 soft target; future additions
+- The active skill count is 177, seven above the 150-170 soft target; future additions
   still need alias discipline. The CI guardrail (200 hard cap) and the collision
   detector keep this from becoming routing noise.
 - Inactive aliases must stay documented in `docs/skill-aliases.yml`; the

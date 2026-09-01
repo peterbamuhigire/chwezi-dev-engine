@@ -6,7 +6,7 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Return the active catalogue to its soft target | The current count is 176 after the intentional managed-visual-assets, full-coverage SaaS seeding, engine-control-plane, and electronic-fiscal-taxing additions. CI enforces the 200 hard cap; the next safe alias or consolidation review should return the catalogue to 150-170 without deleting knowledge. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
+| Return the active catalogue to its soft target | The current count is 177 after the intentional managed-visual-assets, full-coverage SaaS seeding, engine-control-plane, electronic-fiscal-taxing, and Kaizen additions. CI enforces the 200 hard cap; the next safe alias or consolidation review should return the catalogue to 150-170 without deleting knowledge. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
 
 ## High Priority
 

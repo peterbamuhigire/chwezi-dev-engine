@@ -100,6 +100,14 @@ proof, standards currency, output readiness, hygiene, safety, and integrity.
 - `advanced-testing-strategy` for risk-scaled validation.
 - `world-class-engineering` for delivery gates and operational handoff.
 
+## Mandatory Digital Research currentness gate
+
+Every Kaizen cycle must begin with `digital-research-skills` source evaluation
+and source verification. Record scope, dates, freshness class, support status,
+uncertainty, and review date for current standards, APIs, frameworks, packages,
+security, platform, and lifecycle claims; quarantine unsupported claims as
+`NOT_ASSESSED`. Apply the [portfolio Kaizen currentness gate](../../../../digital-research-skills/docs/continuous-improvement/kaizen-currentness-gate.md).
+
 ## References
 
 - `docs/continuous-improvement/kaizen-adoption-2026-08.md` - local adoption plan.
@@ -138,3 +146,5 @@ conditional plan or verdict; never convert unavailable evidence into a pass.
 | The result changes a cross-engine handoff | Require source owner, receiving owner, artefacts, uncertainty contract, and fallback | Silent ownership drift |
 | A material outcome, render, system, or production check cannot run | Mark it `NOT ASSESSED` and retain the blocker | False readiness |
 | The experiment passes its acceptance evidence | Standardise the result and schedule re-measurement | Learning lost in a one-off patch |
+
+The book-wave operating contract is [book-driven system decision and agent orchestration](../references/book-driven-system-decision-and-agent-orchestration.md). Current technology and security claims must pass Digital Research verification.

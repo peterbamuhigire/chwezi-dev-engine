@@ -1,0 +1,32 @@
+{
+  "project": "24-book-cross-engine-kaizen-2026-09",
+  "accessed": "2026-09-01",
+  "owner": "digital-research-skills",
+  "policy": "Current or volatile claims require a primary source, claim-specific support review, and a review date. Historical books provide concepts only.",
+  "sources": [
+    {"id":"w3c-wcag22","title":"Web Content Accessibility Guidelines 2.2","ref":"https://www.w3.org/TR/WCAG22/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"current","publication_date":"2024-12-12","scope":"Current W3C accessibility recommendation and conformance language."},
+    {"id":"isc-bind-status","title":"BIND 9 status and downloads","ref":"https://www.isc.org/bind/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-10-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Current ISC release/status/support information; do not hard-code versions without rechecking."},
+    {"id":"ietf-dnssec-bcp","title":"RFC 9364 DNS Security Extensions","ref":"https://www.rfc-editor.org/rfc/rfc9364.html","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2027-09-01","freshness_class":"current","publication_date":"2023-02-01","scope":"IETF Best Current Practice summary for DNSSEC."},
+    {"id":"owasp-asvs","title":"OWASP Application Security Verification Standard","ref":"https://owasp.org/www-project-application-security-verification-standard/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"current","as_of":"2026-09-01","scope":"Current ASVS project and stable-version reference; requirements must be version-qualified."},
+    {"id":"ifrs-18","title":"IFRS 18 Presentation and Disclosure in Financial Statements","ref":"https://www.ifrs.org/issued-standards/list-of-standards/ifrs-18-presentation-and-disclosure-in-financial-statements/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"regulatory","publication_date":"2024-04-01","scope":"IFRS Foundation effective-date and standard-status information; local reporting basis still controls."},
+    {"id":"nist-ai-rmf","title":"NIST AI Risk Management Framework","ref":"https://www.nist.gov/itl/ai-risk-management-framework","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-10-01","freshness_class":"platform","publication_date":"2023-01-26","scope":"Current NIST AI RMF status and supporting resources; page notes that AI RMF 1.0 is being revised."},
+    {"id":"ms-windows-lifecycle","title":"Microsoft Lifecycle","ref":"https://learn.microsoft.com/en-us/lifecycle/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-10-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Windows and Microsoft product lifecycle and support-status claims."},
+    {"id":"ms-powershell-lifecycle","title":"PowerShell Support Lifecycle","ref":"https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-support-lifecycle?view=powershell-7.5","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-10-01","freshness_class":"platform","as_of":"2026-09-01","scope":"PowerShell 7 stable/LTS/support claims; Windows PowerShell 5.1 is a separate OS component."},
+    {"id":"ms-windows-security-baselines","title":"Windows security baselines","ref":"https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Microsoft security-baseline scope and application boundaries."},
+    {"id":"ms-sct","title":"Microsoft Security Compliance Toolkit","ref":"https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/security-compliance-toolkit-10","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Security Compliance Toolkit tools and versioned baseline workflow."},
+    {"id":"ms-intune-security-baselines","title":"Intune security baselines for Windows devices","ref":"https://learn.microsoft.com/en-us/intune/device-security/security-baselines/overview","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-10-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Current Intune security-baseline feature and platform-support claims."},
+    {"id":"ms-windows-server-docs","title":"Windows Server documentation","ref":"https://learn.microsoft.com/en-us/windows-server/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Current Windows Server documentation surface; specific commands and versions require page-level verification."}
+  ],
+  "claims": [
+    {"id":"claim-wcag-current","requires_currentness":true,"source_ids":["w3c-wcag22"]},
+    {"id":"claim-bind-current","requires_currentness":true,"source_ids":["isc-bind-status"]},
+    {"id":"claim-dnssec-bcp","requires_currentness":true,"source_ids":["ietf-dnssec-bcp"]},
+    {"id":"claim-asvs-current","requires_currentness":true,"source_ids":["owasp-asvs"]},
+    {"id":"claim-ifrs-status","requires_currentness":true,"source_ids":["ifrs-18"]},
+    {"id":"claim-ai-rmf-status","requires_currentness":true,"source_ids":["nist-ai-rmf"]},
+    {"id":"claim-windows-lifecycle","requires_currentness":true,"source_ids":["ms-windows-lifecycle"]},
+    {"id":"claim-powershell-support","requires_currentness":true,"source_ids":["ms-powershell-lifecycle"]},
+    {"id":"claim-windows-security-baselines","requires_currentness":true,"source_ids":["ms-windows-security-baselines","ms-sct","ms-intune-security-baselines"]},
+    {"id":"claim-windows-server-docs","requires_currentness":true,"source_ids":["ms-windows-server-docs"]}
+  ]
+}

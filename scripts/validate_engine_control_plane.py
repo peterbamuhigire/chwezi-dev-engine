@@ -21,7 +21,7 @@ ENGINE_DIRS = {
     "proposal": "proposal-skills",
     "accounting": "chwezi-accounting-doctrine",
     "design": "design-system-skills",
-    "digital-research": "digital-research-engine",
+    "digital-research": "digital-research-skills",
     "skills-web-dev": "skills-web-dev",
     "windows-admin": "windows-admin-engine-skills",
 }

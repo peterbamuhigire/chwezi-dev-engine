@@ -6,6 +6,21 @@ See `.skills-engine/engine-manifest.yaml` for the declarative contract used by t
 
 The package may read the router, discover skills, inspect Git, and run only declared checks. Missing evidence is NOT ASSESSED; writes, pulls, publication, submissions, ledger/filing changes, deployment, or control changes require explicit approval.
 
+## Mandatory Digital Research currentness gate for Kaizen
+
+Every Kaizen audit, skill edit, reference update, validator change, and
+standardisation decision MUST begin with the Digital Research Engine at
+`C:\wamp64\www\digital-research-skills`. Read its `source-evaluation` and
+`source-verification` skills and the currentness gate reference
+`docs/continuous-improvement/kaizen-currentness-gate.md`.
+
+Before admitting any standard, policy, law, technology, platform capability,
+software version, command, security control, benchmark, or lifecycle claim,
+record source scope, publication/version date, access date, freshness class,
+review date, support status, and uncertainty. Use current authoritative
+primary sources; quarantine stale/ambiguous/unsupported claims and mark them
+`NOT_ASSESSED`. Books are durable concept inputs only.
+
 This file is the short navigation hub for coding agents working in this
 repository. Keep detailed explanations in `docs/` and link to them from here.
 
@@ -71,7 +86,7 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 
 Known baseline as of 2026-08-11 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 174.
+- Active `SKILL.md` files: 177.
 - Target active catalog size: 150-170. The managed-visual-assets and engine-control-plane additions leave the catalogue
   two skills above that soft target and well under the enforced 200 cap; the next safe alias or
   consolidation review should return it to range without deleting knowledge.

@@ -17,6 +17,32 @@ handoffs, and bounded recovery. Its registry is
 | Windows host, domain, fleet, and hybrid administration | `windows-admin-engine-skills` |
 | Tool adapters and native hooks | Host adapter or CI; never duplicated in domain doctrine |
 
+## Portfolio Kaizen currentness gate
+
+Every Kaizen operation across all eleven engines—engine audits, skill or
+reference edits, validator changes, routing changes, and standardisation
+decisions—must begin with the Digital Research Engine's source-evaluation and
+source-verification workflow. The canonical contract is
+[`kaizen-currentness-gate.md`](../../digital-research-skills/docs/continuous-improvement/kaizen-currentness-gate.md).
+Current standards, policies, laws, technologies, versions, commands, security
+controls, benchmarks, and lifecycle claims require dated, scoped, reviewable
+primary-source evidence. Missing or ambiguous evidence is `NOT_ASSESSED` and
+blocks standardisation.
+
+## Windows administration engine status
+
+`windows-admin` is a first-class registry engine covering Windows workstations and
+servers, Active Directory, identity/security, networking, storage, recovery, fleet,
+and hybrid administration. Its canonical local checkout is
+`C:\wamp64\www\windows-admin-engine-skills`; the registry contract is present, but
+the checkout, `AGENTS.md`, and `docs/control-plane-adoption.md` are now present.
+Its native catalogue, routing, source-ingestion, and control-plane checks pass;
+live Windows/domain/fleet lab evidence remains claim-specific and must be marked
+`NOT ASSESSED` when unavailable. Do not fabricate Windows procedures from Linux
+or generic engineering guidance.
+
+See [Windows administration engine status](engine-status/windows-admin-engine.md).
+
 ## Hook implementation policy
 
 The registry describes the contract, not a claim that every host supports

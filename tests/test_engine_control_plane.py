@@ -29,7 +29,7 @@ COMPLIANCE_SCRIPT = (
 )
 COMPLIANCE_MODULE = load_module("engine_compliance", COMPLIANCE_SCRIPT)
 
-EXPECTED_ACTIVE_SKILL_COUNT = 174
+EXPECTED_ACTIVE_SKILL_COUNT = 177
 EXPECTED_CLAUDE_BRIDGE = "# Claude Code repository memory\n\n@AGENTS.md\n"
 PORTABLE_SECTION_ALIASES = {
     "Use When": ("Use When",),
@@ -95,7 +95,7 @@ def count_surface_mismatches(surface_texts: dict[str, str], expected: str) -> di
     return mismatches
 
 
-def test_control_plane_registry_has_all_ten_engines():
+def test_control_plane_registry_has_all_eleven_engines():
     assert VALIDATE_MODULE.validate_registry() == []
 
 
@@ -199,10 +199,10 @@ def test_count_surface_mutation_is_rejected():
         )
     }
     surface_texts["README.md"] = surface_texts["README.md"].replace(
-        "| Active `SKILL.md` files | 174 |",
-        "| Active `SKILL.md` files | 173 |",
+        "| Active `SKILL.md` files | 177 |",
+        "| Active `SKILL.md` files | 176 |",
         1,
     )
     assert count_surface_mismatches(surface_texts, str(EXPECTED_ACTIVE_SKILL_COUNT)) == {
-        "README.md": ["173"]
+        "README.md": ["176"]
     }
