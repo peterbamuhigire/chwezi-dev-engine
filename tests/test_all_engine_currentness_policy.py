@@ -14,7 +14,7 @@ ENGINES = (
     "proposal-skills",
     "chwezi-accounting-doctrine",
     "design-system-skills",
-    "digital-research-skills",
+    "digital-research-engine",
     "skills-web-dev",
     "windows-admin-engine-skills",
 )

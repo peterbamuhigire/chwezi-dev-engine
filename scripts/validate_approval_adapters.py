@@ -10,14 +10,14 @@ ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIRS = {
     "skills-web-dev": ROOT,
     "srs": Path(r"C:\wamp64\www\srs-skills"),
-    "business-plan": Path(r"C:\Users\Peter\source\repos\business-plan-skills"),
+    "business-plan": Path(r"C:\wamp64\www\business-plan-skills"),
     "website": Path(r"C:\wamp64\www\website-skills"),
     "social-media": Path(r"C:\wamp64\www\social-media-skills"),
     "linux": Path(r"C:\wamp64\www\linux-skills"),
-    "proposal": Path(r"C:\Users\Peter\source\repos\proposal-skills"),
-    "accounting": Path(r"C:\Users\Peter\source\repos\chwezi-accounting-doctrine"),
+    "proposal": Path(r"C:\wamp64\www\proposal-skills"),
+    "accounting": Path(r"C:\wamp64\www\chwezi-accounting-doctrine"),
     "design": Path(r"C:\wamp64\www\design-system-skills"),
-    "digital-research": Path(r"C:\wamp64\www\digital-research-skills"),
+    "digital-research": Path(r"C:\wamp64\www\digital-research-engine"),
     "windows-admin": Path(r"C:\wamp64\www\windows-admin-engine-skills"),
 }
 REQUIRED = {"action_type", "class", "side_effect", "owner", "allowed_approver_roles",
