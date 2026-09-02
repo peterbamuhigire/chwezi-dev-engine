@@ -60,6 +60,7 @@ plane governs ownership, lifecycle, evidence, handoff, and recovery.
 | Hook | Event, action, failure mode, adapter, and evidence |
 | Handoff | Context, decisions, artefacts, open risks, and next owner |
 | Evidence | Source, check, result, reviewer, timestamp, and release consequence |
+| Runtime catalog | Exact skill roots, entry count, metadata budget, duplicate check, and host result |
 
 ### Agent topology
 
@@ -82,6 +83,7 @@ evidence, destructive-action, and release gates fail closed or return
 - Treat missing tools, sources, screenshots, tests, or approvals as `NOT ASSESSED`, never as `PASS`.
 - Default review and analysis to read-only. Require explicit authority for mutation or external side effects.
 - Make stop conditions, rollback or recovery, and release consequences visible before work advances.
+- Check the assembled runtime skill catalog before release; mark unavailable host or plugin evidence `NOT ASSESSED`.
 
 ## Quality Standards
 
@@ -90,6 +92,7 @@ evidence, destructive-action, and release gates fail closed or return
 - A command is a thin entrypoint and does not duplicate domain doctrine.
 - A hook names its event, action, failure mode, adapter, and retained evidence.
 - A handoff names context, decisions, artefacts, open risks, and the next owner.
+- A runtime catalog gate records exact roots, limits, counts, duplicate names, result, timestamp, and release consequence.
 
 ## Anti-Patterns
 

@@ -63,6 +63,7 @@ Do not label every role Markdown file an agent. State whether the artefact is a 
 - Keep `SKILL.md` under 500 lines. Keep deeper markdown references lean and split them when they become hard to load or maintain.
 - Use only validator-approved frontmatter keys: `name`, `description`, `license`, `allowed-tools`, `metadata`.
 - Make `description` the trigger: what the skill does and when to use it.
+- Keep the discovery description concise: at most 400 characters, with only the user goal, trigger conditions, and a neighbour boundary.
 - Put deep detail in `references/`; keep `SKILL.md` focused on execution logic.
 - Do not add meta-docs inside skills such as `README.md` or `CHANGELOG.md`.
 - Keep shared expertise in one canonical, model-neutral source. Adapters may point to it but must not copy its full content.
@@ -91,6 +92,18 @@ Create or update a skill only if it captures:
 - A high-risk area where guardrails materially improve outcomes.
 
 Do not create skills for generic programming knowledge or one-off tasks.
+
+### Runtime metadata budget
+
+Skill names and descriptions are discovery metadata exposed before the model
+chooses which full instruction body to load. Treat this metadata as a shared
+runtime budget across local engines and plugins:
+
+- Keep each description at or below 400 characters; prefer one or two direct sentences.
+- Put procedures, output contracts, examples, policy detail, and long trigger lists in the body or `references/`.
+- Keep one canonical `SKILL.md` entrypoint per capability. Use `ALIAS.md` and the routing index for absorbed or renamed topics.
+- Do not expose ignored, archived, or reference-only trees as runtime skill roots.
+- Run the aggregate runtime validator against the exact roots a host exposes; a repository-local pass is not sufficient.
 
 ### 2. Choose the Skill Shape
 
@@ -272,14 +285,17 @@ After creating or updating a skill:
 2. Run `python -X utf8 skill-writing/scripts/contract_gate.py --skill <skill-dir>` (Evidence Produced contract from `validation-contract`). Use `--all` to scan the whole repo, `--bundle <path>` to validate a Release Evidence Bundle, and `--strict` to treat warnings as errors.
 3. Run `python -X utf8 scripts/skill_catalog_guardrails.py`; any raw-source or
    likely full-text finding blocks release.
-4. Fix any frontmatter, structure, contract, or source-ingestion issues.
-5. Sanity-check the skill against a realistic prompt.
-6. Ensure the skill still reads cleanly when loaded on its own.
+4. Run the coordination engine's aggregate runtime metadata validator against
+   the assembled local and plugin roots.
+5. Fix any frontmatter, structure, contract, source-ingestion, or runtime-budget issues.
+6. Sanity-check the skill against a realistic prompt.
+7. Ensure the skill still reads cleanly when loaded on its own.
 
 ## Anti-Patterns
 
 - Huge `SKILL.md` files that act like textbooks.
 - Trigger descriptions that are too broad to be useful.
+- Long discovery descriptions that repeat the workflow or claim broad auto-loading. Fix: keep the trigger concise and move detail into references.
 - Skills that duplicate existing skills without raising the quality bar.
 - Example-heavy files with little operational guidance.
 - Raw books, ebook conversions, OCR dumps, or chapter-by-chapter paraphrases in

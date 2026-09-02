@@ -31,7 +31,7 @@ DEFAULT_REFERENCE_ROOTS = (
 )
 DEFAULT_EXTERNAL_ENGINE_ROOTS: tuple[str, ...] = ()
 DEFAULT_MAX_ACTIVE_SKILLS = 200
-MAX_DESCRIPTION_CHARS = 1024
+MAX_DESCRIPTION_CHARS = 350
 MAX_SKILL_MD_LINES = 500
 FRONTMATTER_RE = re.compile(r"^\ufeff?---\r?\n(.*?)\r?\n---\r?\n?", re.DOTALL)
 ALIASES_YML = REPO_ROOT / "docs" / "skill-aliases.yml"

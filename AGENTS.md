@@ -45,9 +45,9 @@ accurate, portable, easy to route, and below the active skill cap.
 
 - Prefer `rg` and `rg --files` for searches.
 - Do not move, delete, or rename skill directories as part of routine docs work.
-- Treat `doctrine/skills/` as retained finance reference material. The active
-  finance doctrine engine is `chwezi-accounting-doctrine`, resolved through the
-  global engine-routing table.
+- Treat the external `chwezi-accounting-doctrine` checkout as the canonical
+  finance source, resolved through the global engine-routing table. Keep its
+  reference-only checkout outside this runtime tree.
 - Preserve user edits. If the worktree is dirty, inspect before editing.
 - Keep Markdown files below 500 lines where practical.
 - Use ASCII unless the existing file already requires another character set.
@@ -69,9 +69,9 @@ accurate, portable, easy to route, and below the active skill cap.
 | `skills/` | Main active skills. |
 | `00-meta-initialization/` | SDLC documentation entry skills. |
 
-An active skill is a `SKILL.md` under one of those roots. `doctrine/skills/`
-is retained reference material for local continuity and is not counted by this
-engine's guardrails.
+An active skill is a `SKILL.md` under one of those roots. Reference-only engine
+checkouts must live outside this runtime tree and are not part of the active
+catalog.
 
 Inactive aliases are kept as `ALIAS.md` in the original skill directory and
 must be routed through `docs/skill-aliases.yml`.
@@ -83,6 +83,11 @@ Run this after catalog routing or skill frontmatter changes:
 ```powershell
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 ```
+
+For a Codex or plugin runtime, also run the cross-engine validator from
+`chwezi-engine-agents/scripts/validate-runtime-skill-budget.py` against the
+exact skill roots exposed by that host. The per-repository guardrail cannot
+measure the assembled runtime metadata budget.
 
 Known baseline as of 2026-08-11 (verify with the script; do not trust this prose):
 

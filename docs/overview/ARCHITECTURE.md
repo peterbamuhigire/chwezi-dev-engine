@@ -11,7 +11,7 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | Component | Responsibility |
 | --- | --- |
 | `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, game development, security, UX, product, and operations, including language entrypoints such as C#/.NET. |
-| `doctrine/skills/` | Retained finance reference material; not an active local catalog root. |
+| External `chwezi-accounting-doctrine` checkout | Canonical finance doctrine; kept outside the runtime skill catalog. |
 | `00-meta-initialization/` | Entry-point workflow for SDLC documentation setup. |
 | `docs/skill-routing-index.md` | Human routing map for consolidated and legacy skill names. |
 | `docs/skill-aliases.yml` | Machine-readable alias registry. |
@@ -59,8 +59,8 @@ legacy names through:
 Finance, accounting, audit, close, reporting, controls, IFRS, banking,
 reconciliation, and finance UX route to the external
 `chwezi-accounting-doctrine` engine unless a root skill adds distinct
-implementation behavior. Local `doctrine/skills/` files are retained references,
-not active local skills.
+implementation behaviour. Reference-only finance checkouts stay outside the
+runtime skill catalog.
 
 ## Validation And Enforcement
 

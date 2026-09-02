@@ -33,7 +33,7 @@ presentation-layer Apple UI guidance lives in the external
 | Area | Location | Notes |
 | --- | --- | --- |
 | Main skill catalog | `skills/` | Broad software, AI, SaaS, mobile, security, UX, and product skills. |
-| Finance doctrine | External <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>; local `doctrine/skills/` reference material | Canonical accounting, audit, reporting, IFRS, controls, and close guidance is loaded from the external engine. |
+| Finance doctrine | External <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a> | Canonical accounting, audit, reporting, IFRS, controls, and close guidance is loaded from the external engine. |
 | SDLC initialization | `00-meta-initialization/` | Entry-point project documentation workflow and examples. |
 | Routing docs | `docs/skill-routing-index.md` | Human-readable consolidation and routing policy. |
 | Alias data | `docs/skill-aliases.yml` | Machine-readable skill alias map. |
@@ -66,7 +66,7 @@ presentation-layer Apple UI guidance lives in the external
 - Target active catalog size is 150-170 skills.
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>
-  engine; local `doctrine/skills/` is retained reference material.
+  engine; reference-only checkouts stay outside the runtime skill catalog.
 - Current active catalog size is 177 skills. This is seven above the 150-170 soft target after the
   intentional managed-visual-assets and engine-control-plane additions and remains below the enforced hard cap of 200.
 - Current routing smoke-test suite contains 128 fixtures, with 91% precision@1

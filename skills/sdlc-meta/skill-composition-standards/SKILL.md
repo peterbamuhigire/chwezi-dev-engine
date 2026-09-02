@@ -103,6 +103,9 @@ A normalised SKILL.md must have these sections; each may be short, but none may 
 
 Rules:
 
+- Runtime gate: keep the parsed description at or below 400 characters; the aggregate runtime budget is checked separately.
+- Discovery metadata contains triggers and boundaries, not procedures, examples, or full policy text.
+
 - SKILL.md **≤ 500 lines**. Overflow goes into `references/`.
 - Every code snippet has a language tag on the fence.
 - No emojis unless the user explicitly requests them.
@@ -284,6 +287,12 @@ This skill is **advisory in mechanism, mandatory in convention**. There is no CI
 - Running the normalisation playbook on one older skill per week until the repository is normalised.
 
 Future work: a CI hook that parses Inputs / Outputs tables and warns when a claimed upstream artifact is not declared by any upstream skill.
+
+The runtime metadata validator is now the required cross-engine gate. Run the
+coordination engine's validator against the exact roots exposed by the host,
+including deliberately enabled plugin skill roots. Keep the runtime set below
+the entry-count and aggregate metadata limits; a per-repository pass does not
+prove that the assembled catalog fits.
 
 ## Anti-patterns
 
