@@ -148,3 +148,5 @@ conditional plan or verdict; never convert unavailable evidence into a pass.
 | The experiment passes its acceptance evidence | Standardise the result and schedule re-measurement | Learning lost in a one-off patch |
 
 The book-wave operating contract is [book-driven system decision and agent orchestration](../references/book-driven-system-decision-and-agent-orchestration.md). Current technology and security claims must pass Digital Research verification.
+
+The 2026-09-02 cross-engine study is [Book-driven Kaizen Wave 3](references/book-driven-kaizen-wave-3-2026-09-02.md); use it for currentness-gated contracts, testing, Git recovery, secure input handling, protocol semantics, and agent evaluation.
