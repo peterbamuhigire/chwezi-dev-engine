@@ -1,6 +1,6 @@
-# Eleven-Engine Control Plane
+# Twelve-Engine Control Plane
 
-The eleven local engines remain separate sources of truth. This control plane
+The twelve local engines remain separate sources of truth. This control plane
 provides the shared operating vocabulary for agents, commands, hooks, evidence,
 handoffs, and bounded recovery. Its registry is
 [`engine-control-plane.json`](engine-control-plane.json).
@@ -15,11 +15,12 @@ handoffs, and bounded recovery. Its registry is
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
 | Visual/presentation controls | `design-system-skills` |
 | Windows host, domain, fleet, and hybrid administration | `windows-admin-engine-skills` |
+| Political doctrine and political writing | `D:\political-skills` |
 | Tool adapters and native hooks | Host adapter or CI; never duplicated in domain doctrine |
 
 ## Portfolio Kaizen currentness gate
 
-Every Kaizen operation across all eleven engines—engine audits, skill or
+Every Kaizen operation across all twelve engines—engine audits, skill or
 reference edits, validator changes, routing changes, and standardisation
 decisions—must begin with the Digital Research Engine's source-evaluation and
 source-verification workflow. The canonical contract is
@@ -70,7 +71,7 @@ validation result, and an owner.
 
 Each engine registry entry identifies its domain agents, thin command surfaces,
 minimum hooks, evidence types, and adoption document. The registry validator
-checks all eleven engines and, when run with `--workspace-root C:\wamp64\www`,
+checks all twelve engines and, when run with `--workspace-root C:\wamp64\www`,
 verifies their routers and adoption documents are present:
 
 ```powershell

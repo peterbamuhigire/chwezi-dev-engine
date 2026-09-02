@@ -62,6 +62,8 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 ## References
 
+- [English output standard](../../docs/continuous-improvement/english-output-standard-2026-09-02.md) for collocation, register, precise vocabulary, idiom restraint, and anti-slop revision.
+
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Pair with `premium-software-product-execution` when copy must support premium pricing, buyer trust, service packaging, sales follow-up, or website-as-marketing-asset requirements.
 <!-- dual-compat-end -->

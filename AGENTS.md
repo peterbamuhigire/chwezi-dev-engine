@@ -141,6 +141,11 @@ This repository has no app database. If a skill discusses MySQL, PostgreSQL, or
 another datastore, that is domain guidance for downstream projects rather than a
 repository runtime dependency.
 
+## Human-facing English standard
+
+For software, apps, websites, APIs with user-facing text, technical guides, and
+skill documentation, load [`docs/continuous-improvement/english-output-standard-2026-09-02.md`](docs/continuous-improvement/english-output-standard-2026-09-02.md). It governs the reader, collocation, register, terminology, idiom, proof, and anti-slop layer. The website engine remains the primary website-content route; the design engine supplies visual and UX doctrine rather than owning prose.
+
 ## Documentation Updates
 
 When documentation is changed, keep these files aligned:

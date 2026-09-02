@@ -58,6 +58,8 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 ## References
 
+- [English output standard](../../docs/continuous-improvement/english-output-standard-2026-09-02.md) for human-facing prose, collocation, register, terminology, and proof.
+
 - Use the `references/` directory for deep detail after reading the core workflow below.
 <!-- dual-compat-end -->
 Two things kill document quality equally: bad design and bad writing. A document must pass **both** tests. This skill addresses both.
