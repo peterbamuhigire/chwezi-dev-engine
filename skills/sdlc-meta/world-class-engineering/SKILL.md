@@ -72,6 +72,16 @@ For authoring new skills or normalising older ones against the current bar, load
 
 ## Executable Standard
 
+### Attention-to-detail execution rule
+
+Work in thin vertical slices that a developer can explain end to end. For each
+slice, inspect the existing architecture and data flow, implement one useful
+behaviour, check its normal and failure states, review the user-visible result,
+and make a deliberate refinement before expanding scope. The same rule applies
+to requirements, design, code, tests, documentation, and kaizen records. Do not
+use a broad generated scaffold as a substitute for understanding; record the
+slice, the changed decision, and the evidence that closed it.
+
 Treat engineering as a delivery system, not only an implementation activity. A result is not world-class unless it can be changed safely, verified quickly, deployed repeatedly, diagnosed under stress, and improved without heroics.
 
 For non-trivial work, explicitly produce or update:

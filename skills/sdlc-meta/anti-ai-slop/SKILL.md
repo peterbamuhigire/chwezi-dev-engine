@@ -35,6 +35,24 @@ Apply these rules **continuously, as you generate** — to every sentence, compo
 
 ## What "AI slop" is (so you know what you are preventing)
 
+## Crafted delivery loop
+
+Anti-slop is an attention discipline, not a vocabulary filter. Work in small,
+named slices and keep the human decision visible:
+
+1. Frame the audience, job, consequence, constraints, and evidence boundary.
+2. Select one flow, section, state, component, claim, or content unit.
+3. Inspect the existing context and data or argument flow before changing it.
+4. Make the smallest useful change with real content, states, and ownership.
+5. Exercise it in context, including a relevant failure, empty, denied,
+   interrupted, or counter-case path.
+6. Refine one concrete defect or remove one element with no job; preserve what
+   works and record the proof before selecting the next slice.
+
+This loop applies to the kaizen operation and to its audit artefacts. A complete
+first draft, a green lint result, or a polished screenshot is not evidence that
+the underlying product has been understood. Missing proof is `NOT ASSESSED`.
+
 **AI slop** is low-quality content produced in quantity by generative AI and pushed at people who did not ask for it (Merriam-Webster 2025 Word of the Year, verified). Its three diagnostic properties (Kommers et al., *"Why Slop Matters"*, arXiv 2601.06060, verified):
 
 1. **Superficial competence** — looks fine on the surface, no substance underneath.

@@ -10,7 +10,7 @@ The package may read the router, discover skills, inspect Git, and run only decl
 
 Every Kaizen audit, skill edit, reference update, validator change, and
 standardisation decision MUST begin with the Digital Research Engine at
-`C:\wamp64\www\digital-research-skills`. Read its `source-evaluation` and
+`C:\wamp64\www\digital-research-engine`. Read its `source-evaluation` and
 `source-verification` skills and the currentness gate reference
 `docs/continuous-improvement/kaizen-currentness-gate.md`.
 
@@ -181,3 +181,7 @@ engine; presentation comes from design-system-skills. Hard rule: never use a ban
 (Inter, Geist, Roboto, Arial, Open Sans, Lato, Space Grotesk, bare system stacks) as primary
 type — state the chosen typeface and reason before producing any artifact.
 <!-- /design-system-skills:trigger -->
+
+## PORTFOLIO CRAFT CONTRACT
+
+Load `C:\wamp64\www\chwezi-engine-agents\docs\operations\portfolio-craft-standard-2026-09-04.md` when available. Build software, APIs, AI systems, and technical artefacts in named vertical slices: frame the user outcome and failure consequence, select one flow, inspect existing architecture and data flow, make the smallest useful change, run normal and failure checks, review rendered or operational behaviour where relevant, refine, and record evidence before proceeding. Code must be understood in context; interfaces, dependencies, states, observability, and rollback are part of the work. Do not generate a whole product as one opaque batch. Apply `Observe -> Baseline -> Select -> Experiment -> Check -> Standardise -> Teach -> Re-measure` to kaizen itself. Missing execution, render, production, source, reviewer, or stakeholder evidence is `NOT ASSESSED`, never a pass.

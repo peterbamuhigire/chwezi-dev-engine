@@ -1,6 +1,6 @@
 # Skills Web Dev
 
-`skills-web-dev` is the Chwezi Core Systems software-engineering engine for routing software work to the smallest accurate skill and connecting implementation guidance with evidence, safety, delivery, and learning controls. It provides the shared engineering route for teams taking a software change from a decision to operation.
+`skills-web-dev` is the Chwezi Core Systems software-engineering engine for turning a product decision into well-understood, maintainable software and an operable release. It routes work to the smallest accurate skill and develops it in traceable vertical slices—requirements, architecture, data flow, interaction detail, code, tests, security, observability, performance, rollback, and handoff—so speed from AI does not replace engineering judgement or finish quality.
 
 Engineers, architects, product and delivery teams, and operators use it for AI systems, SaaS, APIs, databases, frontend and mobile applications, games, security, DevOps, cloud, reliability, and SDLC documentation. The route helps them frame the problem, choose system boundaries, make changes, and verify normal and failure paths.
 
@@ -8,14 +8,14 @@ Use it for engineering implementation and SDLC quality; bring in companion engin
 
 ## Current status
 
-Last verified: 2026-08-28.
+Last verified: 2026-09-04.
 
 | Measure | Result |
 |---|---:|
-| Active `SKILL.md` files | 177 |
+| Active `SKILL.md` files | 178 |
 | Guardrail maximum | 200 |
-| Routing fixtures | 128 |
-| Routing precision@1 | 91% (117/128) |
+| Routing fixtures | 129 |
+| Routing precision@1 | 92% (119/129) |
 | Routing precision@3 | 100% (128/128) |
 | Catalog guardrail findings | 0 |
 | July portfolio audit baseline | 63/100, capped |
@@ -142,12 +142,12 @@ python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py --report-only
 ```
 
-Expected current results are 177 active skills, zero catalog findings, 129/129 routing precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
+Expected current results are 178 active skills, zero catalog findings, 129 fixtures, 119/129 routing precision@1, 129/129 precision@3, and no routing failures. Also run the relevant domain tests, anti-slop gate, evidence-pack checks, and `git diff --check` for the changed workstream.
 
 ## Honest limitations
 
 - Routing precision@1 is 91%; precision@3 is 100%. The engine still requires human review for close domain collisions.
-- The 177 active skills remain below the hard cap of 200, but catalog size alone is not proof of quality or production readiness.
+- The 178 active skills remain below the hard cap of 200, but catalogue size alone is not proof of quality or production readiness.
 - Some book inputs are historical, partial early releases, or have unusable extraction. They inform patterns only where the available text supports them; current claims require independent verification.
 - `AI for Game Developers` contains durable algorithmic foundations but dated APIs and production assumptions. Treat it as conceptual input, not current platform documentation.
 - Game and design guidance does not replace hands-on playtesting, visual review, accessibility testing, security testing, or production telemetry.

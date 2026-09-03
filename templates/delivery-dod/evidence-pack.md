@@ -26,6 +26,19 @@ Use this template for any implementation, architecture, security, AI, SaaS, mobi
 
 Pass criteria: every material architecture, API, database, security, or release choice has a named rationale and a reversal trigger.
 
+## 2A. Craft Slice Record
+
+Complete one record for each meaningful slice; do not replace it with a single
+bulk-generation statement.
+
+| Slice | User job or decision | Existing context inspected | Smallest change | Hard case exercised | Refinement made | Proof or `NOT ASSESSED` |
+|---|---|---|---|---|---|---|
+| `<flow / screen / module / claim>` | `<specific outcome>` | `<code, data, brief, design, source, or runbook>` | `<bounded change>` | `<failure, empty, denied, interrupted, or counter-case>` | `<defect fixed or element removed>` | `<test, render, source locator, review, or gap>` |
+
+Pass criteria: the slice can be explained end to end; its evidence is linked;
+and the next slice is selected only after the current one is understood and
+refined. The same record is required for a kaizen change.
+
 ## 3. Contract Evidence
 
 | Contract | Evidence | Location | Pass/fail |

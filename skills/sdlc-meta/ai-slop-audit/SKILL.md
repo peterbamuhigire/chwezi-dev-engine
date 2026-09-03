@@ -43,6 +43,12 @@ The companion `anti-ai-slop` skill runs continuously *during* generation; this a
 
 ## What slop is (the yardstick)
 
+The audit also checks the production method: was the artefact built in a named
+slice, was existing context inspected, were hard cases exercised, and was at
+least one concrete refinement made from observed evidence? If the record
+contains only a bulk-generation claim, headings, or a final screenshot, mark
+craft evidence `NOT ASSESSED` and do not award readiness from structure alone.
+
 Low-quality content produced in quantity by AI and pushed at people who did not ask for it (Merriam-Webster 2025 WOTY, verified). Three diagnostic properties (Kommers et al., arXiv 2601.06060): **superficial competence, asymmetric effort, mass producibility**. The human tell: **absence of intent**. You are measuring how strongly an artefact exhibits these.
 
 ## Audit method — layered, cheapest first
