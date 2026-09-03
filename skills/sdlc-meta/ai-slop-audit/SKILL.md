@@ -155,6 +155,15 @@ Report ME1-ME7 with exact file, line, component, or section evidence. Separate s
 from intentionally repeated identifiers, schemas, error strings, security warnings, and trace links.
 When the source context or runtime evidence is unavailable, mark the affected check `NOT_ASSESSED`.
 
+### Impeccable-derived overlay audit
+
+For UI, web, dashboard, presentation, or rendered-document artefacts, report AS1-AS7 with exact
+file/line or screenshot evidence and an evidence mode (`cli`, `browser`, `llm_only`, or
+`human_review`). Purple gradients, glassmorphism, neon glow, AI-beige defaults, decorative editorial
+scaffolding, and decorative motion are blocking visual findings unless a functional state,
+accessibility need, data encoding, or approved design-system reason is recorded. Mark unavailable
+visual checks `NOT_ASSESSED`; do not flag functional repetition.
+
 ## Capability contract
 
 Default to read-only. Use search, execution, visual inspection, or network verification only when available and authorised. Never edit the audited artefact unless remediation is separately requested.

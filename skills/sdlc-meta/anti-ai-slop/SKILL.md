@@ -143,6 +143,27 @@ to requirements, architecture notes, code comments, UI copy, release notes, and 
 Cut or merge units with no semantic delta. Preserve repeated identifiers, schemas, error messages,
 security warnings, and traceability fields when they are functionally required.
 
+### Impeccable-derived AS overlay for product and web work
+
+Apply AS1-AS7 when the change includes UI, a website, a dashboard, a presentation, or rendered
+documentation. Reject purple gradients, glassmorphism, neon glow, AI-beige defaults, decorative
+editorial scaffolding, and decorative motion as visual no-ship choices. Functional state,
+accessibility, data encoding, and approved design-system reasons must be recorded.
+
+| ID | Engineering overlay test |
+|---|---|
+| AS1 | Is the framework, layout, type, palette, or copy default justified by the product brief? |
+| AS2 | Do labels, chips, icon tiles, metrics, or numbered sections carry implementation/user value? |
+| AS3 | Do repeated components express a state or information distinction rather than cloned symmetry? |
+| AS4 | Does motion, glow, gradient, cursor, or hover behaviour serve a real state or task? |
+| AS5 | Are assets, examples, icons, and imports real, purposeful, and traceable rather than placeholders? |
+| AS6 | Are buzzwords, em-dash cadence, aphoristic contrast, and theatrical framing absent from technical copy? |
+| AS7 | Do rendered screens and docs expose content, preserve contrast, avoid clipping/overflow, and retain valid structure? |
+
+Unavailable browser, render, or detector evidence is `NOT_ASSESSED`, never clean. Preserve repeated
+identifiers, schemas, error states, security warnings, and traceability fields when their function
+is evidenced.
+
 ## Capability contract
 
 Apply with the capabilities authorised for the parent task. Verification may use search, execution, or network access when available; otherwise mark unverifiable claims and remove unsupported specificity.

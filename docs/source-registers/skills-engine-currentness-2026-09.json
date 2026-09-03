@@ -15,7 +15,8 @@
     {"id":"ms-windows-security-baselines","title":"Windows security baselines","ref":"https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Microsoft security-baseline scope and application boundaries."},
     {"id":"ms-sct","title":"Microsoft Security Compliance Toolkit","ref":"https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/security-compliance-toolkit-10","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Security Compliance Toolkit tools and versioned baseline workflow."},
     {"id":"ms-intune-security-baselines","title":"Intune security baselines for Windows devices","ref":"https://learn.microsoft.com/en-us/intune/device-security/security-baselines/overview","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-10-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Current Intune security-baseline feature and platform-support claims."},
-    {"id":"ms-windows-server-docs","title":"Windows Server documentation","ref":"https://learn.microsoft.com/en-us/windows-server/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Current Windows Server documentation surface; specific commands and versions require page-level verification."}
+    {"id":"ms-windows-server-docs","title":"Windows Server documentation","ref":"https://learn.microsoft.com/en-us/windows-server/","tier":1,"accessed":"2026-09-01","verified_at":"2026-09-01","review_after":"2026-12-01","freshness_class":"platform","as_of":"2026-09-01","scope":"Current Windows Server documentation surface; specific commands and versions require page-level verification."},
+    {"id":"impeccable-slop-catalog","title":"Impeccable Slop catalog","ref":"https://impeccable.style/slop/","tier":1,"accessed":"2026-09-03","verified_at":"2026-09-03","review_after":"2026-10-03","freshness_class":"context-bound","scope":"First-party web-interface AI-slop taxonomy and quality checks; does not establish universal machine-authorship or prevalence."}
   ],
   "claims": [
     {"id":"claim-wcag-current","requires_currentness":true,"source_ids":["w3c-wcag22"]},
@@ -27,6 +28,7 @@
     {"id":"claim-windows-lifecycle","requires_currentness":true,"source_ids":["ms-windows-lifecycle"]},
     {"id":"claim-powershell-support","requires_currentness":true,"source_ids":["ms-powershell-lifecycle"]},
     {"id":"claim-windows-security-baselines","requires_currentness":true,"source_ids":["ms-windows-security-baselines","ms-sct","ms-intune-security-baselines"]},
-    {"id":"claim-windows-server-docs","requires_currentness":true,"source_ids":["ms-windows-server-docs"]}
+    {"id":"claim-windows-server-docs","requires_currentness":true,"source_ids":["ms-windows-server-docs"]},
+    {"id":"claim-impeccable-anti-slop-taxonomy","requires_currentness":true,"source_ids":["impeccable-slop-catalog"]}
   ]
 }
