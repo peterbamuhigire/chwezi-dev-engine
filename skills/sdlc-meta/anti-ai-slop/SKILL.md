@@ -125,6 +125,24 @@ If any box is unticked, the output is not ready to ship.
 
 <!-- dual-compat-end -->
 
+## Machine-error editorial gate (cross-engine Kaizen)
+
+Apply Digital Research's `docs/continuous-improvement/machine-errors-editorial-gate-2026-09-03.md`
+to requirements, architecture notes, code comments, UI copy, release notes, and handoff text:
+
+| ID | Engineering adaptation |
+|---|---|
+| ME1 | Does this add a new behavior, constraint, failure mode, or evidence item? |
+| ME2 | Is the symmetry in components, APIs, or prose required by a real model? |
+| ME3 | Can the implementer or operator act without another explanatory layer? |
+| ME4 | Does the claim exceed its test, SLO, benchmark, or deployment evidence? |
+| ME5 | Is the example tied to the actual system, transaction, or route? |
+| ME6 | Has the same template phrase or rhetorical pattern spread through the repository? |
+| ME7 | Does the section change an implementation or release decision? |
+
+Cut or merge units with no semantic delta. Preserve repeated identifiers, schemas, error messages,
+security warnings, and traceability fields when they are functionally required.
+
 ## Capability contract
 
 Apply with the capabilities authorised for the parent task. Verification may use search, execution, or network access when available; otherwise mark unverifiable claims and remove unsupported specificity.

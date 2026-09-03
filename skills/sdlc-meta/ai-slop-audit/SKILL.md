@@ -149,6 +149,12 @@ Artefact type(s): <...>
 
 <!-- dual-compat-end -->
 
+## Machine-error audit extension
+
+Report ME1-ME7 with exact file, line, component, or section evidence. Separate semantic duplication
+from intentionally repeated identifiers, schemas, error strings, security warnings, and trace links.
+When the source context or runtime evidence is unavailable, mark the affected check `NOT_ASSESSED`.
+
 ## Capability contract
 
 Default to read-only. Use search, execution, visual inspection, or network verification only when available and authorised. Never edit the audited artefact unless remediation is separately requested.

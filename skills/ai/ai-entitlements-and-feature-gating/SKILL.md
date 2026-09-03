@@ -1,6 +1,6 @@
 ---
 name: ai-entitlements-and-feature-gating
-description: Use when defining or enforcing plan-based AI feature access, model tiers, context limits, quotas, tool permissions, tenant overrides, and upgrade behaviour.
+description: Use when defining or enforcing which plan unlocks which AI model tier, generation quota, context limit, tool permission, tenant override, or upgrade behaviour.
 metadata:
   portable: true
   compatible_with:
