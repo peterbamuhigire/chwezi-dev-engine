@@ -1,6 +1,6 @@
 ---
 name: execution-plan-scripts
-description: Author multi-prompt execution scripts (e.g. clear-debt.md, runbook.md) that drive long-running plans across many Claude Code sessions and subagents. Use when a plan is too large for a single session and must be broken into N self-contained prompts that the operator can paste sequentially. Each prompt names the skills it requires by NAME (never by hardcoded path) so the executing environment resolves them from its own skills library locations.
+description: Author multi-prompt execution scripts for long-running plans across sessions and subagents. Use when a plan must be split into self-contained prompts. Refer to required skills by name, never a hardcoded path, so each environment can resolve its own library.
 metadata:
   portable: true
   compatible_with:
