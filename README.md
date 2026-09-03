@@ -6,6 +6,19 @@ Engineers, architects, product and delivery teams, and operators use it for AI s
 
 Use it for engineering implementation and SDLC quality; bring in companion engines when ownership moves to visual design, finance and accounting, current external research, premium website operations, or formal requirements and governance. Its boundary is deliberate: it provides the engineering route and evidence expectations, while those specialist engines retain their own domain rules and outputs.
 
+## Capability map
+
+| Need | Primary route |
+|---|---|
+| AI applications, agents, RAG, gateways, evaluations, and AI safety | `skills/ai/` |
+| Architecture, APIs, distributed systems, and contracts | `skills/architecture/` |
+| Databases, persistence, migrations, and data reliability | `skills/backend-databases/` |
+| Frontend, mobile, TypeScript, Python, PHP, and .NET implementation | `skills/frontend-ux/`, `skills/android/`, `skills/ios/`, `skills/languages/` |
+| SaaS, billing, tenancy, entitlements, SSO, and admin tooling | `skills/saas/` |
+| Security, cloud, deployment, observability, reliability, and testing | `skills/security/`, `skills/devops-cloud/`, `skills/sdlc-meta/` |
+| Product, documents, spreadsheets, and delivery control | `skills/product-business/` |
+| Game development and production | `skills/game-development/` |
+
 ## Current status
 
 Last verified: 2026-09-04.
@@ -32,7 +45,7 @@ The active count is produced by the guardrail script. Do not update this table a
 5. For an engine audit, product audit, book-driven upgrade, or post-iteration learning cycle, load [`skills/sdlc-meta/kaizen-improvement-system/SKILL.md`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md).
 6. For multi-engine agents, commands, hooks, evidence, or handoffs, load [`skills/sdlc-meta/engine-control-plane/SKILL.md`](skills/sdlc-meta/engine-control-plane/SKILL.md) and validate [`docs/engine-control-plane.json`](docs/engine-control-plane.json).
 
-## Capability map
+## Detailed capability routes
 
 | Work type | Primary route |
 |---|---|
