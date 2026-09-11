@@ -18,6 +18,7 @@ docs describe routing, consolidation, planning, and maintenance policy.
 | `docs/source-registers/` | Dated official/current sources for volatile AI, Apple, cloud, security, and framework guidance. |
 | `docs/quality-gates/` | Release-blocking gates and engineering anti-slop governance. |
 | `docs/world-class-exemplars/` | Shared running example and benchmark reference outputs. |
+| `docs/sept-matt-pocock/` | Verified external-repository comparison, complete skill disposition register, cross-engine ownership map, and phased Kaizen execution handoff. It is planning evidence, not an active skill root. |
 | `examples/full-stack-saas-reference/` | End-to-end SaaS evidence pack exercising architecture, API, security, reliability, and release skills. |
 | `templates/delivery-dod/` | Shared delivery evidence pack template for implementation outputs. |
 | `scripts/skill_catalog_guardrails.py` | Static guardrail scan: active count, duplicate names, frontmatter, UTF-8, description length, `SKILL.md` line count, broken `references/`/`templates/` links, and alias integrity (unrouted, stale, dangling). |

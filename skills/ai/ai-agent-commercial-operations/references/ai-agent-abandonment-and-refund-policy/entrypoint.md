@@ -25,7 +25,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Tool catalogue with `scope` annotation (`ai-agent-tool-catalogue-and-action-gating`).
 - Token / credit ledger to refund against (`ai-usage-metering-and-billing`).
 - Stripe Billing wired (`subscription-billing`, `stripe-payments`).
-- Customer-comms templates (`tabler-email-templates`).
+- Customer-communications design and tested HTML from the external design engine's
+  `email-and-newsletter-design` skill.
 - Customer SLA dashboard for refund display (`ai-agent-customer-sla-dashboard`).
 
 ## Workflow
@@ -81,7 +82,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/abandonment-taxonomy.md` — four-class taxonomy with classification rules + worked examples.
 - `references/refund-execution.md` — refund pipeline with Stripe code, comms triggers, accounting hooks.
-- Companion: `ai-agent-runtime-architecture`, `ai-agent-attempted-vs-completed-billing`, `ai-agent-sla-credit-automation`, `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-revenue-recognition`, `stripe-payments`, `subscription-billing`, `tabler-email-templates`.
+- Companion: `ai-agent-runtime-architecture`, `ai-agent-attempted-vs-completed-billing`,
+  `ai-agent-sla-credit-automation`, `ai-agent-tool-catalogue-and-action-gating`,
+  `ai-agent-revenue-recognition`, `stripe-payments`, `subscription-billing`, and the external
+  design-engine `email-and-newsletter-design` skill.
 
 <!-- dual-compat-end -->
 
@@ -191,7 +195,9 @@ Each class has its own email template. Examples:
 - **out-of-scope**: "We weren't able to help with <task summary> because it requires <missing capability>. We've refunded you <amount>. Consider <feature> for this kind of work."
 - **budget-exceeded**: "Task <id> reached its safety limit and stopped. We've <refunded / not refunded> based on the partial result. To run larger tasks, consider <upgrade option>."
 
-Templates live in `tabler-email-templates` (or analog). Once approved by legal, used unchanged.
+Approved message designs and production HTML are created through the external design engine's
+`email-and-newsletter-design` skill. Version the approved artefact and change it only through the
+recorded legal, content, accessibility, and render-review process.
 
 ## §6 Finance Hooks
 

@@ -1,6 +1,6 @@
 ---
 name: saas-transactional-email-infrastructure
-description: Use when designing the transactional and lifecycle email infrastructure — ESP selection (Postmark, SES, SendGrid, Customer.io, Braze, Resend), domain authentication (SPF, DKIM, DMARC, BIMI), sender reputation, subdomain separation (transactional vs marketing), suppression list management, bounce/complaint feedback loops, and the event-bridge from product events to email automation. Distinct from `tabler-email-templates` (HTML templates), `subscription-billing` (billing-event triggers), and `saas-lifecycle-email-orchestration` (sequence design).
+description: Use when designing transactional and lifecycle email infrastructure: provider selection, domain authentication, reputation, suppression, feedback loops, consent, and the product-event bridge. Email presentation belongs to the external design engine; sequence behaviour belongs to `saas-lifecycle-email-orchestration`.
 metadata:
   portable: true
   compatible_with:
@@ -23,7 +23,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Do Not Use When
 
-- The task is the HTML template itself — use `tabler-email-templates`.
+- The task is HTML email or newsletter design — use the external design engine's
+  `email-and-newsletter-design` skill.
 - The task is the sequence design (what emails to send when) — use `saas-lifecycle-email-orchestration`.
 - The task is the trigger for a billing email — use `subscription-billing`.
 
@@ -88,7 +89,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/esp-selection-matrix.md` — Postmark vs SES vs SendGrid vs Mailgun vs Resend, per use case.
 - `references/event-bridge-design.md` — patterns for product event → email automation.
 - `references/suppression-and-consent-model.md` — multi-tenant suppression, GDPR cascade.
-- Companion: `tabler-email-templates`, `saas-lifecycle-email-orchestration`, `subscription-billing`, `saas-tenant-data-portability-and-erasure`.
+- Companion: external design-engine `email-and-newsletter-design`,
+  `saas-lifecycle-email-orchestration`, `subscription-billing`, and
+  `saas-tenant-data-portability-and-erasure`.
 
 <!-- dual-compat-end -->
 
@@ -287,7 +290,8 @@ Three consents per user-per-tenant:
 
 ## §11 Read Next
 
-- `tabler-email-templates` — the HTML templates this infrastructure ships.
+- External design-engine `email-and-newsletter-design` — purpose-fit visual direction,
+  resilient HTML implementation, accessibility, dark-mode handling, and client render evidence.
 - `saas-lifecycle-email-orchestration` — the sequences (welcome, behavioral, retention, etc.) built on top.
 - `subscription-billing` — billing events that trigger transactional emails.
 - `saas-tenant-data-portability-and-erasure` — GDPR cascade through the suppression list.

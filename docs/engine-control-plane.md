@@ -11,7 +11,7 @@ handoffs, and bounded recovery. Its registry is
 |---|---|
 | Domain doctrine and specialist output | The routed domain engine |
 | Agent topology and handoff protocol | `skills-web-dev` control plane |
-| Source/currentness verification | `digital-research-skills` |
+| Source/currentness verification | `digital-research-engine` |
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
 | Visual/presentation controls | `design-system-skills` |
 | Windows host, domain, fleet, and hybrid administration | `windows-admin-engine-skills` |
@@ -24,7 +24,7 @@ Every Kaizen operation across all twelve engines—engine audits, skill or
 reference edits, validator changes, routing changes, and standardisation
 decisions—must begin with the Digital Research Engine's source-evaluation and
 source-verification workflow. The canonical contract is
-[`kaizen-currentness-gate.md`](../../digital-research-skills/docs/continuous-improvement/kaizen-currentness-gate.md).
+[`kaizen-currentness-gate.md`](../../digital-research-engine/docs/continuous-improvement/kaizen-currentness-gate.md).
 Current standards, policies, laws, technologies, versions, commands, security
 controls, benchmarks, and lifecycle claims require dated, scoped, reviewable
 primary-source evidence. Missing or ambiguous evidence is `NOT_ASSESSED` and
@@ -92,7 +92,7 @@ With a workspace root, checkout checks are strict. `SKILL_ENGINE_ROOT_<ID>`
 (hyphens replaced with underscores, uppercase) selects one authoritative
 checkout. An invalid override fails rather than silently falling back. Without
 an override, use the supplied workspace's engine directory. The research
-directory is `digital-research-skills`. Home-directory duplicates are excluded.
+directory is `digital-research-engine`. Home-directory duplicates are excluded.
 Router and adoption files must resolve inside the selected checkout. Internal
 links are accepted; external or broken contract links fail. An explicit
 checkout override may itself be a link, with its resolved root as the boundary.

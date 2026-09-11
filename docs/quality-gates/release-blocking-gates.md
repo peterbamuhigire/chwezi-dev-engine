@@ -17,7 +17,7 @@ This gate applies to every deliverable produced by `skills-web-dev`. It is stric
 | Reliability | Critical journey lacks SLO, alert, rollback, or runbook | SLO query, dashboard, alert rule, rollback plan, runbook |
 | Current facts | Vendor, platform, standard, or statutory claim lacks dated source | Source register entry or Digital Research Skills Engine verification note |
 | Output quality | Section is generic, unsupported, or viewpoint-free | Specific decision, evidence, edge case, and reviewer-facing implication |
-| Cross-engine handoff | Finance, visual design, statutory, or research ownership is copied instead of routed | Link to `chwezi-accounting-doctrine`, `design-system-skills`, or `digital-research-skills` |
+| Cross-engine handoff | Finance, visual design, statutory, or research ownership is copied instead of routed | Link to `chwezi-accounting-doctrine`, `design-system-skills`, or `digital-research-engine` |
 
 ## Reviewer Procedure
 

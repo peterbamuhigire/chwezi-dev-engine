@@ -3,7 +3,7 @@
 Owner: Peter Bamuhigire. Apply with the relevant product, technical-writing,
 anti-slop, security, accessibility, and currentness gates.
 
-Canonical study: `C:\wamp64\www\digital-research-skills\docs\continuous-improvement\english-collocations-and-lexical-precision-2026-09-02.md`.
+Canonical study: `C:\wamp64\www\digital-research-engine\docs\continuous-improvement\english-collocations-and-lexical-precision-2026-09-02.md`.
 
 - Use British English by default and preserve approved product, API, code, protocol, legal, and standards terminology.
 - Write with exact actors, states, constraints, dependencies, examples, acceptance evidence, and failure paths.

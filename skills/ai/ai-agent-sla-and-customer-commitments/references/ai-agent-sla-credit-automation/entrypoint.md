@@ -29,7 +29,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Availability rollups from the LLM gateway + agent runtime (`ai-agent-runtime-architecture`, `ai-model-gateway`).
 - Stripe Billing account (or analog) with credit-note API access.
 - Audit-log spine (`saas-control-plane-engineering`).
-- Customer-comms infrastructure (`tabler-email-templates`).
+- Customer-communications design and tested HTML from the external design engine's
+  `email-and-newsletter-design` skill.
 
 ## Workflow
 
@@ -247,7 +248,8 @@ Full code in `references/credit-issuance-pipeline.md`.
 
 Within 1 business hour:
 
-- Transactional email (template: `tabler-email-templates` `sla-credit-issued.html`) with:
+- Transactional email designed and client-tested through the external design engine's
+  `email-and-newsletter-design` skill, containing:
   - Plain-language description of breach
   - Period
   - Credit amount + currency

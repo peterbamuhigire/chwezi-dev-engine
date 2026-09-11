@@ -7,6 +7,13 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [2026-09-11 Matt Pocock skills comparison](../sept-matt-pocock/README.md) identifies compact
+workflow mechanisms to adapt without importing a second skill catalogue: invocation ownership,
+decision-frontier questioning, persistent domain language, tracer-bullet work graphs, systematic
+bug diagnosis, deep-module design, and two-axis review. Its implementation runbook requires
+catalogue consolidation, currentness checks, behavioural fixtures, rollback, and cross-engine
+ownership before promotion.
+
 The [2026-09-06 Kaizen cycle](../audits/2026-09-06-kaizen/portfolio-progress.md)
 repairs portfolio path resolution, evidence-gate coverage and portable
 contract checks. Its evidence distinguishes structural checks from product proof.

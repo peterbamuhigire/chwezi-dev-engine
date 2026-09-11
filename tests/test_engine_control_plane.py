@@ -147,7 +147,7 @@ def test_workspace_checkout_precedes_home_duplicate(tmp_path, monkeypatch, engin
 
 
 def test_invalid_override_does_not_fall_back(tmp_path, monkeypatch):
-    duplicate = tmp_path / "digital-research-skills"
+    duplicate = tmp_path / "digital-research-engine"
     duplicate.mkdir()
     for name in ("AGENTS.md", "adoption.md"):
         (duplicate / name).write_text("Fixture\n", encoding="utf-8")

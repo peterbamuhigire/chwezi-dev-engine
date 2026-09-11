@@ -160,4 +160,5 @@ Email validation services (NeverBounce, ZeroBounce, Kickbox):
 
 - `saas-transactional-email-infrastructure` — overall infrastructure skill.
 - `saas-lifecycle-email-orchestration` — sequence design that respects deliverability.
-- `tabler-email-templates` — HTML that renders consistently across clients.
+- External design-engine `email-and-newsletter-design` — purpose-fit HTML with target-client,
+  dark-mode, image-off, accessibility, and render evidence.

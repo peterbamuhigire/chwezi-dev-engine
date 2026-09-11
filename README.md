@@ -21,7 +21,7 @@ Use it for engineering implementation and SDLC quality; bring in companion engin
 
 ## Current status
 
-Last verified: 2026-09-07.
+Last verified: 2026-09-11.
 
 | Measure | Result |
 |---|---:|
@@ -52,6 +52,24 @@ Source record: `https://github.com/affaan-m/ECC` (the three guides linked from
 the referenced Affaan posts; accessed 2026-09-07). The source's empirical
 performance and security figures are treated as claims requiring independent
 verification; only the workflow principles are adopted here.
+
+### Matt Pocock skills study - 2026-09-11
+
+We studied Matt Pocock's [`mattpocock/skills`](https://github.com/mattpocock/skills)
+repository as an external benchmark for skill structure, progressive disclosure,
+plugin packaging, cross-agent adapters, user documentation, and discoverability.
+The study compared all 37 upstream skills and 164 non-Git files at verified
+commit `3cca18b368ae95cdbdebbff572ccafa662551015` with this engine and its
+companion domain engines. We acknowledge Matt Pocock and the repository's
+contributors as the source of the mechanisms evaluated; attribution does not
+imply endorsement of this engine or wholesale adoption of the source catalogue.
+
+The resulting evidence, skill-by-skill disposition register, proposed new
+capabilities and references, hardening plan, cross-engine ownership map, and
+implementation runbook are in the
+[`docs/sept-matt-pocock/`](docs/sept-matt-pocock/README.md) study. Concepts are
+adapted selectively under this engine's safety, currentness, evidence, routing,
+anti-slop, and catalogue-budget contracts.
 
 ### September 2026 Kaizen execution update
 

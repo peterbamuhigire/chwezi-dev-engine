@@ -8,7 +8,7 @@ eleven canonical checkouts under `C:/wamp64/www`.
 
 - Portfolio resolution uses the supplied workspace and explicit per-engine
   overrides. A missing override cannot silently select a different checkout.
-  Research resolves to `digital-research-skills`. The twelve-entry registry
+  Research resolves to `digital-research-engine`. The twelve-entry registry
   remains intact; installed-checkout checks may target the eleven-engine scope.
 - The manifest separates portable repository checks from live installation
   checks. Unit tests exercise temporary complete/missing portfolios, malformed

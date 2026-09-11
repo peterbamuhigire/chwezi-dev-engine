@@ -57,7 +57,9 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## Do Not Use When
 
 - The task is the underlying email infrastructure (ESP, deliverability, suppression) — use `saas-transactional-email-infrastructure`.
-- The task is HTML template authoring — use `tabler-email-templates`.
+- The task is HTML email or newsletter design — route to the external design engine's
+  `skills/13-presentations-and-documents/email-and-newsletter-design` skill. That skill owns
+  authored visual direction, resilient HTML, dark mode, accessibility, and render QA.
 - The task is acquisition cold email — use sales/marketing tooling outside this engine.
 
 ## Required Inputs
@@ -120,7 +122,9 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - `references/sequence-retention.md` — churn-risk triggered save sequences.
 - `references/sequence-reactivation.md` — long-dormant win-back.
 - `references/sequence-referral.md` — NPS-promoter and active-user referral.
-- Companion: `saas-transactional-email-infrastructure`, `tabler-email-templates`, `product-led-growth`, `saas-growth-metrics`, `saas-entitlements-and-plan-gating`.
+- Companion: `saas-transactional-email-infrastructure`, external design-engine
+  `email-and-newsletter-design`, `product-led-growth`, `saas-growth-metrics`, and
+  `saas-entitlements-and-plan-gating`.
 
 <!-- dual-compat-end -->
 
@@ -321,7 +325,8 @@ Materialise in the warehouse:
 ## §13 Read Next
 
 - `saas-transactional-email-infrastructure` — the infra underneath.
-- `tabler-email-templates` — the templates each sequence uses.
+- External design-engine `email-and-newsletter-design` — create a purpose-fit email system and
+  production HTML from the product's visual thesis; do not depend on a bundled template library.
 - `product-led-growth` — PQL + activation signals.
 - `saas-entitlements-and-plan-gating` — `gate.denied` event source.
 - `saas-growth-metrics` — churn-risk + cohort retention.

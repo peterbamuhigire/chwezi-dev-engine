@@ -381,7 +381,7 @@ Recommended active skills:
 | `stripe-payments` | Keep if payment implementation happens often. |
 | `saas-business-metrics` | `saas-growth-metrics`. |
 | `saas-sales-organization` | Keep if sales org design is common. |
-| `saas-lifecycle-email-orchestration` | `saas-transactional-email-infrastructure`, `tabler-email-templates` as references, unless email template generation is a frequent output. |
+| `saas-lifecycle-email-orchestration` | Retain `saas-transactional-email-infrastructure` as an engineering reference; route HTML email and newsletter design to the external design engine's `email-and-newsletter-design` skill. Do not bundle a template library. |
 | `saas-admin-backoffice-tooling` | Keep if admin/backoffice design is frequent. |
 | `saas-entitlements-and-plan-gating` | Keep; absorb AI-specific entitlement references if needed. |
 | `customer-service-excellence` | Keep. |
