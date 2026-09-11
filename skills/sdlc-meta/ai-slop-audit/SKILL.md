@@ -203,6 +203,17 @@ Do not invent findings, collapse unassessed checks into passes, or report a grad
 - Treating an inaccessible check as passed. Fix: mark it `not assessed`.
 - Removing useful authored material during cleanup. Fix: record what must be preserved.
 
+## Responsibility audit
+
+The 25 writing signs are editorial warnings, not proof that a person used AI. Report a style
+pattern only with exact artefact evidence and a reader-value or clarity consequence. Audit every
+load-bearing claim for scope, date, source fit, transformation, limitation, and decision effect;
+audit examples for hypothetical labelling. Keep authorship questions separate from unsupported
+claims, fabricated evidence, provenance gaps, security defects, accessibility failures, and
+genericness. Never turn a missing source or render into a pass: record `NOT_ASSESSED`.
+
+- [`AI-slop responsible publishing standard`](../../../references/ai-slop-responsible-publishing-standard-2026-09-11.md)
+
 ## References
 
 - `anti-ai-slop` supplies the production-time prevention controls.

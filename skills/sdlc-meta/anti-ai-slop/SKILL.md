@@ -214,6 +214,17 @@ Every claim is verified or qualified, every section earns its place, and blockin
 - Rewriting an authored phrase merely because it is unusual. Fix: preserve intentional voice.
 - Hiding an unavailable check. Fix: name the verification gap and its consequence.
 
+## Responsibility overlay
+
+Treat the supplied 25 signs as editing prompts, never as an authorship detector. Before emitting
+any human-facing unit, ask what the reader loses if it disappears; then verify the claim's scope,
+date, source, transformation, limitation, and decision consequence. Label hypothetical examples.
+Separate stylistic recurrence from factual, provenance, security, accessibility, or product defects.
+Run ME1-ME7 with exact evidence and mark unavailable source, render, browser, or reviewer checks
+`NOT_ASSESSED`.
+
+- [`AI-slop responsible publishing standard`](../../../references/ai-slop-responsible-publishing-standard-2026-09-11.md)
+
 ## References
 
 - `ai-slop-audit` supplies the independent detection and grading pass.
