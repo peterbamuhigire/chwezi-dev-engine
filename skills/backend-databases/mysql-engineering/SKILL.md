@@ -1,6 +1,6 @@
 ---
 name: mysql-engineering
-description: Use when designing, implementing, or reviewing MySQL application schemas, SQL, indexes, constraints, stored routines, and production query patterns. Load absorbed MySQL best-practice, data-modeling, and advanced-SQL reference files as needed.
+description: Use when designing, implementing, administering, tuning, backing up, restoring, monitoring, or troubleshooting MySQL schemas and production systems; use database-reliability for datastore-independent SLO and recovery policy.
 metadata:
   portable: true
   compatible_with:
@@ -55,7 +55,14 @@ Use this parent skill as the active MySQL engineering entrypoint. It keeps routi
 
 ## References
 
+- Load the retained [MySQL operations workflow](../mysql-operations/ALIAS.md) for backup, restore, replication, production tuning, monitoring, and incidents.
 - Load only the references/<old-skill>.md files named in the workflow when their depth is required.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Data safety | MySQL schema and operations evidence pack | DDL, query plans, and runbook | constraints, migration, backup/restore, performance capture, and rollback |
+
 <!-- dual-compat-end -->
 
 ## Inputs

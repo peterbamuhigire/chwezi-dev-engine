@@ -16,9 +16,10 @@ ideas are invocation ownership, design-tree questioning, domain language as pers
 tracer-bullet work graphs, tight bug feedback loops, deep-module vocabulary, two-axis review, and
 explicit skill lifecycle buckets.
 
-Comparison-specific Chwezi baseline: **58/100 raw, 58/100 published**. The permanent-audit cap is
-`min(raw, 65)`. This is not a replacement for the broader July portfolio score; it measures the
-engine's readiness to provide the compact engineering workflow demonstrated by the source.
+Comparison-specific Chwezi baseline: **58/100 raw, 58/100 published**. The repository-level Kaizen
+completed on 2026-09-11 at a provisional **69/100 raw, 65/100 published**. The permanent-audit cap
+is `min(raw, 65)` until real-project, fresh-agent, stakeholder, and independent-review evidence
+exists. See the completion record for the exact proof and remaining `NOT ASSESSED` items.
 
 ## Read order
 
@@ -33,8 +34,9 @@ engine's readiness to provide the compact engineering workflow demonstrated by t
 9. [Risks, rejected imports, and evidence](08-risk-and-evidence-register.md)
 10. [Execution runbook for the next Kaizen agent](09-kaizen-agent-runbook.md)
 11. [Source inventory](10-source-inventory.md)
+12. [Kaizen completion record](11-kaizen-completion-record.md)
 
-## Highest-value actions
+## Implemented actions
 
 | Priority | Action | Canonical owner |
 | --- | --- | --- |
@@ -51,6 +53,6 @@ engine's readiness to provide the compact engineering workflow demonstrated by t
 
 ## Non-negotiable constraint
 
-The engineering catalogue currently has 179 active skills, nine above its soft target ceiling of
-170. New active skills must be paid for by a proven consolidation or alias in the same Kaizen wave.
-Most source ideas should first land as references or hardening inside existing owners.
+The engineering catalogue now has 170 active skills, at its soft target ceiling. The operation added
+one active diagnosis route and deactivated ten overlapping routes as aliases, a net reduction of
+nine. Future additions still require a proven consolidation or alias in the same Kaizen wave.

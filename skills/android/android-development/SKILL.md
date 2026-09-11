@@ -1,6 +1,6 @@
 ---
 name: android-development
-description: Use when building or reviewing native Android applications with Kotlin, Compose, Hilt, and layered architecture; use android-data-persistence or android-tdd for focused data and test work.
+description: Use when building or reviewing native Android apps with Kotlin, Compose, architecture, Room/DataStore persistence, offline sync, or test-driven development; use mobile-platform-operations for store release work.
 metadata:
   portable: true
   compatible_with:
@@ -30,6 +30,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- Load the retained [Android persistence workflow](../android-data-persistence/ALIAS.md) for Room, DataStore, migrations, or offline sync.
+- Load the retained [Android TDD workflow](../android-tdd/ALIAS.md) for Red-Green-Refactor, test seams, and layer-specific test design.
 - `references/android-ai-ml.md` for on-device Android AI/ML, ML Kit, LiteRT, MediaPipe, AICore, and Gemini Nano.
 - `references/android-biometric-login.md` for AndroidX Biometric launch gates and CryptoObject-backed authentication.
 - `references/android-pdf-export.md` for native `PdfDocument` export and Android report PDF generation.

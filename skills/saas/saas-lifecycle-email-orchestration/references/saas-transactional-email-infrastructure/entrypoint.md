@@ -1,298 +1,137 @@
 ---
-name: saas-transactional-email-infrastructure
-description: Use when designing transactional and lifecycle email infrastructure: provider selection, domain authentication, reputation, suppression, feedback loops, consent, and the product-event bridge. Email presentation belongs to the external design engine; sequence behaviour belongs to `saas-lifecycle-email-orchestration`.
+name: saas-transactional-email-infrastructure-reference
+description: Read when a SaaS email task concerns provider-neutral event transport, authentication, suppression, feedback loops, delivery telemetry, recovery, or provider selection rather than lifecycle policy, copy, or visual design.
 metadata:
   portable: true
-  compatible_with:
-  - Codex
-  - codex
 ---
 
 # SaaS Transactional Email Infrastructure
-Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
-<!-- dual-compat-start -->
-## Use When
+Build an auditable transport boundary from approved product events to an interchangeable email
+provider. Provider features, prices, support, and recipient-network requirements change; verify them
+at decision time and do not encode a permanent “best provider” or default stack.
 
-- Standing up email infrastructure for a new SaaS — domain auth, ESP selection, sender reputation, event bridge.
-- Auditing an existing SaaS's deliverability — open rates < 20%, complaint rate > 0.1%, bounce rate > 2%, marketing emails ending up in spam.
-- Adding lifecycle automation (Customer.io / Braze / Iterable) on top of an existing transactional sender.
-- Separating transactional and marketing reputations on different subdomains because the marketing send is poisoning the transactional one.
-- Designing the suppression list and consent model for multi-tenant SaaS (per-tenant unsubscribe).
-- Wiring a deliverability monitoring + alerting stack.
+## Ownership
 
-## Do Not Use When
+| Concern | Owner |
+| --- | --- |
+| Whether a lifecycle message should exist | Parent `saas-lifecycle-email-orchestration` skill |
+| Message wording | Content-writing or UX-writing route |
+| Hierarchy, HTML email, dark mode, accessibility, client rendering | Design engine `email-and-newsletter-design` |
+| Event bridge, provider adapter, authentication, suppression transport, feedback and recovery | This reference |
 
-- The task is HTML email or newsletter design — use the external design engine's
-  `email-and-newsletter-design` skill.
-- The task is the sequence design (what emails to send when) — use `saas-lifecycle-email-orchestration`.
-- The task is the trigger for a billing email — use `subscription-billing`.
+## Inputs
 
-## Required Inputs
+- exact message classes and their delivery/recovery consequences;
+- sending and author domains, DNS ownership, recipient networks, regions, and volume shape;
+- consent and suppression policy from the accountable owner;
+- security, privacy, retention, residency, audit, and availability requirements;
+- existing providers, contracts, credentials, incidents, telemetry, and rollback path;
+- current recipient-network rules and applicable law verified on the review date.
 
-- Domain(s) the SaaS will send from.
-- Expected send volume per month (drives ESP selection).
-- Mix of transactional / lifecycle / marketing.
-- Regulatory profile (GDPR, CAN-SPAM, CASL, POPIA — consent model).
-- Existing ESP and sender reputation (if any).
+## Architecture
+
+Use a provider-neutral boundary:
+
+```text
+authoritative product event
+  -> message-policy decision and idempotency key
+  -> durable outbox/queue
+  -> provider adapter
+  -> provider acceptance response
+  -> signed/verified feedback webhook
+  -> normalised delivery event and suppression state
+  -> audit, alerting, recovery, and user-outcome lineage
+```
+
+The product database owns business state. The provider owns transport attempts, not tenant truth,
+consent truth, or lifecycle policy.
 
 ## Workflow
 
-1. Read this `SKILL.md`.
-2. Choose subdomain strategy (§2) — separate transactional and marketing subdomains.
-3. Set up SPF / DKIM / DMARC / BIMI per subdomain (§3).
-4. Pick ESP(s) (§4) — usually one transactional + one lifecycle automation tool.
-5. Design the event bridge (§5) — product events → email automation.
-6. Build the suppression list (§6) — central, tenant-aware, category-aware.
-7. Configure feedback loops (§7) — bounces, complaints, unsubscribes.
-8. Stand up deliverability monitoring (§8).
-9. Apply the consent model (§9) — separate transactional from marketing consent.
-10. Apply anti-patterns (§10).
+1. Classify messages by user consequence, consent category, recovery need, and sender identity.
+2. Inventory every authorised sender and align domain/DNS ownership before changing records.
+3. Verify current standards and recipient-network requirements through
+   [the currentness register](references/currentness-register.md); open the primary source before
+   relying on a threshold or implementation detail.
+4. Define one canonical message command with tenant, recipient role, policy/content version,
+   locale, idempotency key, expiry, evidence payload, and trace identifiers. Do not put secrets or
+   unnecessary personal data in events.
+5. Persist before dispatch. Make retries idempotent and bound them by message expiry and user state.
+6. Implement a narrow provider adapter. Map provider responses into stable internal states without
+   exposing vendor-specific semantics to business logic.
+7. Authenticate feedback webhooks, resist replay, retain raw evidence only as long as justified,
+   and normalise bounce, complaint, delivery, delay, and unsubscribe signals.
+8. Apply suppression before every attempt. Separate global safety suppression from category and
+   purpose-specific preferences; define narrowly authorised transactional exceptions.
+9. Test authentication, alignment, MIME/header format, one-click unsubscribe where required,
+   bounce/complaint handling, retry, duplicate webhook, stale event, and provider outage paths.
+10. Release gradually with current recipient-network dashboards, alerts based on observed baseline
+    and provider requirements, a rollback provider/path, and an operator runbook.
 
-## Quality Standards
+## Provider selection without rankings
 
-- Bounce rate < 2%, complaint rate < 0.1%, inbox placement > 95% (measured via Postmark / GlockApps / SendForensics).
-- Every send categorized as transactional / lifecycle / marketing; suppression honoured per category.
-- DMARC at `p=quarantine` minimum within 30 days of launch; `p=reject` within 90 days.
-- Suppression list is the source of truth; centralised across all ESPs the SaaS uses.
-- Unsubscribe processed within minutes; `List-Unsubscribe` header on every applicable send.
-- GDPR delete cascades through the suppression list and ESP contact records.
+Create a dated evidence matrix for the actual workload:
 
-## Anti-Patterns
+| Dimension | Evidence needed |
+| --- | --- |
+| Message fit | Required transactional, regional, API, workflow, and rendering capabilities |
+| Deliverability controls | Authentication support, feedback, reputation visibility, and mitigation process |
+| Reliability | Published status/SLA, retry semantics, incident history, regional architecture |
+| Security/privacy | Data use, residency, retention, subprocessors, access, encryption, audit reports |
+| Operations | Webhook verification, logs, exports, suppression portability, support escalation |
+| Economics | Current contract, volume curve, dedicated-resource costs, egress and add-ons |
+| Exit | Domain/control ownership, export format, migration and dual-send support |
 
-- Sending marketing emails from the transactional sender (poisons transactional reputation).
-- No DMARC — anyone can spoof your domain.
-- Suppressions held only in the ESP — switching ESPs loses years of unsubscribe history.
-- No per-tenant unsubscribe — a user unsubscribes from one tenant and stops receiving emails from all tenants.
-- Webhook from ESP not idempotent (replay creates duplicate suppressions).
-- No warmup for new sending IP/domain — first big broadcast destroys reputation.
+Run a bounded proof using authorised test recipients and representative message classes. A vendor
+marketing claim is not independent deliverability evidence.
+
+## Quality gates
+
+- SPF, DKIM, DMARC, reverse DNS, TLS, alignment, and message format are evaluated for the actual
+  sender and recipient networks.
+- Marketing/subscribed traffic implements standards-compliant and recipient-required unsubscribe
+  controls; transactional exceptions are classified and reviewed rather than assumed.
+- No DNS sample is copied into production. Generate provider/domain-specific records, review the
+  exact diff, stage policy changes, and preserve rollback.
+- Alerts cite the receiver/provider requirement or a measured local baseline and carry a review
+  date; no universal bounce, complaint, or inbox-placement number is invented.
+- Provider acceptance, delivery, inbox placement, attention, and user outcome remain distinct.
+- Suppression, consent, tenant scope, and audit survive provider replacement.
+
+## Failure and recovery cases
+
+- queue delay exceeds message usefulness;
+- retry occurs after the underlying state changed;
+- duplicate product event or webhook arrives;
+- provider accepts but recipient network defers/rejects;
+- authentication or alignment changes unexpectedly;
+- suppression feed is late or unavailable;
+- provider or region is unavailable;
+- sender/domain reputation deteriorates;
+- webhook signature, replay, or schema validation fails;
+- migration requires dual operation without duplicate user contact.
+
+For each case define detection, safe state, operator action, user consequence, retry/expiry, data
+retention, and rollback. Do not silently fail open.
 
 ## Outputs
 
-- ESP selection ADR.
-- Domain auth records (SPF/DKIM/DMARC/BIMI) checked into infrastructure repo.
-- Event-bridge spec (product events → ESP).
-- Suppression list schema + consent model.
-- Deliverability monitoring dashboard.
-
-## Evidence Produced
-
-| Category | Artifact | Format | Example |
-|----------|----------|--------|---------|
-| Architecture | Email infrastructure ADR | ADR markdown | `docs/adr/0012-email-infra.md` |
-| Release evidence | Domain auth records | DNS export or Terraform module | `infra/dns/email.tf` |
-| Operability | Deliverability dashboard | Dashboard link + screenshots | `docs/email/deliverability-dashboard.md` |
+- provider-neutral message command and state model;
+- domain/authentication and current receiver-requirements evidence;
+- adapter and verified feedback contract;
+- suppression/consent and data-retention model;
+- normal/failure-path test evidence;
+- monitoring, incident, migration, and rollback runbooks;
+- dated provider decision record with uncertainty and re-evaluation date.
 
 ## References
 
-- `references/deliverability-deep-dive.md` — SPF/DKIM/DMARC/BIMI, IP warmup, reputation tools.
-- `references/esp-selection-matrix.md` — Postmark vs SES vs SendGrid vs Mailgun vs Resend, per use case.
-- `references/event-bridge-design.md` — patterns for product event → email automation.
-- `references/suppression-and-consent-model.md` — multi-tenant suppression, GDPR cascade.
-- Companion: external design-engine `email-and-newsletter-design`,
-  `saas-lifecycle-email-orchestration`, `subscription-billing`, and
-  `saas-tenant-data-portability-and-erasure`.
+- [Deliverability and authentication operations](references/deliverability-deep-dive.md)
+- [Currentness register](references/currentness-register.md)
 
-<!-- dual-compat-end -->
+## Degraded mode
 
-## §1 The Three Categories of Email
-
-| Category | Examples | Consent | Subdomain |
-|---|---|---|---|
-| **Transactional** | password reset, OTP, receipt, invitation, MFA, security alert, payment failure | Required by service (no opt-out for security-critical) | `notify.app.com` |
-| **Lifecycle / product** | welcome, onboarding nudges, feature announcements, churn-prevention, NPS | Implicit on signup, granular opt-out | `notify.app.com` or `mail.app.com` |
-| **Marketing** | newsletter, promotions, webinars, broadcast | Explicit opt-in (GDPR/CASL/POPIA) | `mail.app.com` |
-
-These never share a reputation domain. A marketing send that triggers complaints poisons the transactional reputation if they share a domain.
-
-## §2 Subdomain Strategy
-
-```
-app.example.com    — the product itself; never sends email
-auth.example.com   — auth-only emails (verify, MFA, security alerts)
-notify.example.com — transactional + lifecycle product emails
-mail.example.com   — marketing broadcasts and campaigns
-bounce.example.com — bounce return-path (set in ESP)
-```
-
-Reputation is per-subdomain. Pre-warm each independently if you're moving senders.
-
-## §3 Domain Authentication
-
-### 3.1 SPF
-TXT record on each sending subdomain authorising the ESP's sending IPs.
-```
-notify.example.com.   TXT   "v=spf1 include:_spf.mtasv.net include:amazonses.com -all"
-mail.example.com.     TXT   "v=spf1 include:mailgun.org -all"
-```
-
-### 3.2 DKIM
-Per-ESP signing key. Most ESPs generate a CNAME or TXT record per sender.
-```
-ksubdomain._domainkey.notify.example.com.   CNAME   ksubdomain.dkim.postmarkapp.com.
-```
-
-Rotate annually. Both old and new keys live in DNS during rotation to avoid downtime.
-
-### 3.3 DMARC
-On the **organisational domain** (root), aligned with SPF/DKIM.
-```
-_dmarc.example.com.   TXT   "v=DMARC1; p=quarantine; rua=mailto:dmarc-rua@example.com; ruf=mailto:dmarc-ruf@example.com; pct=100; sp=quarantine; aspf=r; adkim=r"
-```
-
-Phases:
-1. `p=none; rua=...` — monitoring only; collect 2 weeks of reports.
-2. `p=quarantine; pct=10` → ramp `pct` up over 4-6 weeks.
-3. `p=quarantine; pct=100` → live.
-4. `p=reject` after 60-90 days of clean reports.
-
-DMARC reporting tool: Postmark DMARC monitoring, Valimail, dmarcian.
-
-### 3.4 BIMI
-Optional but trust-boosting once DMARC is `p=quarantine`+ enforced. Publishes logo to inbox (Gmail/Yahoo/Apple Mail).
-```
-default._bimi.example.com.   TXT   "v=BIMI1; l=https://example.com/bimi-logo.svg; a=https://example.com/bimi-vmc.pem"
-```
-Requires a Verified Mark Certificate (VMC) — $1500+/year. Worth it for B2C / consumer-facing SaaS; not essential for B2B.
-
-## §4 ESP Selection
-
-| Use case | Recommended | Why |
-|---|---|---|
-| **Transactional (receipts, OTP, password reset)** | **Postmark** | Best inbox placement + speed; structured templates; great deliverability tools |
-| **High-volume transactional cost-sensitive** | **AWS SES** | Cheapest at scale; need to roll own templating + suppression |
-| **Mid-volume transactional + simple marketing** | **SendGrid** or **Mailgun** | Established, OK deliverability, broader feature set |
-| **Lifecycle automation (event-driven)** | **Customer.io** or **Braze** or **Iterable** | Event-driven, branched workflows, multi-channel (email + SMS + push) |
-| **Marketing broadcasts + simple automation** | **MailerLite** / **ConvertKit** / **Drip** / **Mailchimp** | Lower learning curve, broadcast-focused |
-| **Developer-friendly transactional** | **Resend** | Modern API, easy DX, good for startups |
-| **Embedded in CRM** | **HubSpot Email** / **Salesforce Marketing Cloud** | If CRM is already source of truth |
-
-**Default SaaS stack:** Postmark (transactional) + Customer.io (lifecycle) — or AWS SES + Customer.io if cost matters at scale.
-
-## §5 The Event Bridge
-
-Pattern:
-```
-Product app
-    → emits event to bus (Kafka / Kinesis / SQS / EventBridge / webhook)
-        → Transactional sender (Postmark / SES) for receipt-style emails directly triggered
-        → Lifecycle automation (Customer.io / Braze) for delayed / branched flows
-        → Warehouse (mirror for analytics + revenue attribution)
-        → CRM (HubSpot / Salesforce) for sales/CS visibility
-```
-
-Event contract:
-```json
-{
-  "event_id": "evt_2026_05_11_abc123",
-  "event_type": "user.signed_up",
-  "occurred_at": "2026-05-11T10:23:00Z",
-  "tenant_id": "ten_456",
-  "user_id": "usr_789",
-  "user_email": "alice@example.com",
-  "properties": {
-    "plan": "trial-pro",
-    "acquisition_channel": "google_organic",
-    "signup_source": "web"
-  },
-  "idempotency_key": "user_789_signed_up"
-}
-```
-
-Idempotency at every consumer — replay must not duplicate sends.
-
-## §6 Suppression List
-
-**Central, durable, ESP-independent.** Survives ESP migrations.
-
-```sql
-CREATE TABLE email_suppressions (
-    id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    email_hash    CHAR(64) NOT NULL,         -- SHA-256 of normalised email (GDPR-friendly)
-    email         VARCHAR(255),              -- nullable; can be wiped on GDPR delete
-    category      ENUM('hard_bounce','complaint','unsubscribe_marketing','unsubscribe_lifecycle','unsubscribe_all','gdpr_erasure','admin') NOT NULL,
-    tenant_id     BIGINT UNSIGNED,           -- nullable: NULL = global suppression
-    source        VARCHAR(64),               -- 'postmark_webhook', 'user_action', 'admin'
-    reason        TEXT,
-    suppressed_at DATETIME NOT NULL,
-    UNIQUE KEY uq_hash_category_tenant (email_hash, category, tenant_id)
-);
-```
-
-Send check:
-```python
-def can_send(email, tenant_id, category):
-    suppression = SuppressionList.lookup(
-        email_hash=hash(email),
-        tenant_id=tenant_id,
-        category_chain=expand_categories(category)
-    )
-    return suppression is None
-```
-
-`expand_categories` includes broader categories: a `marketing` send checks for `unsubscribe_marketing`, `unsubscribe_all`, `complaint`, `hard_bounce`, `gdpr_erasure`.
-
-## §7 Feedback Loops
-
-Every ESP exposes webhooks for delivery events:
-- `delivered`
-- `bounce` (hard / soft)
-- `complaint` (FBL from inbox provider)
-- `unsubscribe`
-- `open` (pixel)
-- `click`
-
-Pattern:
-```
-ESP webhook → signed verify → enqueue → consumer:
-  - bounce.hard → suppression_list += {email, hard_bounce}
-  - bounce.soft x3 → suppression_list += {email, hard_bounce}
-  - complaint    → suppression_list += {email, complaint}
-                  → audit + investigate (often indicates marketing in transactional)
-  - unsubscribe  → suppression_list += {email, unsubscribe_<category>, tenant_id?}
-  - delivered/open/click → warehouse for analytics
-```
-
-## §8 Deliverability Monitoring
-
-Dashboards:
-- **Send volume** per category per day.
-- **Bounce rate** rolling 7-day; alert > 2%.
-- **Complaint rate** rolling 7-day; alert > 0.1%.
-- **Inbox placement rate** via seed-list (GlockApps, Mailtrap inbox placement).
-- **DMARC report ingestion** — domains spoofing you; misalignments.
-- **Top failing recipients / domains** (Gmail temp-block, Yahoo greylist).
-
-Alerts:
-- Bounce or complaint rate above threshold.
-- DMARC failures from a domain that should be aligned.
-- Sender score (SenderScore.org) drop.
-
-## §9 Consent Model (Multi-Tenant Nuance)
-
-Three consents per user-per-tenant:
-- **Transactional** — implicit, cannot opt out (legal need).
-- **Lifecycle (product)** — implicit on signup; per-category opt-out.
-- **Marketing (broadcast)** — explicit opt-in (GDPR); easy opt-out.
-
-**Multi-tenant subtlety:** a user belongs to multiple tenants. Unsubscribing from one tenant's marketing must not stop the other tenants' marketing. Store `tenant_id` on suppression rows; global suppression only on GDPR erasure or hard bounce.
-
-## §10 Anti-Patterns
-
-- **No DKIM rotation plan** — single key, never rotated, becomes a liability.
-- **Mixed transactional + marketing on one subdomain** — one viral newsletter complaint thread tanks transactional.
-- **Suppression list only inside the ESP** — switching ESPs loses years of unsubscribe history.
-- **Per-tenant unsubscribe missing** — global unsubscribe kills lifecycle for tenants the user is still active in.
-- **Webhook handler not idempotent** — replay creates duplicate suppressions or skipped sends.
-- **No DMARC report monitoring** — domain spoofing goes unnoticed.
-- **First big send from a fresh IP without warmup** — reputation tanks immediately.
-- **Marketing email lacks `List-Unsubscribe` header** — Gmail/Yahoo penalise; some now require RFC 8058 one-click unsubscribe.
-
-## §11 Read Next
-
-- External design-engine `email-and-newsletter-design` — purpose-fit visual direction,
-  resilient HTML implementation, accessibility, dark-mode handling, and client render evidence.
-- `saas-lifecycle-email-orchestration` — the sequences (welcome, behavioral, retention, etc.) built on top.
-- `subscription-billing` — billing events that trigger transactional emails.
-- `saas-tenant-data-portability-and-erasure` — GDPR cascade through the suppression list.
-- `observability-monitoring` — emit deliverability metrics into the central observability stack.
+Without authoritative DNS, provider/account access, current receiver requirements, test recipients,
+or production authority, produce a read-only architecture and exact verification plan. Mark domain,
+delivery, inbox, complaint, and migration outcomes `NOT ASSESSED`.

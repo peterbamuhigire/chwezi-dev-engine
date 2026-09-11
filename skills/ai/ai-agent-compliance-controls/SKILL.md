@@ -98,4 +98,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Consolidated Child References
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Security | Agent control-to-evidence matrix | Markdown/YAML | control owner, test procedure, result, exception, and review date |
+
 <!-- dual-compat-end -->

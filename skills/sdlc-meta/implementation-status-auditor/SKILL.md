@@ -30,6 +30,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Load `references/plan-implementation.md` when audit findings need to become a phased implementation plan.
+- Load [verified triage state machine](references/verified-triage-state-machine.md) when claims must move through report, reproduction, decision, implementation, and verification states.
 <!-- dual-compat-end -->
 ## Overview
 

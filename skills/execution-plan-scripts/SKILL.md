@@ -44,6 +44,8 @@ into an expected failure solely to obtain a green suite.
 |---|---|---|
 | A task consumes another task's output | Run after the producer's acceptance gate | Producer artefact and result |
 | Independent tasks have disjoint write sets and delegation is available | Assign one owner per write set | Reconciled diffs and worker results |
+| A slice delivers one end-to-end user outcome | Represent it as a tracer-bullet node with explicit blocking edges | Runnable thin-slice evidence |
+| A live contract or schema cannot change atomically | Use expand-contract nodes and preserve a green compatibility boundary | Version-skew and rollback tests |
 | Delegation or a named process plugin is unavailable | Execute the same tasks sequentially | Same acceptance criteria and checkpoint |
 | A session is resumed or compacted | Read the checkpoint and inspect current state | Remaining work, prior results and user corrections |
 | A requested action exceeds existing authority | Complete independent preparation, then request that specific authority | Reviewable proposed action and scope boundary |
@@ -52,8 +54,9 @@ into an expected failure solely to obtain a green suite.
 
 1. Read the plan, user corrections and repository instructions; enumerate the
    actual skills and capabilities.
-2. Partition by dependencies and file ownership. Keep the coordinator's next
-   blocking task local; delegate independent work only where supported.
+2. Partition the plan into tracer-bullet nodes that cross the necessary layers for one useful outcome.
+   Record blocking edges, query the current runnable frontier, and use expand-contract for wide live changes.
+   Keep the coordinator's next blocking task local; delegate independent work only where supported.
 3. Write self-contained prompts using the anatomy below. Use available process
    skills when they add value; never prescribe unavailable vendor tools.
 4. Record exact acceptance commands, expected behaviour, negative cases,
@@ -298,6 +301,8 @@ Use the companion skills above only after confirming their names in the current
 catalogue. The local `world-class-engineering` skill owns implementation gates;
 `implementation-status-auditor` checks plan evidence. Illustrative plugin names
 above are not installation requirements.
+
+- [Tracer-bullet work graphs and expand-contract](references/tracer-bullet-work-graphs.md)
 
 ## Evidence Produced
 

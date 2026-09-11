@@ -97,6 +97,12 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## References
 
 - Use the `references/` directory for deep walkthroughs after reading the core workflow below.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Payment lifecycle reconciliation | Markdown plus webhook fixtures | intent, idempotency, webhook, invoice, refund/dispute, ledger handoff, and retry |
+
 <!-- dual-compat-end -->
 
 Use this skill when Stripe is the payment rail. The goal is safe, retriable, webhook-driven payments that survive replays, partial failures, and SCA challenges.

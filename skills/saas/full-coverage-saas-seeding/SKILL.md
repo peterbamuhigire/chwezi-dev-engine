@@ -1,6 +1,6 @@
 ---
 name: full-coverage-saas-seeding
-description: Use when designing, implementing, executing, replaying, or verifying a realistic synthetic SaaS tenant through the product's supported UI, APIs, application services, commands, and workflow boundaries for both prospect demonstration and full system testing.
+description: Use when populating, refreshing, replaying, resetting, or verifying a realistic synthetic SaaS demo tenant across procurement, inventory, production, sales, finance, reporting, UI/API/application boundaries, isolation, reconciliation, and idempotency.
 metadata:
   portable: true
   compatible_with:
@@ -135,5 +135,11 @@ reconciliation, and reset results where the capability applies.
 - `saas/multi-tenant-saas-architecture`, `security/vibe-security-skill`, `languages/typescript-full-stack`, and `sdlc-meta/kaizen-improvement-system` as applicable.
 
 `references/synthetic-name-bank-standard.md` - deterministic four-CSV identity pools, provenance controls, validation, collision handling, and the initial western/Arabic assets.
+
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Data safety | Synthetic tenant seeding verification pack | Manifest plus query output | scope, seed ownership, replay, reset, isolation, reconciliation, and prohibited production check |
 
 <!-- dual-compat-end -->

@@ -92,6 +92,12 @@ If the engine version, scale, timestep, or coordinate convention is unknown, sto
 
 - [Spatial mathematics and coordinate contracts](references/spatial-mathematics-contracts.md)
 - [Numerical simulation and deterministic tests](references/numerical-simulation-tests.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Simulation oracle and numerical test report | Markdown plus deterministic fixtures | units, timestep, seed, tolerance, invariant, edge case, and replay result |
+
 <!-- dual-compat-end -->
 
 ## Read Next

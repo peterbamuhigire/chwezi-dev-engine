@@ -50,4 +50,10 @@ Accessibility requirement/test matrix; input/feedback map; localisation kit/glos
 
 ## References
 - [Access, localisation, and safety gates](references/access-localisation-safety-gates.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Player access and safety verification matrix | Markdown plus play evidence | remap, sensory alternative, locale, moderation, child safety, failure, and reviewer |
+
 <!-- dual-compat-end -->

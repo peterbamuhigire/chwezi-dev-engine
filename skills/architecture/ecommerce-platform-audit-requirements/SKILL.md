@@ -75,6 +75,12 @@ Use this skill to define a requirements-level audit protocol for e-commerce plat
 - `references/audit-scope-and-standards.md`: Scope, standards, evidence, and payment/AI review.
 - `references/eac-data-protection-table.md`: Verified EAC data-protection status table and legal-use rules.
 - `references/remediation-backlog-template.md`: Backlog fields, severity, business impact, and acceptance criteria.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | E-commerce requirement and evidence matrix | Markdown table | journey, requirement, risk, oracle, evidence owner, and disposition |
+
 <!-- dual-compat-end -->
 
 ## Inputs

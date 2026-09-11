@@ -40,6 +40,12 @@ Device matrix; scenario budget; capture protocol; profiler evidence; bottleneck 
 ## References
 - [Profiling and budget playbook](references/profiling-budget-playbook.md)
 - [Rendering, memory and thermal checklist](references/rendering-memory-thermal.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Performance | Sustained device performance report | Profiler capture plus Markdown | build, scene, device, frame pacing, memory, thermal, battery, bottleneck, and before/after |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Evidence | Action |

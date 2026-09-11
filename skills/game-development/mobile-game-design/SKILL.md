@@ -45,6 +45,12 @@ Player-promise brief; core-loop and session maps; touch-control specification; F
 ## References
 - [Mobile design operating playbook](references/mobile-design-playbook.md)
 - [Ethical progression and economy](references/progression-economy.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Mobile game loop and session evidence | Markdown plus prototype/playtest | fantasy, loop, touch input, onboarding, session, progression, accessibility, and finding |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Choice |

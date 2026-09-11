@@ -48,6 +48,10 @@ domain judgement with the owning engine and makes learning discoverable.
 6. **Standardise.** Promote a successful result into the owning skill, reference, template, fixture, router, or release gate. Do not promote a one-off observation.
 7. **Teach and re-measure.** Update discoverability and handoffs, re-score the changed dimensions, and leave the next improvement visible.
 
+At retrospective, ask which evidence, repository context, stakeholder access, runtime capability, or
+tool result was unavailable to the work. Separate process failure from missing access; improve the
+workflow only where a changed method can alter the outcome.
+
 ## Core content
 
 For a product, assess the applicable combination of requirements, architecture

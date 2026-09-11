@@ -60,4 +60,10 @@ Measurement plan; event/schema and SDK-purpose registry; data-quality tests; eco
 
 ## References
 - [Live data and economy controls](references/live-data-economy-controls.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Game telemetry and economy validation pack | Markdown plus dataset/query | event schema, consent, source/sink balance, experiment guardrail, anomaly, and rollback |
+
 <!-- dual-compat-end -->

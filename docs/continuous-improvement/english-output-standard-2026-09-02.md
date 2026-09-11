@@ -12,6 +12,14 @@ Canonical study: `C:\wamp64\www\digital-research-engine\docs\continuous-improvem
 - Keep idioms and metaphor out of interfaces, requirements, operations, security, and compliance unless their meaning is explicit and tested.
 - Proof identifiers, commands, units, version strings, names, links, code fences, and user-facing messages. Never add typos or false warmth to simulate humanity.
 
+## Re-pitch unclear material
+
+When a reader says the explanation does not make sense, do not merely shorten or repeat it. Identify
+the missing prerequisite, use the project's established terms, state the actor and concrete example,
+then explain the consequence or next action. Preserve necessary technical precision. ASD-STE100 or
+another controlled-language standard applies only when the artefact or client requires it; it is not
+the universal definition of plain English.
+
 The supplied books inform durable language craft only. They are not authority for
 current software, standards, APIs, or security claims; Digital Research verification
 is mandatory whenever a statement may have changed.

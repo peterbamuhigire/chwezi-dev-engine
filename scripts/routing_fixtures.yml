@@ -23,7 +23,7 @@ fixtures:
   - task: "Meter and bill AI token usage per tenant and attribute cost"
     expect: ai-cost-and-metering
   - task: "Gate which AI model tier and how many generations a plan unlocks"
-    expect: ai-entitlements-and-feature-gating
+    expect: saas-entitlements-and-plan-gating
   - task: "Audit this Windows device and safely tune Codex and Claude Code for context, token, model and subagent efficiency"
     expect: coding-agent-optimization
 
@@ -91,17 +91,17 @@ fixtures:
 
   # --- Mobile ---
   - task: "Architect an Android app with offline-first Room persistence and sync"
-    expect: android-data-persistence
+    expect: android-development
   - task: "Build offline-capable local storage and sync for an iOS app with SwiftData"
-    expect: ios-data-persistence
+    expect: ios-platform-capabilities
   - task: "Implement an iOS app feature in Swift using SwiftUI, async await and Xcode project conventions"
     expect: ios-development
   - task: "Build an iOS AI feature using Foundation Models, Core AI, on-device evaluation and privacy-preserving fallbacks"
-    expect: ios-ai-ml
+    expect: ios-platform-capabilities
   - task: "Expose app content and actions to Siri using App Intents, App Entities, View Annotations and Spotlight semantic indexing"
     expect: ios-platform-capabilities
   - task: "Plan iOS release evidence with Device Hub, Xcode Cloud, TestFlight, Swift Testing and App Store submission gates"
-    expect: ios-quality-and-release
+    expect: mobile-platform-operations
 
   # --- Security / compliance ---
   - task: "Run a web app security audit for OWASP vulnerabilities, insecure code and remediation evidence"
@@ -177,6 +177,11 @@ fixtures:
     top_n: 1
   - task: "Use skill-writing to author a new skill that follows the repository house style and contracts"
     expect: skill-writing
+  - task: "Diagnose an intermittent production bug by establishing a red-capable reproduction loop and falsifying ranked hypotheses before changing code"
+    expect: systematic-bug-diagnosis
+    top_n: 1
+  - task: "Design the overall unit, integration and end-to-end test strategy for a new service"
+    expect: advanced-testing-strategy
   - task: "Initialise documentation and a methodology roadmap for a brand new project"
     expect: 00-meta-initialization
   - task: "Red-team a high-stakes donor proposal against the scoring grid, compliance knockouts, evidence and spreadsheet integrity before submission"

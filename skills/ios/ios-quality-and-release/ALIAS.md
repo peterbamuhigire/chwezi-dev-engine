@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/mobile-cross/mobile-platform-operations`; retained here for Apple testing and release depth.
+
 # iOS Quality And Release
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 

@@ -86,6 +86,13 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 - `references/control-room-registers.md`: Required registers and fields.
 - `references/raci-raid-deliverables.md`: RACI, RAID, deliverables, cadence, and gate rules.
+- [Decision-frontier programme wayfinding](references/decision-frontier-wayfinding.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Operability | Programme control-room evidence ledger | Markdown/workbook | deliverable, owner, dependency, RAID item, decision, approval, status, and next gate |
+
 <!-- dual-compat-end -->
 
 ## Core Workflow

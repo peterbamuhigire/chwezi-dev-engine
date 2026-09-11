@@ -186,4 +186,10 @@ also route to `chwezi-accounting-doctrine` and the local `accounting-engine`.
 - `skills/product-business/product-discovery/references/feature-planning/references/pos-mandatory-requirements.md` — session and receipt controls.
 - `skills/sdlc-meta/skill-composition-standards/references/test-plan-template.md` — test evidence shape.
 - `skills/sdlc-meta/skill-composition-standards/references/rollback-plan-template.md` — rollback evidence shape.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | POS sale-to-ledger journey evidence | Markdown plus transaction fixtures | customer, stock, payment, posting, retry, reversal, permission, and reconciliation |
+
 <!-- dual-compat-end -->

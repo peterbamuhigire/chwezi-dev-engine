@@ -88,6 +88,8 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 ## References
 
 - Use `enterprise-ux-process` when the work has enterprise constraints, stakeholder churn, or requirement ambiguity.
+- Use the SRS engine's canonical `decision-frontier-elicitation` reference when open product decisions have prerequisites or several owners.
+- [Question-answering prototypes](references/question-answering-prototypes.md)
 ## Evidence ladder and scale gate
 
 Before recruiting or building, run a lightweight market preflight: define the
@@ -107,6 +109,12 @@ research against the original product/source, and review scoped prototype
 deltas before adoption.
 
 Practitioner cross-checks: [Eleken product-idea validation](https://www.eleken.co/blog-posts/how-to-validate-product-ideas), [SaaS launch](https://www.eleken.co/blog-posts/how-to-launch-a-saas-business), [startup scaling](https://www.eleken.co/blog-posts/scaling-your-startup-how-it-looks-from-the-product-design-perspective), and [AI design workflow](https://www.eleken.co/blog-posts/ai-design-workflow). Use as prompts, not as proof of market size, outcomes, or tool performance.
+
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Product decision evidence board | Markdown table | problem, segment, evidence, assumption, option, experiment, threshold, and decision |
 
 <!-- dual-compat-end -->
 

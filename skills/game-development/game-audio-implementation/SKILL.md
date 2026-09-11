@@ -40,6 +40,12 @@ Audio bible; rights ledger; event/bus map; recording and localisation pack; inte
 ## References
 - [Audio production and implementation](references/audio-production-implementation.md)
 - [Cultural, rights and localisation gates](references/audio-rights-localisation.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Game audio event and accessibility evidence | Markdown plus captures | event, bus, variation, loudness, localisation, mute alternative, device cost, and rights |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Asset | Default treatment |

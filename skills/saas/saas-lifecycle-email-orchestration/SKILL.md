@@ -1,6 +1,6 @@
 ---
 name: saas-lifecycle-email-orchestration
-description: Use when designing SaaS lifecycle email triggers, branches, suppression, churn signals, upgrades, reactivation, referrals, or attribution.
+description: Use when deriving SaaS lifecycle email decisions from user state, product events, consent, channel pressure, suppression, and measurable outcomes; use the design engine for each message's visual composition and the writing route for its words.
 metadata:
   portable: true
   compatible_with:
@@ -9,325 +9,153 @@ metadata:
 ---
 
 # SaaS Lifecycle Email Orchestration
-Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
-
-## Required Inputs
-
-| Input | Required | Use |
-|---|---|---|
-| Tenant, product, and lifecycle scope | yes | Bound the SaaS decision |
-| Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
-| Production data or verified evidence | conditional | Validate thresholds and migrations |
-
-## Capability and permission contract
-
-Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
-
-## Degraded mode
-
-If production access, policy, telemetry, or authoritative records are unavailable, produce a labelled design or dry-run plan. Do not claim deployment, reconciliation, deletion, delivery, or measured outcomes; list missing evidence and verification.
-
-## Decision rules
-
-| Condition | Action | Stop condition |
-|---|---|---|
-| Tenant isolation, money, identity, or deletion is affected | Require approval and rollback evidence | Scope or authority is ambiguous |
-| Evidence supports a reversible change | Stage, test, and record it | Acceptance checks fail |
-| Only partial context is available | Return assumptions and validation | A production claim cannot be verified |
-
-## Domain Anti-Patterns
-
-- Applying one tenant's policy or data to another. Fix: enforce tenant scope at every boundary.
-- Mutating production from an advisory request. Fix: remain read-only until authority is explicit.
-- Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
-- Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
-- Treating a missing dependency as successful. Fix: name the blocked verification.
-
+Design the decision system that determines whether an email should exist, who should receive it,
+what verified state it responds to, and when it must stop. Do not begin from a sequence catalogue,
+fixed cadence, benchmark, or message template.
 
 <!-- dual-compat-start -->
 ## Use When
 
-- Designing the six core lifecycle email sequences for a SaaS — welcome / onboarding, behavioral / feature-discovery, upgrade / upsell, retention, reactivation, referral.
-- Replacing a single "drip campaign" with event-driven branched automation.
-- Coordinating in-app upgrade prompts with email upgrade prompts so they don't double-fire.
-- Attributing revenue to email touches (control vs treatment cohorts).
-- Wiring PQL signals into upgrade emails and churn-risk signals into retention emails.
+- Product events or state transitions may justify a lifecycle email.
+- Email and in-product messages can collide or contradict one another.
+- Consent, suppression, frequency pressure, tenant roles, or account state determine eligibility.
+- A team needs testable trigger, branch, exit, attribution, and recovery contracts.
 
 ## Do Not Use When
 
-- The task is the underlying email infrastructure (ESP, deliverability, suppression) — use `saas-transactional-email-infrastructure`.
-- The task is HTML email or newsletter design — route to the external design engine's
-  `skills/13-presentations-and-documents/email-and-newsletter-design` skill. That skill owns
-  authored visual direction, resilient HTML, dark mode, accessibility, and render QA.
-- The task is acquisition cold email — use sales/marketing tooling outside this engine.
+- The task is HTML email or newsletter presentation. Route to the design engine's
+  `email-and-newsletter-design` skill, which composes the message for its purpose and client matrix.
+- The task is subject lines, body copy, or CTA wording. Route to the appropriate content-writing or
+  UX-writing skill after the message job and evidence are approved.
+- The task is ESP selection, authentication, reputation, bounce processing, or provider operations.
+  Use the retained `saas-transactional-email-infrastructure` reference branch.
+- The task is acquisition outreach to people without an existing product relationship.
 
 ## Required Inputs
 
-- The product's activation event (the "aha moment") — from `product-led-growth`.
-- PQL scoring outputs — from `product-led-growth`.
-- Churn-risk signals — from `saas-growth-metrics` or `product-led-growth`.
-- Plan / tier catalogue and upgrade paths — from `subscription-billing` and `saas-entitlements-and-plan-gating`.
-- Trial policy — from `subscription-billing`.
+| Input | Required | Missing-input response |
+| --- | --- | --- |
+| User outcome and failure consequence | yes | Do not create a send merely to fill a lifecycle stage |
+| Verified product/account state and event semantics | yes | Mark the trigger `NOT ASSESSED` |
+| Recipient role, tenant scope, locale, and consent state | yes | Suppress until eligibility is known |
+| Competing channels and recent contact pressure | yes | Default to no send until arbitration is defined |
+| Exit, invalidation, and recovery conditions | yes | Do not enrol an unbounded flow |
+| Measurement basis and decision owner | yes | Treat performance claims as unproved |
 
 ## Workflow
 
-1. Read this `SKILL.md`.
-2. Define the user data model the email tool needs (§2) — contact attributes + event stream.
-3. Design each of the six sequences (§3-§8) — trigger, branches, suppression, send cadence.
-4. Wire the trigger contract (§9) — what events fire what sequences.
-5. Coordinate with in-app prompts (§10) — avoid double-firing.
-6. Set up revenue attribution (§11) — control vs treatment per sequence.
-7. Apply anti-patterns (§12).
+1. **Start from a decision moment.** State the recipient's current verified state, the decision or
+   task they face, the consequence of silence, and the consequence of an unnecessary message.
+2. **Inspect the existing journey.** Map product UI, support, account management, billing,
+   notifications, and prior email. Prefer the channel already closest to the action.
+3. **Define eligibility as a state predicate.** Use named business events and current state, not a
+   calendar label. Separate event occurrence, derived state, and marketing interpretation.
+4. **Prove the message earns a send.** Record the unique job email can perform, the evidence it may
+   state, and why an in-product, support, or no-message path is insufficient.
+5. **Design branches and exits before cadence.** Define invalidating events, success, role changes,
+   plan changes, consent changes, duplicate signals, bounces, and account closure. Cadence follows
+   urgency and observed behaviour; no universal day count is a default.
+6. **Arbitrate channels and pressure.** Use one decision service or auditable rule set to choose the
+   best channel and suppress duplicates. Contact limits are product policy informed by measured
+   fatigue and legal/consent constraints, not copied benchmark numbers.
+7. **Hand off one message job at a time.** Give writing and design owners the audience, decision,
+   evidence, required action, hierarchy, fallback state, legal controls, and client matrix. Do not
+   prescribe a reusable layout or canned copy.
+8. **Implement an idempotent contract.** Persist the evaluated policy version, eligibility reason,
+   suppression reason, content version, send attempt, provider response, and downstream outcome.
+9. **Test normal and contradiction paths.** Include stale events, duplicate events, late success,
+   role/plan changes, unsubscribed categories, tenant isolation, provider retry, and competing
+   channel activity.
+10. **Release as an experiment only when justified.** Use an ethical comparison or staged rollout,
+    predefine success and harm measures, and stop messages that add pressure without user value.
+
+## Decision Rules
+
+| Condition | Action | Failure avoided |
+| --- | --- | --- |
+| Product state already resolves the user's task | Suppress or use the in-product confirmation | Robotic, contradictory mail |
+| Trigger is inferred from stale or ambiguous data | Hold and seek a fresher state observation | False urgency or wrong recipient |
+| Several messages compete | Rank by user consequence and choose one channel | Notification pile-on |
+| Consent category or lawful basis is unresolved | Stop before enrolment | Unauthorised communication |
+| Recipient is not the accountable tenant role | Route to the correct role or suppress | Cross-role disclosure |
+| Success or invalidation arrives before send | Cancel idempotently | Obsolete call to action |
+| Outcome cannot be measured responsibly | Release only as a labelled operational message, not a growth claim | Invented attribution |
 
 ## Quality Standards
 
-- Every email belongs to exactly one of the six sequences (or is purely transactional).
-- Every sequence is **event-triggered**, not scheduled blast.
-- Every email obeys the suppression list (transactional / lifecycle / marketing categories).
-- Every send/open/click written to the warehouse with cohort attributes.
-- Revenue attributed per sequence; under-performing sequences killed, not iterated forever.
+- Every send can explain the verified state, recipient eligibility, message job, selected channel,
+  policy version, and exit condition.
+- The orchestration is state-driven and idempotent; time may be an input but never the only reason.
+- Consent, tenant isolation, sensitive data, accessibility, localisation, and legal controls are
+  evaluated before content leaves the system.
+- Copy and visual hierarchy are purpose-designed for the approved message; no bundled sequence or
+  layout template is selected.
+- Suppression and channel arbitration are testable independently of the provider.
+- Measurement distinguishes delivery, attention proxies, task completion, user harm, and business
+  outcome. Opens alone do not establish value.
+- Thresholds, delays, and frequency limits are sourced from current product policy or measured
+  evidence and carry an owner and review date.
 
 ## Anti-Patterns
 
-- "Drip campaigns" running on calendar schedule regardless of user behavior.
-- Welcome email sent after the user has already activated (looks robotic).
-- Upgrade emails sent to users on the highest plan.
-- Retention emails sent to users who just renewed.
-- Reactivation emails ignoring transactional consent → spamming.
-- Sequences without branches (every user gets the same email at T+1, T+3, T+5).
-- No A/B test cadence — sequences ossify.
+- A universal welcome/upgrade/retention recipe. Derive the message from the actual product state.
+- Fixed T+1/T+3/T+7 sends copied into every product. Let urgency, behaviour, and evidence set timing.
+- Treating a score threshold as truth. Calibrate and monitor false positives and affected groups.
+- Writing or designing the email before deciding whether it should exist.
+- A provider workflow that owns business truth. Keep policy and audit state in an inspectable system.
+- Double-firing email and in-product prompts for the same decision.
+- Continuing after activation, payment, recovery, role change, unsubscribe, or account closure.
+- Calling opens, clicks, or short attribution windows proof of incremental value.
 
 ## Outputs
 
-- The six sequence specs (trigger, branches, emails, send conditions).
-- Trigger contract — event → sequence mapping.
-- Suppression matrix per sequence.
-- Coordination contract with in-app prompts.
-- Revenue-attribution dashboard.
+| Artifact | Consumer | Acceptance condition |
+| --- | --- | --- |
+| Journey decision map | Product, support, and lifecycle owners | Decision moments, channel alternatives, silence/send harms, and owners are explicit |
+| Trigger and state contract | Engineering and data | Events, predicates, freshness, idempotency, branches, exits, and tenant scope are testable |
+| Eligibility/suppression matrix | Compliance and operations | Consent, role, plan, locale, pressure, contradiction, and recovery paths are covered |
+| Message-job handoffs | Writing and design owners | Each message has purpose, evidence, action, hierarchy, constraints, and no selected template |
+| Measurement and rollback plan | Product and release reviewers | User outcome, harm guardrails, attribution limits, stop rule, and rollback are approved |
 
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
-|----------|----------|--------|---------|
-| Correctness | Six-sequence catalogue | Markdown doc with branch diagrams | `docs/email/lifecycle-sequences.md` |
-| Release evidence | Trigger-event contract | Markdown table | `docs/email/trigger-contract.md` |
-| Operability | Email revenue attribution dashboard | Dashboard link | `docs/email/attribution-dashboard.md` |
+| --- | --- | --- | --- |
+| Correctness | State-transition and eligibility cases | Decision table plus automated tests | duplicate event and late-success cancellation |
+| Security | Tenant/role/consent evidence | Matrix and policy test output | recipient scope and suppression reason |
+| Operability | Delivery and recovery record | Event lineage/runbook | policy version, attempt, provider result, retry/rollback |
+| UX quality | Purpose-specific message handoff | Brief plus rendered-client evidence | user job, image-off order, competing-channel decision |
+| Release evidence | Experiment and stop decision | Change record | outcome, harm measure, uncertainty, owner, review date |
 
 ## References
 
-- `references/sequence-welcome-onboarding.md` — branched welcome flow with activation check.
-- `references/sequence-behavioral.md` — feature-discovery, approaching-limit, inactive nudges.
-- `references/sequence-upgrade.md` — PQL-triggered upgrade flow.
-- `references/sequence-retention.md` — churn-risk triggered save sequences.
-- `references/sequence-reactivation.md` — long-dormant win-back.
-- `references/sequence-referral.md` — NPS-promoter and active-user referral.
-- Companion: `saas-transactional-email-infrastructure`, external design-engine
-  `email-and-newsletter-design`, `product-led-growth`, `saas-growth-metrics`, and
-  `saas-entitlements-and-plan-gating`.
-
+- [Journey-derived orchestration](references/journey-derived-orchestration.md) — use when turning a
+  product decision moment into state, eligibility, channel, handoff, and measurement contracts.
+- [Routing and ownership](references/routing.md) — use when choosing between lifecycle behaviour,
+  infrastructure, design, copy, billing, entitlement, and growth owners.
+- [Transactional email infrastructure entrypoint](references/saas-transactional-email-infrastructure/entrypoint.md)
+  — use for provider, deliverability, domain, suppression transport, and feedback-loop engineering.
 <!-- dual-compat-end -->
 
-## §1 The Six Sequences
+## Capability Contract
 
-From Garbugli's *SaaS Email Marketing Playbook*:
+Read-only design is the default. Sending, enrolment, policy/configuration changes, user-data access,
+provider changes, experiments, and production instrumentation require explicit authority, exact
+tenant/audience scope, rollback, and auditable approval.
 
-| # | Sequence | Trigger | Primary goal |
-|---|---|---|---|
-| 1 | **Welcome & Onboarding** | `user.signed_up` or `tenant.created` | Drive to activation (the aha moment) |
-| 2 | **Behavioral & Lifecycle** | Specific feature/usage events (or their absence) | Drive depth, prevent stall |
-| 3 | **Upgrade / Upsell / Expansion** | PQL signals (approaching limit, gated-feature hit, sustained engagement) | Expand revenue |
-| 4 | **Retention / Churn Prevention** | Churn-risk score threshold crossed | Save accounts |
-| 5 | **Reactivation** | Long inactivity (e.g., 60 days no login) | Win back dormants |
-| 6 | **Referral** | NPS-promoter score, sustained activity | Drive viral acquisition |
+## Degraded Mode
 
-Bonus (out of scope here, owned by sales): **Cold / acquisition** — outbound prospecting.
+Without verified state semantics, consent, recipient scope, channel history, product policy,
+telemetry, or action authority, return a decision map and missing-evidence register. Do not invent a
+cadence, threshold, benchmark, audience response, or send result.
 
-## §2 The Data Model the Email Tool Receives
+## Stop Conditions
 
-Contact attributes (sticky on the contact record in Customer.io / Braze):
-- `email`, `name`, `tenant_id`, `tenant_name`, `tenant_plan`, `tenant_mrr`
-- `role` (owner / admin / member / billing)
-- `signup_date`, `first_login_date`, `last_login_date`
-- `lifecycle_stage` (visitor / signup / trial / activated / paid / churned / reactivated)
-- `acquisition_channel`, `utm_source/medium/campaign`
-- `firmographics` (industry, company_size, country, language)
-- `activation_state` (boolean + date)
-- `pql_score`, `churn_risk_score`, `nps_score`, `last_nps_date`
-- `unsubscribed_categories[]`
+Stop before release when the message job is not unique, a safer channel exists, state freshness is
+unknown, consent or role is ambiguous, suppression/exit paths cannot be tested, content lacks
+approved evidence, or production and rollback authority is absent.
 
-Events (firehose):
-- `user.signed_up`, `user.activated`, `user.logged_in`, `user.invited_teammate`
-- `feature.X.used_first_time`, `feature.X.used_repeat`
-- `trial.started`, `trial.day_N`, `trial.ended`, `trial.converted`
-- `subscription.upgraded/.downgraded/.cancelled`
-- `payment.failed`, `payment.succeeded`
-- `support.ticket.created`, `support.csat_low`
-- `usage.approaching_limit`, `usage.limit_hit`
-- `gate.denied` (feature locked behind higher plan)
-
-Wire via the event bridge from `saas-transactional-email-infrastructure`.
-
-## §3 Sequence 1 — Welcome & Onboarding
-
-**Trigger:** `user.signed_up` (or `tenant.created` if more than one user joins simultaneously).
-
-**Goal:** drive to activation event within trial window.
-
-**Structure (typical 5-7 email branch):**
-```
-T+0       Welcome — confirm signup, deliver core CTA, set expectations
-T+1d      Getting Started — concrete first step
-T+3d      Feature Discovery — high-value feature the user hasn't touched
-            if user.activated: branch → "you're flying" follow-up
-            else:               branch → "having trouble? here's help"
-T+5d      Social proof — case study from similar customer
-T+7d      Activation check
-            if user.activated: branch → "next milestone" + power-feature
-            else:              branch → support-offer + troubleshooting
-T+trial-3 Trial-end warning — value-led
-T+trial   Trial-end conversion — offer + paywall CTA
-            branch on subscription.created → "welcome to paid" (sequence ends)
-            branch on no subscription → "extended trial" or downgrade-to-free
-```
-
-**Suppression:**
-- Skip if already `paid` plan at signup (B2B paid trial → straight to enterprise sequence).
-- Stop sending if `user.activated` past T+3 + `feature.X.used_repeat` (user is in product).
-- Always honour explicit unsubscribe.
-
-## §4 Sequence 2 — Behavioral & Lifecycle
-
-**Trigger:** event presence or absence in product.
-
-**Examples:**
-
-| Email | Trigger condition |
-|---|---|
-| "Try the X feature" | `user.activated AND NOT feature.X.used_first_time AND days_since_signup ≥ 7` |
-| "Approaching your limit" | `usage.approaching_limit (80% threshold)` |
-| "We noticed you haven't logged in" | `last_login_date < now - 14d` |
-| "Your team is collaborating" | `collaboration_event_count ≥ 5 in last 7d` (positive reinforcement) |
-| "How can we help?" | `support.csat_low` recently OR repeat-failed actions |
-
-**Send cadence:** event-driven; capped at 2 / week per user / category.
-
-## §5 Sequence 3 — Upgrade / Upsell / Expansion
-
-**Trigger:** PQL score threshold OR specific gate hit.
-
-**Examples:**
-
-| Trigger | Email |
-|---|---|
-| `usage.approaching_limit (90%)` on a plan-tied limit | "You're close to your limit — upgrade to keep moving" |
-| `gate.denied (feature=X)` repeated 3x in 7 days | "Try X free for 14 days" (in-app trial of feature) |
-| `pql_score >= threshold` (Pro-tier behavior on Free plan) | "It looks like you're ready for Pro" |
-| `active_users / max_seats >= 0.8` | "Add 5 seats and save 20%" |
-
-**Coordinate with in-app:** if the in-app prompt fires today, suppress the email today.
-
-## §6 Sequence 4 — Retention / Churn Prevention
-
-**Trigger:** churn-risk score crosses threshold OR specific churn-precursor events.
-
-**Examples:**
-
-| Trigger | Email |
-|---|---|
-| `churn_risk_score >= 0.7` | "Are we missing something?" — survey + CS contact |
-| `subscription.downgraded` | "Welcome to the new plan — here's what you keep" |
-| `subscription.cancel_initiated` (in-product) | Save flow — pause / discount / direct CS |
-| `payment.failed` | Dunning email + card update CTA |
-
-**Suppression:** stop if user un-cancels or upgrades.
-
-## §7 Sequence 5 — Reactivation
-
-**Trigger:** long inactivity (`last_login_date < now - 60d`, configurable).
-
-**Structure:**
-```
-T+60d   "We miss you" — emotional, value-led
-T+67d   "What's new" — features added since they left
-T+74d   "Special offer" — discount, extended use, or restore-data offer
-T+81d   "Final goodbye" — last chance + permission to fully unsubscribe
-```
-
-After the sequence, mark `permanently_dormant` and move to broadcast-only suppression.
-
-## §8 Sequence 6 — Referral
-
-**Trigger:** `nps_score >= 9` recent OR `active_user >= 30d sustained + plan = paid`.
-
-**Examples:**
-- "You're getting value — would you tell a friend?" (links to in-app invite flow)
-- "Give X, get X" referral CTA
-- Champion-program invite (for enterprise)
-
-## §9 Trigger Contract
-
-The contract between product events and sequence enrolment:
-
-| Event | Sequences it can trigger |
-|---|---|
-| `user.signed_up` | Welcome & Onboarding (enroll) |
-| `user.activated` | Welcome & Onboarding (branch), Behavioral (enroll) |
-| `usage.approaching_limit` | Behavioral (warning), Upgrade (if plan-tied) |
-| `gate.denied` | Upgrade (after threshold) |
-| `pql_score_increase` | Upgrade |
-| `churn_risk_increase` | Retention |
-| `subscription.cancel_initiated` | Retention (save flow) |
-| `last_login_date passed N days` | Behavioral nudge → Reactivation after 60d |
-| `nps_score >= 9` | Referral |
-| `subscription.cancelled` | Retention (exit survey), then Reactivation in 60-90d |
-
-The email tool (Customer.io / Braze) consumes events and routes per the contract.
-
-## §10 Coordination with In-App Prompts
-
-Single rule: **one channel at a time per user per upgrade-context per day**.
-
-```
-On upgrade_signal_for_user:
-  if user.in_app_session_active:
-    → fire in-app prompt (Pendo / Appcues / built-in)
-    → suppress email today
-  else:
-    → fire email
-    → suppress in-app prompt for 24h after click
-```
-
-Store the coordination state in a `prompt_dispatcher` service that the email tool and in-app tool both consult.
-
-## §11 Revenue Attribution
-
-Every send writes:
-- `send_id`, `user_id`, `tenant_id`, `sequence`, `email_id`, `template_id`, `cohort_tag`, `timestamp`.
-
-Every open/click/conversion writes back with the `send_id` lineage.
-
-Materialise in the warehouse:
-- Per-sequence conversion rate (sent → opened → clicked → converted).
-- Per-email revenue (sum of `subscription.upgraded` MRR delta in 7d post-click).
-- Control vs treatment: maintain a hold-out cohort (e.g., 5% random skip) per sequence to measure incremental revenue.
-
-## §12 Anti-Patterns
-
-- **Scheduled drip ignoring user behavior** — welcome email T+3 still hits a user who already activated and upgraded by T+1.
-- **No A/B test rhythm** — emails go stale, conversion decays silently.
-- **Upgrade emails to users on the top plan** — annoying; bad attribution.
-- **Reactivation that pings explicit unsubscribers** — legal liability + spam.
-- **No `prompt_dispatcher` — in-app + email double-fire** — user sees the same nudge twice in 5 minutes.
-- **Sequences live in the email tool only** — engineering can't reason about them; can't test the trigger logic.
-- **Cancellation reason not captured** — win-back sequence can't personalise.
-
-## §13 Read Next
-
-- `saas-transactional-email-infrastructure` — the infra underneath.
-- External design-engine `email-and-newsletter-design` — create a purpose-fit email system and
-  production HTML from the product's visual thesis; do not depend on a bundled template library.
-- `product-led-growth` — PQL + activation signals.
-- `saas-entitlements-and-plan-gating` — `gate.denied` event source.
-- `saas-growth-metrics` — churn-risk + cohort retention.
-- `subscription-billing` — billing-event triggers.
+This workflow preserves event and lifecycle engineering while rejecting both visual and behavioural
+template catalogues. Email composition belongs to the design and writing engines; this skill owns
+the auditable decision to send or suppress.

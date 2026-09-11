@@ -20,6 +20,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/tooling-and-tests.md` — full Vite + next-pwa configs, Lighthouse CI workflow, Playwright offline test scaffold.
 - `references/safari-webkit-27-pwa-checks.md` for Safari/WebKit 27, iOS/iPadOS PWA limits, Customizable Select, `img sizes="auto"`, layout changes, HTML `<model>`, and web extension watch items.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Offline journey and recovery test pack | Markdown plus browser/test output | cache version, offline action, queued sync, conflict, update, storage pressure, and recovery |
+
 <!-- dual-compat-end -->
 
 ## Why Offline-First for East Africa

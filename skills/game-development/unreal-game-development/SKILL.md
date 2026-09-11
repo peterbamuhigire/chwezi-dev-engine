@@ -30,9 +30,25 @@ Engine/source distribution and version, plugins, target platforms/hardware, netw
 - Exact APIs follow pinned official Unreal documentation, not copied book snippets.
 - Editor/PIE success does not replace packaged target or network-condition testing.
 
+## Anti-Patterns
+
+- Gameplay logic split arbitrarily between Blueprint and C++. Fix: define ownership and test seams.
+- Hard asset references everywhere. Fix: use managed loading and validate dependency/cook graphs.
+- PIE-only acceptance. Fix: test packaged builds on target hardware and network conditions.
+- Replication added after single-player design. Fix: establish authority and state ownership first.
+- Engine upgrade without a recovery point. Fix: branch, inventory plugins/assets, convert, test, and retain rollback.
+
 ## Outputs
 Unreal architecture and version manifest; module/Blueprint contract; authority/replication spec; asset validation report; automation results; packaged build evidence.
 
 ## References
 - [Unreal multiplayer and production gates](references/unreal-production-gates.md)
+
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Unreal gameplay and packaging evidence | Project/build output plus Markdown | Gameplay Framework flow, asset validation, automation, package, profile, and recovery |
+<!-- dual-compat-end -->
 

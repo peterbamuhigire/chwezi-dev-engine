@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/backend-databases/postgresql-engineering`; retained here for production PostgreSQL operations depth.
+
 # PostgreSQL Operations
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 

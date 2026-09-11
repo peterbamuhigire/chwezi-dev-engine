@@ -98,6 +98,12 @@ If the decision owner, falsifiable threshold or consequence is missing, stop the
 
 - [Hypothesis and prototype loop](references/hypothesis-prototype-loop.md)
 - [Game experiment and gate templates](references/game-experiment-gate-templates.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Game hypothesis and playtest decision record | Markdown table | player assumption, prototype, observation, threshold, counter-signal, and pivot/stop decision |
+
 <!-- dual-compat-end -->
 
 ## Read Next

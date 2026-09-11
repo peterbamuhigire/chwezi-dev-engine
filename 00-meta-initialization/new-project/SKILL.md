@@ -18,7 +18,13 @@ metadata:
 
 # Skill: New Project Scaffold
 
-<!-- dual-compat-start --><!-- dual-compat-end -->
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Project initialisation evidence pack | Markdown plus filesystem validation | selected methodology, created paths, preserved files, validation result, rollback, and handoff |
+<!-- dual-compat-end -->
 ## Inputs
 | Artefact | Required? | Purpose |
 |---|---|---|

@@ -34,7 +34,7 @@ COMPLIANCE_SCRIPT = (
 )
 COMPLIANCE_MODULE = load_module("engine_compliance", COMPLIANCE_SCRIPT)
 
-EXPECTED_ACTIVE_SKILL_COUNT = 179
+EXPECTED_ACTIVE_SKILL_COUNT = 170
 EXPECTED_CLAUDE_BRIDGE = "# Claude Code repository memory\n\n@AGENTS.md\n"
 PORTABLE_SECTION_ALIASES = {
     "Use When": ("Use When",),
@@ -301,10 +301,10 @@ def test_count_surface_mutation_is_rejected():
         )
     }
     surface_texts["README.md"] = surface_texts["README.md"].replace(
-        "| Active `SKILL.md` files | 179 |",
-        "| Active `SKILL.md` files | 178 |",
+        "| Active `SKILL.md` files | 170 |",
+        "| Active `SKILL.md` files | 169 |",
         1,
     )
     assert count_surface_mismatches(surface_texts, str(EXPECTED_ACTIVE_SKILL_COUNT)) == {
-        "README.md": ["178"]
+        "README.md": ["169"]
     }

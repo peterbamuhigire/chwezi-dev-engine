@@ -1,6 +1,6 @@
 ---
 name: cicd-pipelines
-description: Use when designing CI/CD pipelines, stage gates, reusable workflows, short-lived cloud authentication, caching, deployment strategies, and pipeline telemetry.
+description: Use when building CI/CD pipelines with build, test, security, packaging, deployment stages, reusable workflows, short-lived cloud authentication, caching, promotion gates, and pipeline telemetry; use deployment-release-engineering for rollout decisions.
 metadata:
   portable: true
   compatible_with:

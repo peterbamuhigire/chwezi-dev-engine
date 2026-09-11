@@ -1,6 +1,6 @@
 ---
 name: skill-writing
-description: Use when creating or upgrading reusable skills, specialist-role instructions, or vendor adapters. Covers agent-versus-skill boundaries, model-neutral canonical sources, triggers, capability and output contracts, progressive disclosure, validation, and repository quality gates.
+description: Use when authoring, creating, or upgrading a reusable SKILL.md, specialist-role instruction, or vendor adapter with repository house style, triggers, progressive disclosure, context pointers, permissions, output/evidence contracts, validation, and routing fixtures.
 metadata:
   portable: true
   compatible_with:
@@ -237,6 +237,14 @@ review and verification. Reuse those before creating a new local reference.
 Do not bury important files several levels deep. Link them directly from `SKILL.md`.
 
 Load [universal agent and skill architecture](references/universal-agent-skill-architecture.md) when designing a canonical role library, vendor adapters, capability policies, or multi-agent workflows.
+
+For attention-sensitive skills, load only the reference that governs the current authoring decision:
+
+- [Context pointers](references/context-pointer-quality.md) for branch-specific references and pointer tests.
+- [Two-load context budgets](references/two-loads-and-context-budget.md) for discovery versus execution content.
+- [Invocation ownership](references/invocation-ownership.md) for explicit, implicit, and adapter behaviour.
+- [Leading words](references/leading-words-and-trigger-design.md) for descriptions and routing fixtures.
+- [Completion and handoff](references/completion-criteria-and-handoff.md) for sequential workflows and resumability.
 
 ### Book and Source-File Distillation Rule
 

@@ -1,6 +1,6 @@
 ---
 name: java-enterprise-development
-description: Use when building, reviewing, diagnosing, or modernising Java/JVM systems with Spring Boot/Batch/Security OIDC, Jakarta EE, Hibernate query performance, jOOQ, Maven/Gradle, modular Java ERP, Quarkus, GraalVM, WebLogic, Oracle JDBC, Kubernetes, JFR, or javax.persistence-to-jakarta.persistence migration; pair with cross-cutting specialists.
+description: Use when building, diagnosing, or modernising Java/JVM APIs, data pipelines, modular ERP, or Hibernate N+1/fetch plans with Spring Boot/Batch, Jakarta EE, transactions, tests, PostgreSQL/jOOQ, Maven/Gradle, WebLogic, Oracle JDBC, Quarkus, GraalVM, JFR, or javax-to-jakarta.persistence migration.
 metadata:
   portable: true
   compatible_with:

@@ -57,3 +57,22 @@ def test_description_limit_matches_catalogue_policy(length, accepted):
         "metadata": {"portable": True, "compatible_with": ["claude-code", "codex"]},
     }, Path("example"), errors)
     assert (not errors) is accepted
+
+
+@pytest.mark.parametrize("invocation,description,accepted", [
+    (None, "Use when checking a fixture.", True),
+    ("implicit", "Use when checking a fixture.", True),
+    ("both", "Use when checking a fixture.", True),
+    ("explicit", "Use when the user explicitly requests a fixture operation.", True),
+    ("explicit", "Use when checking a fixture.", False),
+    ("automatic", "Use when checking a fixture.", False),
+])
+def test_invocation_contract(invocation, description, accepted):
+    metadata = {"portable": True, "compatible_with": ["claude-code", "codex"]}
+    if invocation is not None:
+        metadata["invocation"] = invocation
+    errors = []
+    VALIDATOR.validate_frontmatter({
+        "name": "example", "description": description, "metadata": metadata,
+    }, Path("example"), errors)
+    assert (not errors) is accepted

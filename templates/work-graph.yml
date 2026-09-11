@@ -1,0 +1,11 @@
+version: 1
+nodes:
+  - id: slice-1
+    outcome: Replace with one user or operator outcome.
+    failure_consequence: Replace with the harm caused by an incomplete slice.
+    owner: Replace with one accountable owner.
+    write_set: []
+    blocked_by: []
+    acceptance: []
+    status: pending
+    evidence: []

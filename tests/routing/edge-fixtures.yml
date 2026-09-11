@@ -46,11 +46,11 @@ fixtures:
   - task: "Tune MySQL schema design and query patterns for application development"
     expect: mysql-engineering
   - task: "Operate MySQL backups, replication, slow query logs and production maintenance"
-    expect: mysql-operations
+    expect: mysql-engineering
   - task: "Write PostgreSQL schema, indexes, functions and advanced SQL for a product backend"
     expect: postgresql-engineering
   - task: "Run PostgreSQL vacuum, backups, replication, monitoring and operational maintenance"
-    expect: postgresql-operations
+    expect: postgresql-engineering
 
   # DevOps and reliability
   - task: "Design cloud architecture with environments, networking, managed services and deployment pattern"
@@ -78,7 +78,7 @@ fixtures:
   - task: "Implement Android features with Kotlin, app architecture and platform APIs"
     expect: android-development
   - task: "Write test-driven Android code with unit and UI tests"
-    expect: android-tdd
+    expect: android-development
   - task: "Build iOS monetization with StoreKit subscriptions and server notifications"
     expect: ios-monetization
   - task: "Secure iOS app data with Keychain, App Attest and authorization rules"

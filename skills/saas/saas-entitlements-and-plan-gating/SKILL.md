@@ -1,6 +1,6 @@
 ---
 name: saas-entitlements-and-plan-gating
-description: Use when designing SaaS entitlements, plan limits, gate placement, tenant overrides, upgrade discovery, or runtime permission resolution.
+description: Use when gating which SaaS plan or AI model tier unlocks seats, API calls, generations, context, tools, or quotas, including tenant overrides, denial behaviour, upgrade discovery, and runtime permission resolution.
 metadata:
   portable: true
   compatible_with:
@@ -115,6 +115,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 
 ## References
 
+- Load the retained [AI entitlements workflow](../../ai/ai-entitlements-and-feature-gating/ALIAS.md) for model tiers, generation quotas, context limits, tool permissions, and AI-specific denial behaviour.
 - `references/entitlements-vs-feature-flags.md` — when each applies; how they coexist.
 - `references/limit-enforcement-patterns.md` — atomic counters, period rollover, distributed quotas.
 - `references/enterprise-override-model.md` — data-driven overrides for custom contracts.

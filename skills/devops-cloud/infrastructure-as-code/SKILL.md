@@ -51,6 +51,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/aws-patterns.md` — VPC, ECS+ALB, RDS, S3 lifecycle, Terratest.
 - `references/ansible-debian.md` — inventory, role layout, idempotency patterns, hardening playbook, tags.
 - `references/gitops-argocd-flux.md` — ArgoCD `Application`/`ApplicationSet`, Flux bootstrap, drift wiring.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Infrastructure plan and apply evidence | Plan output plus change record | reviewed diff, policy checks, state backup, apply result, drift check, and rollback |
+
 <!-- dual-compat-end -->
 
 ## Why IaC

@@ -111,4 +111,10 @@ Use this skill to write requirements for the operational system behind a BDS or 
 
 - `references/data-dictionary-and-rbac.md`: Core tables, fields, scoring, roles, and controls.
 - `references/monitoring-dashboard-requirements.md`: Indicator dictionary and dashboard view requirements.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | BDS intake-to-outcome traceability pack | Markdown/workbook | applicant, criterion, consent, score, decision, intervention, indicator, and audit link |
+
 <!-- dual-compat-end -->

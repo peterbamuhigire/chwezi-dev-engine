@@ -1,6 +1,6 @@
 ---
 name: game-3d-asset-pipeline
-description: Use when directing or producing game-ready 3D environments, characters, props, materials, rigs, animations, LODs, collisions, lighting assets, or DCC-to-engine imports; mobile budgets must come from target-device measurement.
+description: Use when producing game-ready 3D environments, characters, props, materials, rigs, animations, LODs, collisions, Blender source/automation, FBX/glTF exports, or DCC-to-engine imports; use real-time-game-graphics for runtime rendering.
 metadata: {portable: true, compatible_with: [claude-code, codex]}
 ---
 # Game 3D Asset Pipeline
@@ -39,9 +39,17 @@ Art pillars, reference/rights ledger, target camera and devices, engine/renderer
 ## Outputs
 Art bible; reference/rights ledger; asset inventory and briefs; budget profile; DCC/export/import contracts; accepted source and runtime assets; QA reports; stress-scene/device evidence.
 ## References
+
+- Load the retained [Blender production workflow](../blender-game-asset-production/ALIAS.md) for `.blend` organisation, rigging, automation, export presets, and clean target-engine re-import.
 - [Concept-to-engine 3D pipeline](references/concept-to-engine-pipeline.md)
 - [Asset acceptance and mobile budgets](references/asset-acceptance-mobile-budgets.md)
 - [Practical 3D scene evidence](references/practical-3d-scene-evidence.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | 3D asset runtime acceptance sheet | Markdown plus source/import captures | provenance, topology, rig, LOD, collision, budget, export, re-import, and device result |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Choice |

@@ -26,6 +26,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- [Two-axis code review](references/two-axis-code-review.md)
+- [Two-axis review record](templates/two-axis-review.md)
+- [Intent-led merge-conflict resolution](references/intent-led-conflict-resolution.md)
 <!-- dual-compat-end -->
 Use this skill to keep version control readable, reviewable, and recoverable. It is for disciplined delivery, not command memorization.
 

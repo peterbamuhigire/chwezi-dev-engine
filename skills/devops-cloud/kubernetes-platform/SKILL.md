@@ -1,6 +1,6 @@
 ---
 name: kubernetes-platform
-description: Use when running Kubernetes as a platform team — bootstrapping self-managed clusters on Debian/Ubuntu, designing multi-tenant RBAC, enforcing Pod Security and resource quotas, and operating cluster lifecycle (upgrades, certs, etcd, ingress, cert-manager, metrics-server). Self-managed first, cloud-managed second.
+description: Use when building or running production Kubernetes clusters, namespaces, workloads, ingress, autoscaling, multi-tenant RBAC, network/Pod Security, resource quotas, upgrades, certificates, etcd, metrics, disruption, and recovery.
 metadata:
   portable: true
   compatible_with:
@@ -458,5 +458,11 @@ Deep-dives in `references/`:
 - `pod-security.md` — `warn` to `enforce` migration, exemptions, NetworkPolicy patterns.
 - `cluster-lifecycle.md` — upgrade ordering, version skew, etcd restore drill.
 - `cluster-managed-components.md` — ingress, cert-manager, metrics-server install patterns.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Operability | Kubernetes platform verification pack | Manifests plus command output | policy, rollout, health, disruption, recovery, resource, and rollback checks |
+
 <!-- dual-compat-end -->
 

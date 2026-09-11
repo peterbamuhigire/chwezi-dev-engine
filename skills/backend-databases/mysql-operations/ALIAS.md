@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/backend-databases/mysql-engineering`; retained here for production MySQL operations depth.
+
 # MySQL Operations
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 

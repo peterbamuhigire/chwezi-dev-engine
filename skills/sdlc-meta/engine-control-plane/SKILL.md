@@ -134,6 +134,7 @@ evidence, destructive-action, and release gates fail closed or return
 - `docs/engine-control-plane.json` - machine-readable eleven-engine registry.
 - `../../../scripts/validate_engine_control_plane.py` - deterministic registry validator.
 - `skill-writing` and `skill-composition-standards` - authoring and composition rules.
+- [Pointer-rich resumable handoffs](references/pointer-rich-handoffs.md)
 <!-- dual-compat-end -->
 
 ## Inputs

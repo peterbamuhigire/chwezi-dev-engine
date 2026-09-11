@@ -60,6 +60,12 @@ Use this parent skill as the active GIS implementation entrypoint. Keep enterpri
 ## References
 
 - Load only the references/<old-skill>.md files named in the workflow when their depth is required.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Spatial data and map-service verification | Markdown plus query/render evidence | CRS, geometry validity, spatial query, tile/service response, attribution, and failure state |
+
 <!-- dual-compat-end -->
 
 ## Decision rules

@@ -50,6 +50,8 @@ Decisions link a driver to a chosen option, rejected alternatives, consequences,
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - [references/practical-architecture-knowledge.md](references/practical-architecture-knowledge.md) - book-distilled checks for DDD boundaries, scalability, architecture metrics, and executable architecture documentation.
+- [Deep-module design and design-it-twice](references/deep-module-design.md) - interface depth, seams, deletion tests, and independent option comparison.
+- For confirmed domain terminology and decision ownership, consume the SRS engine's canonical `domain-language-and-decisions` reference through its router.
 <!-- dual-compat-end -->
 Use this skill when the problem is bigger than a single component. Start here before committing to frameworks, service boundaries, data ownership, or integration patterns.
 

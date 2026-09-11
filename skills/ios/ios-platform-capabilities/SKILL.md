@@ -1,6 +1,6 @@
 ---
 name: ios-platform-capabilities
-description: Use when integrating iOS system capabilities such as App Intents, widgets, Spotlight, biometrics, notifications, Bluetooth, media, or PDF export; use ios-development for ordinary app features.
+description: Use when integrating iOS capabilities including App Intents, Spotlight, SwiftData, offline storage, biometrics, notifications, Bluetooth, media, PDF, Foundation Models, Core ML, or Vision; use ios-development for app architecture.
 metadata:
   portable: true
   compatible_with:
@@ -84,6 +84,16 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/ios-networking-advanced.md` for production URLSession, typed errors, refresh, pinning, multipart, and offline queues.
 - `references/app-intents-siri-spotlight-wwdc26.md` for App Intents, App Entities, App Schemas, View Annotations, Spotlight semantic indexing, App Intents Testing, and widget customization.
 - `references/apple-framework-watch-items-wwdc26.md` for NowPlaying, Music Understanding, RAW, camera/media, Background Assets, Game Porting Toolkit, Unity plugins, and specialty follow-up routing.
+## References
+
+- Load the retained [iOS AI/ML workflow](../ios-ai-ml/ALIAS.md) for Foundation Models, Core ML, Vision, Natural Language, and evaluation depth.
+- Load the retained [iOS persistence workflow](../ios-data-persistence/ALIAS.md) for SwiftData, migrations, semantic indexing, and local AI context.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Apple capability integration evidence | Markdown plus device/test output | availability, entitlement, permission denial, data lifecycle, fallback, and device result |
+
 <!-- dual-compat-end -->
 ## Read next
 - `ios-security-and-rbac` for protected capabilities; `ios-quality-and-release` for entitlement and device verification.

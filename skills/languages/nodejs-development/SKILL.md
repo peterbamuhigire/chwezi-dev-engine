@@ -1,6 +1,6 @@
 ---
 name: nodejs-development
-description: Use when building or reviewing Node.js servers, APIs, CLI tools, streams, asynchronous workflows, real-time systems, tests, scaling, or production deployment.
+description: Use when creating Node.js backend services, APIs, routing, workers, CLI tools, streams, asynchronous or real-time workflows, production logging, tests, scaling, and deployment; use online-multiplayer-and-game-backend for authoritative game servers.
 metadata:
   portable: true
   compatible_with:

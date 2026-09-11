@@ -51,13 +51,13 @@ See `docs/engine-control-plane.md` and the audit's portfolio progress record.
 
 ## Current Risks
 
-- The [Matt Pocock skills comparison](../sept-matt-pocock/README.md) found compact workflow gaps in
-  systematic diagnosis, dependency-frontier questioning, persistent domain language, work graphs,
-  two-axis review, and skill attention mechanics. Its phased runbook is the current evidence-backed
-  improvement route; the study is complete, but the proposed behavioural changes are not yet
-  implemented or proven.
-- The active skill count is 179, nine above the 150-170 soft target; future additions
-  still need alias discipline. The CI guardrail (200 hard cap) and the collision
+- The [Matt Pocock skills comparison](../sept-matt-pocock/README.md) drove a repository-level Kaizen
+  for systematic diagnosis, dependency-frontier questioning, persistent domain language, work
+  graphs, two-axis review, and skill attention mechanics. Structural implementation and lab fixtures
+  are complete; production outcomes, host invocation, fresh-agent handoff, and independent review
+  remain `NOT ASSESSED`.
+- The active skill count is 170, at the 150-170 soft target ceiling; future additions
+  still need equal-value consolidation or alias discipline. The CI guardrail (200 hard cap) and the collision
   detector keep this from becoming routing noise.
 - Inactive aliases must stay documented in `docs/skill-aliases.yml`; the
   alias-integrity check now fails CI on a stale or unrouted alias, so this is

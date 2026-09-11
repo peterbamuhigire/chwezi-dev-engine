@@ -1,6 +1,6 @@
 ---
 name: postgresql-engineering
-description: Use when designing, implementing, or reviewing PostgreSQL application data models, SQL, indexes, constraints, extensions, server-side routines, and production query patterns. Load the absorbed PostgreSQL reference files for fundamentals, advanced SQL, schema patterns, and server programming.
+description: Use when designing, implementing, administering, tuning, backing up, restoring, monitoring, or troubleshooting PostgreSQL schemas and production systems; use database-reliability for datastore-independent SLO and recovery policy.
 metadata:
   portable: true
   compatible_with:
@@ -59,7 +59,14 @@ Use this parent skill as the active PostgreSQL engineering entrypoint. Keep impl
 
 ## References
 
+- Load the retained [PostgreSQL operations workflow](../postgresql-operations/ALIAS.md) for backup, restore, vacuum, replication, production tuning, monitoring, and incidents.
 - Load only the references/<old-skill>.md files named in the workflow when their depth is required.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Data safety | PostgreSQL schema and operations evidence pack | DDL, query plans, and runbook | constraints, migration, vacuum/replication evidence, restore result, and rollback |
+
 <!-- dual-compat-end -->
 
 ## Inputs

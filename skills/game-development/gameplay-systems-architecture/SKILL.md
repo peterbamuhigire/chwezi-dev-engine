@@ -40,6 +40,12 @@ System specification; state/sequence diagrams; data schema; interfaces/events; i
 - [Gameplay systems patterns](references/gameplay-systems-patterns.md)
 - [Save, quest and narrative state](references/persistence-narrative-state.md)
 - [Resource vitality and carrying capacity systems](references/resource-vitality-carrying-capacity.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Gameplay state and invariant test pack | Markdown plus deterministic fixtures | state transition, authority, save/load, exploit case, failure recovery, and replay |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Need | Pattern |

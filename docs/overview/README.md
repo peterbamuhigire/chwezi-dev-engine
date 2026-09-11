@@ -7,12 +7,11 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
-The [2026-09-11 Matt Pocock skills comparison](../sept-matt-pocock/README.md) identifies compact
-workflow mechanisms to adapt without importing a second skill catalogue: invocation ownership,
+The [2026-09-11 Matt Pocock skills comparison](../sept-matt-pocock/README.md) produced a completed
+repository-level Kaizen without importing a second catalogue: invocation ownership,
 decision-frontier questioning, persistent domain language, tracer-bullet work graphs, systematic
-bug diagnosis, deep-module design, and two-axis review. Its implementation runbook requires
-catalogue consolidation, currentness checks, behavioural fixtures, rollback, and cross-engine
-ownership before promotion.
+bug diagnosis, deep-module design, and two-axis review now have canonical owners and deterministic
+gates. The completion record keeps production and independent evidence gaps `NOT ASSESSED`.
 
 The [2026-09-06 Kaizen cycle](../audits/2026-09-06-kaizen/portfolio-progress.md)
 repairs portfolio path resolution, evidence-gate coverage and portable
@@ -85,10 +84,10 @@ presentation-layer Apple UI guidance lives in the external
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>
   engine; reference-only checkouts stay outside the runtime skill catalog.
-- Current active catalog size is 179 skills. This is nine above the 150-170 soft target after intentional
-  capability additions and remains below the enforced hard cap of 200.
-- Current routing smoke-test suite contains 158 fixtures, with 91% precision@1
-  (144/158) and 100% precision@3 (158/158).
+- Current active catalog size is 170 skills. The Pocock Kaizen consolidation returned it to the
+  150-170 target range while retaining absorbed workflows as routed aliases; the hard cap remains 200.
+- Current routing smoke-test suite contains 160 fixtures, with 90% precision@1
+  (145/160) and 100% precision@3 (160/160); the active Kaizen target is at least 95% top-1.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated

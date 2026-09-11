@@ -139,4 +139,10 @@ Prioritize high-value, high-feasibility, low-regret use cases first. Defer low-v
 
 - Use companion AI implementation, evaluation, security, RAG, analytics, or agentic skills after the opportunity is economically justified.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | AI value hypothesis and outcome ledger | Markdown table | baseline, intervention, attributable outcome, cost, counterfactual, uncertainty, and decision |
+
 <!-- dual-compat-end -->

@@ -58,4 +58,10 @@ Discovery pack; estimate basis/range; staffing/RACI; SOW acceptance schedule; RA
 
 ## References
 - [Studio operating gates](references/studio-operating-gates.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Operability | Game delivery and greenlight evidence pack | Markdown/workbook | scope, estimate, staffing, milestone, dependency, commercial risk, decision, and owner |
+
 <!-- dual-compat-end -->

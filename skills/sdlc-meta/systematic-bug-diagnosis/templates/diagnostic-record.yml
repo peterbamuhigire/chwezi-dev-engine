@@ -1,0 +1,10 @@
+symptom: "Replace with observable expected-versus-actual behaviour"
+environment: "Replace with version, platform, scope, and relevant configuration"
+red_capable: false
+red_observed: false
+case: normal
+cause_claimed: false
+fix_authority: false
+reproduction_rate: null
+comparison_boundary: null
+telemetry_authority: false

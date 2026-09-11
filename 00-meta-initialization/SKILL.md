@@ -1,6 +1,6 @@
 ---
 name: 00-meta-initialization
-description: Use when starting project documentation to detect project type, select Waterfall, Agile, or Hybrid delivery, and generate the documentation roadmap.
+description: Use when initialising documentation and a methodology roadmap for a brand-new project by detecting project type, selecting Waterfall, Agile, or Hybrid delivery, and generating the governed document sequence.
 metadata:
   use_when: Use when the task matches meta-initialization skill and this skill's local workflow.
   do_not_use_when: Do not use when a more specific upstream or downstream skill owns the task, or when the required project context has not been prepared.
@@ -16,7 +16,13 @@ metadata:
   - codex
 ---
 # Meta-Initialization Skill
-<!-- dual-compat-start --><!-- dual-compat-end -->
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Methodology selection and initialisation record | Markdown | project context, decision criteria, selected route, rejected options, generated artefacts, and validation |
+<!-- dual-compat-end -->
 ## Inputs
 | Artefact | Required? | Purpose |
 |---|---|---|

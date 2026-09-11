@@ -1,5 +1,10 @@
 # Roadmap and Acceptance Gates
 
+Repository implementation status (2026-09-11): Waves 0-2 and the repository-level portions of
+Wave 3 are complete. Applied production, fresh-agent, host-invocation, stakeholder, and independent
+review evidence remains `NOT ASSESSED`; see
+[`11-kaizen-completion-record.md`](11-kaizen-completion-record.md).
+
 ## Wave 0: freeze and select
 
 Owner: root/orchestrator.

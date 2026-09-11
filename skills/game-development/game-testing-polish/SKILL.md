@@ -43,6 +43,12 @@ Test strategy/matrix; automated and manual evidence; playtest protocol/findings;
 ## References
 - [QA, playtest and bug operations](references/qa-playtest-bug-operations.md)
 - [Polish, balance and milestone gates](references/polish-balance-release-gates.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Game test and play-evidence report | Markdown plus captures | build, scenario, device, defect, balance observation, accessibility, regression, and exit decision |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Stage | Cannot advance while |

@@ -15,7 +15,13 @@ metadata:
 
 # Accounting Finance Controller
 
-<!-- dual-compat-start --><!-- dual-compat-end -->
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Controller review and reconciliation pack | Markdown/workbook | trial balance, control exceptions, reconciliations, approvals, close status, and unresolved items |
+<!-- dual-compat-end -->
 
 ## Inputs
 

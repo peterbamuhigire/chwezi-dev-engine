@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/game-development/game-3d-asset-pipeline`; retained here for Blender-specific production depth.
+
 # Blender Game Asset Production
 
 Turn an approved game-asset brief into version-pinned Blender source, reproducible exports, and target-engine evidence without confusing a viewport result with a runtime-ready asset.

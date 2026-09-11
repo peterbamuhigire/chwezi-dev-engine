@@ -30,9 +30,25 @@ Engine/version, player/region/load envelope, topology, trust boundaries, tick/up
 - Reliable delivery is used only for state that must arrive; queues must be bounded.
 - Tests retain seed, build/protocol version, topology, network profile, server logs, and outcome.
 
+## Anti-Patterns
+
+- Client-authoritative competitive state. Fix: validate commands and outcomes at trusted authority.
+- Happy-path local-network testing. Fix: exercise latency, jitter, loss, duplication, and partitions.
+- Protocol break in one deployment. Fix: use versioned expand-contract compatibility windows.
+- Reconnect creates duplicate effects. Fix: persist identity, sequence, idempotency, and resume state.
+- Capacity inferred from averages. Fix: test peak concurrency, regional failure, queues, and recovery.
+
 ## Outputs
 Authority matrix; protocol/session contracts; replication budget; backend data ownership map; network test pack; capacity/region plan; compatibility and rollback runbook.
 
 ## References
 - [Multiplayer authority and session gates](references/multiplayer-authority-session-gates.md)
+
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Multiplayer authority and network-condition test pack | Markdown plus test output | protocol, ownership, latency/loss, reconnect, duplicate action, cheat case, and recovery |
+<!-- dual-compat-end -->
 

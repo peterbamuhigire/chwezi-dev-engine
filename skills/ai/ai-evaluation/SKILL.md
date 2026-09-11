@@ -1,6 +1,6 @@
 ---
 name: ai-evaluation
-description: Use when setting up quality assurance for AI features — defining evaluation criteria, measuring output quality, using AI-as-judge, monitoring production AI, detecting drift, and building user feedback loops
+description: Use when building an AI/LLM evaluation harness, golden datasets, quality metrics, judge calibration, regression gates, production monitoring, drift detection, or user-feedback loops; use ai-llm-integration for provider calls.
 metadata:
   portable: true
   compatible_with:

@@ -91,4 +91,10 @@ migration slice, with interaction, accessibility, visual and performance checks
 marked NOT ASSESSED. A static component inspection cannot establish rendered
 behaviour. Retain the current implementation until required acceptance checks
 can support the migration decision.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Frontend boundary and state contract | Markdown/diagram | component owner, state source, content contract, error state, test seam, and migration |
+
 <!-- dual-compat-end -->

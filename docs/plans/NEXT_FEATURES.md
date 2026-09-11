@@ -6,14 +6,14 @@ This file tracks the next practical work for the skills repository.
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Return the active catalogue to its soft target | The current count is 179 after the intentional enterprise-Java and other capability additions. CI enforces the 200 hard cap; the next safe alias or consolidation review should return the catalogue to 150-170 without deleting knowledge. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
+| Hold the active catalogue within its soft target | The current count is 170 after the Pocock Kaizen consolidation. CI enforces the 200 hard cap, while new routes require an equal-value consolidation and routing evidence. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
 
 ## High Priority
 
 | Work | Why | Start Point |
 | --- | --- | --- |
 | Close evidence gaps exposed by the repaired contract gate | The former gate scanned only one family. Missing declarations and product evidence must be assessed in their domain, not filled with boilerplate. | `docs/audits/2026-09-06-kaizen/portfolio-progress.md` and `skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all` |
-| Execute the Matt Pocock workflow Kaizen | The comparison found high-value gaps in systematic diagnosis, decision-frontier interviews, domain-language maintenance, tracer-bullet work graphs, two-axis review, and skill attention mechanics. | Start with `docs/sept-matt-pocock/09-kaizen-agent-runbook.md`; consolidate active routes before adding skills. |
+| Produce applied proof for the Pocock workflow Kaizen | Repository mechanisms and deterministic fixtures are complete, but real-project outcomes, host invocation traces, fresh-agent handoffs, and independent review remain `NOT ASSESSED`. | Use `docs/sept-matt-pocock/11-kaizen-completion-record.md`; pilot one diagnosis and one decision-frontier project before the 2026-10-11 re-audit. |
 | Grow the routing fixture set with each new skill | The smoke test only guards routes it has fixtures for. | Add a case to `scripts/routing_fixtures.yml` for any skill a neighbour could shadow. |
 | Review inactive aliases for deeper consolidation | `ALIAS.md` preserves content, but durable material should eventually move into retained parent references. | Start with finance and data aliases from `docs/skill-aliases.yml`. |
 | Complete Uganda EFRIS adapter and UAT evidence | The reusable engineering route now exists, but the authenticated URA contract, credentials, sandbox acceptance, and BIRDC production evidence are still provider-gated. | `skills/finance-accounting/electronic-fiscal-taxing/` and the ERP `docs/plans/efris-aug-26/` programme |
@@ -30,6 +30,7 @@ This file tracks the next practical work for the skills repository.
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-09-11 | Matt Pocock workflow Kaizen | Returned the catalogue to 170, closed portable/evidence debt, added systematic diagnosis and deterministic workflow gates, rolled decision-frontier adapters across seven engines, and removed the live email-template route. |
 | 2026-09-05 | Enterprise Java engineering capability | Added one consolidated Java/JVM route with currentness register, deep decision references, evidence templates, production diagnostics, Oracle integration, routing fixtures, and an enterprise reference scenario. |
 | 2026-08-20 | Eleven-engine control plane | Registered `windows-admin-engine-skills` as the eleventh canonical engine, added its adoption contract, and extended deterministic registry validation. |
 | 2026-08-16 | ERP POS sales operations | Added the live engineering route for tenant defaults, three POS surfaces, product-to-finished-stock identity, stock timing, canonical posting, permissions, idempotency, and reconciliation. |

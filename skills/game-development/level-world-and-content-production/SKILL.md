@@ -23,9 +23,32 @@ Player verbs, design pillars, content schema, camera/input, target performance, 
 4. Test impossible states, sequence breaks, backtracking, interruption, low-memory streaming, localisation expansion, accessibility routes, and missing content.
 5. Measure throughput and rework by content type; recalibrate schedule rather than hiding variance.
 
+## Quality Standards
+
+- Every level exposes a player goal, readable route, meaningful choice, recoverable failure, and exit.
+- Streaming, navigation, collision, encounter, save, accessibility, and device budgets are measured.
+- Content schemas and validators catch missing dependencies before manual play review.
+- Throughput forecasts use observed cycle time and rework rather than asset-count optimism.
+
+## Anti-Patterns
+
+- Greybox skipped. Fix: prove traversal, pacing, and encounter logic before finish art.
+- Landmark without gameplay purpose. Fix: connect orientation, decision, payoff, or story function.
+- Procedural output accepted unseen. Fix: validate seeds, bounds, solvability, repetition, and fallback.
+- Streaming tuned in editor. Fix: capture release-like target-device traversal.
+- Schedule hides rework. Fix: measure queue, blocked time, rejection, and revision by content type.
+
 ## Outputs
 Content bible/schema; level and encounter briefs; dependency/streaming map; validators; playtest evidence; throughput forecast and variance; acceptance manifest.
 
 ## References
 - [Content production gates](references/content-production-gates.md)
+
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Level traversal and content acceptance report | Markdown plus play capture | goal, route, pacing, encounter, streaming, accessibility, failure, and device budget |
+<!-- dual-compat-end -->
 

@@ -251,6 +251,12 @@ Read and search the solution first. Edit only when authorised; execute the narro
 If repository access or execution is unavailable, provide a file-level plan and mark build, binding, packaging, and accessibility checks as unverified.
 
 - This skill is self-contained. Load project files, Avalonia documentation, or related .NET skills only when the task needs version-specific API details or broader C#/.NET architecture guidance.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Avalonia journey and platform verification | Markdown plus screenshots/test output | keyboard flow, states, binding errors, packaging, failure recovery, and accessibility |
+
 <!-- dual-compat-end -->
 ## Read next
 - `csharp-dotnet-development` for language/runtime depth and `world-class-engineering` for release evidence.

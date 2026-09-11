@@ -57,6 +57,12 @@ Use this parent skill as the active microservices entrypoint. It should help dec
 ## References
 
 - Load only the references/<old-skill>.md files named in the workflow when their depth is required.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Service-boundary and dependency decision record | Markdown/diagram | capability owner, data authority, contract, failure mode, coupling, and rollback |
+
 <!-- dual-compat-end -->
 
 ## Inputs

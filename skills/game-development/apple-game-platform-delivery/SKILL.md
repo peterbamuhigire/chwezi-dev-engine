@@ -31,9 +31,25 @@ Game/engine version, Xcode version, target OS and hardware matrix, distribution 
 - Apple services degrade without corrupting local state or blocking offline-capable play.
 - No signing key or service secret enters the client repository.
 
+## Anti-Patterns
+
+- Treating simulator success as device proof. Fix: exercise representative physical devices.
+- Rebuilding after release approval. Fix: promote the identical tested archive by checksum.
+- Assuming an entitlement is available. Fix: verify account, target, capability, and denied state.
+- Hiding save or service failure. Fix: define offline, retry, conflict, and recovery behaviour.
+- Storing signing material in source. Fix: use named custodians and recoverable secret storage.
+
 ## Outputs
 Apple platform contract; service adapters; device/display/input matrix; entitlement and signing register; tested archive with symbols/checksum; distribution and rollback record.
 
 ## References
 - [Apple game delivery gates](references/apple-game-delivery-gates.md)
+
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Apple game platform release pack | Markdown plus build/test output | device, entitlement, controller, save, signing, notarisation, failure, and recovery |
+<!-- dual-compat-end -->
 

@@ -43,6 +43,12 @@ Unity architecture map; project/version manifest; system and scene specification
 - [Unity project architecture](references/unity-project-architecture.md)
 - [Legacy Unity migration and mobile build gates](references/unity-mobile-build-gates.md)
 - [Unity 6 MCP and runtime UI notes](references/unity-6-mcp-and-runtime-ui-notes.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Unity mobile vertical-slice evidence | Project/build output plus Markdown | scene flow, input, save, pause/resume, device profile, build, and failure check |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Choice |

@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/ios/ios-development`; retained here for module and dependency architecture depth.
+
 # iOS Architecture
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 

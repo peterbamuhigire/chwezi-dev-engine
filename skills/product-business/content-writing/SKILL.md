@@ -1,6 +1,6 @@
 ---
 name: content-writing
-description: Use when writing or reviewing website copy, articles, headlines, ledes, persuasive content, readability, or scannable structure.
+description: Use when writing or reviewing blog posts, long-form articles, website copy, headlines, ledes, persuasive content, readability, or scannable editorial structure; use ux-content-strategy for interface microcopy and product states.
 metadata:
   portable: true
   compatible_with:
@@ -65,6 +65,7 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 - [English output standard](../../../docs/continuous-improvement/english-output-standard-2026-09-02.md) for collocation, register, precise vocabulary, idiom restraint, and anti-slop revision.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- [Explore, shape, and beat writing](references/explore-shape-and-beats.md)
 - Pair with `premium-software-product-execution` when copy must support premium pricing, buyer trust, service packaging, sales follow-up, or website-as-marketing-asset requirements.
 <!-- dual-compat-end -->
 Professional copywriting standards for website copy, blog posts, articles, and all written content. This is a cross-cutting skill — apply these principles whenever creating or editing text for any page.

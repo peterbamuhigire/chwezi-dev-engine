@@ -16,7 +16,13 @@ metadata:
 
 # Multicurrency And FX
 
-<!-- dual-compat-start --><!-- dual-compat-end -->
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Foreign-currency measurement schedule | Markdown/workbook | transaction rate, closing rate, remeasurement, translation, rounding, posting, and source |
+<!-- dual-compat-end -->
 
 ## Inputs
 

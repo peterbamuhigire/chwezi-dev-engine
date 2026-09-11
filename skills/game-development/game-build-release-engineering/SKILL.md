@@ -25,9 +25,32 @@ Repository/tag, engine/toolchain locks, target matrix, build variants, dependenc
 5. Promote the tested binary through environments/channels; never recompile after approval.
 6. Rehearse rollback, save compatibility, revoked credential, failed upload, partial rollout, and unavailable dependency.
 
+## Quality Standards
+
+- Builds are reproducible from tagged source, locked dependencies, declared tools, and clean runners.
+- The promoted artefact retains checksum, symbols, SBOM/licence data, test evidence, and provenance.
+- Signing and store credentials stay outside source with named custody and recovery.
+- Rollback preserves player saves, protocol compatibility, and support communication.
+
+## Anti-Patterns
+
+- Rebuilding after QA approval. Fix: promote the tested artefact by digest.
+- Mutable dependency or engine version. Fix: pin and verify the complete build manifest.
+- Symbols discarded. Fix: retain symbols and mapping files under release access control.
+- Signing inside an untrusted job. Fix: isolate the signing boundary and minimise credentials.
+- Rollback assumed. Fix: rehearse downgrade, save, protocol, and partial-rollout recovery.
+
 ## Outputs
 Build interface; CI configuration; release manifest; signed artefacts; symbols/checksums/SBOM; promotion ledger; certification evidence; rollback rehearsal.
 
 ## References
 - [Reproducible game release contract](references/reproducible-game-release-contract.md)
+
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Game build provenance and promotion record | Manifest plus command output | source tag, dependencies, build hash, symbols, tests, signing boundary, promotion, and rollback |
+<!-- dual-compat-end -->
 

@@ -41,6 +41,12 @@ Release manifest; signing/custody plan; store compliance evidence; privacy/SDK/d
 ## References
 - [Store, signing and privacy gates](references/store-signing-privacy-gates.md)
 - [Rollout, support and ethical live operations](references/rollout-support-liveops.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Mobile game release and live-event record | Manifest plus Markdown | tested artefact hash, store gate, privacy, rollout threshold, event guardrail, support, and rollback |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Decision |

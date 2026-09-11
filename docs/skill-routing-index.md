@@ -24,7 +24,7 @@ Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 179 |
+| Active `SKILL.md` files | 170 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -143,19 +143,14 @@ target instead.
 | Agent evidence | `ai-agent-observability-evaluation` | `ai-agent-eval`, `ai-agent-task-success-tracking`, `ai-agent-observability-and-replay`, `ai-agent-evidence-automation` |
 | Agent commercial ops | `ai-agent-commercial-operations` | `ai-agent-pricing-engine`, `ai-agent-attempted-vs-completed-billing`, `ai-agent-revenue-recognition`, `ai-agent-abandonment-and-refund-policy` |
 | Agent compliance | `ai-agent-compliance-controls` | `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-control-testing-and-attestation`, `ai-agent-audit-log-integrity` |
-| Android | `android-development` | `android-ai-ml`, `android-biometric-login`, `android-pdf-export` |
-| Android persistence | `android-data-persistence` | `android-room` |
+| Android | `android-development` | `android-ai-ml`, `android-biometric-login`, `android-pdf-export`, `android-data-persistence`, `android-room`, `android-tdd` |
 | Android UI | `android-ui-ux-design` | `jetpack-compose-ui` |
-| iOS core | `ios-development` | `ios-project-setup`, `ios-swift-recipes` |
-| iOS architecture | `ios-architecture` | `ios-architecture-advanced`, `ios-at-scale`, `ios-production-patterns` |
-| iOS AI/ML | `ios-ai-ml` | Foundation Models, Core AI, Core ML, Vision, NaturalLanguage, on-device evaluation |
-| iOS persistence | `ios-data-persistence` | `ios-swiftdata`, semantic indexing, AI local context caches |
+| iOS core | `ios-development` | `ios-project-setup`, `ios-swift-recipes`, `ios-architecture`, `ios-architecture-advanced`, `ios-at-scale`, `ios-production-patterns` |
 | iOS UI | `ios-ui-ux-design` | `swiftui-design`, `swiftui-pro-patterns`, `ios-uikit-advanced` |
-| iOS capabilities | `ios-platform-capabilities` | `ios-biometric-login`, `ios-bluetooth-printing`, `ios-push-notifications`, `ios-pdf-export`, `ios-networking-advanced`, App Intents, Siri, Spotlight semantic indexing |
-| iOS quality/release | `ios-quality-and-release` | Swift Testing, Device Hub, Xcode Cloud, TestFlight, App Store release evidence |
+| iOS capabilities | `ios-platform-capabilities` | `ios-biometric-login`, `ios-bluetooth-printing`, `ios-push-notifications`, `ios-pdf-export`, `ios-networking-advanced`, `ios-ai-ml`, `ios-data-persistence`, App Intents, Siri, Spotlight, SwiftData, Foundation Models and Core ML |
 | iOS security/RBAC | `ios-security-and-rbac` | Keychain, App Attest, Trust Insights, App Intents authorization, AI tool security |
 | iOS monetization | `ios-monetization` | StoreKit 2, App Store Server API, subscriptions, Unity StoreKit plugin |
-| Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, Apple TestFlight/Xcode Cloud operations |
+| Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, `ios-quality-and-release`, Apple TestFlight/Xcode Cloud operations |
 | SaaS managed visual assets | `saas-managed-visual-assets` | Authentication background pools, light/dark logos, favicons, secure admin lifecycle, fallback, and audit |
 | Full-coverage SaaS seeding | `full-coverage-saas-seeding` | Synthetic tenant demonstrations, phased application-boundary journeys, schema-compatibility gates, controlled reference/configuration exceptions, temporal refresh, replay, reset, isolation, reconciliation, and evidence |
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
@@ -164,10 +159,8 @@ target instead.
 | Frontend architecture | `frontend-architecture` | Component boundaries, tokens, state/content contracts, design-system implementation, frontend quality and migration decisions |
 | ERP POS sales operations | `pos-sales-operations-engineering` | Tenant default customer, three POS surfaces, product-to-finished-stock identity, manufacturing timing, canonical posting, permissions, idempotency, and reconciliation |
 | Design audit | `design-audit` | `lean-ux-validation`, heuristic review workflows |
-| Database PostgreSQL | `postgresql-engineering` | `postgresql-fundamentals`, `postgresql-patterns`, `postgresql-advanced-sql`, `postgresql-server-programming` |
-| PostgreSQL operations | `postgresql-operations` | `postgresql-administration`, `postgresql-performance` |
-| MySQL engineering | `mysql-engineering` | `mysql-best-practices`, `mysql-data-modeling`, `mysql-advanced-sql` |
-| MySQL operations | `mysql-operations` | `mysql-administration`, `mysql-query-performance` |
+| Database PostgreSQL | `postgresql-engineering` | `postgresql-fundamentals`, `postgresql-patterns`, `postgresql-advanced-sql`, `postgresql-server-programming`, `postgresql-operations`, `postgresql-administration`, `postgresql-performance` |
+| MySQL engineering | `mysql-engineering` | `mysql-best-practices`, `mysql-data-modeling`, `mysql-advanced-sql`, `mysql-operations`, `mysql-administration`, `mysql-query-performance` |
 | Microservices | `microservices-architecture` | `microservices-fundamentals`, `microservices-architecture-models`, `microservices-communication`, `microservices-resilience` |
 | APIs | `api-design-first` | `api-error-handling`, `api-pagination`, `api-testing-verification` |
 | JavaScript | `javascript-modern` | `javascript-advanced`, `javascript-patterns` |
@@ -182,6 +175,7 @@ target instead.
 | Product discovery | `product-discovery` | `feature-planning`, `competitive-analysis-pm` |
 | Content | `content-writing` | `blog-writer`, `blog-idea-generator`, `east-african-english` |
 | SDLC docs | `sdlc-documentation` | `sdlc-design`, `sdlc-maintenance`, `sdlc-planning`, `sdlc-post-deployment`, `sdlc-testing`, `sdlc-user-deploy` |
+| Evidence-led defect diagnosis | `systematic-bug-diagnosis` | Red-capable reproduction, falsifiable hypotheses, intermittent failures, performance regressions, and production-safe instrumentation |
 | GIS | `gis-platform-engineering` | `gis-mapping`, `gis-maps-integration`, `gis-postgis-backend` |
 
 ## Eleven-engine control plane
@@ -221,7 +215,7 @@ Route complete game initiatives through `skills/game-development/game-developmen
 | Coordinate spaces, transforms, vectors, quaternions, curves, probability, fixed-step simulation or numerical stability | `game-math-and-simulation` |
 | Render pipeline, shaders, materials, lighting, shadows, visibility, post-processing or graphics API diagnosis | `real-time-game-graphics` |
 | Concepts, models, UVs, textures, rigs, animation, LODs, colliders or imports | `game-3d-asset-pipeline` |
-| Blender source files, rig controls, shape keys, export presets, FBX/glTF, clean re-import or Blender automation | `blender-game-asset-production` |
+| Blender source files, rig controls, shape keys, export presets, FBX/glTF, clean re-import or Blender automation | `game-3d-asset-pipeline` (load the retained Blender alias reference) |
 | Music, ambience, Foley, voice, buses, spatial/adaptive audio or audio rights | `game-audio-implementation` |
 | Frame pacing, CPU/GPU, memory, loading, battery, heat or device budgets | `mobile-game-performance` |
 | QA, playtesting, balance, accessibility/localisation regression, alpha/beta/RC | `game-testing-polish` |

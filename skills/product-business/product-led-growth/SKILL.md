@@ -53,6 +53,12 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Growth-loop experiment record | Markdown plus metric query | activation behaviour, trigger, cohort, guardrail, intervention, result, and rollback |
+
 <!-- dual-compat-end -->
 
 ## PLG vs Sales-Led vs Marketing-Led

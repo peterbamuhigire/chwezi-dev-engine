@@ -1,6 +1,6 @@
 ---
 name: mobile-platform-operations
-description: Use when coordinating cross-platform mobile store assets, signing, RBAC operations, release planning, and Android/iOS evidence; use native release skills for platform-specific gates.
+description: Use when coordinating Android/iOS testing, signing, store assets, TestFlight, Xcode Cloud, App Store/Play review, staged release, rollback, RBAC operations, and cross-platform release evidence.
 metadata:
   portable: true
   compatible_with:
@@ -86,6 +86,15 @@ If a required operational capability is unavailable, keep the corresponding rele
 - `references/mobile-saas-planning.md` for native mobile SaaS planning documents and implementation sequencing.
 - `references/google-play-store-review.md` for Android Play Store policy, testing, listing, and submission readiness.
 - `references/apple-platform-operations-wwdc26.md` for Apple Silicon, Xcode 27, Device Hub, TestFlight, Xcode Cloud, and App Store evidence readiness.
+## References
+
+- Load the retained [iOS quality and release workflow](../../ios/ios-quality-and-release/ALIAS.md) for Swift Testing, Xcode Cloud, TestFlight, App Store evidence, and Apple-specific recovery.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Mobile release promotion record | Markdown plus build/store evidence | artefact hash, signing owner, device tests, store checks, staged threshold, and rollback |
+
 <!-- dual-compat-end -->
 ## Read next
 - Platform-specific Android and iOS release skills for signing, store, and device evidence.

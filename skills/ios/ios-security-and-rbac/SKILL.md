@@ -80,6 +80,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/ios-app-security.md` for Keychain, Secure Enclave, ATS, pinning, signing, privacy manifests, and tamper resistance.
 - `references/ios-rbac.md` for permission models, SwiftUI gates, offline caches, and tenant-safe authorization UX.
 - `references/agentic-ai-and-app-intents-security.md` for prompt/tool injection, App Intents authorization, semantic index privacy, App Attest, Trust Insights watch items, and AI action audit.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Security | iOS trust and authorisation test pack | Markdown plus test output | Keychain, App Attest, role/action matrix, denied path, tamper case, and recovery |
+
 <!-- dual-compat-end -->
 ## Read next
 - `ios-development` for implementation; `vibe-security-skill` for system-level threat modelling.

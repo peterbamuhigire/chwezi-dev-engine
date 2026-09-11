@@ -1,6 +1,6 @@
 ---
 name: accounting-engine
-description: Use when designing, implementing, or reviewing an embedded accounting engine with append-only ledgers, mapped postings, idempotency, reversals, period locks, audit trails, and integrity tests.
+description: Use when designing or implementing double-entry accounting policy and an embedded ledger engine for invoices, payments, stock, balanced postings, mapped accounts, idempotency, reversals, period locks, audit trails, and financial statements.
 metadata:
   portable: true
   required_inputs: Provide the transaction event, tenant, accounting policy, chart mapping, and existing ledger contract.
@@ -16,7 +16,13 @@ metadata:
 
 # Accounting Engine
 
-<!-- dual-compat-start --><!-- dual-compat-end -->
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Ledger invariant test pack | Markdown plus transaction fixtures | balanced posting, idempotency, reversal, period lock, subledger tie-out, and audit trail |
+<!-- dual-compat-end -->
 
 ## Inputs
 

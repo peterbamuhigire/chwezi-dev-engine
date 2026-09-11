@@ -94,6 +94,12 @@ Load `world-class-engineering`, `anti-ai-slop`, `lean-game-product-development`,
 - [Kaizen game production loop](references/kaizen-game-production-loop.md)
 - [Narrative and gameplay playtest loop](../game-narrative-and-interactive-story-design/references/narrative-playtest-loop.md)
 - [Behaviour telemetry and tuning](../game-ai-behaviour-and-navigation/references/behaviour-telemetry-and-tuning.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Game slice evidence ledger | Markdown table | player outcome, owner, dependency, build, playtest, risk, acceptance, and next gate |
+
 <!-- dual-compat-end -->
 
 ## Decision Rules

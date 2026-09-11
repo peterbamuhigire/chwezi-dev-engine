@@ -139,6 +139,15 @@ def validate_frontmatter(frontmatter: dict, skill_dir: Path, errors: list[str]) 
     ):
         errors.append("`metadata.compatible_with` must list unique runtime names including 'claude-code' and 'codex'.")
 
+    invocation = metadata.get("invocation", "implicit")
+    if invocation not in {"implicit", "explicit", "both"}:
+        errors.append("`metadata.invocation` must be one of: implicit, explicit, both.")
+
+    if invocation == "explicit":
+        description = str(frontmatter.get("description", "")).lower()
+        if "explicit" not in description and "direct user" not in description:
+            errors.append("Explicit-invocation skills must state the direct/explicit user trigger in `description`.")
+
 
 def validate_portable_sections(frontmatter: dict, body: str, errors: list[str]) -> None:
     if DUAL_COMPAT_START not in body or DUAL_COMPAT_END not in body:

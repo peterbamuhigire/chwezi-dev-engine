@@ -1,6 +1,6 @@
 ---
 name: ios-development
-description: Use when building or reviewing native iOS applications with Swift, SwiftUI, structured concurrency, security, tests, and performance gates; use focused iOS skills for persistence, release, or monetisation.
+description: Use when building, architecting, or reviewing native iOS apps with Swift, SwiftUI, structured concurrency, module boundaries, security, tests, and performance; use platform-capabilities for Apple integrations and mobile-platform-operations for release.
 metadata:
   portable: true
   compatible_with:
@@ -30,6 +30,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- Load the retained [iOS architecture workflow](../ios-architecture/ALIAS.md) for module boundaries, dependency direction, state ownership, and provider seams.
 - `references/ios-project-setup.md` for Xcode project structure, SPM, schemes, build settings, and environment configuration.
 - `references/ios-swift-recipes.md` for production Swift recipes, safe conversions, dates, Codable, hashing, and validation.
 - `references/apple-platform-compatibility-wwdc26.md` for Xcode 27, Swift 6.4, iOS/iPadOS/macOS 27 SDK, Device Hub, coding agents, availability gates, and macOS/Safari watch items.

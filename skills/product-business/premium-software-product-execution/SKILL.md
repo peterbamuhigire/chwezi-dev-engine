@@ -102,4 +102,10 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 - `references/premium-software-product-gate.md` - execution gate for premium software, websites, SaaS, ERP/POS, dashboards, and agency delivery.
 - Companion skills: `world-class-engineering`, `software-pricing-strategy`, `product-strategy-vision`, `product-discovery`, `webapp-gui-design`, `practical-ui-design`, `content-writing`, `ux-writing`, `it-proposal-writing`, `saas-sales-organization`.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | Premium product slice acceptance record | Markdown plus rendered/operational evidence | buyer outcome, value proof, interaction states, failure consequence, polish, and decision |
+
 <!-- dual-compat-end -->

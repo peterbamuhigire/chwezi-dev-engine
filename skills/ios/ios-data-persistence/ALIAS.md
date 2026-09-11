@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/ios/ios-platform-capabilities`; retained here for SwiftData, migration, and local-context depth.
+
 # iOS Data Persistence
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 

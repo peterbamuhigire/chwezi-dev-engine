@@ -1,6 +1,6 @@
 ---
 name: skill-safety-audit
-description: Use when reviewing new, imported, or changed skills for unsafe tools, installers, credential harvesting, hidden execution, prompt injection, excessive permissions, data exfiltration, or improperly retained third-party source content.
+description: Use when auditing a skill or skills engine for safety, routing hazards, hallucination risks, unsafe tools/installers, credential harvesting, hidden execution, prompt injection, excessive permissions, data exfiltration, or retained third-party source content.
 metadata:
   portable: true
   compatible_with:

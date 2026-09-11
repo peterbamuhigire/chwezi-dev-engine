@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/saas/saas-entitlements-and-plan-gating`; retained here for AI model-tier and quota depth.
+
 # AI Entitlements and Feature Gating
 
 ## Operating contract

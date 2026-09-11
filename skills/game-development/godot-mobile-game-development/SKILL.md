@@ -41,6 +41,12 @@ Godot architecture map; version/export manifest; scene/resource contracts; imple
 ## References
 - [Godot architecture and migration](references/godot-architecture-migration.md)
 - [Godot mobile export gates](references/godot-mobile-export-gates.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Godot mobile vertical-slice evidence | Project/build output plus Markdown | scene flow, input, save, pause/resume, device profile, export, and failure check |
+
 <!-- dual-compat-end -->
 ## Decision Rules
 | Condition | Choice |

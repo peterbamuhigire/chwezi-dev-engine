@@ -94,6 +94,12 @@ If the renderer, API, device or representative scene is unknown, produce the fra
 
 - [Rendering pipeline and shader contracts](references/rendering-pipeline-shader-contracts.md)
 - [Mobile graphics budgets and diagnostics](references/mobile-graphics-diagnostics.md)
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Performance | Rendered graphics and frame-budget evidence | Capture plus profiler output | device, scene, pipeline, visual target, frame cost, artefact check, fallback, and comparison |
+
 <!-- dual-compat-end -->
 
 ## Read Next

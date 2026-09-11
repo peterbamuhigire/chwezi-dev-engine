@@ -1,6 +1,6 @@
 ---
 name: document-spreadsheet-tooling-readiness
-description: Use when checking whether this machine can generate and validate requested DOCX, PDF, XLSX, workbook, register, budget, or dashboard outputs.
+description: Use when checking whether this machine can generate, open, render, and validate promised Word/DOCX, PDF, Excel/XLSX, workbook, scoring register, budget, report, or dashboard files before committing to delivery.
 metadata:
   portable: true
   compatible_with:
@@ -88,6 +88,12 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 - `references/toolchain-checks.md`: Commands and package/binary checklist.
 - `references/fallback-routes.md`: Output routes and fallback decision tree.
 - `references/libreoffice-headless.md`: Required cross-platform headless conversion, diagnosis, and validation contract.
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Release evidence | Document tooling readiness report | Markdown plus smoke-test output | DOCX/PDF/XLSX creation, open/render check, missing tool, fallback, and limitation |
+
 <!-- dual-compat-end -->
 
 ## Core Workflow

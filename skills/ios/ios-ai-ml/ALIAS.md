@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/ios/ios-platform-capabilities`; retained here for Apple AI and ML implementation depth.
+
 # iOS AI/ML
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 

@@ -41,8 +41,8 @@ CANONICAL_CATEGORIES = (
     "Release evidence",
 )
 
-# When item 1 (normalisation rollout) lands, change to "error".
-MISSING_SECTION_SEVERITY = "warning"
+# The 2026-09-11 normalisation rollout closed the backlog; absence is now release-blocking.
+MISSING_SECTION_SEVERITY = "error"
 
 DUAL_COMPAT_START = "<!-- dual-compat-start -->"
 DUAL_COMPAT_END = "<!-- dual-compat-end -->"

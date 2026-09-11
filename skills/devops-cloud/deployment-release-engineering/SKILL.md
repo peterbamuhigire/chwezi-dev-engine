@@ -74,6 +74,7 @@ If staging, telemetry, or rollback execution is unavailable, produce a read-only
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- [Human-only operation wizards](references/human-only-operation-wizards.md)
 <!-- dual-compat-end -->
 Use this skill when shipping software to real users. It turns implementation output into releasable output. The focus is safe deployment, fast rollback, and evidence-based release decisions.
 

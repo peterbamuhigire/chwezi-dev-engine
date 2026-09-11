@@ -172,4 +172,10 @@ explicit release state.
 - [Testing, observability, and release](references/testing-observability-and-release.md)
 - [ERP mapping example](examples/erp-efris-mapping-example.md)
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Correctness | Fiscal document reconciliation | Markdown/CSV | source transaction, fiscal request, authority response, retry, cancellation, ledger link, and exception |
+
 <!-- dual-compat-end -->

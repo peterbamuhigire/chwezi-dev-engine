@@ -1,164 +1,74 @@
-# Email Deliverability — Deep Dive
+# Deliverability and Authentication Operations
 
-The infrastructure that gets your email into the inbox instead of the spam folder. The single largest hidden cost in SaaS email — bad deliverability silently kills lifecycle revenue.
+Deliverability is an observed property of a specific sender, traffic class, recipient network, and
+time window. Do not reduce it to a provider ranking or one universal percentage.
 
-## The Four DNS Records
+## Control layers
 
-### SPF (Sender Policy Framework)
-Authorizes which IPs / ESPs can send mail on behalf of a domain.
+1. **Identity and transport:** SPF authorisation, DKIM signing, DMARC alignment/policy/reporting,
+   forward and reverse DNS where required, TLS, and RFC-conformant message format.
+2. **Permission and expectation:** valid recipient relationship, accurate sender identity, clear
+   purpose, applicable consent, and easy unsubscribe for relevant traffic.
+3. **Traffic behaviour:** stable classification, bounded retries, gradual authorised ramp-up, no
+   sudden unreviewed volume or identity changes, and recipient-network-aware response handling.
+4. **Feedback:** authenticated provider webhooks, suppression updates, DMARC reports, receiver
+   dashboards, SMTP responses, and user complaints interpreted in context.
+5. **Content/render resilience:** purpose-fit content, honest claims, plain-text alternative,
+   accessible HTML, image-off reading, and real-client checks owned with the design engine.
 
-```
-notify.example.com.   TXT   "v=spf1 include:_spf.mtasv.net include:amazonses.com -all"
-```
+## Change procedure
 
-- One SPF record per subdomain (DNS does not allow merging).
-- `-all` = hard fail; receivers reject unauthorized senders.
-- 10 DNS lookup limit — `include:` mechanisms count.
-- SPF alone does not survive forwarding; DKIM does.
+1. Inventory every system authorised to send for the domain and every visible author domain.
+2. Read the current primary standards and recipient-network rules in
+   [the currentness register](currentness-register.md).
+3. Generate records from verified provider/domain inputs. Never paste illustrative DNS values.
+4. Review SPF lookup complexity, DKIM selector/key lifecycle, DMARC alignment, report recipients,
+   forwarding/list behaviour, and failure policy with the domain owner.
+5. Stage changes from observation to enforcement using real reports and rollback. Do not jump to a
+   reject policy because a generic guide says so.
+6. Verify message headers and receiver results for each traffic class and representative network.
+7. Record exact evidence, uncertainty, owner, support status, and next review date.
 
-### DKIM (DomainKeys Identified Mail)
-Cryptographic signature on each email. Receiver verifies via DNS-published public key.
+## Monitoring
 
-```
-ksubdomain._domainkey.notify.example.com.   CNAME   ksubdomain.dkim.postmarkapp.com.
-```
+Track by sender identity, traffic class, provider/adapter, recipient network, region, and policy
+version:
 
-- Sign with 2048-bit keys (1024 is being phased out).
-- Rotate keys annually; publish both old and new during transition.
-- DKIM survives forwarding (unlike SPF) — required for forwarded mail to authenticate.
+- queue age, dispatch attempts, provider acceptance, deferral, rejection, and bounce class;
+- authentication and alignment results;
+- complaint and unsubscribe signals using receiver-defined denominators;
+- suppression propagation delay and duplicate/late feedback;
+- delivery-to-task time for consequence-critical messages;
+- user-harm signals and support incidents;
+- reputation/receiver status where an authorised dashboard supplies it.
 
-### DMARC (Domain-based Message Authentication, Reporting & Conformance)
-Tells receivers what to do if SPF/DKIM fail; also tells receivers where to send reports.
+Thresholds come from current receiver/provider requirements or a measured local baseline. Store the
+source, denominator, window, owner, and review date beside each alert.
 
-```
-_dmarc.example.com.   TXT   "v=DMARC1; p=quarantine; rua=mailto:dmarc-rua@example.com; ruf=mailto:dmarc-ruf@example.com; pct=100; sp=quarantine; aspf=r; adkim=r; fo=1"
-```
+## Incident triage
 
-Phases:
-1. `p=none; rua=...` — monitor only; 2-week minimum.
-2. `p=quarantine; pct=10` → ramp pct: 25 → 50 → 100 over 4-6 weeks.
-3. `p=reject; pct=100` — fully enforced.
+1. Bound the affected sender, traffic class, time, recipient networks, and recent changes.
+2. Separate authentication, reputation, content, rate, provider, and recipient-address failures.
+3. Preserve SMTP/provider/header evidence without retaining unnecessary message content.
+4. Reduce or pause only the affected traffic when safe; protect consequence-critical mail through
+   an approved fallback.
+5. Test one discriminating hypothesis at a time. Avoid reputation folklore.
+6. Restore gradually, watch receiver-specific evidence, and close with prevention and review dates.
 
-Tools that ingest DMARC RUA reports:
-- Postmark DMARC monitor (free)
-- dmarcian
-- Valimail
-- EasyDMARC
+## Migration
 
-### BIMI (Brand Indicators for Message Identification)
-Once DMARC is `p=quarantine`+, you can publish a logo for the inbox.
+Keep domains, policy, content, consent, suppression truth, and event lineage outside the provider.
+Before cutover, prove suppression portability, webhook parity, idempotency across adapters,
+authentication/alignment, DNS rollback, traffic ramp, and non-duplication. Provider acceptance is
+not completion; inspect representative receiver outcomes and user-task delivery.
 
-```
-default._bimi.example.com.   TXT   "v=BIMI1; l=https://example.com/bimi-logo.svg; a=https://example.com/bimi-vmc.pem"
-```
+## Evidence boundaries
 
-Requires:
-- SVG logo (Tiny PS profile, square).
-- Verified Mark Certificate (VMC) — $1500+/year (DigiCert, Entrust).
-- Helps Gmail/Yahoo/Apple Mail show your logo. Trust-boost.
+- A DNS record proves publication, not message authentication success.
+- Authentication pass proves identity alignment, not inbox placement.
+- Provider acceptance proves handoff, not final delivery.
+- A pixel open is an imperfect attention proxy, not a user outcome.
+- A benchmark from another sender is context, not the alert threshold for this sender.
+- A test inbox is evidence for that path and time, not all recipients.
 
-## Sender Reputation
-
-Maintained per sending IP + sending domain. Receivers (Gmail, Yahoo, Microsoft, Apple) score you.
-
-### Building it
-- **Warmup**: gradually ramp send volume on a new IP/domain. Start at 50/day, double every other day, cap at expected daily volume over 4-6 weeks.
-- **Engagement signals**: high open rates, high click rates, low complaint rates push reputation up.
-- **Consistency**: spikes from 100/day to 100,000/day look like a hijacked sender.
-
-### Damaging it
-- High bounce rate (> 2% rolling 7d).
-- High complaint rate (> 0.1% rolling 7d).
-- Spam-trap hits (purchased lists or scraped emails).
-- Sudden volume spikes.
-- Sending to long-inactive recipients.
-
-## Bounces
-
-| Type | Action |
-|---|---|
-| Hard bounce (553, 550, 511) | Immediately suppress; never retry |
-| Soft bounce (421, 451, 4xx) | Retry 3-5 times with backoff; suppress if persistent |
-| Block (mailbox provider blocked you) | Investigate; may need to contact provider postmaster |
-
-## Complaints (FBL — Feedback Loop)
-
-Mailbox providers expose Feedback Loops — when a recipient hits "Spam", you receive an automated notification.
-
-- Sign up for FBL with: Yahoo, Microsoft, AOL, Comcast, USA-CDX, La Poste.
-- Gmail does not have an FBL; you get aggregate stats via Postmaster Tools instead.
-- Every FBL complaint → immediately add to suppression list. Investigate why (often: marketing in transactional, or no-consent send).
-
-## Inbox Placement
-
-Even with everything green, mail can land in Spam. Monitor:
-- **Seed lists**: GlockApps, Litmus, Mailtrap — send test emails to seed addresses; report on placement per provider.
-- **Postmaster Tools**: Google, Yahoo, Microsoft give domain-level inbox placement stats.
-- **Sender Score**: SenderScore.org — IP-level reputation 0-100.
-
-Target: > 95% inbox placement across major providers.
-
-## Subdomain Strategy
-
-Critical for reputation isolation:
-- `app.example.com` — the product. **Never send mail from this**.
-- `auth.example.com` — auth-only emails (verify, MFA, security). Highest trust, smallest volume.
-- `notify.example.com` — transactional + lifecycle product emails.
-- `mail.example.com` or `news.example.com` — marketing.
-- `bounce.example.com` — return-path / bounce-handling (set in your ESP).
-
-Each has its own SPF + DKIM + reputation. A marketing-send burst that triggers complaints poisons only `mail.example.com`, leaving transactional `notify.example.com` clean.
-
-## ESP-Specific Notes
-
-| ESP | Strength | Watch out |
-|---|---|---|
-| **Postmark** | Best transactional inbox placement; great deliverability tools | Pricier per email |
-| **AWS SES** | Cheap at scale | Sandbox mode by default; reputation building is on you |
-| **SendGrid** | Mature; broad features | Shared IP reputation can be poor on lower tiers |
-| **Mailgun** | Good API; cleanup tools | Mid-tier deliverability |
-| **Resend** | DX-friendly modern | Smaller market history |
-| **Customer.io** | Best automation/segmentation | Bring your own deliverability via SES/SendGrid |
-| **Braze / Iterable** | Enterprise-grade automation | Cost |
-
-## DMARC Report Monitoring
-
-DMARC reports (aggregate and forensic) reveal:
-- Who is sending mail claiming to be your domain (legit + spoofers).
-- Which senders fail SPF/DKIM alignment.
-- Which receivers are quarantining/rejecting.
-
-Without monitoring, you don't see spoofing. With monitoring, you can:
-- Onboard internal senders (Workday, Greenhouse, Salesforce, Zendesk) into SPF/DKIM.
-- Identify legitimate senders failing alignment and fix.
-- Identify spoofers and refer to abuse channels.
-
-## List Hygiene
-
-Engagement-based pruning:
-- Drop from broadcast lists addresses with no open/click in 90 days.
-- Keep them eligible for transactional only.
-- Re-engagement campaign before drop — sometimes recovers 5-10%.
-
-Email validation services (NeverBounce, ZeroBounce, Kickbox):
-- Run lists through them before importing to ESP.
-- Catches typos (`@gnail.com`), defunct addresses, role accounts.
-- Costs pennies per address.
-
-## Anti-Patterns
-
-- One SPF record with 12 `include:`s blowing the lookup limit.
-- DKIM key never rotated; same since 2017.
-- DMARC stuck at `p=none` indefinitely — no enforcement, anyone can spoof.
-- Marketing burst from the transactional subdomain.
-- No FBL signups → complaints invisible.
-- No DMARC report ingestion → spoofing invisible.
-- New sending IP / domain hits production volume on day 1 → reputation craters.
-- Sending to purchased lists → spam-trap hits, blacklisting, permanent reputation damage.
-
-## See Also
-
-- `saas-transactional-email-infrastructure` — overall infrastructure skill.
-- `saas-lifecycle-email-orchestration` — sequence design that respects deliverability.
-- External design-engine `email-and-newsletter-design` — purpose-fit HTML with target-client,
-  dark-mode, image-off, accessibility, and render evidence.
+Mark any unavailable layer `NOT ASSESSED` and state the next observation needed.

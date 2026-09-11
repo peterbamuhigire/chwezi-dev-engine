@@ -23,9 +23,32 @@ Art direction, source/provenance/licence, target devices/resolutions, colour/alp
 4. Validate dimensions, formats, duplicates, missing frames, pivots, atlas boundaries, import drift, memory, draw calls, and target-device readability.
 5. Retain source-to-export-to-import manifest and device captures for normal, low-quality, accessibility, and failure variants.
 
+## Quality Standards
+
+- Preserve source, licence, cultural restriction, export profile, and runtime owner for every asset.
+- Validate scale, pivot, alpha, colour, animation timing, atlas bleed, fallback, and memory on target devices.
+- Provide non-motion and non-colour-only communication for gameplay-critical VFX.
+- Accept assets from engine captures and budgets, not DCC previews alone.
+
+## Anti-Patterns
+
+- Shipping only a source preview. Fix: capture the imported runtime asset.
+- One atlas for unrelated lifecycles. Fix: group by load/unload and update behaviour.
+- Particle count set by taste. Fix: profile overdraw, fill rate, CPU, memory, and readability.
+- Colour alone communicates danger. Fix: add shape, motion, text, sound, or haptic alternatives.
+- Missing provenance. Fix: quarantine the asset until rights and source are recorded.
+
 ## Outputs
 Art direction contract; provenance manifest; export/import profiles; atlas/animation/VFX specifications; validator results; engine/device acceptance evidence.
 
 ## References
 - [2D content acceptance matrix](references/2d-content-acceptance-matrix.md)
+
+<!-- dual-compat-start -->
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| UX quality | 2D asset runtime acceptance sheet | Markdown plus rendered captures | source, atlas, animation, scaling, performance, accessibility, provenance, and import result |
+<!-- dual-compat-end -->
 

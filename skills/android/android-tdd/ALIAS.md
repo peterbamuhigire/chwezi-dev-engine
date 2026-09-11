@@ -8,6 +8,8 @@ metadata:
   - codex
 ---
 
+> Inactive alias. Route to `skills/android/android-development`; retained here for the complete Android testing workflow.
+
 ## Platform Notes
 
 - Optional helper plugins may help in some environments, but they must not be treated as required for this skill.

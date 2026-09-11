@@ -64,6 +64,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/php-python-js-container-delivery.md`
 - `references/source-register.md`
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+| --- | --- | --- | --- |
+| Operability | Container build and runtime verification | Command output plus manifest | pinned image, non-root run, health check, dependency failure, scan, and cleanup |
+
 <!-- dual-compat-end -->
 
 ## Inputs

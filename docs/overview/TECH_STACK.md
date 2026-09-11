@@ -19,7 +19,7 @@ of this repository.
 | --- | --- |
 | Git | Version control. |
 | PowerShell | Primary local shell on Windows. |
-| Python 3 | Catalog guardrail and routing smoke test execution. |
+| Python 3 | Catalog, routing, work-graph, two-axis review, diagnosis, lifecycle, and control-plane validation. |
 | pytest | Repository validator tests, including temporary portfolio fixtures and malformed-input cases. Live installed-portfolio checks are opt-in and report unavailable execution separately. |
 | PyYAML | YAML parsing for `scripts/skill_catalog_guardrails.py` and `scripts/routing_smoke_test.py`. |
 | GitHub Actions | CI: runs both gates on every push and PR (`.github/workflows/skill-guardrails.yml`). |
@@ -36,6 +36,7 @@ rg --files -g "SKILL.md"
 python -X utf8 scripts\skill_catalog_guardrails.py --report-only
 python -X utf8 scripts\routing_smoke_test.py
 python -X utf8 scripts\routing_smoke_test.py --collisions
+python -X utf8 scripts\validate_work_graph.py templates\work-graph.yml
 python -X utf8 skills\languages\python-modern-standards\scripts\desktop_suite_packager.py --help
 ```
 
