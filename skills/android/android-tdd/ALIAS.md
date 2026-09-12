@@ -8,13 +8,14 @@ metadata:
   - codex
 ---
 
+# Android Test-Driven Development (TDD)
+
 > Inactive alias. Route to `skills/android/android-development`; retained here for the complete Android testing workflow.
 
 ## Platform Notes
 
 - Optional helper plugins may help in some environments, but they must not be treated as required for this skill.
 
-# Android Test-Driven Development (TDD)
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
@@ -25,14 +26,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
-|----------|----------|--------|---------|
+| --- | --- | --- | --- |
 | Correctness | Android TDD test plan | Markdown doc per `skill-composition-standards/references/test-plan-template.md` covering Red-Green-Refactor cycles per layer | `docs/android/tdd-plan-checkout.md` |
 | Correctness | Test pyramid coverage report | Markdown doc showing 70/20/10 distribution and per-layer coverage | `docs/android/tdd-coverage-2026-04-16.md` |
 
 ## Decision Rules
 
 | Behaviour | First test boundary |
-|---|---|
+| --- | --- |
 | Pure business rule | JVM unit test |
 | DAO query or migration | Instrumented Room test |
 | Repository coordination | Integration test with deterministic fakes |
@@ -53,6 +54,7 @@ If execution is unavailable, treat every test result as pending rather than pass
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 <!-- dual-compat-end -->
+
 ## Overview
 
 TDD is a development process where you write tests **before** feature code, following the **Red-Green-Refactor** cycle. Every feature starts with a failing test, gets minimal implementation, then is refined.
@@ -75,7 +77,7 @@ TDD is a development process where you write tests **before** feature code, foll
 
 ## The Red-Green-Refactor Cycle
 
-```
+```text
 1. RED    → Write a failing test for desired behavior
 2. GREEN  → Write MINIMUM code to make it pass
 3. REFACTOR → Clean up while keeping tests green
@@ -91,7 +93,7 @@ TDD is a development process where you write tests **before** feature code, foll
 
 ## Test Pyramid (70/20/10)
 
-```
+```text
         /  UI  \        10% - Espresso, end-to-end flows
        /--------\
       / Integra- \      20% - ViewModel+Repository, Room, API
@@ -273,7 +275,7 @@ fun fetchUsers_networkError_showsErrorState()
 
 ## Integration with Other Skills
 
-```
+```text
 feature-planning → Define specs & acceptance criteria
       ↓
 android-tdd → Write tests first, then implement (THIS SKILL)
@@ -322,13 +324,21 @@ jobs:
 - **Mockito Kotlin**: github.com/mockito/mockito-kotlin
 - **Espresso**: developer.android.com/training/testing/espresso
 - **Architecture Samples**: github.com/android/architecture-samples
+
 ## Inputs
+
 | Artefact | Required? | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | Behaviour requirement, risk, architecture boundary, and existing test suite | yes | Drive test-first slices |
+
 ## Outputs
+
 - Produce failing-then-passing Android tests, implementation evidence, and residual coverage gaps.
+
 ## Degraded mode
+
 Fallback without an emulator/device: write test cases and mark instrumentation behaviour unverified.
+
 ## Capability contract
+
 Test execution may use isolated fixtures; production services, accounts, signing, and destructive device operations are out of scope without approval.
