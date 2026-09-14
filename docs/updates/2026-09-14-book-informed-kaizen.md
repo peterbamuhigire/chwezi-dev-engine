@@ -31,15 +31,25 @@ architecture sections; its dated product claims were not adopted as doctrine.
 
 ## Model-policy currentness decision
 
-The active Codex configuration and managed roles select gpt-5.6-luna with high
-reasoning. Official currentness evidence was checked on 2026-09-14:
+The active Codex configuration and managed roles select `gpt-5.6-luna` with
+`high` reasoning. Official evidence checked on 2026-09-14:
 
-- https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4
-- https://openai.com/index/safety-overview-gpt-6-astra/
+- [OpenAI Models](https://platform.openai.com/docs/models/gpt-4-turbo-and-gpt-4):
+  lists `gpt-5.6-sol`, `gpt-5.6-terra` and `gpt-5.6-luna`; it describes Luna as
+  the cost-sensitive tier and Sol as the flagship complex-work tier.
+- [GPT-6 Astra safety overview](https://openai.com/index/safety-overview-gpt-6-astra/):
+  confirms Astra as a newer, broadly deployed, higher-capability candidate.
+- [Using Codex with your ChatGPT plan](https://help.openai.com/en/articles/11369540):
+  documents Codex model availability by plan and the Luna replacement path for
+  older Codex defaults.
 
-Decision: reconcile all five engines to the active Luna policy. Astra remains
-available only when Peter explicitly selects it for a task; no automatic model
-switch was introduced.
+Local evidence: `codex-cli 0.154.0`, `C:\Users\Peter\.codex\config.toml`
+(`gpt-5.6-luna`, `high`, review model Luna), and all eight engine policy
+helpers pass. Effective account entitlement and runtime session readout are
+`NOT_ASSESSED`. Decision: retain Luna/high as the active policy for cost,
+latency and sufficient quality on this engine work; keep Astra opt-in only.
+No automatic model switch was introduced. Any replacement requires a new
+comparative quality/cost/latency review and explicit Peter authorisation.
 
 ## Re-measurement
 

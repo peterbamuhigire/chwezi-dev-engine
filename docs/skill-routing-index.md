@@ -127,6 +127,20 @@ target instead.
 
 ## Broad Routing Groups
 
+## Hospitality systems
+
+Hotel, resort, lodge, inn, guest-house, restaurant, bar, catering, event-venue,
+PMS, POS, room, folio, KOT, KDS, housekeeping, night-audit, menu/BOM, or
+hospitality operations work routes to:
+
+- `skills/product-business/hospitality-hotel-restaurant-systems/SKILL.md`
+- `C:\wamp64\www\srs-skills\02-requirements-engineering\hospitality-operating-model-srs\SKILL.md`
+- `C:\wamp64\www\chwezi-accounting-doctrine\skills\11-sector-and-fund-accounting\hospitality-and-restaurant-pack\SKILL.md` whenever money, inventory, tax or reconciliation is involved.
+
+The Maduuka audit standard is the companion acceptance reference; code or a
+screen is not implementation proof without executable normal, failure,
+concurrency, tenant, reconciliation, recovery and owner-sign-off evidence.
+
 | Domain | Target active skill | Absorbed or routed slugs |
 |---|---|---|
 | AI architecture | `ai-app-architecture` | `ai-architecture-patterns`, `ai-on-saas-architecture` |
