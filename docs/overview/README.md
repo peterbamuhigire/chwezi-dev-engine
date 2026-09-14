@@ -7,6 +7,11 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [2026-09-14 book-informed portfolio Kaizen](../updates/2026-09-14-book-informed-kaizen.md)
+added scenario-led engineering, measurable NFR, human-owned AI, review/recovery,
+design-system, website, SRS, and technical-proposal guidance without importing
+full source text.
+
 The [2026-09-11 Matt Pocock skills comparison](../sept-matt-pocock/README.md) produced a completed
 repository-level Kaizen without importing a second catalogue: invocation ownership,
 decision-frontier questioning, persistent domain language, tracer-bullet work graphs, systematic

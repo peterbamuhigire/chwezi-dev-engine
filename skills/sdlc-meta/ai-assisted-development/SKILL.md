@@ -29,6 +29,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+## Book-informed practice route
+
+Apply the human-owned, scenario-constrained AI workflow in [the 2026-09-14 engineering practice synthesis](../../../book-extractions/2026-09-14-engineering-practice-synthesis.md).
 <!-- dual-compat-end -->
 ## Overview
 

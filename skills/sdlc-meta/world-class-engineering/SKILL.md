@@ -27,6 +27,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Load `references/language-standards.md` when implementation or documentation needs explicit language, localisation, naming, or terminology standards.
+## Book-informed practice route
+
+For scenario contracts, review focus, AI collaboration, failure-aware architecture, and Git recovery, load [the 2026-09-14 engineering practice synthesis](../../../book-extractions/2026-09-14-engineering-practice-synthesis.md).
 <!-- dual-compat-end -->
 Use this skill as the baseline operating system for all serious implementation skills in this repository. It defines what world-class software development, engineering, and management look like when the goal is not just to ship code, but to build software that is valuable, trusted, maintainable, fast to evolve, and worth paying for.
 

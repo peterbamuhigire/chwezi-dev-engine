@@ -1,5 +1,10 @@
 # Skills Web Dev
 
+The [2026-09-14 book-informed portfolio Kaizen](docs/updates/2026-09-14-book-informed-kaizen.md)
+strengthens scenario contracts, risk-based review, human-owned AI, failure-aware
+architecture, and Git recovery while retaining the existing specialist skill
+boundaries.
+
 `skills-web-dev` is the Chwezi Core Systems software-engineering engine for turning a product decision into well-understood, maintainable software and an operable release. It routes work to the smallest accurate skill and develops it in traceable vertical slices—requirements, architecture, data flow, interaction detail, code, tests, security, observability, performance, rollback, and handoff—so speed from AI does not replace engineering judgement or finish quality.
 
 Engineers, architects, product and delivery teams, and operators use it for AI systems, SaaS, APIs, databases, frontend and mobile applications, games, security, DevOps, cloud, reliability, and SDLC documentation. The route helps them frame the problem, choose system boundaries, make changes, and verify normal and failure paths.
