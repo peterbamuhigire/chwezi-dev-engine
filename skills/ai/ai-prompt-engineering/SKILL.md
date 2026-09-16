@@ -68,9 +68,26 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 ## Overview
 
-The prompt is the only input to the model. Quality of output is directly proportional to quality of prompt. Treat prompts as production code: version them, test them, evaluate them.
+## Superseding evidence-first standard
 
-**Core principle:** The model can only extend the input sequence — all instructions, context, and examples must be merged into one text block before calling the API.
+The legacy examples below are retained as historical patterns, but this section governs all new prompt packages and reviews. A prompt is one part of a feature contract alongside the model adapter, supplied data, tools, policies, evaluator, and human review path. Do not claim that prompt quality alone determines output quality.
+
+Build each prompt around a reusable prompt card:
+
+- **Outcome:** the decision or artefact required and who will use it.
+- **Trusted context:** the allowed source boundary, variables, freshness, and provenance.
+- **Task and constraints:** required content, exclusions, safety rules, scope, and non-goals.
+- **Output and acceptance:** schema or format, quality checks, refusal/fallback behaviour, and escalation path.
+
+Treat named frameworks, personas, delimiters, chain-of-thought requests, sampling parameters, token limits, and provider syntax as optional, testable adapters—not universal laws. For complex work, request a concise reasoning shape such as assumptions, options, trade-offs, checks, and unresolved gaps; do not depend on private chain-of-thought disclosure. Use a small representative fixture set, inspect failure slices, and retain a change only when its value survives correctness, safety, accessibility, latency, cost, and scope gates. Record the prompt version, adapter/model, context, evaluator, result, and rollback path.
+
+Current or volatile facts must come from an authorised current source or the Digital Research Engine's verified evidence record. A prompt may require source checking and citation; it cannot create current evidence or make an unverified claim true. Unavailable model access, provider parameters, tool capability, or evaluator coverage remains `NOT_ASSESSED`.
+
+Accordingly, do not follow the legacy claims below that output quality is directly proportional to prompt quality, that few-shot is always the biggest lever, that emotional wording or repeated constraints reliably improves accuracy, that chain-of-thought disclosure reduces hallucinations, or that any temperature/token range is safe across providers. Validate the actual adapter and task instead.
+
+The prompt is one part of a model feature's input contract. Treat prompts as production code: version them, test them, evaluate them, and validate the surrounding data, tools, policies, and review path.
+
+**Core principle:** The adapter must preserve instruction/data boundaries and pass the model the structured inputs it supports; do not assume every provider requires one merged text block.
 
 ---
 
@@ -114,21 +131,21 @@ State format, length, style, language, structure, audience — explicitly. Never
 |---|---|---|
 | Zero-shot | None | Simple, well-defined tasks |
 | One-shot | 1 example | When format matters |
-| Few-shot | 3–10 examples | Complex format, best quality |
+| Few-shot | Small relevant set | Complex formats when comparison testing shows value |
 
-Few-shot examples are the single biggest quality lever. Invest in them.
+Few-shot examples are a task-dependent option. Use a small, relevant, representative set only when comparison testing shows that examples improve the acceptance criteria.
 
 ---
 
 ## Enhancement Techniques
 
 ### 1. Chain of Thought (CoT)
-Add "Think step by step" or "Explain your reasoning before giving a final answer."
+Request a concise reasoning shape—assumptions, criteria, trade-offs, checks, and unresolved gaps—when it helps the reviewer evaluate a complex task. Do not require private chain-of-thought disclosure.
 
 ```
 Analyse this invoice. Think step by step, then give your final verdict.
 ```
-- Reduces hallucinations (LinkedIn finding)
+- Any quality, safety, latency, or cost effect must be measured on representative fixtures; do not infer it from a generic claim.
 - Increases latency and token cost — use when accuracy matters more than speed
 
 ### 2. Self-Validation
@@ -200,7 +217,7 @@ Respond in formal English."""
 - Persona + domain restriction + tone + format rules
 - Stored in config/database — NOT hardcoded in application logic
 - Keep it under 500 tokens where possible (every call re-sends it)
-- Use prefix KV caching when available (OpenAI, Codex) — eliminates repeated processing cost
+- Keep provider caching and cost controls in the adapter; verify current provider behaviour before relying on them.
 
 ---
 
@@ -307,7 +324,7 @@ Document:
 | `top_p` | — | — | Alternative to temperature; don't use both |
 | `n` | 1 | 3–5 | Multiple variants for preference data collection |
 
-**Never use temperature > 1.1 in production** — produces garbled output.
+Do not copy these illustrative parameter ranges across providers. Choose parameters only when the target adapter documents them and test their effect on representative fixtures.
 
 ---
 

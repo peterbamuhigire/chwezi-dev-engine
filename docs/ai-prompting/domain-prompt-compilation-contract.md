@@ -47,6 +47,24 @@ geometry, and unwanted changes.
 Keep provider-specific wording and parameters in an adapter. Verify current
 platform/model claims through Digital Research before making them a rule.
 
+## Evidence-first prompt tuning
+
+Treat every framework, phrase, parameter, and prompt recipe as a candidate,
+not a universal law. Before standardising it, name the failure mode it should
+improve, classify it as durable or current/provider-specific, run a baseline
+and a small representative comparison, inspect failure slices, and retain it
+only when the gain survives the engine's safety, evidence, accessibility,
+quality, cost, and scope gates. Record prompt version, receiving tool/model when
+known, context boundary, test cases, grader, result, and rollback condition.
+
+Use a reusable prompt card with: outcome, audience, trusted context and source
+boundary, required content, hard constraints and non-goals, output contract,
+acceptance checks, and the next action when a check fails. Omit fields that do
+not affect the task. Never require a named framework, chain-of-thought,
+temperature, token limit, delimiter, or platform syntax unless the target
+adapter and current evidence establish that it applies. Current facts must be
+researched and cited; a prompt may require verification but cannot create it.
+
 ## Evidence basis
 
 ## Agentic and software-development lifecycle
