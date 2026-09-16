@@ -209,6 +209,10 @@ engine; presentation comes from design-system-skills. Hard rule: never use a ban
 type — state the chosen typeface and reason before producing any artifact.
 <!-- /design-system-skills:trigger -->
 
+## DOMAIN PROMPT GENERATION CONTRACT
+
+For a prompt handoff, read the local [domain prompt contract](docs/ai-prompting/domain-prompt-compilation-contract.md). Generate a ready-to-paste engineering prompt with user outcome, failure consequence, one vertical slice, current architecture/data, behaviour, states, security, dependencies, tests, observability, rollback, and acceptance checks. **Ready-to-paste prompt:** include assumptions and risk flags. **Failure action:** fix one failed slice or regenerate when the design is structurally wrong.
+
 ## PORTFOLIO CRAFT CONTRACT
 
 Load `C:\wamp64\www\chwezi-engine-agents\docs\operations\portfolio-craft-standard-2026-09-04.md` when available. Build software, APIs, AI systems, and technical artefacts in named vertical slices: frame the user outcome and failure consequence, select one flow, inspect existing architecture and data flow, make the smallest useful change, run normal and failure checks, review rendered or operational behaviour where relevant, refine, and record evidence before proceeding. Code must be understood in context; interfaces, dependencies, states, observability, and rollback are part of the work. Do not generate a whole product as one opaque batch. Apply `Observe -> Baseline -> Select -> Experiment -> Check -> Standardise -> Teach -> Re-measure` to kaizen itself. Missing execution, render, production, source, reviewer, or stakeholder evidence is `NOT ASSESSED`, never a pass.

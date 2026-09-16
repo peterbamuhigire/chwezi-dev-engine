@@ -107,6 +107,19 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## §2 Indirect Prompt Injection Defences
 
+### Prompt-safety requirements for generated task briefs
+
+Prompt generation must preserve the authority boundary: durable system or
+developer rules remain separate from user data, retrieved text, screenshots,
+logs, and tool observations. Mark externally controlled content as untrusted
+data and never let it rewrite permissions, identity, tenant scope, tool policy,
+or the original objective. Test prompt builders with direct and indirect
+injection fixtures, conflicting instructions, malformed tool output, secret
+requests, cross-tenant references, and attempts to trigger irreversible
+actions. A safe prompt is not sufficient by itself: authorization, least
+privilege, approval, output validation, provenance, logging, and kill/recovery
+controls must be enforced outside the model where possible.
+
 Three layers:
 
 ### Layer 1: Provenance Tagging

@@ -213,6 +213,32 @@ claim that a runner supports a control merely because another runner does.
 
 ## Cross-harness operating pattern
 
+## Prompt contract for coding-agent tasks
+
+Compile every material coding request into a task brief containing: the
+objective and affected user, repository/system map, relevant files and
+observed symptom, hard constraints and non-goals, exclusive write set,
+acceptance checks, risk/permission boundary, and required evidence. Use this
+starter shape when generating a prompt:
+
+```text
+Objective: [observable end state]
+Context: [repo/system, relevant files, current behaviour, evidence]
+Constraints: [must preserve, dependencies, security, scope, non-goals]
+Workflow: inspect -> plan -> implement -> verify -> review
+Output: [patch/report/commands/results and assumptions]
+Acceptance: [tests, lint, preview, dry run, or other observable checks]
+Failure: classify the defect, make the smallest justified retry, or stop and
+escalate if authority, evidence, or safety is missing.
+```
+
+Separate exploration and planning from implementation when the task is
+multi-file, risky, or unfamiliar. Require the agent to report commands and
+observed results; compilation or a green test alone does not establish design,
+security, unchanged-behaviour, or product acceptance. Keep prompt builders and
+their representative fixtures close to the feature so changes can be reviewed,
+tested, staged, and rolled back.
+
 Use this sequence for every material coding-agent task, regardless of whether
 the active runner is Claude Code, Codex, or another compatible harness:
 

@@ -10,6 +10,18 @@ metadata:
 
 # AI-Enhanced Web Apps
 
+## Prompt and delivery contract
+
+Prompts for AI web features must join the user journey to the model/system
+boundary: state the user outcome, context assembly and provenance, tenant and
+authority scope, tool permissions, output schema, loading/empty/error/refusal
+states, latency and cost budget, fallback, and acceptance evidence. For
+agentic features, separate inspect/plan from mutation, validate model output
+before rendering or acting, require approval for consequential side effects,
+and log the prompt/model/context/tool versions needed to reproduce a result.
+Test prompt revisions with representative, edge, adversarial, and accessibility
+cases; do not treat a good demo or a framework default as production evidence.
+
 ## Operating contract
 
 ## Inputs

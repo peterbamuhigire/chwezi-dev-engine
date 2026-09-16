@@ -26,6 +26,15 @@ Use it for engineering implementation and SDLC quality; bring in companion engin
 
 ## Current status
 
+## Prompt-generation and AI-development capability — September 2026
+
+The AI route now compiles provider-neutral prompts for software development,
+Java/JVM backends, HTML/CSS frontends, PowerShell automation, AI feature
+specification, evaluation, safety, and tool/HITL design. Prompts carry scoped
+context, hard constraints, staged execution, acceptance evidence, recovery, and
+currentness requirements. The standalone [domain prompt contract](docs/ai-prompting/domain-prompt-compilation-contract.md)
+travels with every fork.
+
 Last verified: 2026-09-11.
 
 | Measure | Result |

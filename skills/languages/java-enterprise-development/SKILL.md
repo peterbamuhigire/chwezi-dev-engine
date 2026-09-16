@@ -15,6 +15,20 @@ enterprise systems. It turns cross-cutting architecture, security, data,
 delivery, and operations contracts into version-aware Java decisions and
 evidence without replacing their owning skills.
 
+## Prompting and AI-assisted implementation
+
+When generating a Java task prompt, include the actual JDK/toolchain and build
+evidence, affected flow and layer, API/data contracts, transaction and security
+invariants, non-goals, expected files, and acceptance commands. Prefer a staged
+handoff: inspect the repository and reproduce the symptom; plan the smallest
+change; implement within the write set; compile and run focused tests; then
+review compatibility, error handling, observability, and unchanged behaviour.
+For debugging, provide the stack trace and reproduction, ask for a root-cause
+hypothesis tied to code evidence, and require a targeted regression test. For
+refactors, state what behaviour must remain unchanged. Treat dependency,
+framework, JDK, and API-version suggestions as `NOT ASSESSED` until the local
+build and current primary sources support them.
+
 <!-- dual-compat-start -->
 ## Prerequisites
 

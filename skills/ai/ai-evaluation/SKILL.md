@@ -101,6 +101,24 @@ Every production AI feature needs an evaluation contract before release:
 
 ## Evaluation Workflow
 
+### Prompt and agent evaluation addendum
+
+Version the prompt builder, model identifier, context assembly, tool policy,
+and evaluation data as one change surface. For each revision, record the
+objective, hard constraints, expected output, risk class, and acceptance
+grader. Compare against the previous version on representative, edge,
+adversarial, multilingual, and low-context cases; report per-slice failures,
+not only the aggregate score. Include a regression case for every production
+incident. A successful demo or syntax check is not release evidence for an AI
+feature.
+
+For agentic workflows, evaluate the whole loop: context selection, plan
+quality, tool-argument validity, authorization/approval, side effects,
+recovery, final output, latency, cost, and audit trace. Keep deterministic
+format/schema/security checks separate from model-judged quality checks. If a
+grader, test set, runtime, or account model is unavailable, mark that result
+`NOT ASSESSED` rather than treating absence as a pass.
+
 ```
 1. Define criteria before building
 2. Create golden test set (20–50 examples with expected outputs)

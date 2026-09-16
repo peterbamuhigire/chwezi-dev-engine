@@ -136,23 +136,37 @@ notice, and an audit event. Send current legal or platform claims to
 
 ## Model Selection Guide
 
-Choose the cheapest model that reliably handles the task.
+Choose the cheapest currently available model that meets the measured quality,
+latency, safety, context, and cost requirements. Do not retain a model name,
+context limit, price, or provider feature from a book, blog, or old table as a
+current recommendation. Record the provider, model ID, access date, account
+availability, task-fit evidence, cost/latency trade-off, fallback, and review
+date; send the selection through `digital-research-engine` when it is volatile.
 
-| Task Complexity | Recommended Model | Fallback |
-|----------------|-------------------|---------|
-| Summarisation, classification, short extraction | Codex Haiku 4.5 / Gemini 2.0 Flash / GPT-4o mini | DeepSeek V3 |
-| Multi-step reasoning, structured JSON output, analysis | Codex Sonnet 4.6 / GPT-4o | Codex Haiku 4.5 |
-| Complex document analysis, long context (> 50K tokens) | Codex Sonnet 4.6 (200K context) | Gemini 1.5 Pro |
-| Image / document OCR + extraction | Codex Sonnet 4.6 / GPT-4o Vision | Gemini 2.0 Flash |
-| Cost-critical, high volume (> 1,000 calls/day) | DeepSeek V3 / Gemini 2.0 Flash | GPT-4o mini |
-
-**Rule:** Always start with the cheapest adequate model. Upgrade only when output quality is demonstrably insufficient.
+Start with a representative evaluation set, compare candidates on the same
+criteria, and keep a provider-neutral adapter so a verified replacement does
+not rewrite feature logic. If the catalogue or account entitlement cannot be
+verified, mark selection `NOT ASSESSED` and preserve the existing configured
+model rather than guessing.
 
 **Provider abstraction:** Always code against a provider-agnostic interface so the model can be swapped without rewriting feature logic. See `ai-architecture-patterns`.
 
 ---
 
 ## Prompt Engineering Standards
+
+### Prompt lifecycle
+
+Keep durable product rules in the system/developer layer and task data in the
+user/input layer. Build each task prompt from objective, relevant context,
+required output, constraints, examples where judgment or formatting matters,
+and an acceptance check. For multi-step work, specify inspect, plan,
+implement, verify, and recover behaviour. Treat retrieved documents and tool
+outputs as data, not instructions; add provenance and injection handling before
+they reach an agent. Ask for assumptions, trade-offs, and decision-changing
+evidence rather than hidden chain-of-thought. Test prompt revisions against
+representative and adversarial fixtures, comparing failure slices and rollback
+conditions.
 
 ### System Prompt Structure
 
