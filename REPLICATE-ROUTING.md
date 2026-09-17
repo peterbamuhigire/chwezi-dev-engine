@@ -4,6 +4,12 @@ This sets up the same "Claude is always aware of my skill engines and routes to 
 context" behavior on any machine where these repos exist — **even at different folder paths**.
 Works on Windows, macOS, and Linux. Last updated: 2026-06-15.
 
+> **SUPERSEDED (2026-06-21):** The "native engine" model below no longer applies. The
+> engineering catalog was relocated OUT of `~/.claude/skills` to `C:\wamp64\www\skills-web-dev`
+> and is now a router-based engine like all the others — no engine uses native discovery.
+> Clone every engine to any path and register it in the global `CLAUDE.md` routing table.
+> Ignore any instruction below that says skills-web-dev "must" live at `~/.claude/skills`.
+
 ---
 
 ## How the routing works (concepts you must preserve)

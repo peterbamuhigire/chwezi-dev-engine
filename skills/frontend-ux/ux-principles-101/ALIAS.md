@@ -10,7 +10,7 @@ metadata:
   - codex
 ---
 
-> Inactive alias. Route to `skills/practical-ui-design` through `docs/skill-aliases.yml`; this file is retained for historical content.
+> Inactive alias. This skill migrated to the external design engine: route to `ux-foundations` in `C:\wamp64\www\design-system-skills` per `docs/skill-aliases.yml`; this file is retained for historical content.
 
 
 # UX Principles 101

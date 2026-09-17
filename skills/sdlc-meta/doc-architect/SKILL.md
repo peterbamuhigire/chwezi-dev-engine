@@ -60,7 +60,7 @@ The skill should activate when the user asks to:
 ## Standard Operating Procedure (SOP)
 
 1. **Scan the workspace**
-   - Inspect the root for identifiers (README, PROJECT_BRIEF, TECH_STACK, ARCHITECTURE, Codex, package.json, composer.json, \*.sln, pyproject.toml).
+   - Inspect the root for identifiers (README, PROJECT_BRIEF, TECH_STACK, ARCHITECTURE, CLAUDE.md, AGENTS.md, package.json, composer.json, \*.sln, pyproject.toml).
    - Locate likely data directories (database/, schema/, migrations/, sql/, db/).
    - Locate planning/documentation directories (docs/, docs/plans/, planning/, specs/).
    - Identify module/area entry points (menus, docs, feature folders) to group specs.
@@ -130,7 +130,7 @@ When generating AGENTS.md files, be aware of the complete SDLC documentation eco
 | `project-requirements` | Raw requirements interview | Input source for SDLC planning docs |
 | `feature-planning` | Feature-level specs + implementation plans | Stored in `docs/plans/` (planning directory) |
 | `manual-guide` | End-user manuals and guides | Stored in `/manuals/` (separate from AGENTS.md) |
-| `update-Codex-documentation` | Keep project docs (README, AGENTS.md) updated | Maintains project-level docs after changes |
+| `update-claude-documentation` | Keep project docs (README, AGENTS.md) updated | Maintains project-level docs after changes |
 
 ### SDLC Output Directory Structure
 

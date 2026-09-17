@@ -12,7 +12,7 @@ metadata:
 
 - Optional helper plugins may help in some environments, but they must not be treated as required for this skill.
 
-# Update Codex Documentation
+# Update Claude Documentation
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
@@ -50,7 +50,7 @@ Update project documentation systematically after significant changes. Keep all 
 
 **Docs Organization Rule (Required):** All documentation markdown now lives under `docs/` plus a semantic subdirectory (overview, architecture, pharmacy, localization, etc.). Do not add new files directly to the repo root—move existing root markdown into the appropriate `docs/<module>` folder before editing, then update `docs/agents/AGENTS.md` and always update `docs/plans/AGENTS.md` when plans are added or their status changes. The canonical landing doc is now `docs/overview/README.md`, and the root `README.md` should only point people into `docs/`.
 
-**Codex-Ready Module Headers (Required):** Updating documentation now includes refreshing `AGENTS.md` and the hero portion of each touched skill (`*/SKILL.md`). Codex relies on the YAML `name`/`description` pair and the opening markdown (hero title, quick summary, when-to-use bullets) for each skill, so keep that block aligned with the module-header template in `references/module-header-template.md`. The template spells out the Codex-friendly structure with a checklist for ensuring the front-matter description triggers the right use cases and the leading sections stay concise yet informative.
+**Claude-Ready Module Headers (Required):** Updating documentation now includes refreshing `AGENTS.md` and the hero portion of each touched skill (`*/SKILL.md`). Claude relies on the YAML `name`/`description` pair and the opening markdown (hero title, quick summary, when-to-use bullets) for each skill, so keep that block aligned with the module-header template in `references/module-header-template.md`. The template spells out the Claude-friendly structure with a checklist for ensuring the front-matter description triggers the right use cases and the leading sections stay concise yet informative.
 
 ## When to Use
 
@@ -117,9 +117,9 @@ Update project documentation systematically after significant changes. Keep all 
 | docs/API.md                | API consumers           | API reference               | API changes           |
 | docs/DATABASE.md           | Backend devs, DBAs      | Schema docs                 | Schema changes        |
 | AGENTS.md                  | Codex             | Dev patterns                | Pattern changes       |
-| docs/plans/NEXT_FEATURES.md| Team, Codex       | **Priority roadmap**        | **Every session**     |
-| docs/plans/INDEX.md        | Team, Codex       | Plans index                 | Plan status changes   |
-| MEMORY.md                  | Codex             | Session memory, learnings   | End of each session   |
+| docs/plans/NEXT_FEATURES.md| Team, Claude       | **Priority roadmap**        | **Every session**     |
+| docs/plans/INDEX.md        | Team, Claude       | Plans index                 | Plan status changes   |
+| MEMORY.md                  | Claude            | Session memory, learnings   | End of each session   |
 
 ## Change → File Mapping
 
@@ -134,7 +134,7 @@ Update project documentation systematically after significant changes. Keep all 
 - **docs/plans/NEXT_FEATURES.md (MANDATORY - mark as completed, update priorities)**
 - docs/plans/INDEX.md (update status)
 - MEMORY.md (capture key learnings)
-- Each affected `*/SKILL.md` front-matter and hero section should follow the module-header template above so Codex sees the change immediately and can re-trigger the skill with the new context.
+- Each affected `*/SKILL.md` front-matter and hero section should follow the module-header template above so Claude sees the change immediately and can re-trigger the skill with the new context.
 
 **Tech Stack Change:**
 
@@ -185,7 +185,7 @@ Read all affected files in parallel.
 
 ### 3.a. Review Module Headers (1-2 min)
 
-Open every impacted `*/SKILL.md` and verify the hero `name`/`description` plus the opening sections line up with the Codex-friendly template. Capture the new feature/behavior in the quick summary and `## When to Use` bullets before editing the downstream docs.
+Open every impacted `*/SKILL.md` and verify the hero `name`/`description` plus the opening sections line up with the Claude-friendly template. Capture the new feature/behavior in the quick summary and `## When to Use` bullets before editing the downstream docs.
 
 ### 4. Update Systematically (10-20 min)
 
@@ -312,7 +312,7 @@ Check across all files:
 **Update Order:**
 
 ```
-API/DB Specs → Architecture → Codex → README → BRIEF
+API/DB Specs → Architecture → CLAUDE.md → README → BRIEF
 ```
 
 **Consistency Checks:**

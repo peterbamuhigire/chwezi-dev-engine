@@ -200,6 +200,11 @@ visual identity, web/desktop/mobile UI screens, or the visual formatting of a DO
 — routes to the **`design-system-skills`** engine, the single home for ALL design/UI/UX skills
 and the anti-AI-slop doctrine.
 
+Migration status: UI/UX design skills are migrating OUT of this repo's `skills/frontend-ux/`
+into `C:\wamp64\www\design-system-skills`. Migrated skills (`ux-principles-101`,
+`pos-sales-ui-design`, `pos-restaurant-ui-standard`) are inactive `ALIAS.md` stubs redirected
+via `docs/skill-aliases.yml`; check that registry before loading any `frontend-ux` design skill.
+
 **Resolve its location on THIS device from your global engine-routing table** (`~/.claude/CLAUDE.md`,
 or `AGENTS.md` for Codex) — never assume an absolute path; it varies per machine. Then read its
 `README.md` → `doctrine/design-doctrine.md` → glob `skills/**/SKILL.md` fresh and route by

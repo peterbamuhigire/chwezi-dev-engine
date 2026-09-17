@@ -35,7 +35,7 @@ When required telemetry, evidence, execution, network access, or write authority
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
-- Integrate LLMs into any application — OpenAI, Anthropic Codex, DeepSeek, and Gemini APIs directly (no framework required), streaming responses, function calling/tool use, embeddings and semantic search, multi-model routing, prompt caching, rate...
+- Integrate LLMs into any application — OpenAI, Anthropic Claude, DeepSeek, and Gemini APIs directly (no framework required), streaming responses, function calling/tool use, embeddings and semantic search, multi-model routing, prompt caching, rate...
 
 ## Evidence Produced
 
@@ -57,7 +57,7 @@ For framework patterns (Vercel AI SDK, agents), see `ai-web-apps` and `openai-ag
 | Provider | Best For | SDK | Base URL |
 |---|---|---|---|
 | OpenAI GPT-4o | General, function calling | `openai` | `api.openai.com/v1` |
-| Anthropic Codex | Long context, coding, analysis | `@anthropic-ai/sdk` | `api.anthropic.com` |
+| Anthropic Claude | Long context, coding, analysis | `@anthropic-ai/sdk` | `api.anthropic.com` |
 | DeepSeek V3 | Cost-effective general tasks | `openai` (compatible) | `api.deepseek.com/v1` |
 | DeepSeek R1 | Reasoning, math, science | `openai` (compatible) | `api.deepseek.com/v1` |
 | Google Gemini | Multimodal, large context | `@google/generative-ai` | via SDK |
@@ -182,7 +182,7 @@ embedding = result.data[0].embedding   # list of 1536 floats
 
 ---
 
-## 2. Anthropic Codex API — Python
+## 2. Anthropic Claude API — Python
 
 ```bash
 pip install anthropic
@@ -195,7 +195,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="Codex-sonnet-4-6",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     system="You are a legal document reviewer. Be precise and thorough.",
     messages=[
@@ -206,11 +206,11 @@ print(message.content[0].text)
 print(f"Input tokens: {message.usage.input_tokens}")
 ```
 
-### Codex Streaming
+### Claude Streaming
 
 ```python
 with client.messages.stream(
-    model="Codex-sonnet-4-6",
+    model="claude-sonnet-4-6",
     max_tokens=2048,
     messages=[{"role": "user", "content": "Write a detailed report on..."}],
 ) as stream:
@@ -218,7 +218,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 ```
 
-### Codex Tool Use
+### Claude Tool Use
 
 ```python
 tools = [
@@ -237,7 +237,7 @@ tools = [
 ]
 
 response = client.messages.create(
-    model="Codex-sonnet-4-6",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     tools=tools,
     messages=[{"role": "user", "content": "Find products matching 'solar panel 250W'"}],
@@ -255,7 +255,7 @@ for block in response.content:
 ```python
 # Cache large system context — reduces cost by ~90% on repeated calls
 response = client.messages.create(
-    model="Codex-sonnet-4-6",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     system=[
         {
@@ -313,7 +313,7 @@ export async function POST(req: Request) {
 
 ---
 
-## 4. Anthropic Codex — JavaScript/TypeScript
+## 4. Anthropic Claude — JavaScript/TypeScript
 
 ```bash
 npm install @anthropic-ai/sdk
@@ -325,7 +325,7 @@ import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const message = await client.messages.create({
-  model: "Codex-sonnet-4-6",
+  model: "claude-sonnet-4-6",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Analyse the sentiment of: 'Great service!'" }],
 });
@@ -398,7 +398,7 @@ def route_to_model(task_type: str, token_estimate: int) -> tuple[str, str]:
     if task_type == "reasoning" or "math" in task_type:
         return "deepseek", "deepseek-reasoner"       # R1 for reasoning
     if token_estimate > 50000:
-        return "anthropic", "Codex-sonnet-4-6"       # Codex for long context
+        return "anthropic", "claude-sonnet-4-6"       # Claude for long context
     if task_type in ("quick", "simple", "classify"):
         return "deepseek", "deepseek-chat"            # cheap for simple tasks
     return "openai", "gpt-4o"                         # GPT-4o as default
@@ -439,7 +439,7 @@ def log_usage(model: str, usage, tenant_id: int):
         "gpt-4o":            (2.50, 10.00),    # (input per M, output per M)
         "deepseek-chat":     (0.27,  1.10),
         "deepseek-reasoner": (0.55,  2.19),
-        "Codex-sonnet-4-6": (3.00, 15.00),
+        "claude-sonnet-4-6": (3.00, 15.00),
     }
     if model in costs:
         in_rate, out_rate = costs[model]

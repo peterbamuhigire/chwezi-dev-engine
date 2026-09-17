@@ -37,7 +37,7 @@ context, hard constraints, staged execution, acceptance evidence, recovery, and
 currentness requirements. The standalone [domain prompt contract](docs/ai-prompting/domain-prompt-compilation-contract.md)
 travels with every fork.
 
-Last verified: 2026-09-11.
+Last verified: 2026-09-17.
 
 | Measure | Result |
 |---|---:|
@@ -231,7 +231,7 @@ Expected counts and routing results must be taken from the current validator out
 ## Honest limitations
 
 - Routing precision@1 is 91%; precision@3 is 100%. The engine still requires human review for close domain collisions.
-- The 170 active skills meet the soft target ceiling and remain below the hard cap of 200, but catalogue size alone is not proof of quality or production readiness.
+- The 171 active skills meet the soft target ceiling and remain below the hard cap of 200, but catalogue size alone is not proof of quality or production readiness.
 - Some book inputs are historical, partial early releases, or have unusable extraction. They inform patterns only where the available text supports them; current claims require independent verification.
 - `AI for Game Developers` contains durable algorithmic foundations but dated APIs and production assumptions. Treat it as conceptual input, not current platform documentation.
 - Game and design guidance does not replace hands-on playtesting, visual review, accessibility testing, security testing, or production telemetry.
