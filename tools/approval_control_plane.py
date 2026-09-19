@@ -118,6 +118,23 @@ class ApprovalRecord:
     second_approver_id: str | None = None
 
 
+@dataclass(frozen=True)
+class ExecutionBudget:
+    """Hard limits checked immediately before a side effect."""
+
+    max_steps: int | None = None
+    max_cost: float | None = None
+    max_seconds: float | None = None
+
+    def __post_init__(self) -> None:
+        if self.max_steps is not None and (not isinstance(self.max_steps, int) or self.max_steps < 0):
+            raise ApprovalError("max_steps must be a non-negative integer or None")
+        if self.max_cost is not None and (not isinstance(self.max_cost, (int, float)) or self.max_cost < 0):
+            raise ApprovalError("max_cost must be non-negative or None")
+        if self.max_seconds is not None and (not isinstance(self.max_seconds, (int, float)) or self.max_seconds < 0):
+            raise ApprovalError("max_seconds must be non-negative or None")
+
+
 class AuditSink:
     """In-memory tamper-evident sink used by tests and host adapters."""
 
@@ -140,15 +157,46 @@ class ApprovalGate:
 
     def __init__(self, definitions: Mapping[str, ActionDefinition], policy_version: str,
                  allowlist: Mapping[str, Mapping[str, set[str]]], audit: AuditSink | None = None,
-                 now: Callable[[], datetime] | None = None) -> None:
+                 now: Callable[[], datetime] | None = None,
+                 budget: ExecutionBudget | None = None) -> None:
         self.definitions = dict(definitions)
         self.policy_version = policy_version
         self.allowlist = allowlist
         self.audit = audit or AuditSink()
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.kill_switch = False
+        self.paused = False
+        self.pause_reason: str | None = None
+        self.budget = budget
+        self._started_at: datetime | None = None
+        self._steps_used = 0
+        self._cost_used = 0.0
         self._used_nonces: set[str] = set()
         self._results: dict[str, Any] = {}
+        self._result_previews: dict[str, str] = {}
+
+    def pause(self, reason: str) -> None:
+        """Stop future actions while retaining the in-memory execution state."""
+        if not isinstance(reason, str) or not reason.strip():
+            raise ApprovalError("pause reason is required")
+        self.paused = True
+        self.pause_reason = reason.strip()
+        self.audit.append("action_paused", {"reason": self.pause_reason})
+
+    def resume(self) -> None:
+        if self.kill_switch:
+            raise ApprovalError("kill switch active; execution cannot resume")
+        self.paused = False
+        self.pause_reason = None
+        self.audit.append("action_resumed", {})
+
+    def trip_circuit_breaker(self, reason: str) -> None:
+        """Trip the kill path and record why subsequent execution is denied."""
+        if not isinstance(reason, str) or not reason.strip():
+            raise ApprovalError("circuit-breaker reason is required")
+        self.kill_switch = True
+        self.pause_reason = reason.strip()
+        self.audit.append("circuit_breaker_tripped", {"reason": self.pause_reason})
 
     @classmethod
     def from_adapter(cls, path: str | Path, allowlist: Mapping[str, Mapping[str, set[str]]],
@@ -205,8 +253,12 @@ class ApprovalGate:
             raise ApprovalError("approver role is outside the action policy")
         if approver_id not in self.allowlist.get(approver_role, {}).get(preview.action_type, set()) and approver_id not in self.allowlist.get(approver_role, {}).get("*", set()):
             raise ApprovalError("approver is not authorised for this action")
-        if definition.requires_dual_approval and (not second_approver_id or second_approver_id in {approver_id, preview.requester_id}):
-            raise ApprovalError("distinct second approver is required")
+        if definition.requires_dual_approval:
+            if not second_approver_id or second_approver_id in {approver_id, preview.requester_id}:
+                raise ApprovalError("distinct second approver is required")
+            allowed = self.allowlist.get(approver_role, {})
+            if second_approver_id not in allowed.get(preview.action_type, set()) and second_approver_id not in allowed.get("*", set()):
+                raise ApprovalError("second approver is not authorised for this action")
         current = _utc(approved_at or self.now())
         if preview.expires_at is None or current >= preview.expires_at:
             raise ApprovalError("preview approval window has expired")
@@ -225,17 +277,22 @@ class ApprovalGate:
 
     def execute(self, preview: ActionPreview, approval: ApprovalRecord | None,
                 operation: Callable[[], Any], verifier: Callable[[Any], bool] | None = None,
-                executed_at: datetime | None = None) -> Any:
+                executed_at: datetime | None = None, estimated_cost: float = 0.0) -> Any:
         definition = self._definition(preview)
         current = _utc(executed_at or self.now())
         if self.kill_switch:
             raise ApprovalError("kill switch active; execution denied")
+        if self.paused:
+            raise ApprovalError(f"execution paused: {self.pause_reason or 'operator pause'}")
         if definition.idempotency_required and preview.action_id in self._results:
+            if self._result_previews.get(preview.action_id) != preview.preview_hash:
+                raise ApprovalError("action payload changed; idempotency key cannot be reused")
             return self._results[preview.action_id]
         if definition.action_class in {"L2", "L3"}:
             self._check_approval(preview, approval, current)
             if verifier is None:
                 raise ApprovalError("post-action verification callback is required")
+        self._check_budget(current, estimated_cost)
         self.audit.append("action_executing", {"action_id": preview.action_id, "action_type": preview.action_type,
                                                 "class": preview.action_class, "scope_hash": preview.scope_hash,
                                                 "approval_id": approval.approval_id if approval else None,
@@ -250,12 +307,30 @@ class ApprovalGate:
                 self.audit.append("action_verified", {"action_id": preview.action_id,
                                                        "verification_ref": preview.verification_ref})
             self._results[preview.action_id] = result
+            self._result_previews[preview.action_id] = preview.preview_hash
             return result
         except ApprovalError:
             raise
         except Exception as exc:
             self.audit.append("action_failed", {"action_id": preview.action_id, "error_type": type(exc).__name__})
             raise
+
+    def _check_budget(self, current: datetime, estimated_cost: float) -> None:
+        if not isinstance(estimated_cost, (int, float)) or estimated_cost < 0:
+            raise ApprovalError("estimated cost must be non-negative")
+        if self.budget is None:
+            return
+        if self._started_at is None:
+            self._started_at = current
+        elapsed = (current - self._started_at).total_seconds()
+        if self.budget.max_steps is not None and self._steps_used >= self.budget.max_steps:
+            raise ApprovalError("step budget exhausted; execution denied")
+        if self.budget.max_cost is not None and self._cost_used + estimated_cost > self.budget.max_cost:
+            raise ApprovalError("cost budget exhausted; execution denied")
+        if self.budget.max_seconds is not None and elapsed >= self.budget.max_seconds:
+            raise ApprovalError("time budget exhausted; execution denied")
+        self._steps_used += 1
+        self._cost_used += float(estimated_cost)
 
     def _definition(self, preview: ActionPreview) -> ActionDefinition:
         definition = self.definitions.get(preview.action_type)

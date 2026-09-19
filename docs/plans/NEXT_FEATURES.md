@@ -4,6 +4,11 @@ This file tracks the next practical work for the skills repository.
 
 ## Critical Priority
 
+The [bounded agent-contract wave](../updates/2026-09-19-engineering-kaizen-wave.md)
+is implemented in fixture mode. The next decision is whether a named host
+adapter and durable replay store are warranted; live execution evidence is
+`NOT_ASSESSED`.
+
 | Work | Why | Start Point |
 | --- | --- | --- |
 | Hold the active catalogue within its soft target | The current count is 170 after the Pocock Kaizen consolidation. CI enforces the 200 hard cap, while new routes require an equal-value consolidation and routing evidence. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |

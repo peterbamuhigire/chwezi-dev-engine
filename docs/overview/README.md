@@ -7,6 +7,11 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [2026-09-19 bounded agent-contract wave](../updates/2026-09-19-engineering-kaizen-wave.md)
+adds versioned context, prompt, tool-approval, action-budget and deterministic
+planning utilities under `tools/ai/`; live host integration remains
+`NOT_ASSESSED`.
+
 The [2026-09-14 book-informed portfolio Kaizen](../updates/2026-09-14-book-informed-kaizen.md)
 added scenario-led engineering, measurable NFR, human-owned AI, review/recovery,
 design-system, website, SRS, and technical-proposal guidance without importing

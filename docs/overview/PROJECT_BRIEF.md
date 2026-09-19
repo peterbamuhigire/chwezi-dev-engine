@@ -2,6 +2,11 @@
 
 ## Summary
 
+The engineering runtime contract now has fixture-tested local utilities for
+versioned context, prompt/data boundaries, provenance-bound tool approval,
+bounded action budgets and pure deterministic planning. These are host-facing
+helpers, not a production agent runtime.
+
 This repository is a curated AI skills and documentation engine. It helps
 coding agents and human operators select reusable workflows for software
 engineering, AI systems, SaaS operations, finance-doctrine orchestration, mobile development,

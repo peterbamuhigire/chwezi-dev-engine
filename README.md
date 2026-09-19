@@ -104,6 +104,19 @@ a running database, tenant isolation, production SLOs, or security posture.
 The next planned experiment is the isolated FieldOps slice, subject to the
 buyer, environment, finance and operations dependencies in the portfolio plan.
 
+### September 2026 bounded agent-contract wave
+
+The engineering-owned wave now includes small provider-neutral helpers for
+versioned shared context, deterministic prompt assembly, provenance-bound tool
+approval, bounded action budgets/circuit breaking, and pure deterministic
+planning. Contracts and limitations are documented in
+[`references/ai/`](references/ai/) and the implementation record is
+[`docs/updates/2026-09-19-engineering-kaizen-wave.md`](docs/updates/2026-09-19-engineering-kaizen-wave.md).
+Fixture evidence covers valid packets and plans plus stale, missing,
+mismatched-objective, revoked-access, changed-payload, unauthorised-call,
+budget and replay failures. Host authentication, live execution and production
+outcomes remain `NOT_ASSESSED`.
+
 ## Start here
 
 1. Read [`SKILL.md`](SKILL.md) for routing, cross-engine ownership, release workflow, and stop conditions.

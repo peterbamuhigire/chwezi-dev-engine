@@ -8,6 +8,11 @@ docs describe routing, consolidation, planning, and maintenance policy.
 
 ## Main Components
 
+The provider-neutral AI contract layer lives under `tools/ai/`: shared context
+packets and prompt cards are pure data assembly, tool provenance delegates
+consequential approval to the existing gate, and deterministic planning stops
+at a plan result. None of these helpers executes external side effects.
+
 | Component | Responsibility |
 | --- | --- |
 | `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, game development, security, UX, product, and operations, including C#/.NET and consolidated enterprise Java/JVM entrypoints. |

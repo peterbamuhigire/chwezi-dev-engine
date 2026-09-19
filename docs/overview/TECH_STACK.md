@@ -15,6 +15,9 @@ of this repository.
 
 ## Tooling
 
+The local AI contract utilities use Python standard-library dataclasses,
+canonical JSON and SHA-256 hashes; no provider SDK or package was added.
+
 | Tool | Use |
 | --- | --- |
 | Git | Version control. |
