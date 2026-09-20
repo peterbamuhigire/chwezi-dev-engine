@@ -5,10 +5,10 @@ context" behavior on any machine where these repos exist — **even at different
 Works on Windows, macOS, and Linux. Last updated: 2026-06-15.
 
 > **SUPERSEDED (2026-06-21):** The "native engine" model below no longer applies. The
-> engineering catalog was relocated OUT of `~/.claude/skills` to `C:\wamp64\www\skills-web-dev`
+> engineering catalog was relocated OUT of `~/.claude/skills` to `C:\wamp64\www\chwezi-dev-engine`
 > and is now a router-based engine like all the others — no engine uses native discovery.
 > Clone every engine to any path and register it in the global `CLAUDE.md` routing table.
-> Ignore any instruction below that says skills-web-dev "must" live at `~/.claude/skills`.
+> Ignore any instruction below that says chwezi-dev-engine "must" live at `~/.claude/skills`.
 
 ---
 
@@ -18,7 +18,7 @@ Works on Windows, macOS, and Linux. Last updated: 2026-06-15.
    `SKILL.md` files *on demand* by context. These can live at ANY path; you just record the
    real path in the routing table. Seven of the eight engines work this way.
 2. **One native engine** — Claude Code auto-discovers skills ONLY from `~/.claude/skills`.
-   The **engineering catalog (skills-web-dev)** must be cloned to `~/.claude/skills` to stay
+   The **engineering catalog (chwezi-dev-engine)** must be cloned to `~/.claude/skills` to stay
    natively discovered. If you clone it elsewhere, it simply becomes another router engine
    (add it to the table like the rest).
 3. **Finance is cross-cutting** — it activates *in addition to* whatever domain engine is
@@ -40,7 +40,7 @@ one exception — it goes to `~/.claude/skills`.
 
 ```bash
 # Engineering catalog -> MUST be ~/.claude/skills for native discovery
-git clone https://github.com/peterbamuhigire/skills-web-dev.git ~/.claude/skills
+git clone https://github.com/peterbamuhigire/chwezi-dev-engine.git ~/.claude/skills
 
 # The other engines -> any folder (set BASE to wherever you keep repos)
 BASE=~/repos          # <- change to your location
@@ -113,7 +113,7 @@ table), treat that engine as the **default source of skills** for the work:
 | `<PATH:linux-skills>` | Linux sysadmin: provisioning, hardening, networking, DNS/mail, firewall/SSL, storage, security analysis, observability, DR. Hub skill: `linux-sysadmin` (start there) |
 | `<PATH:proposal-skills>` | Consulting proposals, Expressions of Interest, procurement/tender responses (East & Central African market) |
 | `<PATH:chwezi-accounting-doctrine>` | **Cross-cutting finance/accounting engine** (Chwezi Doctrine). ANY finance/accounting work: bookkeeping, IFRS/IAS standards, financial statements, tax/statutory, close/consolidation, controls, sector accounting. Consult IN ADDITION to whatever domain engine is active. Router doc is `README.md`; skills under `skills/<group>/<skill-name>/SKILL.md`. |
-| `~/.claude/skills` | **Engineering-catalog engine** (= skills-web-dev): general engineering / AI-systems / SaaS / security / product / UX / docs skills. This one IS natively discovered; routed by name. |
+| `~/.claude/skills` | **Engineering-catalog engine** (= chwezi-dev-engine): general engineering / AI-systems / SaaS / security / product / UX / docs skills. This one IS natively discovered; routed by name. |
 
 ### Notes
 - Engine structures vary: `srs-skills` uses `NN-category/NN-skill/SKILL.md`;
@@ -166,7 +166,7 @@ social-media-skills         https://github.com/peterbamuhigire/social-media-skil
 linux-skills                https://github.com/peterbamuhigire/linux-skills.git
 proposal-skills             https://github.com/peterbamuhigire/proposal-skills.git
 chwezi-accounting-doctrine  https://github.com/peterbamuhigire/chwezi-accounting-doctrine.git   (finance, cross-cutting)
-skills-web-dev              https://github.com/peterbamuhigire/skills-web-dev.git   (engineering catalog -> clone to ~/.claude/skills)
+chwezi-dev-engine              https://github.com/peterbamuhigire/chwezi-dev-engine.git   (engineering catalog -> clone to ~/.claude/skills)
 ```
 
 ## Troubleshooting

@@ -10,7 +10,7 @@
  *
  * Handles the three skill-root shapes found across the Chwezi engines:
  *   - skills/<skill>/SKILL.md                      (flat)          e.g. digital-research-engine
- *   - skills/<category>/<skill>/SKILL.md            (one level)     e.g. business-plan, proposal, website, social-media, skills-web-dev
+ *   - skills/<category>/<skill>/SKILL.md            (one level)     e.g. business-plan, proposal, website, social-media, chwezi-dev-engine
  *   - skills/<NN-category>/<NN-skill>/SKILL.md      (one level)     e.g. design-system, srs (roots differ — see --root)
  *   - <NN-area>/SKILL.md at the repo root, no skills/ dir           e.g. linux-skills (use --root .)
  *

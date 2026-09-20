@@ -140,7 +140,7 @@ NOT:
 
 > Read `/Users/alice/skills/mysql-best-practices/SKILL.md` …
 
-The executor finds the file by following the path rule its own environment defines (e.g. macOS: `~/Sites/skills-web-dev/skills/<name>/SKILL.md`; Linux dev box: `~/skills-lib/<name>/SKILL.md`; CI: `$SKILLS_HOME/<name>/SKILL.md`). Skill names are stable; paths are not.
+The executor finds the file by following the path rule its own environment defines (e.g. macOS: `~/Sites/chwezi-dev-engine/skills/<name>/SKILL.md`; Linux dev box: `~/skills-lib/<name>/SKILL.md`; CI: `$SKILLS_HOME/<name>/SKILL.md`). Skill names are stable; paths are not.
 
 ## Prompt Anatomy
 

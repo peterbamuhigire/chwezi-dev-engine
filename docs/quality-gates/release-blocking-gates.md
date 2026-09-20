@@ -4,7 +4,7 @@ Last verified: 2026-07-08
 Standard/version: Skills Web Dev July 2026 release gate
 Benchmark: Google SRE launch discipline, OWASP security review, Stripe API compatibility practice, Thoughtworks architecture fitness functions.
 
-This gate applies to every deliverable produced by `skills-web-dev`. It is stricter than a checklist: any blocker below holds release until evidence is added or the scope is explicitly reduced.
+This gate applies to every deliverable produced by `chwezi-dev-engine`. It is stricter than a checklist: any blocker below holds release until evidence is added or the scope is explicitly reduced.
 
 ## Gate Matrix
 

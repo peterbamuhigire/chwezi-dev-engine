@@ -1,11 +1,11 @@
 ---
-name: skills-web-dev
+name: chwezi-dev-engine
 description: Top-level router for the Chwezi Core Systems web-development and software-engineering skills engine. Use for AI systems, SaaS, architecture, APIs, databases, security, frontend engineering, mobile, DevOps, reliability, product engineering, SDLC documentation, catalog maintenance, delivery evidence packs, routing fixtures, and world-class engineering quality gates.
 ---
 
 # Skills Web Dev Router
 
-This is the entrypoint for the `skills-web-dev` engine. It routes engineering work to the smallest accurate active skill, applies quality gates, and records evidence so outputs can be reviewed by a team that did not write them.
+This is the entrypoint for the `chwezi-dev-engine` engine. It routes engineering work to the smallest accurate active skill, applies quality gates, and records evidence so outputs can be reviewed by a team that did not write them.
 
 Standard implemented: Skills Web Dev July 2026 upgrade baseline. Last verified: 2026-09-17.
 

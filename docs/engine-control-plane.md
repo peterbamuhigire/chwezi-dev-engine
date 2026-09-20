@@ -10,7 +10,7 @@ handoffs, and bounded recovery. Its registry is
 | Concern | Owner |
 |---|---|
 | Domain doctrine and specialist output | The routed domain engine |
-| Agent topology and handoff protocol | `skills-web-dev` control plane |
+| Agent topology and handoff protocol | `chwezi-dev-engine` control plane |
 | Source/currentness verification | `digital-research-engine` |
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
 | Visual/presentation controls | `design-system-skills` |

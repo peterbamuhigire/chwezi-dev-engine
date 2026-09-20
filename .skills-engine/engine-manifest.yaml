@@ -1,5 +1,5 @@
 schema_version: "1.0"
-engine_id: skills-web-dev
+engine_id: chwezi-dev-engine
 display_name: Skills Web Dev
 contract_version: "1.0"
 router:

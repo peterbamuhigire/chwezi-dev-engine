@@ -14,7 +14,7 @@ description: "Audit finance/accounting software or plans when money, billing, ta
 When the auto-run fires, the agent:
 
 1. Loads this `SKILL.md` and the four reference files in this folder.
-2. Loads the canonical doctrine at `<engine-root>/skills/_doctrine/accounting-finance-doctrine.md` (skills-web-dev path) **or** `<engine-root>/doctrine/accounting-finance-doctrine.md` (other engines).
+2. Loads the canonical doctrine at `<engine-root>/skills/_doctrine/accounting-finance-doctrine.md` (chwezi-dev-engine path) **or** `<engine-root>/doctrine/accounting-finance-doctrine.md` (other engines).
 3. Loads the relevant doctrine reference files under `doctrine/references/`.
 4. Loads any specialist finance skill from the new skill suite that matches the target (e.g. `bank-and-mobile-money-reconciliation` if mobile money is in scope; `finance-ui-pattern-library` if UI work is involved).
 5. Runs the audit workflow below.

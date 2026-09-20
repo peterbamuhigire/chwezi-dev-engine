@@ -1,6 +1,6 @@
-# Skills Web Dev (Chwezi Engineering Engine)
+# Chwezi Dev Engine (Chwezi Engineering Engine)
 
-`skills-web-dev` is the Chwezi Core Systems software-engineering engine: 183 routed skills
+`chwezi-dev-engine` is the Chwezi Core Systems software-engineering engine: 183 routed skills
 (`SKILL.md` files) for turning a product decision into well-understood, maintainable software
 and an operable release. It spans AI/agent systems, architecture and APIs, backend databases,
 DevOps and cloud, frontend/UX, game development, GIS, Android/iOS/cross-platform mobile,
@@ -32,7 +32,7 @@ engine routes to deliberately rather than duplicating.
 
 # npm-free, from a clone
 git clone https://github.com/peterbamuhigire/chwezi-dev-engine
-cd skills-web-dev
+cd chwezi-dev-engine
 ./install.sh --scope project      # macOS/Linux/Git Bash
 .\install.ps1 --scope project     # Windows PowerShell
 ```
@@ -42,8 +42,9 @@ engine's own `.claude-plugin/marketplace.json`. Both installers are thin, Window
 wrappers (their own headers say so, following the same resolution pattern documented in ECC's
 installers) around `scripts/install-engine.js`, which supports `--scope user` (default,
 `~/.claude`) or `--scope project` (`.claude/` in the current repo) — confirmed from the script's
-own `--help` usage string. Note: the GitHub repository is named `chwezi-dev-engine`; the local
-folder on this machine is `skills-web-dev`.
+own `--help` usage string. The GitHub repository and the local folder on this machine are both
+named `chwezi-dev-engine` (renamed 2026-09-20 from `skills-web-dev` to match the repo; the folder
+had drifted from the repo name since the repo's creation).
 
 This engine's own `rules/README.md` cross-engine table and its "Cross-engine routing" section
 name the sister engines it works alongside most, none of them a hard dependency:
@@ -61,6 +62,16 @@ name the sister engines it works alongside most, none of them a hard dependency:
 
 Each is an independent, optional install — this engine functions standalone and only points to
 them for specialist ownership it deliberately does not replicate.
+
+## Content integrity
+
+This repository contains no client names, client data, or project-specific work product — it
+has no `projects/` or `clients/` directory at all; everything under `skills/`, `rules/`, and
+`agents/` is reusable methodology, not engagement-specific content. Users installing this
+engine should still exercise their own due diligence — you can ask Claude Code or Codex to run
+a security scan of this engine, its skills, and its reference files before relying on it in a
+sensitive environment (for example: "scan this repository for hardcoded secrets, personal
+paths, or unexpected network calls").
 
 ## Capabilities
 
