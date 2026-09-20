@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "status": "SPECIFIED_NOT_EXECUTED",
+  "origin": "Original synthetic specifications; no Ponytail examples or datasets copied",
+  "fixtures": [
+    {
+      "id": "F01",
+      "title": "Existing-code reuse",
+      "stack": "Python 3.11+; unittest; no added dependency",
+      "initial_state": "A report endpoint formats customer identifiers inline; core/identifiers.py already exposes canonical_id with whitespace and Unicode handling and two existing callers.",
+      "public_task": "Add canonical customer IDs to the report by following the shared contract; preserve existing callers.",
+      "positive_oracles": [
+        "report output equals canonical_id for all public vectors",
+        "existing callers unchanged",
+        "no parallel normaliser introduced"
+      ],
+      "negative_oracles": [
+        "empty identifier follows existing error contract",
+        "do not silently collapse distinct Unicode IDs"
+      ],
+      "withheld_family": "Additional caller and mixed normalisation inputs; review searches and chosen reuse owner.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F02",
+      "title": "Native form control",
+      "stack": "HTML/CSS/JS; pinned browser and AT matrix",
+      "initial_state": "A settings form uses a text field for a civil date; no time zone conversion is required; server accepts ISO date or explicit absence.",
+      "public_task": "Offer date selection, preserve keyboard entry and validate at server boundary.",
+      "positive_oracles": [
+        "valid date round trips unchanged",
+        "label/help/error association and keyboard completion",
+        "empty optional value retained"
+      ],
+      "negative_oracles": [
+        "invalid dates rejected server-side even if client bypassed",
+        "date not converted through UTC midnight"
+      ],
+      "withheld_family": "Leap days, locale display vs submitted value and supported-browser keyboard/AT paths.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F03",
+      "title": "Mature installed dependency",
+      "stack": "JavaScript; preinstalled locked CSV parser; no network",
+      "initial_state": "An import service has a mature CSV parser already used in another route; new import includes quoted separators and embedded newlines.",
+      "public_task": "Add a second import format with schema validation and bounded input size.",
+      "positive_oracles": [
+        "quoted/newline fields parsed correctly",
+        "installed parser reused or documented better alternative",
+        "row errors retain source location"
+      ],
+      "negative_oracles": [
+        "oversized rows and wrong column counts rejected",
+        "spreadsheet export injection addressed where output is spreadsheet-targeted"
+      ],
+      "withheld_family": "BOM, escaped quotes, malformed trailing record and adversarial size.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F04",
+      "title": "New feature",
+      "stack": "Python service; repository query layer and SQLite fixture",
+      "initial_state": "A catalogue has list/read operations and an established query layer; no saved-view module exists.",
+      "public_task": "Add persistent per-user saved filters with create/list/delete; explicit product need rules out omitting feature.",
+      "positive_oracles": [
+        "saved filters survive restart",
+        "users cannot read/delete another user filter",
+        "transaction rollback leaves no partial filter"
+      ],
+      "negative_oracles": [
+        "invalid filter schema rejected",
+        "duplicate create key is deterministic"
+      ],
+      "withheld_family": "Concurrent duplicate requests and deleted-user boundary.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F05",
+      "title": "Bug across components",
+      "stack": "Python; api/, workers/, exports/ share core/time_windows.py",
+      "initial_state": "A half-open time-window helper incorrectly includes the upper boundary; API and worker callers both depend on it, while export expects documented half-open semantics.",
+      "public_task": "Fix duplicate inclusion across all callers without changing valid lower-bound behaviour.",
+      "positive_oracles": [
+        "upper endpoint excluded",
+        "lower endpoint included",
+        "API, worker and export tests pass"
+      ],
+      "negative_oracles": [
+        "empty/reversed ranges follow existing contract",
+        "time-zone aware values not compared to naive ones silently"
+      ],
+      "withheld_family": "Unadvertised fourth caller and adjacent partition joins.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F06",
+      "title": "Behaviour-preserving refactor",
+      "stack": "Python; public pricing-free eligibility API",
+      "initial_state": "A rule evaluator repeats policy checks in three functions; fixtures pin exception types and order of observable audit events.",
+      "public_task": "Reduce duplication without changing public behaviour, errors, order or observability.",
+      "positive_oracles": [
+        "golden outputs and error types preserved",
+        "audit event sequence identical",
+        "reviewer can explain new control flow"
+      ],
+      "negative_oracles": [
+        "do not remove apparently redundant permission check with distinct trust boundary",
+        "no speculative plugin framework"
+      ],
+      "withheld_family": "Unusual branch combinations and side-effect ordering.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F07",
+      "title": "API boundary validation",
+      "stack": "HTTP JSON service; pinned validation package already installed",
+      "initial_state": "The service accepts create requests through an authenticated endpoint and an internal queue; only queue input is validated.",
+      "public_task": "Apply one explicit boundary contract to each untrusted entry point.",
+      "positive_oracles": [
+        "type/range/unknown-field policy enforced",
+        "consistent documented status and machine error code",
+        "no partial write on validation error"
+      ],
+      "negative_oracles": [
+        "null, boolean-as-integer and oversize body rejected as contract requires",
+        "malformed nested data cannot bypass validation"
+      ],
+      "withheld_family": "Duplicate JSON keys policy, nested malicious values and direct queue invocation.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F08",
+      "title": "Authentication and authorisation",
+      "stack": "Multi-tenant service; installed auth library; local fake identity provider",
+      "initial_state": "Read API is tenant-scoped; new export job retrieves an object by global ID and forgets tenant/role scope.",
+      "public_task": "Make export authorisation consistent at enqueue and execution time.",
+      "positive_oracles": [
+        "cross-tenant and insufficient-role requests denied",
+        "revoked permission prevents later job execution",
+        "audited denial contains no secret"
+      ],
+      "negative_oracles": [
+        "object-ID guessing fails",
+        "missing/expired credentials fail closed"
+      ],
+      "withheld_family": "Role change between enqueue and run, confused-deputy path and forged tenant claim.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F09",
+      "title": "Accessible interaction",
+      "stack": "Existing HTML dialog component; pinned Chromium/Firefox/WebKit where available",
+      "initial_state": "An existing confirmation dialog restores focus incorrectly after failure; destructive operation has loading, error and retry states.",
+      "public_task": "Repair keyboard and assistive-technology flow while preserving operation state.",
+      "positive_oracles": [
+        "focus enters and returns logically",
+        "name/role/error announcements verified manually",
+        "retry does not create duplicate operation"
+      ],
+      "negative_oracles": [
+        "Escape and disabled/loading state follow product contract",
+        "no invisible focus or trap on failure"
+      ],
+      "withheld_family": "Trigger removed while dialog open, narrow viewport, zoom and AT combinations.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F10",
+      "title": "Database migration",
+      "stack": "SQLite portable fixture plus separately pinned PostgreSQL integration image",
+      "initial_state": "Orders reference nullable legacy customer codes; data contains duplicates and unmapped values; reads must remain available during staged change.",
+      "public_task": "Add validated customer foreign keys through expand/backfill/verify/contract stages with reversible rollout.",
+      "positive_oracles": [
+        "all mapped records preserve lineage",
+        "unmapped/duplicate cases stop or enter approved exception path",
+        "old and new application versions coexist during expand"
+      ],
+      "negative_oracles": [
+        "interrupted backfill resumes idempotently",
+        "rollback never deletes source data"
+      ],
+      "withheld_family": "Concurrent writes during backfill, injected lock/timeouts and count/checksum reconciliation.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F11",
+      "title": "Asynchronous failure and retries",
+      "stack": "Python queue service; fake clock and injected transport; no real service",
+      "initial_state": "Notification job retries any exception immediately; transient timeout may occur after provider acceptance.",
+      "public_task": "Bound retries, classify failures, preserve idempotency and expose terminal failure.",
+      "positive_oracles": [
+        "transient failure uses bounded delay policy",
+        "permanent error not retried indefinitely",
+        "terminal failure is observable and recoverable"
+      ],
+      "negative_oracles": [
+        "timeout after acceptance does not duplicate externally accepted operation",
+        "cancellation/shutdown preserves pending state"
+      ],
+      "withheld_family": "Concurrent retries, jitter boundaries, retry-after hints and crash between send and acknowledgement.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F12",
+      "title": "Money workflow: synthetic receipt",
+      "stack": "Python decimal/integer minor units; SQLite transaction; fake payment callback",
+      "initial_state": "Synthetic entity K has one book and a declared two-decimal test currency; a receipt clears an existing receivable through posting_service. No tax, FX or statutory rates. Amounts and accounts are synthetic fixture data.",
+      "public_task": "Process signed simulated receipt callbacks idempotently, atomically and with source evidence; correction uses linked reversal.",
+      "positive_oracles": [
+        "debits equal credits per currency/book",
+        "same key/same payload returns original journal",
+        "receipt clears AR without recognising revenue again",
+        "actor/source/request/version and evidence lineage retained"
+      ],
+      "negative_oracles": [
+        "same key/different payload rejected and audited",
+        "closed period, unauthorised actor, unbalanced journal or absent evidence rejected",
+        "failure between header/lines/audit rolls back all writes",
+        "posted journal cannot be edited/deleted"
+      ],
+      "withheld_family": "Parallel duplicate callbacks, crash/replay, precision boundary, period transition and reversal tie-out; controller re-performance required.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F13",
+      "title": "Counterexample: native date input insufficient",
+      "stack": "Browser UI; existing accessible calendar component",
+      "initial_state": "Scheduling requires a date range, blackout explanations and keyboard range exploration. A product-tested accessible component already supports these requirements.",
+      "public_task": "Add scheduling without losing range semantics or explanatory feedback; evaluate native input instead of assuming it wins.",
+      "positive_oracles": [
+        "range and unavailable-date reasons usable by keyboard and AT",
+        "server validates range",
+        "component reuse justified by evidence"
+      ],
+      "negative_oracles": [
+        "two native date fields alone do not pass if required exploration is absent",
+        "custom UI must still meet full accessibility contract"
+      ],
+      "withheld_family": "Ranges spanning blackout periods, locale changes and focus recovery.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F14",
+      "title": "Counterexample: fewer dependencies unsafe",
+      "stack": "Service with locked mature authentication/cryptography dependency",
+      "initial_state": "A proposed cleanup can remove a package only by implementing password hashing, token signature or validation logic manually.",
+      "public_task": "Reduce incidental complexity while retaining vetted security primitive and correct policy checks.",
+      "positive_oracles": [
+        "no home-grown crypto",
+        "algorithm/key/issuer/audience checks preserved",
+        "dependency removal rejected with a concrete reason when unsafe"
+      ],
+      "negative_oracles": [
+        "unsigned or wrong-audience token denied",
+        "password representation never logged"
+      ],
+      "withheld_family": "Algorithm confusion and key rotation failure handling; security reviewer required.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F15",
+      "title": "Counterexample: compact code hides complexity",
+      "stack": "Python worker with explicit retry state machine",
+      "initial_state": "A cleanup request offers a dense comprehension/lambda/regex replacement for a readable parser and retry state machine.",
+      "public_task": "Improve readability and change safety without removing error classification or trace points.",
+      "positive_oracles": [
+        "all failure-state transitions remain explainable",
+        "reviewer edit task completed without regression",
+        "observability spans retained"
+      ],
+      "negative_oracles": [
+        "fewer lines cannot override worse reviewer understanding",
+        "catastrophic-regex or unbounded retry rejected"
+      ],
+      "withheld_family": "Mutation task requiring a new terminal state and adversarial parsing input.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    },
+    {
+      "id": "F16",
+      "title": "Counterexample: new dependency justified",
+      "stack": "Unicode-rich text processing service; no suitable installed segmentation library",
+      "initial_state": "Product requires grapheme-aware cursor/selection behaviour across emoji sequences and combining marks; naive codepoint slicing is incorrect.",
+      "public_task": "Compare standard/native facilities in supported runtimes and add a mature dependency only when the documented contract requires it.",
+      "positive_oracles": [
+        "grapheme boundaries meet frozen test corpus contract",
+        "licence/version/support evidence captured",
+        "dependency justification includes alternatives and removal trigger"
+      ],
+      "negative_oracles": [
+        "few lines of ad hoc Unicode logic cannot replace missing capability",
+        "unsupported native runtime path has tested fallback or explicit support boundary"
+      ],
+      "withheld_family": "Unseen combining sequences and supported-runtime compatibility cases.",
+      "materialisation_status": "NOT_ASSESSED",
+      "initial_commit": null,
+      "hidden_manifest_hash": null,
+      "owner_role": "Fixture maintainer; independent acceptance reviewer",
+      "time_limit_minutes": 45
+    }
+  ]
+}

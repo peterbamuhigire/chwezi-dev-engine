@@ -153,6 +153,16 @@ The rollout in [references/integration-rollout.md](references/integration-rollou
 
 ## Companion Skills
 
+## Risk-scaled simplification gate
+
+Short code or fewer dependencies is not an acceptance criterion by itself. For
+high-risk changes, the Release Evidence Bundle must identify negative or mutation
+evidence that would fail if authorisation, boundary validation, transaction
+integrity, retry/idempotency, recovery, audit logging, accessibility state, or
+observability were removed. Low-risk read-only changes may use a smaller sufficient
+set when the record names the excluded categories and why they do not apply. This
+is a risk-scaled rule, not a universal one-test limit.
+
 ## Inputs
 
 | Artefact | Required? | Purpose |

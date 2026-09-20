@@ -1,0 +1,5 @@
+# Frozen from the verified Windows implementation environment on 2026-09-20.
+# Refresh deliberately after a compatibility and security review; do not use
+# an unbounded upgrade in the release gate.
+pytest==9.0.3
+PyYAML==6.0.2

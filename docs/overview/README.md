@@ -94,8 +94,8 @@ presentation-layer Apple UI guidance lives in the external
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>
   engine; reference-only checkouts stay outside the runtime skill catalog.
-- Current active catalog size is 170 skills. The Pocock Kaizen consolidation returned it to the
-  150-170 target range while retaining absorbed workflows as routed aliases; the hard cap remains 200.
+- Current active catalog size is 171 skills. This is one documented exception above the 150-170 soft
+  target while the retained hospitality route is contract-repaired and reviewed; the hard cap remains 200.
 - Current routing smoke-test suite contains 160 fixtures, with 90% precision@1
   (145/160) and 100% precision@3 (160/160); the active Kaizen target is at least 95% top-1.
 - Inactive aliases are retained as `ALIAS.md` and routed through

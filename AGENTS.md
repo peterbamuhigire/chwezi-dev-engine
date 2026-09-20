@@ -115,9 +115,10 @@ measure the assembled runtime metadata budget.
 
 Known baseline as of 2026-08-11 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 170.
-- Target active catalog size: 150-170. The Pocock Kaizen consolidation returned the catalogue to
-  the soft target ceiling while preserving absorbed knowledge in routed `ALIAS.md` files.
+- Active `SKILL.md` files: 171.
+- Target active catalog size: 150-170. The current 171-entry catalogue is a documented one-entry
+  exception while the retained hospitality route is contract-repaired and independently reviewed;
+  preserve the hard cap of 200 and do not add another active entrypoint without consolidation.
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links

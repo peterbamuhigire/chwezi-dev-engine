@@ -81,6 +81,27 @@ python scripts/validate_engine_control_plane.py --workspace-root C:\wamp64\www
 This is intentionally a small control plane. It prevents duplicated persona
 catalogues while making missing controls visible and testable.
 
+## Solution-selection controls
+
+The engineering engine now exposes thin, portable commands over existing
+ownership rather than a new skill catalogue:
+
+| Capability | Command | Behaviour |
+|---|---|---|
+| Decision evidence | `python tools/solution_decision.py validate <record> --root .` | Validates scope, alternatives, risk, evidence and negative tests; changed or missing evidence blocks PASS. |
+| Review | `python tools/solution_review.py diff-review --root .` | Read-only changed-file review for dependency boundaries, weak failure paths and decision evidence. |
+| Debt | `python tools/solution_debt.py list --root .` | Read-only marker and structured-ledger scan with owner, trigger and expiry checks. |
+| Scoped mode | `python tools/solution_mode.py get --root . --session <id>` | Repository/session state with atomic writes, explicit reset and malformed-state NOT_ASSESSED. |
+| Experiment evidence | `python tools/solution_evidence.py validate <evidence.json> --root .` | Rejects mixed models, missing raw files, unknown-as-zero cost and unassessed runs. |
+| Adapter lifecycle | `python tools/adapter_lifecycle.py plan --config <scoped.json>` | Plans an owned adapter entry; apply requires an explicit flag and creates a verified backup. |
+| Optional read-only transport | `python tools/solution_mcp_facade.py --root .` | JSON-lines inspection and validation facade; no SDK or write operation is required. |
+| Teach/re-measure | `python tools/solution_teach.py --root .` | Fresh-context discoverability check; it reports missing command/docs surfaces without changing them. |
+
+These tools are repository and CI fallbacks. The Codex and Claude manifests are
+labelled `instruction-only` until disposable host canaries prove native lifecycle
+events. No global configuration is changed by the commands unless `apply` is
+explicitly selected.
+
 ### Repository checks and installed portfolio checks
 
 With no `--workspace-root`, the validator checks the full registry's structure

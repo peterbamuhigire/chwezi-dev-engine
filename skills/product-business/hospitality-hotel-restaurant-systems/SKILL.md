@@ -9,6 +9,8 @@ metadata:
 # Hospitality Hotel And Restaurant Systems
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+<!-- dual-compat-start -->
+
 Use with requirements, modular SaaS, PHP/API/database, security, finance,
 offline-first, observability, testing, UX and professional documentation skills.
 This is an implementation contract, not a certification that any existing
@@ -78,6 +80,18 @@ negative stock, void-after-posting, tax/fiscal outage, lost connection, night
 audit rerun, cross-property access and backup restore. Code or a screen is only
 `observed`; release status requires executable evidence and owner sign-off.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Scenario and state-transition evidence | Markdown table plus test output | Reservation overlap, folio posting, night-audit rerun and KOT state tests with expected outcomes |
+| Security | Tenant, role and provider-boundary findings | JSON or Markdown finding record | Cross-property access denial, server-side capability check and webhook signature result |
+| Data safety | Ledger, inventory and idempotency trace | JSON/YAML trace with stable IDs | Duplicate payment key, reversal lineage, stock movement and reconciliation evidence |
+| Performance | Workload and latency result | Versioned benchmark record | Availability search, KDS timer and report query measured with data volume and environment |
+| Operability | Recovery and owner runbook | Markdown runbook plus incident evidence | Fiscal outage, queue retry, backup restore and night-audit recovery steps |
+| UX quality | Accessibility and device-state evidence | Test matrix plus rendered/UAT record | Keyboard flow, focus/error/loading states, narrow-screen and offline/reconnect results |
+| Release evidence | Signed readiness and rollback record | Markdown/JSON manifest | Migration, feature flag, rollback, approver and unresolved-risk status |
+
 ## Deliberate exclusions until proven
 
 No raw card storage, biometric guest ID, blockchain ledger, metaverse/VR as core,
@@ -109,3 +123,5 @@ folio/report state reconciles and the event trail is complete.
 
 - `C:\wamp64\www\skills-web-dev\docs\skill-routing-index.md`
 - `C:\wamp64\www\skills-web-dev\docs\source-registers\hospitality-currentness-2026-09.json`
+
+<!-- dual-compat-end -->

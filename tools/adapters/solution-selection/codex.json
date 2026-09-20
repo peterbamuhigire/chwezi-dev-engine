@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "adapter": "codex",
+  "status": "instruction-only",
+  "events": ["preflight", "context", "before_write", "after_write", "release", "stop"],
+  "commands": ["solution-decision validate", "solution-review diff-review", "solution-debt list"],
+  "fallback": "repository command and CI gate",
+  "requires_native_hook": false,
+  "live_canary": "NOT_ASSESSED"
+}

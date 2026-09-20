@@ -61,8 +61,8 @@ See `docs/engine-control-plane.md` and the audit's portfolio progress record.
   graphs, two-axis review, and skill attention mechanics. Structural implementation and lab fixtures
   are complete; production outcomes, host invocation, fresh-agent handoff, and independent review
   remain `NOT ASSESSED`.
-- The active skill count is 170, at the 150-170 soft target ceiling; future additions
-  still need equal-value consolidation or alias discipline. The CI guardrail (200 hard cap) and the collision
+- The active skill count is 171, one above the 150-170 soft target while the retained hospitality route is
+  contract-repaired and reviewed; future additions still need equal-value consolidation or alias discipline. The CI guardrail (200 hard cap) and the collision
   detector keep this from becoming routing noise.
 - Inactive aliases must stay documented in `docs/skill-aliases.yml`; the
   alias-integrity check now fails CI on a stale or unrouted alias, so this is

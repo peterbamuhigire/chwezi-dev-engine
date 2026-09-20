@@ -11,7 +11,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Hold the active catalogue within its soft target | The current count is 170 after the Pocock Kaizen consolidation. CI enforces the 200 hard cap, while new routes require an equal-value consolidation and routing evidence. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
+| Hold the active catalogue within its soft target | The current count is 171 after the retained hospitality route was added; this is a documented one-entry exception while its contract is repaired and reviewed. CI enforces the 200 hard cap, while new routes require an equal-value consolidation and routing evidence. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
 
 ## High Priority
 
@@ -35,7 +35,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Date | Work | Summary |
 | --- | --- | --- |
-| 2026-09-11 | Matt Pocock workflow Kaizen | Returned the catalogue to 170, closed portable/evidence debt, added systematic diagnosis and deterministic workflow gates, rolled decision-frontier adapters across seven engines, and removed the live email-template route. |
+| 2026-09-11 | Matt Pocock workflow Kaizen | Returned the catalogue to the 170 baseline; subsequent retained hospitality coverage is now counted as 171 and is subject to the contract repair and review gate. |
 | 2026-09-05 | Enterprise Java engineering capability | Added one consolidated Java/JVM route with currentness register, deep decision references, evidence templates, production diagnostics, Oracle integration, routing fixtures, and an enterprise reference scenario. |
 | 2026-08-20 | Eleven-engine control plane | Registered `windows-admin-engine-skills` as the eleventh canonical engine, added its adoption contract, and extended deterministic registry validation. |
 | 2026-08-16 | ERP POS sales operations | Added the live engineering route for tenant defaults, three POS surfaces, product-to-finished-stock identity, stock timing, canonical posting, permissions, idempotency, and reconciliation. |
