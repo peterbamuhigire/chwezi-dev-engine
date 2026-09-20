@@ -24,7 +24,7 @@ Act as the Kaizen lead for this engineering product. Complete the improvement lo
 ### Route before acting
 
 1. Read applicable project `AGENTS.md` files and preserve unrelated worktree changes.
-2. Resolve `skills-web-dev` through the global engine-routing table. Read its root `SKILL.md`, `AGENTS.md`, `docs/skill-routing-index.md`, `skills/sdlc-meta/kaizen-improvement-system/SKILL.md`, and only the matched domain skills.
+2. Resolve `chwezi-dev-engine` through the global engine-routing table. Read its root `SKILL.md`, `AGENTS.md`, `docs/skill-routing-index.md`, `skills/sdlc-meta/kaizen-improvement-system/SKILL.md`, and only the matched domain skills.
 3. Apply `anti-ai-slop`, the delivery evidence-pack contract, advanced testing, security, reliability, accessibility, and release skills when triggered.
 4. Read the Digital Research portfolio Kaizen standard. Verify current framework, cloud, model, security, legal, or standards claims through its source-evaluation and source-verification routes.
 5. Route finance behaviour to Chwezi, lifecycle specifications to SRS, and visual/UI decisions to Design System Skills without copying their doctrine.

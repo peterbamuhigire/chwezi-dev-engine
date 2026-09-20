@@ -3,7 +3,7 @@
 Last verified: 2026-07-08
 Benchmark: Stripe-quality API discipline, Thoughtworks evolutionary architecture, Google SRE release evidence, OWASP security review.
 
-This example shows how `skills-web-dev` composes into a complete delivery workflow. The running example is FieldOps Ledger, a Chwezi Core Systems multi-tenant field-service SaaS.
+This example shows how `chwezi-dev-engine` composes into a complete delivery workflow. The running example is FieldOps Ledger, a Chwezi Core Systems multi-tenant field-service SaaS.
 
 ## Pack Contents
 

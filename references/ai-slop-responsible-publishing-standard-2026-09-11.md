@@ -2,7 +2,7 @@
 
 **Status:** active cross-engine reference
 **Checked:** 11 September 2026
-**Owner:** skills-web-dev control plane; domain engines adapt the standard to their artefact type
+**Owner:** chwezi-dev-engine control plane; domain engines adapt the standard to their artefact type
 
 ## Purpose
 
