@@ -64,6 +64,7 @@ accurate, portable, easy to route, and below the active skill cap.
 | Skill routing | `docs/skill-routing-index.md` |
 | Alias registry | `docs/skill-aliases.yml` |
 | Current priorities | `docs/plans/NEXT_FEATURES.md` |
+| Always-on cross-cutting rules (security, coding style, verification) | `rules/README.md` |
 
 ## Working Rules
 

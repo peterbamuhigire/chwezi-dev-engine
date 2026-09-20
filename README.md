@@ -1,33 +1,123 @@
-# Skills Web Dev
+# Skills Web Dev (Chwezi Engineering Engine)
 
-The [2026-09-14 book-informed portfolio Kaizen](docs/updates/2026-09-14-book-informed-kaizen.md)
-strengthens scenario contracts, risk-based review, human-owned AI, failure-aware
-architecture, and Git recovery while retaining the existing specialist skill
-boundaries.
+`skills-web-dev` is the Chwezi Core Systems software-engineering engine: 183 routed skills
+(`SKILL.md` files) for turning a product decision into well-understood, maintainable software
+and an operable release. It spans AI/agent systems, architecture and APIs, backend databases,
+DevOps and cloud, frontend/UX, game development, GIS, Android/iOS/cross-platform mobile,
+programming languages, product/business delivery, SaaS, SDLC methodology, security, and a
+small finance-accounting slice for engineering-adjacent decisions. It routes every task to the
+smallest accurate skill and develops it in traceable vertical slices — requirements,
+architecture, data flow, interaction detail, code, tests, security, observability, performance,
+rollback, and handoff — so speed from AI assistance does not replace engineering judgement or
+finish quality.
 
-The 2026-09-20 solution-selection implementation wave adds evidence-bound
-decision records, read-only review and debt scans, scoped mode state,
-quality-gated experiment evidence, and explicit adapter lifecycle controls
-without adding active skills.
+Engineers, architects, product and delivery teams, and operators use it for concrete work such
+as: designing a multi-tenant SaaS billing model (`skills/saas/`), choosing between hexagonal and
+layered architecture for a new service (`skills/architecture/`), building a RAG pipeline with
+evaluation and human-oversight controls (`skills/ai/`), hardening a Kubernetes deployment
+(`skills/devops-cloud/`, `skills/security/`), reviewing PHP or TypeScript for silent failures
+before merge (`skills/languages/`, `agents/`), running a Kaizen audit against a shipped product
+(`skills/sdlc-meta/kaizen-improvement-system/`), or producing an SDLC evidence pack before a
+release decision (`templates/delivery-dod/evidence-pack.md`). It is not the place for visual
+design, finance/accounting standards, live external research, premium website operations, or
+formal SRS/governance artifacts — those stay with the companion engines below, which this
+engine routes to deliberately rather than duplicating.
 
-`skills-web-dev` is the Chwezi Core Systems software-engineering engine for turning a product decision into well-understood, maintainable software and an operable release. It routes work to the smallest accurate skill and develops it in traceable vertical slices—requirements, architecture, data flow, interaction detail, code, tests, security, observability, performance, rollback, and handoff—so speed from AI does not replace engineering judgement or finish quality.
+## Install
 
-Engineers, architects, product and delivery teams, and operators use it for AI systems, SaaS, APIs, databases, frontend and mobile applications, games, security, DevOps, cloud, reliability, and SDLC documentation. The route helps them frame the problem, choose system boundaries, make changes, and verify normal and failure paths.
+```
+# Native Claude Code plugin
+/plugin marketplace add https://github.com/peterbamuhigire/chwezi-dev-engine
+/plugin install engineering@chwezi-engineering
 
-Use it for engineering implementation and SDLC quality; bring in companion engines when ownership moves to visual design, finance and accounting, current external research, premium website operations, or formal requirements and governance. Its boundary is deliberate: it provides the engineering route and evidence expectations, while those specialist engines retain their own domain rules and outputs.
+# npm-free, from a clone
+git clone https://github.com/peterbamuhigire/chwezi-dev-engine
+cd skills-web-dev
+./install.sh --scope project      # macOS/Linux/Git Bash
+.\install.ps1 --scope project     # Windows PowerShell
+```
 
-## Capability map
+The plugin name (`engineering`) and marketplace name (`chwezi-engineering`) come from this
+engine's own `.claude-plugin/marketplace.json`. Both installers are thin, Windows-symlink-safe
+wrappers (their own headers say so, following the same resolution pattern documented in ECC's
+installers) around `scripts/install-engine.js`, which supports `--scope user` (default,
+`~/.claude`) or `--scope project` (`.claude/` in the current repo) — confirmed from the script's
+own `--help` usage string. Note: the GitHub repository is named `chwezi-dev-engine`; the local
+folder on this machine is `skills-web-dev`.
 
-| Need | Primary route |
-|---|---|
-| AI applications, agents, RAG, gateways, evaluations, and AI safety | `skills/ai/` |
-| Architecture, APIs, distributed systems, and contracts | `skills/architecture/` |
-| Databases, persistence, migrations, and data reliability | `skills/backend-databases/` |
-| Frontend, mobile, TypeScript, Python, PHP, .NET, and enterprise Java/JVM implementation | `skills/frontend-ux/`, `skills/android/`, `skills/ios/`, `skills/languages/` |
-| SaaS, billing, tenancy, entitlements, SSO, and admin tooling | `skills/saas/` |
-| Security, cloud, deployment, observability, reliability, and testing | `skills/security/`, `skills/devops-cloud/`, `skills/sdlc-meta/` |
-| Product, documents, spreadsheets, and delivery control | `skills/product-business/` |
-| Game development and production | `skills/game-development/` |
+This engine's own `rules/README.md` cross-engine table and its "Cross-engine routing" section
+name the sister engines it works alongside most, none of them a hard dependency:
+
+- **Design System Skills** (`design-system-skills`) — for typography, visual design, UI
+  appearance, design systems, and document/slide/spreadsheet presentation. This engine's
+  engineering skills produce the structure and code; design-system-skills owns how anything gets
+  formatted or looks.
+- **Chwezi Accounting Doctrine** (`chwezi-accounting-doctrine`) — for IFRS, tax, payroll,
+  treasury, close, audit, and other statutory values that engineering skills (e.g. billing logic
+  in `skills/saas/`, or the small `skills/finance-accounting/` slice) must not invent.
+- **Digital Research Engine** (`digital-research-engine`) — for current web, AI, cloud,
+  security, framework, standards, or market evidence; this engine's `rules/common/security.md`
+  and `AGENTS.md` both gate Kaizen and standards claims through it before admitting them.
+
+Each is an independent, optional install — this engine functions standalone and only points to
+them for specialist ownership it deliberately does not replicate.
+
+## Capabilities
+
+| Category | Skills | What it covers |
+|---|---:|---|
+| `ai` | 31 | AI/agent systems: RAG, gateways, evaluation, human oversight, AI safety and cost |
+| `sdlc-meta` | 31 | SDLC methodology: Kaizen, code review, anti-slop, verification loops, coding-agent workflow |
+| `game-development` | 25 | Game production: narrative, AI/navigation, playtesting, production orchestration |
+| `saas` | 18 | SaaS tenancy, billing, entitlements, SSO/SCIM, portability, admin tooling |
+| `product-business` | 15 | Product discovery, delivery control, proposals, documents/spreadsheets |
+| `languages` | 12 | TypeScript/JavaScript, Python, PHP, C#/.NET, enterprise Java/JVM implementation |
+| `frontend-ux` | 9 | React, Next.js, Tailwind, frontend performance, content UX |
+| `architecture` | 8 | APIs, distributed systems, architecture decisions, contracts, migrations |
+| `devops-cloud` | 8 | CI/CD, cloud, containers, Kubernetes, deployment, observability, SLOs |
+| `security` | 7 | Threat modelling, secure coding, privacy/DPIA, Linux hardening, network security |
+| `ios` | 4 | iOS development, data persistence, platform capabilities, security/RBAC |
+| `backend-databases` | 4 | SQL, MySQL, PostgreSQL, schemas, persistence, data reliability |
+| `finance-accounting` | 4 | Engineering-adjacent finance touchpoints (defers to Chwezi Accounting Doctrine for standards) |
+| `mobile-cross` | 3 | Kotlin Multiplatform, PWA, cross-platform mobile operations |
+| `gis` | 2 | Geographic information systems |
+| `android` | 1 | Android development |
+| `execution-plan-scripts` | 1 | Execution-plan scripting support |
+
+(183 `SKILL.md` files total, counted directly under `skills/`; `00-meta-initialization/` adds
+further SDLC documentation-entry skills outside this count.)
+
+## References
+
+- Mustafa, A. et al. *Everything Claude Code (ECC)*. GitHub: `affaan-m/ECC`, 2026. Adapted
+  directly, with attribution recorded in each skill's own frontmatter `origin` field:
+  `skills/sdlc-meta/santa-method/SKILL.md` ("Adapted from affaan-m/ECC
+  skills/santa-method/SKILL.md (Ronald Skelton, RapportScore.ai)"), `skills/sdlc-meta/council/SKILL.md`,
+  `skills/sdlc-meta/opensource-pipeline/SKILL.md` (ECC's three dedicated subagent types replaced
+  with scoped general-purpose agent invocations, since this engine has no equivalent named
+  subagent types), and `skills/security/security-scan/SKILL.md` (ECC's checklist rebuilt
+  self-contained rather than wrapping ECC's third-party `ecc-agentshield` npm CLI, per this
+  engine's own supply-chain rule in `rules/common/security.md`). The `rules/` directory's
+  common/domain-agnostic layer (`rules/README.md`) is also structurally adapted from ECC's
+  `rules/` pattern, with per-language content deliberately left in `skills/languages/*` instead.
+- Pocock, M. et al. `mattpocock/skills`. GitHub, accessed 2026-09-11 at commit
+  `3cca18b368ae95cdbdebbff572ccafa662551015`. Studied as an external benchmark for skill
+  structure, progressive disclosure, and plugin packaging; recorded in this README's own
+  "Matt Pocock skills study" section below and in `docs/sept-matt-pocock/README.md`. Attribution
+  does not imply endorsement or wholesale adoption of the source catalogue.
+- Branson, S. *UX / UI Design: Introduction Guide to Intuitive Design and User-Friendly
+  Experience* (2020) — `book-extractions/branson-ux-ui-design-extraction.md`.
+- Deacon, P. B. *UX and UI Design Strategy: A Step-by-Step Guide* (2020) —
+  `book-extractions/deacon-ux-ui-strategy-extraction.md`.
+- Levy, J. *UX Strategy: How to Devise Innovative Digital Products that People Want* (O'Reilly,
+  2015), ed. Mary Treseler — `book-extractions/levy-ux-strategy-extraction.md`.
+- Fekeshazi, Z. *Product Managers' Guide to UX Design* (UX Studio, c. 2017) —
+  `book-extractions/fekeshazi-pm-ux-guide-extraction.md`.
+
+These book extractions inform the UX-adjacent portions of `skills/frontend-ux/` and
+`skills/product-business/`; the remaining `book-extractions/` files are internal Kaizen/audit
+syntheses (SaaS, game development, AI-on-SaaS) rather than citable third-party works, so they
+are not listed as references here.
 
 ## Current status
 

@@ -1,0 +1,21 @@
+{
+  "name": "chwezi-engineering",
+  "owner": { "name": "Peter Bamuhigire", "email": "peter.bamuhigire@gmail.com" },
+  "metadata": { "description": "Chwezi engineering-catalog engine — architecture, APIs, databases, SaaS, AI/agent systems, security, game development, mobile, and SDLC methodology" },
+  "plugins": [
+    {
+      "name": "engineering",
+      "source": "./",
+      "description": "169 skills spanning architecture, backend/databases, devops/cloud, frontend/UX, AI systems, SaaS, security, game development, mobile, and SDLC methodology",
+      "version": "1.0.0",
+      "author": { "name": "Peter Bamuhigire" },
+      "homepage": "https://github.com/chwezi/skills-web-dev",
+      "repository": "https://github.com/chwezi/skills-web-dev",
+      "license": "MIT",
+      "keywords": ["engineering", "architecture", "saas", "ai", "security", "sdlc"],
+      "category": "engineering",
+      "tags": ["engineering", "architecture", "saas", "ai"],
+      "strict": false
+    }
+  ]
+}
