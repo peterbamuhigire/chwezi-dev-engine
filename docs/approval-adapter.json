@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "engine": "skills-web-dev",
+  "engine": "chwezi-dev-engine",
   "policy_version": "approval-policy-1.0.0",
   "actions": [
     {"action_type":"repository.inspect","class":"L0","side_effect":"none","owner":"engineering-owner","allowed_approver_roles":["none"],"requires_dual_approval":false,"preview_required":false,"approval_ttl_seconds":null,"idempotency_required":false,"rollback":"not-applicable","verification":"read-result-check","sensitive_fields":["credentials","private-source"]},
