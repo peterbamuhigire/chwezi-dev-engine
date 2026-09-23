@@ -1,6 +1,6 @@
 ---
 name: parallel-execution-optimizer
-description: Use when a task can go faster by doing independent work at the same time — batched reads/searches, concurrent subagents, isolated worktrees, or multiple verification lanes — without letting concurrency create conflicting writes or a false sense of "done." Not for deciding whether a task should be delegated to a subagent at all — this is about running already-independent lanes efficiently once decomposed.
+description: Use when independent work can run concurrently through batched reads/searches, subagents, worktrees, or verification lanes without conflicting writes or false completion. Use after decomposition; it does not decide whether to delegate.
 metadata:
   portable: true
   compatible_with:
@@ -15,6 +15,32 @@ Speed comes from doing independent work at the same time — repo inspection,
 file reads, API or build checks, multiple verification lanes, multi-worktree
 implementation passes — without letting concurrency create conflicting writes
 or paper over a lane that never actually finished.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when already-decomposed independent work can run concurrently.
+
+## Do Not Use When
+Do not use to decide whether a task should be delegated or to parallelise conflicting writes.
+
+## Required Inputs
+- Independent lanes, ownership boundaries, dependencies, and a shared completion signal.
+
+## Workflow
+1. Apply the lane matrix and execution rules below, then reconcile every lane before claiming completion.
+
+## Quality Standards
+Concurrency must preserve evidence, ownership, failure visibility, and integration order.
+
+## Anti-Patterns
+- Counting a launched lane as done. Fix: wait for and inspect each lane result.
+
+## Outputs
+- A lane plan, execution record, and integrated verification result.
+
+## References
+- The detailed concurrency method and completion gate are documented below.
 
 ## Core Pattern
 
@@ -83,6 +109,8 @@ Parallel execution result:
 - A success summary that quietly omits a lane that was skipped, not run.
 
 ## Relationship to This Engine
+
+<!-- dual-compat-end -->
 
 Pairs with `rules/common/agentic-engineering.md`'s unit-decomposition rule
 (each unit independently verifiable, single dominant risk) — decompose first

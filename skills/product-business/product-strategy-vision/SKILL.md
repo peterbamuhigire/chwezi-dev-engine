@@ -155,6 +155,24 @@ For premium software, SaaS, ERP/POS, websites, or high-ticket agency products, s
 - the service experience: senior access, review cadence, support path, escalation, training, and success reporting
 - the refusal policy: which customers, budgets, deadlines, or quality compromises are out of scope
 
+## Offer to reliable delivery chain (Kaizen adoption)
+
+For each strategic bet, connect the offer to an outcome and to delivery evidence (synthesis):
+
+1. Name the target customer, problem, promise, and the cheaper or non-AI alternative being tested.
+2. Define the observable outcome, measurement owner, privacy boundary, and decision rule; do not
+   collect a metric merely because it is available.
+3. State the reliability expectation, failure and recovery path, and the evidence required from
+   implementation, operations, and handover.
+4. Record the countercase where the bet should be refused or narrowed, then review the evidence at
+   the stated horizon before expanding scope.
+
+Use the [delivery definition of done](../../sdlc-meta/skill-composition-standards/references/delivery-definition-of-done.md)
+to turn the strategy into an evidence pack. Instrument's [About page](https://www.instrument.com/about)
+is a framing reference for its advertised integrated strategy, design and technology offer.
+The worker's fetch timed out; the root independently opened the page on 2026-09-22.
+That verifies the narrow public description, not equivalent capability or results.
+
 ---
 
 ## 3. Product Principles

@@ -1,6 +1,6 @@
 ---
 name: documentation-lookup
-description: Use before answering setup, configuration, or API-reference questions about a specific library or framework, or before writing code that depends on its exact current behavior — fetch live docs via an MCP documentation server (e.g. Context7) instead of relying on training data, which is a fixed snapshot and goes stale as libraries release new major versions.
+description: Use when answering setup, configuration, or API-reference questions about a specific library or framework, or writing code that depends on current behavior. Fetch live docs via an MCP documentation server instead of relying on stale training data.
 metadata:
   portable: true
   compatible_with:
@@ -17,6 +17,32 @@ after that snapshot — and the model has no way to know, from inside a single
 answer, whether what it "remembers" is still current. When a live documentation
 MCP server (Context7 or an equivalent your environment has configured) is
 available, use it instead of guessing from memory for anything version-sensitive.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when an answer or implementation depends on a library's current documented behaviour.
+
+## Do Not Use When
+Do not use for durable language or architecture guidance that does not require live documentation.
+
+## Required Inputs
+- Library or framework name, version scope, exact question, and documentation provider.
+
+## Workflow
+1. Resolve the live documentation source, read the relevant page, and record its scope before answering.
+
+## Quality Standards
+Separate verified documentation from inference and stale or unavailable evidence.
+
+## Anti-Patterns
+- Relying on memory for current APIs. Fix: retrieve and cite the live documentation.
+
+## Outputs
+- A source-backed answer or implementation note with unresolved gaps retained.
+
+## References
+- The documentation lookup method and engine relationships are documented below.
 
 ## When to Use
 
@@ -61,6 +87,8 @@ that a new release can change.
   and fall back to training data explicitly, flagging that the answer may be
   stale for a fast-moving library rather than presenting it with the same
   confidence as a live-verified answer.
+
+<!-- dual-compat-end -->
 
 ## Relationship to This Engine
 

@@ -1,6 +1,6 @@
 ---
 name: opensource-pipeline
-description: Fork, sanitize, and package a private project for safe public release — a 3-stage pipeline (fork/strip secrets, sanitize/verify clean, package for release). Use when a private project (including any of this consultancy's engines or client codebases) must be prepared for public GitHub release. Prerequisite before publishing any Chwezi engine publicly.
+description: Use when preparing a private project for safe public GitHub release through fork/strip-secrets, sanitize/verify, and package stages. Applies to engines and client codebases; it is a prerequisite before publishing a Chwezi engine.
 metadata:
   portable: true
   compatible_with:
@@ -17,6 +17,32 @@ instructions). This is the missing piece this Kaizen operation's own publishing 
 scanning already exists elsewhere in this estate (`skills/security/code-safety-scanner`,
 `linux-skills`' secrets tooling), but the fork → sanitize → package chain and the git-history scrub
 do not.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when preparing a private project for a safe public release.
+
+## Do Not Use When
+Do not use for an already public repository or a release without publishing authority.
+
+## Required Inputs
+- Repository, release authority, sanitisation rules, and required legal or licence evidence.
+
+## Workflow
+1. Run the fork, sanitise, verify, and package stages below; stop on a failed gate.
+
+## Quality Standards
+Preserve history safety, secret removal evidence, licence records, and a reproducible package.
+
+## Anti-Patterns
+- Publishing after a partial scan. Fix: complete every stage and retain the failed-path record.
+
+## Outputs
+- A sanitised release tree, verification record, and package handoff.
+
+## References
+- The detailed open-source pipeline and related skills are documented below.
 
 ## When to Activate
 
@@ -187,6 +213,8 @@ $HOME/opensource-staging/
 - Re-run the sanitizer after any manual fix, before publishing
 - Parameterize secrets rather than deleting the functionality that needed them — preserve behavior,
   strip only the sensitive value
+
+<!-- dual-compat-end -->
 
 ## Related Skills
 

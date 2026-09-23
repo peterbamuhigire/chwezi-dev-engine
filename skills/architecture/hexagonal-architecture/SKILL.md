@@ -1,6 +1,6 @@
 ---
 name: hexagonal-architecture
-description: Design, implement, and refactor Ports & Adapters systems with clear domain boundaries, dependency inversion, and testable use-case orchestration across TypeScript, PHP, Java, Kotlin, and Go services. Use when introducing or refactoring toward Ports and Adapters, or when domain logic has become entangled with I/O. Complements skills/architecture/microservices-architecture (service topology) and skills/architecture/api-design-first (boundary contracts) — this skill governs internal module boundaries.
+description: Use when designing or refactoring Ports & Adapters boundaries, dependency inversion, or testable use-case orchestration in TypeScript, PHP, Java, Kotlin, or Go. Complements microservices-architecture (service topology) and api-design-first (boundary contracts); this skill owns internal module boundaries.
 metadata:
   portable: true
   compatible_with:
@@ -14,6 +14,32 @@ metadata:
 Hexagonal architecture (Ports and Adapters) keeps business logic independent from frameworks,
 transport, and persistence details. The core application depends on abstract ports; adapters
 implement those ports at the edges.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when designing or refactoring Ports and Adapters boundaries.
+
+## Do Not Use When
+Do not use for service topology or public API contract design alone.
+
+## Required Inputs
+- Domain use cases, boundary dependencies, and the target implementation language.
+
+## Workflow
+1. Apply the boundary and migration method below, then verify the resulting dependency direction.
+
+## Quality Standards
+Keep domain logic independent from infrastructure and make ports testable.
+
+## Anti-Patterns
+- Hiding I/O inside domain logic. Fix: move it behind an explicit adapter.
+
+## Outputs
+- Ports, adapters, module boundaries, and a migration or test record.
+
+## References
+- The detailed architecture method and related skills are documented below.
 
 ## When to Use
 
@@ -225,6 +251,8 @@ production behavior is verified.
 - Use cases are testable with simple in-memory fakes for ports
 - Refactoring starts from one vertical slice with behavior-preserving tests
 - Language/framework specifics stay in adapters, never in domain rules
+
+<!-- dual-compat-end -->
 
 ## Related
 

@@ -1,6 +1,6 @@
 ---
 name: security-scan
-description: Audit a project's Claude Code configuration (.claude/ directory, CLAUDE.md/AGENTS.md, settings.json, MCP server configs, hooks, and agent definitions) for security vulnerabilities and misconfigurations — hardcoded secrets, overly permissive tool allow lists, command injection in hooks, prompt-injection surface. Use whenever a hooks.json, agent roster, or settings.json changes, and before publishing a plugin/engine publicly. Newly relevant now that this engine ships real hooks and an agent roster.
+description: Use when auditing Claude Code configuration, hooks, MCP servers, settings, agents, or `.claude` for secrets, permissive tools, command injection, or prompt-injection exposure. Run after configuration changes and before publishing a plugin or engine.
 metadata:
   portable: true
   compatible_with:
@@ -15,6 +15,32 @@ Audit a project's `.claude/` configuration surface for security issues — the s
 that a code security review misses, because `CLAUDE.md`, `settings.json`, hooks, and agent
 definitions are themselves an attack surface once an engine ships plugins, hooks, and an agent
 roster (as this engine now does after this Kaizen pass).
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when auditing Claude Code configuration, hooks, MCP servers, settings, or agents.
+
+## Do Not Use When
+Do not use as a substitute for application-code security review.
+
+## Required Inputs
+- Configuration scope, repository authority, and the security evidence to inspect.
+
+## Workflow
+1. Scan the configuration surface below, classify findings, and retain evidence for each disposition.
+
+## Quality Standards
+Report secrets, permissions, injection paths, severity, owner, and unresolved evidence without exposure.
+
+## Anti-Patterns
+- Printing secrets during a scan. Fix: record the location and redact the value.
+
+## Outputs
+- A configuration security report with findings, severity, remediation owner, and evidence.
+
+## References
+- The detailed scan procedure and related security skills are documented below.
 
 ## When to Activate
 
@@ -126,6 +152,8 @@ auto-install in MCP configs.
 
 **Info (awareness)**: MCP servers missing descriptions; instructions that are correctly restrictive
 and worth keeping as-is.
+
+<!-- dual-compat-end -->
 
 ## Related Skills
 

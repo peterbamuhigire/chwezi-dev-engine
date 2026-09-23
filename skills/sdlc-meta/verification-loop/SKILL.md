@@ -1,6 +1,6 @@
 ---
 name: verification-loop
-description: Use before claiming a feature, refactor, or fix is complete, and before opening a PR — a fixed six-phase mechanical gate (build, types, lint, tests, security, diff review) that produces a READY/NOT READY verdict. Not a test-design framework — use `sdlc-meta/advanced-testing-strategy` to decide what tests to write; this is the ordered pipeline that runs them and reports the result.
+description: Use when verifying a feature, refactor, or fix before claiming completion or opening a PR. Runs the six-phase build, types, lint, tests, security, and diff-review gate for a READY/NOT READY verdict. Use advanced-testing-strategy to design tests.
 metadata:
   portable: true
   compatible_with:
@@ -15,6 +15,32 @@ A fixed, ordered, mechanical gate run before any claim of "done." Six phases, ru
 sequence, each gating the next: build → types → lint → tests → security scan → diff
 review. A build failure stops the sequence — there is no value in reporting type or
 lint results for code that does not compile.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when verifying a feature, refactor, or fix before a completion claim or PR.
+
+## Do Not Use When
+Do not use to design a test strategy; use the testing strategy skill for that decision.
+
+## Required Inputs
+- Changed scope, project commands, risk level, and the required release or PR evidence.
+
+## Workflow
+1. Run the six phases below in order and stop at the first failed gate.
+
+## Quality Standards
+Report exact commands, results, limitations, and a READY or NOT READY verdict.
+
+## Anti-Patterns
+- Skipping a failed phase. Fix: stop, correct the cause, and rerun the affected gate.
+
+## Outputs
+- A six-phase verification record and a READY or NOT READY verdict.
+
+## References
+- The detailed verification phases and testing-strategy boundary are documented below.
 
 ## How This Differs From `advanced-testing-strategy`
 
@@ -152,6 +178,8 @@ checkpoints — after each 15-minute unit (`rules/common/agentic-engineering.md`
 after finishing a component, before moving to the next task — rather than only once
 before a final PR. Catching a Phase 1 failure early is cheap; catching it after ten
 more units have built on top of the broken one is not.
+
+<!-- dual-compat-end -->
 
 ## Relationship to Hooks
 

@@ -1,6 +1,6 @@
 ---
 name: iterative-retrieval
-description: Progressive multi-pass context refinement for a context-starved subagent — a 4-phase DISPATCH-EVALUATE-REFINE-LOOP cycle, max 3 cycles, for when a subagent cannot predict upfront which files or context it needs. Narrower than skills/ai/ai-rag-patterns (general agentic RAG) and skills/ai/ai-agent-multi-agent-coordination (handoff contracts) — this skill is specifically the retrieval-refinement loop inside one subagent's own context-gathering pass.
+description: Use when a context-starved subagent needs progressive retrieval refinement through a bounded DISPATCH-EVALUATE-REFINE-LOOP. Narrower than ai-rag-patterns (general agentic RAG) and ai-agent-multi-agent-coordination (handoff contracts); this skill governs one subagent's context-gathering pass.
 metadata:
   portable: true
   compatible_with:
@@ -18,6 +18,32 @@ terminology the project uses. This engine already covers agentic RAG broadly
 (`skills/ai/ai-agent-multi-agent-coordination`); this skill is the specific missing piece —
 progressive, bounded refinement of a single subagent's own retrieval pass before it starts real
 work.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when a context-starved subagent needs bounded retrieval refinement.
+
+## Do Not Use When
+Do not use for general agentic RAG or cross-agent handoff contracts.
+
+## Required Inputs
+- Retrieval goal, starting context, and an allowed file or source boundary.
+
+## Workflow
+1. Follow the four-phase refinement loop below and retain each pass result.
+
+## Quality Standards
+Keep retrieval passes bounded, traceable, and tied to the stated goal.
+
+## Anti-Patterns
+- Guessing missing context. Fix: dispatch a bounded retrieval pass.
+
+## Outputs
+- Refined context and a record of retrieval decisions.
+
+## References
+- The detailed loop and related skills are documented below.
 
 ## When to Activate
 
@@ -106,6 +132,8 @@ When retrieving context for this task:
 3. **Track what's missing explicitly** — gap identification, not vague dissatisfaction, is what drives refinement
 4. **Stop at "good enough"** — a small set of high-relevance files beats a large set of mediocre ones
 5. **Exclude confidently** — low-relevance files won't become relevant on a later pass without new evidence
+
+<!-- dual-compat-end -->
 
 ## Related
 

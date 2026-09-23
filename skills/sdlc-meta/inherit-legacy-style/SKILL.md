@@ -1,6 +1,6 @@
 ---
 name: inherit-legacy-style
-description: Use when onboarding an AI coding agent onto a hand-written legacy project (including this consultancy's WAMP/PHP client codebases) and you need to prevent "style drift" — the model imposing pretrained mainstream idioms onto a project with its own implicit conventions. Language- and framework-agnostic; aligns meta-architecture only, not syntax. Once run, becomes a standing behavioral constraint on all subsequent coding tasks in that project. Not for pure research or one-off questions unrelated to code-style alignment.
+description: Use when onboarding an AI coding agent to a hand-written legacy project and preventing style drift across its implicit conventions. Language/framework-agnostic; aligns meta-architecture, not syntax. Use for sustained coding constraints, not pure research or one-off questions.
 metadata:
   portable: true
   compatible_with:
@@ -17,6 +17,32 @@ crystallizing the consensus into an enforceable `.ai-style-rules.md`. Fully lang
 framework-agnostic — directly applicable to this consultancy's hand-written WAMP/PHP client
 projects, where a model's pretrained instinct to reach for a framework-idiomatic structure that the
 client's codebase never adopted is a real, recurring failure mode.
+
+<!-- dual-compat-start -->
+
+## Use When
+Use when onboarding an AI coding agent to a hand-written legacy project.
+
+## Do Not Use When
+Do not use for pure research or a one-off question unrelated to code-style alignment.
+
+## Required Inputs
+- Repository access, representative code, and the owner-approved style constraints.
+
+## Workflow
+1. Run the existing scan, resolve conflicts with the owner, and record the resulting standing constraints.
+
+## Quality Standards
+Prefer observed project conventions over pretrained defaults and keep exceptions explicit.
+
+## Anti-Patterns
+- Imposing mainstream idioms without evidence. Fix: measure the repository and ask on conflicts.
+
+## Outputs
+- A style-rules record and an onboarding or update decision log.
+
+## References
+- The detailed legacy-style method and examples are documented below.
 
 ## When to Activate
 
@@ -119,6 +145,8 @@ declaration naming the exemplar file being followed and the DONTs being avoided.
 - Let the signal threshold handle noise — an 843-vs-8 naming split should auto-resolve without interrupting the user
 - When in doubt about signal strength, lean toward asking
 - The soft hook is usually sufficient; reach for a hard hook only when the user wants mechanical enforcement
+
+<!-- dual-compat-end -->
 
 ## Related Skills
 
