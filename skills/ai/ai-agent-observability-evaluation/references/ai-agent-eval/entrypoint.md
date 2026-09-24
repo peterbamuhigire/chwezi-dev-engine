@@ -319,7 +319,7 @@ evidence/processing-integrity/eval-coverage/{YYYY-MM}/
 
 Cadence: monthly via `ops/compliance/evidence-cadence.yaml` (`pi1_5_eval_coverage`, cron `0 4 1 * *`). A drift ≥ 2pp opens a `high` exception against PI1.5; a coverage drop below 80% opens a `medium` exception.
 
-The eval suite is also drilled monthly via `eval_drift_baseline` (`ai-agent-drill-evidence-and-cadence`) — the drill freezes the golden set and tests for silent drift in the agent's behaviour without intervention.
+The eval suite is also drilled monthly via `eval_drift_baseline` (`ai-agent-compliance-controls/references/ai-agent-drill-evidence-and-cadence`) — the drill freezes the golden set and tests for silent drift in the agent's behaviour without intervention.
 
-Cross-links: `ai-agent-soc2-controls` (PI1.5), `ai-agent-iso27001-controls` (A.8.29), `ai-agent-drill-evidence-and-cadence`, `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.
+Cross-links: `ai-agent-soc2-controls` (PI1.5), `ai-agent-iso27001-controls` (A.8.29), `ai-agent-compliance-controls/references/ai-agent-drill-evidence-and-cadence`, `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.
 

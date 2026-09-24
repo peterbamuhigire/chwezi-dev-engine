@@ -1,6 +1,6 @@
 ---
 name: ai-assisted-development
-description: Use when coordinating AI-assisted planning, implementation, review of an AI-generated pull request before merge, modernisation, documentation, human approval, CI evidence, or bounded multi-agent software work.
+description: Use when coordinating AI-assisted planning, implementation, review of an AI-generated pull request before merge, onboarding an AI agent to a legacy codebase's implicit style, looking up current library docs instead of stale memory, modernisation, human approval, CI evidence, or bounded multi-agent work.
 metadata:
   portable: true
   compatible_with:
@@ -69,7 +69,7 @@ This skill bridges **prompting patterns** + **orchestration** + **sub-agent coor
 
 | Risk | Control |
 |---|---|
-| Hallucinated APIs | Compile/typecheck and inspect imports, method names, schemas, and SDK versions |
+| Hallucinated APIs | Compile/typecheck and inspect imports, method names, schemas, and SDK versions; fetch current library docs per `references/live-documentation-lookup.md` |
 | Plausible but wrong logic | Add examples, regression tests, and domain-specific fixtures |
 | Security regression | Run threat review for auth, tenancy, file IO, network calls, secrets, and prompt injection |
 | IP/license exposure | Avoid copying unknown code; check dependency licenses before adding packages |
@@ -149,3 +149,15 @@ Before merging any materially AI-generated diff, load the
 [AI-generated code review gate](references/ai-generated-code-review-gate.md)
 for blocking checks on performance, API currency, states, accessibility,
 security, supply chain, and measured evidence for optimisation claims.
+
+## Codebase grounding modules
+
+- Load [legacy style inheritance](references/legacy-style-inheritance.md) when
+  onboarding an AI agent to a hand-written legacy project: scan four
+  meta-architecture dimensions, resolve conflicts with the owner one at a time,
+  and record an enforceable `.ai-style-rules.md` (absorbed from the retired
+  `inherit-legacy-style` skill).
+- Load [live documentation lookup](references/live-documentation-lookup.md)
+  when code or an answer depends on a library's current, version-specific API,
+  configuration, or setup; resolve the library, query the live docs, and cite
+  the version (absorbed from the retired `documentation-lookup` skill).

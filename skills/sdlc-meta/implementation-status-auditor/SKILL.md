@@ -257,7 +257,7 @@ This auditor leverages other skills for both analysis and recommended actions:
 | Missing features | `feature-planning` | `feature-planning` |
 | API gaps | `api-design-first` | `api-design-first`, `dual-auth-rbac` |
 | Multi-tenant issues | `multi-tenant-saas-architecture` | `multi-tenant-saas-architecture` |
-| Documentation gaps | `doc-architect` | `update-claude-documentation` |
+| Documentation gaps | `doc-architect` | `doc-architect` (documentation maintenance after change) |
 | Testing gaps | `sdlc-documentation` | `sdlc-documentation` |
 | Planning gaps | `sdlc-documentation` | `sdlc-documentation` |
 | UI issues | `webapp-gui-design` | `jetpack-compose-ui` |

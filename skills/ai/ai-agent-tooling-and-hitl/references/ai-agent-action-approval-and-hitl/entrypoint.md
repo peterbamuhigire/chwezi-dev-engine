@@ -308,7 +308,7 @@ When an approval is granted:
 
 1. Compute the canonical bytes (sorted keys, deterministic field set).
 2. Sign with the approver's per-session key (delegated from SSO + 2FA; key validity ≤ 24h).
-3. Capture `linked_action_chain_pos` from the audit log emitter so completeness checks can verify chain linkage (see `ai-agent-approval-audit-completeness`).
+3. Capture `linked_action_chain_pos` from the audit log emitter so completeness checks can verify chain linkage (see `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness`).
 4. Emit `approval_received` event onto the action audit log with the signature embedded in `payload_summary`.
 
 Approvals where:
@@ -316,4 +316,4 @@ Approvals where:
 - `approver_id NOT IN allowlist_at(tenant_id, policy_version)` → reject (unauthorised).
 - `dual_approver_required AND dual_approver_id IS NULL` → reject (incomplete).
 
-Cross-links: `ai-agent-approval-audit-completeness` (the completeness check that consumes these rows), `ai-agent-audit-log-integrity` (chain storage), `ai-agent-soc2-controls` (PI1.1).
+Cross-links: `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness` (the completeness check that consumes these rows), `ai-agent-audit-log-integrity` (chain storage), `ai-agent-soc2-controls` (PI1.1).

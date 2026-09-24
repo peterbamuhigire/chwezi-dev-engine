@@ -36,7 +36,8 @@ nobody can find to change when it turns out to be wrong.
 When editing an existing codebase, match its comment density, naming
 conventions, and idiom before introducing a different style — even one you would
 otherwise prefer. A codebase with two competing styles is worse than one with a
-style you disagree with. (This mirrors the ECC-audited `inherit-legacy-style`
+style you disagree with. (This mirrors the ECC-audited legacy-style inheritance procedure in
+`sdlc-meta/ai-assisted-development` (`references/legacy-style-inheritance.md`)
 pattern: align to the codebase's meta-architecture, not your pretrained default.)
 
 ## House style for this engine's own artefacts

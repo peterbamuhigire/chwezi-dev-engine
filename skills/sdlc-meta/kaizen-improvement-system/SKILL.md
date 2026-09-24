@@ -23,7 +23,7 @@ domain judgement with the owning engine and makes learning discoverable.
 
 ## Do Not Use When
 
-- A single-skill safety review is the only task; use `skill-safety-audit`.
+- A single-skill safety review is the only task; use the skill safety gate in `skill-engine-audit`.
 - A current external claim is needed before source evaluation and verification.
 - The proposed change is cosmetic and has no measurable effect on routing, quality, safety, or delivery.
 
@@ -107,7 +107,7 @@ slice that preserves the client's design thesis rather than copying a reference 
 ## Read next
 
 - `skill-engine-audit` for the engine rubric and evidence matrix.
-- `skill-safety-audit` for changed or imported skill safety review.
+- `skill-engine-audit` safety gate for changed or imported skill safety review.
 - `advanced-testing-strategy` for risk-scaled validation.
 - `world-class-engineering` for delivery gates and operational handoff.
 
@@ -125,7 +125,7 @@ security, platform, and lifecycle claims; quarantine unsupported claims as
 - `docs/continuous-improvement/kaizen-adoption-2026-08.md` - local adoption plan.
 - `C:/wamp64/www/digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md` - cross-engine standard.
 - `skills/sdlc-meta/skill-engine-audit/` - audit dimensions, scoring, and report structure.
-- `skills/sdlc-meta/skill-safety-audit/` - safety and source-ingestion gate.
+- `skills/sdlc-meta/skill-engine-audit/references/skill-safety-gate.md` - safety and source-ingestion gate.
 - `skills/sdlc-meta/kaizen-improvement-system/references/purpose-fit-premium-ux-implementation.md` - implementation patterns for friction reduction, dashboards, state feedback, and authored visual systems.
 <!-- dual-compat-end -->
 

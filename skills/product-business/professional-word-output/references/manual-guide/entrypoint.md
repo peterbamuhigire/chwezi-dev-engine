@@ -238,7 +238,7 @@ Organize manuals with a clear hierarchy:
 | In-app PHP manual for ERP module | `manual-guide` (this skill) |
 | SDLC-standard user manual (markdown) | `sdlc-user-deploy` |
 | AI guidance docs (AGENTS.md) | `doc-architect` |
-| Project README and AGENTS.md updates | `update-claude-documentation` |
+| Project README and AGENTS.md updates | `doc-architect` (`references/doc-maintenance-after-change.md`) |
 | Feature spec with documentation impact | `spec-architect` or `feature-planning` |
 
 ---

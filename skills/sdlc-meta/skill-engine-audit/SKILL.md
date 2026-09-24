@@ -1,6 +1,6 @@
 ---
 name: skill-engine-audit
-description: Use when auditing, grading, benchmarking, or conforming an entire skills engine. Measures taxonomy, doctrine, contracts, depth, routing, safety, references, output readiness, and normalisation priorities.
+description: Use when auditing, grading, benchmarking, or conforming a skills engine, or safety-gating one new, changed, or imported skill for unsafe installers, credential harvesting, prompt injection, exfiltration, excess permissions, or retained source content. Measures taxonomy, contracts, routing, safety, and readiness.
 metadata:
   portable: true
   compatible_with:
@@ -14,14 +14,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 <!-- dual-compat-start -->
 ## Use When
 
-- Asked to AUDIT, grade, benchmark, rank, or find gaps in a whole skills engine / skill catalog
-  (not a single skill — for one skill's safety use `skill-safety-audit`).
+- Asked to AUDIT, grade, benchmark, rank, or find gaps in a whole skills engine / skill catalog.
+- A single new, changed, copied, or third-party skill must pass the safety gate before
+  acceptance → load `references/skill-safety-gate.md` and return its Safe / Needs Review /
+  Unsafe verdict (skip the engine-wide workflow below).
 - Deciding whether an engine is "world-class" and what to add/harden to get there.
 - Producing a comprehensive, ranked, evidence-based report on an engine's quality and coverage.
 
 ## Do Not Use When
 
-- Auditing ONE skill for unsafe/malicious instructions → use `skill-safety-audit`.
 - Auditing produced artifacts (a website/app/document) for AI slop → use the design engine's
   `ai-slop-typography-audit` / `visual-product-slop-audit`.
 - Writing or routing a new skill → use `skill-writing` / `skill-taxonomy-and-routing`.
@@ -101,7 +102,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 - `references/audit-dimensions.md` — every aspect to rank + the output-type checklist.
 - `references/parallel-agent-method.md` — the audit-agent fleet and how to brief it.
 - `references/report-structure.md` — the multi-file report template.
-- Sibling skills: `skill-safety-audit`, `skill-writing`, `skill-taxonomy-and-routing`,
+- `references/skill-safety-gate.md` — load when clearing one new, changed, or imported skill,
+  or scoring the safety dimension per skill (absorbed from the retired `skill-safety-audit`).
+- Sibling skills: `skill-writing`, `skill-taxonomy-and-routing`,
   `ai-slop-audit`.
 ## Inputs
 
@@ -116,6 +119,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 | Category | Artifact | Format | Example |
 |---|---|---|---|
 | Release evidence | Engine compliance report | Scanner summary or JSON exception register with before/after counts | `engine-compliance.json` |
+| Security | Skill safety verdict | Safe / Needs Review / Unsafe record with inspected surfaces | `docs/security/skill-safety-2026-09-24.md` |
 | Correctness | Normalisation evidence pack | Validator, routing, safety, diff, and remaining-exception results | `docs/audits/<engine>/evidence.md` |
 
 <!-- dual-compat-end -->

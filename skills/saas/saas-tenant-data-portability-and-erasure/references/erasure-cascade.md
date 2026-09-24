@@ -168,6 +168,6 @@ A run that crashed after deleting Stripe and search but before the primary DB re
 - `saas-tenant-data-portability-and-erasure` section 3 (capability matrix), section 5 (workflow), section 7 (retention exceptions).
 - `references/requester-verification.md` - proving the requester is entitled before any of this runs.
 - `references/export-format-spec.md` - the final export offered before erasure.
-- `ai-agent-memory-erasure-proof` - the agent-memory leg and independent verification probes.
+- `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof` - the agent-memory leg and independent verification probes.
 - `ai-tenant-isolation-patterns` - per-tenant KEK strategy for crypto-erase.
 - `uganda-dppa-compliance` - regional retention specifics.

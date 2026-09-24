@@ -104,9 +104,11 @@ further SDLC documentation-entry skills outside this count.)
   directly, with attribution recorded in each skill's own frontmatter `origin` field:
   `skills/sdlc-meta/santa-method/SKILL.md` ("Adapted from affaan-m/ECC
   skills/santa-method/SKILL.md (Ronald Skelton, RapportScore.ai)"), `skills/sdlc-meta/council/SKILL.md`,
-  `skills/sdlc-meta/opensource-pipeline/SKILL.md` (ECC's three dedicated subagent types replaced
+  `skills/sdlc-meta/opensource-pipeline/ALIAS.md` (now absorbed into
+  `skills/sdlc-meta/github-ops/references/opensource-release-pipeline.md`; ECC's three dedicated subagent types replaced
   with scoped general-purpose agent invocations, since this engine has no equivalent named
-  subagent types), and `skills/security/security-scan/SKILL.md` (ECC's checklist rebuilt
+  subagent types), and the former `skills/security/security-scan` (now
+  `skills/security/code-safety-scanner/references/agent-harness-config-scan.md`; ECC's checklist rebuilt
   self-contained rather than wrapping ECC's third-party `ecc-agentshield` npm CLI, per this
   engine's own supply-chain rule in `rules/common/security.md`). The `rules/` directory's
   common/domain-agnostic layer (`rules/README.md`) is also structurally adapted from ECC's
@@ -146,7 +148,7 @@ Last verified: 2026-09-17.
 
 | Measure | Result |
 |---|---:|
-| Active `SKILL.md` files | 185 |
+| Active `SKILL.md` files | 167 |
 | Guardrail maximum | 200 |
 | Routing fixtures | 158 |
 | Routing precision@1 | 91% (144/158) |
@@ -349,7 +351,7 @@ Expected counts and routing results must be taken from the current validator out
 ## Honest limitations
 
 - Routing precision@1 is 91%; precision@3 is 100%. The engine still requires human review for close domain collisions.
-- The 185 active skills exceed the 150-170 soft target by 15 (open consolidation item) and remain below the hard cap of 200; catalogue size alone is not proof of quality or production readiness.
+- The 167 active skills sit inside the 150-180 target (raised from 170 on 2026-09-24 after an 18-skill consolidation) and below the hard cap of 200; catalogue size alone is not proof of quality or production readiness.
 - Some book inputs are historical, partial early releases, or have unusable extraction. They inform patterns only where the available text supports them; current claims require independent verification.
 - `AI for Game Developers` contains durable algorithmic foundations but dated APIs and production assumptions. Treat it as conceptual input, not current platform documentation.
 - Game and design guidance does not replace hands-on playtesting, visual review, accessibility testing, security testing, or production telemetry.

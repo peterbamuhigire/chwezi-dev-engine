@@ -24,7 +24,7 @@ fixtures:
   - task: "Design commercial operations for agent billing by completed tasks and refund policy"
     expect: ai-agent-commercial-operations
   - task: "Define customer SLA promises for an AI agent service"
-    expect: ai-agent-sla-and-customer-commitments
+    expect: ai-agent-commercial-operations
   - task: "Port a Codex config and Claude Code agent policy to this laptop after checking installed versions, supported models and local resources"
     expect: coding-agent-optimization
   - task: "Design a supervisor-worker protocol with handoff schemas, shared state and deadlock recovery for an in-product agent system"
@@ -174,14 +174,14 @@ fixtures:
   - task: "Audit implementation status against claims and evidence"
     expect: implementation-status-auditor
   - task: "Clean markdown lint issues and normalize documentation style"
-    expect: markdown-lint-cleanup
+    expect: doc-architect
   - task: "Gather and structure project requirements before design"
     expect: project-requirements
   - task: "Write complete SDLC documentation for planning, design, testing and deployment"
     expect: sdlc-documentation
-  - task: "Use skill-safety-audit to audit a skill engine for safety, routing and hallucination risks"
-    expect: skill-safety-audit
+  - task: "Safety-audit a skill engine and an imported skill for unsafe installers, routing and hallucination risks"
+    expect: skill-engine-audit
   - task: "Update Claude documentation files and module headers"
-    expect: update-claude-documentation
+    expect: doc-architect
   - task: "Apply world-class engineering gates to a software delivery"
     expect: world-class-engineering

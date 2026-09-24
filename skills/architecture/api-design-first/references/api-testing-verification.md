@@ -359,7 +359,7 @@ android-tdd → Write unit tests (with mocked responses)
       ↓
 api-testing-verification → MANDATORY: Test with real backend (THIS SKILL)
       ↓
-update-claude-documentation → Document API contract in completion report
+doc-architect (doc maintenance after change) → Document API contract in completion report
 ```
 
 ## Summary

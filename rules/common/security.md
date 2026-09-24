@@ -61,8 +61,7 @@ manual skim. A public Chwezi repository was found, during this engine's own
 Kaizen pass, to have real client project history on its public `main` branch;
 `.gitignore` alone does not remove history already pushed.
 
-*Skill:* `security/code-safety-scanner` (adapt its scan to a pre-publish check);
-*pattern to build toward:* a fork → sanitise → package pipeline, matching the
-`opensource-pipeline` shape identified in the ECC audit
-(`kaizen-engines/ECC-audit-2026-09-20/06-chwezi-engine-agents.md`, item CEA-17)
-— not yet built for this estate.
+*Skills:* `sdlc-meta/github-ops` (`references/opensource-release-pipeline.md`:
+the fork → sanitise → package pipeline identified in the ECC audit,
+`kaizen-engines/ECC-audit-2026-09-20/06-chwezi-engine-agents.md`, item CEA-17)
+and `security/code-safety-scanner` for the scan patterns its sanitise gate uses.

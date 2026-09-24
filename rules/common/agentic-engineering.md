@@ -3,7 +3,8 @@
 > Distilled from `affaan-m/ECC`'s `skills/agentic-engineering/SKILL.md` (task
 > decomposition, model routing, and review-focus doctrine for agent-driven
 > engineering work), cross-checked against this engine's own `sdlc-meta/santa-method`
-> and `sdlc-meta/verification-loop`, which already assume both principles below
+> and the verification gate in `sdlc-meta/world-class-engineering`
+> (`references/verification-loop.md`), which already assume both principles below
 > without ever stating them as a standalone rule. Kept separate from
 > `coding-style.md` because it governs how agentic work is planned and routed, not
 > how code is written — a genuinely different axis, and one every skill in this
@@ -16,7 +17,7 @@ break it into units that are independently verifiable, have a single dominant
 risk, and expose a clear done condition. A unit too large to verify in one pass
 hides its own failures; a unit with two unrelated risks makes a failed check
 ambiguous about which risk fired. This is the same discipline
-`sdlc-meta/verification-loop` assumes when it recommends running the six-phase
+the verification gate (`sdlc-meta/world-class-engineering`, `references/verification-loop.md`) assumes when it recommends running the six-phase
 gate "after each unit" rather than only at the end of a session.
 
 ## Route model tier to task complexity, not to habit
@@ -40,7 +41,7 @@ violation as a mechanical fix, not a discussion. Reserve review attention —
 human or agent — for invariants, edge cases, error boundaries, security and
 auth assumptions, and hidden coupling: the things static tooling cannot catch.
 This is the same non-duplication principle the review phase of
-`sdlc-meta/verification-loop` states for Phase 3 (Lint).
+the verification gate (`sdlc-meta/world-class-engineering`, `references/verification-loop.md`) states for Phase 3 (Lint).
 
 ## Session and compaction boundaries follow the work, not the clock
 

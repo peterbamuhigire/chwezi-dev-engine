@@ -233,9 +233,9 @@ Minimum event taxonomy emitted by the loop:
 | Erasure step | `erasure_step` | request_id, step, status |
 | Task closed | `task_closed` | task_id, terminal_state, verdict_ref |
 
-Every event carries `policy_version` so historical authority checks resolve correctly (see `ai-agent-approval-audit-completeness`). Emissions are synchronous on the critical path for irreversible-action transitions and `kill_switch_flipped`; everything else may be batched with at-most-1s drain.
+Every event carries `policy_version` so historical authority checks resolve correctly (see `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness`). Emissions are synchronous on the critical path for irreversible-action transitions and `kill_switch_flipped`; everything else may be batched with at-most-1s drain.
 
-Cross-links: `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls`, `ai-agent-evidence-automation`, `ai-agent-approval-audit-completeness`.
+Cross-links: `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls`, `ai-agent-evidence-automation`, `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness`.
 ## Consolidated Child References
 
 - Load `references/routing.md` to map retired AI child skill slugs to their reference modules.

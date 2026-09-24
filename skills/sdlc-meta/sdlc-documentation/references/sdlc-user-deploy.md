@@ -111,7 +111,7 @@ Delivery documents must define:
 - **Writing ERP module-specific manuals** with in-app PHP delivery -- use `manual-guide` skill
 - **Planning a single feature** -- use `feature-planning` skill
 - **Bootstrapping a new SaaS project** -- use `saas-seeder` skill
-- **Updating project docs** (AGENTS.md, README) after code changes -- use `update-claude-documentation`
+- **Updating project docs** (AGENTS.md, README) after code changes -- use `doc-architect` (`references/doc-maintenance-after-change.md`)
 
 ## Document Inventory
 
@@ -190,7 +190,7 @@ Step 6: Release Notes (per-version communication — ongoing)
 
 | Skill | Relationship |
 |-------|-------------|
-| `update-claude-documentation` | Keeps project docs (README, AGENTS.md) updated after changes. |
+| `doc-architect` | Keeps project docs (README, AGENTS.md) updated after changes. |
 | `saas-seeder` | Uses operations manual patterns when bootstrapping new SaaS instances. |
 
 ### Sibling SDLC Skills

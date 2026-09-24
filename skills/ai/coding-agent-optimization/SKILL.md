@@ -1,6 +1,6 @@
 ---
 name: coding-agent-optimization
-description: Use when auditing or tuning a development machine's Claude Code or Codex setup for context, model, subagent, permission, or token efficiency. Analyse local capabilities first and apply only supported reversible changes; route runner-specific details to the linked adapters.
+description: Use when auditing or tuning a development machine's Claude Code or Codex setup for context, model, subagent, permission, or token efficiency, deciding when to compact a long session, or running independent lanes in parallel safely. Analyse local capabilities first; apply only supported reversible changes.
 metadata:
   portable: true
   compatible_with:
@@ -18,7 +18,7 @@ Code adapters only after the local runner and schema have been identified.
 ## Prerequisites
 
 Load `anti-ai-slop`, `skill-composition-standards`, and
-`world-class-engineering` first. Load `skill-safety-audit` before accepting or
+`world-class-engineering` first. Load `skill-engine-audit` (skill safety gate) before accepting or
 applying a new optimisation workflow. After inventory, load only the relevant
 adapter: [Codex](references/codex.md) or [Claude Code](references/claude-code.md).
 
@@ -31,6 +31,12 @@ adapter: [Codex](references/codex.md) or [Claude Code](references/claude-code.md
 - Review a configuration that appears to consume too many tokens or spawn too
   many workers.
 - Prepare a safe, reversible patch for global or project-level agent settings.
+- Decide whether a long session should be compacted now, at a phase boundary,
+  rather than left to auto-compaction; load
+  [strategic context compaction](references/strategic-context-compaction.md).
+- Run already-decomposed independent work concurrently (batched reads, subagents,
+  worktrees, verification lanes) without write collisions or false completion;
+  load [parallel execution lanes](references/parallel-execution-lanes.md).
 
 Do not use this skill to design an application agent runtime, an in-product
 multi-agent protocol, or a provider gateway. Route those tasks to
@@ -195,7 +201,7 @@ containers, emulators, or databases.
 - `ai-agent-governance-and-limits` for aggregate budgets and kill switches.
 - `ai-agent-tooling-and-hitl` for action approval and permission boundaries.
 - `skill-writing` for canonical skills and thin runner adapters.
-- `skill-safety-audit` before accepting high-impact instructions.
+- `skill-engine-audit` (skill safety gate) before accepting high-impact instructions.
 
 ## References
 
@@ -203,6 +209,12 @@ containers, emulators, or databases.
   model catalogues, and fresh-context checks.
 - [Claude Code adapter](references/claude-code.md) for `CLAUDE.md`, settings,
   agents, permissions, and session limits.
+- [Strategic context compaction](references/strategic-context-compaction.md)
+  for phase-boundary compaction decisions and what survives compaction
+  (absorbed from the retired `strategic-compact` skill).
+- [Parallel execution lanes](references/parallel-execution-lanes.md) for the
+  lane matrix, execution rules, and lane-reconciliation gate (absorbed from the
+  retired `parallel-execution-optimizer` skill).
 
 ## Portable runner rule
 

@@ -90,7 +90,7 @@ If you find a CRITICAL vulnerability: document with a detailed report, alert the
 
 ## Reference
 
-For detailed vulnerability patterns, code examples, and audit checklists, see skills: `skills/security/web-app-security-audit`, `skills/security/code-safety-scanner`, `skills/languages/php-security`. For auditing a `.claude/` directory itself (hooks, agents, MCP config), see skill `sdlc-meta/security-scan` once imported (this Kaizen pass).
+For detailed vulnerability patterns, code examples, and audit checklists, see skills: `skills/security/web-app-security-audit`, `skills/security/code-safety-scanner`, `skills/languages/php-security`. For auditing a `.claude/` directory itself (hooks, agents, MCP config), load `skills/security/code-safety-scanner/references/agent-harness-config-scan.md` (the scanner's agent-harness config mode).
 
 ---
 

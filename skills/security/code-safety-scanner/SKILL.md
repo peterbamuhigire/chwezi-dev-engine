@@ -1,6 +1,6 @@
 ---
 name: code-safety-scanner
-description: Use when scanning a codebase before deployment for critical vulnerabilities, server-error risks, unsafe AI-generated code, dependency problems, or payment misconfiguration.
+description: Use when scanning a codebase before deployment for critical vulnerabilities, server-error risks, unsafe AI-generated code, dependency problems, or payment misconfiguration, or when auditing Claude Code / agent config (CLAUDE.md, settings, hooks, MCP servers, agents) for secrets, permissive tools, and injection.
 metadata:
   portable: true
   compatible_with:
@@ -28,10 +28,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 Systematic 14-point safety scan for web applications. Covers security, stability, and payment safety across PHP, Node.js/JS/TS, and Python stacks.
 
-## Two Modes
+## Scan Modes
 
 **Automated Scan** (default): Run all 14 checks, produce structured report.
-**Checklist Mode**: Reference checks passively during code review. State which mode at start.
+**Checklist Mode**: Reference checks passively during code review.
+**Agent-Harness Config Scan**: Audit `CLAUDE.md`/`AGENTS.md`, `.claude/settings*.json`, `.mcp.json`, hooks, and `agents/*.md` for hardcoded secrets, permissive tool grants, hook command injection, unpinned MCP packages, and prompt-injection surface. Load [references/agent-harness-config-scan.md](references/agent-harness-config-scan.md) — run after configuration changes and before publishing a plugin or engine.
+
+State which mode at start.
 
 ## Scan Procedure
 

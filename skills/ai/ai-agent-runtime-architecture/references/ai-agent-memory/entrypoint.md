@@ -198,11 +198,11 @@ Each memory tier carries a **retention class** consumed by the compliance pipeli
 | Uploads | configurable per tenant | per data class |
 | Derivatives | parallel to source tier | parallel |
 
-Per-tier deletion functions **must** be idempotent and **must** wait on replication drain — they are invoked by the 9-step cascade in `ai-agent-memory-erasure-proof`. After every cascade run, the independent verification probes (separate code path) must return residue=0; otherwise the erasure request is held back from notification.
+Per-tier deletion functions **must** be idempotent and **must** wait on replication drain — they are invoked by the 9-step cascade in `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`. After every cascade run, the independent verification probes (separate code path) must return residue=0; otherwise the erasure request is held back from notification.
 
 Cross-links:
 
-- **`ai-agent-memory-erasure-proof`** — the verification job and the proof-of-erasure pack consumer.
+- **`ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`** — the verification job and the proof-of-erasure pack consumer.
 - **`saas-tenant-data-portability-and-erasure`** — whole-tenant erasure that fans into agent-memory leg.
 - **`ai-agent-soc2-controls`** — C1.2 (confidential disposal), P5 (retention and disposal).
 - **`ai-agent-hipaa-security-controls`** — PHI-tier constraints.

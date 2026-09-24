@@ -61,23 +61,26 @@ Release rule: a feature that can reach a privileged or external action must
 show evidence for L1 or L5, plus L6 for irreversible actions. L2-L3 alone never
 passes review.
 
-## 4. Crosswalk: OWASP Top 10 for LLM Applications (2025)
+## 4. Crosswalk: OWASP Top 10 for LLM Applications (2026)
 
-| ID | Risk | Primary engineering control | Minimum test before release |
-|---|---|---|---|
-| LLM01 | Prompt Injection | Layers L1-L6 above; indirect content treated as data | Direct and indirect injection cases from the standing red-team suite; privileged action must not execute |
-| LLM02 | Sensitive Information Disclosure | Data classification before context assembly; tenant-scoped retrieval; redaction; no secrets in prompts | Cross-tenant probe, PII echo probe, secret-in-context scan |
-| LLM03 | Supply Chain | Pinned model versions, provider DPA, model/package provenance, SBOM including prompts, skills and MCP servers | Dependency and model-version diff in CI; hallucinated-package check on AI-written code |
-| LLM04 | Data and Model Poisoning | Provenance and write-controls on RAG corpora, fine-tune data and memory; review queue for new sources | Poisoned-document canary in staging corpus |
-| LLM05 | Improper Output Handling | Treat output as untrusted user input to every downstream sink | XSS, SQL, shell, SSRF payloads emitted by a coerced model are neutralised |
-| LLM06 | Excessive Agency | Narrow tools, scoped credentials, autonomy level, approval gates | Tool-scope matrix review; out-of-scope call is denied by policy, not by prompt |
-| LLM07 | System Prompt Leakage | Keep no secrets, credentials or authorisation logic in prompts; assume the prompt is public | Extraction attempts yield nothing sensitive even when they succeed |
-| LLM08 | Vector and Embedding Weaknesses | Per-tenant namespaces or enforced metadata filters; access checks on retrieved chunks; embedding-store access control | Tenant B query never returns tenant A chunks; ACL change propagates to index |
-| LLM09 | Misinformation | Grounding with citations, abstain paths, confidence routing to humans, UX that shows uncertainty | Groundedness and abstention evals on the golden set |
-| LLM10 | Unbounded Consumption | Per-user/tenant rate limits, token and step budgets, max output tokens, spend alerts | Load and loop tests hit hard limits and stop safely |
+| ID (2026) | 2025 ID | Risk | Primary engineering control | Minimum test before release |
+|---|---|---|---|---|
+| LLM01 | LLM01 | Prompt Injection (now includes cross-modal: instructions in images, scans, audio) | Layers L1-L6 above; indirect and non-text content treated as data | Direct, indirect and cross-modal injection cases from the standing red-team suite; privileged action must not execute |
+| LLM02 | LLM02 | Sensitive Information Disclosure | Data classification before context assembly; tenant-scoped retrieval; redaction; no secrets in prompts | Cross-tenant probe, PII echo probe, secret-in-context scan |
+| LLM03 | LLM06 | Excessive Agency | Narrow tools, scoped credentials, autonomy level, approval gates | Tool-scope matrix review; out-of-scope call is denied by policy, not by prompt |
+| LLM04 | LLM03 | Supply Chain (now includes promoted model artefacts that are not what they claim) | Pinned model versions, provider DPA, signed or hash-checked model artefacts, SBOM including prompts, skills and MCP servers | Dependency, model-version and artefact-hash diff in CI; hallucinated-package check on AI-written code |
+| LLM05 | LLM04 | Data and Model Poisoning (now includes fine-tuning subversion) | Provenance and write-controls on RAG corpora, fine-tune data and memory; review queue for new sources; behaviour eval after every fine-tune | Poisoned-document canary in staging corpus; trigger-phrase regression eval on fine-tuned models |
+| LLM06 | LLM10 | Unbounded Consumption | Per-user/tenant rate limits, token and step budgets, max output tokens, spend alerts | Load and loop tests hit hard limits and stop safely |
+| LLM07 | LLM09 | Misinformation | Grounding with citations, abstain paths, confidence routing to humans, UX that shows uncertainty | Groundedness and abstention evals on the golden set |
+| LLM08 | LLM07 | Hidden Context Exposure (re-scoped from System Prompt Leakage: system prompt, developer instructions, retrieved chunks, tool outputs, memory) | Keep no secrets, credentials or authorisation logic in any model-visible context; entitlement-filter context before assembly; assume hidden context can be extracted | Extraction attempts on prompt, retrieved context and memory yield nothing the user is not entitled to |
+| LLM09 | LLM08 | Vector and Embedding Weaknesses | Per-tenant namespaces or enforced metadata filters; access checks on retrieved chunks; embedding-store access control | Tenant B query never returns tenant A chunks; ACL change propagates to index |
+| LLM10 | LLM05 | Improper Output Handling (now includes insecure AI-generated code) | Treat output as untrusted user input to every downstream sink; SAST and review gate on AI-written code | XSS, SQL, shell, SSRF payloads emitted by a coerced model are neutralised; generated-code scan passes |
 
-Note the 2023 v1.1 names (Insecure Output Handling, Training Data Poisoning,
-Model DoS, Insecure Plugin Design, Overreliance, Model Theft) are superseded.
+Cite IDs with the year (`LLM03:2026`), because the same number names a different
+risk in 2025. The 2023 v1.1 names (Insecure Output Handling, Training Data
+Poisoning, Model DoS, Insecure Plugin Design, Overreliance, Model Theft) are
+superseded. The 2026 LLM list covers the model as a component; once the model
+acts through tools, memory and downstream effects, also map section 5.
 
 ## 5. Crosswalk: OWASP Top 10 for Agentic Applications (2026)
 
@@ -88,7 +91,7 @@ Model DoS, Insecure Plugin Design, Overreliance, Model Theft) are superseded.
 | ASI03 | Identity and Privilege Abuse | Agent has its own identity; acts on behalf of the user with user-scoped, short-lived, audience-bound tokens; no shared service super-token | Token audience/lifetime config; no token passthrough |
 | ASI04 | Agentic Supply Chain Vulnerabilities | Allow-listed, pinned, reviewed tools, MCP servers, skills and prompt libraries; detect tool-description changes | Registry with version pins and review records |
 | ASI05 | Unexpected Code Execution | No shell or `eval` from model output; sandboxed interpreters with no network or secrets by default | Sandbox profile and escape test |
-| ASI06 | Memory and Context Poisoning | Validate before writing memory; provenance on memory items; per-user isolation; expiry; correction and erasure path | Poisoned-memory test; erasure proof (`ai-agent-memory-erasure-proof`) |
+| ASI06 | Memory and Context Poisoning | Validate before writing memory; provenance on memory items; per-user isolation; expiry; correction and erasure path | Poisoned-memory test; erasure proof (`ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`) |
 | ASI07 | Insecure Inter-Agent Communication | Authenticated channels, typed messages, receiving agent re-applies its own policy; no authority inherited by message content | Message schema and per-hop authorisation check |
 | ASI08 | Cascading Failures | Circuit breakers, per-run step/cost budgets, bounded retries, blast-radius limits | Fault-injection run stops within budget |
 | ASI09 | Human-Agent Trust Exploitation | Approval UI shows exact effect and provenance, flags model-authored rationale as such, resists approval fatigue | Approval UX review; rubber-stamp rate metric |
@@ -121,7 +124,7 @@ bank statements, answers questions, and can "send a repayment reminder" by SMS.
   from an approved template with typed slots (amount, due date). The document
   reader runs with no tools and returns a typed extraction. The outbound leg is
   now fixed-destination and fixed-content.
-- Residual risk recorded: misinformation in the extraction (LLM09) routed to a
+- Residual risk recorded: misinformation in the extraction (LLM07:2026) routed to a
   loan officer when confidence or cross-check against the ledger fails.
 
 ## 8. Premium versus generic output
@@ -131,14 +134,14 @@ bank statements, answers questions, and can "send a repayment reminder" by SMS.
 | "Sanitise inputs and add a strong system prompt." | Names the trust boundary, the triad legs present, and which leg is broken in code. |
 | Lists OWASP entries with definitions. | Maps each relevant entry to a control, an owner, a test ID and a release effect; marks non-applicable entries with the reason. |
 | Claims injection is "prevented". | States residual risk and the detection and response path. |
-| Uses 2023 OWASP names. | Uses LLM 2025 and ASI 2026 identifiers, dated. |
+| Uses 2023 OWASP names. | Uses LLM 2026 and ASI 2026 identifiers with the year suffix. |
 
 ## 9. Quality gate
 
 - [ ] Data-flow diagram marks every untrusted source, including tool outputs and memory.
 - [ ] Triad check recorded per component; each high-risk component has a broken leg in code.
 - [ ] Every privileged tool call passes a deterministic policy check outside the model.
-- [ ] Every LLM 2025 and ASI 2026 entry is mapped or marked not applicable with reason.
+- [ ] Every LLM 2026 and ASI 2026 entry is mapped or marked not applicable with reason.
 - [ ] Each control has an owner, a test in CI or the red-team suite, and a re-test date.
 - [ ] Residual risks and accepted exceptions are signed by a named owner.
 
@@ -146,7 +149,7 @@ bank statements, answers questions, and can "send a repayment reminder" by SMS.
 
 Access date 2026-09-24.
 
-- OWASP Top 10 for LLM Applications 2025 names and IDs: genai.owasp.org/llm-top-10 (verified).
+- OWASP Top 10 for LLM Applications 2026, published 2026-08-03: genai.owasp.org/resource/owasp-genai-llm-top-10-2026 (IDs, names, re-rankings and scope boundary verified in the edition PDF). The genai.owasp.org/llm-top-10 page still listed the 2025 edition on the access date; the 2025 list is superseded.
 - OWASP Top 10 for Agentic Applications 2026, published 2025-12-09: genai.owasp.org resource page and release post (publication verified). ASI01-ASI10 names taken from the OWASP GenAI release post and search summaries of it; the full PDF text was not opened, so exact wording is `NOT_ASSESSED` beyond the names shown.
 - OWASP AI Agent Security Cheat Sheet (cheatsheetseries.owasp.org): approval binding to exact parameters, memory isolation, inter-agent trust boundaries (verified).
 - MITRE ATLAS: github.com/mitre-atlas/atlas-data releases, v2026.09 dated 2026-09-15 (16 tactics; agent techniques added through 2026). Technique counts change monthly; do not hard-code.

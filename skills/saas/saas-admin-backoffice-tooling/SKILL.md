@@ -408,12 +408,12 @@ The back-office adds a **Compliance Console** surface for control owners and (re
 | **Control Status** | One row per SOC 2 / ISO 27001 / HIPAA control; latest evidence pack, cadence health, owner, open exceptions | `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls` |
 | **Run Evidence Collection** | Trigger an ad-hoc collector run (auditor sample request) | `ai-agent-evidence-automation` |
 | **Integrity Verification** | Run a chain-witness over a custom window; show drift positions | `ai-agent-audit-log-integrity` |
-| **Drill Cadence** | All drill classes with last pass date, next-due, status | `ai-agent-drill-evidence-and-cadence` |
-| **Approval Completeness** | Latest PI1.1 report; open gaps | `ai-agent-approval-audit-completeness` |
-| **Erasure Requests** | Open and recent erasure requests with proof-pack links | `ai-agent-memory-erasure-proof`, `saas-tenant-data-portability-and-erasure` |
+| **Drill Cadence** | All drill classes with last pass date, next-due, status | `ai-agent-compliance-controls/references/ai-agent-drill-evidence-and-cadence` |
+| **Approval Completeness** | Latest PI1.1 report; open gaps | `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness` |
+| **Erasure Requests** | Open and recent erasure requests with proof-pack links | `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`, `saas-tenant-data-portability-and-erasure` |
 | **Exception Register** | All open compliance exceptions sortable by control / severity / target-close | `ai-agent-soc2-controls` |
 | **Auditor Portal** | Read-only auditor sub-surface (separate auth realm, scoped to packs) | `ai-agent-evidence-automation` |
 
 All Compliance Console actions are themselves logged onto the action audit log with `event_class=compliance_console`. Auditor-portal access is logged separately into `auditor_access_log` (evidence for CC6.1).
 
-Cross-links: `ai-agent-evidence-automation`, `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-drill-evidence-and-cadence`, `ai-agent-approval-audit-completeness`, `ai-agent-memory-erasure-proof`, `ai-agent-control-testing-and-attestation`.
+Cross-links: `ai-agent-evidence-automation`, `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-compliance-controls/references/ai-agent-drill-evidence-and-cadence`, `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness`, `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`, `ai-agent-control-testing-and-attestation`.

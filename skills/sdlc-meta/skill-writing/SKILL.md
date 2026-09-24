@@ -326,7 +326,7 @@ After creating or updating a skill:
 ## Companion Skills
 
 - Load `world-class-engineering` when authoring engineering skills.
-- Load `skill-safety-audit` before sharing high-impact or security-sensitive skills.
+- Load `skill-engine-audit` (skill safety gate) before sharing high-impact or security-sensitive skills.
 
 ## Inputs
 

@@ -1,7 +1,7 @@
 # Release Notes Template
 
 **Back to:** [SKILL.md](../SKILL.md)
-**Related:** [google-play-store-review](../../google-play-store-review/SKILL.md) (Play Store "What's New") | [update-claude-documentation](../../update-claude-documentation/SKILL.md) (project doc updates)
+**Related:** [google-play-store-review](../../google-play-store-review/SKILL.md) (Play Store "What's New") | [doc-architect](../../doc-architect/SKILL.md) (project doc updates)
 
 ## Purpose
 

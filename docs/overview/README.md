@@ -90,14 +90,14 @@ presentation-layer Apple UI guidance lives in the external
 ## Current Catalog Policy
 
 - Active roots are `skills/` and `00-meta-initialization/`.
-- Target active catalog size is 150-170 skills.
+- Target active catalog size is 150-180 skills (raised from 170 on 2026-09-24).
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>
   engine; reference-only checkouts stay outside the runtime skill catalog.
-- Current active catalog size is 185 skills. This exceeds the 150-170 soft target by 15 after the
-  2026-09-20 depth-first pass; consolidation is an open item and the hard cap remains 200.
-- Current routing smoke-test suite contains 160 fixtures, with 90% precision@1
-  (145/160) and 100% precision@3 (160/160); the active Kaizen target is at least 95% top-1.
+- Current active catalog size is 167 skills. The 2026-09-24 consolidation merged 18 overlapping
+  skills into references of their owners; the hard cap remains 200.
+- Current routing smoke-test suite contains 184 fixtures, with 96% precision@1
+  (178/184) and 100% precision@3 (184/184); the active Kaizen target is at least 95% top-1.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated

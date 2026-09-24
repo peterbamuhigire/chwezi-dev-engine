@@ -1,6 +1,6 @@
 ---
 name: world-class-engineering
-description: Use when designing, building, reviewing, or upgrading production software systems that must be secure, performant, maintainable, scalable, and user-centered. Apply before writing specs, code, architecture, APIs, databases, mobile apps, SaaS platforms, or ERP systems.
+description: Use when designing, building, reviewing, or upgrading production software that must be secure, performant, maintainable, scalable, and user-centred, and when verifying a change before claiming done or opening a PR via the six-phase build, types, lint, tests, security, and diff-review gate (READY/NOT READY).
 metadata:
   portable: true
   compatible_with:
@@ -27,6 +27,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Load `references/language-standards.md` when implementation or documentation needs explicit language, localisation, naming, or terminology standards.
+- Load [references/verification-loop.md](references/verification-loop.md) immediately before claiming a feature, fix, or refactor is done or opening a PR: the six-phase build, types, lint, tests, security, and diff-review gate with a fixed READY/NOT READY report (absorbed from the retired `verification-loop` skill).
 ## Book-informed practice route
 
 For scenario contracts, review focus, AI collaboration, failure-aware architecture, and Git recovery, load [the slice, review, and recovery practice](references/slice-review-and-recovery-practice.md).
@@ -310,6 +311,7 @@ Use these prompts while working:
 - [references/source-patterns.md](references/source-patterns.md): Book-to-practice workflows derived from the supplied PDFs.
 - [references/executable-engineering-system.md](references/executable-engineering-system.md): Delivery-system rules, artifacts, and operating loops derived from the supplied books.
 - [references/world-class-gates.md](references/world-class-gates.md): Release gates for engineering, security, performance, UX, and operations.
+- [references/verification-loop.md](references/verification-loop.md): Per-change six-phase completion gate and report format.
 
 ## Inputs
 

@@ -251,7 +251,7 @@ User: "Using webapp-gui-design and multi-tenant-saas-architecture, create a mult
 
 **Example:**
 ```
-User: "Run skill-safety-audit on new skills"
+User: "Run the skill-engine-audit safety gate on new skills"
 ```
 
 **Claude's Steps:**
@@ -294,7 +294,7 @@ User: "Run skill-safety-audit on new skills"
 
 **Example:**
 ```
-User: "Run markdown-lint-cleanup on skills docs"
+User: "Use doc-architect to clean markdown lint in skills docs"
 ```
 
 **Claude's Steps:**

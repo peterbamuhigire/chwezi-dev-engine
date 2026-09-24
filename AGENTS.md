@@ -140,12 +140,12 @@ measure the assembled runtime metadata budget.
 
 Known baseline as of 2026-09-24 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 185.
-- Target active catalog size: 150-170. The current 185-entry catalogue exceeds the soft target
-  by 15 after the 2026-09-20 depth-first pass added 14 workflow skills (for example
-  `verification-loop`, `council`, `santa-method`, `security-scan`) on top of the retained
-  hospitality route. This is an open consolidation item, not an accepted baseline: preserve the
-  hard cap of 200 and do not add another active entrypoint without an equal-value consolidation.
+- Active `SKILL.md` files: 167.
+- Target active catalog size: 150-180 (upper bound raised from 170 to 180 by Peter Bamuhigire,
+  Lead Consultant, on 2026-09-24). The 2026-09-24 consolidation merged 18 overlapping skills into
+  their natural owners as references (inactive `ALIAS.md` routes in `docs/skill-aliases.yml`),
+  taking the catalogue from 185 to 167 without losing capability. Preserve the hard cap of 200;
+  new active entrypoints still need routing evidence and a collision check.
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links

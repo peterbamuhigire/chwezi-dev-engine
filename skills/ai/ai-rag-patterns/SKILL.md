@@ -1,6 +1,6 @@
 ---
 name: ai-rag-patterns
-description: Use when building features that answer questions from private data, documents, policies, or time-sensitive information — RAG architecture, chunking strategies, hybrid search, re-ranking, vector databases, evaluation, agentic RAG, multimodal RAG...
+description: Use when building features that answer questions from private data, documents, policies, or time-sensitive information — RAG architecture, chunking, hybrid search, re-ranking, vector databases, evaluation, agentic and multimodal RAG, and bounded iterative retrieval for context-starved subagents.
 metadata:
   portable: true
   compatible_with:
@@ -132,6 +132,8 @@ Guidance is split across two reference files so this entrypoint stays compact.
 - `Cost Management Decision Tree` — concrete dollar figures per branch
 - `Failure Mode Playbook` — empty, irrelevant, hallucinated, stale
 - `Gates Before Shipping`
+
+**[references/iterative-retrieval.md](references/iterative-retrieval.md)** — load when a context-starved subagent must explore a codebase or workspace before working: bounded DISPATCH-EVALUATE-REFINE-LOOP (max 3 cycles), relevance banding, explicit gap lists, and terminology learning.
 
 Load the production file when building a RAG system that has to pass evaluation gates, survive multi-tenant review, or hit a cost budget under load.
 

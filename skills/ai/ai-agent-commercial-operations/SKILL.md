@@ -1,6 +1,6 @@
 ---
 name: ai-agent-commercial-operations
-description: Use when pricing, billing, refunding, recognizing revenue, or packaging commercial terms for agentic AI services and outcomes.
+description: Use when pricing, billing, refunding, recognizing revenue, or packaging commercial terms for agentic AI services, or when defining agent SLAs, customer commitments, SLA dashboards, breach credits, and service evidence.
 metadata:
   portable: true
   compatible_with:
@@ -17,10 +17,12 @@ metadata:
 | Input | Required | Purpose |
 |---|---|---|
 | Domain evidence | yes | offer catalogue, pricing metric, usage ledger, contract terms, refund policy, and accounting jurisdiction |
+| SLA evidence | when commitments or credits apply | service boundary, customer tier, measurable SLI data, support coverage, exclusions, and credit policy |
 
 ## Outputs
 
 - Produce: priced offer, billing rules, refund decision matrix, revenue-treatment handoff, and commercial control register.
+- When commitments apply, also produce: SLA schedule, SLI/SLO definitions, dashboard specification, breach and credit workflow, and customer evidence.
 
 ## Capability and permission boundaries
 
@@ -56,6 +58,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Design agent pricing, attempted-vs-completed billing, refunds, and revenue recognition policy.
 - Connect commercial terms to task evidence, completion status, usage records, and customer promises.
 - Define fair billing boundaries for abandoned, failed, partial, or human-approved agent tasks.
+- Define agent availability, completion, response-time, quality, and support commitments (SLAs).
+- Design SLA credit automation and customer-facing service dashboards; map task evidence to support, credits, renewals, and account reviews.
 
 ## Do Not Use When
 
@@ -94,7 +98,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.
-
+- Load [references/provider-recourse-and-multi-agent-attribution.md](references/provider-recourse-and-multi-agent-attribution.md) when a breach or credit involves an upstream provider, or when several agents share one billed task.
+- SLA work: load `references/ai-agent-sla-and-commitments/`, `references/ai-agent-sla-credit-automation/`, or `references/ai-agent-customer-sla-dashboard/` through [references/routing.md](references/routing.md).
 ## Consolidated Child References
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
@@ -103,5 +108,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Category | Artifact | Format | Example |
 | --- | --- | --- | --- |
 | Correctness | Agent commercial event reconciliation | Markdown table plus query evidence | attempted, completed, credited, refunded, and recognised amounts reconcile by tenant |
+| Operability | SLA measurement and credit evidence | Markdown table plus calculation | service class, exclusion, breach window, credit calculation, approval, and customer notice |
 
 <!-- dual-compat-end -->

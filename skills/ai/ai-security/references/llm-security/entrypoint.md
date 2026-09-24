@@ -61,24 +61,25 @@ LLM security is fundamentally different from traditional web app security. The a
 
 ---
 
-## OWASP Top 10 for LLM Applications (2025)
+## OWASP Top 10 for LLM Applications (2026)
 
-Updated 2026-09-24 from the superseded v1.1 (2023) list; verified at genai.owasp.org/llm-top-10.
+Updated 2026-09-24 to the 2026 edition (published 2026-08-03; verified in the edition PDF at
+genai.owasp.org/resource/owasp-genai-llm-top-10-2026). Cite IDs with the year: numbers moved.
 For agents also apply the OWASP Top 10 for Agentic Applications (2026). Control and test
-mapping for both lists: [../llm-and-agent-threat-control-map.md](../llm-and-agent-threat-control-map.md).
+mapping for both lists, with the 2025 IDs: [../llm-and-agent-threat-control-map.md](../llm-and-agent-threat-control-map.md).
 
-| # | Vulnerability | Risk |
-|---|---|---|
-| LLM01 | **Prompt Injection** | Direct or indirect input alters model behaviour, goals, or tool use |
-| LLM02 | **Sensitive Information Disclosure** | Model reveals PII, secrets, or other tenants' data from context or training |
-| LLM03 | **Supply Chain** | Compromised models, adapters, datasets, packages, plugins, or providers |
-| LLM04 | **Data and Model Poisoning** | Tampered training, fine-tune, RAG, or embedding data introduces backdoors or bias |
-| LLM05 | **Improper Output Handling** | Raw LLM output passed to browsers, SQL, shells, or other sinks without validation |
-| LLM06 | **Excessive Agency** | Too much functionality, permission, or autonomy granted to the model |
-| LLM07 | **System Prompt Leakage** | Prompts expose secrets or security logic that should never have been in them |
-| LLM08 | **Vector and Embedding Weaknesses** | Retrieval stores leak across tenants, accept poisoned content, or bypass access control |
-| LLM09 | **Misinformation** | Plausible false output relied upon without grounding or review |
-| LLM10 | **Unbounded Consumption** | Uncontrolled inference cost, loops, or extraction via excessive queries |
+| # | Vulnerability | Risk | 2025 ID |
+|---|---|---|---|
+| LLM01 | **Prompt Injection** | Direct, indirect or cross-modal input alters model behaviour, goals, or tool use | LLM01 |
+| LLM02 | **Sensitive Information Disclosure** | Model reveals PII, secrets, or other tenants' data from context or training | LLM02 |
+| LLM03 | **Excessive Agency** | Too much functionality, permission, or autonomy granted to the model | LLM06 |
+| LLM04 | **Supply Chain** | Compromised or misrepresented models, adapters, datasets, packages, plugins, or providers | LLM03 |
+| LLM05 | **Data and Model Poisoning** | Tampered training, fine-tune, RAG, or embedding data introduces backdoors or bias | LLM04 |
+| LLM06 | **Unbounded Consumption** | Uncontrolled inference cost, loops, or extraction via excessive queries | LLM10 |
+| LLM07 | **Misinformation** | Plausible false output relied upon without grounding or review | LLM09 |
+| LLM08 | **Hidden Context Exposure** | System prompt, instructions, retrieved chunks, tool outputs or memory extracted or inferred | LLM07 (System Prompt Leakage) |
+| LLM09 | **Vector and Embedding Weaknesses** | Retrieval stores leak across tenants, accept poisoned content, or bypass access control | LLM08 |
+| LLM10 | **Improper Output Handling** | Raw LLM output or generated code passed to browsers, SQL, shells, or other sinks without validation | LLM05 |
 
 ---
 
@@ -316,5 +317,5 @@ checkAiQuota($tenantId);
 ---
 
 ## Sources
-Steve Wilson — *The Developer's Playbook for LLM Security* (2025); Chip Huyen — *AI Engineering* (2025) Ch.10; David Spuler — *Generative AI Applications* (2024) Ch.10; OWASP Top 10 for LLM Applications 2025 (accessed 2026-09-24)
+Steve Wilson — *The Developer's Playbook for LLM Security* (2025); Chip Huyen — *AI Engineering* (2025) Ch.10; David Spuler — *Generative AI Applications* (2024) Ch.10; OWASP Top 10 for LLM Applications 2026 (accessed 2026-09-24)
 

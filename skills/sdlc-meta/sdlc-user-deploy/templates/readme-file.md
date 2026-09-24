@@ -1,7 +1,7 @@
 # README File Template
 
 **Back to:** [SKILL.md](../SKILL.md)
-**Related:** [update-claude-documentation](../../update-claude-documentation/SKILL.md) (ongoing README maintenance) | [saas-seeder](../../saas-seeder/SKILL.md) (project bootstrap)
+**Related:** [doc-architect](../../doc-architect/SKILL.md) (ongoing README maintenance) | [saas-seeder](../../saas-seeder/SKILL.md) (project bootstrap)
 
 ## Purpose
 

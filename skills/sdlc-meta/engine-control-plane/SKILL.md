@@ -25,7 +25,7 @@ plane governs ownership, lifecycle, evidence, handoff, and recovery.
 
 - A single domain skill can own the work without an orchestration decision.
 - The task needs domain doctrine rather than routing, ownership, or release control.
-- A safety-only review is required; load `skill-safety-audit` instead.
+- A safety-only review is required; load `skill-engine-audit` and its skill safety gate instead.
 
 ## Required Inputs
 
@@ -124,7 +124,7 @@ evidence, destructive-action, and release gates fail closed or return
 ## Read next
 
 - `skill-engine-audit` for whole-engine inventory and scoring.
-- `skill-safety-audit` for unsafe instructions, dependencies, and provenance.
+- `skill-engine-audit` (skill safety gate) for unsafe instructions, dependencies, and provenance.
 - `advanced-testing-strategy` for risk-based test depth and retained evidence.
 - `world-class-engineering` for implementation and release gates.
 

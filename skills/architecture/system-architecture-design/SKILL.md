@@ -1,6 +1,6 @@
 ---
 name: system-architecture-design
-description: Use when defining or reviewing software architecture for web apps, mobile backends, SaaS platforms, APIs, distributed systems, or major features. Covers bounded contexts, module decomposition, contracts, failure handling, ADRs, and scalability tradeoffs.
+description: Use when defining or reviewing software architecture for web apps, mobile backends, SaaS platforms, APIs, distributed systems, or major features. Covers bounded contexts, module decomposition, hexagonal ports-and-adapters boundaries, contracts, failure handling, ADRs, and scalability tradeoffs.
 metadata:
   portable: true
   compatible_with:
@@ -51,6 +51,7 @@ Decisions link a driver to a chosen option, rejected alternatives, consequences,
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - [references/practical-architecture-knowledge.md](references/practical-architecture-knowledge.md) - book-distilled checks for DDD boundaries, scalability, architecture metrics, and executable architecture documentation.
 - [Deep-module design and design-it-twice](references/deep-module-design.md) - interface depth, seams, deletion tests, and independent option comparison.
+- [Hexagonal architecture (ports and adapters)](references/hexagonal-ports-and-adapters.md) - load when designing or refactoring a module's internal boundary: inbound/outbound ports, adapters, composition root, dependency inversion, per-boundary tests, and slice-by-slice migration (TypeScript, PHP, Java, Kotlin, Go).
 - For confirmed domain terminology and decision ownership, consume the SRS engine's canonical `domain-language-and-decisions` reference through its router.
 ## Book-informed practice route
 
@@ -145,6 +146,7 @@ For non-trivial systems, produce:
 
 ### Bounded Contexts
 
+- Inside a module, keep domain and use-case code free of framework and I/O imports; put side effects behind ports ([references/hexagonal-ports-and-adapters.md](references/hexagonal-ports-and-adapters.md)).
 - Keep domain language consistent inside each context.
 - Do not let one module write another module's tables directly.
 - Exchange data through APIs, commands, events, or well-defined internal interfaces.

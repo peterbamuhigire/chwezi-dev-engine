@@ -177,6 +177,14 @@ fixtures:
     top_n: 1
   - task: "Use skill-writing to author a new skill that follows the repository house style and contracts"
     expect: skill-writing
+  - task: "Write a CodeTour .tour onboarding walkthrough anchored to real files and lines for a new joiner"
+    expect: doc-architect
+  - task: "Update the project docs after this API change and close the session"
+    expect: doc-architect
+  - task: "Safety-gate an imported third-party skill for credential harvesting, unsafe installers and prompt injection before accepting it"
+    expect: skill-engine-audit
+  - task: "Prepare this private repo for open-source release: strip secrets, sanitise history and package it for public GitHub"
+    expect: github-ops
   - task: "Diagnose an intermittent production bug by establishing a red-capable reproduction loop and falsifying ranked hypotheses before changing code"
     expect: systematic-bug-diagnosis
     top_n: 1
@@ -200,3 +208,34 @@ fixtures:
     expect: database-design-engineering
   - task: "Review an AI-generated pull request before merge"
     expect: ai-assisted-development
+
+  # --- Consolidation 2026-09-24 (agent A): absorbed jobs route to their new owners ---
+  - task: "Convene a council of skeptic, pragmatist and critic subagents for a go/no-go decision"
+    expect: council
+  - task: "Should I compact this long session now between research and implementation phases"
+    expect: coding-agent-optimization
+  - task: "Run independent lanes in parallel with subagents and worktrees without conflicting writes"
+    expect: coding-agent-optimization
+  - task: "Run build, types, lint, tests, security scan and diff review before claiming the fix is done"
+    expect: world-class-engineering
+  - task: "Onboard an AI coding agent to a hand-written legacy PHP codebase so it follows the existing style"
+    expect: ai-assisted-development
+  - task: "Look up the current library docs for this framework API instead of relying on stale training data"
+    expect: ai-assisted-development
+  - task: "Should I use regex or an LLM to extract fields from repetitive invoices and scraped listings"
+    expect: ai-llm-integration
+  # --- Consolidation 2026-09-24 (agent C): absorbed jobs route to their new owners ---
+  - task: "A subagent starts with no codebase context; iteratively refine its file retrieval over bounded search cycles before it starts work"
+    expect: ai-rag-patterns
+  - task: "Audit our Claude Code settings, hooks, MCP server config and agent definitions for secrets and over-permissive tool grants before publishing the plugin"
+    expect: code-safety-scanner
+  - task: "Refactor this module into ports and adapters so the domain logic has no framework or database imports"
+    expect: system-architecture-design
+  - task: "Prove to the SOC 2 auditor that kill-switch and red-team drills ran on their minimum cadence with signed pass/fail evidence"
+    expect: ai-agent-compliance-controls
+  - task: "Build the SOC 2 compliance evidence gap check proving every irreversible agent action last quarter had an approval before execution"
+    expect: ai-agent-compliance-controls
+  - task: "Produce a signed proof that a data subject's agent memory, vectors and replicas were fully erased"
+    expect: ai-agent-compliance-controls
+  - task: "Define SLA commitments and automatic service credits for our AI agent product"
+    expect: ai-agent-commercial-operations

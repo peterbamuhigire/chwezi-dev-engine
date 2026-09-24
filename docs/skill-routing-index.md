@@ -12,7 +12,7 @@ skills while the catalog is reduced below the active-skill cap.
 
 - Active skill roots are `skills/` and `00-meta-initialization/`.
 - Active skill means a file named `SKILL.md` under an active root.
-- Target active catalog size is 150-170 skills, with a hard cap of 200.
+- Target active catalog size is 150-180 skills (raised from 170 on 2026-09-24), with a hard cap of 200.
 - Reference material must not be named `SKILL.md`.
 - Inactive aliases retain their original content as `ALIAS.md` in the same
   directory and route through `docs/skill-aliases.yml`.
@@ -24,7 +24,7 @@ Current guardrail baseline after the 2026-06-21 external-engine split:
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 185 |
+| Active `SKILL.md` files | 167 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 47 |
@@ -124,6 +124,11 @@ target instead.
 | `skills/ai/ux-for-ai` | `design-system/skills/ai-ux` (external alias; resolve through the design engine router) |
 | `skills/frontend-ux/ux-principles-101` | `design-system/skills/ux-foundations` (external alias; resolve through the design engine router) |
 | `skills/backend-databases/vector-databases` | `skills/ai/ai-rag-patterns` |
+| `skills/sdlc-meta/code-tour` | `skills/sdlc-meta/doc-architect` (`references/code-tour.md`) |
+| `skills/sdlc-meta/markdown-lint-cleanup` | `skills/sdlc-meta/doc-architect` (`references/markdown-lint-cleanup.md`) |
+| `skills/sdlc-meta/update-claude-documentation` | `skills/sdlc-meta/doc-architect` (`references/doc-maintenance-after-change.md`) |
+| `skills/sdlc-meta/skill-safety-audit` | `skills/sdlc-meta/skill-engine-audit` (`references/skill-safety-gate.md`) |
+| `skills/sdlc-meta/opensource-pipeline` | `skills/sdlc-meta/github-ops` (`references/opensource-release-pipeline.md`) |
 
 ## Broad Routing Groups
 

@@ -11,8 +11,8 @@ active_skill_policy:
     - design-system-skills
     - chwezi-accounting-doctrine
   hard_cap: 200
-  target_range: 150-170
-  current_active_skill_count: 185
+  target_range: 150-180
+  current_active_skill_count: 167
   finance_doctrine_external: true
   local_doctrine_reference_only: true
   do_not_move_or_delete_skill_directories_from_registry_work: true
@@ -98,6 +98,24 @@ inactive_skill_aliases:
   skills/ios/ios-quality-and-release: skills/mobile-cross/mobile-platform-operations
   skills/game-development/blender-game-asset-production: skills/game-development/game-3d-asset-pipeline
   skills/ai/ai-entitlements-and-feature-gating: skills/saas/saas-entitlements-and-plan-gating
+  skills/sdlc-meta/strategic-compact: skills/ai/coding-agent-optimization
+  skills/sdlc-meta/parallel-execution-optimizer: skills/ai/coding-agent-optimization
+  skills/sdlc-meta/verification-loop: skills/sdlc-meta/world-class-engineering
+  skills/sdlc-meta/inherit-legacy-style: skills/sdlc-meta/ai-assisted-development
+  skills/sdlc-meta/documentation-lookup: skills/sdlc-meta/ai-assisted-development
+  skills/sdlc-meta/regex-vs-llm-structured-text: skills/ai/ai-llm-integration
+  skills/ai/iterative-retrieval: skills/ai/ai-rag-patterns
+  skills/security/security-scan: skills/security/code-safety-scanner
+  skills/architecture/hexagonal-architecture: skills/architecture/system-architecture-design
+  skills/ai/ai-agent-drill-evidence-and-cadence: skills/ai/ai-agent-compliance-controls
+  skills/ai/ai-agent-approval-audit-completeness: skills/ai/ai-agent-compliance-controls
+  skills/ai/ai-agent-memory-erasure-proof: skills/ai/ai-agent-compliance-controls
+  skills/ai/ai-agent-sla-and-customer-commitments: skills/ai/ai-agent-commercial-operations
+  skills/sdlc-meta/code-tour: skills/sdlc-meta/doc-architect
+  skills/sdlc-meta/markdown-lint-cleanup: skills/sdlc-meta/doc-architect
+  skills/sdlc-meta/update-claude-documentation: skills/sdlc-meta/doc-architect
+  skills/sdlc-meta/skill-safety-audit: skills/sdlc-meta/skill-engine-audit
+  skills/sdlc-meta/opensource-pipeline: skills/sdlc-meta/github-ops
 planned_routes:
   doctrine/skills/ifrs-standards-suite:
     domain: finance

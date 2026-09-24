@@ -59,7 +59,7 @@ a withdrawn edition is not evidence.
 | HIPAA Security Rule | 45 CFR 164.302-.318 as in force | January 2025 NPRM not final; do not cite proposed text as law |
 | ISO/IEC 42001 | 2023 | CEN adoption EN ISO/IEC 42001:2026 is the same text |
 | EU AI Act | Reg. (EU) 2024/1689 as amended by Reg. (EU) 2026/1744 | High-risk dates 2 Dec 2027 / 2 Aug 2028 |
-| OWASP LLM Top 10 | 2025 | Also map OWASP Top 10 for Agentic Applications (2026) |
+| OWASP LLM Top 10 | 2026 (published 2026-08-03; IDs renumbered from 2025) | Cite IDs with the year; also map OWASP Top 10 for Agentic Applications (2026) |
 | NIST AI RMF | 1.0 + AI 600-1 profile | Revision announced; re-check before citing |
 
 ## 5. Subprocessor and LLM provider re-verification

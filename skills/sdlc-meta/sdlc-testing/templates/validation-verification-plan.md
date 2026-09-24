@@ -104,7 +104,7 @@ It ensures the system is both built correctly (verification) and meets user need
 **Markdown:**
 | Tool | Check | When |
 |------|-------|------|
-| `markdown-lint-cleanup` skill | Headings, blank lines, code fences | Before commit |
+| `doc-architect` skill (`references/markdown-lint-cleanup.md`) | Headings, blank lines, code fences | Before commit |
 | Line count | All .md files under 500 lines | Before commit |
 
 ### 2.3 Unit Testing (Per-Layer Verification)

@@ -1,6 +1,6 @@
 ---
 name: ai-agent-compliance-controls
-description: Use when mapping AI agent operations to SOC 2, ISO 27001, HIPAA, audit logs, control testing, attestations, and compliance evidence.
+description: Use when mapping AI agent operations to SOC 2, ISO 27001, HIPAA, audit logs, control testing, attestations, and compliance evidence, including drill-cadence evidence, approval-completeness (PI1.1) gap checks, and signed agent-memory erasure proofs.
 metadata:
   portable: true
   compatible_with:
@@ -56,6 +56,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Design compliance controls for agent actions, logs, approvals, evidence, and access boundaries.
 - Map agent operations to SOC 2, ISO 27001, HIPAA, or control testing requirements.
 - Prepare control evidence and audit-ready narratives for agentic AI systems.
+- Prove kill-switch, red-team, eval-drift, and restoration drills ran on cadence with signed pass/fail evidence (`references/ai-agent-drill-evidence-and-cadence/`).
+- Prove every irreversible agent action had a prior, authorised, linked approval and emit the SOC 2 PI1.1 gap register (`references/ai-agent-approval-audit-completeness/`).
+- Prove a data-subject erasure removed all agent memory tiers, vectors, replicas, and subprocessor copies, with a signed proof-of-erasure pack (`references/ai-agent-memory-erasure-proof/`).
 
 ## Do Not Use When
 
@@ -95,6 +98,9 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.
 - Load [references/eu-ai-act-and-iso-42001-agent-overlay.md](references/eu-ai-act-and-iso-42001-agent-overlay.md) when a feature may be EU AI Act high-risk or a customer asks for ISO/IEC 42001 alignment: classification, Arts. 9-15/19/72/73 mapped to existing controls, application dates.
+- Load [references/ai-agent-drill-evidence-and-cadence/entrypoint.md](references/ai-agent-drill-evidence-and-cadence/entrypoint.md) when turning drills into audit evidence: drill registry, minimum cadence, overdue paging, signed drill packs. Drill scenario design stays in `ai-agent-safety-and-red-team` and `ai-incident-response`.
+- Load [references/ai-agent-approval-audit-completeness/entrypoint.md](references/ai-agent-approval-audit-completeness/entrypoint.md) when an auditor asks for proof that irreversible actions were approved before execution: gap-detection job, backfill detection, PI1.1 pack.
+- Load [references/ai-agent-memory-erasure-proof/entrypoint.md](references/ai-agent-memory-erasure-proof/entrypoint.md) when an erasure request touches agent-derived memory: cascade verification job, residue probes, signed proof pack.
 - Load [references/continuous-control-monitoring.md](references/continuous-control-monitoring.md) when proving controls stayed effective across an audit window: declared-vs-observed drift checks, compliance deploy gate, framework edition register, LLM provider re-verification.
 
 ## Consolidated Child References

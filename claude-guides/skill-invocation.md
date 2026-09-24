@@ -162,8 +162,7 @@ Claude should recognize these directories and their purposes:
 skills/
 ├── multi-tenant-saas-architecture/  # SaaS backend skill
 ├── feature-planning/         # Complete feature planning (spec + implementation)
-├── update-claude-documentation/  # Documentation maintenance skill
-├── doc-architect/            # Triple-Layer AGENTS.md generator
+├── doc-architect/            # AGENTS.md generator and documentation maintenance
 ├── manual-guide/             # End-user manual and reference guide skill
 ├── dual-auth-rbac/           # Dual auth + RBAC security skill
 ├── webapp-gui-design/        # Web app GUI design skill
@@ -229,14 +228,9 @@ skills/
 - Provides: Complete planning from spec to implementation, TDD workflows
 - Combine with: Relevant implementation skills
 
-**update-claude-documentation**
-- When: Maintaining project documentation
-- Provides: Documentation standards, consistency checking
-- Standalone skill
-
 **doc-architect**
-- When: Generating AGENTS.md documentation
-- Provides: Triple-Layer documentation generation
+- When: Generating AGENTS.md documentation, or maintaining project documentation after changes
+- Provides: Triple-Layer documentation generation, post-change doc alignment, code tours, Markdown lint cleanup
 - Standalone skill
 
 ## Skill-Specific Guidelines

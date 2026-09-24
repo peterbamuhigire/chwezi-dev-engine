@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-09-24 - Kaizen: book-extraction retirement, currentness, consolidation
+
+- Removed `book-extractions/`; knowledge folded into task references; guardrail rejects extraction
+  folders, links and local-ebook citations. See `docs/updates/2026-09-24-book-extraction-removal-and-kaizen.md`.
+- Restored 126 `compatible_with` corruptions to `claude-code`; validators use the canonical engine
+  id `chwezi-dev-engine`; 88 GitHub Actions pins moved to current majors.
+- Ingested 20+ engineering titles as paraphrased references (API styles, JSON/schema, OWASP API,
+  MCP 2026-07-28, LLM/agent security, performance, React/TS, React Native, DevOps, Python/pandas 3,
+  ML feature pipelines, data contracts, lineage, accessibility testing).
+- OWASP LLM citations re-mapped to the Top 10 for LLM Applications 2026 (published 2026-08-03);
+  every citation now carries its edition year.
+- Consolidation (authorised by Peter Bamuhigire): 18 overlapping skills merged into their owners as
+  references with inactive `ALIAS.md` routes; active catalogue 185 -> 167. Target range raised
+  to 150-180 (hard cap 200). Routing fixtures 160 -> 184, precision@3 100%.
+
 ## 2026-08-05 - Managed SaaS Visual Assets
 
 - Added `saas-managed-visual-assets` as the engineering owner for scoped background pools,
