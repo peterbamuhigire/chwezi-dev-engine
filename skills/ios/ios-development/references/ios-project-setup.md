@@ -7,7 +7,7 @@ description: 'iOS project setup with Xcode: project structure, SPM dependencies,
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

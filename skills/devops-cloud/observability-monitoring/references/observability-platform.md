@@ -10,7 +10,7 @@ description: Use when building or operating a production observability platform 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

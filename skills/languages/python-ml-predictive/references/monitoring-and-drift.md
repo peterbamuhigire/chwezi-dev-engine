@@ -154,6 +154,20 @@ Retrain on any of:
 
 Do **not** retrain nightly. Nightly retraining hides drift (the model chases it) and mixes development with production.
 
+## Drift shapes and when to check
+
+- **Abrupt** drift (a source system change, a new mobile-money tariff) is caught by comparing a recent window to a locked reference window.
+- **Incremental** drift (slow inflation of loan sizes) hides from short windows; also compare the recent window to the *training* distribution, not only to last week.
+- **Recurring** drift (harvest seasons, school-fee months, Ramadan, December trading) is not a fault; use a same-period-last-year reference before alerting.
+- **Ingestion-time (eager) checks** validate a batch before it is written to the feature table and can block it; **scheduled (lazy) checks** inspect data already written. Use eager checks for schema, ranges and nulls; lazy windowed checks for distribution drift, because small batches make distribution tests noisy.
+- Monitor embeddings for RAG/LLM features by tracking the distribution of distances to a reference centroid or of nearest-neighbour similarity, not per-dimension PSI.
+
+## Retrain or redesign?
+
+- Labels arrive quickly enough -> monitor performance directly (concept drift) and retrain when it degrades.
+- Labels are slow -> monitor feature and prediction drift as leading indicators; for classifiers, performance-estimation methods that use calibrated probabilities can estimate accuracy without labels (e.g. confidence-based performance estimation), valid only while the probabilities stay calibrated.
+- Retraining on fresh data fixes a shifted distribution. It does not fix a changed relationship, a missing signal, or a changed business question; those need feature or model redesign. If two successive retrains decay faster than the one before, stop retraining and redesign.
+
 ## Multi-tenant notes
 
 - Compute drift **per tenant** for large tenants. A single global drift signal hides a big customer silently breaking.
@@ -164,12 +178,14 @@ Do **not** retrain nightly. Nightly retraining hides drift (the model chases it)
 
 `evidently` gives a batteries-included drift report:
 ```python
-from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset, TargetDriftPreset
+# Evidently 0.7.x API (verified 2026-09-24). The pre-0.7 imports
+# `evidently.report` / `evidently.metric_preset` are legacy; do not use them in new code.
+from evidently import Report
+from evidently.presets import DataDriftPreset
 
-report = Report(metrics=[DataDriftPreset(), TargetDriftPreset()])
-report.run(reference_data=ref_df, current_data=recent_df)
-report.save_html("drift.html")
+report = Report([DataDriftPreset()])
+snapshot = report.run(recent_df, ref_df)   # current first, reference second
+snapshot.save_html("drift.html")
 ```
 
 Worth it when:
@@ -211,3 +227,9 @@ Persist `results` to a table; Grafana reads from it; alert rules live in Alertma
 - Alerting on every feature — noise kills ops.
 - Treating drift alerts as model failures instead of signals — sometimes the world changed and the model was right to be confident; sometimes the model is broken. Investigate, don't auto-rollback.
 - No ownership — drift alerts with no named owner get ignored.
+
+## Evidence/currentness
+
+Access date 2026-09-24. Evidently API from docs.evidentlyai.com (quickstart); latest release v0.7.23 (2026-09-11, GitHub). NannyML (label-free performance estimation) last released v0.13.1 in 2025-07: treat as low-activity and verify maintenance before adopting. PSI/alert thresholds in this file are engineering conventions, not standards; calibrate per model.
+
+Sources: Dowling (2026) *Building Machine Learning Systems with a Feature Store*; Rabanser, Guennemann and Lipton (2019) "Failing Loudly", NeurIPS; Evidently documentation.

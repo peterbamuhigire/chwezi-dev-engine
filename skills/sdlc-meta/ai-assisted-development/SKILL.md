@@ -1,6 +1,6 @@
 ---
 name: ai-assisted-development
-description: Use when coordinating AI-assisted planning, implementation, review, modernisation, documentation, human approval, CI evidence, or bounded multi-agent software work.
+description: Use when coordinating AI-assisted planning, implementation, review of an AI-generated pull request before merge, modernisation, documentation, human approval, CI evidence, or bounded multi-agent software work.
 metadata:
   portable: true
   compatible_with:
@@ -31,7 +31,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Use the `references/` directory for deep detail after reading the core workflow below.
 ## Book-informed practice route
 
-Apply the human-owned, scenario-constrained AI workflow in [the 2026-09-14 engineering practice synthesis](../../../book-extractions/2026-09-14-engineering-practice-synthesis.md).
+Apply the human-owned, scenario-constrained AI workflow in [the slice, review, and recovery practice](../world-class-engineering/references/slice-review-and-recovery-practice.md).
 <!-- dual-compat-end -->
 ## Overview
 
@@ -63,7 +63,7 @@ This skill bridges **prompting patterns** + **orchestration** + **sub-agent coor
 - Use workers for bounded implementation with disjoint file ownership. Tell workers they are not alone in the codebase and must not revert others' edits.
 - Do not delegate the immediate blocking task if the main workflow cannot proceed until it returns.
 - Never let two agents write the same files unless one is explicitly reviewing the other's patch.
-- For generated code, require the same quality bar as human code: tests, readable names, explicit error handling, and no invented dependencies.
+- For generated code, require the same quality bar as human code: tests, readable names, explicit error handling, and no invented dependencies. Apply `references/ai-generated-code-review-gate.md` as the merge gate.
 
 ## AI Coding Risk Controls
 
@@ -144,3 +144,8 @@ Fallback: without delegation, execute sequentially. Without execution, return pa
 
 For interaction modes, execution records, prompt/context discipline, and trust
 ramps, load [book-informed AI collaboration and execution](references/book-informed-ai-collaboration-and-execution.md).
+
+Before merging any materially AI-generated diff, load the
+[AI-generated code review gate](references/ai-generated-code-review-gate.md)
+for blocking checks on performance, API currency, states, accessibility,
+security, supply chain, and measured evidence for optimisation claims.

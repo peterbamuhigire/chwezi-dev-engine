@@ -53,7 +53,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Plain `audit_log` table with no chain — any mutation is invisible.
 - Hash chain but no daily seal — chain can be replaced wholesale.
 - Daily seal but no off-platform replication — same operator can rewrite both.
-- Retention by `created_at < 3 years ago → DELETE` ignores event-class retention (HIPAA 6y, financial 7y, EU AI Act high-risk 10y).
+- Retention by `created_at < 3 years ago → DELETE` ignores event-class retention (HIPAA 6y, financial 7y, EU AI Act high-risk logs >= 6 months statutory, 10y by policy).
 - Verification job runs but failure is a Slack message — no alert escalation.
 - Export returns the rows but not the proof; auditor cannot verify the slice corresponds to the live chain.
 - Action audit log lives in the same DB user as the application; application bug can mutate it.
@@ -237,7 +237,7 @@ Full table in `references/retention-policies.md`. Summary:
 | `memory_erasure` | 7 years | GDPR proof |
 | `tool_call` (default) | 3 years | SOC 2 + ISO baseline |
 | `task_*` (lifecycle) | 1 year | Operability |
-| `eu_aia_high_risk_action` | 10 years | EU AI Act Article 12 |
+| `eu_aia_high_risk_action` | 10 years (policy) | EU AI Act: Art. 12 requires logging capability; Art. 19 / Art. 26(6) require logs kept at least 6 months; Art. 18 requires technical and QMS documentation kept 10 years. 10y is a conservative choice when logs evidence the technical file. |
 
 A row's `retention_class` is set at emission time based on `event_class`, `data_class`, `phi_flag`, and feature classification.
 

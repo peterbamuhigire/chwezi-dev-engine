@@ -6,7 +6,7 @@ description: 'Report UI rule for mobile apps: any report with potential for more
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

@@ -46,16 +46,47 @@ class SourceIngestionGuardrailTests(unittest.TestCase):
         findings = self.scan({"references/innocent-name.md": text})
         self.assertIn("source-fulltext-markers", {finding.code for finding in findings})
 
-    def test_allows_concise_independent_synthesis(self):
+    def test_allows_concise_independent_synthesis_in_skill_references(self):
         findings = self.scan(
             {
-                "book-extractions/topic-extraction.md": (
-                    "# Topic synthesis\n\nSource: Example Author, Example Book.\n\n"
+                "skills/x/references/retry-safe-writes.md": (
+                    "# Retry-safe writes\n\nSources: Example Author (2024) *Example Book*.\n\n"
                     "Use idempotency keys for retry-safe writes."
-                )
+                ),
+                "skills/python/references/pdf-extraction.md": "# PDF Extraction\n\nPick a parser.",
             }
         )
         self.assertEqual([], findings)
+
+    def test_rejects_any_file_in_book_extraction_folder(self):
+        for folder in ("book-extractions", "extracted-books", "docs/book-study"):
+            findings = self.scan({f"{folder}/tiny-note.md": "# Note\n\nOne line."})
+            self.assertIn("book-extraction-folder", {finding.code for finding in findings}, folder)
+
+    def test_rejects_link_into_book_extraction_folder(self):
+        findings = self.scan(
+            {"skills/x/SKILL.md": "Load [notes](../../book-extractions/topic.md) first."}
+        )
+        self.assertIn("book-extraction-link", {finding.code for finding in findings})
+
+    def test_rejects_extraction_file_outside_named_folder(self):
+        findings = self.scan(
+            {
+                "docs/ux-strategy-extraction.md": (
+                    "# UX Strategy - Example Author - Extraction\n"
+                    "**Source:** Example Author, *Example Book* (2015).\n"
+                )
+            }
+        )
+        self.assertIn("book-extraction-file", {finding.code for finding in findings})
+
+    def test_rejects_shadow_library_or_local_ebook_citation(self):
+        for text in (
+            "- `Example Book (Author) (z-library.sk, 1lib.sk).epub`",
+            "Source input: `C:\\Users\\someone\\Downloads\\Example Book.epub`",
+        ):
+            findings = self.scan({"skills/x/references/source-register.md": text})
+            self.assertIn("source-file-citation", {finding.code for finding in findings}, text)
 
 
 if __name__ == "__main__":

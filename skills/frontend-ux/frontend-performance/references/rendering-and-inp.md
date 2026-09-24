@@ -106,4 +106,4 @@ button.addEventListener('click', async () => {
 });
 ```
 
-Use `scheduler.yield()` where available (Chromium 129+) instead of the `setTimeout(0)` dance.
+Prefer `scheduler.yield()` where supported, but it is not Baseline (MDN, checked 2026-09-24): feature-detect with `globalThis.scheduler?.yield` and fall back to the `setTimeout(0)` pattern above. For field attribution of slow interactions, use the `web-vitals` attribution build, which reports Long Animation Frame script data (Chromium only).

@@ -86,6 +86,7 @@ If a required operational capability is unavailable, keep the corresponding rele
 - `references/mobile-saas-planning.md` for native mobile SaaS planning documents and implementation sequencing.
 - `references/google-play-store-review.md` for Android Play Store policy, testing, listing, and submission readiness.
 - `references/apple-platform-operations-wwdc26.md` for Apple Silicon, Xcode 27, Device Hub, TestFlight, Xcode Cloud, and App Store evidence readiness.
+- `references/react-native-production-checklist.md` - load when a React Native or Expo app needs a toolchain, New Architecture, accessibility, performance, OTA, or App Store/Play readiness gate.
 ## References
 
 - Load the retained [iOS quality and release workflow](../../ios/ios-quality-and-release/ALIAS.md) for Swift Testing, Xcode Cloud, TestFlight, App Store evidence, and Apple-specific recovery.

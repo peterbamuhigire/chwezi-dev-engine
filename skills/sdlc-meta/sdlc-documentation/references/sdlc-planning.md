@@ -13,7 +13,7 @@ description: Generate Planning & Management documentation for SDLC projects. Cov
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

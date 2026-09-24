@@ -64,6 +64,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- Load `ai-llm-integration/references/llm-application-pattern-decision-catalogue.md` (section 4) when the task is the eval-driven development loop or reusing evals as runtime guardrails.
 <!-- dual-compat-end -->
 ## Overview
 
@@ -134,6 +135,12 @@ actions, load [references/ai-human-oversight-evaluation.md](references/ai-human-
 Evaluate the problem, human, system, model, inputs, and outputs separately. Do not
 call a model-quality pass a product-quality pass. Require evidence for correction,
 contest, undo or safe fallback, escalation, consent/notice, and the audit event.
+
+When a model, score, rule set, or ranking decides or materially shapes an outcome
+for a person (credit, hiring, eligibility, pricing, visibility, risk flags), load
+[references/algorithmic-decision-impact-review.md](references/algorithmic-decision-impact-review.md)
+for the impact tier, proxy and feedback-loop checks, subgroup error evidence,
+fairness-criterion ownership, and contest path required before release.
 
 ## Evaluation Dataset Design
 

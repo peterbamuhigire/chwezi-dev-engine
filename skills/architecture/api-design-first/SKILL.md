@@ -1,6 +1,6 @@
 ---
 name: api-design-first
-description: Use when designing HTTP APIs with OpenAPI, versioning, authentication, rate limits, idempotency, error contracts, and observability requirements.
+description: Use when designing HTTP APIs with OpenAPI, versioning, authentication, rate limits, idempotency, error contracts, observability requirements, and choosing REST, webhooks, SSE, or WebSocket delivery.
 metadata:
   portable: true
   compatible_with:
@@ -88,6 +88,10 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 - [references/api-error-handling.md](references/api-error-handling.md) - absorbed API error envelope and failure-response guidance.
 - [references/api-pagination.md](references/api-pagination.md) - absorbed pagination, cursor, and collection-response guidance.
 - [references/api-testing-verification.md](references/api-testing-verification.md) - absorbed API contract testing and verification guidance.
+- [references/api-style-selection.md](references/api-style-selection.md) - load when choosing REST, GraphQL, gRPC, webhooks, SSE, WebSocket, messaging, or feeds per interaction (decision matrix, AsyncAPI/OpenAPI 3.2 currentness).
+- [references/json-payload-and-schema-design.md](references/json-payload-and-schema-design.md) - load when designing payloads, JSON Schema 2020-12 contracts, RFC 9457 problem details, or classifying a change as breaking.
+- [references/api-security-owasp-top10.md](references/api-security-owasp-top10.md) - load for API authorisation design or pre-release review against OWASP API Security Top 10 (2023) with negative-test proofs.
+- [references/apis-for-ai-agents-and-data.md](references/apis-for-ai-agents-and-data.md) - load when LLM agents, MCP servers, notebooks/BI tools, or model-inference clients consume the API (MCP 2026-07-28).
 - Companion skill: `graphql-patterns` — schema-first Apollo Server + TypeScript patterns when choosing GraphQL over REST for client-shaped reads.
 <!-- dual-compat-end -->
 
@@ -192,6 +196,8 @@ Load alongside:
 | Real-time subscriptions                       | GraphQL subscriptions |
 
 Failure mode if wrong: GraphQL-first for simple CRUD buys query-complexity DoS risk with no field-flexibility payoff; REST-first for multi-client heavy-reads pushes clients into over-fetch and N+1 round trips.
+
+This table is the REST/GraphQL shortcut only. For real-time, service-to-service, event, or callback interactions (SSE, WebSocket, gRPC, webhooks, broker messaging), decide per interaction with `references/api-style-selection.md`; one-way live updates rarely need GraphQL subscriptions or WebSocket.
 
 ## Design workflow (six steps)
 

@@ -1,6 +1,6 @@
 # tsconfig for production
 
-Every option in a production `tsconfig.json` earns its place. This is the reference for what each flag does, when to turn it on, and what trade-offs apply. Matches TypeScript 5.4+ semantics.
+Every option in a production `tsconfig.json` earns its place. This is the reference for what each flag does, when to turn it on, and what trade-offs apply. Written against TypeScript 5.4+ semantics; see "TypeScript 7 upgrade gate" below before applying it to a 7.x project.
 
 ## Recommended baseline
 
@@ -204,6 +204,30 @@ Use `tsup` or `tshy` with two `tsconfig` variants. Avoid hand-rolling.
 - Mixing `moduleResolution: "node"` with `module: "ESNext"` — inconsistent output.
 - Omitting `isolatedModules` in a project using esbuild/swc/Babel — build will silently produce broken output.
 - `"strict": true` plus `//@ts-nocheck` at file top — defeats the purpose.
+
+## TypeScript 7 upgrade gate
+
+TypeScript 7.0 (GA 2026-07-08) is the native Go port of the compiler and
+language service. Before moving a project to 7.x:
+
+1. Remove options that are now hard errors: `target: "es5"`, `baseUrl`
+   (express `paths` relative to the project root), `moduleResolution:
+   "node"`/`"node10"`/`"classic"` (use `bundler` for app packages, `nodenext`
+   for libraries), and `module: "amd" | "umd" | "systemjs" | "none"`.
+2. Account for new defaults: `strict: true`, `module: "esnext"`,
+   `types: []` (list needed `@types` packages explicitly, for example
+   `"types": ["node", "vitest/globals"]`), and `rootDir` defaulting to `./`.
+3. Check every tool that calls the compiler API (typescript-eslint, some
+   Vue/MDX/Astro/Svelte tooling, custom transformers). 7.0 has no stable
+   programmatic API yet; keep those tools on TypeScript 6 through the
+   `@typescript/typescript6` compatibility package until the 7.x API ships.
+4. Gate: `tsc --noEmit` clean on 7.x, lint clean on the 6.x API path, and
+   build output diffed against the previous compiler for one release.
+
+Evidence/currentness: devblogs.microsoft.com/typescript "Announcing
+TypeScript 7.0" and GitHub releases for microsoft/TypeScript (v7.0.2,
+2026-08-20); accessed 2026-09-24. The expected 7.1 API date is
+`NOT_ASSESSED`.
 
 ## Cross-reference
 

@@ -40,7 +40,8 @@ Production-grade React patterns drawn from Mastering React (Horton & Vice), Pro 
 | TS + React production gotchas (Fullstack React with TS) | `references/react-typescript-gotchas.md` |
 | Testing (RTL) | `references/testing.md` |
 | Forms and validation | `references/forms.md` |
-| React 18/19 features | `references/react-18-19.md` |
+| React 18/19 features; load for 19.2/19.3 APIs and React Compiler adoption | `references/react-18-19.md` |
+| Large-scale React + TS app architecture (layers, HTTP/API client, config, i18n, primitives) | `../../languages/typescript-full-stack/references/large-scale-react-ts.md` |
 
 ---
 

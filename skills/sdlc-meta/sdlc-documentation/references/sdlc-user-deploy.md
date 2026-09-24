@@ -13,7 +13,7 @@ description: Generate User & Deployment documentation for SDLC projects. Covers 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -111,7 +111,7 @@ Delivery documents must define:
 - **Writing ERP module-specific manuals** with in-app PHP delivery -- use `manual-guide` skill
 - **Planning a single feature** -- use `feature-planning` skill
 - **Bootstrapping a new SaaS project** -- use `saas-seeder` skill
-- **Updating project docs** (AGENTS.md, README) after code changes -- use `update-Codex-documentation`
+- **Updating project docs** (AGENTS.md, README) after code changes -- use `update-claude-documentation`
 
 ## Document Inventory
 
@@ -190,7 +190,7 @@ Step 6: Release Notes (per-version communication — ongoing)
 
 | Skill | Relationship |
 |-------|-------------|
-| `update-Codex-documentation` | Keeps project docs (README, AGENTS.md) updated after changes. |
+| `update-claude-documentation` | Keeps project docs (README, AGENTS.md) updated after changes. |
 | `saas-seeder` | Uses operations manual patterns when bootstrapping new SaaS instances. |
 
 ### Sibling SDLC Skills

@@ -7,7 +7,7 @@ description: Steve Krug's web and mobile usability principles from Don't Make Me
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

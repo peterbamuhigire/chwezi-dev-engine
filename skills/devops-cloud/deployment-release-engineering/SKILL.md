@@ -75,6 +75,8 @@ If staging, telemetry, or rollback execution is unavailable, produce a read-only
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - [Human-only operation wizards](references/human-only-operation-wizards.md)
+- [Rollout selection](references/rollout-selection.md) - load when writing the rollout, abort-threshold, and reversal sections of a release plan.
+- Supply-chain verification before promotion: `../cicd-pipelines/references/supply-chain-provenance.md`.
 <!-- dual-compat-end -->
 Use this skill when shipping software to real users. It turns implementation output into releasable output. The focus is safe deployment, fast rollback, and evidence-based release decisions.
 
@@ -236,7 +238,7 @@ For significant releases, produce:
 
 - [references/deployment-pipeline.md](references/deployment-pipeline.md): Stage model, release packet, and rollout heuristics.
 - [references/release-checklist.md](references/release-checklist.md): Pre-deploy and post-deploy checks.
-- [references/rollout-selection.md](references/rollout-selection.md): Choosing rolling, blue-green, or canary.
+- [references/rollout-selection.md](references/rollout-selection.md): Load when choosing the core strategy (downtime, rolling new-before-old, rolling replace-in-place, blue-green) plus add-ons (canary, toggle, promotion, dark launch), and when deciding rollback vs toggle-disable vs roll-forward per change.
 - [references/devops-book-patterns.md](references/devops-book-patterns.md): Value-stream, pipeline, observability, DevSecOps, PHP, cloud-native, and GitOps patterns from the supplied DevOps books.
 - [references/delivery-feedback-evidence.md](references/delivery-feedback-evidence.md): Book-derived release hypotheses, model lineage, independent verification, guardrails, and post-release learning.
 - [../docker-development/references/php-python-js-container-delivery.md](../docker-development/references/php-python-js-container-delivery.md): Docker image, Compose, CI, registry, and runtime promotion standards for PHP, Python, and JavaScript services.

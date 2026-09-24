@@ -1,6 +1,6 @@
 # GitHub Actions Workflows — Copy-Paste Templates
 
-Production-grade YAML templates for Node.js, PHP, Docker, reusable workflows, and OIDC deploys. Pin action SHAs in security-critical jobs.
+Production-grade YAML templates for Node.js, PHP, Docker, reusable workflows, and OIDC deploys. Action versions are current major tags (verified 2026-09-24) for readability; production workflows pin every action to its full commit SHA with the version as a trailing comment (see `github-actions-security-hardening.md`).
 
 ## Node.js — Build, Test, Docker, Deploy
 
@@ -28,8 +28,8 @@ jobs:
   check:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -37,7 +37,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test -- --coverage
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: coverage/
@@ -49,8 +49,8 @@ jobs:
     outputs:
       digest: ${{ steps.push.outputs.digest }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: actions/checkout@v7
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::123456789012:role/gha-deploy
           aws-region: eu-west-1
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment: dev
     steps:
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::123456789012:role/gha-deploy
           aws-region: eu-west-1
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment: ${{ inputs.environment }}
     steps:
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ secrets.aws_role_arn }}
           aws-region: eu-west-1
@@ -166,13 +166,13 @@ jobs:
           --health-timeout=5s
           --health-retries=10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           tools: composer
           coverage: pcov
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: ~/.composer/cache
           key: composer-${{ hashFiles('composer.lock') }}
@@ -189,7 +189,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -230,7 +230,7 @@ jobs:
 ### Node
 
 ```yaml
-- uses: actions/setup-node@v4
+- uses: actions/setup-node@v7
   with:
     node-version: '22'
     cache: 'npm'
@@ -240,7 +240,7 @@ jobs:
 ### Gradle
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: |
       ~/.gradle/caches
@@ -251,7 +251,7 @@ jobs:
 ### CocoaPods
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: Pods
     key: pods-${{ hashFiles('Podfile.lock') }}
@@ -260,7 +260,7 @@ jobs:
 ### Python
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: ~/.cache/pip
     key: pip-${{ hashFiles('**/requirements*.txt') }}
@@ -272,13 +272,13 @@ jobs:
 strategy:
   fail-fast: false
   matrix:
-    node: ['20', '22']
+    node: ['22', '24']
     os:   [ubuntu-24.04, macos-14]
   max-parallel: 4
 
 runs-on: ${{ matrix.os }}
 steps:
-  - uses: actions/setup-node@v4
+  - uses: actions/setup-node@v7
     with: { node-version: ${{ matrix.node }} }
 ```
 

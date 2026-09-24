@@ -12,7 +12,7 @@ description: Resilience patterns for microservices — circuit breaker (full imp
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

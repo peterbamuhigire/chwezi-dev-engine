@@ -146,7 +146,7 @@ jobs:
   red-team:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run red-team
         run: python -m tests.red_team.runner --suite=indirect_injection --output=red-team.json
       - name: Check thresholds
@@ -157,7 +157,7 @@ jobs:
         with:
           path: red-team-summary.md
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with: { name: red-team-report, path: red-team.json }
 ```
 

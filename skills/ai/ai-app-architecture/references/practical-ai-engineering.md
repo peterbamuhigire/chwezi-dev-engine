@@ -3,7 +3,7 @@
 This file is self-contained. It was prepared from local EPUB study notes and
 must remain useful even if the EPUB is deleted.
 
-Source input: local EPUB `C:\Users\Peter\Downloads\Documents\AI Engineering.epub`.
+Sources: Chip Huyen (2025) *AI Engineering*, O'Reilly.
 
 Use this reference when designing, reviewing, or hardening AI-enabled products.
 

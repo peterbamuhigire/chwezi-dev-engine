@@ -12,7 +12,7 @@ description: 'Advanced MySQL 8 SQL techniques: window functions, CTEs, recursive
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

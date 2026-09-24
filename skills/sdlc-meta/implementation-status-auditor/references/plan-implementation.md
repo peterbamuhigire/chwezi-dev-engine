@@ -13,7 +13,7 @@ description: Autonomous plan executor that implements feature plans from start t
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

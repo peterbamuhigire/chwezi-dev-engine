@@ -20,6 +20,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - For long-lived PHP application work, load `references/world-class-php-oop-clean-architecture.md` before designing controllers, services, repositories, or domain objects.
 - For containerized PHP work, pair with `docker-development`.
+- Pin a supported PHP branch before choosing language features. On 2026-09-24 php.net listed 8.4 and 8.5 in active support, 8.3 security-only to 31 Dec 2027, and 8.2 security-only to 31 Dec 2026; 8.1 and earlier are end of life. Re-check <https://www.php.net/supported-versions.php> at execution time and flag any project on an EOL or near-EOL branch as an upgrade risk.
 
 ## Evidence Produced
 
@@ -48,7 +49,7 @@ Production-grade PHP patterns for maintainable, testable, secure, high-performan
 - `references/database-orm-patterns.md` — PDO, QueryBuilder, Active Record Model, soft delete, ORM concepts
 - `references/attack-prevention.md` — SQL injection, XSS, CSRF, CSP, brute force, least privilege
 - `references/world-class-php-oop-clean-architecture.md` — PHP 8 OOP, SOLID, clean architecture, repositories, adapters, and framework-independent domain rules
-- `references/source-register-dev-engine.md` — local EPUB sources used for this development-engine upgrade
+- `references/source-register-dev-engine.md` — book sources (titles only) used for this development-engine upgrade
 - `references/php-security.md` - absorbed PHP-specific security hardening, sessions, validation, crypto, upload, and deployment guidance
 - `references/php-vs-nextjs.md` - absorbed PHP vs Next.js architecture decision guidance
 - `references/javascript-php-integration.md` - absorbed integration patterns for PHP-rendered pages and JavaScript modules

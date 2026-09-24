@@ -6,7 +6,7 @@ description: Integrating AI into a microservices architecture — AI model serve
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -98,7 +98,7 @@ POST /ai/complete
   "tenant_id": 42,
   "user_id": 101,
   "feature_slug": "sales-summary",
-  "model": "Codex-haiku-4-5",
+  "model": "claude-haiku-4-5",
   "system_prompt": "You are a sales analyst...",
   "user_message": "Summarise today's sales: ...",
   "max_tokens": 400
@@ -223,7 +223,7 @@ class ProcessAIReportJob implements ShouldQueue
             'tenant_id'   => $job->tenant_id,
             'user_id'     => $job->user_id,
             'feature_slug'=> 'report-generation',
-            'model'       => 'Codex-haiku-4-5',
+            'model'       => 'claude-haiku-4-5',
             'system_prompt' => '...',
             'user_message'  => $this->buildPrompt($job->params),
             'max_tokens'    => 2000,

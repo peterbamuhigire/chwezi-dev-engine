@@ -54,7 +54,7 @@ Decisions link a driver to a chosen option, rejected alternatives, consequences,
 - For confirmed domain terminology and decision ownership, consume the SRS engine's canonical `domain-language-and-decisions` reference through its router.
 ## Book-informed practice route
 
-Use [the 2026-09-14 engineering practice synthesis](../../../book-extractions/2026-09-14-engineering-practice-synthesis.md) for workload-led trade-offs, ownership, data truth, failure containment, and evolution.
+Use [the slice, review, and recovery practice](../../sdlc-meta/world-class-engineering/references/slice-review-and-recovery-practice.md) for workload-led trade-offs, ownership, data truth, failure containment, and evolution.
 <!-- dual-compat-end -->
 Use this skill when the problem is bigger than a single component. Start here before committing to frameworks, service boundaries, data ownership, or integration patterns.
 

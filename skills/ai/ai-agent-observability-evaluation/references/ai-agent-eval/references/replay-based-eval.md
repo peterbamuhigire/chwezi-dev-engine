@@ -122,7 +122,7 @@ jobs:
   replay-eval:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Pull sanitised replay corpus
         run: ./scripts/pull-replay-corpus.sh --feature=$(cat changed-features.txt) --size=500
       - name: Run replay

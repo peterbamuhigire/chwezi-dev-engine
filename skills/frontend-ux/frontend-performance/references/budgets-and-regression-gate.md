@@ -62,9 +62,9 @@ jobs:
   size:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20', cache: 'npm' }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: '24', cache: 'npm' }
       - run: npm ci
       - run: npm run build
       - run: npx size-limit --json > size.json
@@ -75,12 +75,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: size
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20', cache: 'npm' }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: '24', cache: 'npm' }
       - run: npm ci && npm run build
       - run: npx @lhci/cli autorun
 ```
+
+Currentness (checked 2026-09-24): Node.js 24 is the active LTS; Node 20 is end of life. `actions/checkout` and `actions/setup-node` have published newer majors (v7 as of July 2026); bump them deliberately after reading release notes rather than copying this example's pins. `@lhci/cli` 0.15.1 bundles Lighthouse 12.6.1 while Lighthouse 13.5.0 is current, so compare CI runs only against CI baselines. See `performance-engineering-procedure.md`.
 
 Gate rules:
 

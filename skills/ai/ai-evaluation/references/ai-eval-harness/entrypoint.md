@@ -169,7 +169,7 @@ jobs:
   goldens:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: pip install -r eval/requirements.txt
       - run: python -m eval.runner.ci --features changed --compare-base
       - run: python -m eval.runner.ci --report-pr

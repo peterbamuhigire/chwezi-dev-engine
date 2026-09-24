@@ -6,7 +6,7 @@ description: Production-grade iOS networking — URLSession async/await with typ
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

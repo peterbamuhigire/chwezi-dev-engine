@@ -11,7 +11,7 @@ description: Use when building the telemetry infrastructure that powers growth a
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

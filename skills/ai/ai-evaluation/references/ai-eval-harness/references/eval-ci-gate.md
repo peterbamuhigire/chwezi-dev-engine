@@ -34,8 +34,8 @@ jobs:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY_EVAL }}   # rate-limited eval key
       OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY_EVAL }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: { python-version: '3.12' }
       - run: pip install -r eval/requirements.txt
 

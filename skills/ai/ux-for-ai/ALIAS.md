@@ -6,7 +6,7 @@ description: AI interface design framework for building AI-powered features that
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

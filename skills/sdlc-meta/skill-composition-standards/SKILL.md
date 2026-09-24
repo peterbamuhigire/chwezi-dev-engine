@@ -83,7 +83,7 @@ description: Use when <trigger scenarios> — <what this skill covers>, <what it
 
 Rules for `description`:
 
-- Starts with "Use when" (trigger-phrasing — Codex loads skills on trigger match).
+- Starts with "Use when" (trigger-phrasing — agents load skills on trigger match).
 - Names the scenarios that should trigger loading.
 - Names the neighbour skills (so the reader knows the difference).
 - Single line, fits on screen without wrapping — under ~350 characters.

@@ -11,7 +11,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Hold the active catalogue within its soft target | The current count is 171 after the retained hospitality route was added; this is a documented one-entry exception while its contract is repaired and reviewed. CI enforces the 200 hard cap, while new routes require an equal-value consolidation and routing evidence. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
+| Return the active catalogue to its soft target | The current count is 185 after the 2026-09-20 depth-first pass added 14 workflow skills to the retained hospitality route; this is 15 above the 150-170 target and needs an equal-value consolidation (candidates: `council` with `santa-method`, `strategic-compact` and `parallel-execution-optimizer` into `coding-agent-optimization` references, `verification-loop` into `world-class-engineering`). CI enforces the 200 hard cap, while new routes require an equal-value consolidation and routing evidence. | Use `docs/skill-routing-index.md`, collision evidence, and `docs/skill-aliases.yml` before adding another active entrypoint. |
 
 ## High Priority
 

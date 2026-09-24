@@ -4,9 +4,9 @@ This JavaScript patterns update distills applicable guidance from the user's loc
 
 ## Sources
 
-- `C:\Users\Peter\Downloads\JavaScript Object-Oriented Programming By Examples (D. Truman, Neo) (z-library.sk, 1lib.sk, z-lib.sk).epub`
+- D. Truman, *JavaScript Object-Oriented Programming By Examples* (year NOT_ASSESSED)
   - Used for JavaScript objects, prototypes, prototype chain, `this`, closures, private state, classes, static members, private fields, inheritance, and ES5/ES6 OOP distinctions.
-- `C:\Users\Peter\Downloads\Decoding JavaScript Design Patterns_ Build scalable applications with object-oriented programming and advanced pattern techniques.epub`
+- *Decoding JavaScript Design Patterns* (author and year NOT_ASSESSED)
   - Used for creational, structural, behavioral, async, React/Vue, MV*, testing, anti-pattern, and pattern-selection guidance.
 
 ## Copyright Note

@@ -1,4 +1,12 @@
 # UI/UX Book Extractions — Phase 1 Design
+
+> **Superseded 2026-09-24 - historical record only; do not follow.** This spec
+> directed agents to create or cite book-extraction files. That practice is now
+> prohibited by the "Never store book extractions" rule in `AGENTS.md`; the
+> `book-extractions/` folder was removed and UX practice lives in the design
+> engine (`design-system-skills`). Book titles below are named for provenance
+> only; no book content is stored here.
+
 **Date:** 2026-05-04
 **Author:** Claude (with peter.bamuhigire@gmail.com)
 **Status:** Approved
@@ -38,7 +46,7 @@ This design covers **Phase 1 only**. Subsequent phases each get their own spec.
 | Product Managers' Guide to UX (Fekeshazi) | Focused | `fekeshazi-pm-ux-guide-extraction.md` |
 | UX/UI Design (Branson) | Focused | `branson-ux-ui-design-extraction.md` |
 
-- **Full tier:** every actionable rule, every framework, every named technique. Target 400–600 lines per file.
+- **Full tier:** (withdrawn - exhaustive capture of a book's rules is not permitted).
 - **Focused tier:** only material that's *new or distinct* relative to the existing 30+ extractions in `website-skills/book-extractions/`. Skip rules already well-covered (e.g., 12-column grids, "don't make me think" heuristics). Target 150–250 lines per file.
 
 ### Output locations (per file)
@@ -49,20 +57,13 @@ This design covers **Phase 1 only**. Subsequent phases each get their own spec.
 
 `srs-skills` is excluded from copies — it's a requirements-doc engine with no `book-extractions/` folder. Phase 2 SRS spec will reference the canonical path.
 
-### Format
+### Format and method (removed)
 
-Match the existing pattern (see `roots-of-uiux-design-extraction.md`):
-- Header: title, source, subtitle, coverage note
-- Body: dense bullets grouped by part / chapter / topic
-- Prefer specific rules and numeric thresholds over abstract advice
-- Include named frameworks verbatim (CUBI, Levy's 4 tenets, etc.)
-
-### Method
-
-1. Convert each EPUB → markdown via `pandoc` (already installed at `/c/ProgramData/chocolatey/bin/pandoc`).
-2. Read converted text; for focused tier, cross-reference 2–3 existing UX extractions to identify gaps.
-3. Write extraction file to canonical location.
-4. After all 5 are written, copy to website-skills and social-media-skills `book-extractions/` folders.
+The original format and conversion method prescribed dense, chapter-ordered
+extractions with named frameworks reproduced verbatim from converted ebooks.
+Both are prohibited. Current practice: read the source outside the repository,
+then write paraphrased, task-oriented skill references with a short
+Author (Year) *Title* citation; see `skills/sdlc-meta/skill-writing/references/source-distillation-and-copyright.md`.
 
 ## Out of Scope (Phase 1)
 

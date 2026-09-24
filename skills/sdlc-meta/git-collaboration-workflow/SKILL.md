@@ -31,7 +31,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - [Intent-led merge-conflict resolution](references/intent-led-conflict-resolution.md)
 ## Book-informed practice route
 
-Use [the 2026-09-14 engineering practice synthesis](../../../book-extractions/2026-09-14-engineering-practice-synthesis.md) for reviewable commits, PR evidence, conflict recovery, and safe history changes.
+Use [the slice, review, and recovery practice](../world-class-engineering/references/slice-review-and-recovery-practice.md) for reviewable commits, PR evidence, conflict recovery, and safe history changes.
 <!-- dual-compat-end -->
 Use this skill to keep version control readable, reviewable, and recoverable. It is for disciplined delivery, not command memorization.
 

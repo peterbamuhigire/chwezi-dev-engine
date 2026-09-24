@@ -26,9 +26,8 @@ the failure mode this guide exists to prevent.
 Default to a submodule for a repo you own, or a sibling clone for ad-hoc work.
 Expose only the active roots: `skills/` and `00-meta-initialization/`. Load
 finance doctrine from the separate `chwezi-accounting-doctrine` engine when
-needed. Do not expose `docs/`, `blog-posts/`, or
-`book-extractions/` to the working agent - that is maintainer material and only
-adds routing noise.
+needed. Do not expose `docs/` or `blog-posts/` to the working agent - that is
+maintainer material and only adds routing noise.
 
 ## Progressive disclosure - the loading discipline
 

@@ -1,6 +1,9 @@
 > Consolidated from skills/ai-agent-hipaa-security-controls/SKILL.md into ai-agent-compliance-controls on 2026-05-13. Load this through skills/ai-agent-compliance-controls/SKILL.md, not as an active skill entrypoint.
 
 # AI Agent HIPAA Security Controls
+
+> Currentness (accessed 2026-09-24): design to the Security Rule in force (45 CFR 164.302-.318, required vs addressable specifications). The HHS OCR Security Rule NPRM (Federal Register, 6 January 2025) proposes removing the addressable category, mandatory encryption, MFA, asset inventory and 72-hour restoration; it is NOT final (the OMB regulatory agenda, as reported by HIPAA Journal and Clark Hill, now lists final action for 2027; agenda entry not opened directly). Treat NPRM items as prudent hardening, not as the legal baseline, and re-check hhs.gov/hipaa before any attestation. Final-rule content: `NOT_ASSESSED`.
+
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->

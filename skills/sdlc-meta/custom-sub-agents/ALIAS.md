@@ -6,7 +6,7 @@ description: Guidance for creating and organizing custom sub-agents in local rep
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

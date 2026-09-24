@@ -291,7 +291,7 @@ Push notification payload:
 
 ## §10 Approval Events as Compliance Evidence (Enhancement)
 
-Every approval event is a **compliance evidence point** for SOC 2 PI1.1 (system processing complete, accurate, timely, and authorised) and ISO 27001 A.9.4.1 (information access restriction). The approval record is the proof.
+Every approval event is a **compliance evidence point** for SOC 2 PI1.1 (system processing complete, accurate, timely, and authorised) and ISO/IEC 27001:2022 A.8.3 (information access restriction). The approval record is the proof.
 
 Schema additions for evidence-grade approvals:
 

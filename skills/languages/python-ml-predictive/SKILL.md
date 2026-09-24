@@ -1,6 +1,6 @@
 ---
 name: python-ml-predictive
-description: Use when adding forecasting, classification, regression, or anomaly detection to a SaaS feature — demand/sales/cash-flow forecasting, churn and risk scoring, anomaly detection — with scikit-learn, Prophet, and statsmodels. Covers data prep, model serving, monitoring, and explainability.
+description: Use when adding forecasting, classification, regression, or anomaly detection to a SaaS feature — demand/sales/cash-flow forecasting, churn and risk scoring — with scikit-learn, Prophet, and statsmodels. Covers data prep, point-in-time correct training data from a feature store, model serving, monitoring, and explainability.
 metadata:
   portable: true
   compatible_with:
@@ -224,6 +224,8 @@ See `references/explainability.md`.
 
 ## Integration patterns
 
+Load `references/ml-system-architecture-fti.md` when the model must run beyond a notebook: splitting feature, training and inference pipelines, deciding on a feature store, building point-in-time correct training data, coupling model and feature versions, online fallbacks, or placing an LLM/RAG feature in the same architecture.
+
 **Sidecar (sync scoring):** small, fast models. `POST /score` → features in → prediction + confidence out. Latency budget < 200ms.
 
 **Worker (batch scoring):** nightly scoring of all customers for churn; bulk forecast for all SKUs. Writes results to MySQL where PHP reads them.
@@ -258,6 +260,7 @@ See `references/explainability.md`.
 - `references/evaluation-metrics.md`
 - `references/model-serving.md`
 - `references/monitoring-and-drift.md`
+- `references/ml-system-architecture-fti.md`
 - `references/explainability.md`
 
 ## See also

@@ -12,7 +12,7 @@ description: 'JavaScript design patterns for SaaS apps: Module, Observer, Factor
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

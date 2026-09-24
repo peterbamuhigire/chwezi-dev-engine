@@ -7,7 +7,7 @@ description: Use when building growth analytics for a SaaS — AARRR funnel, coh
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

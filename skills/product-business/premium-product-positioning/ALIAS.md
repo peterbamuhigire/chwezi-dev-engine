@@ -4,7 +4,7 @@ description: Use when designing, positioning, pricing, or reviewing software pro
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

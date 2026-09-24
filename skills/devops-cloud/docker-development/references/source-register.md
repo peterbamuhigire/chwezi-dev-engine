@@ -4,9 +4,9 @@ This skill distills applicable guidance from the user's local EPUB library. Raw 
 
 ## Substantially Extracted
 
-- `C:\Users\Peter\Downloads\Docker for PHP Developers.epub`
+- *Docker for PHP Developers* (author and year NOT_ASSESSED)
   - Used for PHP containers, Docker Compose, PHP INI configuration, PHP modules, Composer in Docker, PHP-FPM/Nginx, legacy PHP applications, registry builds, and environment-specific Compose workflows.
-- `C:\Users\Peter\Downloads\Build APIs You Won_t Hate.epub`
+- Phil Sturgeon, *Build APIs You Won't Hate* (year NOT_ASSESSED)
   - Used for API development environment repeatability, seed data, endpoint testing, versioning, and API deployment concerns.
 
 ## Cross-Runtime Application

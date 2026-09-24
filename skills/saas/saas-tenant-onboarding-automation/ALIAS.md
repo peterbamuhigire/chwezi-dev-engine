@@ -4,7 +4,7 @@ description: Use when designing and implementing the tenant onboarding state mac
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

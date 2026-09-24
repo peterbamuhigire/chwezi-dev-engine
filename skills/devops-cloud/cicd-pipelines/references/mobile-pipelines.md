@@ -2,6 +2,8 @@
 
 Deep-dive reference for iOS and Android CI/CD on GitHub Actions. Pairs with `ios-fastlane-pipeline.md` and `android-pipeline.md` in this directory.
 
+Action versions below are current major tags (verified 2026-09-24) for readability; production workflows pin each action to its full commit SHA with the version as a trailing comment (see `github-actions-security-hardening.md`).
+
 ## Runner Choice
 
 - iOS: `macos-14` (Apple Silicon, Xcode 15+). Costs ~10x ubuntu minutes, so keep iOS jobs fast — cache aggressively.
@@ -59,12 +61,12 @@ jobs:
       APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.ASC_PRIVATE_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with: { ruby-version: '3.3', bundler-cache: true }
       - uses: maxim-lobanov/setup-xcode@v1
         with: { xcode-version: '15.4' }
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: Pods
           key: pods-${{ hashFiles('**/Podfile.lock') }}
@@ -106,8 +108,8 @@ jobs:
   play-internal:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
         with: { distribution: 'temurin', java-version: '17', cache: 'gradle' }
       - name: Decode keystore
         run: |

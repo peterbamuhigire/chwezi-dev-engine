@@ -191,7 +191,7 @@ jobs:
   agent-eval:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run agent eval
         run: python -m eval.agent_eval --features=$(cat .github/changed_agent_features.txt) --report=agent-eval.json
       - name: Check thresholds

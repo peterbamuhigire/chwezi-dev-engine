@@ -87,6 +87,30 @@ accurate, portable, easy to route, and below the active skill cap.
   route final review through
   `skills/sdlc-meta/world-class-bid-red-team-and-delivery-qc`.
 
+## Never store book extractions
+
+Book extractions, book summaries and chapter-by-chapter notes must never be
+stored in this repository: no `book-extractions/`, `extracted-books/` or
+`docs/book-study/` folder and no `*-extraction.md` book files. Keeping them
+infringes copyright. Knowledge from purchased books enters only as
+paraphrased, task-oriented skill content and `references/` files (procedures,
+decision rules, checklists, templates, anti-patterns, original worked
+examples), organised by task rather than by the book's chapters, with a short
+citation (Author (Year) *Title*). Verbatim quotations stay rare and under 25
+words. Never cite a local ebook path or shadow-library file name. Staging notes
+live outside the repository and are never linked from skills. Books are
+durable concept inputs only; versions, APIs, standards and thresholds come
+from current primary official sources.
+
+`scripts/source_ingestion_guardrail.py` (run by
+`scripts/skill_catalog_guardrails.py` and CI) fails if an extraction folder
+exists, a `*-extraction.md` book file exists, a Markdown file links into an
+extraction folder, or a file cites a local ebook path or shadow-library file
+name. Plan and audit documents may name books but must not store their
+content. The former `book-extractions/` folder was removed on 2026-09-24; its
+durable knowledge now lives in skill `references/` (engineering) and in the
+design engine (UX practice).
+
 ## Active Catalog Roots
 
 | Root | Meaning |
@@ -114,19 +138,22 @@ For a Codex or plugin runtime, also run the cross-engine validator from
 exact skill roots exposed by that host. The per-repository guardrail cannot
 measure the assembled runtime metadata budget.
 
-Known baseline as of 2026-08-11 (verify with the script; do not trust this prose):
+Known baseline as of 2026-09-24 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 171.
-- Target active catalog size: 150-170. The current 171-entry catalogue is a documented one-entry
-  exception while the retained hospitality route is contract-repaired and independently reviewed;
-  preserve the hard cap of 200 and do not add another active entrypoint without consolidation.
+- Active `SKILL.md` files: 185.
+- Target active catalog size: 150-170. The current 185-entry catalogue exceeds the soft target
+  by 15 after the 2026-09-20 depth-first pass added 14 workflow skills (for example
+  `verification-loop`, `council`, `santa-method`, `security-scan`) on top of the retained
+  hospitality route. This is an open consolidation item, not an accepted baseline: preserve the
+  hard cap of 200 and do not add another active entrypoint without an equal-value consolidation.
 - Hard cap tracked by the guardrail script: 200.
 - Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
 - The guardrail script now also fails on broken `references/`/`templates/` links
   and on stale or dangling aliases, and runs in CI on every push and PR.
-- The same gate rejects raw ebook formats, large files under book-extraction
-  paths, and marker-rich full-text conversions. Books are temporary inputs:
-  commit only concise, attributed, independently structured synthesis.
+- The same gate rejects raw ebook formats, any file under a book-extraction
+  folder, `*-extraction.md` book files, links into extraction folders,
+  local-ebook or shadow-library citations, and marker-rich full-text
+  conversions. See "Never store book extractions" above.
 - `scripts/routing_smoke_test.py` measures routing precision against
   `scripts/routing_fixtures.yml` and runs in the same CI job; `--collisions`
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour

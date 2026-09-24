@@ -8,7 +8,7 @@ description: Use when building, launching, or scaling a subscription business â€
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

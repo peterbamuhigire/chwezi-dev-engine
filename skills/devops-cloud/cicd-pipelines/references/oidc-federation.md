@@ -2,6 +2,8 @@
 
 GitHub Actions issues a short-lived OIDC token per workflow run when the job sets `permissions: id-token: write`. The token is exchanged at the cloud (or Vault) trust boundary for a short-lived credential — no long-lived secret ever lives in the repo.
 
+Action versions below are current major tags (verified 2026-09-24) for readability; production workflows pin each action to its full commit SHA with the version as a trailing comment (see `github-actions-security-hardening.md`).
+
 The OIDC subject (`sub`) claim encodes `repo:<owner>/<repo>:ref:refs/heads/<branch>` (or `:environment:<env>`). Bind the trust policy to the exact subject — never `repo:*` — to prevent a fork from assuming the role.
 
 ## OIDC to AWS IAM
@@ -30,8 +32,8 @@ Workflow:
 ```yaml
 permissions: { id-token: write, contents: read }
 steps:
-  - uses: actions/checkout@v4
-  - uses: aws-actions/configure-aws-credentials@v4
+  - uses: actions/checkout@v7
+  - uses: aws-actions/configure-aws-credentials@v6
     with:
       role-to-assume: arn:aws:iam::123456789012:role/github-actions-deploy
       aws-region: eu-west-1
@@ -43,11 +45,11 @@ steps:
 ```yaml
 permissions: { id-token: write, contents: read }
 steps:
-  - uses: google-github-actions/auth@v2
+  - uses: google-github-actions/auth@v3
     with:
       workload_identity_provider: projects/123/locations/global/workloadIdentityPools/gh/providers/gh-oidc
       service_account: deploy@project.iam.gserviceaccount.com
-  - uses: google-github-actions/setup-gcloud@v2
+  - uses: google-github-actions/setup-gcloud@v3
   - run: gcloud auth list
 ```
 

@@ -2,7 +2,7 @@
 
 This is the full mapping table the auditor will sample against. Each row: TSC, control description, **agent-specific** implementation, evidence artefact, cadence, owner.
 
-References use the AICPA 2017 TSC framework (CC = Common Criteria for Security; A = Availability; C = Confidentiality; PI = Processing Integrity; P = Privacy).
+References use the AICPA *2017 Trust Services Criteria (With Revised Points of Focus - 2022)*, TSP section 100; the 2022 revision changed points of focus only, not the criteria IDs below. Evidence/currentness: aicpa-cima.com resource page for that edition, accessed 2026-09-24; any later AICPA revision is `NOT_ASSESSED` - confirm the edition named in the auditor's engagement letter. Legend: CC = Common Criteria for Security; A = Availability; C = Confidentiality; PI = Processing Integrity; P = Privacy.
 
 ---
 

@@ -160,7 +160,7 @@ Move these to `references/`:
 
 ### 4. Encode Judgment, Not Boilerplate
 
-Good skills tell Codex:
+Good skills tell the agent:
 
 - What to prioritize
 - What to avoid
@@ -192,7 +192,7 @@ Test at least:
 
 ## Quality Standard
 
-Every skill in this repo should help Codex produce outputs that are:
+Every skill in this repo should help the agent produce outputs that are:
 
 - Production-ready
 - Secure by default

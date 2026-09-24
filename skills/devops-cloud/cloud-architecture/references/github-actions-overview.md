@@ -2,6 +2,8 @@
 
 This reference covers workflow file structure for cloud deployment from GitHub Actions. Pipeline depth, gates, matrix strategy, reusable workflows, and DevSecOps controls live in `cicd-pipelines` and `cicd-devsecops`.
 
+Action versions below are current major tags (verified 2026-09-24) for readability; production workflows pin each action to its full commit SHA with the version as a trailing comment (see `skills/devops-cloud/cicd-pipelines/references/github-actions-security-hardening.md`).
+
 ## Workflow File Structure
 
 Workflow files live in `.github/workflows/*.yml`. Top-level keys:
@@ -34,9 +36,9 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: npm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 24, cache: npm }
       - run: npm ci
       - run: npm test
       - uses: docker/login-action@v3

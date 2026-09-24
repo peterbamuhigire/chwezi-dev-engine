@@ -3,9 +3,9 @@
 This file is self-contained. It was prepared from local EPUB study notes and
 must remain useful even if the EPUBs are deleted.
 
-Source inputs: local EPUBs under `C:\Users\Peter\Downloads\Documents\`:
-`Mastering API Architecture.epub`, `Learning Domain-Driven Design.epub`, and
-`Foundations of Scalable Systems.epub`.
+Sources: Gough, Bryant and Auburn *Mastering API Architecture*; Vlad Khononov
+*Learning Domain-Driven Design*; Ian Gorton *Foundations of Scalable Systems*
+(O'Reilly; publication years NOT_ASSESSED).
 
 Use this reference when an API needs to be treated as a long-lived product
 contract rather than a thin controller layer.

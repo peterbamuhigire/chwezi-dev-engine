@@ -94,6 +94,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.
+- Load [references/eu-ai-act-and-iso-42001-agent-overlay.md](references/eu-ai-act-and-iso-42001-agent-overlay.md) when a feature may be EU AI Act high-risk or a customer asks for ISO/IEC 42001 alignment: classification, Arts. 9-15/19/72/73 mapped to existing controls, application dates.
+- Load [references/continuous-control-monitoring.md](references/continuous-control-monitoring.md) when proving controls stayed effective across an audit window: declared-vs-observed drift checks, compliance deploy gate, framework edition register, LLM provider re-verification.
 
 ## Consolidated Child References
 

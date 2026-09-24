@@ -6,7 +6,7 @@ description: Role-Based Access Control for Android mobile apps integrating with 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

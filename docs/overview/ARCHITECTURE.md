@@ -38,7 +38,6 @@ at a plan result. None of these helpers executes external side effects.
 | `skills/ios/` and `skills/mobile-cross/` | Apple/mobile implementation guidance, including WWDC26-era Xcode, Swift, Foundation Models/Core AI, App Intents, StoreKit, PWA/Safari, KMP, release, and security references. |
 | `skills/game-development/` | Game orchestration, lean experiments, design, mathematics/simulation, graphics, Unity/Godot/Unreal, Apple delivery, multiplayer/backend, security, 2D/3D content, audio, performance, build/release, testing, data/live economy, accessibility/player safety, studio operations, and live operations. |
 | `claude-guides/` | Skill authoring and Claude-specific usage guidance. |
-| `book-extractions/` | Long-form source notes and reference summaries. |
 
 ## Skill Loading Model
 

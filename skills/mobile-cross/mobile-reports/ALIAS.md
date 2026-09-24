@@ -6,7 +6,7 @@ description: Best practices for designing mobile-optimized reports in Android (J
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

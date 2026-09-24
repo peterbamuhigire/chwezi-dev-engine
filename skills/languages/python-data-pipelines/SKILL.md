@@ -278,6 +278,7 @@ See `references/observability-pipelines.md`.
 - `references/validation-and-deadletter.md`
 - `references/multi-tenant-pipelines.md`
 - `references/observability-pipelines.md`
+- [references/data-quality-checks-and-lineage.md](references/data-quality-checks-and-lineage.md) — load when the pipeline publishes to or reads from a data-contract interface: check placement, ODCS quality-rule mapping, SLO measurement, OpenLineage emission
 
 ## Decision Rules
 

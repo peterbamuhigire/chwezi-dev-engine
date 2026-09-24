@@ -249,14 +249,14 @@ lynis audit system --profile /etc/lynis/default.prf
 
 ## Compliance Mapping (Brief)
 
-| Control family | CIS | ISO 27001 | PCI-DSS | Primary reference |
+| Control family | CIS | ISO/IEC 27001:2022 Annex A | PCI DSS v4.0.1 | Primary reference |
 |----------------|-----|-----------|---------|--------------------|
-| Access control | 5.x | A.9 | 7, 8 | `users-groups-sudo.md`, `pam-authentication.md` |
-| Cryptography | - | A.10 | 3, 4 | `boot-security.md`, `network-security/tls-pki.md` |
-| Operations security | 4.x | A.12 | 6 | `patch-management.md`, `file-integrity.md` |
-| Communications security | 3.x | A.13 | 1 | `network-security/*` |
-| Logging / monitoring | 4.x | A.12.4 | 10 | `auditd-logging.md`, `rootkit-detection.md` |
-| System acquisition / dev | - | A.14 | 6 | `cicd-devsecops` |
+| Access control | 5.x | A.5.15-A.5.18, A.8.2, A.8.5 | 7, 8 | `users-groups-sudo.md`, `pam-authentication.md` |
+| Cryptography | - | A.8.24 | 3, 4 | `boot-security.md`, `network-security/tls-pki.md` |
+| Operations security | 4.x | A.8.8, A.8.9, A.8.19 | 6 | `patch-management.md`, `file-integrity.md` |
+| Communications security | 3.x | A.8.20-A.8.22 | 1 | `network-security/*` |
+| Logging / monitoring | 4.x | A.8.15, A.8.16 | 10 | `auditd-logging.md`, `rootkit-detection.md` |
+| Secure development | - | A.8.25-A.8.29 | 6 | `cicd-devsecops` |
 
 Full CIS Debian 12 checklist: `references/cis-benchmark-checklist.md`.
 

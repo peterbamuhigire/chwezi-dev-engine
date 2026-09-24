@@ -7,7 +7,7 @@ description: Production Swift recipes from real App Store apps. Covers safe nume
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

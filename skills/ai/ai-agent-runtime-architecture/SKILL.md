@@ -215,7 +215,7 @@ Tools that cannot accept an idempotency key (legacy APIs) must be wrapped in an 
 
 ## §8 Compliance-Evidence Emissions (Enhancement)
 
-Every state-machine transition emits a **compliance event** onto the hash-chained action audit log (`ai-agent-audit-log-integrity`). The runtime is the canonical source of compliance evidence for `ai-agent-soc2-controls` CC7.2 (monitoring), PI1.1 (processing integrity), and `ai-agent-iso27001-controls` A.12.4 (logging).
+Every state-machine transition emits a **compliance event** onto the hash-chained action audit log (`ai-agent-audit-log-integrity`). The runtime is the canonical source of compliance evidence for `ai-agent-soc2-controls` CC7.2 (monitoring), PI1.1 (processing integrity), and `ai-agent-iso27001-controls` A.8.15 (logging, ISO/IEC 27001:2022).
 
 Minimum event taxonomy emitted by the loop:
 

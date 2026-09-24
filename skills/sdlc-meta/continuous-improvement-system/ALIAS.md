@@ -4,7 +4,7 @@ description: Use when designing or running an operating cadence (daily/weekly/mo
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

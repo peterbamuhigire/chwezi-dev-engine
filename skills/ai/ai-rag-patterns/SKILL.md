@@ -134,6 +134,8 @@ Guidance is split across two reference files so this entrypoint stays compact.
 - `Gates Before Shipping`
 
 Load the production file when building a RAG system that has to pass evaluation gates, survive multi-tenant review, or hit a cost budget under load.
+
+When answers depend on structured records about a specific customer, order or account (not documents), or when embedding, prompt and model versions must be managed like an ML system, load `python-ml-predictive` reference `ml-system-architecture-fti.md` (feature/training/inference pipelines, entity-keyed retrieval, version coupling).
 ## Multi-Tenant Addendum
 
 This skill describes RAG patterns in general. When the RAG feature ships inside a multi-tenant SaaS, the production answer is `ai-rag-multi-tenant` — per-tenant ingestion pipelines, vector store partitioning, tier-specific chunking and embedding models, defence-in-depth retrieval security, and citation grounding tied to live sources.
@@ -145,6 +147,7 @@ Cross-references:
 - `ai-hallucination-slo-and-grounding` — citation grounding + faithfulness SLO.
 - `ai-model-gateway` — gateway-mediated retrieval calls.
 - `saas-tenant-data-portability-and-erasure` — KB erasure cascade for embeddings.
+- [Catalog metadata for AI](../../backend-databases/database-design-engineering/references/metadata-catalog-and-lineage-design.md) — load when retrieval or an agent draws on data-catalog or data-contract metadata: classification-first filtering, ODCS `context` block, provenance.
 ## Consolidated Child References
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.

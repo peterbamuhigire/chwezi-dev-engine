@@ -13,7 +13,7 @@ description: 'Expert MySQL 8 administration: replication topology, InnoDB Cluste
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

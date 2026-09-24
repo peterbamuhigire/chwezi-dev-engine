@@ -1,4 +1,12 @@
 # Website-Skills UX/UI Phase 2 Upgrade — Design Spec
+
+> **Superseded 2026-09-24 - historical record only; do not follow.** This spec
+> directed agents to create or cite book-extraction files. That practice is now
+> prohibited by the "Never store book extractions" rule in `AGENTS.md`; the
+> `book-extractions/` folder was removed and UX practice lives in the design
+> engine (`design-system-skills`). Book titles below are named for provenance
+> only; no book content is stored here.
+
 **Date:** 2026-05-04
 **Author:** Claude (with peter.bamuhigire@gmail.com)
 **Status:** Approved

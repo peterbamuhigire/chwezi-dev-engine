@@ -6,7 +6,7 @@ description: Standard Restaurant POS UI derived from the Restaurant POS redesign
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

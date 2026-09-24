@@ -7,7 +7,7 @@ description: Dual authentication system (Session + JWT) with role-based access c
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

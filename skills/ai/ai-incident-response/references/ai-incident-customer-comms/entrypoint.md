@@ -127,12 +127,14 @@ See `references/regulator-notification-templates.md` for full templates. Summary
 
 | Regulator | Trigger | Clock | Owner |
 |---|---|---|---|
-| EU AI Act competent authority (Art. 73) | Serious incident on a high-risk AI system | within 15 days; within 2 days if widespread infringement; within 10 days if critical infrastructure | Legal + AI ops |
+| EU AI Act market surveillance authority (Art. 73) | Serious incident on a high-risk AI system | within 15 days of awareness; within 2 days for a widespread infringement or serious and irreversible critical-infrastructure disruption (Art. 3(49)(b)); within 10 days where a person dies | Legal + AI ops |
 | GDPR DPA (Art. 33) | Personal data breach | 72 hours of awareness | Legal + DPO |
 | Sector regulators (banking, health, energy) | per sector rules | varies | Legal |
 | Contractual customer notifications | per contract | per contract | Legal + CSM |
 
 The clock starts at **detection** (when the on-call has reasonable belief), not at "confirmation". Document the detection moment in the incident channel.
+
+Art. 73 duties bind high-risk AI systems only once the high-risk chapter applies: 2 December 2027 for Annex III systems and 2 August 2028 for Annex I product-embedded systems, as deferred by Regulation (EU) 2026/1744 (Digital Omnibus on AI, in force 27 July 2026). Rehearse the clocks now; do not claim a legal duty that has not yet applied. Evidence/currentness: Art. 73(2)-(4) text checked at artificialintelligenceact.eu/article/73 and the OJ entry for Regulation (EU) 2026/1744 on EUR-Lex (dates corroborated by published legal analyses; EUR-Lex full text not machine-readable at access, so exact amended wording is `NOT_ASSESSED`), accessed 2026-09-24.
 
 ## §6 Close-Out Comms
 

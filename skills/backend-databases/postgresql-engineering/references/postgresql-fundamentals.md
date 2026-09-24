@@ -16,7 +16,7 @@ description: PostgreSQL core concepts for developers and DBAs coming from MySQL 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

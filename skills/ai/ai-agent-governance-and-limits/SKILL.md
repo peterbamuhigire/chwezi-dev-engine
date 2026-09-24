@@ -56,6 +56,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.
+- Load [references/agent-governance-and-oversight.md](references/agent-governance-and-oversight.md) when deciding code-versus-model split, deferral to humans, safeguard components, agent registry, readiness, or NIST AI RMF evidence mapping.
 
 ## Consolidated Child References
 

@@ -46,7 +46,7 @@ The house style for Python in our PHP + Android + iOS SaaS stack. Every Python f
 
 ## Non-negotiables
 
-1. Python **3.11+** (we target 3.12 unless a dependency forces 3.11).
+1. A supported (non-EOL) Python; new services pin **3.13** (3.14 once every dependency ships wheels). 3.11/3.12 are security-only and allowed only for existing services with a dated migration ticket.
 2. `src/` layout with `pyproject.toml`. No `setup.py`. No flat layout.
 3. **uv** for package management, lockfile committed.
 4. **ruff** for formatting + linting (replaces black, isort, flake8).
@@ -59,14 +59,16 @@ The house style for Python in our PHP + Android + iOS SaaS stack. Every Python f
 
 ## Python version
 
-Use 3.12 as the baseline. 3.11 is acceptable when a server can't upgrade yet. Do not target <3.11 — we rely on `TypeAlias`, `match`, exception groups, faster CPython, and PEP 695 type parameter syntax (3.12).
+New services pin 3.13 in `.python-version` (as of 2026-09-24: 3.13 and 3.14 are bugfix branches; 3.11 and 3.12 are security-only; 3.10 reaches EOL in 2026-10). Do not target <3.11 — pandas 3.0 requires 3.11+, and we rely on `match`, exception groups, and PEP 695 type parameter syntax (3.12+).
 
-Pin the version in `pyproject.toml`:
+`requires-python` is a floor, never a ceiling:
 
 ```toml
 [project]
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.13"   # oldest version CI tests; no upper cap
 ```
+
+For version choice, EOL handling, PEP 668 system-Python rules, and per-platform interpreter provisioning, load `references/python-version-and-environment-policy.md`.
 
 ## Project layout
 
@@ -106,7 +108,7 @@ Use `uv` (Astral). Fast, drop-in replacement for pip + pip-tools + virtualenv. C
 ```bash
 uv init                   # bootstrap a project
 uv add fastapi            # add a dependency
-uv add --dev pytest ruff  # add a dev dependency
+uv add --dev pytest ruff  # add to [dependency-groups].dev (PEP 735)
 uv sync                   # install exact versions from lockfile
 uv run pytest             # run a command in the venv
 uv lock --upgrade         # upgrade lockfile
@@ -322,6 +324,7 @@ When the task requires it, load:
 
 - `references/project-layout.md`
 - `references/tooling-uv-ruff.md`
+- `references/python-version-and-environment-policy.md`
 - `references/typing-mypy-pyright.md`
 - `references/pydantic-v2-patterns.md`
 - `references/logging-structlog.md`

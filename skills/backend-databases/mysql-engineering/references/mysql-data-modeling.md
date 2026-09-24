@@ -12,7 +12,7 @@ description: Universal SaaS data modeling patterns from Silverston's Data Model 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

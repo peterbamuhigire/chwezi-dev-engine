@@ -12,7 +12,7 @@ The audit log retains different event classes for different windows. Retention i
 | `financial_7y` | 7 years | SOX, IRS, sector financial | Irreversible financial actions; jurisdictional max |
 | `soc2_iso_7y` | 7 years | SOC 2 historical + ISO 27001 | Kill-switch flips, incident records, approval grants |
 | `erasure_proof_7y` | 7 years | GDPR Art. 5(2) accountability | Proof of erasure must survive longer than erased data |
-| `eu_aia_10y` | 10 years | EU AI Act Art. 12 record-keeping | High-risk AI systems |
+| `eu_aia_10y` | 10 years (policy) | EU AI Act Art. 12 logging capability; statutory log minimum is 6 months (Art. 19 provider, Art. 26(6) deployer); Art. 18 keeps technical/QMS documentation 10 years | High-risk AI systems; high-risk obligations apply from 2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I) under Reg. (EU) 2026/1744 |
 | `soc2_baseline_3y` | 3 years | SOC 2 Type II + 1 buffer year | Default for non-sensitive |
 | `operational_1y` | 1 year | Operability only | Lifecycle events without compliance burden |
 | `legal_hold` | indefinite | Litigation hold | Overrides scheduled retention; flag on the row |
@@ -152,3 +152,7 @@ class RetentionCollector(EvidenceCollector):
             "legal_holds_active.csv": LegalHold.active(),
         }
 ```
+
+## Evidence/currentness
+
+Access date 2026-09-24. EU AI Act Arts. 12, 18, 19, 26(6) checked at artificialintelligenceact.eu (consolidated text of Regulation (EU) 2024/1689); application dates per Regulation (EU) 2026/1744 OJ entry on EUR-Lex (amended wording `NOT_ASSESSED`; dates corroborated by published legal analyses). HIPAA 45 CFR 164.316(b)(2)(i) six-year documentation retention unchanged; the HHS Security Rule NPRM (Federal Register 2025-01-06) is not final at access date (regulatory agenda targets 2027) - do not design to proposed text as if binding. SOX/IRS 7-year and SOC 2/ISO 7-year rows are organisational policy choices, not statutory minima: `NOT_ASSESSED` per jurisdiction.

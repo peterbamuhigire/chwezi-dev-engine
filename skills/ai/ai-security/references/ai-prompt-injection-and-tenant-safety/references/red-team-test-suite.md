@@ -153,7 +153,7 @@ jobs:
   red-team:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: pip install -r tests/requirements.txt
       - run: pytest tests/ai/red-team -v --maxfail=3
 ```

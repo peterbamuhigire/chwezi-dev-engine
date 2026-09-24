@@ -48,6 +48,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- Load [references/llm-application-pattern-decision-catalogue.md](references/llm-application-pattern-decision-catalogue.md) when choosing an LLM pattern (component, chain, RAG, tools, agent), designing structured outputs, or setting up eval-driven development.
 <!-- dual-compat-end -->
 Direct integration patterns for all major LLM providers.
 For framework patterns (Vercel AI SDK, agents), see `ai-web-apps` and `openai-agents-sdk` skills.

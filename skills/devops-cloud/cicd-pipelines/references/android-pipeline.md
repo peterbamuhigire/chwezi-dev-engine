@@ -2,6 +2,8 @@
 
 Gradle build, unit tests, signed Android App Bundle (AAB), and release to Google Play via Fastlane Supply.
 
+Action versions below are current major tags (verified 2026-09-24) for readability; production workflows pin each action to its full commit SHA with the version as a trailing comment (see `github-actions-security-hardening.md`).
+
 ## Secrets Required
 
 Store as GitHub environment secrets on the `android` environment:
@@ -122,14 +124,14 @@ jobs:
     timeout-minutes: 60
     environment: android
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: '21'
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -153,7 +155,7 @@ jobs:
           LANE="${{ github.event.inputs.lane || 'test' }}"
           bundle exec fastlane "$LANE"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: android-build-${{ github.run_id }}

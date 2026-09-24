@@ -94,6 +94,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.
+- Load [references/provider-recourse-and-multi-agent-attribution.md](references/provider-recourse-and-multi-agent-attribution.md) when a breach or credit involves an upstream provider, or when several agents share one billed task.
 
 ## Consolidated Child References
 

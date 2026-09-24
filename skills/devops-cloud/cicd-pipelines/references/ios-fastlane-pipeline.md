@@ -2,6 +2,8 @@
 
 Fastlane lanes for test, TestFlight beta, and App Store release. GitHub Actions drives the lanes. Code signing is managed by Match.
 
+Action versions below are current major tags (verified 2026-09-24) for readability; production workflows pin each action to its full commit SHA with the version as a trailing comment (see `github-actions-security-hardening.md`).
+
 ## Secrets Required
 
 Store as GitHub environment secrets on the `ios` environment:
@@ -141,7 +143,7 @@ jobs:
     runs-on: macos-14
     timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: maxim-lobanov/setup-xcode@v1
         with:
@@ -152,7 +154,7 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: Pods
           key: pods-${{ hashFiles('Podfile.lock') }}
@@ -171,7 +173,7 @@ jobs:
           LANE="${{ github.event.inputs.lane || 'test' }}"
           bundle exec fastlane "$LANE"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: build-${{ github.run_id }}

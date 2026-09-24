@@ -3,10 +3,10 @@
 This file is self-contained. It was prepared from local EPUB study notes and
 must remain useful even if the EPUBs are deleted.
 
-Source inputs: local EPUBs under `C:\Users\Peter\Downloads\Documents\`:
-`Software Architecture Metrics.epub`, `Learning Domain-Driven Design.epub`,
-`Mastering API Architecture.epub`, `Foundations of Scalable Systems.epub`,
-and `Software Architecture for Developers.epub`.
+Sources: Ciceri et al. *Software Architecture Metrics*; Vlad Khononov
+*Learning Domain-Driven Design*; Gough, Bryant and Auburn *Mastering API
+Architecture*; Ian Gorton *Foundations of Scalable Systems*; Simon Brown
+*Software Architecture for Developers* (publication years NOT_ASSESSED).
 
 Use this reference when architecture work needs stronger practical judgment on
 boundaries, design documentation, measurable quality, and scalability tradeoffs.

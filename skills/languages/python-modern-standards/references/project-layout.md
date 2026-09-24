@@ -74,16 +74,19 @@ Copy this into a new service and edit the top-level metadata. Every field below 
 
 ```toml
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+# Pure-Python service: the uv build backend is uv's default (upper-bound it).
+# Keep hatchling (or setuptools/scikit-build-core) when you ship extension modules
+# or need build hooks; uv_build is pure-Python only.
+requires = ["uv_build>=0.12.18,<0.13"]
+build-backend = "uv_build"
 
 [project]
 name = "service-name"
 version = "0.1.0"
 description = "One-line description of what this service does."
 readme = "README.md"
-requires-python = ">=3.11,<3.13"
-license = { text = "Proprietary" }
+requires-python = ">=3.13"        # floor = oldest version CI tests; never add an upper cap
+license = "LicenseRef-Proprietary" # PEP 639 SPDX expression; the {text=...} table is deprecated
 authors = [{ name = "Peter Bamuhigire" }]
 
 dependencies = [
@@ -106,7 +109,7 @@ dev = [
     "pytest>=8.3",
     "pytest-cov>=5.0",
     "pytest-asyncio>=0.24",
-    "ruff>=0.6",
+    "ruff>=0.16",
     "mypy>=1.11",
     "respx>=0.21",
     "freezegun>=1.5",
@@ -116,13 +119,14 @@ dev = [
 [project.scripts]
 service-name = "service_name.main:cli"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/service_name"]
+# uv_build discovers src/service_name automatically. With hatchling instead, add:
+# [tool.hatch.build.targets.wheel]
+# packages = ["src/service_name"]
 
 # --- ruff ------------------------------------------------------------------
 [tool.ruff]
 line-length = 100
-target-version = "py312"
+target-version = "py313"   # optional: ruff infers it from requires-python
 extend-exclude = ["migrations", "scripts/legacy"]
 
 [tool.ruff.lint]
@@ -152,7 +156,7 @@ indent-style = "space"
 
 # --- mypy ------------------------------------------------------------------
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.13"
 strict = true
 plugins = ["pydantic.mypy"]
 mypy_path = "src"
@@ -230,3 +234,7 @@ Do **not** split because:
 - Typing config: `typing-mypy-pyright.md`.
 - Testing layout: `testing-pytest.md`.
 - Deployment shape (sidecar, worker): `python-saas-integration` skill.
+
+## Evidence/currentness
+
+Access date 2026-09-24. `uv_build` as default, pure-Python limitation and bounded `requires` from docs.astral.sh/uv/concepts/build-backend; SPDX `license` (PEP 639) and the caution against upper-bounding `requires-python` from packaging.python.org "Writing your pyproject.toml"; supported Python branches from devguide.python.org/versions. Version policy lives in `python-version-and-environment-policy.md`.

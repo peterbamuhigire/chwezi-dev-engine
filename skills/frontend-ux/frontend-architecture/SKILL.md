@@ -87,6 +87,7 @@ framework and library claims require current verification.
 - `frontend-ux/visual-qa`
 - `frontend-ux/practical-ui-design`
 - `sdlc-meta/kaizen-improvement-system`
+- `references/spa-route-contract-and-legacy-modernisation.md` - load when designing client-side routing (URL, history, scroll, title, focus, data states, cleanup, security) or migrating an inherited jQuery/CRA/hash-routed front end.
 - website-skills `skills/build/design-reference` and `skills/build/design-system`
 
 ## Capability contract

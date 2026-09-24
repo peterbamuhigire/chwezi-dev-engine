@@ -1,6 +1,6 @@
 ---
 name: python-data-analytics
-description: Use when computing complex analytics, KPIs, cohort/funnel/retention metrics, financial math (IRR/NPV/amortization), statistical tests, anomaly detection, or geospatial analytics in Python — for cases where SQL alone gets unwieldy.
+description: Use when computing complex analytics, KPIs, cohort/funnel/retention metrics, financial math (IRR/NPV/amortization), statistical tests, anomaly detection, or geospatial analytics in Python and pandas (including the pandas 3 copy-on-write upgrade) — for cases where SQL alone gets unwieldy.
 metadata:
   portable: true
   compatible_with:
@@ -103,11 +103,11 @@ df["total"] = df.apply(lambda r: r["qty"] * r["unit_price"], axis=1)
 df["total"] = df["qty"] * df["unit_price"]
 ```
 
-**Avoid `inplace=True`.** Leads to chained assignment bugs in 2.x. Use explicit reassignment.
+**Avoid `inplace=True`.** Hides mutation and saves nothing. Use explicit reassignment.
 
 **Use dtypes on load.** `pd.read_sql(..., dtype={"customer_id": "int64"})`. Cast dates, categoricals, booleans early.
 
-**`copy()` when slicing, always.** `df2 = df[df.status == "paid"].copy()` — prevents `SettingWithCopyWarning`.
+**Write through `.loc` only.** pandas 3.0 makes Copy-on-Write the only mode: chained assignment (`df[mask]["col"] = x`) silently does nothing and `SettingWithCopyWarning` is gone. Use `df.loc[mask, "col"] = x`. Text columns default to the `str` dtype, not `object`.
 
 **`groupby().agg()` with named columns** is clearer than dict form:
 
@@ -122,7 +122,7 @@ summary = (
 )
 ```
 
-See `references/pandas-idioms.md` for the full catalog (copy vs view, dtypes, datetime handling, common pitfalls).
+See `references/pandas-idioms.md` for the full catalog (Copy-on-Write, pandas 3.0 upgrade checklist, dtypes, datetime handling, common pitfalls). Load `references/tidy-reshaping-and-missing-data.md` when raw data is wide, spread over many files, mistyped, or has gaps. Load `references/notebooks-to-production-code.md` when a notebook must be rerun by others, scheduled, reviewed, or promoted into a pipeline or service.
 
 ## Cohort, funnel, retention
 
@@ -228,6 +228,8 @@ Analytics results don't live in Python — they return to PHP or become document
 
 - `references/analytics-method-selection-and-governance.md`
 - `references/pandas-idioms.md`
+- `references/tidy-reshaping-and-missing-data.md`
+- `references/notebooks-to-production-code.md`
 - `references/loading-data.md`
 - `references/cohort-funnel-retention.md`
 - `references/financial-math.md`

@@ -358,9 +358,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with: { node-version: '20.x' }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: '24.x' }
       - run: npm ci
       - run: npm run lint
       - run: npm test
@@ -370,7 +370,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - run: npm install -g vercel && vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
 ```
 

@@ -925,7 +925,7 @@ def workflow_source(config: SuiteConfig) -> str:
           verify-package:
             runs-on: windows-latest
             steps:
-              - uses: actions/checkout@v6
+              - uses: actions/checkout@v7
               - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
                 with:
                   python-version: {config.build["python_version"]!r}

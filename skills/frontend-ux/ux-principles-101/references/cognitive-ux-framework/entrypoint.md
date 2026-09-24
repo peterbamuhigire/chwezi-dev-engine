@@ -6,7 +6,7 @@ description: Cognitive science-based UI/UX evaluation framework built on John Wh
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -83,7 +83,7 @@ This skill provides a structured evaluation framework grounded in cognitive psyc
 | Vision | Can users perceive the structure? | Gestalt principles, contrast ratios |
 | Wayfinding | Can users navigate to their goal? | Information scent, progressive disclosure |
 | Attention | Can users focus on what matters? | Hick's Law, Fitts's Law, cognitive load |
-| Memory | Can users remember how to use it? | Miller's Law (7 plus/minus 2), recognition over recall |
+| Memory | Can users remember how to use it? | Working-memory limit (about four chunks; Cowan 2001), recognition over recall |
 | Language | Can users understand the words? | Plain language, F/Z reading patterns |
 | Emotion | Do users feel confident and in control? | Trust signals, error recovery, feedback timing |
 
@@ -167,8 +167,8 @@ The Attention Mind determines what users notice and how much mental effort they 
 
 The Memory Mind dictates how much users can hold in working memory and how they recall interface patterns.
 
-**Miller's Law (7 plus/minus 2):**
-- Chunk related information into groups of 5 to 7 items.
+**Working-memory limit (about four chunks, Cowan 2001; Miller's 1956 "7 plus/minus 2" is superseded):**
+- Chunk related information into groups of 3 to 4 items.
 - Break long forms into logical sections or multi-step wizards.
 - Display phone numbers, codes, and IDs in chunked format (e.g., 555-123-4567).
 

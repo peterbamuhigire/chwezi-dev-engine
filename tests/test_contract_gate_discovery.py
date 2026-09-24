@@ -18,7 +18,7 @@ def test_gate_discovers_entire_real_catalogue():
         if path.is_file() and not any(part.startswith(".") for part in path.relative_to(ROOT / root).parts)
     }
     assert set(GATE.iter_skill_dirs()) == expected
-    assert len(expected) == 171
+    assert len(expected) == 185
 
 
 def test_missing_skill_is_an_error():

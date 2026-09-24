@@ -59,6 +59,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- [references/revenue-lifecycle-data-contract.md](references/revenue-lifecycle-data-contract.md): load when lifecycle-stage definitions, stage-transition events, CRM/messaging sync ownership, progressive profiling, or renewal alerts must be engineered.
 <!-- dual-compat-end -->
 Based on *A Quick Guide to Software as a Service* (Indocan Publications, 2022)
 and Dash (2025) *Mastering Software Product Management*.

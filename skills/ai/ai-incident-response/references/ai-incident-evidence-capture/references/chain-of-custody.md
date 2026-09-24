@@ -5,7 +5,7 @@ A bundle's evidence value depends on the chain of custody. This document defines
 ## Storage
 
 - Object-lock storage (S3 Object Lock, GCS Bucket Lock, equivalent).
-- Retention default 7 years; 10 years for high-risk-AI features under EU AI Act; legal-hold flag overrides retention timer.
+- Retention default 7 years; 10 years by policy for high-risk-AI features (EU AI Act Art. 18 documentation window; statutory log minimum 6 months); legal-hold flag overrides retention timer.
 - Two copies:
   - **Redacted** copy — bundle as documented in `evidence-bundle-spec.md`, with PII masked. Accessible to incident responders, postmortem authors, AI leadership.
   - **Unredacted** copy — full prompts, retrieval, outputs. Accessible only via legal-approval workflow.

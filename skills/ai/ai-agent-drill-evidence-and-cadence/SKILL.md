@@ -122,7 +122,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/drill-evidence-capture.md` — Full capture pipeline (Python) for kill-switch / red-team / eval-drift drills.
 - `references/cadence-enforcement.md` — Cadence policy schema, enforcer code, paging wiring.
-- Companions: `ai-incident-drill-and-game-day` (scenarios), `ai-agent-safety-and-red-team` (red-team suite), `ai-agent-eval` (eval drift), `ai-agent-soc2-controls` (CC7.4, CC9.2), `ai-agent-iso27001-controls` (A.16.1.6, A.17.1.3), `ai-agent-evidence-automation` (pack pipeline).
+- Companions: `ai-incident-drill-and-game-day` (scenarios), `ai-agent-safety-and-red-team` (red-team suite), `ai-agent-eval` (eval drift), `ai-agent-soc2-controls` (CC7.4, CC9.2), `ai-agent-iso27001-controls` (ISO/IEC 27001:2022 A.5.27, A.5.29-A.5.30), `ai-agent-evidence-automation` (pack pipeline).
 
 <!-- dual-compat-end -->
 
@@ -136,7 +136,7 @@ drills:
     min_cadence_days: 90        # quarterly
     mtth_target_seconds: 30
     owner: sre-lead@example.com
-    control_ids: [CC7.4, A.16.1.5]
+    control_ids: [CC7.4, A.5.26]
     scenarios: [kill_switch_global_drill]
 
   - id: kill_switch_per_tenant
@@ -167,14 +167,14 @@ drills:
     description: Restore audit log from immutable storage; verify chain integrity.
     min_cadence_days: 365
     owner: sre-lead@example.com
-    control_ids: [A1.3, A.17.1.2]
+    control_ids: [A1.3, A.8.13]
     scenarios: [restore_audit_log]
 
   - id: incident_response_tabletop
     description: Tabletop exercise of the agent incident runbook with on-call.
     min_cadence_days: 180        # semi-annual
     owner: incident-commander@example.com
-    control_ids: [CC7.4, A.16.1.5]
+    control_ids: [CC7.4, A.5.26]
     scenarios: [tabletop-data-exfil, tabletop-hallucinated-action]
 ```
 

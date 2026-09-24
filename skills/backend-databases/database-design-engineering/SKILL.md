@@ -1,6 +1,6 @@
 ---
 name: database-design-engineering
-description: Use when designing or reviewing relational or document-backed data architecture for SaaS platforms, ERP systems, APIs, analytics stores, or mobile sync. Covers domain modeling, tenancy, indexing, migrations, integrity, retention, and performance tradeoffs.
+description: Use when designing or reviewing relational or document-backed data architecture for SaaS platforms, ERP systems, APIs, analytics stores, or mobile sync. Covers domain modeling, tenancy, indexing, migrations, event stream data contract and schema evolution, integrity, retention, and performance tradeoffs.
 metadata:
   portable: true
   compatible_with:
@@ -211,6 +211,8 @@ For substantive database work, produce:
 
 - [references/data-review-checklist.md](references/data-review-checklist.md): Schema and migration review prompts.
 - [references/live-data-evolution.md](references/live-data-evolution.md): Expand-contract, backfills, verification, and rollback posture.
+- [references/data-contracts-and-schema-evolution.md](references/data-contracts-and-schema-evolution.md): Load when another team, service, model, or report consumes the data: ODCS v3.2.0 contract template, lifecycle, change classification, CI gates, publishing patterns.
+- [references/metadata-catalog-and-lineage-design.md](references/metadata-catalog-and-lineage-design.md): Load when designing a data catalog, glossary, classification scheme, or lineage, or exposing catalog metadata to AI assistants and agents.
 - [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Source-derived patterns for design quality and website/data analysis.
 
 ## Capability contract

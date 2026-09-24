@@ -17,7 +17,7 @@ ENGINES = (
     "chwezi-accounting-doctrine",
     "design-system-skills",
     "digital-research-engine",
-    "skills-web-dev",
+    "chwezi-dev-engine",
     "windows-admin-engine-skills",
 )
 KAIZEN_SKILLS = (
@@ -29,7 +29,7 @@ KAIZEN_SKILLS = (
     WWW / "proposal-skills/skills/meta/kaizen-improvement-system/SKILL.md",
     WWW / "chwezi-accounting-doctrine/skills/10-controls-governance-and-fraud/kaizen-engine-and-product-improvement/SKILL.md",
     WWW / "design-system-skills/skills/00-cross-cutting-ops-qa-a11y/design-engine-and-product-improvement/SKILL.md",
-    WWW / "skills-web-dev/skills/sdlc-meta/kaizen-improvement-system/SKILL.md",
+    WWW / "chwezi-dev-engine/skills/sdlc-meta/kaizen-improvement-system/SKILL.md",
 )
 
 

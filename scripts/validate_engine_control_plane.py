@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "docs" / "engine-control-plane.json"
-EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", "proposal", "accounting", "design", "digital-research", "skills-web-dev", "windows-admin", "political"}
+EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", "proposal", "accounting", "design", "digital-research", "chwezi-dev-engine", "windows-admin", "political"}
 REQUIRED_KEYS = {"id", "domain", "router", "adoption_doc", "agents", "commands", "hooks", "evidence"}
 ALLOWED_HOOKS = {"preflight", "context", "before_write", "after_write", "release", "stop"}
 ENGINE_DIRS = {
@@ -22,7 +22,7 @@ ENGINE_DIRS = {
     "accounting": "chwezi-accounting-doctrine",
     "design": "design-system-skills",
     "digital-research": "digital-research-engine",
-    "skills-web-dev": "skills-web-dev",
+    "chwezi-dev-engine": "chwezi-dev-engine",
     "windows-admin": "windows-admin-engine-skills",
     "political": "political-essay-skills",
 }

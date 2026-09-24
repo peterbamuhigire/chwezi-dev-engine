@@ -7,7 +7,7 @@ metadata:
   compatibility_notes: Uganda-based systems. Pairs with dpia-generator.
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

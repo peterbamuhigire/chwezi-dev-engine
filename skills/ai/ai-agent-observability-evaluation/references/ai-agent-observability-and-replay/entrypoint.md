@@ -334,7 +334,7 @@ Every task trace adds these top-level fields once the success-tracking cascade h
 
 ## Replay Availability as Compliance Evidence (Enhancement)
 
-Replay availability is an auditable control for SOC 2 **Availability (A1.3, recovery)** and **Processing Integrity (PI1.5, re-processing)** and for ISO 27001 **A.12.4 (logging) + A.17.1 (continuity)**.
+Replay availability is an auditable control for SOC 2 **Availability (A1.3, recovery)** and **Processing Integrity (PI1.5, re-processing)** and for ISO/IEC 27001:2022 **A.8.15 (logging) + A.5.30 (ICT readiness for business continuity)**.
 
 A monthly **replay-availability test** picks a random sample of N=50 historical tasks (stratified by tool class and tenant) and re-runs them through the replay harness. Pass criteria:
 
@@ -356,4 +356,4 @@ evidence/availability/replay/{YYYY-MM}/
 
 Cadence: monthly, recorded in `ops/compliance/evidence-cadence.yaml` as `availability_replay_test`. Failed runs open a `high` exception against A1.3 and PI1.5.
 
-Cross-links: `ai-agent-soc2-controls` (A1.3, PI1.5), `ai-agent-iso27001-controls` (A.12.4, A.17.1), `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.
+Cross-links: `ai-agent-soc2-controls` (A1.3, PI1.5), `ai-agent-iso27001-controls` (A.8.15, A.5.30), `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`.

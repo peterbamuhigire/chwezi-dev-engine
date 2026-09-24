@@ -1,12 +1,12 @@
 # Regulator Notification Templates and Clocks
 
-Note: These templates are operational starting points. They must be reviewed by legal counsel in each jurisdiction before submission. Clocks below summarise published rules current to early 2026 and are not a substitute for legal advice.
+Note: These templates are operational starting points. They must be reviewed by legal counsel in each jurisdiction before submission. Clocks below were re-checked on 2026-09-24 and are not a substitute for legal advice. EU AI Act Art. 73 applies to high-risk systems from 2 December 2027 (Annex III) and 2 August 2028 (Annex I) under Regulation (EU) 2026/1744; before those dates the template is a rehearsal and voluntary-disclosure aid. Evidence/currentness: Art. 73 text via artificialintelligenceact.eu/article/73; Digital Omnibus OJ entry eur-lex.europa.eu/eli/reg/2026/1744/oj (amended wording `NOT_ASSESSED`); accessed 2026-09-24.
 
 ## Clocks Summary
 
 | Regulator | Trigger | Clock from detection | Owner | Template |
 |---|---|---|---|---|
-| EU AI Act competent authority (Art. 73) — serious incident | Incident on a high-risk AI system causing serious harm, infringement, or widespread harm | within 15 days of awareness; **within 2 days** if widespread infringement; **within 10 days** if death or serious damage to critical infrastructure | Legal + AI ops + DPO | §1 |
+| EU AI Act competent authority (Art. 73) — serious incident | Incident on a high-risk AI system causing serious harm, infringement, or widespread harm | within 15 days of awareness; **within 2 days** if widespread infringement or serious and irreversible disruption of critical infrastructure (Art. 3(49)(b)); **within 10 days** if a person dies | Legal + AI ops + DPO | §1 |
 | GDPR DPA (Art. 33, 34) | Personal data breach | within 72 hours; affected subjects "without undue delay" if high risk | Legal + DPO | §2 |
 | UK ICO (UK GDPR Art. 33, 34) | Personal data breach | within 72 hours | Legal + DPO | similar to §2 |
 | Sector-specific — banking (e.g., DORA in EU) | Major ICT-related incident | initial notification within 4 hours of classification; intermediate report 72h; final 1 month | Legal + AI ops | §3 |

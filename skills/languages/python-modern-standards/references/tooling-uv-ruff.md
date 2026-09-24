@@ -11,16 +11,16 @@ uv (from Astral) replaces pip, pip-tools, virtualenv, pipx, and pyenv for our Py
 ```bash
 # --- project bootstrap ---
 uv init --package service-name         # creates pyproject.toml, src/ layout
-uv python pin 3.12                     # writes .python-version
+uv python pin 3.13                     # writes .python-version (see python-version-and-environment-policy.md)
 
 # --- daily dependency work ---
 uv add fastapi pydantic                # runtime deps
-uv add --dev pytest ruff mypy          # dev deps (legacy; prefer groups)
-uv add --group test pytest respx       # dep groups (preferred on uv >= 0.4)
+uv add --dev pytest ruff mypy          # writes [dependency-groups].dev (PEP 735); synced by default
+uv add --group test pytest respx       # named group; include with --group test or [tool.uv] default-groups
 uv remove sqlalchemy                   # removes + updates lockfile
 uv sync                                # installs from lockfile, exact versions
 uv sync --frozen                       # CI mode: fail if lockfile is stale
-uv sync --no-dev                       # production images
+uv sync --no-dev                       # production images (also consider --no-default-groups)
 uv lock --upgrade                      # refresh entire lockfile
 uv lock --upgrade-package fastapi      # bump one package
 
@@ -112,14 +112,14 @@ Pre-commit runs formatters and linters before each commit. It catches 90% of CI 
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.9
+    rev: v0.16.8                 # verified latest 2026-09-24; bump deliberately
     hooks:
-      - id: ruff
+      - id: ruff-check           # hook id is ruff-check; the bare `ruff` id is legacy
         args: [--fix, --exit-non-zero-on-fix]
-      - id: ruff-format
+      - id: ruff-format          # also formats Python code blocks in Markdown by default
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-yaml
       - id: check-toml
@@ -131,7 +131,7 @@ repos:
       - id: detect-private-key
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.4.18
+    rev: 0.12.18
     hooks:
       - id: uv-lock      # keeps uv.lock in sync with pyproject.toml
 ```
@@ -162,10 +162,12 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      # Pin third-party actions to a full commit SHA with a version comment
+      # (setup-uv's own README does this); tags shown here for readability.
+      - uses: actions/checkout@v7          # v7.0.1 current at 2026-09-24
+      - uses: astral-sh/setup-uv@v10       # v10.2.0 current at 2026-09-24
         with:
-          version: "0.4.18"
+          version: "0.12.18"              # pin uv; bump with the lockfile
           enable-cache: true
       - run: uv sync --frozen
       - run: uv run ruff format --check .
@@ -198,3 +200,7 @@ Notes:
 - Typing config: `typing-mypy-pyright.md`.
 - Security rules for ruff `S`: `security-baseline.md`.
 - CI gates: see "CI gates" section in `SKILL.md`.
+
+## Evidence/currentness
+
+Access date 2026-09-24. Versions from GitHub release APIs: uv 0.12.18, ruff and ruff-pre-commit v0.16.8, uv-pre-commit 0.12.18, pre-commit-hooks v6.0.0, setup-uv v10.2.0, actions/checkout v7.0.1. Hook id `ruff-check` and Markdown code-block formatting from the ruff-pre-commit README. `[dependency-groups]` (PEP 735) as the uv default and `tool.uv.dev-dependencies` as deprecated from docs.astral.sh/uv/concepts/projects/dependencies. Re-verify all pins at each Kaizen cycle; versions drift monthly.

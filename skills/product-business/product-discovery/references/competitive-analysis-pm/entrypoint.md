@@ -7,7 +7,7 @@ description: Competitive analysis toolkit for product managers. Covers Porter's 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

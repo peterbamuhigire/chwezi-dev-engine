@@ -6,7 +6,7 @@ description: Complete feature planning from specification to implementation. Cre
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

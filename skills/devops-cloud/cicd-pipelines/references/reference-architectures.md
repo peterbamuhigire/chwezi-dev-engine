@@ -2,6 +2,8 @@
 
 These pin the patterns from the main skill (matrix, reusable workflows, OIDC, BuildKit cache, environment promotion, deployment strategy) to three concrete shapes. Engine assumption: GitHub Actions on self-managed Debian/Ubuntu runners; switch the `runs-on:` label to migrate to GitLab CI runners or GitHub-hosted runners without changing the job graph.
 
+Action versions below are current major tags (verified 2026-09-24) for readability; production workflows pin each action to its full commit SHA with the version as a trailing comment (see `github-actions-security-hardening.md`).
+
 ## A. PHP/MySQL SaaS on Debian VPS (blue/green via Nginx symlink swap)
 
 Stages: composer install → PHPUnit → PHPStan → Trivy on container → push to GHCR → deploy via SSH to Debian VPS, swap Nginx symlink, drain old release.
@@ -16,7 +18,7 @@ jobs:
   test:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with: { php-version: '8.3', tools: composer:v2, coverage: none }
       - run: composer install --no-interaction --prefer-dist --no-progress
@@ -29,7 +31,7 @@ jobs:
     runs-on: ubuntu-24.04
     outputs: { digest: ${{ steps.push.outputs.digest }} }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
         with: { registry: ghcr.io, username: ${{ github.actor }}, password: ${{ secrets.GITHUB_TOKEN }} }
@@ -86,14 +88,14 @@ permissions: { contents: read, id-token: write, packages: write }
 jobs:
   ci:
     uses: ./.github/workflows/reusable-node-ci.yml
-    with: { node-version: '20', package-manager: pnpm }
+    with: { node-version: '24', package-manager: pnpm }
 
   build:
     needs: ci
     runs-on: ubuntu-24.04
     outputs: { digest: ${{ steps.push.outputs.digest }} }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
         with: { registry: ghcr.io, username: ${{ github.actor }}, password: ${{ secrets.GITHUB_TOKEN }} }
@@ -111,7 +113,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment: { name: production }
     steps:
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v6
         with: { role-to-assume: arn:aws:iam::123456789012:role/github-actions-eks, aws-region: eu-west-1 }
       - run: aws eks update-kubeconfig --name prod
       - run: |
@@ -142,7 +144,7 @@ jobs:
     runs-on: ubuntu-24.04
     outputs: { digest: ${{ steps.push.outputs.digest }} }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3

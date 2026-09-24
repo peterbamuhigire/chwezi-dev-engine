@@ -1,6 +1,6 @@
 ---
 name: cicd-pipelines
-description: Use when building CI/CD pipelines with build, test, security, packaging, deployment stages, reusable workflows, short-lived cloud authentication, caching, promotion gates, and pipeline telemetry; use deployment-release-engineering for rollout decisions.
+description: Use when building CI/CD pipelines with build, test, security, packaging, deployment stages, reusable workflows, short-lived cloud authentication, caching, promotion gates, pipeline telemetry, and hardening GitHub Actions workflows (SHA pinning, OIDC); use deployment-release-engineering for rollout decisions.
 metadata:
   portable: true
   compatible_with:
@@ -63,6 +63,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
+- `references/github-actions-security-hardening.md` — load when writing or reviewing any workflow change, adding credentials, accepting fork PRs, or proposing self-hosted runners; includes current action majors (verified 2026-09-24).
+- `references/supply-chain-provenance.md` — load when a pipeline publishes release artifacts or a deploy gate must verify SLSA provenance and artifact attestations.
 - `references/oidc-federation.md` — OIDC → AWS, GCP, and Vault with bound-claim trust policies.
 - `references/pipeline-observability.md` — DORA metrics, queue time, scraper sketch, dashboards.
 - `references/reference-architectures.md` — three end-to-end pipelines (PHP/MySQL SaaS, Node.js/TS service, container library).
@@ -112,7 +114,7 @@ Matrix, concurrency, permissions:
 strategy:
   fail-fast: false
   matrix:
-    node: ['18', '20', '22']
+    node: ['22', '24']   # Node 20 reached end of life 2026-04-30
     os: [ubuntu-24.04, macos-14]
 
 concurrency:
@@ -138,6 +140,8 @@ jobs:
 
 GitLab CI dialect differences live in `references/github-vs-gitlab.md`; the patterns here apply to both engines.
 
+Action tags in examples show the current major (verified 2026-09-24) for readability. Production workflows pin every external action to a full commit SHA with the version as a comment; see `references/github-actions-security-hardening.md` for the pinning procedure, upgrade notes per action, and the workflow review gate.
+
 ## §3 Secret injection without long-lived credentials
 
 `GITHUB_TOKEN` is automatically issued per workflow run with permissions the workflow specifies; grant the least required access. Pin per job and never rely on legacy write-all defaults.
@@ -149,8 +153,8 @@ Minimal AWS pattern:
 ```yaml
 permissions: { id-token: write, contents: read }
 steps:
-  - uses: actions/checkout@v4
-  - uses: aws-actions/configure-aws-credentials@v4
+  - uses: actions/checkout@v7
+  - uses: aws-actions/configure-aws-credentials@v6
     with:
       role-to-assume: arn:aws:iam::123456789012:role/github-actions-deploy
       aws-region: eu-west-1
@@ -170,7 +174,7 @@ Secret scoping:
 Lockfile-keyed dependency caches:
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: ~/.npm
     key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -183,7 +187,7 @@ Docker BuildKit cache via `type=gha` with `mode=max` stores all intermediate lay
 
 Cross-job artefacts use `actions/upload-artifact` / `actions/download-artifact`. Container images go to GHCR (`ghcr.io/<owner>/<repo>:<sha>`) tied to repo permissions; ECR via OIDC for AWS-hosted services.
 
-Multi-platform images only when the runtime differs (ARM Graviton, Apple Silicon dev) — it doubles build time. Sign with `cosign` keyless and emit `provenance: true` and `sbom: true` from `docker/build-push-action` so consumers can verify before deploy.
+Multi-platform images only when the runtime differs (ARM Graviton, Apple Silicon dev) — it doubles build time. Sign with `cosign` keyless and emit `provenance: true` and `sbom: true` from `docker/build-push-action` so consumers can verify before deploy. Generate GitHub artifact attestations with `actions/attest` and verify them in the promotion job with `gh attestation verify`; target SLSA Build level and plan limits are in `references/supply-chain-provenance.md`.
 
 ## §5 Parallelism, fan-out / fan-in, manual approvals, concurrency
 
@@ -203,12 +207,12 @@ e2e:
     matrix: { shard: [1/4, 2/4, 3/4, 4/4] }
   runs-on: ubuntu-24.04
   steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with: { node-version: '20', cache: 'npm' }
+    - uses: actions/checkout@v7
+    - uses: actions/setup-node@v7
+      with: { node-version: '24', cache: 'npm' }
     - run: npm ci && npx playwright install --with-deps
     - run: npx playwright test --shard=${{ matrix.shard }} --reporter=blob
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with: { name: blob-report-${{ strategy.job-index }}, path: blob-report, retention-days: 1 }
 
 merge-reports:
@@ -216,7 +220,7 @@ merge-reports:
   needs: [e2e]
   runs-on: ubuntu-24.04
   steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v8
       with: { path: reports, pattern: blob-report-*, merge-multiple: true }
     - run: npx playwright merge-reports --reporter=html ./reports
 ```
@@ -295,7 +299,7 @@ Headline list — broken-vs-fixed examples in `references/anti-patterns.md`:
 - Missing `permissions:` block defaults to write-all on older repos; pin per workflow and per job.
 - No `concurrency:` on production allows two simultaneous deploys to race on `kubectl apply`.
 - Rebuilding per environment lets staging and production drift silently; build once on merge to `main`, promote the digest.
-- Pinning third-party actions to mutable tags (`@v1`) lets a publisher repoint to a malicious commit; pin to a full SHA on security paths.
+- Pinning third-party actions to mutable tags (`@v1`) lets a publisher repoint to a malicious commit; pin every external action to a full SHA and let Dependabot propose reviewed bumps.
 - Logging the entire environment can leak vended Vault tokens that the redactor never registered.
 
 ## §10 Reference architectures
@@ -360,6 +364,7 @@ If runners or environments are unavailable, validate workflow syntax and return 
 ## Sources
 
 - Continuous Delivery, Humble & Farley, Addison-Wesley, 2010, ISBN 978-0-321-60191-9.
+- Brikman (2025) *Fundamentals of DevOps and Software Delivery* (deployment-server protection, plan/apply privilege split, secret classes).
 - The DevOps Handbook, 2nd ed., Kim, Humble, Debois, Willis, IT Revolution, 2021, ISBN 978-1-950508-40-2.
 - GitHub Actions docs: [docs.github.com/actions](https://docs.github.com/actions); Reusing workflows: [docs.github.com/en/actions/using-workflows/reusing-workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 - Automatic token authentication: [docs.github.com/en/actions/security-guides/automatic-token-authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).

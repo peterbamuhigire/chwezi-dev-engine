@@ -446,3 +446,4 @@ A common anti-pattern is one negative line "Discount". The four patterns have **
 - [references/dunning-management.md](references/dunning-management.md): Failed-payment recovery flows, retry cadence, suspension logic.
 - [references/metered-billing.md](references/metered-billing.md): Usage pricing models, recording patterns, billing-cycle resets.
 - [references/revenue-recognition.md](references/revenue-recognition.md): Deferred revenue mechanics handed off to `saas-accounting-system`.
+- [references/price-versioning-and-plan-migration.md](references/price-versioning-and-plan-migration.md): load when changing prices, retiring a plan, or migrating/grandfathering existing subscriptions.

@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIRS = {
-    "skills-web-dev": ROOT,
+    "chwezi-dev-engine": ROOT,
     "srs": Path(r"C:\wamp64\www\srs-skills"),
     "business-plan": Path(r"C:\wamp64\www\business-plan-skills"),
     "website": Path(r"C:\wamp64\www\website-skills"),

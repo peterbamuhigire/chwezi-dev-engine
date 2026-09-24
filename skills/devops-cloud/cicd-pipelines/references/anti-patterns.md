@@ -26,7 +26,7 @@ Pass the secret via the env block, never interpolate into a shell-quoted string 
 Broken:
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: ~/.npm
     key: ${{ runner.os }}-npm
@@ -37,7 +37,7 @@ Failure: every PR shares the same cache key. A malicious PR (or just a stale loc
 Fix:
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: ~/.npm
     key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}

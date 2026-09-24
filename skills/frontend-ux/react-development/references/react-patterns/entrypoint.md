@@ -6,7 +6,7 @@ description: Advanced React design patterns for production apps — Container/Pr
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

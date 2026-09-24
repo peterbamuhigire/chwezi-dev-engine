@@ -4,13 +4,13 @@ This PHP update distills applicable guidance from the user's local EPUB library.
 
 ## Sources
 
-- `C:\Users\Peter\Downloads\PHP 8_ Principles and Practices of Object-Oriented Programming.epub`
+- *PHP 8: Principles and Practices of Object-Oriented Programming* (author and year NOT_ASSESSED)
   - Used for PHP 8 OOP topics: classes, objects, inheritance, polymorphism, encapsulation, interfaces, abstract classes, namespaces, autoloading, exceptions, composition, traits, Composer, testing/TDD, design patterns, and SOLID.
-- `C:\Users\Peter\Downloads\The Clean Architecture in PHP (Kristopher Wilson) (z-library.sk, 1lib.sk, z-lib.sk).epub`
+- Kristopher Wilson, *The Clean Architecture in PHP* (year NOT_ASSESSED)
   - Used for decoupling, testability, dependency injection, repositories, adapters, framework independence, domain/application separation, and framework migration risk.
-- `C:\Users\Peter\Downloads\Docker for PHP Developers.epub`
+- *Docker for PHP Developers* (author and year NOT_ASSESSED)
   - Used for PHP containers, Docker Compose, PHP INI/modules, Composer inside Docker, PHP-FPM/Nginx, and registry/deployment workflows.
-- `C:\Users\Peter\Downloads\Build APIs You Won_t Hate.epub`
+- Phil Sturgeon, *Build APIs You Won't Hate* (year NOT_ASSESSED)
   - Used for API endpoint planning, JSON request/response shape, realistic seed data, testing, pagination, versioning, and consumer-driven API thinking.
 
 ## Copyright Note

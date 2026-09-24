@@ -391,6 +391,7 @@ CREATE POLICY tenant_isolation ON orders
 ## References
 
 - `references/owasp-mapping.md` — OWASP Top 10 2025 complete map with code.
+- `../../architecture/api-design-first/references/api-security-owasp-top10.md` — load when the target is an HTTP/GraphQL/gRPC/webhook API: OWASP API Security Top 10 (2023) controls with a negative-test proof per risk.
 - `references/access-control.md` — IDOR, tenancy, authorisation patterns.
 - `references/authentication-security.md` — password hashing, MFA, session, JWT, OAuth.
 - `references/server-side-security.md` — SQLi, SSRF, XXE, path traversal, command injection.

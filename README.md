@@ -116,19 +116,18 @@ further SDLC documentation-entry skills outside this count.)
   structure, progressive disclosure, and plugin packaging; recorded in this README's own
   "Matt Pocock skills study" section below and in `docs/sept-matt-pocock/README.md`. Attribution
   does not imply endorsement or wholesale adoption of the source catalogue.
-- Branson, S. *UX / UI Design: Introduction Guide to Intuitive Design and User-Friendly
-  Experience* (2020) — `book-extractions/branson-ux-ui-design-extraction.md`.
-- Deacon, P. B. *UX and UI Design Strategy: A Step-by-Step Guide* (2020) —
-  `book-extractions/deacon-ux-ui-strategy-extraction.md`.
-- Levy, J. *UX Strategy: How to Devise Innovative Digital Products that People Want* (O'Reilly,
-  2015), ed. Mary Treseler — `book-extractions/levy-ux-strategy-extraction.md`.
-- Fekeshazi, Z. *Product Managers' Guide to UX Design* (UX Studio, c. 2017) —
-  `book-extractions/fekeshazi-pm-ux-guide-extraction.md`.
+- Branson, S. (2020) *UX / UI Design: Introduction Guide to Intuitive Design and
+  User-Friendly Experience*.
+- Deacon, P. B. (2020) *UX and UI Design Strategy: A Step-by-Step Guide*.
+- Levy, J. (2015) *UX Strategy: How to Devise Innovative Digital Products that People Want*,
+  O'Reilly.
+- Fekeshazi, Z. (c. 2017) *Product Managers' Guide to UX Design*, UX Studio.
 
-These book extractions inform the UX-adjacent portions of `skills/frontend-ux/` and
-`skills/product-business/`; the remaining `book-extractions/` files are internal Kaizen/audit
-syntheses (SaaS, game development, AI-on-SaaS) rather than citable third-party works, so they
-are not listed as references here.
+These books informed UX-adjacent guidance that now lives, paraphrased and task-oriented, in the
+design engine (`design-system-skills`). The former `book-extractions/` folder was removed on
+2026-09-24 under the "Never store book extractions" rule in `AGENTS.md`; engineering knowledge
+it held now lives in skill `references/` files, and game-development source-disposition records
+moved to `docs/game-dev-analysis/`.
 
 ## Current status
 
@@ -147,7 +146,7 @@ Last verified: 2026-09-17.
 
 | Measure | Result |
 |---|---:|
-| Active `SKILL.md` files | 171 |
+| Active `SKILL.md` files | 185 |
 | Guardrail maximum | 200 |
 | Routing fixtures | 158 |
 | Routing precision@1 | 91% (144/158) |
@@ -350,7 +349,7 @@ Expected counts and routing results must be taken from the current validator out
 ## Honest limitations
 
 - Routing precision@1 is 91%; precision@3 is 100%. The engine still requires human review for close domain collisions.
-- The 171 active skills meet the soft target ceiling and remain below the hard cap of 200, but catalogue size alone is not proof of quality or production readiness.
+- The 185 active skills exceed the 150-170 soft target by 15 (open consolidation item) and remain below the hard cap of 200; catalogue size alone is not proof of quality or production readiness.
 - Some book inputs are historical, partial early releases, or have unusable extraction. They inform patterns only where the available text supports them; current claims require independent verification.
 - `AI for Game Developers` contains durable algorithmic foundations but dated APIs and production assumptions. Treat it as conceptual input, not current platform documentation.
 - Game and design guidance does not replace hands-on playtesting, visual review, accessibility testing, security testing, or production telemetry.

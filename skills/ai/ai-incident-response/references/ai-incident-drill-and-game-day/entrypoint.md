@@ -216,5 +216,5 @@ What `ai-agent-drill-evidence-and-cadence` is responsible for: signed evidence p
 
 Bridge: every scenario in this skill registers in `ops/compliance/drill-cadence.yaml` with its `min_cadence_days`, `pass_threshold`, `owner`, and `control_ids` (the SOC 2 / ISO 27001 / HIPAA controls the drill provides evidence for). A scenario without a cadence registration is not auditable.
 
-Cross-links: `ai-agent-drill-evidence-and-cadence`, `ai-agent-soc2-controls` (CC7.4 incident response), `ai-agent-iso27001-controls` (A.16.1.5, A.17.1.3), `ai-agent-evidence-automation`.
+Cross-links: `ai-agent-drill-evidence-and-cadence`, `ai-agent-soc2-controls` (CC7.4 incident response), `ai-agent-iso27001-controls` (ISO/IEC 27001:2022 A.5.26, A.5.29-A.5.30), `ai-agent-evidence-automation`.
 

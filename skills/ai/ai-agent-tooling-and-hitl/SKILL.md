@@ -56,6 +56,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.
+- Load [references/least-privilege-tool-and-mcp-security.md](references/least-privilege-tool-and-mcp-security.md) when making a tool or MCP server safe to call: typed actions, scoped credentials, strict schemas, MCP threats, tool-call audit fields and mandatory tests.
 
 ## Consolidated Child References
 

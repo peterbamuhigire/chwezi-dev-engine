@@ -72,7 +72,7 @@ presentation-layer Apple UI guidance lives in the external
 | Engine control plane | `docs/engine-control-plane.json`, `skills/sdlc-meta/engine-control-plane/` | Shared agents, commands, hooks, evidence, handoffs, and bounded recovery across eleven engines. |
 | CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
-| Long-form references | `book-extractions/`, `claude-guides/`, `blog-posts/` | Source material and companion writing. |
+| Long-form references | `claude-guides/`, `blog-posts/` | Companion writing. Book extractions are never stored (see `AGENTS.md`). |
 
 ## How To Work In This Repo
 
@@ -94,8 +94,8 @@ presentation-layer Apple UI guidance lives in the external
 - The guardrail hard cap is 200 active `SKILL.md` files.
 - Finance doctrine is canonical in the external <a href="https://github.com/peterbamuhigire/chwezi-accounting-doctrine" target="_blank" rel="noopener noreferrer">Chwezi Accounting Doctrine</a>
   engine; reference-only checkouts stay outside the runtime skill catalog.
-- Current active catalog size is 171 skills. This is one documented exception above the 150-170 soft
-  target while the retained hospitality route is contract-repaired and reviewed; the hard cap remains 200.
+- Current active catalog size is 185 skills. This exceeds the 150-170 soft target by 15 after the
+  2026-09-20 depth-first pass; consolidation is an open item and the hard cap remains 200.
 - Current routing smoke-test suite contains 160 fixtures, with 90% precision@1
   (145/160) and 100% precision@3 (160/160); the active Kaizen target is at least 95% top-1.
 - Inactive aliases are retained as `ALIAS.md` and routed through

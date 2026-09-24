@@ -12,7 +12,7 @@ description: Use for web apps that need Leaflet-first GIS mapping, location sele
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

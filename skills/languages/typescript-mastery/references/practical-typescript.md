@@ -3,7 +3,7 @@
 This file is self-contained. It was prepared from local EPUB study notes and
 must remain useful even if the EPUB is deleted.
 
-Source input: local EPUB `C:\Users\Peter\Downloads\Documents\Learning TypeScript.epub`.
+Sources: Josh Goldberg (2022) *Learning TypeScript*, O'Reilly.
 
 Use this reference when TypeScript work needs maintainable production judgement
 instead of isolated type-system tricks.

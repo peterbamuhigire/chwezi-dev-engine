@@ -1,6 +1,6 @@
 # Pandas Idioms
 
-Reference companion to `SKILL.md`. The items here are the pandas patterns that actually bite in production SaaS analytics work. Assume pandas 2.x, Python 3.11+, and Arrow as an option.
+Reference companion to `SKILL.md`. The items here are the pandas patterns that actually bite in production SaaS analytics work. Assume pandas 3.0.x (current stable; 2.x only in legacy services), Python 3.11+, and pyarrow installed. For reshaping, missing data, and type repair load `tidy-reshaping-and-missing-data.md`.
 
 ## Vectorisation is not optional
 
@@ -27,7 +27,7 @@ import numpy as np
 conditions = [
     df["status"] == "paid",
     df["status"] == "partial",
-    df["due_date"] < pd.Timestamp.utcnow(),
+    df["due_date"] < pd.Timestamp.now(tz="UTC"),
 ]
 choices = ["paid", "partial", "overdue"]
 df["bucket"] = np.select(conditions, choices, default="current")
@@ -35,11 +35,12 @@ df["bucket"] = np.select(conditions, choices, default="current")
 
 ## Copy vs view vs SettingWithCopy
 
-In pandas 2.x, Copy-on-Write (CoW) is being rolled out, but the safe default is still to be explicit. Three rules remove the entire class of bug:
+Since pandas 3.0, Copy-on-Write (CoW) is the only mode: every indexing result and every method result behaves as a copy, chained assignment (`df[df.a > 0]["b"] = 1`) silently never modifies `df`, and `SettingWithCopyWarning` no longer exists to warn you. The bug class changed from "warning noise" to "silent no-op". Rules:
 
-1. When slicing a DataFrame and planning to write to it, call `.copy()`.
-2. Never chain a filter with an assignment (`df[df.a > 0]["b"] = 1`). Use `.loc` with a boolean mask.
-3. Avoid `inplace=True`. The API is inconsistent and the pattern masks mutation.
+1. Write to a frame only through `df.loc[mask, col] = value` or `assign`. Never chain a filter with an assignment.
+2. An explicit `.copy()` after slicing is no longer required for correctness; keep it only where it documents intent at a function boundary.
+3. Avoid `inplace=True`. It rarely saves memory and hides mutation (in 3.0 it returns the object instead of `None`).
+4. Mutating a NumPy array obtained via `.to_numpy()` or `.values` may now raise because it is read-only; copy the array if you must mutate it.
 
 ```python
 # Correct mutation pattern
@@ -50,11 +51,17 @@ paid["net_after_fee"] = paid["net"] - paid["fee"]
 df.loc[df["status"] == "paid", "net_after_fee"] = df["net"] - df["fee"]
 ```
 
-Enable CoW behaviour globally when starting a new codebase:
+Do not set `pd.options.mode.copy_on_write`; in 3.0 it has no effect and is deprecated for removal in 4.0. On a 2.2 codebase preparing to upgrade, set it to `"warn"` in the test suite to surface code whose behaviour will change.
 
-```python
-pd.options.mode.copy_on_write = True
-```
+### pandas 3.0 upgrade checklist
+
+- [ ] Strings: text columns now default to the `str` dtype (Arrow-backed when pyarrow is installed; missing value is `NaN`). Replace `dtype == object` checks with `pd.api.types.is_string_dtype`, and stop storing mixed Python objects in text columns.
+- [ ] Datetimes: parsing now infers resolution (`us` for strings and `datetime` objects, not always `ns`). Any `astype("int64")` on timestamps changes scale by 1000x; use `.dt.as_unit("ns")` first or avoid integer epochs.
+- [ ] Offsets: aliases `M`, `Q`, `Y`, `BM` are removed; use `ME`, `QE`, `YE`, `BME` in `resample`, `date_range`, and offset arithmetic. Period frequencies are separate: `to_period("M")` stays `"M"` (passing `"ME"` there is an error).
+- [ ] `pd.offsets.Day` is now a calendar day (keeps wall-clock time across DST), not 24 hours.
+- [ ] Time zones are `zoneinfo` objects; `pytz` is optional (`pandas[timezone]`).
+- [ ] Minimums: Python 3.11, NumPy 1.26, pyarrow 13.
+- [ ] Run the suite with `-W error::FutureWarning` on the last 2.3 release before switching.
 
 ## Dtypes, including Arrow-backed
 
@@ -72,7 +79,7 @@ df = df.astype({
 
 For money, use `Decimal` end-to-end for computation and only cross into pandas when you are ready for display, aggregation by sum, or export. Pandas `float64` is fine for rates and ratios, never for cash.
 
-Arrow-backed dtypes (pandas 2.0+) are worth using when:
+Beyond the default `str` dtype, explicit Arrow-backed dtypes are worth using when:
 
 - Reading Parquet or the result of a `read_sql` that already returns strings.
 - You need nullable integers and booleans that behave like SQL.
@@ -217,7 +224,7 @@ Use `indicator=True` during development to see which rows came from where.
 - Comparing tz-aware and tz-naive timestamps raises in 2.x. Pick one policy and stick to it.
 - Float equality on money. Always compare rounded Decimals or use `np.isclose` on floats.
 - Silent int-to-float promotion on NaN. Use nullable `Int64` or Arrow integers if NaN is expected.
-- `read_csv` default `dtype=object` for string columns. Pass `dtype_backend="pyarrow"` or explicit dtypes.
+- Assuming string columns are `object`. In 3.0 they are `str`; code branching on `object` silently takes the wrong path. Pass explicit dtypes at load.
 - Group keys disappearing. `as_index=False` or `.reset_index()` keeps keys as columns.
 - Mutating a DataFrame passed into a function. Treat inputs as immutable; copy at the boundary.
 
@@ -233,3 +240,7 @@ df = pd.read_sql(sql, engine, params={"tenant_id": tenant_id})
 assert (df["tenant_id"] == tenant_id).all(), "tenant leakage"
 df = df.drop(columns=["tenant_id"])
 ```
+
+## Evidence/currentness
+
+Access date 2026-09-24. pandas 3.0.0 released 2026-01-21, latest 3.0.6 (2026-09-17) per pandas.pydata.org/docs/whatsnew. CoW-only semantics, removal of `SettingWithCopyWarning`, deprecated `mode.copy_on_write`, default `str` dtype, datetime resolution inference, offset alias removals, `Day` offset change, and minimum versions from the v3.0.0 release notes. Whether `.to_numpy()` read-only behaviour applies to every dtype: `NOT_ASSESSED`; test on your frames.

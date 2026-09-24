@@ -58,7 +58,9 @@ URI rules: plural nouns, lowercase, hyphens not underscores, no trailing slashes
 | 500  | Server error                                                                                |
 | 503  | Service unavailable (maintenance, overload) + `Retry-After` header                          |
 
-## Standard response envelope (RFC 7807-inspired)
+## Standard response envelope (house format)
+
+RFC 7807 is obsoleted by RFC 9457 (July 2023; checked 2026-09-24). For public, partner, and agent-facing APIs, map this envelope to `application/problem+json` as described in `json-payload-and-schema-design.md`; never mix both formats within one API.
 
 ```json
 {

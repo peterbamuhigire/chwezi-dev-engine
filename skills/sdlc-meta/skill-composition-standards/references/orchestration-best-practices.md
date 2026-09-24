@@ -12,7 +12,7 @@ description: Master skill for orchestrating multi-step workflows. Use when gener
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

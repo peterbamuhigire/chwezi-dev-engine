@@ -334,3 +334,39 @@ useEffect(() => {
   return () => ws.close();  // cleanup makes this safe
 }, [url]);
 ```
+
+## React 19.2 and 19.3 Additions and React Compiler (currentness layer)
+
+Use this section before recommending any React 19 API. The sections above
+describe 18.x and 19.0 features; the items below were verified against
+react.dev on 2026-09-24.
+
+| Release | Stable additions | Adoption rule |
+|---|---|---|
+| 19.2 (2025-10-01) | `<Activity>`, `useEffectEvent`, React Performance Tracks in browser DevTools | Use `<Activity mode="hidden">` to keep a tab or panel's state while unmounting its effects, instead of CSS-hiding or remounting. Use `useEffectEvent` only for non-reactive logic called from inside an effect; never to silence the dependency linter. |
+| 19.3 (2026-09-09) | `<ViewTransition>` and `addTransitionType`, Fragment refs, `browser()` in React DOM, Trusted Types pass-through, Server Components rendering Context directly | Animate only updates wrapped in `startTransition`; respect `prefers-reduced-motion`. Use Fragment refs for focus and observation across sibling nodes without wrapper `div`s. Use `use(browser())` for browser-only reads (locale, timezone, storage) instead of `useEffect` + `useState` hydration workarounds. |
+
+React Compiler 1.0 (stable since 2025-10-07):
+
+- Works natively with React 19; React 17-18 need `react-compiler-runtime`
+  and a configured minimum target.
+- New code: rely on automatic memoisation; write `useMemo`/`useCallback` only
+  when you need explicit control (for example an effect dependency identity).
+- Existing code: leave manual memoisation in place unless tests cover the
+  effect behaviour; removing it can change effect firing.
+- Enable `eslint-plugin-react-hooks` recommended rules first. Compiler
+  bail-outs usually mean a Rules of React violation (mutation during render,
+  reading refs in render) - fix the code, do not suppress.
+- Pin the exact compiler version when test coverage is thin.
+- Expo SDK 54+ enables the compiler in new apps. Vite 8's
+  `@vitejs/plugin-react` v6 no longer uses Babel, so follow the current
+  react.dev installation page for the Vite recipe rather than an older
+  `babel: { plugins: [...] }` snippet (exact recipe `NOT_ASSESSED` here).
+
+Security note: December 2025 advisories affected React Server Components
+packages. Any app using RSC (Next.js App Router, other RSC frameworks) must be
+on a patched release line; check the react.dev blog advisories before release.
+
+Evidence/currentness: react.dev/versions, react.dev/blog (19.2, 19.3,
+React Compiler v1.0 posts), vite.dev/blog/announcing-vite8; accessed
+2026-09-24. Review again on the next React minor release.

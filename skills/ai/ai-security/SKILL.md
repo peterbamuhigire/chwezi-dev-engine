@@ -55,6 +55,7 @@ Findings name the affected boundary, attack path, impact, control, and verificat
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- Load [references/llm-and-agent-threat-control-map.md](references/llm-and-agent-threat-control-map.md) when threat-modelling or release-gating: OWASP LLM 2025 and Agentic 2026 crosswalk, exfiltration-triad check, injection defence layers, ATLAS/NIST fit.
 <!-- dual-compat-end -->
 ## Source
 
@@ -97,6 +98,11 @@ $request = new AIRequest(
 ```
 
 ### Input Sanitisation
+
+Pattern lists like the one below catch only naive attacks and are trivially
+paraphrased around. Treat a match as a detection signal (log, raise scrutiny),
+never as the injection control; the controls are capability separation and
+policy enforcement outside the model (see `references/llm-and-agent-threat-control-map.md`).
 
 ```php
 class AIInputSanitiser

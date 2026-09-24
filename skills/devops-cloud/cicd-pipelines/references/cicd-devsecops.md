@@ -12,7 +12,7 @@ description: Use when hardening CI/CD pipelines with security gates, secrets man
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

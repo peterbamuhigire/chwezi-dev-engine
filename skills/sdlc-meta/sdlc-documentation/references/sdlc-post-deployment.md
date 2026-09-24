@@ -12,7 +12,7 @@ description: Generate a Post-Deployment Evaluation Report (PDER) to assess softw
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

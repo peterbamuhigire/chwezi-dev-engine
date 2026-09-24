@@ -39,6 +39,8 @@ Specialist frontend skill. Produces the three deliverables that give a team an o
 ## Workflow
 
 - Read this SKILL.md, then load `references/budgets-and-regression-gate.md` plus whichever of `loading-performance.md`, `rendering-and-inp.md`, `framework-recipes.md` the task requires.
+- Load `references/performance-engineering-procedure.md` when diagnosing field regressions by metric sub-part, adding Speculation Rules/bfcache/fetchpriority, governing third-party or AI chat scripts, budgeting streaming AI interfaces, or checking toolchain currentness.
+- When the change under review was AI-generated, also apply `../../sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md`.
 - Produce the three deliverables (budget, measurement plan, regression gate) before chasing individual optimisations.
 - Tie every SLI back to an SLO owned by `observability-monitoring`.
 
@@ -75,6 +77,7 @@ Read and search the application and measurement configuration first. Editing and
 - `references/loading-performance.md`
 - `references/rendering-and-inp.md`
 - `references/framework-recipes.md`
+- `references/performance-engineering-procedure.md`
 <!-- dual-compat-end -->
 
 ## When this skill applies
@@ -225,3 +228,4 @@ A blocking CI job with at least: `size-limit` per entry, Lighthouse CI score and
 - `references/loading-performance.md` — image, JS, CSS, font, and resource-hint detail.
 - `references/rendering-and-inp.md` — layout, paint, CLS, and INP mechanics.
 - `references/framework-recipes.md` — React, Next.js App Router, Vue, vanilla, service workers.
+- `references/performance-engineering-procedure.md` — diagnose-fix-gate procedure, navigation acceleration, third-party and streaming-AI budgets, toolchain currentness.

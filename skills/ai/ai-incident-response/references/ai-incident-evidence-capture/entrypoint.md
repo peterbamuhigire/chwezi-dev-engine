@@ -181,7 +181,7 @@ def export_bundle(incident_id: str, signal: str, feature: str,
 
 ## §3 Chain of Custody (Summary)
 
-- Bundle written to object-lock storage; retention set per policy (7 years default; 10 years for high-risk-AI features under EU AI Act).
+- Bundle written to object-lock storage; retention set per policy (7 years default; 10 years by policy for high-risk-AI features, aligned to EU AI Act Art. 18 documentation retention; statutory log minimum is 6 months under Arts. 19 and 26(6)).
 - Bundle is signed at creation; signature stored alongside.
 - Access requires a custody event: who read it, when, why, approved by whom. Append-only log per bundle (`custody.log`).
 - Legal hold: a flag prevents deletion regardless of retention timer.
@@ -246,5 +246,5 @@ Implementation: factor the `EvidencePack` writer out of the incident pipeline in
 
 The retention policy is the **maximum** of the incident retention and the control's retention class.
 
-Cross-links: `ai-agent-evidence-automation`, `ai-agent-soc2-controls` (CC7.4), `ai-agent-iso27001-controls` (A.16.1), `ai-agent-audit-log-integrity`.
+Cross-links: `ai-agent-evidence-automation`, `ai-agent-soc2-controls` (CC7.4), `ai-agent-iso27001-controls` (ISO/IEC 27001:2022 A.5.24-A.5.28), `ai-agent-audit-log-integrity`.
 

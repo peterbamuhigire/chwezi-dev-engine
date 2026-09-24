@@ -10,7 +10,7 @@ description: Use when writing end-to-end browser tests for production web apps �
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -358,14 +358,14 @@ import { test, expect } from '@playwright/test';
 test('dashboard has no accessibility violations', async ({ page }) => {
   await page.goto('/dashboard');
   const results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
     .exclude('#third-party-widget')
     .analyze();
   expect(results.violations).toEqual([]);
 });
 ```
 
-Violations contain `id`, `impact`, `description`, and `nodes[].html` — enough to open a ticket with selector and remediation pointer.
+Violations contain `id`, `impact`, `description`, and `nodes[].html` — enough to open a ticket with selector and remediation pointer. A clean scan is not a conformance claim; add the manual passes in `accessibility-testing-automated-and-manual.md`.
 
 ## Mobile Viewport Testing
 

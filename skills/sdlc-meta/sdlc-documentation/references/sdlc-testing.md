@@ -13,7 +13,7 @@ description: Generate Testing & Quality documentation for SDLC projects. Complia
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

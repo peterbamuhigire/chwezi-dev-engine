@@ -12,7 +12,7 @@ description: 'Spec-driven development: write feature specs, plan modules, produc
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

@@ -7,7 +7,7 @@ description: Generate end-user manuals and reference guides for ERP modules. Use
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -238,7 +238,7 @@ Organize manuals with a clear hierarchy:
 | In-app PHP manual for ERP module | `manual-guide` (this skill) |
 | SDLC-standard user manual (markdown) | `sdlc-user-deploy` |
 | AI guidance docs (AGENTS.md) | `doc-architect` |
-| Project README and AGENTS.md updates | `update-Codex-documentation` |
+| Project README and AGENTS.md updates | `update-claude-documentation` |
 | Feature spec with documentation impact | `spec-architect` or `feature-planning` |
 
 ---

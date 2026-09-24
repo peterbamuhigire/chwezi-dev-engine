@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
-"""Reject raw books and likely reconstructive full-text conversions."""
+"""Reject raw books, stored book extractions, and reconstructive full-text conversions.
+
+Books are temporary inputs. The repository may keep only paraphrased,
+task-oriented skill content and references. This gate therefore fails on:
+
+- raw ebook files anywhere, and PDFs under book/source-extraction paths;
+- ANY file inside a book-extraction folder (``book-extractions/``,
+  ``extracted-books/``, ``book-study/`` and similar), whatever its size;
+- ``*-extraction.md`` files that present themselves as a book extraction;
+- Markdown links that point into a book-extraction folder;
+- shadow-library file names and local ebook download paths used as citations;
+- large or marker-rich text that looks like a reconstructed book.
+
+Plan and audit documents may name books; they must not store book content.
+"""
 
 from __future__ import annotations
 
@@ -13,7 +27,18 @@ LARGE_BOOK_TEXT_BYTES = 80_000
 RAW_BOOK_EXTENSIONS = {".epub", ".mobi", ".azw", ".azw3"}
 SOURCE_TEXT_EXTENSIONS = {".md", ".txt", ".rst", ".html", ".htm"}
 BOOK_SOURCE_PATH_RE = re.compile(
-    r"(?:^|/)(?:book-extractions?|book-dumps?|raw-books?|source-books?)(?:/|$)",
+    r"(?:^|/)(?:book-extractions?|extracted-books?|book-study|book-dumps?|raw-books?|source-books?)(?:/|$)",
+    re.IGNORECASE,
+)
+BOOK_EXTRACTION_LINK_RE = re.compile(
+    r"\]\(\s*<?[^)\s>]*(?:book-extractions?|extracted-books?|book-study)/",
+    re.IGNORECASE,
+)
+EXTRACTION_TITLE_RE = re.compile(r"^#[^\n]*\bextraction\b", re.IGNORECASE | re.MULTILINE)
+EXTRACTION_SOURCE_RE = re.compile(r"^\s*\*{0,2}sources?:\*{0,2}", re.IGNORECASE | re.MULTILINE)
+SHADOW_LIBRARY_RE = re.compile(r"\b(?:z-library|z-lib|1lib)\.[a-z]{2,}\b", re.IGNORECASE)
+LOCAL_EBOOK_PATH_RE = re.compile(
+    r"[A-Za-z]:\\Users\\[^\\\n`]+\\Downloads\\[^`\n]*\.(?:epub|mobi|azw3?|pdf)\b",
     re.IGNORECASE,
 )
 FULL_TEXT_MARKERS = {
@@ -65,6 +90,15 @@ def scan(root: Path) -> list[Finding]:
 
         in_book_source_path = BOOK_SOURCE_PATH_RE.search(relative.as_posix()) is not None
         size = path.stat().st_size
+        if in_book_source_path:
+            findings.append(
+                Finding(
+                    "book-extraction-folder",
+                    relative,
+                    "book-extraction folders must not exist; fold paraphrased, task-oriented "
+                    "knowledge into skill references/ and delete the folder",
+                )
+            )
         if suffix == ".pdf" and in_book_source_path:
             findings.append(
                 Finding(
@@ -86,11 +120,12 @@ def scan(root: Path) -> list[Finding]:
                 )
             )
 
-        if size < 30_000:
-            continue
         try:
             content = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
+            continue
+        findings.extend(_scan_text_policy(relative, content))
+        if size < 30_000:
             continue
         markers = sorted(name for name, pattern in FULL_TEXT_MARKERS.items() if pattern.search(content))
         if len(markers) >= 3:
@@ -101,6 +136,42 @@ def scan(root: Path) -> list[Finding]:
                     "likely reconstructive book text; matched markers: " + ", ".join(markers),
                 )
             )
+    return findings
+
+
+def _scan_text_policy(relative: Path, content: str) -> list[Finding]:
+    """Small-file checks that do not depend on size."""
+    findings: list[Finding] = []
+    if relative.suffix.lower() == ".md":
+        if BOOK_EXTRACTION_LINK_RE.search(content):
+            findings.append(
+                Finding(
+                    "book-extraction-link",
+                    relative,
+                    "links into a book-extraction folder; point to a paraphrased skill reference instead",
+                )
+            )
+        head = content[:1500]
+        if (
+            relative.name.lower().endswith("-extraction.md")
+            and EXTRACTION_TITLE_RE.search(head)
+            and EXTRACTION_SOURCE_RE.search(head)
+        ):
+            findings.append(
+                Finding(
+                    "book-extraction-file",
+                    relative,
+                    "stored book extraction; keep only paraphrased, task-oriented references",
+                )
+            )
+    if SHADOW_LIBRARY_RE.search(content) or LOCAL_EBOOK_PATH_RE.search(content):
+        findings.append(
+            Finding(
+                "source-file-citation",
+                relative,
+                "cites a local ebook path or shadow-library file name; cite Author (Year) Title instead",
+            )
+        )
     return findings
 
 

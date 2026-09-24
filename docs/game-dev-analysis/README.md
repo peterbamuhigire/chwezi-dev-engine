@@ -40,7 +40,7 @@ The audit inspected:
 - the mandatory `anti-ai-slop` and `ai-slop-audit` gates;
 - the delivery evidence-pack template;
 - the two existing July 2026 game-family release audits;
-- the source-book synthesis record in `book-extractions/`;
+- the source-disposition records now in `docs/game-dev-analysis/source-disposition-*.md`;
 - catalog guardrails, routing smoke tests and routing-collision output.
 
 This is a capability audit of an instruction engine. It is not an audit of staff résumés, shipped titles, source code, player data, revenue, art portfolios or production infrastructure. Those were not present and therefore were not scored as if they existed.

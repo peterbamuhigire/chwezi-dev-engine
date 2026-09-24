@@ -7,7 +7,7 @@ description: Expert iOS app architecture patterns — dependency injection conta
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

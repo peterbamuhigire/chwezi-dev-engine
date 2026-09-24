@@ -13,7 +13,7 @@ description: Generate a Software Maintenance Plan (SMP) and supporting maintenan
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

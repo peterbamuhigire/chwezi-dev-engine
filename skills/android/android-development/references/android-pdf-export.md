@@ -6,7 +6,7 @@ description: Native Android PDF export system using PdfDocument API (zero depend
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

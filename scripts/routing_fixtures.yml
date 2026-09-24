@@ -186,3 +186,17 @@ fixtures:
     expect: 00-meta-initialization
   - task: "Red-team a high-stakes donor proposal against the scoring grid, compliance knockouts, evidence and spreadsheet integrity before submission"
     expect: world-class-bid-red-team-and-delivery-qc
+
+  # --- Kaizen 2026-09-24 neighbour-collision fixtures ---
+  - task: "Should this be SSE, WebSocket or webhooks"
+    expect: api-design-first
+  - task: "Harden GitHub Actions workflow with SHA pinning and OIDC"
+    expect: cicd-pipelines
+  - task: "pandas 3 copy-on-write upgrade"
+    expect: python-data-analytics
+  - task: "Point-in-time correct training data from a feature store"
+    expect: python-ml-predictive
+  - task: "Data contract and schema evolution for an event stream"
+    expect: database-design-engineering
+  - task: "Review an AI-generated pull request before merge"
+    expect: ai-assisted-development

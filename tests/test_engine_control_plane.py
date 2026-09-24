@@ -34,7 +34,7 @@ COMPLIANCE_SCRIPT = (
 )
 COMPLIANCE_MODULE = load_module("engine_compliance", COMPLIANCE_SCRIPT)
 
-EXPECTED_ACTIVE_SKILL_COUNT = 171
+EXPECTED_ACTIVE_SKILL_COUNT = 185
 EXPECTED_CLAUDE_BRIDGE = "# Claude Code repository memory\n\n@AGENTS.md\n"
 PORTABLE_SECTION_ALIASES = {
     "Use When": ("Use When",),
@@ -78,8 +78,26 @@ def portable_contract_failures(text: str) -> list[str]:
     return failures
 
 
+BRIDGE_ALLOWED_SECTION = "## Never store book extractions"
+
+
 def bridge_failures(text: str) -> list[str]:
-    return [] if text == EXPECTED_CLAUDE_BRIDGE else ["bridge is not the canonical thin import"]
+    """The bridge is the canonical import plus, at most, the copyright rule.
+
+    The copyright section is deliberately duplicated from AGENTS.md so a
+    Claude session sees it even before the import resolves. Any other added
+    guidance is duplication and fails.
+    """
+    text = text.replace("\r\n", "\n")
+    if text == EXPECTED_CLAUDE_BRIDGE:
+        return []
+    if not text.startswith(EXPECTED_CLAUDE_BRIDGE + "\n"):
+        return ["bridge is not the canonical thin import"]
+    remainder = text[len(EXPECTED_CLAUDE_BRIDGE) + 1 :]
+    headings = re.findall(r"^#{1,6} .*$", remainder, re.MULTILINE)
+    if not remainder.startswith(BRIDGE_ALLOWED_SECTION + "\n") or headings != [BRIDGE_ALLOWED_SECTION]:
+        return ["bridge is not the canonical thin import"]
+    return []
 
 
 def count_surface_mismatches(surface_texts: dict[str, str], expected: str) -> dict[str, list[str | None]]:
@@ -203,12 +221,12 @@ def test_contract_links_must_stay_inside_selected_checkout(tmp_path, monkeypatch
     target.mkdir()
     for filename in ("AGENTS.md", "adoption.md"):
         (target / filename).write_text("Fixture\n", encoding="utf-8")
-    monkeypatch.setenv("SKILL_ENGINE_ROOT_SKILLS_WEB_DEV", str(checkout))
+    monkeypatch.setenv("SKILL_ENGINE_ROOT_CHWEZI_DEV_ENGINE", str(checkout))
     with directory_link(checkout / "linked", target):
-        result = VALIDATE_MODULE.resolve_engine_dir(tmp_path, "skills-web-dev", "linked/AGENTS.md", "linked/adoption.md")
+        result = VALIDATE_MODULE.resolve_engine_dir(tmp_path, "chwezi-dev-engine", "linked/AGENTS.md", "linked/adoption.md")
         assert result == (None if external else checkout)
         target.rename(target.with_name("moved"))
-        assert VALIDATE_MODULE.resolve_engine_dir(tmp_path, "skills-web-dev", "linked/AGENTS.md", "linked/adoption.md") is None
+        assert VALIDATE_MODULE.resolve_engine_dir(tmp_path, "chwezi-dev-engine", "linked/AGENTS.md", "linked/adoption.md") is None
 
 
 def test_governing_skills_meet_current_authoring_contract():
@@ -262,6 +280,13 @@ def test_claude_bridge_mutation_is_rejected():
     assert bridge_failures(mutated) == ["bridge is not the canonical thin import"]
 
 
+def test_claude_bridge_extra_section_is_rejected():
+    allowed = EXPECTED_CLAUDE_BRIDGE + "\n## Never store book extractions\n\nRule text.\n"
+    assert bridge_failures(allowed) == []
+    mutated = allowed + "\n## Duplicated routing\n\n- extra\n"
+    assert bridge_failures(mutated) == ["bridge is not the canonical thin import"]
+
+
 def test_current_active_count_matches_filesystem_and_documented_surfaces():
     active_roots = (ROOT / "skills", ROOT / "00-meta-initialization")
     active_count = sum(
@@ -301,7 +326,7 @@ def test_count_surface_mutation_is_rejected():
         )
     }
     surface_texts["README.md"] = surface_texts["README.md"].replace(
-        "| Active `SKILL.md` files | 171 |",
+        f"| Active `SKILL.md` files | {EXPECTED_ACTIVE_SKILL_COUNT} |",
         "| Active `SKILL.md` files | 170 |",
         1,
     )

@@ -3,7 +3,7 @@ import os
 import sys
 import yaml
 
-EXPECTED_ENGINE = "skills-web-dev"
+EXPECTED_ENGINE = "chwezi-dev-engine"
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / ".skills-engine" / "engine-manifest.yaml"
 

@@ -7,7 +7,7 @@ description: Microcopy and UX writing standards for buttons, error messages, emp
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

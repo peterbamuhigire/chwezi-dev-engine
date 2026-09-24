@@ -6,7 +6,7 @@ description: Comprehensive named-law quick reference for all 30 Laws of UX (Yabl
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 
@@ -141,7 +141,7 @@ These laws govern speed and complexity trade-offs:
 | **Doherty Threshold** | 400ms | Below = engaged; above = disengaged |
 | **Fitts's Law** | 44×44px minimum | Target size × distance determines click time |
 | **Hick's Law** | ≤7 options | Log growth: double options ≠ double time — but it adds up |
-| **Miller's Law** | 7±2 chunks | Practical target: 3–5 per region |
+| **Miller's Law** | 7±2 chunks (superseded; current estimate about 4 chunks, Cowan 2001) | Practical target: 3–4 per region |
 
 ---
 

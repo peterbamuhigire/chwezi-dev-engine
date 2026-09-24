@@ -7,7 +7,7 @@ description: Use when designing or improving engineering management, team operat
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

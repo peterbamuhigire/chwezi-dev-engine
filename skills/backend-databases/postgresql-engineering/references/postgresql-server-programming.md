@@ -15,7 +15,7 @@ description: PostgreSQL server-side programming sourced from "PostgreSQL Server 
 metadata:
   portable: true
   compatible_with:
-  - Codex
+  - claude-code
   - codex
 ---
 

@@ -51,6 +51,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/aws-patterns.md` — VPC, ECS+ALB, RDS, S3 lifecycle, Terratest.
 - `references/ansible-debian.md` — inventory, role layout, idempotency patterns, hardening playbook, tags.
 - `references/gitops-argocd-flux.md` — ArgoCD `Application`/`ApplicationSet`, Flux bootstrap, drift wiring.
+- `references/iac-tool-selection-and-delivery.md` — load when choosing IaC tool categories, deciding Terraform vs OpenTofu (licence verified 2026-09-24), or designing the PR-plan / protected-apply pipeline and state isolation.
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
@@ -108,9 +109,9 @@ Pin provider and Terraform versions — a minor provider bump can silently chang
 
 ```hcl
 terraform {
-  required_version = ">= 1.7.0"
+  required_version = ">= 1.11.0" # S3 native locking (use_lockfile) needs Terraform 1.11+ / OpenTofu 1.10+
   required_providers {
-    aws = { source = "hashicorp/aws", version = "~> 5.0" }
+    aws = { source = "hashicorp/aws", version = "~> 6.0" } # AWS provider 6.x current as of 2026-09-24
   }
   backend "s3" {
     bucket       = "acme-tfstate"
