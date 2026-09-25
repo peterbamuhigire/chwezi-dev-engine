@@ -4,10 +4,10 @@ Peter's rule, effective 2026-09-07. Apply only in Codex. Claude and other
 consumers retain their own model selection and all domain-engine capabilities.
 
 - Root/orchestrator, final reviewer, and execution subagents default to
-  `gpt-5.6-luna` with high reasoning.
+  `gpt-6-luna` with high reasoning.
 - Use `gpt-6-astra` only when Peter explicitly selects it for a task that needs
   its additional capability. Astra is never selected automatically.
-- Every spawned role must explicitly use `gpt-5.6-luna` with high reasoning
+- Every spawned role must explicitly use `gpt-6-luna` with high reasoning
   unless Peter has manually selected Astra for that task. On hosts that prohibit
   model overrides with full-history forks, use a bounded-context or no-history
   fork with a sufficient task brief. Preserve the selected model through nested

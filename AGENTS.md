@@ -12,10 +12,11 @@ If it reports configuration drift, Peter authorises the bounded
 `--runtime codex --apply` repair, followed by `--check`. The helper backs up
 changes and preserves unrelated settings. If Python or configuration access is
 unavailable, report the limitation; do not replace the user's config wholesale.
-Read `.codex/model-policy.md` for the full contract. Use Astra (`gpt-6-astra`)
-for the root/orchestrator and reviewer; explicitly pin execution subagents to
-Luna (`gpt-5.6-luna`). Delegate bounded work when useful and keep final review
-with Astra. A running session may need restarting for root settings to apply.
+Read `.codex/model-policy.md` for the full contract. Use Luna (`gpt-6-luna`)
+with high reasoning for the root/orchestrator, reviewer, and execution roles by
+default. Peter may explicitly select Astra (`gpt-6-astra`) for a task that needs
+its additional capability. A running session may need restarting for root
+settings to apply.
 
 Every Kaizen cycle MUST check latest official model releases and actual
 runtime availability, record dated evidence and a retain/change decision,

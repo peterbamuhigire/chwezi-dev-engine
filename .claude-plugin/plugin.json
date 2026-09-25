@@ -1,4 +1,5 @@
 {
+  "name": "engineering",
   "version": "1.0.0",
   "skills": [
     "./skills/ai/ai-agent-commercial-operations/",
