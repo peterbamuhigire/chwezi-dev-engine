@@ -21,8 +21,12 @@ from pathlib import Path
 
 START = "<!-- chwezi-codex-model-policy:start -->"
 END = "<!-- chwezi-codex-model-policy:end -->"
-ROOT_KEYS = ("model", "review_model")
-POLICY_KEYS = {"model": "root_model", "review_model": "review_model"}
+ROOT_KEYS = ("model", "review_model", "model_reasoning_effort")
+POLICY_KEYS = {
+    "model": "root_model",
+    "review_model": "review_model",
+    "model_reasoning_effort": "reasoning_effort",
+}
 
 
 class PolicyError(Exception):
@@ -209,6 +213,7 @@ def assert_semantic(before: dict, after: dict, policy: dict) -> None:
         result = dict(value)
         result.pop("model", None)
         result.pop("review_model", None)
+        result.pop("model_reasoning_effort", None)
         agents = dict(result.get("agents", {}))
         for role in policy["roles"]:
             agents.pop(role, None)
@@ -229,6 +234,8 @@ def check(home: Path, root: Path) -> None:
     parsed = parse_config(config_path)
     if parsed.get("model") != policy["root_model"] or parsed.get("review_model") != policy["review_model"]:
         raise PolicyDrift("root model policy drift")
+    if parsed.get("model_reasoning_effort") != policy["reasoning_effort"]:
+        raise PolicyDrift("root reasoning effort policy drift")
     expected_files = expected(home, policy, policy_text, templates)
     safe_destination(config_path, home)
     safe_destination(home / "AGENTS.md", home)
