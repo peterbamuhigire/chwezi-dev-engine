@@ -22,17 +22,35 @@ gate "after each unit" rather than only at the end of a session.
 
 ## Route model tier to task complexity, not to habit
 
-Match the model to what the task actually demands:
+Model selection follows the active runtime's controlling user policy and
+available catalogue. Do not infer a live session's model from saved settings.
 
-- **Haiku** — classification, boilerplate transforms, narrow mechanical edits
-- **Sonnet** — implementation and refactors
-- **Opus** — architecture decisions, root-cause analysis, multi-file invariants
+### Codex
+
+Peter's current Codex policy is authoritative:
+
+- Use GPT-6 Luna with high reasoning by default for orchestration, review and
+  execution.
+- Use GPT-6 Astra only when Peter explicitly selects it for the task.
+- Never select GPT-5.6 or fall back to it; report an unavailable GPT-6 pin.
+
+### Claude and other runtimes
+
+Keep each runtime's own model selection, settings, permissions and capabilities.
+Do not translate Codex model pins into another runtime's configuration.
+
+When a runtime's own policy permits a choice among model tiers, match the
+available tier to the task:
+
+- Use its efficient tier for classification, boilerplate and narrow edits.
+- Use its standard tier for implementation and refactors.
+- Use its strongest tier for architecture, root-cause analysis and multi-file
+  invariants.
 
 Escalate to a higher tier only when the lower tier has already failed with a
-clear reasoning gap — not preemptively, and not as a default. Running
-architecture-grade work through a classification-tier model wastes correctness;
-running boilerplate through an architecture-tier model wastes cost for no
-quality gain in return.
+clear reasoning gap, not preemptively or as a default. Running architecture-grade
+work through a classification-tier model wastes correctness; running boilerplate
+through an architecture-tier model wastes cost for no quality gain in return.
 
 ## Do not spend review cycles on what the linter already enforces
 
