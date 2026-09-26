@@ -38,7 +38,7 @@ Use this skill to define a requirements-level audit protocol for e-commerce plat
 ## Workflow
 
 1. Define audit scope and evidence access.
-2. Set standards baseline: OWASP Top 10, OWASP API Security Top 10, OWASP ASVS, CVSS, PCI-DSS where payment card scope exists, and NIST AI RMF for AI use.
+2. Set standards baseline: OWASP Top 10, OWASP API Security Top 10, OWASP ASVS, CVSS, PCI-DSS where payment card scope exists, and NIST AI RMF for AI use. For ASVS, record the exact stable release in the audit scope and use version-qualified requirement IDs. As checked on 2026-09-26, v5.0.0 is the latest stable release; recheck the official project before each engagement and do not use bleeding-edge content as a production baseline.
 3. Map architecture, integrations, data flows, roles, permissions, and third-party dependencies.
 4. Scope payment security. Identify hosted redirect, embedded checkout, card data exposure, mobile money/gateway flows, reconciliation, settlement, refunds, and chargebacks.
 5. Map privacy and consumer-protection obligations by jurisdiction using the verified EAC data-protection table and escalate uncertain legal questions.

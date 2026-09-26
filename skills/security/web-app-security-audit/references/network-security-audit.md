@@ -187,6 +187,6 @@ Tier 2 (supporting):
 
 Tier 3 (supplementary):
 
-- OWASP ASVS — owasp.org/www-project-application-security-verification-standard
+- OWASP ASVS — [official project and version-qualified requirement guidance](https://owasp.org/projects/asvs); use the exact stable release in scope and cite version-qualified IDs. The current stable version was v5.0.0 when checked on 2026-09-26; recheck before each engagement. Do not use bleeding-edge content as a production baseline.
 - OWASP Top Ten — owasp.org
 - NIST SP 800-57 — key management lifecycle (for VPN key-rotation cadence justification)

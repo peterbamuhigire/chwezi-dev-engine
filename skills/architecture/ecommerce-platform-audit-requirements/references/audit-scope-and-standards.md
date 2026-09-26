@@ -18,7 +18,7 @@
 |---|---|
 | Web application risk | OWASP Top 10. |
 | API risk | OWASP API Security Top 10. |
-| Verification | OWASP ASVS. |
+| Verification | OWASP ASVS. Record the exact stable release in the scope and qualify each cited requirement ID by version (for example, `v5.0.0-1.2.5`). As checked on 2026-09-26, v5.0.0 is the latest stable release; recheck the [official ASVS project](https://owasp.org/projects/asvs) before each engagement. Do not use bleeding-edge content as a production baseline. |
 | Severity | CVSS plus business impact. |
 | Payment card scope | PCI-DSS and appropriate SAQ logic. |
 | AI risk | NIST AI RMF; EU AI Act exposure where selling into or processing for EU markets. |
