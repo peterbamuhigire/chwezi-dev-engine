@@ -1,59 +1,24 @@
 #!/usr/bin/env node
 /**
- * destructive-bash-gate.js — PreToolUse hook on Bash/PowerShell.
+ * destructive-bash-gate.js — PreToolUse hook for destructive shell commands.
  *
- * Three-stage gate for destructive commands, modelled on the DENY -> FORCE
- * -> ALLOW pattern documented in the ECC audit's gateguard skill: the first
- * attempt at a destructive command is denied with a demand for concrete
- * facts (what does this touch, what's the rollback, what did the user
- * actually ask for); a repeated attempt at the SAME command is allowed,
- * on the theory that presenting those facts is itself what changes the
- * outcome, not a second automated check.
+ * This is a defense-in-depth prompt to name the blast radius and rollback. It
+ * is not an authorization system or a complete shell parser. Matching commands
+ * are denied on every attempt: repeating one does not create authority.
  *
- * This exists because of a real, recorded incident: ~30 skill folders were
- * deleted from .claude/skills/skills/ on 2026-05-12 by a destructive sync
- * run without per-operation confirmation. That is exactly the failure mode
- * this hook targets.
- *
- * Contract: reads a JSON payload on stdin (Claude Code PreToolUse hook),
- * inspects the pending Bash/PowerShell command string, and exits 0 (allow)
- * or 2 (block, reason on stderr). As with banned-font-gate.js, this has
- * been unit-tested directly (see hooks/test-destructive-bash-gate.js) but
- * NOT exercised inside a live Claude Code session — verify the stdin field
- * names against the installed version before relying on it in production.
- *
- * State (for the deny-once-then-allow behaviour): a per-command-hash marker
- * file under CHWEZI_GATE_STATE_DIR (default: a temp dir under the OS temp
- * root), expiring after CHWEZI_GATE_STATE_TTL_HOURS (default 8). This is a
- * TIME-WINDOW approximation of "this session already saw this command", not
- * a true session ID — Claude Code's exact session-scoping hook environment
- * variable was not confirmed against live documentation before writing
- * this, so a fixed time window is the honestly-uncertain choice rather than
- * asserting a specific env var name with false confidence. Widen or narrow
- * the TTL, or wire in a confirmed session-ID env var, once verified.
- *
- * Graduated controls (matches gateguard's pattern):
- *   CHWEZI_GATEGUARD=off                  — disable entirely
- *   CHWEZI_GATE_EXTRA_PATTERNS=<regex>     — additional destructive regex,
- *                                            appended to the built-in set
- *   CHWEZI_GATE_STATE_DIR=<path>           — override the state directory
- *
- * Fails open: if state cannot be read or written, the gate ALLOWS the
- * operation rather than looping or blocking on its own malfunction, and
- * says so on stderr.
+ * The hook reads the documented Claude Code PreToolUse JSON payload from
+ * stdin. Invalid or missing input fails closed with exit code 2. A deliberate
+ * administrator override remains available through CHWEZI_GATEGUARD=off in
+ * the hook process environment; do not treat that setting as user approval.
  */
 
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const crypto = require('crypto');
 
 const BUILTIN_DESTRUCTIVE_PATTERNS = [
-  /\brm\s+(-\w*r\w*f\w*|-\w*f\w*r\w*)\b/i, // rm -rf, rm -fr, rm -Rf, etc.
   /\bgit\s+reset\s+--hard\b/i,
-  /\bgit\s+push\s+.*--force(?!-with-lease)\b/i, // --force, not --force-with-lease
+  /\bgit\s+push\b(?:(?![;&|\r\n]).)*(?:--force(?:-with-lease)?(?=\s|$)|(?:^|\s)-f(?=\s|$)|(?:^|\s)\+[^\s;&|]+)/i,
   /\bgit\s+clean\s+-[a-z]*[dfx][a-z]*\b/i,
   /\bdrop\s+table\b/i,
   /\bdrop\s+database\b/i,
@@ -61,83 +26,83 @@ const BUILTIN_DESTRUCTIVE_PATTERNS = [
   /\bdd\s+if=/i,
   /\brobocopy\b.*\/MIR\b/i,
   /\brsync\b.*--delete\b/i,
-  /\bRemove-Item\b.*-Recurse\b.*-Force\b/i, // PowerShell equivalent of rm -rf
-  /\bformat\s+[a-z]:/i, // Windows format <drive>:
+  /\bformat\s+[a-z]:/i,
   /\bshred\b/i,
 ];
+
+function block(reason) {
+  console.error(`[chwezi:destructive-bash-gate] BLOCKED: ${reason}`);
+  process.exit(2);
+}
 
 function readStdin() {
   try {
     return fs.readFileSync(0, 'utf8');
-  } catch (e) {
-    return '';
+  } catch (error) {
+    return null;
   }
 }
 
-function extractCommand(toolInput) {
-  if (!toolInput) return '';
-  return toolInput.command || toolInput.script || toolInput.cmd || '';
+function shellSegments(command) {
+  // Conservative lexical split. This is deliberately not presented as a
+  // complete shell grammar; unusual quoting and shell features remain a gap.
+  return command.split(/(?:&&|\|\||[;&|\r\n])/);
 }
 
-function stateDir() {
-  return process.env.CHWEZI_GATE_STATE_DIR || path.join(os.tmpdir(), 'chwezi-gate-state');
+function shellWords(command) {
+  return command.match(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s]+/g) || [];
 }
 
-function ttlMs() {
-  const hours = Number(process.env.CHWEZI_GATE_STATE_TTL_HOURS) || 8;
-  return hours * 60 * 60 * 1000;
-}
-
-function commandHash(command) {
-  return crypto.createHash('sha256').update(command.trim()).digest('hex').slice(0, 24);
-}
-
-/**
- * Returns true if this exact command was already denied within the TTL
- * window (i.e. this is a retry that should now be allowed), and marks it
- * as seen for next time either way. Returns false (fail open, allow) if the
- * state directory itself is unusable.
- */
-function alreadyDeniedRecently(command) {
-  const dir = stateDir();
-  const file = path.join(dir, commandHash(command) + '.json');
-  try {
-    fs.mkdirSync(dir, { recursive: true });
-  } catch (e) {
-    console.error(`[chwezi:destructive-bash-gate] Could not create state dir ${dir} — allowing (fail-open).`);
-    return true; // fail open: treat as already-seen so we don't loop-deny
+function unquote(word) {
+  if (word.length >= 2 && ((word[0] === '"' && word.at(-1) === '"') || (word[0] === "'" && word.at(-1) === "'"))) {
+    return word.slice(1, -1);
   }
+  return word;
+}
 
-  let previouslyDenied = false;
-  try {
-    const stat = fs.statSync(file);
-    const age = Date.now() - stat.mtimeMs;
-    if (age < ttlMs()) previouslyDenied = true;
-  } catch (e) {
-    previouslyDenied = false;
-  }
+function hasRecursiveForceRemove(command) {
+  return shellSegments(command).some((segment) => {
+    const match = /\brm\b/i.exec(segment);
+    if (!match) return false;
 
-  try {
-    fs.writeFileSync(file, JSON.stringify({ deniedAt: new Date().toISOString() }));
-  } catch (e) {
-    console.error(`[chwezi:destructive-bash-gate] Could not write state file — allowing (fail-open).`);
-    return true;
-  }
+    const words = shellWords(segment.slice(match.index + match[0].length)).map(unquote);
+    let recursive = false;
+    let force = false;
+    for (const word of words) {
+      if (word === '--') break;
+      if (word === '--recursive' || /^-(?!-)[^-]*r[^-]*$/i.test(word)) recursive = true;
+      if (word === '--force' || /^-(?!-)[^-]*f[^-]*$/i.test(word)) force = true;
+    }
+    return recursive && force;
+  });
+}
 
-  return previouslyDenied;
+function hasRecursiveForcePowerShellRemove(command) {
+  return shellSegments(command).some((segment) => {
+    const match = /\bRemove-Item\b/i.exec(segment);
+    if (!match) return false;
+
+    const words = shellWords(segment.slice(match.index + match[0].length)).map(unquote);
+    const recursive = words.some((word) => /^-Recurse(?:$|:)/i.test(word));
+    const force = words.some((word) => /^-Force(?:$|:)/i.test(word));
+    return recursive && force;
+  });
 }
 
 function matchesDestructive(command) {
+  if (hasRecursiveForceRemove(command)) return 'recursive forced rm';
+  if (hasRecursiveForcePowerShellRemove(command)) return 'recursive forced Remove-Item';
+
   const patterns = [...BUILTIN_DESTRUCTIVE_PATTERNS];
   const extra = process.env.CHWEZI_GATE_EXTRA_PATTERNS;
   if (extra) {
     try {
       patterns.push(new RegExp(extra, 'i'));
-    } catch (e) {
-      console.error(`[chwezi:destructive-bash-gate] CHWEZI_GATE_EXTRA_PATTERNS is not a valid regex — ignoring it.`);
+    } catch (error) {
+      console.error('[chwezi:destructive-bash-gate] Invalid CHWEZI_GATE_EXTRA_PATTERNS; ignoring the optional pattern.');
     }
   }
-  return patterns.find((re) => re.test(command)) || null;
+  return patterns.find((pattern) => pattern.test(command)) || null;
 }
 
 function main() {
@@ -146,37 +111,35 @@ function main() {
   }
 
   const raw = readStdin();
+  if (raw === null) block('could not read the PreToolUse payload; refusing to assume the command is safe');
+
   let payload;
   try {
     payload = JSON.parse(raw);
-  } catch (e) {
-    process.exit(0); // fail open on unparseable payload
+  } catch (error) {
+    block('invalid JSON PreToolUse payload; refusing to assume the command is safe');
   }
 
-  const toolInput = payload.tool_input || payload.toolInput || payload.input || {};
-  const command = extractCommand(toolInput);
-  if (!command) process.exit(0);
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+    block('unexpected PreToolUse payload; refusing to assume the command is safe');
+  }
+
+  const toolInput = payload.tool_input;
+  if (!toolInput || typeof toolInput !== 'object' || Array.isArray(toolInput)) {
+    block('missing tool_input object; refusing to assume the command is safe');
+  }
+
+  const command = toolInput.command;
+  if (typeof command !== 'string' || !command.trim()) {
+    block('missing shell command; refusing to assume the command is safe');
+  }
 
   const matched = matchesDestructive(command);
   if (!matched) process.exit(0);
 
-  if (alreadyDeniedRecently(command)) {
-    // This exact command was already fact-forced once in the recent past —
-    // allow the retry rather than deny-looping on it forever.
-    process.exit(0);
-  }
-
-  console.error(
-    `BLOCKED (destructive command) — before running this, present these facts:\n\n` +
-    `1. List every file, table, branch, or remote ref this command will modify or delete.\n` +
-    `2. Write a one-line rollback procedure — what restores the prior state if this is wrong.\n` +
-    `3. Quote the user's current instruction verbatim.\n\n` +
-    `Command matched: ${matched}\n` +
-    `Retrying the exact same command after presenting these facts will be allowed.\n` +
-    `Override for this session: CHWEZI_GATEGUARD=off (use only when you have already\n` +
-    `confirmed the operation with the user through another channel).`
+  block(
+    `destructive command matched (${matched}). Before requesting an approved override, state every affected file, table, branch, or remote ref; give the one-line rollback; and quote the user's current authorization. Repeating the same command does not authorize it. If the user/operator separately approves an override, set CHWEZI_GATEGUARD=off in the hook process environment.`,
   );
-  process.exit(2);
 }
 
 main();
