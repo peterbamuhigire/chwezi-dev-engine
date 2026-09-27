@@ -87,6 +87,15 @@ function main() {
   const SKILLS_DIR = path.join(ROOT, args.root);
   const MANIFEST_PATH = path.join(ROOT, '.claude-plugin', 'plugin.json');
   const EXCLUDE_DIRS = new Set(args.exclude.split(',').map((s) => s.trim()).filter(Boolean));
+  let pluginName = path.basename(ROOT);
+  const marketplacePath = path.join(ROOT, '.claude-plugin', 'marketplace.json');
+  if (fs.existsSync(marketplacePath)) {
+    try {
+      const marketplace = JSON.parse(fs.readFileSync(marketplacePath, 'utf8'));
+      const rootPlugin = Array.isArray(marketplace.plugins) ? marketplace.plugins.find((p) => p.source === './' || p.source === '.') : null;
+      if (rootPlugin && rootPlugin.name) pluginName = rootPlugin.name;
+    } catch (e) { /* retain the directory fallback */ }
+  }
 
   if (!fs.existsSync(SKILLS_DIR)) {
     console.error(`No skill root at ${SKILLS_DIR}`);
@@ -127,6 +136,7 @@ function main() {
   }
 
   const manifest = {
+    name: pluginName,
     version: args.version || existingVersion,
     skills: skillPaths,
     mcpServers: {},

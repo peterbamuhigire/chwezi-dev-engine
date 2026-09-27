@@ -17,6 +17,7 @@ default for orchestration, research, audit, review, and implementation. Use Astr
 Peter explicitly selects it for the task; never select or fall back to GPT-5.6. Report unavailable required GPT-6
 models. A running session may need restarting for root settings to apply.
 
+
 Every Kaizen cycle MUST check latest official model releases and actual
 runtime availability, record dated evidence and a retain/change decision,
 and evaluate better candidates before recommending replacement. Preserve the
