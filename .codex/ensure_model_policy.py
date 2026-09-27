@@ -49,9 +49,11 @@ def load_policy(root: Path) -> tuple[dict, str, dict[str, bytes]]:
         raise PolicyError(f"cannot read shipped policy: {exc}") from exc
     if not isinstance(policy, dict) or any(not isinstance(policy.get(k), str) or not policy[k] for k in ("root_model", "review_model")):
         raise PolicyError("policy root_model/review_model must be non-empty strings")
+    if any(policy.get(key) != "gpt-6-luna" for key in ("root_model", "review_model", "execution_model")):
+        raise PolicyError("the Codex default model policy must pin root, review, and execution to gpt-6-luna")
     effort = policy.get("reasoning_effort")
-    if not isinstance(effort, str) or not effort:
-        raise PolicyError("policy reasoning_effort must be a non-empty string")
+    if effort != "high":
+        raise PolicyError("the Codex default reasoning_effort must be high")
     roles = policy.get("roles")
     if not isinstance(roles, list) or roles != ["default", "worker", "explorer", "tester", "researcher", "reviewer"]:
         raise PolicyError("policy roles must be the six supported roles in order")
