@@ -20,7 +20,7 @@ const fs = require('fs');
 
 const BUILTIN_DESTRUCTIVE_PATTERNS = [
   /\bgit\s+reset\s+--hard\b/i,
-  /\bgit\s+push\b(?:(?![;&|\r\n]).)*(?:--force(?=\s|$)|--force-with-lease(?:=[^\s;&|]+)?(?=\s|$)|(?:^|\s)-f(?=\s|$)|(?:^|\s)\+[^\s;&|]+)/i,
+  /\bgit\s+push\b(?:(?![;&|\r\n]).)*(?:--force(?=\s|$)|--force-with-lease(?:=[^\s;&|]+)?(?=\s|$)|--delete(?=\s|$)|--prune(?=\s|$)|--mirror(?=\s|$)|(?:^|\s)(?:-f|-d)(?=\s|$)|(?:^|\s)\+[^\s;&|]+|(?:^|\s):[^\s;&|]+)/i,
   /\bgit\s+clean\s+-[a-z]*[dfx][a-z]*\b/i,
   /\bdrop\s+table\b/i,
   /\bdrop\s+database\b/i,
