@@ -125,19 +125,24 @@ function main() {
   }
   if (collision) process.exit(1);
 
-  let existingVersion = '1.0.0';
+  let existingManifest = {};
   if (fs.existsSync(MANIFEST_PATH)) {
     try {
-      const existing = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
-      if (existing.version) existingVersion = existing.version;
+      const parsed = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) existingManifest = parsed;
     } catch (e) {
       /* ignore malformed existing file, regenerate */
     }
   }
 
+  if (!existingManifest.userConfig || typeof existingManifest.userConfig !== 'object' || Array.isArray(existingManifest.userConfig)) {
+    delete existingManifest.userConfig;
+  }
+
   const manifest = {
+    ...existingManifest,
     name: pluginName,
-    version: args.version || existingVersion,
+    version: args.version || existingManifest.version || '1.0.0',
     skills: skillPaths,
     mcpServers: {},
   };
@@ -149,19 +154,24 @@ function main() {
   // PLUGIN_SCHEMA_NOTES.md.
   if (fs.existsSync(path.join(ROOT, 'hooks', 'hooks.json'))) {
     manifest.userConfig = {
+      ...(existingManifest.userConfig || {}),
       hooks_enabled: {
         type: 'boolean',
         title: 'Enable Chwezi hooks',
-        description: 'Run this engine\'s enforcement hooks (e.g. destructive-command gate, banned-font gate where applicable). Disable to install skills only, with no local automation.',
+        description: 'Run this engine\'s enforcement hooks (e.g. destructive-command gate, banned-font gate where applicable). Disable hook enforcement while keeping skills and agents available.',
         default: true,
       },
     };
+  } else if (manifest.userConfig) {
+    const { hooks_enabled: _hooksEnabled, ...remainingConfig } = manifest.userConfig;
+    if (Object.keys(remainingConfig).length) manifest.userConfig = remainingConfig;
+    else delete manifest.userConfig;
   }
 
   const rendered = JSON.stringify(manifest, null, 2) + '\n';
 
   if (args.check) {
-    const current = fs.existsSync(MANIFEST_PATH) ? fs.readFileSync(MANIFEST_PATH, 'utf8') : null;
+    const current = fs.existsSync(MANIFEST_PATH) ? fs.readFileSync(MANIFEST_PATH, 'utf8').replace(/\r\n?/g, '\n') : null;
     if (current !== rendered) {
       console.error(`${path.basename(ROOT)}: plugin.json is stale (${skillPaths.length} skills on disk).`);
       process.exit(1);

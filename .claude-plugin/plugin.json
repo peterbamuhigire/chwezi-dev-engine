@@ -173,7 +173,7 @@
     "hooks_enabled": {
       "type": "boolean",
       "title": "Enable Chwezi hooks",
-      "description": "Run this engine's enforcement hooks (e.g. destructive-command gate, banned-font gate where applicable). Disable to install skills only, with no local automation.",
+      "description": "Run this engine's enforcement hooks (e.g. destructive-command gate, banned-font gate where applicable). Disable hook enforcement while keeping skills and agents available.",
       "default": true
     }
   }

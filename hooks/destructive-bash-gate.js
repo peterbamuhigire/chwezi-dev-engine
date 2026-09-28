@@ -14,6 +14,8 @@
 
 'use strict';
 
+if (!require('./plugin-hook-config').isEnabled()) process.exit(0);
+
 const fs = require('fs');
 
 const BUILTIN_DESTRUCTIVE_PATTERNS = [
