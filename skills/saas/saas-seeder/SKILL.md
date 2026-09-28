@@ -487,8 +487,8 @@ Every demo SaaS MUST keep a stable baseline and a fictional, tenant-scoped
 rolling activity refresh (normally the latest 14 days). The refresh contract
 requires deterministic keys, `--from`/`--to`/`--days`, `--dry-run`, a production
 guard, a run ledger, coverage verification, no destructive changes, and
-second-server portability. Demo login buttons and shortcut accounts must use
-the same explicit development-only configuration as the seeder.
+second-server portability. Demo login is one-click profile buttons with no
+password anywhere: [`references/demo-one-click-login.md`](references/demo-one-click-login.md).
 
 Use `../full-coverage-saas-seeding/references/synthetic-name-bank-standard.md` for fictional, culturally scoped, deterministic, checksum-recorded four-CSV identity pools; never use a tiny repeated list or runtime-random names.
 See [`references/recurring-demo-data.md`](references/recurring-demo-data.md)

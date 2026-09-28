@@ -44,11 +44,14 @@ and idempotent rerun result as concise evidence.
 
 ## Demo login and second server
 
-The sign-in screen should expose one-click buttons only on configured demo
-hosts (for example `MEDIC8_SHOW_DEMO_LOGIN_SHORTCUTS=1` or a host allow-list).
-The server-side shortcut seeder must be explicit opt-in and development/demo
-only. Use the same named accounts in both places; document demo credentials
-without exposing production secrets.
+Demo sign-in follows [`demo-one-click-login.md`](demo-one-click-login.md): on a
+demo host the page shows only one-click profile buttons, each posting a profile
+key that the server maps through an allow-list to a demo user and signs in through
+the normal authentication path (same RBAC, password step skipped). Gates:
+`DEMO_LOGIN_ENABLED=true` in that server's `.env` and a demo host. No password is
+ever written in code, pages, docs, evidence or commits. The server-side shortcut
+seeder must be explicit opt-in and development/demo only, using the same named
+accounts as the allow-list.
 
 To use a second demo server, configure its own database connection, a strong
 non-empty `PASSWORD_PEPPER`, and the demo-host flag, then run the same
