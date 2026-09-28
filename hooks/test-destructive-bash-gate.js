@@ -7,22 +7,45 @@
 'use strict';
 
 const { spawnSync } = require('child_process');
+const { execFileSync } = require('child_process');
+const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
 const HOOK = path.join(__dirname, 'destructive-bash-gate.js');
 
 function run(input, env = {}) {
+  let cwd = process.cwd();
+  try {
+    cwd = JSON.parse(input).cwd || cwd;
+  } catch (error) {
+    // Malformed payload fixtures still run from the current test directory.
+  }
   const result = spawnSync(process.execPath, [HOOK], {
     input,
     encoding: 'utf8',
+    cwd,
     env: { ...process.env, ...env },
   });
   return { code: result.status, stderr: result.stderr };
 }
 
-function payload(command) {
-  return JSON.stringify({ tool_name: 'Bash', tool_input: { command } });
+function payload(command, cwd = process.cwd()) {
+  return JSON.stringify({ cwd, tool_name: 'Bash', tool_input: { command } });
 }
+
+const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'chwezi-git-mirror-gate-'));
+const mirrorRepo = path.join(fixtureRoot, 'mirror-repo');
+const ordinaryRepo = path.join(fixtureRoot, 'ordinary-repo');
+const globalConfig = path.join(fixtureRoot, 'global-gitconfig');
+fs.mkdirSync(mirrorRepo);
+fs.mkdirSync(ordinaryRepo);
+execFileSync('git', ['-C', mirrorRepo, 'init', '-q']);
+execFileSync('git', ['-C', mirrorRepo, 'config', 'remote.origin.url', 'https://example.invalid/mirror.git']);
+execFileSync('git', ['-C', mirrorRepo, 'config', 'remote.origin.mirror', 'true']);
+execFileSync('git', ['-C', ordinaryRepo, 'init', '-q']);
+execFileSync('git', ['-C', ordinaryRepo, 'config', 'remote.origin.url', 'https://example.invalid/ordinary.git']);
+fs.writeFileSync(globalConfig, '[remote "origin"]\n\tmirror = true\n');
 
 const cases = [
   { name: 'rm -rf is blocked', input: payload('rm -rf /some/skills/dir'), expect: 2 },
@@ -51,6 +74,17 @@ const cases = [
   { name: 'git -c false mirror override does not block ordinary push', input: payload('git -c remote.origin.mirror=false push origin HEAD:main'), expect: 0 },
   { name: 'last git -c mirror override controls matching remote', input: payload('git -c remote.origin.mirror=true -c remote.origin.mirror=no push origin HEAD:main'), expect: 0 },
   { name: 'git -c mirror override does not block non-push command', input: payload('git -c remote.origin.mirror=true status'), expect: 0 },
+  { name: 'effective repository mirror config blocks ordinary-looking push', input: payload('git push origin HEAD:main', mirrorRepo), expect: 2 },
+  { name: 'effective global mirror config blocks ordinary-looking push', input: payload('git push origin HEAD:main', ordinaryRepo), env: { GIT_CONFIG_GLOBAL: globalConfig, GIT_CONFIG_NOSYSTEM: '1' }, expect: 2 },
+  { name: 'git -C repository mirror config blocks push', input: payload(`git -C "${mirrorRepo}" push origin HEAD:main`, ordinaryRepo), expect: 2 },
+  { name: 'literal cd before push checks the changed repository config', input: payload(`cd "${mirrorRepo}" && git push origin HEAD:main`, ordinaryRepo), expect: 2 },
+  { name: 'pipeline directory change makes push configuration unknown and blocks', input: payload(`cd "${mirrorRepo}" | git push origin HEAD:main`, ordinaryRepo), expect: 2 },
+  { name: 'explicit false command override disables repository mirror setting', input: payload(`git -C "${mirrorRepo}" -c remote.origin.mirror=false push origin HEAD:main`, ordinaryRepo), expect: 0 },
+  { name: 'ordinary repository push remains allowed', input: payload('git push origin HEAD:main', ordinaryRepo), expect: 0 },
+  { name: 'later push in a compound command is still checked for mirror config', input: payload(`git -C "${ordinaryRepo}" push origin HEAD:main && git -C "${mirrorRepo}" push origin HEAD:main`, ordinaryRepo), expect: 2 },
+  { name: 'inherited Git config environment mirror override blocks push', input: payload('git push origin HEAD:main', ordinaryRepo), env: { GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'remote.origin.mirror', GIT_CONFIG_VALUE_0: 'true' }, expect: 2 },
+  { name: 'git --config-env mirror override blocks push', input: payload('git --config-env=remote.origin.mirror=CHWEZI_TEST_MIRROR push origin HEAD:main', ordinaryRepo), env: { CHWEZI_TEST_MIRROR: 'yes' }, expect: 2 },
+  { name: 'missing cwd fails closed for push configuration check', input: JSON.stringify({ tool_name: 'Bash', tool_input: { command: 'git push origin HEAD:main' } }), expect: 2 },
   { name: 'git --git-dir before destructive push is blocked', input: payload('git --git-dir=C:\\repo\\.git push --mirror origin'), expect: 2 },
   { name: 'git -C before destructive reset is blocked', input: payload('git -C C:\\repo reset --hard HEAD~1'), expect: 2 },
   { name: 'git -C before ordinary status is allowed', input: payload('git -C C:\\repo status'), expect: 0 },
@@ -83,4 +117,5 @@ for (const testCase of cases) {
 }
 
 console.log(`\n${cases.length - failures}/${cases.length} passed`);
+fs.rmSync(fixtureRoot, { recursive: true, force: true });
 process.exit(failures > 0 ? 1 : 0);

@@ -17,6 +17,8 @@
 if (!require('./plugin-hook-config').isEnabled()) process.exit(0);
 
 const fs = require('fs');
+const path = require('path');
+const { spawnSync } = require('child_process');
 
 // Git accepts global options such as -C and -c before the subcommand. Skip
 // these known single-value/flag options so destructive subcommands remain
@@ -141,7 +143,92 @@ function hasGitMirrorPushOverride(command) {
   });
 }
 
-function matchesDestructive(command) {
+// Git mirror mode can be inherited from repository/global config, so inspect
+// effective values with a read-only Git config subprocess before an ordinary
+// push. The hook's host timeout is short; bound all probes and fail closed.
+function gitPushMirrorState(command, cwd) {
+  if (typeof cwd !== 'string' || !path.isAbsolute(cwd)) return 'unknown';
+  if (/\b(?:cd|pushd)\b[^;\r\n]*\|[^;\r\n]*\bgit\s+[^;\r\n]*\bpush\b/i.test(command)) return 'unknown';
+  let currentCwd = cwd;
+  const deadline = Date.now() + 1000;
+
+  for (const segment of shellSegments(command)) {
+    const trimmed = segment.trim();
+    if (/^(?:cd|pushd)\b/i.test(trimmed)) {
+      const words = shellWords(trimmed).map(unquote);
+      if (words.length !== 2 || /[\$`*?]/.test(words[1])) return 'unknown';
+      currentCwd = path.resolve(currentCwd, words[1]);
+      try {
+        if (!fs.statSync(currentCwd).isDirectory()) return 'unknown';
+      } catch (error) {
+        return 'unknown';
+      }
+      continue;
+    }
+    if (/^(?:popd)\b/i.test(trimmed)) return 'unknown';
+
+    const git = /\bgit\s+/ig;
+    let match;
+    while ((match = git.exec(segment)) !== null) {
+      const words = shellWords(segment.slice(match.index + match[0].length)).map(unquote);
+      const globalArgs = [];
+      for (let index = 0; index < words.length; index += 1) {
+        const word = words[index];
+
+        if (word === '-c' || word === '-C') {
+          const value = words[index + 1];
+          if (value === undefined) return 'unknown';
+          globalArgs.push(word, value);
+          index += 1;
+          continue;
+        }
+        if (/^--(?:git-dir|work-tree|namespace|super-prefix|config-env|exec-path)(?:=|$)/i.test(word)) {
+          globalArgs.push(word);
+          if (!word.includes('=')) {
+            const value = words[index + 1];
+            if (value === undefined) return 'unknown';
+            globalArgs.push(value);
+            index += 1;
+          }
+          continue;
+        }
+        if (/^(?:-[pP]|--no-pager|--paginate|--no-replace-objects|--bare|--literal-pathspecs|--no-lazy-fetch|--no-optional-locks)$/i.test(word)) {
+          globalArgs.push(word);
+          continue;
+        }
+        if (word.startsWith('-')) return 'unknown';
+        if (word.toLowerCase() !== 'push') break;
+
+        const remainingMs = deadline - Date.now();
+        if (remainingMs <= 0) return 'unknown';
+        const probe = spawnSync('git', [...globalArgs, 'config', '--get-regexp', '^remote\\..*\\.mirror$'], {
+          cwd: currentCwd,
+          encoding: 'utf8',
+          timeout: Math.min(750, remainingMs),
+          maxBuffer: 64 * 1024,
+          windowsHide: true,
+        });
+        if (probe.error || probe.status !== 0 && probe.status !== 1) return 'unknown';
+        if (probe.status === 1) break;
+
+        const effective = new Map();
+        for (const line of probe.stdout.split(/\r?\n/)) {
+          const parsed = /^(remote\..+\.mirror)(?:\s+(.*))?$/i.exec(line);
+          if (!parsed) continue;
+          const value = parsed[2];
+          if (value === undefined || /^(?:true|yes|on|1)$/i.test(value)) effective.set(parsed[1].toLowerCase(), true);
+          else if (/^(?:false|no|off|0|)$/i.test(value)) effective.set(parsed[1].toLowerCase(), false);
+          else effective.set(parsed[1].toLowerCase(), 'unknown');
+        }
+        if ([...effective.values()].some((value) => value === true || value === 'unknown')) return 'mirror';
+        break;
+      }
+    }
+  }
+  return 'clear';
+}
+
+function matchesDestructive(command, cwd) {
   if (hasRecursiveForceRemove(command)) return 'recursive forced rm';
   if (hasRecursiveForcePowerShellRemove(command)) return 'recursive forced Remove-Item';
   if (hasGitMirrorPushOverride(command)) return 'git push with explicit mirror configuration';
@@ -155,7 +242,13 @@ function matchesDestructive(command) {
       console.error('[chwezi:destructive-bash-gate] Invalid CHWEZI_GATE_EXTRA_PATTERNS; ignoring the optional pattern.');
     }
   }
-  return patterns.find((pattern) => pattern.test(command)) || null;
+  const matched = patterns.find((pattern) => pattern.test(command));
+  if (matched) return matched;
+
+  const mirrorState = gitPushMirrorState(command, cwd);
+  if (mirrorState === 'mirror') return 'git push with effective mirror configuration';
+  if (mirrorState === 'unknown') return 'git push with unverified repository configuration';
+  return null;
 }
 
 function main() {
@@ -187,7 +280,7 @@ function main() {
     block('missing shell command; refusing to assume the command is safe');
   }
 
-  const matched = matchesDestructive(command);
+  const matched = matchesDestructive(command, payload.cwd);
   if (!matched) process.exit(0);
 
   block(
