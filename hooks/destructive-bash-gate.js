@@ -99,9 +99,52 @@ function hasRecursiveForcePowerShellRemove(command) {
   });
 }
 
+function hasGitMirrorPushOverride(command) {
+  return shellSegments(command).some((segment) => {
+    const git = /\bgit\s+/ig;
+    let match;
+    while ((match = git.exec(segment)) !== null) {
+      const words = shellWords(segment.slice(match.index + match[0].length)).map(unquote);
+      const mirrorOverrides = new Map();
+
+      for (let index = 0; index < words.length; index += 1) {
+        const word = words[index];
+
+        if (word === '-c') {
+          const setting = words[index + 1];
+          if (setting === undefined) break;
+          index += 1;
+          const config = /^(remote\..+\.mirror)(?:=(.*))?$/i.exec(setting);
+          if (config) {
+            const value = config[2];
+            mirrorOverrides.set(config[1].toLowerCase(), value === undefined || /^(?:true|yes|on|1)$/i.test(value));
+          }
+          continue;
+        }
+
+        if (/^--(?:git-dir|work-tree|namespace|super-prefix|config-env|exec-path)(?:=|$)/i.test(word)) {
+          if (!word.includes('=')) index += 1;
+          continue;
+        }
+        if (/^(?:-[Cc])$/.test(word)) {
+          index += 1;
+          continue;
+        }
+        if (/^(?:-[pP]|--no-pager|--paginate|--no-replace-objects|--bare|--literal-pathspecs|--no-lazy-fetch|--no-optional-locks)$/i.test(word)) continue;
+
+        if (word.startsWith('-')) break;
+        if (word.toLowerCase() === 'push') return [...mirrorOverrides.values()].some(Boolean);
+        break;
+      }
+    }
+    return false;
+  });
+}
+
 function matchesDestructive(command) {
   if (hasRecursiveForceRemove(command)) return 'recursive forced rm';
   if (hasRecursiveForcePowerShellRemove(command)) return 'recursive forced Remove-Item';
+  if (hasGitMirrorPushOverride(command)) return 'git push with explicit mirror configuration';
 
   const patterns = [...BUILTIN_DESTRUCTIVE_PATTERNS];
   const extra = process.env.CHWEZI_GATE_EXTRA_PATTERNS;
