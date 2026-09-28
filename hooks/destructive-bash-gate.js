@@ -18,10 +18,18 @@ if (!require('./plugin-hook-config').isEnabled()) process.exit(0);
 
 const fs = require('fs');
 
+// Git accepts global options such as -C and -c before the subcommand. Skip
+// these known single-value/flag options so destructive subcommands remain
+// visible to the lexical matcher (this still is not a complete shell parser).
+const GIT_GLOBAL_VALUE = String.raw`(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)`;
+const GIT_GLOBAL_OPTION = String.raw`(?:(?:-[Cc]\s+${GIT_GLOBAL_VALUE})|(?:--(?:git-dir|work-tree|namespace|super-prefix|config-env|exec-path)(?:=|\s+)${GIT_GLOBAL_VALUE})|(?:-[pP]|--no-pager|--paginate|--no-replace-objects|--bare|--literal-pathspecs|--no-lazy-fetch|--no-optional-locks))\s+`;
+const GIT_COMMAND_PREFIX = String.raw`\bgit\s+(?:${GIT_GLOBAL_OPTION})*`;
+const gitCommandPattern = (subcommandPattern) => new RegExp(GIT_COMMAND_PREFIX + subcommandPattern, 'i');
+
 const BUILTIN_DESTRUCTIVE_PATTERNS = [
-  /\bgit\s+reset\s+--hard\b/i,
-  /\bgit\s+push\b(?:(?![;&|\r\n]).)*(?:--force(?=\s|$)|--force-with-lease(?:=[^\s;&|]+)?(?=\s|$)|--delete(?=\s|$)|--prune(?=\s|$)|--mirror(?=\s|$)|(?:^|\s)(?:-f|-d)(?=\s|$)|(?:^|\s)\+[^\s;&|]+|(?:^|\s):[^\s;&|]+)/i,
-  /\bgit\s+clean\s+-[a-z]*[dfx][a-z]*\b/i,
+  gitCommandPattern(String.raw`reset\s+--hard\b`),
+  gitCommandPattern(String.raw`push\b(?:(?![;&|\r\n]).)*(?:--force(?=\s|$)|--force-with-lease(?:=[^\s;&|]+)?(?=\s|$)|--delete(?=\s|$)|--prune(?=\s|$)|--mirror(?=\s|$)|(?:^|\s)(?:-f|-d)(?=\s|$)|(?:^|\s)\+[^\s;&|]+|(?:^|\s):[^\s;&|]+)`),
+  gitCommandPattern(String.raw`clean\s+-[a-z]*[dfx][a-z]*\b`),
   /\bdrop\s+table\b/i,
   /\bdrop\s+database\b/i,
   /\btruncate\s+table\b/i,
