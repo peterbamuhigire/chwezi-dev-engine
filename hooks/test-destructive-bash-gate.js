@@ -81,6 +81,7 @@ const cases = [
   { name: 'pipeline directory change makes push configuration unknown and blocks', input: payload(`cd "${mirrorRepo}" | git push origin HEAD:main`, ordinaryRepo), expect: 2 },
   { name: 'explicit false command override disables repository mirror setting', input: payload(`git -C "${mirrorRepo}" -c remote.origin.mirror=false push origin HEAD:main`, ordinaryRepo), expect: 0 },
   { name: 'ordinary repository push remains allowed', input: payload('git push origin HEAD:main', ordinaryRepo), expect: 0 },
+  { name: 'unrelated unresolved cd does not block a command without Git push', input: payload('cd C:\\path-that-does-not-exist'), expect: 0 },
   { name: 'later push in a compound command is still checked for mirror config', input: payload(`git -C "${ordinaryRepo}" push origin HEAD:main && git -C "${mirrorRepo}" push origin HEAD:main`, ordinaryRepo), expect: 2 },
   { name: 'inherited Git config environment mirror override blocks push', input: payload('git push origin HEAD:main', ordinaryRepo), env: { GIT_CONFIG_COUNT: '1', GIT_CONFIG_KEY_0: 'remote.origin.mirror', GIT_CONFIG_VALUE_0: 'true' }, expect: 2 },
   { name: 'git --config-env mirror override blocks push', input: payload('git --config-env=remote.origin.mirror=CHWEZI_TEST_MIRROR push origin HEAD:main', ordinaryRepo), env: { CHWEZI_TEST_MIRROR: 'yes' }, expect: 2 },

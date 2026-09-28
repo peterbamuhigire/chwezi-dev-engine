@@ -147,6 +147,7 @@ function hasGitMirrorPushOverride(command) {
 // effective values with a read-only Git config subprocess before an ordinary
 // push. The hook's host timeout is short; bound all probes and fail closed.
 function gitPushMirrorState(command, cwd) {
+  if (!gitCommandPattern(String.raw`push\b`).test(command)) return 'clear';
   if (typeof cwd !== 'string' || !path.isAbsolute(cwd)) return 'unknown';
   if (/\b(?:cd|pushd)\b[^;\r\n]*\|[^;\r\n]*\bgit\s+[^;\r\n]*\bpush\b/i.test(command)) return 'unknown';
   let currentCwd = cwd;
