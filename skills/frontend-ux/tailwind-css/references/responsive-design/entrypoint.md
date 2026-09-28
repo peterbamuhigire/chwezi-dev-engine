@@ -397,4 +397,4 @@ DevTools device emulation does NOT accurately represent:
 
 ---
 
-*Sources: Impeccable responsive-design reference (Bakaus, 2025); MDN Web Docs — Responsive Design; Web.dev — Learn Responsive Design.*
+*Sources: Impeccable responsive-design reference (Bakaus, 2025) — Impeccable (Paul Bakaus), Apache-2.0, https://github.com/pbakaus/impeccable, commit 114ea1d (reviewed 2026-09-29); `superseded-upstream`: upstream reference removed in v4; retained as house guidance; MDN Web Docs — Responsive Design; Web.dev — Learn Responsive Design.*

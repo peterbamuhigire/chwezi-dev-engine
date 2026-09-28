@@ -375,4 +375,4 @@ Your product's personality — stays the same everywhere. Define once:
 
 ---
 
-*Sources: Impeccable ux-writing reference (Bakaus, 2025); microcopy patterns from UX Writing Hub; Nielsen Norman Group error message guidelines.*
+*Sources: Impeccable ux-writing reference (Bakaus, 2025) — Impeccable (Paul Bakaus), Apache-2.0, https://github.com/pbakaus/impeccable, commit 114ea1d (reviewed 2026-09-29); `superseded-upstream`: upstream reference removed in v4; retained as house guidance; microcopy patterns from UX Writing Hub; Nielsen Norman Group error message guidelines.*
