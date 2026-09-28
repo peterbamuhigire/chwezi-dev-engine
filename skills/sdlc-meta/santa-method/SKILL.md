@@ -25,7 +25,9 @@ deliverable — code, a generated document, a batch of generated content — not
 or a research claim review. Use it as the gate; use `skill-engine-audit` or `peer-review-loop` for
 their own broader jobs.
 
-## When to Activate
+<!-- dual-compat-start -->
+
+## Use When
 
 - Output will be published, deployed, or consumed by end users
 - Compliance, regulatory, or brand constraints must be enforced
@@ -34,11 +36,21 @@ their own broader jobs.
 - Batch generation at scale where spot-checking misses systemic patterns
 - Hallucination risk is elevated (claims, statistics, API references, legal language)
 
-Do NOT use for internal drafts, exploratory research, or tasks with deterministic verification —
+## Do Not Use When
+
+Do not use for internal drafts, exploratory research, or tasks with deterministic verification —
 run this engine's build/type/lint/test pipeline for those instead (see
 `rules/common/verification.md`).
 
-## Architecture
+## Required Inputs
+
+- The task specification the output was generated against.
+- The output under review, in full (or the sample, under Batch Sampling).
+- A rubric whose every criterion has an objective pass/fail condition (see Rubric Design).
+- Authority to launch two fresh, non-fork reviewer agents per round; without it, see Degraded Mode
+  under Quality Standards.
+
+## Workflow
 
 ```
 GENERATE  ->  DUAL INDEPENDENT REVIEW (B, C; no shared context, same rubric)
@@ -138,7 +150,21 @@ For large batches (100+ items), full dual review on every item is cost-prohibiti
 3. If a systematic pattern emerges, apply a targeted fix to the whole batch, not just the sample.
 4. Re-sample and re-verify the fixed batch. Repeat until a clean sample passes.
 
-## Failure Modes and Mitigations
+## Quality Standards
+
+- Both reviewers PASS in the same round; there is no partial credit and no majority vote.
+- Reviewers never see each other's assessment, and each round uses fresh reviewers.
+- Fixes address only the flagged critical issues; three rounds without a double PASS escalate to a human.
+- Degraded mode: when independent agents cannot be launched, the gate cannot be met. Record the
+  verdict as NOT_ASSESSED for the dual-PASS gate and hand the deliverable to a human reviewer,
+  rather than reporting a self-review as a Santa PASS.
+
+## Outputs
+
+- One structured verdict per reviewer per round.
+- A reconciliation record ending in SHIP or escalation to a human.
+
+## Anti-Patterns
 
 | Failure mode | Symptom | Mitigation |
 |---|---|---|
@@ -149,7 +175,18 @@ For large batches (100+ items), full dual review on every item is cost-prohibiti
 | Agreement bias | Both miss the same thing | Mitigated by independence, not eliminated — add a third reviewer for critical output |
 | Cost explosion | Too many iterations on large outputs | Batch sampling pattern; budget caps per cycle |
 
-## Integration with This Engine
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Correctness | Two independent reviewer verdicts per round, each against the same rubric | JSON in the reviewer-prompt shape (`verdict`, `checks`, `critical_issues`, `suggestions`) | `reviews/santa/round-1-reviewer-b.json`, `reviews/santa/round-1-reviewer-c.json` |
+| Release evidence | Reconciliation record: rounds run, both verdicts per round, issues flagged by one or both reviewers, fixes applied, final outcome (SHIP or escalated) | Markdown | `reviews/santa/reconciliation.md` — "Round 1: B=FAIL (invented API), C=PASS; fixed; round 2: B=PASS, C=PASS; SHIP" |
+| Correctness | Batch sample record (Batch Sampling only): sample size and selection, failure taxonomy, batch-wide fix, re-sample result | Markdown table | "120 items, 15 sampled; 3 hallucinated citations; citation check applied to all 120; clean re-sample of 15" |
+
+## References
+
+Companion rules, agents and skills:
+
 
 | Skill/agent | Relationship |
 |---|---|
@@ -165,3 +202,5 @@ For large batches (100+ items), full dual review on every item is cost-prohibiti
 - **Issue taxonomy**: distribution of failure types
 - **Reviewer agreement**: % of issues flagged by both reviewers vs. only one — low agreement means the rubric needs tightening
 - **Escape rate**: issues found post-ship that this gate should have caught (target 0)
+
+<!-- dual-compat-end -->

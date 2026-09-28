@@ -21,7 +21,9 @@ This is for **decision-making under ambiguity**, not code review, implementation
 architecture design — this engine already has `agents/planner.md` and `agents/architect.md` for
 those, and `sdlc-meta/santa-method` for adversarial verification of a finished deliverable.
 
-## When to Use
+<!-- dual-compat-start -->
+
+## Use When
 
 - a decision has multiple credible paths and no obvious winner
 - you need explicit tradeoff surfacing
@@ -33,7 +35,7 @@ Examples: ship an engine's install surface now vs. hold for the full profile sys
 layer everywhere vs. per-engine; import a skill wholesale vs. cherry-pick one clause into an
 existing skill (the exact kind of call this Kaizen operation makes repeatedly).
 
-## When NOT to Use
+## Do Not Use When
 
 | Instead of council | Use |
 |---|---|
@@ -57,6 +59,12 @@ The three external voices are launched as fresh subagents with **only the questi
 context**, never the full ongoing conversation transcript. That is the anti-anchoring mechanism —
 use the `Agent` tool with a fresh (non-fork) agent type for each, per this engine's own
 `superpowers:dispatching-parallel-agents` pattern where applicable.
+
+## Required Inputs
+
+- One decision question: what is being decided, which constraints bind, and what counts as success.
+- The minimum context that changes the answer (files, snippets, metrics), not the conversation transcript.
+- Authority to run three fresh, non-fork subagents; without it, see Degraded Mode under Quality Standards.
 
 ## Workflow
 
@@ -131,6 +139,19 @@ You are both a participant and the synthesizer:
 
 Keep it scannable on a phone screen.
 
+## Quality Standards
+
+- Each external voice starts from a fresh context holding only the question and the compact context.
+- The in-context position, its three reasons and its main risk are written before any external voice is read.
+- The strongest dissent is shown in the verdict, even when it is rejected, with the reason for rejecting it.
+- Degraded mode: when subagents cannot be launched, say so, write the three voices as separate passes after
+  fixing your own position, and label the verdict "single-context council" so readers weigh it accordingly.
+
+## Outputs
+
+- The compact council verdict (step 6), shown to the user.
+- A dated decision record, persisted only under the Persistence Rule below.
+
 ## Persistence Rule
 
 Only persist a council outcome when it changes something real: update the relevant plan/backlog
@@ -151,7 +172,16 @@ anti-anchoring value.
 - hiding disagreement in the final verdict
 - persisting every decision as a note regardless of importance
 
-## Related Skills
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Release evidence | Dated council decision record: question, the four positions, strongest dissent, premise check, recommendation, and whether an external voice changed the in-context position | Markdown section appended to the plan, backlog or `docs/` record the decision changes (Persistence Rule) | `docs/plans/NEXT_FEATURES.md` entry "Council 2026-09-29: land the rules layer before importing gap skills; dissent: Skeptic says half the gaps are false" |
+| Correctness | In-context position fixed before the external voices were read (position, three reasons, main risk) | Bullet list kept with the verdict working notes | "Position: defer imports. Reasons: session budget, unverified gaps, roster dependency. Risk: roster ships with missing skills" |
+
+A verdict that changes nothing real is shown to the user and not persisted; its only evidence is the verdict in the session.
+
+## References
 
 - `sdlc-meta/santa-method` — adversarial verification of a finished deliverable
 - `sdlc-meta/skill-engine-audit` — whole-engine audit and scoring
@@ -168,3 +198,5 @@ questions whether all 25 are really gaps (per the verification-and-corrections p
 weren't); Pragmatist asks what fits in the current session's budget without half-finishing
 everything; Critic flags the cost of an unfinished import (an agent roster with no skills it
 references). The value is not unanimity — it is making the disagreement legible before choosing.
+
+<!-- dual-compat-end -->

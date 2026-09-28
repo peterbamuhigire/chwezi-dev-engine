@@ -38,6 +38,13 @@ On Windows PowerShell, run `./install.ps1 -scope project`. The wrappers expose s
 
 The catalogue is discovered from active `SKILL.md` files under `skills/` and `00-meta-initialization/`; the root `SKILL.md` supplies the engineering baseline. Browse the [skills](skills/) and [initialisation](00-meta-initialization/) directories for current entries. The [routing index](docs/skill-routing-index.md) distinguishes active routes, aliases, and finance-engine ownership.
 
+The catalogue size below is a checked count surface: the test suite compares it with the files on disk, so update it in the same change that adds or retires a skill.
+
+| Measure | Value |
+|---|---:|
+| Active `SKILL.md` files | 167 |
+| Guardrail maximum | 200 |
+
 ## References
 
 - [Chwezi Dev Engine source repository](https://github.com/peterbamuhigire/chwezi-dev-engine)

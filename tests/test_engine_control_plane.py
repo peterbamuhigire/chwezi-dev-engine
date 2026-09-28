@@ -333,3 +333,28 @@ def test_count_surface_mutation_is_rejected():
     assert count_surface_mismatches(surface_texts, str(EXPECTED_ACTIVE_SKILL_COUNT)) == {
         "README.md": ["170"]
     }
+
+
+ALIAS_COUNT_SURFACE = r"\| Inactive alias files retained \| (\d+) \|"
+
+
+def routing_index_alias_counts(text: str) -> list[str]:
+    return re.findall(ALIAS_COUNT_SURFACE, text)
+
+
+def test_routing_index_alias_count_matches_alias_files():
+    alias_count = sum(
+        1
+        for active_root in (ROOT / "skills", ROOT / "00-meta-initialization")
+        for alias_md in active_root.rglob("ALIAS.md")
+        if not any(part.startswith(".") for part in alias_md.relative_to(active_root).parts)
+    )
+    index_text = (ROOT / "docs" / "skill-routing-index.md").read_text(encoding="utf-8")
+    assert routing_index_alias_counts(index_text) == [str(alias_count)]
+
+    mutated = index_text.replace(
+        f"| Inactive alias files retained | {alias_count} |",
+        f"| Inactive alias files retained | {alias_count + 1} |",
+        1,
+    )
+    assert routing_index_alias_counts(mutated) != [str(alias_count)]

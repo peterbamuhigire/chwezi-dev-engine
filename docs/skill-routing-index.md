@@ -20,14 +20,14 @@ skills while the catalog is reduced below the active-skill cap.
 - Finance doctrine is canonical in the external `chwezi-accounting-doctrine`
   engine. Local `doctrine/skills/` files are retained reference material only.
 
-Current guardrail baseline after the 2026-06-21 external-engine split:
+Current guardrail baseline (the test suite checks the active and alias counts against the files on disk):
 
 | Metric | Value |
 |---|---:|
 | Active `SKILL.md` files | 167 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
-| Inactive alias files retained | 47 |
+| Inactive alias files retained | 76 |
 
 ## 2026-06-13 Consulting Delivery Additions
 

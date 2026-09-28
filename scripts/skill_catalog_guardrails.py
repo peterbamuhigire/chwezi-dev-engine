@@ -4,6 +4,7 @@ Repository-level guardrails for the active skills catalog.
 
 This script intentionally does not move, delete, or rewrite skills. It scans the
 active catalog roots and reports loader risks that matter during consolidation.
+Errors fail the run; warnings (such as empty directories) are reported only.
 """
 
 from __future__ import annotations
@@ -395,6 +396,36 @@ def check_alias_integrity(records: list[SkillRecord]) -> list[Finding]:
     return findings
 
 
+def check_empty_directories(roots: Iterable[Path]) -> list[Finding]:
+    """Warn about directories under the active roots that hold no files.
+
+    Git does not track empty directories, so they exist only in local
+    checkouts, yet they can still look like skills to a reader or a loader.
+    Only the topmost file-less directory is reported; its empty descendants
+    are implied. Hidden paths are skipped.
+    """
+    findings: list[Finding] = []
+    for root in roots:
+        reported: list[Path] = []
+        for directory in sorted(path for path in root.rglob("*") if path.is_dir()):
+            relative = directory.relative_to(root)
+            if any(part.startswith(".") for part in relative.parts):
+                continue
+            if any(directory.is_relative_to(parent) for parent in reported):
+                continue
+            if not any(child.is_file() for child in directory.rglob("*")):
+                reported.append(directory)
+                findings.append(
+                    Finding(
+                        "warning",
+                        "empty-directory",
+                        relpath(directory),
+                        "directory under an active root holds no files; remove it with rmdir or give it content",
+                    )
+                )
+    return findings
+
+
 def main() -> int:
     args = parse_args()
     roots = active_roots(args.roots)
@@ -408,6 +439,8 @@ def main() -> int:
     findings.extend(check_source_ingestion())
     findings.extend(check_broken_references(roots))
     findings.extend(check_alias_integrity(records))
+    findings.extend(check_empty_directories(roots))
+    errors = [finding for finding in findings if finding.severity == "error"]
 
     print("skill-catalog-guardrails:")
     print(f"- repo: {REPO_ROOT}")
@@ -419,12 +452,13 @@ def main() -> int:
         print(f"  - {relpath(root)}")
     print(f"- active SKILL.md files: {len(records)}")
     print(f"- max active SKILL.md files: {args.max_active}")
-    print(f"- findings: {len(findings)}")
+    print(f"- findings: {len(findings)} (errors: {len(errors)}, warnings: {len(findings) - len(errors)})")
 
     for finding in findings:
         print(finding.format())
 
-    if findings and not args.report_only:
+    # Warnings are reported but do not fail the build; errors do.
+    if errors and not args.report_only:
         return 1
     return 0
 

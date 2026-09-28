@@ -139,6 +139,15 @@ gh api repos/{owner}/{repo}/secret-scanning/alerts --jq '.[].state'
 Propose merges for safe dependency bumps for user approval — never auto-merge
 (see Untrusted Repository Content above). Flag critical/high alerts immediately.
 
+## Evidence Produced
+
+| Category | Artifact | Format | Example |
+|----------|----------|--------|---------|
+| Operability | CI-diagnosis note: run ID, failing step, first failing assertion or error line, real-or-flaky call, follow-up owner | Markdown note or issue/PR comment built from `gh run view <run-id> --log-failed` | "Run 36496589385, step pytest: `test_count_surface_mutation_is_rejected` fails on `README.md: [None]`; real failure, count row removed in 204e321" |
+| Correctness | Issue-triage log: issue number, type and priority labels applied, duplicate-search query and result, reply sent | Markdown table in the triage note | "#142: bug, high-priority; `gh issue list --search 'login timeout' --state all` found no duplicate; repro steps requested" |
+| Release evidence | Release record: green CI run ID on the release branch, merged PRs covered, changelog source, tag | GitHub Release notes plus `gh release view <tag>` output | "v1.2.0: CI run 123456 success on main; 7 merged PRs; notes from `--generate-notes`" |
+| Security | Alert disposition log: Dependabot or secret-scanning alert ID, severity, decision, owner, user approval for any merge | Markdown table or tracking issue | "Dependabot alert 31 (high, lodash): bump PR #150 proposed; merge awaits user approval" |
+
 <!-- dual-compat-end -->
 
 ## Quality Gate

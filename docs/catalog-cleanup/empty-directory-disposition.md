@@ -45,3 +45,16 @@ Pass criteria:
 - No empty path is presented as an active skill.
 - Every empty path has a route, owner, or migration note.
 - No finance or design doctrine is copied back into this engine.
+
+## 2026-09-29 update (M10-01-T06)
+
+- `scripts/skill_catalog_guardrails.py` now reports every file-less directory under `skills/` and
+  `00-meta-initialization/` as an `empty-directory` **warning**. Warnings are printed but do not fail
+  the run; errors still do.
+- The 50 empty directories found on 2026-09-29 (none tracked by Git) were removed one at a time with
+  `rmdir`, which refuses a non-empty directory. The path list and results are recorded in
+  `chwezi-engine-agents/docs/operations/m10-kaizen-evidence/M10-01/`.
+- None of the eight paths in the table above existed on 2026-09-29; the table is kept as history.
+- Directories that hold only `references/` or `templates/` files (for example
+  `skills/sdlc-meta/plan-implementation/`) are not empty and were not touched. Their disposition
+  belongs to Kaizen phase M10-06.

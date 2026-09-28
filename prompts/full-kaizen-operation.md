@@ -1,6 +1,6 @@
-# Skills Web Dev Full Kaizen Operation Prompt
+# Chwezi Dev Engine Full Kaizen Operation Prompt
 
-Paste the prompt below at the root of a software product or project built with the Skills Web Dev engine.
+Paste the prompt below at the root of a software product or project built with the Chwezi Dev Engine.
 
 ## Configuration
 

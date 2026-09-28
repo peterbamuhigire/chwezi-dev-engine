@@ -1,6 +1,6 @@
 schema_version: "1.0"
 engine_id: chwezi-dev-engine
-display_name: Skills Web Dev
+display_name: Chwezi Dev Engine
 contract_version: "1.0"
 router:
   path: AGENTS.md

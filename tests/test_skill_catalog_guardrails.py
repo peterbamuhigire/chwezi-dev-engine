@@ -91,3 +91,24 @@ class SourceIngestionGuardrailTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EmptyDirectoryGuardrailTests(unittest.TestCase):
+    def test_warns_on_file_less_directory_and_reports_topmost_only(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "skills"
+            (root / "ai" / "real-skill").mkdir(parents=True)
+            (root / "ai" / "real-skill" / "SKILL.md").write_text("---\nname: real-skill\n---\n", encoding="utf-8")
+            (root / "ai" / "empty-skill" / "references").mkdir(parents=True)
+            (root / ".hidden" / "empty").mkdir(parents=True)
+            findings = guardrails.check_empty_directories([root])
+        self.assertEqual(["empty-directory"], [finding.code for finding in findings])
+        self.assertEqual("warning", findings[0].severity)
+        self.assertEqual(Path("ai") / "empty-skill", findings[0].path.relative_to(root))
+
+    def test_directory_with_files_is_not_reported(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "skills"
+            (root / "ai" / "orphan" / "references").mkdir(parents=True)
+            (root / "ai" / "orphan" / "references" / "note.md").write_text("# Note\n", encoding="utf-8")
+            self.assertEqual([], guardrails.check_empty_directories([root]))
