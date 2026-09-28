@@ -240,8 +240,11 @@ or `AGENTS.md` for Codex) — never assume an absolute path; it varies per machi
 `README.md` → `doctrine/design-doctrine.md` → glob `skills/**/SKILL.md` fresh and route by
 frontmatter (read SKILL.md directly, not via the Skill tool). Content and structure stay in THIS
 engine; presentation comes from design-system-skills. Hard rule: never use a banned AI-slop font
-(Inter, Geist, Roboto, Arial, Open Sans, Lato, Space Grotesk, bare system stacks) as primary
-type — state the chosen typeface and reason before producing any artifact.
+as primary type — hard ban: Inter, Geist, Roboto, Open Sans, Lato, Arial, Fraunces, IBM Plex (all
+faces); secondary ban: Space Grotesk, Instrument Serif, Poppins, Montserrat, Nunito, Nunito Sans;
+Roboto Mono and IBM Plex Mono are banned as monospace choices; Source Sans 3 only as a paired
+body face; no bare system stacks alone. State the chosen typeface and reason before producing
+any artifact.
 <!-- /design-system-skills:trigger -->
 
 ## DOMAIN PROMPT GENERATION CONTRACT

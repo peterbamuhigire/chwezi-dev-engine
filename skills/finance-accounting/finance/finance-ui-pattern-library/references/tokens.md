@@ -7,8 +7,8 @@ The token bundle for Chwezi finance UI. Reference values; consumer projects can 
 ```json
 {
   "type": {
-    "family-sans": "Inter, IBM Plex Sans, system-ui, sans-serif",
-    "family-mono": "JetBrains Mono, IBM Plex Mono, ui-monospace, monospace",
+    "family-sans": "Public Sans, system-ui, sans-serif",
+    "family-mono": "JetBrains Mono, Fira Code, ui-monospace, monospace",
     "numerals": "tabular-nums",
     "scale": { "1": 11, "2": 12, "3": 14, "4": 16, "5": 18, "6": 24, "7": 32 },
     "weight": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 },
@@ -53,8 +53,8 @@ The token bundle for Chwezi finance UI. Reference values; consumer projects can 
 
 ```css
 :root {
-  --font-sans: Inter, "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
   --numerals: tabular-nums;
 
   --t-1: 11px; --t-2: 12px; --t-3: 14px; --t-4: 16px;
@@ -109,8 +109,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'IBM Plex Sans', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'IBM Plex Mono', 'ui-monospace', 'monospace'],
+        sans: ['Public Sans', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         '1': ['11px',{lineHeight:'1.4'}],
