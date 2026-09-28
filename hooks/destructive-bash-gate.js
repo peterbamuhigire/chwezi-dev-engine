@@ -72,6 +72,48 @@ function unquote(word) {
   return word;
 }
 
+function inlineCommandEnvironment(segment, commandOffset) {
+  const prefix = segment.slice(0, commandOffset).trim();
+  if (!prefix) return {};
+
+  const words = [];
+  let word = '';
+  let started = false;
+  let quote = null;
+  for (const character of prefix) {
+    if (quote) {
+      if (character === quote) quote = null;
+      else {
+        if (quote === '"' && /[$`\\]/.test(character)) return null;
+        word += character;
+      }
+    } else if (character === '"' || character === "'") {
+      quote = character;
+      started = true;
+    } else if (/\s/.test(character)) {
+      if (started) words.push(word);
+      word = '';
+      started = false;
+    } else {
+      if (/[$`\\]/.test(character)) return null;
+      word += character;
+      started = true;
+    }
+  }
+  if (quote) return null;
+  if (started) words.push(word);
+
+  let assignments = words;
+  if (assignments[0] === 'env') assignments = assignments.slice(1);
+  const environment = {};
+  for (const assignmentWord of assignments) {
+    const assignment = /^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/.exec(assignmentWord);
+    if (!assignment || assignment[2].startsWith('~')) return null;
+    environment[assignment[1]] = assignment[2];
+  }
+  return environment;
+}
+
 function hasRecursiveForceRemove(command) {
   return shellSegments(command).some((segment) => {
     const match = /\brm\b/i.exec(segment);
@@ -171,6 +213,8 @@ function gitPushMirrorState(command, cwd) {
     const git = /\bgit\s+/ig;
     let match;
     while ((match = git.exec(segment)) !== null) {
+      const inlineEnvironment = inlineCommandEnvironment(segment, match.index);
+      if (inlineEnvironment === null) return 'unknown';
       const words = shellWords(segment.slice(match.index + match[0].length)).map(unquote);
       const globalArgs = [];
       for (let index = 0; index < words.length; index += 1) {
@@ -208,6 +252,7 @@ function gitPushMirrorState(command, cwd) {
           timeout: Math.min(750, remainingMs),
           maxBuffer: 64 * 1024,
           windowsHide: true,
+          env: { ...process.env, ...inlineEnvironment },
         });
         if (probe.error || probe.status !== 0 && probe.status !== 1) return 'unknown';
         if (probe.status === 1) break;
