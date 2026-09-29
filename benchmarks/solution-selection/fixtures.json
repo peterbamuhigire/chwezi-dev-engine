@@ -316,7 +316,8 @@
       "hidden_manifest_hash": "924a7efda40d531acc591577e2eb590279a4636f5ca4bb5cd70ba9c0515f8379",
       "owner_role": "Fixture maintainer; independent acceptance reviewer",
       "time_limit_minutes": 45,
-      "materialised_path": "benchmarks/solution-selection/materialised/F13"
+      "materialised_path": "benchmarks/solution-selection/materialised/F13",
+      "acceptance_notes": ["Native control choice is judged against design-system-skills/skills/00-cross-cutting-ops-qa-a11y/accessibility-wcag-2-2-compliance/references/native-control-sufficiency.md (M10-10 PT-09); oracles unchanged."]
     },
     {
       "id": "F14",
