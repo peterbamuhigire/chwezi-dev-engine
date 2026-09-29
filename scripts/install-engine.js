@@ -42,7 +42,7 @@ const COMPONENT_DIRS = ['skills', 'agents', 'commands', 'hooks', 'rules'];
 
 // Non-skills component discovery stays a fixed directory-name list — agents,
 // commands, hooks and rules are conventional across every engine. Skills are
-// not: srs-skills and linux-skills keep numbered category directories
+// not: chwezi-sdlc-documentation and linux-skills keep numbered category directories
 // (01-strategic-vision/, 03-networking-and-dns/) at the engine root instead
 // of under a skills/ subdirectory. When no skills/ directory exists, fall
 // back to scanning the engine root for directories that contain at least
@@ -67,7 +67,7 @@ const ROOT_EXCLUDE = new Set([
  * Returns { mode: 'explicit', dirs: [<engineRoot>/skills] } when a
  * conventional skills/ directory exists, or
  * { mode: 'root-scan', dirs: [...category dirs at engine root] } when it
- * does not (srs-skills, linux-skills: numbered category directories live
+ * does not (chwezi-sdlc-documentation, linux-skills: numbered category directories live
  * directly at the engine root).
  */
 function findSkillRootDirs(engineRoot) {
@@ -232,7 +232,7 @@ function cmdInstall(args) {
       let relRoot = entry.replace(/^\.\//, '').replace(/\/$/, '');
       // Engines whose skills live at conventional skills/<category>/<skill>/
       // paths already have that prefix in the manifest. Engines with
-      // numbered category directories at the engine root (srs-skills,
+      // numbered category directories at the engine root (chwezi-sdlc-documentation,
       // linux-skills) do not — synthesize the prefix so every install
       // target ends up with a uniform <root>/skills/... shape regardless of
       // how the source engine organizes its own working tree.

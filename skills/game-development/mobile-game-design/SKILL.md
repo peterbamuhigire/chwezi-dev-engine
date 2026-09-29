@@ -8,7 +8,7 @@ Design a game around fingers, interruptions, small screens, varied devices, unre
 
 ## Prerequisites
 
-Load `game-development-orchestration` and the approved product thesis; use `design-system-skills` for interface appearance.
+Load `game-development-orchestration` and the approved product thesis; use `chwezi-design-engine` for interface appearance.
 <!-- dual-compat-start -->
 ## Use When
 - Defining genre, player fantasy, core loop, session cadence, controls, camera, tutorial, difficulty, progression, economy, or accessibility.

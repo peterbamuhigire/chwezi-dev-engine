@@ -139,7 +139,7 @@ PMS, POS, room, folio, KOT, KDS, housekeeping, night-audit, menu/BOM, or
 hospitality operations work routes to:
 
 - `skills/product-business/hospitality-hotel-restaurant-systems/SKILL.md`
-- `C:\wamp64\www\srs-skills\02-requirements-engineering\hospitality-operating-model-srs\SKILL.md`
+- `C:\wamp64\www\chwezi-sdlc-documentation\02-requirements-engineering\hospitality-operating-model-srs\SKILL.md`
 - `C:\wamp64\www\chwezi-accounting-doctrine\skills\11-sector-and-fund-accounting\hospitality-and-restaurant-pack\SKILL.md` whenever money, inventory, tax or reconciliation is involved.
 
 The Maduuka audit standard is the companion acceptance reference; code or a
@@ -252,7 +252,7 @@ Route complete game initiatives through `skills/game-development/game-developmen
 | Game discovery, estimation, staffing/RACI, SOW, greenlight, milestones, outsourcing, launch command or case evidence | `game-studio-delivery-and-commercial-operations` |
 | Accessible gameplay, remapping, sensory alternatives, localisation, cultural review, moderation or player safety | `game-accessibility-localisation-and-player-safety` |
 
-For historical, cultural, market, legal or version-sensitive claims, pair this family with the external Digital Research Skills Engine. For interface appearance, pair it with `design-system-skills`. For native store operations, reuse the existing Android/iOS/mobile-platform skills.
+For historical, cultural, market, legal or version-sensitive claims, pair this family with the external Digital Research Skills Engine. For interface appearance, pair it with `chwezi-design-engine`. For native store operations, reuse the existing Android/iOS/mobile-platform skills.
 
 - Update this file when a retained parent skill changes.
 - Add the same mapping to `docs/skill-aliases.yml` when a route needs to be machine-readable.

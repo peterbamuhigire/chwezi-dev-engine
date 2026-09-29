@@ -14,7 +14,7 @@ This skill owns the application and service contract for operational point of
 sale. It keeps fast sales entry aligned with tenant isolation, finished-stock
 truth, manufacturing timing, payment idempotency, permissions, accounting
 posting, and evidence. Visual hierarchy and typography remain owned by the
-external `design-system-skills` engine.
+external `chwezi-design-engine` engine.
 
 <!-- dual-compat-start -->
 ## Prerequisites
@@ -170,7 +170,7 @@ also route to `chwezi-accounting-doctrine` and the local `accounting-engine`.
 
 ## Read next
 
-- External `design-system-skills/skills/06-sector-and-domain-ux/pos-and-retail-operations`
+- External `chwezi-design-engine/skills/06-sector-and-domain-ux/pos-and-retail-operations`
 - `skills/architecture/api-design-first`
 - `skills/finance-accounting/accounting-engine`
 - `skills/backend-databases/database-design-engineering`

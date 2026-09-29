@@ -71,7 +71,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - The AI feature is purely backend or batch (no interactive web surface) — use `ai-llm-integration` or `python-saas-integration` instead.
-- The task is a pure UX pattern question — use `ai-ux-patterns` or `ai-agent-ux` (design-system-skills).
+- The task is a pure UX pattern question — use `ai-ux-patterns` or `ai-agent-ux` (chwezi-design-engine).
 - The task is full metering / billing strategy — use `ai-metering-billing` or `ai-saas-billing`.
 - The task is prompt or threat design — use `ai-prompt-engineering`, `ai-security`, or `llm-security`.
 

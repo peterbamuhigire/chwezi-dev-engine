@@ -6,7 +6,7 @@ not verified. Target conformance is WCAG 2.2 Level AA unless the contract states
 
 Boundary: this reference covers how engineering *verifies* accessibility. Design intent (focus
 styling, contrast choices, target sizes, motion policy, content order) is owned by the design
-engine; read `C:\wamp64\www\design-system-skills\governance\design-quality-gate.md` and its
+engine; read `C:\wamp64\www\chwezi-design-engine\governance\design-quality-gate.md` and its
 `accessibility-wcag-2-2-compliance` skill for what the experience must do. Requirements stating
 the measurable target belong in the SRS.
 

@@ -317,7 +317,7 @@
       "owner_role": "Fixture maintainer; independent acceptance reviewer",
       "time_limit_minutes": 45,
       "materialised_path": "benchmarks/solution-selection/materialised/F13",
-      "acceptance_notes": ["Native control choice is judged against design-system-skills/skills/00-cross-cutting-ops-qa-a11y/accessibility-wcag-2-2-compliance/references/native-control-sufficiency.md (M10-10 PT-09); oracles unchanged."]
+      "acceptance_notes": ["Native control choice is judged against chwezi-design-engine/skills/00-cross-cutting-ops-qa-a11y/accessibility-wcag-2-2-compliance/references/native-control-sufficiency.md (M10-10 PT-09); oracles unchanged."]
     },
     {
       "id": "F14",

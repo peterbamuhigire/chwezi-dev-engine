@@ -7,7 +7,7 @@ planning the migration of an inherited front end (jQuery-era, float grids, hash 
 create-react-app, Bootstrap 3/4 remnants) to current practice.
 
 Visual and layout decisions belong to the design engine
-(`design-system-skills/skills/03-layout-grid-and-composition/responsive-and-adaptive-layout`,
+(`chwezi-design-engine/skills/03-layout-grid-and-composition/responsive-and-adaptive-layout`,
 including `references/modern-css-capability-baseline.md`). This file owns the implementation side.
 
 ---

@@ -19,7 +19,7 @@
 
 - **Never apply direct formatting to individual paragraphs.** Every typographic decision must live inside a named Word style. Direct formatting creates inconsistency the moment content is edited or reused.
 - Use a **maximum of two typefaces** per document: one for headings (display), one for body. Three typefaces signals amateur work.
-- **Serif vs. sans-serif:** a plain sans (Public Sans; Word-safe fallback Segoe UI, then Calibri) reads well on screens and in short documents. A text serif (Source Serif 4; Word-safe fallback Georgia) is preferred for long-form print documents above 15 pages. Never pick a face from the design engine's banned list (`design-system-skills/doctrine/references/ai-slop-banned-fonts.json`).
+- **Serif vs. sans-serif:** a plain sans (Public Sans; Word-safe fallback Segoe UI, then Calibri) reads well on screens and in short documents. A text serif (Source Serif 4; Word-safe fallback Georgia) is preferred for long-form print documents above 15 pages. Never pick a face from the design engine's banned list (`chwezi-design-engine/doctrine/references/ai-slop-banned-fonts.json`).
 - **Avoid decorative or novelty fonts** in any professional context. They undermine credibility before the reader reads a single word.
 - **Size hierarchy must be consistent:** each heading level should differ by at least 2pt from the level below it.
 - Never use ALLCAPS in body text — use small caps (character formatting) if emphasis is required.
@@ -44,7 +44,7 @@
 | Caption | Public Sans | 9pt | Regular | #595959 |
 | Footer / Header | Public Sans | 9pt | Regular | #595959 |
 
-**Word-safe fallbacks.** Source Serif 4, Public Sans and JetBrains Mono are SIL OFL faces, so embed and subset them (File > Options > Save > Embed fonts in the file > Embed only the characters used). Where embedding is not possible (Word for the web, a locked-down client machine, or a template the client must edit without the fonts), use the stated fallback instead: Georgia for Source Serif 4; Segoe UI, then Calibri, for Public Sans; Consolas for JetBrains Mono. Name the fallback in the delivery note; a silent substitution is a defect. The pairing follows the design engine's DOCX baseline (`design-system-skills`, skill `docx-report-and-document-formatting`) and its fallback tier (`doctrine/references/system-font-fallbacks.md`); never use a face on its banned list (`doctrine/references/ai-slop-banned-fonts.json`).
+**Word-safe fallbacks.** Source Serif 4, Public Sans and JetBrains Mono are SIL OFL faces, so embed and subset them (File > Options > Save > Embed fonts in the file > Embed only the characters used). Where embedding is not possible (Word for the web, a locked-down client machine, or a template the client must edit without the fonts), use the stated fallback instead: Georgia for Source Serif 4; Segoe UI, then Calibri, for Public Sans; Consolas for JetBrains Mono. Name the fallback in the delivery note; a silent substitution is a defect. The pairing follows the design engine's DOCX baseline (`chwezi-design-engine`, skill `docx-report-and-document-formatting`) and its fallback tier (`doctrine/references/system-font-fallbacks.md`); never use a face on its banned list (`doctrine/references/ai-slop-banned-fonts.json`).
 
 ### Academic / Formal Report Stack
 

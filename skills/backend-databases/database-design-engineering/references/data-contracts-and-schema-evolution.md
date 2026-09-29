@@ -8,7 +8,7 @@ enforce, version, or retire the interface. For internal-only schema changes on
 a table nobody else reads, `live-data-evolution.md` is enough.
 
 Requirements-side counterpart (what the contract must guarantee, as verifiable
-NFRs): `srs-skills` `02-requirements-engineering/fundamentals/during/05-conceptual-data-modeling/references/data-contract-and-dictionary-requirements.md`.
+NFRs): `chwezi-sdlc-documentation` `02-requirements-engineering/fundamentals/during/05-conceptual-data-modeling/references/data-contract-and-dictionary-requirements.md`.
 Enforcement and lineage emission in pipelines:
 `../../../languages/python-data-pipelines/references/data-quality-checks-and-lineage.md`.
 

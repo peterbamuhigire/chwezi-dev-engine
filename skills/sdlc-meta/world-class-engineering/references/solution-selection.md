@@ -47,11 +47,11 @@ controls, parsers, database constraints and retry identity.
 ## Domain gates
 
 - UI, keyboard, focus, reflow and assistive-technology acceptance belongs to
-  `C:\wamp64\www\design-system-skills`; this engine records the boundary and
+  `C:\wamp64\www\chwezi-design-engine`; this engine records the boundary and
   consumes its evidence rather than duplicating visual doctrine.
 - Money, ledger, posting, period, reversal, idempotency and reconciliation
   invariants belong to `C:\wamp64\www\chwezi-accounting-doctrine`; use its
   `ledger-posting-engine-core` and `ledger-invariants` routes where applicable.
 - Requirements, acceptance IDs and traceability belong to
-  `C:\wamp64\www\srs-skills`; implementation decisions return the approved
+  `C:\wamp64\www\chwezi-sdlc-documentation`; implementation decisions return the approved
   identifiers and evidence through the SDD handoff contract.

@@ -63,7 +63,7 @@
     {
       "id": "PS04",
       "title": "Shared-understanding gate before drafting an SRS",
-      "target_skill": "srs-skills/02-elicitation-toolkit",
+      "target_skill": "chwezi-sdlc-documentation/02-elicitation-toolkit",
       "discipline_gate": "Decision-frontier elicitation: synthesis waits for the owner to confirm the summary of goal, actors, scope, flows and unresolved decisions; a polished draft or a silent meeting end is not confirmation (references/decision-frontier-elicitation.md)",
       "pressures": [
         "economic",
@@ -92,8 +92,8 @@
     {
       "id": "PS05",
       "title": "Render evidence for a generated DOCX under exhaustion and authority pressure",
-      "target_skill": "srs-skills/13-saas-billing-and-metering-spec",
-      "discipline_gate": "A renderer or execution check that was not run is 'not assessed', never a pass (skill fallback rule; srs-skills AGENTS.md: missing render evidence is NOT ASSESSED)",
+      "target_skill": "chwezi-sdlc-documentation/13-saas-billing-and-metering-spec",
+      "discipline_gate": "A renderer or execution check that was not run is 'not assessed', never a pass (skill fallback rule; chwezi-sdlc-documentation AGENTS.md: missing render evidence is NOT ASSESSED)",
       "pressures": [
         "authority",
         "exhaustion",

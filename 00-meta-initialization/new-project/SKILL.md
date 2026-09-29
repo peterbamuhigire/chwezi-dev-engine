@@ -70,11 +70,11 @@ If the Superpowers plugin is present, its process skills (for example
 
 ---
 
-## How to Use the SRS-Skills Engine (PRIME Workflow)
+## How to Use the Chwezi SDLC Documentation engine (PRIME Workflow)
 
 Every skill in this engine follows the **PRIME methodology** (Kodukula & Vinueza, 2024):
 
-| Step | What the Consultant Does | SRS-Skills Equivalent |
+| Step | What the Consultant Does | Chwezi SDLC Documentation Equivalent |
 |------|--------------------------|----------------------|
 | **P — Prepare** | Gather all project data before prompting | Populate `_context/` files with real stakeholder data, not placeholders |
 | **R — Relay** | Submit the prompt with precise instructions | Invoke the SKILL.md (tell Claude: "Run the [skill name] skill") |

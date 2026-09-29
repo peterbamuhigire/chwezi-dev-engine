@@ -32,7 +32,7 @@ design-system engine for visual composition.
 - Optimising ordinary content images without an administrative lifecycle; use
   `image-compression`.
 - Designing the appearance of the authentication page; route additionally to
-  `design-system-skills/webapp-gui-design`.
+  `chwezi-design-engine/webapp-gui-design`.
 - Managing arbitrary documents or user attachments; use the applicable upload/storage and
   security skills.
 

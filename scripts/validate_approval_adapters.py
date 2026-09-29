@@ -9,14 +9,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIRS = {
     "chwezi-dev-engine": ROOT,
-    "srs": Path(r"C:\wamp64\www\srs-skills"),
+    "srs": Path(r"C:\wamp64\www\chwezi-sdlc-documentation"),
     "business-plan": Path(r"C:\wamp64\www\business-plan-skills"),
     "website": Path(r"C:\wamp64\www\website-skills"),
     "social-media": Path(r"C:\wamp64\www\social-media-skills"),
     "linux": Path(r"C:\wamp64\www\linux-skills"),
     "proposal": Path(r"C:\wamp64\www\proposal-skills"),
     "accounting": Path(r"C:\wamp64\www\chwezi-accounting-doctrine"),
-    "design": Path(r"C:\wamp64\www\design-system-skills"),
+    "design": Path(r"C:\wamp64\www\chwezi-design-engine"),
     "digital-research": Path(r"C:\wamp64\www\digital-research-engine"),
     "windows-admin": Path(r"C:\wamp64\www\windows-admin-engine-skills"),
 }

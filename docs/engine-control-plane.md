@@ -13,7 +13,7 @@ handoffs, and bounded recovery. Its registry is
 | Agent topology and handoff protocol | `chwezi-dev-engine` control plane |
 | Source/currentness verification | `digital-research-engine` |
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
-| Visual/presentation controls | `design-system-skills` |
+| Visual/presentation controls | `chwezi-design-engine` |
 | Windows host, domain, fleet, and hybrid administration | `windows-admin-engine-skills` |
 | Political doctrine and political writing | `D:\political-skills` |
 | Tool adapters and native hooks | Host adapter or CI; never duplicated in domain doctrine |

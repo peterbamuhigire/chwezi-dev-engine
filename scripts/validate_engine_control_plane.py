@@ -13,14 +13,14 @@ EXPECTED_ENGINES = {"srs", "business-plan", "website", "social-media", "linux", 
 REQUIRED_KEYS = {"id", "domain", "router", "adoption_doc", "agents", "commands", "hooks", "evidence"}
 ALLOWED_HOOKS = {"preflight", "context", "before_write", "after_write", "release", "stop"}
 ENGINE_DIRS = {
-    "srs": "srs-skills",
+    "srs": "chwezi-sdlc-documentation",
     "business-plan": "business-plan-skills",
     "website": "website-skills",
     "social-media": "social-media-skills",
     "linux": "linux-skills",
     "proposal": "proposal-skills",
     "accounting": "chwezi-accounting-doctrine",
-    "design": "design-system-skills",
+    "design": "chwezi-design-engine",
     "digital-research": "digital-research-engine",
     "chwezi-dev-engine": "chwezi-dev-engine",
     "windows-admin": "windows-admin-engine-skills",

@@ -8,7 +8,7 @@ active_skill_policy:
   retained_reference_roots:
     - doctrine/skills
   external_reference_engines:
-    - design-system-skills
+    - chwezi-design-engine
     - chwezi-accounting-doctrine
   hard_cap: 200
   target_range: 150-180
@@ -19,7 +19,7 @@ active_skill_policy:
 inactive_alias_file: ALIAS.md
 external_target_prefixes:
   doctrine/skills: chwezi-accounting-doctrine
-  design-system/skills: design-system-skills
+  design-system/skills: chwezi-design-engine
 finance_canonical_duplicates:
   skills/finance-accounting/finance/audit-ready-reporting-pack: doctrine/skills/audit-ready-reporting-pack
   skills/finance-accounting/finance/bank-and-mobile-money-reconciliation: doctrine/skills/bank-and-mobile-money-reconciliation

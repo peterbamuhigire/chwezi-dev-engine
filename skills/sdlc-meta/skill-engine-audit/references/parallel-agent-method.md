@@ -1,7 +1,7 @@
 # Reference: The Parallel-Agent Audit Method
 
 Run independent concerns in PARALLEL so strict scores emerge without single-viewpoint bias, then
-synthesize. This is the method, proven on the design-system-skills audit (overall 51/100).
+synthesize. This is the method, proven on the chwezi-design-engine audit (overall 51/100).
 
 ## The standard fleet (one agent per concern, each writes its own report file)
 

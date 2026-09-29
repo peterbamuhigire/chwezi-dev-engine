@@ -8,27 +8,27 @@ ROOT = Path(__file__).resolve().parents[1]
 WWW = ROOT.parent
 MARKER = "Mandatory Digital Research currentness gate for Kaizen"
 ENGINES = (
-    "srs-skills",
+    "chwezi-sdlc-documentation",
     "business-plan-skills",
     "website-skills",
     "social-media-skills",
     "linux-skills",
     "proposal-skills",
     "chwezi-accounting-doctrine",
-    "design-system-skills",
+    "chwezi-design-engine",
     "digital-research-engine",
     "chwezi-dev-engine",
     "windows-admin-engine-skills",
 )
 KAIZEN_SKILLS = (
-    WWW / "srs-skills/09-governance-compliance/31-kaizen-engine-and-product-improvement/SKILL.md",
+    WWW / "chwezi-sdlc-documentation/09-governance-compliance/31-kaizen-engine-and-product-improvement/SKILL.md",
     WWW / "business-plan-skills/skills/meta-strategy/kaizen-improvement-system/SKILL.md",
     WWW / "website-skills/skills/quality-gates/kaizen-engine-and-product-improvement/SKILL.md",
     WWW / "social-media-skills/skills/meta-utility/kaizen-improvement-system/SKILL.md",
     WWW / "linux-skills/meta/kaizen-improvement-system/SKILL.md",
     WWW / "proposal-skills/skills/meta/kaizen-improvement-system/SKILL.md",
     WWW / "chwezi-accounting-doctrine/skills/10-controls-governance-and-fraud/kaizen-engine-and-product-improvement/SKILL.md",
-    WWW / "design-system-skills/skills/00-cross-cutting-ops-qa-a11y/design-engine-and-product-improvement/SKILL.md",
+    WWW / "chwezi-design-engine/skills/00-cross-cutting-ops-qa-a11y/design-engine-and-product-improvement/SKILL.md",
     WWW / "chwezi-dev-engine/skills/sdlc-meta/kaizen-improvement-system/SKILL.md",
 )
 

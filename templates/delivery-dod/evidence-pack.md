@@ -79,7 +79,7 @@ Pass criteria: no `assert true`, no unrun tests, no untriaged failures.
 |---|---|
 | Current AI/platform behavior | `docs/source-registers/ai-platforms.md` or official vendor docs |
 | Finance/accounting/statutory rule | External `chwezi-accounting-doctrine` |
-| Visual/typographic rule | External `design-system-skills` |
+| Visual/typographic rule | External `chwezi-design-engine` |
 | Security standard | OWASP, NIST, CIS, vendor primary documentation, or project security policy |
 
 Pass criteria: no volatile fact appears without last-verified date and source.

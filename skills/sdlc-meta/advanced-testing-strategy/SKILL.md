@@ -184,7 +184,7 @@ See [references/test-matrix-template.md](references/test-matrix-template.md).
 - [references/risk-driven-testing.md](references/risk-driven-testing.md): Test-layer selection, determinism, and flake policy.
 - [references/test-matrix-template.md](references/test-matrix-template.md): Test plan by risk and layer.
 - [references/release-evidence.md](references/release-evidence.md): What must be true before shipping.
-- Pairwise combinatorial test design (parameter model, constraints, coverage statement): see the `srs-skills` reference [05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md](https://github.com/peterbamuhigire/srs-skills/blob/main/05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md).
+- Pairwise combinatorial test design (parameter model, constraints, coverage statement): see the `chwezi-sdlc-documentation` reference [05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md](https://github.com/peterbamuhigire/chwezi-sdlc-documentation/blob/main/05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md).
 
 ## Decision Rules
 

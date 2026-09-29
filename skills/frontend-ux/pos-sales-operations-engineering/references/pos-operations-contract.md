@@ -1,7 +1,7 @@
 # POS Operations Contract
 
 Back to [`SKILL.md`](../SKILL.md). This reference is the engineering companion
-to the visual POS contract in the external `design-system-skills` engine.
+to the visual POS contract in the external `chwezi-design-engine` engine.
 
 ## 1. Surface ownership
 

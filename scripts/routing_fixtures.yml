@@ -96,7 +96,7 @@ fixtures:
       - task: "Add per-tenant rate limits and usage quotas with clear 429 responses"
         owner: saas-rate-limiting-and-quotas
       - task: "Write the API specification section of the SRS with endpoints and error codes for sign-off"
-        owner: srs-skills/03-api-specification
+        owner: chwezi-sdlc-documentation/03-api-specification
   - task: "Integrate Uganda EFRIS e-receipts into our POS in a jurisdiction-neutral way, with tenant-scoped TINs, offline queues, fiscal document mapping and reconciliation"
     expect: electronic-fiscal-taxing
     negatives:

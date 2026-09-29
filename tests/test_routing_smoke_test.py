@@ -60,7 +60,7 @@ def test_owned_negative_passes_when_owner_outranks_self(tmp_path):
 
 
 def test_cross_engine_owner_is_not_assessed_locally():
-    status, _detail = routing.check_negative("a", {"task": "x", "owner": "srs-skills/02-business-case"}, [("a", 0.9)])
+    status, _detail = routing.check_negative("a", {"task": "x", "owner": "chwezi-sdlc-documentation/02-business-case"}, [("a", 0.9)])
     assert status == "NOT_ASSESSED"
 
 

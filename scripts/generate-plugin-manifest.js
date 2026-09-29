@@ -11,7 +11,7 @@
  * Handles the three skill-root shapes found across the Chwezi engines:
  *   - skills/<skill>/SKILL.md                      (flat)          e.g. digital-research-engine
  *   - skills/<category>/<skill>/SKILL.md            (one level)     e.g. business-plan, proposal, website, social-media, chwezi-dev-engine
- *   - skills/<NN-category>/<NN-skill>/SKILL.md      (one level)     e.g. design-system, srs (roots differ — see --root)
+ *   - skills/<NN-category>/<NN-skill>/SKILL.md      (one level)     e.g. chwezi-design-engine, chwezi-sdlc-documentation (roots differ — see --root)
  *   - <NN-area>/SKILL.md at the repo root, no skills/ dir           e.g. linux-skills (use --root .)
  *
  * Follows the constraints in ECC's .claude-plugin/PLUGIN_SCHEMA_NOTES.md:
@@ -26,7 +26,7 @@
  *
  * Examples:
  *   node generate-plugin-manifest.js --engine ../../digital-research-engine
- *   node generate-plugin-manifest.js --engine ../../srs-skills --exclude "%SystemDrive%,projects,docs,references,templates,engine,book-extractions"
+ *   node generate-plugin-manifest.js --engine ../../chwezi-sdlc-documentation --exclude "%SystemDrive%,projects,docs,references,templates,engine,book-extractions"
  *   node generate-plugin-manifest.js --engine ../../linux-skills --root . --exclude "docs,scripts,templates,tests,commands,meta,notes,prompts"
  */
 

@@ -53,7 +53,7 @@ without adding new active entrypoints. The catalog now routes current Apple work
 through iOS development, AI/ML, App Intents/Siri/Spotlight, quality/release,
 security, StoreKit, PWA/Safari, KMP, and mobile operations guidance, while
 presentation-layer Apple UI guidance lives in the external
-<a href="https://github.com/peterbamuhigire/design-system-skills" target="_blank" rel="noopener noreferrer">Design System Skills Engine</a>.
+<a href="https://github.com/peterbamuhigire/chwezi-design-engine" target="_blank" rel="noopener noreferrer">Chwezi Design Engine</a>.
 
 ## What Is Here
 

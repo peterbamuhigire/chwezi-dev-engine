@@ -21,7 +21,7 @@ This reference records the stable standards and professional benchmarks used by 
 | Concern | Canonical owner |
 |---|---|
 | Finance, accounting, IFRS, tax, payroll, statutory rates | `chwezi-accounting-doctrine` |
-| Visual design, typography, UI/UX, document visual formatting | `design-system-skills` |
+| Visual design, typography, UI/UX, document visual formatting | `chwezi-design-engine` |
 | Research, source verification, benchmarking, current-source checks | `digital-research-engine` |
 | Software engineering routing, implementation evidence, release gates | `chwezi-dev-engine` |
 
