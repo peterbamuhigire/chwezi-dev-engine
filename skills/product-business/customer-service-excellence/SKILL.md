@@ -121,7 +121,7 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 - `references/difficult-interaction-frameworks.md` for angry, anxious, technical-novice, executive, public-channel handling.
 - `references/service-quality-measurement.md` for the four-metric dashboard (response, resolution, recovery success, retention impact).
 - `references/cx-ex-alignment.md` for frontline empowerment, escalation paths, and knowledge management.
-- Use `continuous-improvement-system` to feed prevention entries into operating cadence reviews.
+- Use `world-class-engineering` to feed prevention entries into operating cadence reviews.
 - Use `premium-client-sales` for the inverse direction (pre-sale conversations).
 <!-- dual-compat-end -->
 

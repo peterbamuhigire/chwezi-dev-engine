@@ -141,7 +141,7 @@ If the candidate refuses to provide references from their most recent manager, i
 ## Cross-references
 
 - `onboarding-ramp.md` — hire people who can actually ramp.
-- `engineering-management-system` — coaching systems that reinforce the hire.
+- `world-class-engineering` — coaching systems that reinforce the hire.
 - `world-class-engineering` — for hiring standards that travel across disciplines.
 
 ## Anti-patterns

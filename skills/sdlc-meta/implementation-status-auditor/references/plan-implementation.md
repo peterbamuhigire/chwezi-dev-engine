@@ -262,20 +262,20 @@ This executor depends on and enforces patterns from other skills:
 |-------|---------------|-----------------|
 | Plan source | `feature-planning` | Task breakdown, specs, acceptance criteria |
 | Design baseline | `sdlc-design` | Architecture, DB design, API contracts |
-| Test standards | `sdlc-testing`, `android-tdd` | Test pyramid, TDD cycle, coverage targets |
+| Test standards | `sdlc-testing`, `android-development` | Test pyramid, TDD cycle, coverage targets |
 | Orchestration | `orchestration-best-practices` | 10 Commandments for multi-step execution |
 | Error prevention | `ai-error-prevention` | 7 strategies to prevent bad code generation |
 | Validation | `ai-error-handling` | 5-layer validation stack, quality scoring |
 | Security | `vibe-security-skill` | Security checklist for every endpoint |
 | DB standards | `mysql-best-practices` | Schema design, indexing, multi-tenant patterns |
 | API patterns | `api-error-handling`, `api-pagination` | Error responses, pagination |
-| Auth | `dual-auth-rbac` | Session + JWT, RBAC enforcement |
+| Auth | `vibe-security-skill` | Session + JWT, RBAC enforcement |
 | UI (Web) | `webapp-gui-design` | Template patterns, SweetAlert2, DataTables |
 | UI (Mobile) | `jetpack-compose-ui` | Material 3, state hoisting, animations |
 | Multi-tenant | `multi-tenant-saas-architecture` | Tenant isolation, scoping |
 | Post-execution | `implementation-status-auditor` | Verify completeness after all tasks done |
 
-**Skill loading rule:** Only load skills relevant to the current project's tech stack. A PHP web app doesn't need `android-tdd`.
+**Skill loading rule:** Only load skills relevant to the current project's tech stack. A PHP web app doesn't need `android-development`.
 
 ## The 10 Commandments (Mandatory)
 

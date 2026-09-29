@@ -77,6 +77,6 @@ Same as above, in the other direction. A feature flag named `enable_billing` som
 ## See Also
 
 - `saas-entitlements-and-plan-gating` — entitlements engine.
-- `experiment-engineering` — experimentation patterns.
+- `ai-feature-rollout-and-experimentation` — experimentation patterns.
 - `subscription-billing` — Price versioning for pricing tests.
 - `product-led-growth` — using both in the upgrade-discovery flow.

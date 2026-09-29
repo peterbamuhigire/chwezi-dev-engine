@@ -360,7 +360,7 @@ Each panel uses a distinct session prefix to prevent session collisions:
 | Component Design | List components per layer. Include naming conventions. |
 | Module Decomposition | One block per business module. Document ownership and interfaces. |
 | Multi-Tenant | Document franchise_id strategy explicitly. Never assume it is obvious. |
-| Security | Reference `dual-auth-rbac` and `vibe-security-skill`. Cover all four areas. |
+| Security | Reference `vibe-security-skill`. Cover all four areas. |
 | Deployment | Include all three environments with specific OS and server details. |
 | ADR Log | Add decisions as they are made. Never delete old ADRs; mark superseded. |
 

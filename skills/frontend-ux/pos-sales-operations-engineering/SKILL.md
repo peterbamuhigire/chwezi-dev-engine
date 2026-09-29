@@ -176,7 +176,7 @@ also route to `chwezi-accounting-doctrine` and the local `accounting-engine`.
 - `skills/backend-databases/database-design-engineering`
 - `skills/security/vibe-security-skill`
 - `skills/sdlc-meta/advanced-testing-strategy`
-- `skills/sdlc-meta/reliability-engineering`
+- `skills/devops-cloud/reliability-engineering`
 - `skills/sdlc-meta/skill-composition-standards`
 
 ## References

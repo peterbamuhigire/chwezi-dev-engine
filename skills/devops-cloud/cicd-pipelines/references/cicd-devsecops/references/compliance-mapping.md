@@ -31,7 +31,7 @@ The goal is **continuous compliance** — the work is already done by the time t
 | A.6 | Organisation of security | RACI matrix; incident response roles; security officer designated |
 | A.7 | Human resource security | Onboarding/offboarding Ansible playbooks; signed NDAs; background checks |
 | A.8 | Asset management | CMDB inventory; SBOM per build artifact; data classification tags |
-| A.9 | Access control | RBAC (see `dual-auth-rbac`); MFA on admin; least-privilege sudoers |
+| A.9 | Access control | RBAC (see `vibe-security-skill`); MFA on admin; least-privilege sudoers |
 | A.10 | Cryptography | TLS 1.3 everywhere; Vault for keys; Argon2id for passwords |
 | A.11 | Physical security | Inherited from cloud/VPS provider; provider SOC 2 report on file |
 | A.12 | Operations security | Ansible patch playbook; daily backups; auditd; ClamAV; OSSEC/Wazuh |
@@ -59,7 +59,7 @@ The goal is **continuous compliance** — the work is already done by the time t
 | R4 | Protect data in transit | TLS 1.3; HSTS; strong cipher suites; certificate pinning for mobile |
 | R5 | Protect against malware | ClamAV scheduled scans; auditd file-integrity monitoring; immutable base images |
 | R6 | Develop secure systems | SAST (Semgrep/SonarQube); DAST (OWASP ZAP); dependency scanning (OWASP DC); peer review |
-| R7 | Restrict access by need-to-know | RBAC (see `dual-auth-rbac`); row-level security for multi-tenant isolation |
+| R7 | Restrict access by need-to-know | RBAC (see `vibe-security-skill`); row-level security for multi-tenant isolation |
 | R8 | Identify and authenticate users | Argon2id passwords; MFA on all admin; session management; account lockout |
 | R9 | Restrict physical access | Inherited from cloud/VPS provider; compensating controls documented |
 | R10 | Log and monitor access | auditd + Vault audit + app logs shipped to SigNoz/SIEM; daily log review |
@@ -191,7 +191,7 @@ Ship everything to SigNoz, Loki, Elastic, or an external SIEM. Retain per your f
 
 ## Data residency and sovereignty
 
-- **Uganda DPPA 2019** requires that personal data of Ugandans be processed in-country except under specific legal bases. See `uganda-dppa-compliance` skill.
+- **Uganda DPPA 2019** requires that personal data of Ugandans be processed in-country except under specific legal bases. See `dpia-generator` skill.
 - Document where data physically resides (which data centre, which region).
 - Cross-border transfer requires either adequacy, SCCs, or explicit consent.
 - Vault, database, and backup storage must all be in-country if the DPPA applies.

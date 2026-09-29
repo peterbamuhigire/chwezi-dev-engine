@@ -133,7 +133,7 @@ Load alongside:
 |-------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | OpenAPI 3.1 contract    | frontend, mobile, SDK, `advanced-testing-strategy` (contract tests)| `skill-composition-standards/references/openapi-contract.md`                              |
 | Error model             | frontend, mobile, `advanced-testing-strategy`                      | `skill-composition-standards/references/error-model.md`                                   |
-| Auth model              | `vibe-security-skill`, `mobile-rbac`, `ios-rbac`, `dual-auth-rbac` | inline in spec (`components.securitySchemes`) + role/scope matrix in `auth-and-security.md` |
+| Auth model              | `vibe-security-skill`, `mobile-rbac`, `ios-rbac` | inline in spec (`components.securitySchemes`) + role/scope matrix in `auth-and-security.md` |
 | Idempotency map         | `reliability-engineering`, `stripe-payments`                       | inline table — see `references/auth-and-security.md`                                      |
 | Observability notes     | `observability-monitoring`                                         | inline table — see `references/implementation-checklist.md`                               |
 

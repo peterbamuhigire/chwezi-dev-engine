@@ -175,9 +175,9 @@ Non-accountants record business actions: `Record Sale`, `Receive Payment`, `Buy 
 
 ## Companion Skills
 
-- `chart-of-accounts-templates` for IFRS-aligned industry templates.
-- `inventory-costing` for IAS 2 stock valuation and COGS flows.
-- `payroll-postings-uganda` for PAYE/NSSF/LST payroll journal shapes.
+- `ledger-posting-engine-core` (chwezi-accounting-doctrine) for IFRS-aligned industry templates.
+- `inventory-costing-and-stock-accounting` (chwezi-accounting-doctrine) for IAS 2 stock valuation and COGS flows.
+- `payroll-and-statutory-postings-east-africa` (chwezi-accounting-doctrine) for PAYE/NSSF/LST payroll journal shapes.
 - `fixed-assets-and-depreciation` for IAS 16 asset lifecycle.
 - `multicurrency-and-fx` for IAS 21 currency handling.
 - `multi-tenant-saas-architecture`, `api-design-first`, and `advanced-testing-strategy` for platform integration.

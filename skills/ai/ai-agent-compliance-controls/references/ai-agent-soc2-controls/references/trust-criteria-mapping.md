@@ -98,7 +98,7 @@ References use the AICPA *2017 Trust Services Criteria (With Revised Points of F
 | TSC | Agent Implementation | Evidence | Cadence | Owner |
 |---|---|---|---|---|
 | **C1.1** Identifies and maintains confidential information | Data classification on every tool registration; PHI / PII flag; per-tenant memory tagging | Tool registry export with classifications | Daily | Security |
-| **C1.2** Disposes of confidential information | Memory-erasure proof (`ai-agent-memory-erasure-proof`); tenant erasure cascade | Erasure evidence packs | Per event | DPO |
+| **C1.2** Disposes of confidential information | Memory-erasure proof (`ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`); tenant erasure cascade | Erasure evidence packs | Per event | DPO |
 
 ---
 

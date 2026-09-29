@@ -290,4 +290,4 @@ Add telemetry on migration failures; they are silent security holes otherwise.
 - `data-protection-classes.md` — file-level protection for large blobs whose keys live in Keychain.
 - `code-signing-entitlements.md` — Keychain Sharing entitlement and access groups.
 - `ios-biometric-login` skill — LocalAuthentication flow and biometric fallbacks.
-- `ios-data-persistence` skill — where repository code wires in the Keychain helpers.
+- `ios-platform-capabilities` skill — where repository code wires in the Keychain helpers.

@@ -150,5 +150,5 @@ Co-sign means a second authorised staff member approves the frozen cohort (bound
 
 - `saas-admin-backoffice-tooling` section 6 - the bulk-operations workflow this expands.
 - `references/internal-roles-and-permissions.md` - who may run which bulk class.
-- `saas-control-plane-engineering` - the migration services bulk ops drive.
+- `saas-architecture-strategy` - the migration services bulk ops drive.
 - `subscription-billing` - Stripe subscription/price semantics for plan migration.

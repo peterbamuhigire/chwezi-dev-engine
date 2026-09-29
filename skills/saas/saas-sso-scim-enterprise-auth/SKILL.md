@@ -58,16 +58,16 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 
 ## Do Not Use When
 
-- The task is the customer-facing tenant-admin auth screen — use `dual-auth-rbac`.
-- The task is internal staff auth — use `dual-auth-rbac` + MFA + the back-office privileged-access workflow in `saas-admin-backoffice-tooling`.
+- The task is the customer-facing tenant-admin auth screen — use `vibe-security-skill`.
+- The task is internal staff auth — use `vibe-security-skill` + MFA + the back-office privileged-access workflow in `saas-admin-backoffice-tooling`.
 - The task is OAuth as a *client* (calling Google/Stripe APIs) — use `vibe-security-skill`.
 
 ## Required Inputs
 
 - Current auth implementation (which provider / framework — Cognito, Auth0, Clerk, Supabase Auth, custom, etc.).
-- Identity model from `saas-control-plane-engineering` (users + memberships).
+- Identity model from `saas-architecture-strategy` (users + memberships).
 - Enterprise-tier definition from `subscription-billing` (which plan gates enterprise auth).
-- Custom-domain strategy from `saas-deployment-models` / `multi-tenant-saas-architecture`.
+- Custom-domain strategy from `saas-architecture-strategy` / `multi-tenant-saas-architecture`.
 
 ## Workflow
 
@@ -123,7 +123,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - `references/scim-provisioning.md` — SCIM 2.0 endpoints, PATCH semantics, Okta/Azure quirks.
 - `references/custom-domain-and-tls.md` — DNS verification, cert-manager, fingerprint validation.
 - `references/audit-log-api.md` — API surface, retention, format.
-- Companion: `multi-tenant-saas-architecture`, `dual-auth-rbac`, `saas-control-plane-engineering`, `saas-entitlements-and-plan-gating`, `vibe-security-skill`.
+- Companion: `multi-tenant-saas-architecture`, `vibe-security-skill`, `saas-architecture-strategy`, `saas-entitlements-and-plan-gating`.
 
 <!-- dual-compat-end -->
 
@@ -369,9 +369,9 @@ Break-glass: super-admin in the back-office can temporarily disable enforcement 
 
 ## §11 Read Next
 
-- `dual-auth-rbac` — base auth implementation this skill extends.
+- `vibe-security-skill` — base auth implementation this skill extends.
 - `multi-tenant-saas-architecture` — tenant binding model.
-- `saas-control-plane-engineering` — identity service this skill plugs into.
+- `saas-architecture-strategy` — identity service this skill plugs into.
 - `saas-entitlements-and-plan-gating` — gate enterprise auth behind enterprise plan.
 - `saas-admin-backoffice-tooling` — staff break-glass workflow.
 - `vibe-security-skill` — security review baseline.

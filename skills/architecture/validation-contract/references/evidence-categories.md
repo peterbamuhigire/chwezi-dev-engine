@@ -11,7 +11,7 @@ The seven categories are fixed. Each entry below gives the full definition, what
 - Latest CI run link showing unit, integration, and contract tests passing.
 - Contract test output for API or data-schema stability.
 
-**Indicative contributing skills:** `advanced-testing-strategy`, `api-testing-verification`, `android-tdd`, `ios-tdd`, `kmp-tdd`.
+**Indicative contributing skills:** `advanced-testing-strategy`, `api-testing-verification`, `android-development`, `ios-tdd`, `kmp-tdd`.
 
 **Common failure mode:** Test count is high but coverage skews to happy paths; risky boundaries and error paths are untested.
 
@@ -37,7 +37,7 @@ The seven categories are fixed. Each entry below gives the full definition, what
 - Backup verification log (most recent restore test).
 - PII and retention note mapping personal data fields to regulatory basis and retention window.
 
-**Indicative contributing skills:** `database-design-engineering`, `postgresql-administration`, `mysql-administration`, `dpia-generator`, `uganda-dppa-compliance`.
+**Indicative contributing skills:** `database-design-engineering`, `postgresql-administration`, `mysql-administration`, `dpia-generator`.
 
 **Common failure mode:** Migration is irreversible (dropped column, destructive type change) with no feature-flag gate, forcing a full release rollback instead of a feature rollback.
 

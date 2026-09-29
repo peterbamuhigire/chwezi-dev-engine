@@ -127,7 +127,7 @@ Content-Type: application/json
 | Access Token | 1 hour | EncryptedSharedPreferences | Via refresh endpoint |
 | Refresh Token | 30 days | EncryptedSharedPreferences | Via login |
 
-See: `dual-auth-rbac` skill for full token rotation and breach detection.
+See: `vibe-security-skill` skill for full token rotation and breach detection.
 
 ### 2.3 Backend <-> Web Frontend (IF-001, IF-003)
 

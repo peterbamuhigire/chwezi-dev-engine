@@ -261,7 +261,7 @@ Cross-references:
 - `ai-cost-per-tenant-attribution` — operational pipeline.
 - `ai-usage-metering-and-billing` — turning tokens into invoiced units (Stripe Meters recipe).
 - `ai-model-gateway` — captures cost at request close.
-- `ai-entitlements-and-feature-gating` — defines the caps the pipeline guardrails.
+- `saas-entitlements-and-plan-gating` — defines the caps the pipeline guardrails.
 - `ai-on-saas-architecture` — control-plane positioning.
 
 

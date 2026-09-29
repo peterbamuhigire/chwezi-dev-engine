@@ -426,4 +426,4 @@ flaws:
 - `security-headers-reference.md` — `Set-Cookie` attributes, CSP, HSTS
 - `audit-checklist-detailed.md` — full audit checklist
 - `../SKILL.md` — entry point for web app security audit
-- Related skills: `php-security`, `dual-auth-rbac`, `vibe-security-skill`, `llm-security`
+- Related skills: `php-security`, `vibe-security-skill`, `llm-security`

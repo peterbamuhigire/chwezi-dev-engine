@@ -302,7 +302,7 @@ Controllers call `$policy->view($user, $invoice)`. Tests exercise the policy in 
 - `business-logic-flaws.md` — workflow, race conditions and state machine bypasses
 - `audit-checklist-detailed.md` — the parent skill's master audit checklist
 - `php-security` skill — PHP-specific session, CSRF and input-handling patterns
-- `dual-auth-rbac` skill — dual auth plus RBAC reference implementation
+- `vibe-security-skill` skill — dual auth plus RBAC reference implementation
 - `multi-tenant-saas-architecture` skill — tenant isolation architecture
 - `vibe-security-skill` — general secure coding baseline
 - OWASP Top 10: A01 Broken Access Control

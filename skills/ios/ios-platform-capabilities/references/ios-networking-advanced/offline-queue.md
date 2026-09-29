@@ -72,7 +72,7 @@ actor OfflineQueue {
 }
 ```
 
-**For persistent offline queue** (survives app restart): use `PendingOperation` model in SwiftData. See `ios-data-persistence` skill Section 6.1–6.3.
+**For persistent offline queue** (survives app restart): use `PendingOperation` model in SwiftData. See `ios-platform-capabilities` skill Section 6.1–6.3.
 
 ## When to Use Each
 

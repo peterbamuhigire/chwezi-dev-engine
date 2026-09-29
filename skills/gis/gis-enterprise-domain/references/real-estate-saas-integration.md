@@ -238,7 +238,7 @@ Heatmap GeoJSON      Object storage   1–6 hours      Scheduled rebuild
 - **Observability** — every search and tile request emits a span tagged with tenant_id, filter shape, result count, and latency. Alerts on p95 breaches.
 - **Cost attribution** — external provider calls (Mapbox, Google) are written to a ledger with `tenant_id`; the billing module charges back or enforces quotas.
 - **Data retention** — sold listings retain geometry for N years for market heatmaps, then are anonymised (geometry snapped to a coarse grid) per data-protection policy.
-- **DPIA / DPPA** — pair with `uganda-dppa-compliance` for Uganda deployments; location data is personal data when tied to a user.
+- **DPIA / DPPA** — pair with `dpia-generator` for Uganda deployments; location data is personal data when tied to a user.
 - **Backup** — MySQL and PostGIS have independent backup schedules but a coordinated recovery plan. Document the order of restore (MySQL first, then PostGIS replay).
 
 ## Deployment footprint

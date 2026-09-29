@@ -255,7 +255,7 @@ Content-query patterns (container queries) for component-level grids: `reference
 | `healthcare-ui-design` | High-density clinical screens built on refined 24-col modular grids. |
 | `design-audit` | Runs grid adherence as part of the UI quality audit. |
 | `data-visualization` | Chart composition on a shared grid for dashboards. |
-| `mobile-reports` / `mobile-report-tables` | Table and report rhythm on 4-col phones. |
+| `professional-word-output` / `mobile-report-tables` | Table and report rhythm on 4-col phones. |
 
 ## Source
 

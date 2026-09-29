@@ -322,7 +322,7 @@ Use these prompts while working:
 - Load `advanced-testing-strategy` for risk-based validation and release evidence.
 - Load `deployment-release-engineering` for rollout, rollback, migration-safe shipping, and post-deploy verification.
 - Load `distributed-systems-patterns` when crossing service, queue, or consistency boundaries.
-- Load `engineering-management-system` for delivery operating rhythm, delegation, communication, and team scaling.
+- Apply this skill's engineering-management guidance for delivery operating rhythm, delegation, communication, and team scaling (the retired `engineering-management-system` skill is an inactive alias of it).
 - Load platform and security skills relevant to the stack after this baseline is established.
 - Load `validation-contract` when authoring a specialist skill or assembling a Release Evidence Bundle for ship; it is the canonical source for what evidence ship readiness requires.
 - Load `premium-software-product-execution` when the software itself must support premium pricing, executive trust, sales enablement, website/content authority, or refusal of commodity work.

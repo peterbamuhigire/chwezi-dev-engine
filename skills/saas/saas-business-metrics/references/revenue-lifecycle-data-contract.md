@@ -13,7 +13,7 @@ movements in `saas-growth-metrics/references/saas-metrics-event-contract.md`; se
 
 - The product's activation definition (a named product event and window) from the PRD.
 - Current CRM objects and field list, lifecycle-messaging profile attributes, and who edits each.
-- Billing mirror and tenant lifecycle states (`saas-control-plane-engineering` reference branch).
+- Billing mirror and tenant lifecycle states (`saas-architecture-strategy` reference branch).
 - Privacy basis and retention rules for each attribute that leaves the product database.
 
 ## Step 1: Publish one definitions registry

@@ -254,4 +254,4 @@ CLOSING CASH BALANCE           25,000
 | Journal Register | No | Yes | Yes |
 | Audit Trail | No | No | Yes |
 
-Control via RBAC permissions from `dual-auth-rbac` skill.
+Control via RBAC permissions from `vibe-security-skill` skill.

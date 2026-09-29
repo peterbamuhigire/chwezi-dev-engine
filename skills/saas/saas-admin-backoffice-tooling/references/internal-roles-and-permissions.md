@@ -146,5 +146,5 @@ At 18:00 the row's `expires_at` lapses; `effective_permissions` filters it out o
 - `saas-admin-backoffice-tooling` section 3 and section 7 - the role model and privileged-access workflow this expands.
 - `references/impersonation-design.md` - which roles may impersonate, in which mode.
 - `references/bulk-operations.md` - which roles may run which bulk class, and co-sign rules.
-- `dual-auth-rbac` - the underlying RBAC and MFA primitives.
+- `vibe-security-skill` - the underlying RBAC and MFA primitives.
 - `multi-tenant-saas-architecture` - customer-side RBAC, kept distinct from staff-side.

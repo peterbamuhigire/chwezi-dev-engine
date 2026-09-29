@@ -159,7 +159,7 @@ explicit release state.
   `distributed-systems-patterns`, and `reliability-engineering`
 - `multi-tenant-saas-architecture`, `saas-erp-system-design`, and
   `pos-sales-operations-engineering`
-- `android-development`, `android-data-persistence`, and `android-tdd` for
+- `android-development` (including its persistence and TDD guidance) for
   downstream mobile projections
 
 ## References

@@ -15,7 +15,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - The task is generic platform forensics — use SOC2 incident-response procedures.
 - The task is the trace schema — `ai-observability-and-debugging`.
-- The task is the audit log spine — `saas-control-plane-engineering`.
+- The task is the audit log spine — `saas-architecture-strategy`.
 
 ## Required Inputs
 
@@ -76,7 +76,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/evidence-bundle-spec.md` — full bundle contents and manifest schema.
 - `references/chain-of-custody.md` — access control, signing, audit, legal hold.
 - `references/reproduce-script-template.md` — generator pattern and an example.
-- Companion: `ai-observability-and-debugging`, `ai-on-saas-architecture`, `ai-eval-harness`, `ai-agents-tools`, `ai-incident-response-runbook`, `ai-incident-customer-comms`, `saas-control-plane-engineering`.
+- Companion: `ai-observability-and-debugging`, `ai-on-saas-architecture`, `ai-eval-harness`, `ai-agents-tools`, `ai-incident-response-runbook`, `ai-incident-customer-comms`, `saas-architecture-strategy`.
 
 <!-- dual-compat-end -->
 

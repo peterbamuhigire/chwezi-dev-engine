@@ -56,5 +56,5 @@ These should run as automated checks in the experiment scorecard job, not as man
 
 ## See also
 
-- `skills/experiment-engineering/SKILL.md` — the engineering discipline of trustworthy experiments.
-- `skills/experiment-engineering/references/experiment-spec-template.md` — where guardrails sit in the spec.
+- `skills/ai/ai-feature-rollout-and-experimentation/SKILL.md` — the engineering discipline of trustworthy experiments.
+- `skills/product-business/experiment-engineering/references/experiment-spec-template.md` — where guardrails sit in the spec (retained in the retired `experiment-engineering` alias folder).

@@ -38,8 +38,8 @@ Use this parent skill as the active PostgreSQL engineering entrypoint. Keep impl
    - `references/postgresql-patterns.md` for schema and application patterns.
    - `references/postgresql-advanced-sql.md` for advanced query design.
    - `references/postgresql-server-programming.md` for functions, triggers, and server-side behaviour.
-3. Pair with `postgresql-operations` for administration, performance incidents, tuning, backups, or production operations.
-4. Pair with `postgresql-ai-platform` only when pgvector or AI platform concerns are central.
+3. Administration, performance incidents, tuning, backups, and production operations also route here (the retired `postgresql-operations` skill is an inactive alias of this skill).
+4. Pair with `ai-rag-patterns` only when pgvector or AI platform concerns are central.
 
 ## Quality Standards
 

@@ -60,7 +60,7 @@ Systematic security audit for PHP/JavaScript/HTML web applications. Scans 8 secu
 
 **Scope:** Web application code only (PHP, JS, HTML, CSS). For Android security and database security, use dedicated skills.
 
-**Cross-references:** `php-security` (PHP patterns), `vibe-security-skill` (OWASP), `dual-auth-rbac` (auth), `api-error-handling` (API errors)
+**Cross-references:** `php-security` (PHP patterns), `vibe-security-skill` (OWASP, auth), `api-error-handling` (API errors)
 
 **See references/ for:** `audit-checklist-detailed.md`, `security-headers-reference.md`, `report-template.md`
 

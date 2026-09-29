@@ -475,7 +475,7 @@ Before shipping any feature intended to build repeat engagement:
 
 - **`ux-psychology`** — cognitive science foundations: IKEA effect, goal-gradient, loss aversion, dual-process model, Hick-Hyman Law
 - **`lean-ux-validation`** — validate your internal trigger hypothesis with real users before building
-- **`ux-for-ai`** — when the habit-forming product involves AI features (trust, autonomy, transparency)
+- **`ai-agent-ux` (design-system-skills)** — when the habit-forming product involves AI features (trust, autonomy, transparency)
 - **`interaction-design-patterns`** — Tidwell's behavioural patterns for the action and reward phases
 
 ---

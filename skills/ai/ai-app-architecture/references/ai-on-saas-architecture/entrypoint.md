@@ -20,7 +20,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Required Inputs
 
-- Tenancy and deployment model from `multi-tenant-saas-architecture` and `saas-deployment-models`.
+- Tenancy and deployment model from `multi-tenant-saas-architecture` and `saas-architecture-strategy`.
 - Plan / tier catalogue from `subscription-billing` and `saas-entitlements-and-plan-gating`.
 - The list of AI features in scope and the data each touches.
 - Data residency requirements per tenant (region, sovereignty).
@@ -79,7 +79,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/llm-gateway-design.md` — full design of the LLM gateway as a control-plane service.
 - `references/control-plane-ai-services.md` — the five AI control-plane services in detail.
-- Companion: `ai-model-gateway`, `ai-tenant-isolation-patterns`, `ai-rag-multi-tenant`, `ai-eval-harness`, `ai-cost-per-tenant-attribution`, `ai-usage-metering-and-billing`, `ai-entitlements-and-feature-gating`, `ai-hallucination-slo-and-grounding`, `ai-prompt-injection-and-tenant-safety`, `ai-feature-rollout-and-experimentation`, `ai-observability-and-debugging`, `ai-agent-runtime-architecture`, `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-cost-and-step-budgets`, `ai-agent-observability-and-replay`, `ai-agent-safety-and-red-team`, `saas-control-plane-engineering`, `multi-tenant-saas-architecture`.
+- Companion: `ai-model-gateway`, `ai-tenant-isolation-patterns`, `ai-rag-multi-tenant`, `ai-eval-harness`, `ai-cost-per-tenant-attribution`, `ai-usage-metering-and-billing`, `saas-entitlements-and-plan-gating`, `ai-hallucination-slo-and-grounding`, `ai-prompt-injection-and-tenant-safety`, `ai-feature-rollout-and-experimentation`, `ai-observability-and-debugging`, `ai-agent-runtime-architecture`, `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-cost-and-step-budgets`, `ai-agent-observability-and-replay`, `ai-agent-safety-and-red-team`, `saas-architecture-strategy`, `multi-tenant-saas-architecture`.
 
 <!-- dual-compat-end -->
 
@@ -238,8 +238,8 @@ See `ai-tenant-isolation-patterns/references/vector-store-partitioning-tradeoffs
 - `ai-prompt-injection-and-tenant-safety` — threat model + red team.
 - `ai-observability-and-debugging` — traces and replays.
 - `ai-feature-rollout-and-experimentation` — flags and canaries.
-- `ai-entitlements-and-feature-gating` — plan-tier binding.
+- `saas-entitlements-and-plan-gating` — plan-tier binding.
 - `ai-usage-metering-and-billing` — turning tokens into billable units.
-- `saas-control-plane-engineering` — broader control-plane context.
+- `saas-architecture-strategy` — broader control-plane context.
 
 

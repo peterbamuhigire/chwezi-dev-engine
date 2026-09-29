@@ -380,7 +380,7 @@ The full 50-point audit is in `references/audit-checklist.md`. Headline items:
 - `linux-security-hardening` — OS-level hardening beyond network
 - `microservices-architecture-models` — service mesh, gateway patterns
 - `realtime-systems` — WSS/TLS for WebSocket connections
-- `dual-auth-rbac` — session + JWT authentication patterns
+- `vibe-security-skill` — session + JWT authentication patterns
 ## Capability contract
 
 Read and search are required. Packet capture, active scanning, firewall changes, VPN changes, and external probing require explicit scope and authorisation. Default audits to non-invasive inspection.

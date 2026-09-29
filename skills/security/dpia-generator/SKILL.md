@@ -33,7 +33,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 Generate a Uganda Data Protection and Privacy Act 2019 — compliant Data Protection Impact Assessment (DPIA) document for a specific processing operation that has been flagged with `[DPIA-REQUIRED]`. Implements Regulation 12 of the Data Protection and Privacy Regulations 2021.
 
 Use this skill when:
-- The `uganda-dppa-compliance` skill has flagged `[DPIA-REQUIRED: <reason>]` for a processing operation
+- A Uganda DPPA compliance review (formerly the retired `uganda-dppa-compliance` skill, now an inactive alias of this one) has flagged `[DPIA-REQUIRED: <reason>]` for a processing operation
 - The consultant is preparing for Phase 3 go-live involving farmer personal data
 - Any new processing feature involves large-scale, systematic, or special personal data collection
 - A PDPO auditor requests a DPIA on file

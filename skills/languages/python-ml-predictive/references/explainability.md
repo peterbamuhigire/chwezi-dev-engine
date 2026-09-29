@@ -168,7 +168,7 @@ For automated decisions about individuals:
 - Allow subjects to request a human review of a decision.
 - Inform subjects when an automated decision was made and what factors mattered.
 
-Cross-reference: `uganda-dppa-compliance`, `dpia-generator`.
+Cross-reference: `dpia-generator`.
 
 ### Audit trail
 Log per prediction:

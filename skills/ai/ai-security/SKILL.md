@@ -309,7 +309,7 @@ Before going live, verify:
 - `ai-architecture-patterns` — Budget Guard, gate middleware
 - `vibe-security-skill` — General web app security baseline
 - `web-app-security-audit` — Full 8-layer security audit
-- `uganda-dppa-compliance` — DPPA 2019 full compliance skill
+- `dpia-generator` — DPPA 2019 full compliance skill
 ## Threat Model + Red-Team Suite
 
 This skill is the AI-security checklist. The deeper threat-model treatment plus the standing red-team test suite live in `ai-prompt-injection-and-tenant-safety`:

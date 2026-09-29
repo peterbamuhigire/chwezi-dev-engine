@@ -94,7 +94,7 @@ All development follows Red-Green-Refactor:
 3. **Refactor:** Clean up code and tests while keeping everything green
 4. **Commit:** Commit after each green cycle
 
-Reference: `android-tdd` skill for implementation details.
+Reference: `android-development` skill for implementation details.
 
 ### 2.4 Regression Testing Strategy
 - Full regression suite runs on every PR merge to `develop`
@@ -298,7 +298,7 @@ Open -> Assigned -> In Progress -> Fixed -> Verified -> Closed
 ## Section-by-Section Guidance
 
 ### Test Strategy
-Be specific about the 70/20/10 split. Document which frameworks handle which test level. Reference `android-tdd` for implementation patterns.
+Be specific about the 70/20/10 split. Document which frameworks handle which test level. Reference `android-development` for implementation patterns.
 
 ### Test Scope
 Map every feature to SRS requirement IDs. If a feature is excluded from testing, document why. This traceability is critical for audits.

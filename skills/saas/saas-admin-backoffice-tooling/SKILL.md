@@ -57,15 +57,15 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## Do Not Use When
 
 - The task is the customer-facing super-admin or tenant-admin panel (inside one tenant) — use `multi-tenant-saas-architecture` three-panel pattern.
-- The task is the control-plane services architecture — use `saas-control-plane-engineering`; this skill is the UI/UX layer on top.
-- The task is the audit log schema itself — use `saas-control-plane-engineering` §6.
-- The task is general RBAC — use `dual-auth-rbac` and `multi-tenant-saas-architecture`.
+- The task is the control-plane services architecture — use `saas-architecture-strategy`; this skill is the UI/UX layer on top.
+- The task is the audit log schema itself — use `saas-architecture-strategy` §6.
+- The task is general RBAC — use `vibe-security-skill` and `multi-tenant-saas-architecture`.
 
 ## Required Inputs
 
-- Control-plane service inventory from `saas-control-plane-engineering`.
-- Audit log spec from `saas-control-plane-engineering`.
-- Tenant lifecycle states from `saas-control-plane-engineering`.
+- Control-plane service inventory from `saas-architecture-strategy`.
+- Audit log spec from `saas-architecture-strategy`.
+- Tenant lifecycle states from `saas-architecture-strategy`.
 - Compliance posture (SOC2, ISO27001, HIPAA?) — determines required guardrails.
 - Internal roles (super admin, support engineer, billing ops, finance, security, customer success).
 
@@ -119,7 +119,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - `references/impersonation-design.md` — time-boxed, justified, visible impersonation.
 - `references/bulk-operations.md` — dry-run + approval + rollback patterns.
 - `references/internal-roles-and-permissions.md` — typical role matrix.
-- Companion: `saas-control-plane-engineering`, `multi-tenant-saas-architecture`, `dual-auth-rbac`, `vibe-security-skill`, `saas-sso-scim-enterprise-auth`.
+- Companion: `saas-architecture-strategy`, `multi-tenant-saas-architecture`, `vibe-security-skill`, `saas-sso-scim-enterprise-auth`.
 - AI incident console: when the platform ships AI features, the back-office must include an **AI incident console** with: feature kill-switch, agent task kill-switch, model-pin, prompt-pin, retrieval index-pin, tool-pin / tool-disable, gateway routing pin, per-tenant feature pause, quota cap, and the evidence-bundle exporter. Each control writes to `ai_incident_mitigation_log` with `(actor, ts, primitive, scope, reason, ticket_id)`. The reason field is mandatory. See `ai-incident-response-runbook` §3 for the primitive contract and `ai-incident-recovery-and-rollback/references/rollback-patterns.md` for the un-pin path.
 
 <!-- dual-compat-end -->
@@ -335,11 +335,11 @@ The kill-with-rollback runbook (`ai-agent-reversibility-and-blast-radius` §4) d
 
 ## §11 Read Next
 
-- `saas-control-plane-engineering` — the services this console drives.
+- `saas-architecture-strategy` — the services this console drives.
 - `multi-tenant-saas-architecture` — tenant data model + cross-tenant access rules.
 - `subscription-billing` — billing operations this console invokes.
 - `saas-tenant-data-portability-and-erasure` — GDPR workflows this console initiates.
-- `dual-auth-rbac` — internal auth + MFA underpinning.
+- `vibe-security-skill` — internal auth + MFA underpinning.
 - `vibe-security-skill` — security baseline for the back-office app.
 - `ai-agent-runtime-architecture` — agent task control-plane.
 - `ai-agent-observability-and-replay` — task viewer + replay surfaces.
@@ -395,7 +395,7 @@ Rate-limit safeguard: if a tenant's overturn-in-customer-favor rate in the rolli
 - `ai-agent-sla-credit-automation` — case data source.
 - `ai-agent-task-success-tracking` — dispute data source.
 - `ai-agent-abandonment-and-refund-policy` — refund execution invoked from overturns.
-- `dual-auth-rbac` — auth model for the override actions.
+- `vibe-security-skill` — auth model for the override actions.
 
 ---
 

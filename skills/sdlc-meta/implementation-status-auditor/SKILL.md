@@ -129,7 +129,7 @@ Evaluate API contracts and data flow between systems.
 - [ ] Webhook/callback endpoints documented and implemented
 - [ ] Data sync mechanisms between platforms verified
 
-**Cross-reference with:** the `api-design-first` skill (pagination and error-handling standards) and the `dual-auth-rbac` skill.
+**Cross-reference with:** the `api-design-first` skill (pagination and error-handling standards) and the `vibe-security-skill` skill.
 
 #### Pillar 4: Technical Risk & Debt Assessment
 
@@ -255,7 +255,7 @@ This auditor leverages other skills for both analysis and recommended actions:
 |------------|---------------|--------------|
 | Database schema gaps | `mysql-engineering` | `mysql-engineering` |
 | Missing features | `feature-planning` | `feature-planning` |
-| API gaps | `api-design-first` | `api-design-first`, `dual-auth-rbac` |
+| API gaps | `api-design-first` | `api-design-first`, `vibe-security-skill` |
 | Multi-tenant issues | `multi-tenant-saas-architecture` | `multi-tenant-saas-architecture` |
 | Documentation gaps | `doc-architect` | `doc-architect` (documentation maintenance after change) |
 | Testing gaps | `sdlc-documentation` | `sdlc-documentation` |

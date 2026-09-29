@@ -159,10 +159,10 @@ Step 6: Code Documentation Standards (team conventions)
 |---------|------------|-----------------|
 | MVVM + Clean Architecture | Android (Presentation / Domain / Data layers) | `android-development` |
 | Three-Panel Web Architecture | `/public/`, `/adminpanel/`, `/memberpanel/` | `multi-tenant-saas-architecture` |
-| REST API + Dual Auth | Session (web) + JWT (mobile) | `dual-auth-rbac` |
+| REST API + Dual Auth | Session (web) + JWT (mobile) | `vibe-security-skill` |
 | Row-Level Multi-Tenancy | `franchise_id` in every tenant-scoped query | `multi-tenant-saas-architecture` |
 | Pluggable Module Architecture | Enable/disable business modules per tenant | `modular-saas-architecture` |
-| Repository Pattern | Android data access abstraction | `android-data-persistence` |
+| Repository Pattern | Android data access abstraction | `android-development` |
 | Service Layer Pattern | PHP business logic encapsulation | `php-modern-standards` |
 
 ## Cross-References to Existing Skills
@@ -184,7 +184,7 @@ Step 6: Code Documentation Standards (team conventions)
 | `php-modern-standards` | Technical Spec and Code Documentation reference PHP 8+ standards. |
 | `android-development` | Technical Spec references Android architecture layers (MVVM + Clean). |
 | `multi-tenant-saas-architecture` | SDD references tenant isolation, three-panel architecture. |
-| `dual-auth-rbac` | SDD and ICD reference dual auth flows and RBAC model. |
+| `vibe-security-skill` | SDD and ICD reference dual auth flows and RBAC model. |
 | `vibe-security-skill` | Security architecture sections in SDD. Always apply alongside. |
 
 ### Downstream Skills (use AFTER this skill)

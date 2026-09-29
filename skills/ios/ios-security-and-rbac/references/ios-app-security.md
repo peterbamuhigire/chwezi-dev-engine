@@ -258,6 +258,6 @@ Run through this before every release. Every unchecked box is a finding to fix o
 - **`ios-stability-solutions`** — crash prevention; stability and security are complementary (a crash is often a security bug, and a locked-down app that crashes constantly is not secure in practice).
 - **`ios-biometric-login`** — `LAContext`, Face ID/Touch ID integration; cross-referenced from Keychain access control and Secure Enclave key gating.
 - **`ios-networking-advanced`** — production `URLSession` client where pinning is wired in; this skill specifies the pinning policy, that skill shows where it plugs in.
-- **`ios-data-persistence`** — repository pattern over SwiftData/SQLite; this skill specifies the protection class those stores must use.
+- **`ios-platform-capabilities`** — repository pattern over SwiftData/SQLite; this skill specifies the protection class those stores must use.
 - **`app-store-review`** — Review Guidelines, privacy labels, TestFlight; the privacy manifest and ATT material here aligns with the review skill's checklist.
 - **`ios-project-setup`** — Xcode build settings, xcconfig, code signing; where the binary protection and stripping flags actually live.

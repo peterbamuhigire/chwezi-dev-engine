@@ -433,7 +433,7 @@ android-biometric-login
 ```
 
 **Key integrations:**
-- `dual-auth-rbac`: BiometricHelper works alongside JWT auth — biometric gates app access, JWT gates API access
+- `vibe-security-skill`: BiometricHelper works alongside JWT auth — biometric gates app access, JWT gates API access
 - `android-development`: Follows MVVM pattern — ViewModel delegates to AuthManager, UI observes state
 - `jetpack-compose-ui`: Settings toggle uses Material 3 `ListItem` + `Switch` pattern
 

@@ -122,7 +122,7 @@ A skill is "specialist" for the purposes of this contract when it:
 Skills exempt from declaring (non-exhaustive):
 
 - `world-class-engineering`, `skill-composition-standards`, `validation-contract` itself.
-- `system-architecture-design`, `engineering-management-system`, `git-collaboration-workflow`.
+- `system-architecture-design`, `world-class-engineering`, `git-collaboration-workflow`.
 - `feature-planning`, and spec authoring in `project-requirements` (`../../sdlc-meta/project-requirements/references/spec-architect.md`).
 - All `superpowers:*` skills.
 

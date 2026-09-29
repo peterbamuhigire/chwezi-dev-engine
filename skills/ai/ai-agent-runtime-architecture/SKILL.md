@@ -61,7 +61,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - The AI on SaaS architecture decision (`ai-on-saas-architecture`) — gateway, audit log, prompt registry.
 - The agent feature catalogue (which features are agentic, which are single-shot).
-- The plan / tier catalogue with agent entitlements (`ai-entitlements-and-feature-gating`).
+- The plan / tier catalogue with agent entitlements (`saas-entitlements-and-plan-gating`).
 - Tenant-aware queue / worker infrastructure (`distributed-systems-patterns`, `reliability-engineering`).
 - The eval and red-team posture (`ai-agent-eval`, `ai-agent-safety-and-red-team`).
 

@@ -491,7 +491,7 @@ Temporal — the cluster overhead is not justified.
 - `microservices-communication/references/workflow-engines.md` — n8n / Temporal / Airflow deep dive: deployment topology, full retry semantics, signals/queries/child workflows, XCom, HA, backup, security
 - `microservices-architecture-models` — where service discovery is handled (Proxy/Router/Fabric)
 - `microservices-resilience` — retry, timeout, circuit breaker for synchronous calls
-- `microservices-ai-integration` — async AI job queue pattern
+- `ai-app-architecture` — async AI job queue pattern
 - `api-error-handling` — error response standards for service APIs
 - `event-driven-architecture` — broker selection, outbox, sagas
 - `realtime-systems` — push channels (WebSocket, SSE) for status updates while a workflow runs

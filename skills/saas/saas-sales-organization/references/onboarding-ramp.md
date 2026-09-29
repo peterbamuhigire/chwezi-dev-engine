@@ -120,7 +120,7 @@ Intervention pattern: document the gap in writing, specify 30-day improvement ac
 
 - `hiring-rubrics.md` — pick reps who can actually ramp.
 - `pipeline-stages.md` — ramp milestones tied to stage advancement.
-- `engineering-management-system` — coaching cadence and 1:1 structure.
+- `world-class-engineering` — coaching cadence and 1:1 structure.
 
 ## Anti-patterns
 

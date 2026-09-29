@@ -150,4 +150,4 @@ The rule of thumb: the more irreversible and the wider the scope, the further up
 - `references/erasure-cascade.md` - what runs only after verification passes.
 - `references/export-format-spec.md` - delivering the export only to the verified address.
 - `saas-admin-backoffice-tooling` - the co-sign and justification machinery for admin-initiated requests.
-- `uganda-dppa-compliance` - Information Officer obligations and regional response timelines.
+- `dpia-generator` - Information Officer obligations and regional response timelines.

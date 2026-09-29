@@ -23,7 +23,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - The list of agentic features and what each agent is expected to accomplish.
 - The catalogue of internal and external systems the agent can touch (CRM, ERP, email, payments, KB, calendar, ticketing).
-- Plan / tier catalogue from `ai-entitlements-and-feature-gating`.
+- Plan / tier catalogue from `saas-entitlements-and-plan-gating`.
 - Audit log baseline from `ai-on-saas-architecture`.
 
 ## Workflow
@@ -79,7 +79,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/tool-schema-conventions.md` — JSON-schema conventions, naming, error contracts.
 - `references/reversible-vs-irreversible-classification.md` — classification rubric + examples.
 - `references/tool-side-effect-budgets.md` — budget design + enforcement.
-- Companion: `ai-agents-tools`, `ai-agent-runtime-architecture`, `ai-agent-action-approval-and-hitl`, `ai-agent-reversibility-and-blast-radius`, `ai-agent-safety-and-red-team`, `ai-entitlements-and-feature-gating`, `ai-on-saas-architecture`.
+- Companion: `ai-agents-tools`, `ai-agent-runtime-architecture`, `ai-agent-action-approval-and-hitl`, `ai-agent-reversibility-and-blast-radius`, `ai-agent-safety-and-red-team`, `saas-entitlements-and-plan-gating`, `ai-on-saas-architecture`.
 
 <!-- dual-compat-end -->
 

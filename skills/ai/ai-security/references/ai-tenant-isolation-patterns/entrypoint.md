@@ -73,7 +73,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/vector-store-partitioning-tradeoffs.md` — pgvector / Pinecone / Qdrant / Weaviate / OpenSearch tradeoffs and the per-tenant patterns each supports.
 - `references/data-bleed-test-suite.md` — full test taxonomy + sample tests.
-- Companion: `ai-on-saas-architecture`, `ai-model-gateway`, `ai-rag-multi-tenant`, `ai-prompt-injection-and-tenant-safety`, `multi-tenant-saas-architecture`, `saas-deployment-models`.
+- Companion: `ai-on-saas-architecture`, `ai-model-gateway`, `ai-rag-multi-tenant`, `ai-prompt-injection-and-tenant-safety`, `multi-tenant-saas-architecture`, `saas-architecture-strategy`.
 
 <!-- dual-compat-end -->
 

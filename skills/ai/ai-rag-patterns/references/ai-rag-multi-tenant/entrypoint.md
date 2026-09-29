@@ -20,7 +20,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Required Inputs
 
-- Tenant deployment model (`saas-deployment-models`).
+- Tenant deployment model (`saas-architecture-strategy`).
 - Vector store choice (see `ai-tenant-isolation-patterns`).
 - Plan tiers and entitlements for KB size, embedding tier, retrieval depth.
 - Source types per tenant (uploaded files, URL crawls, third-party integrations).

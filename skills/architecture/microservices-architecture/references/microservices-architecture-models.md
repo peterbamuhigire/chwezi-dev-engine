@@ -465,4 +465,4 @@ Deeper material — verbatim doc extracts, full HAProxy stick-table syntax, Kong
 - `microservices-fundamentals` — When to choose microservices, decomposition patterns
 - `microservices-resilience` — Circuit breaker implementation, health check design
 - `microservices-communication` — Service discovery deep dive, sync vs async
-- `microservices-ai-integration` — AI gateway layered on top of this architecture
+- `ai-app-architecture` — AI gateway layered on top of this architecture

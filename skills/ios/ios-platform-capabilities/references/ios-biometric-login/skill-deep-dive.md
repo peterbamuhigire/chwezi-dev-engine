@@ -460,7 +460,7 @@ ios-biometric-login
 ```
 
 **Key integrations:**
-- `dual-auth-rbac`: BiometricHelper works alongside JWT auth — biometric gates app access, JWT gates API access
+- `vibe-security-skill`: BiometricHelper works alongside JWT auth — biometric gates app access, JWT gates API access
 - `vibe-security-skill`: Keychain storage follows secure coding patterns — `kSecAttrAccessibleAfterFirstUnlock` for background availability
 
 ## Checklist

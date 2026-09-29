@@ -17,13 +17,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - The task is the platform cost-attribution pipeline — `ai-cost-per-tenant-attribution`. This skill is the per-task enforcement; that skill is the rollup.
 - The task is general SaaS quotas / rate limiting — `saas-rate-limiting-and-quotas`.
 - The task is tool side-effect budgets (count of emails, etc.) — `ai-agent-tool-catalogue-and-action-gating`.
-- The task is plan-tier entitlements — `ai-entitlements-and-feature-gating` (this skill enforces *runtime budgets*; that skill enforces *eligibility*).
+- The task is plan-tier entitlements — `saas-entitlements-and-plan-gating` (this skill enforces *runtime budgets*; that skill enforces *eligibility*).
 
 ## Required Inputs
 
 - Agent runtime (`ai-agent-runtime-architecture`).
 - LLM gateway emitting per-call cost (`ai-model-gateway`).
-- Plan / tier catalogue with agent budgets (`ai-entitlements-and-feature-gating`).
+- Plan / tier catalogue with agent budgets (`saas-entitlements-and-plan-gating`).
 - Cost attribution pipeline (`ai-cost-per-tenant-attribution`).
 
 ## Workflow
@@ -78,7 +78,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - `references/budget-enforcement-pipeline.md` — implementation, including atomic Redis counters + DB persistence.
-- Companion: `ai-agent-runtime-architecture`, `ai-cost-per-tenant-attribution`, `ai-model-gateway`, `ai-entitlements-and-feature-gating`, `ai-usage-metering-and-billing`, `saas-rate-limiting-and-quotas`, `ai-agent-eval`.
+- Companion: `ai-agent-runtime-architecture`, `ai-cost-per-tenant-attribution`, `ai-model-gateway`, `saas-entitlements-and-plan-gating`, `ai-usage-metering-and-billing`, `saas-rate-limiting-and-quotas`, `ai-agent-eval`.
 
 <!-- dual-compat-end -->
 

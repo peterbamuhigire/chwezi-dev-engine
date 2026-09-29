@@ -36,7 +36,7 @@ Use this parent skill as the active MySQL engineering entrypoint. It keeps routi
    - `references/mysql-best-practices.md` for MySQL defaults, constraints, engine choices, and safe conventions.
    - `references/mysql-data-modeling.md` for schema and relationship design.
    - `references/mysql-advanced-sql.md` for advanced query and SQL patterns.
-3. Pair with `mysql-operations` for administration, performance, backup, restore, or incident work.
+3. Administration, performance, backup, restore, and incident work also route here (the retired `mysql-operations` skill is an inactive alias of this skill).
 
 ## Quality Standards
 

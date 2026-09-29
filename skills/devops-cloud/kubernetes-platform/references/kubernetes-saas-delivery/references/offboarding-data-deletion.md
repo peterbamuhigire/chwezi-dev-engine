@@ -3,7 +3,7 @@
 Step-by-step tenant offboarding for Kubernetes-hosted SaaS. Read after
 `SKILL.md` and `tenant-onboarding-automation.md`. Cross-reference
 `multi-tenant-saas-architecture` for auth and data-layer scope, and
-`uganda-dppa-compliance` or your regional equivalent for legal
+`dpia-generator` or your regional equivalent for legal
 specifics.
 
 ## Why a runbook
@@ -213,7 +213,7 @@ fails.
   proportionality of retained backups (legal basis: contract, legal
   obligation).
 - Uganda DPPA 2019: deletion must be verifiable; logs kept for at
-  least 5 years. See `uganda-dppa-compliance` skill for the annex
+  least 5 years. See `dpia-generator` skill for the annex
   template.
 - HIPAA (if applicable): PHI in backups must be encrypted with keys
   under your control; retention aligns with covered-entity agreement.

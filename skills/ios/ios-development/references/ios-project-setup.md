@@ -74,7 +74,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | `android-development` | Cross-platform reference (equivalent Android patterns) |
 | `multi-tenant-saas-architecture` | Backend API that the iOS app connects to |
 | `vibe-security-skill` | Security baseline for API communication |
-| `dual-auth-rbac` | Authentication and role-based access |
+| `vibe-security-skill` | Authentication and role-based access |
 | `image-compression` | Client-side image handling before upload |
 | `healthcare-ui-design` | Clinical-grade UI when building health apps |
 

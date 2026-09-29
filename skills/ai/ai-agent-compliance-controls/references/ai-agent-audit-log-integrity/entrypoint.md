@@ -15,7 +15,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - The task is the agent runtime state machine itself — `ai-agent-runtime-architecture`.
-- The task is the platform audit log spine — `saas-control-plane-engineering` (this skill extends it for agents).
+- The task is the platform audit log spine — `saas-architecture-strategy` (this skill extends it for agents).
 - The task is the incident evidence bundle — `ai-incident-evidence-capture`.
 - The task is the auditor portal UI — `ai-agent-evidence-automation`.
 
@@ -82,7 +82,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/hash-chain-design.md` — Schema + chain emission code.
 - `references/retention-policies.md` — Retention by event class across SOC 2 / ISO / HIPAA / GDPR / financial / EU AI Act.
 - `references/integrity-verification-job.md` — Verification job code + alerting wiring.
-- Companion: `ai-agent-runtime-architecture`, `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-evidence-automation`, `saas-control-plane-engineering`.
+- Companion: `ai-agent-runtime-architecture`, `ai-agent-tool-catalogue-and-action-gating`, `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-evidence-automation`, `saas-architecture-strategy`.
 
 <!-- dual-compat-end -->
 

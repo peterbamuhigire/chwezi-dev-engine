@@ -163,4 +163,4 @@ Keep last 12 months of raw receipts per subscription for support investigation. 
 - `ios-monetization` — StoreKit2 specifics.
 - `subscription-billing` — Stripe Billing specifics.
 - `saas-entitlements-and-plan-gating` — the runtime that reads `user_entitlements`.
-- `saas-control-plane-engineering` — where the entitlement service lives.
+- `saas-architecture-strategy` — where the entitlement service lives.

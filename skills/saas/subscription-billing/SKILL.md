@@ -105,7 +105,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## References
 
 - `references/dunning-management.md`, `references/metered-billing.md`, `references/revenue-recognition.md` for deep detail.
-- Companion skills: `stripe-payments` (primitives), `saas-subscription-mastery` (broader lifecycle/retention playbook), `saas-accounting-system` (revenue recognition), `saas-growth-metrics` (MRR cohorting).
+- Companion skills: `stripe-payments` (primitives), `subscription-billing` (broader lifecycle/retention playbook), `saas-accounting-system` (revenue recognition), `saas-growth-metrics` (MRR cohorting).
 
 <!-- dual-compat-end -->
 

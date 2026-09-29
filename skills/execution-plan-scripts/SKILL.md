@@ -72,7 +72,7 @@ invocation, a generated file or an unexecuted test is not completion.
 
 ## About this skill (self-awareness)
 
-This skill is itself a member of the **domain engine** — the same library of craft skills it instructs you to reference when authoring a script. It is the meta-skill for the *planning* and *documentation* surface of software and app development. Other engine members (e.g. `mysql-best-practices`, `php-security`, `healthcare-ui-design`, `android-tdd`, `swiftui-design`, `multi-tenant-saas-architecture`) are the *implementation* surface.
+This skill is itself a member of the **domain engine** — the same library of craft skills it instructs you to reference when authoring a script. It is the meta-skill for the *planning* and *documentation* surface of software and app development. Other engine members (e.g. `mysql-best-practices`, `php-security`, `healthcare-ui-design`, `android-development`, `swiftui-design`, `multi-tenant-saas-architecture`) are the *implementation* surface.
 
 Because it lives inside the engine, this skill MUST:
 
@@ -134,7 +134,7 @@ This skill (`execution-plan-scripts`) sits in the SDLC + Architecture corner of 
 
 In your script, write:
 
-> Read these skills in full before any code: `mysql-best-practices`, `php-security`, `multi-tenant-saas-architecture`, `dual-auth-rbac`, `sdlc-testing`, `healthcare-ui-design`, `api-error-handling`.
+> Read these skills in full before any code: `mysql-best-practices`, `php-security`, `multi-tenant-saas-architecture`, `vibe-security-skill`, `sdlc-testing`, `healthcare-ui-design`, `api-error-handling`.
 
 NOT:
 

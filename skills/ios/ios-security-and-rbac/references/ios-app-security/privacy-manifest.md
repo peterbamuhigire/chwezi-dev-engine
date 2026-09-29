@@ -174,4 +174,4 @@ Repeat this workflow every time you add or upgrade a dependency.
 - `keychain-secure-enclave.md` — Keychain use is not on the required-reason list but telemetry about it might be.
 - `ats-cert-pinning.md` — pinning failure telemetry is a collected data type and must be declared.
 - `app-store-review` skill — privacy label workflow and rejection recovery.
-- `uganda-dppa-compliance` skill — local data protection obligations that layer on top of Apple's requirements.
+- `dpia-generator` skill — local data protection obligations that layer on top of Apple's requirements.

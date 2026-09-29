@@ -434,7 +434,7 @@ Four dashboards every SaaS needs — **Service Health** (RED per service), **Inf
 
 ## AI-Workload Signals
 
-Treat AI features as production services with their own SLIs. Emit through the same OTel pipeline; cross-reference `vector-databases` and `ai-rag-patterns` for measurement methodology.
+Treat AI features as production services with their own SLIs. Emit through the same OTel pipeline; cross-reference `ai-rag-patterns` for measurement methodology.
 
 | Metric | Type | What it measures | Why it matters |
 |--------|------|------------------|----------------|
@@ -452,7 +452,7 @@ Do not hardcode SLO targets — they are workload-specific. Build the golden set
 - `database-reliability` — database SLIs, replication lag tracking
 - `kubernetes-platform` — K8s pod/node metrics, PodMonitor for Prometheus
 - `cicd-pipelines` — deployment alerts tied to releases
-- `vector-databases`, `ai-rag-patterns` — methodology for the AI-workload signals above
+- `ai-rag-patterns` — methodology for the AI-workload signals above
 
 ## Sources
 

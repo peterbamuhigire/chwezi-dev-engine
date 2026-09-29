@@ -326,5 +326,5 @@ For every inter-service dependency, verify:
 **See also:**
 - `microservices-architecture-models` — NGINX circuit breaker implementation in each model
 - `microservices-communication` — Health check propagation and service discovery
-- `microservices-ai-integration` — AI service resilience and async job fallback
+- `ai-app-architecture` — AI service resilience and async job fallback
 - `ai-ux-patterns` — User-facing error states when downstream service is unavailable

@@ -58,7 +58,7 @@ When building an agentic feature in a multi-tenant SaaS, load these in order:
    - `ai-agent-async-and-long-running-tasks`
 
 7. **Ops & commercial**
-   - `ai-entitlements-and-feature-gating` (agent entitlements).
+   - `saas-entitlements-and-plan-gating` (agent entitlements).
    - `saas-rate-limiting-and-quotas` (agent quotas).
    - `saas-admin-backoffice-tooling` (agent ops console).
    - `ai-cost-per-tenant-attribution` (agent-step cost rollup).

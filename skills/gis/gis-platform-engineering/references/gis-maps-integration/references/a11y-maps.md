@@ -2,7 +2,7 @@
 
 Maps are image-heavy interactive widgets. Default implementations are hostile to screen readers and keyboard users. This reference gives concrete patterns for WCAG 2.2 AA compliance on Google, Mapbox, and MapLibre maps.
 
-Companion: `laws-of-ux`, `ux-principles-101`.
+Companion: `laws-of-ux`, `ux-psychology` (design-system-skills).
 
 ## Core rule
 

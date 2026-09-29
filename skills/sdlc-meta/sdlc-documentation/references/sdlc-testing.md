@@ -102,7 +102,7 @@ Testing documentation must make these explicit:
 
 ## When NOT to Use
 
-- **Writing actual test code** (unit tests, integration tests) -- use `android-tdd` skill instead
+- **Writing actual test code** (unit tests, integration tests) -- use `android-development` skill instead
 - **Validating AI-generated code** -- use `ai-error-handling` skill (5-layer validation)
 - **Planning security testing only** -- use `vibe-security-skill` for security patterns
 - **Planning a single feature** -- use `feature-planning` skill (includes testing strategy)
@@ -133,7 +133,7 @@ This skill generates documentation compliant with **BS ISO/IEC/IEEE 29119-3:2013
 
 ### TDD-First Development
 
-All production code follows the **Red-Green-Refactor** cycle. Tests are written before implementation. Reference the `android-tdd` skill for the complete TDD workflow.
+All production code follows the **Red-Green-Refactor** cycle. Tests are written before implementation. Reference the `android-development` skill for the complete TDD workflow.
 
 ### Test Pyramid (70/20/10)
 
@@ -268,7 +268,7 @@ Before test execution begins, confirm:
 | Area | Method | Reference |
 |------|--------|-----------|
 | Tenant isolation | Automated + manual: cross-tenant access denied | `vibe-security-skill` |
-| Auth bypass | Token manipulation, session hijacking attempts | `dual-auth-rbac` |
+| Auth bypass | Token manipulation, session hijacking attempts | `vibe-security-skill` |
 | Injection | SQL injection, XSS, CSRF payloads | OWASP Top 10 |
 | Data exposure | API response auditing, error message review | `vibe-security-skill` |
 
@@ -295,7 +295,7 @@ Before test execution begins, confirm:
 
 | Skill | Relationship |
 |-------|-------------|
-| `android-tdd` | Actual TDD implementation patterns (Red-Green-Refactor, layer-specific tests). This skill documents; `android-tdd` implements. |
+| `android-development` | Actual TDD implementation patterns (Red-Green-Refactor, layer-specific tests). This skill documents; `android-development` implements. |
 | `ai-error-handling` | 5-layer validation stack for AI-generated code. Complements this skill's formal V&V processes. |
 | `ai-error-prevention` | "Trust but verify" patterns. Use alongside peer review processes. |
 | `vibe-security-skill` | Security testing patterns, OWASP mapping. Reference in test plans and security test cases. |

@@ -84,7 +84,7 @@ Generate a complete, implementation-ready documentation suite for a native mobil
   SDS will include the shared module architecture (Ktor, SQLDelight, Koin).
   API Contract will account for shared networking layer in `commonMain`.
   Testing Strategy will reference `kmp-tdd` for shared module tests alongside
-  `android-tdd` and `ios-tdd` for platform UI tests
+  `android-development` and `ios-tdd` for platform UI tests
 - Adding a WebView wrapper — this skill targets fully native screens
 - Incremental feature additions to an existing mobile app
 
@@ -445,12 +445,12 @@ Adapt to target market:
 Load these skills alongside for deeper implementation guidance:
 
 - `android-development` — Kotlin/Android coding standards
-- `android-tdd` — Test-driven development workflow
-- `android-data-persistence` — Room, DataStore, offline-first patterns
+- `android-development` — Test-driven development workflow
+- `android-development` — Room, DataStore, offline-first patterns
 - `jetpack-compose-ui` — Compose UI standards and Material 3
 - `ios-development` — Swift/iOS coding standards (when created)
 - `swiftui-design` — SwiftUI UI standards (when created)
-- `dual-auth-rbac` — Authentication and permission system
+- `vibe-security-skill` — Authentication and permission system
 - `api-error-handling` — API error response patterns
 - `modular-saas-architecture` — Module toggle and subscription gating
 - `multi-tenant-saas-architecture` — Tenant isolation patterns

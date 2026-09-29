@@ -116,7 +116,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - `references/erasure-verification-job.md` — Full Python implementation of the cascade orchestrator + independent verification job + proof pack writer.
-- Companions: `ai-agent-memory` (the cascade implementer), `saas-tenant-data-portability-and-erasure` (tenant-level), `ai-agent-audit-log-integrity` (redaction not deletion), `ai-agent-evidence-automation` (pack pipeline), `ai-agent-hipaa-security-controls` (PHI agent erasure constraints), `uganda-dppa-compliance` (KE / UG specifics), `ai-agent-soc2-controls` (C1.2, P5).
+- Companions: `ai-agent-memory` (the cascade implementer), `saas-tenant-data-portability-and-erasure` (tenant-level), `ai-agent-audit-log-integrity` (redaction not deletion), `ai-agent-evidence-automation` (pack pipeline), `ai-agent-hipaa-security-controls` (PHI agent erasure constraints), `dpia-generator` (KE / UG specifics), `ai-agent-soc2-controls` (C1.2, P5).
 
 <!-- dual-compat-end -->
 
@@ -295,4 +295,4 @@ Sample `manifest.json`:
 - **`ai-agent-audit-log-integrity`** — defines the PII redaction (not deletion) flow for the audit log; redaction record is part of the proof.
 - **`ai-agent-soc2-controls`** — C1.2 (confidential information disposal), P5 (retention and disposal).
 - **`ai-agent-hipaa-security-controls`** — additional constraints when subject is a patient (BAA / 164.310(d)(2)(i) media disposal).
-- **`uganda-dppa-compliance`** — KE / UG specifics for `legal_basis ∈ {KE_DPA, UG_DPPA}`.
+- **`dpia-generator`** — KE / UG specifics for `legal_basis ∈ {KE_DPA, UG_DPPA}`.

@@ -1,6 +1,6 @@
 # SaaS Deployment Models — Decision Tree (Reference)
 
-For full coverage, see the dedicated skill `saas-deployment-models`. This file is the quick-reference table.
+For full coverage, see the dedicated skill `saas-architecture-strategy`. This file is the quick-reference table.
 
 ## Five Models
 
@@ -61,5 +61,5 @@ For full coverage, see the dedicated skill `saas-deployment-models`. This file i
 
 ## See Also
 
-- `saas-deployment-models` — full skill.
+- `saas-architecture-strategy` — full skill.
 - Golding, *Building Multi-Tenant SaaS Architectures*, Ch.3.

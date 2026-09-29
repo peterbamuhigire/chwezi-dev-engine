@@ -87,7 +87,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - `references/security-rule-mapping.md` — §164.306–.318 → agent implementation table.
 - `references/phi-agent-constraints.md` — Admin-only constraint, BAA-scoped tool flags, allowed model providers.
 - `references/baa-implications.md` — BAA decision tree for LLM providers.
-- Companion: `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-audit-log-integrity`, `ai-agent-memory-erasure-proof`, `ai-agent-action-approval-and-hitl`, `ai-agent-tool-catalogue-and-action-gating`, `saas-tenant-data-portability-and-erasure`, `healthcare-ui-design`.
+- Companion: `ai-agent-soc2-controls`, `ai-agent-iso27001-controls`, `ai-agent-audit-log-integrity`, `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`, `ai-agent-action-approval-and-hitl`, `ai-agent-tool-catalogue-and-action-gating`, `saas-tenant-data-portability-and-erasure`, `healthcare-ui-design`.
 
 <!-- dual-compat-end -->
 

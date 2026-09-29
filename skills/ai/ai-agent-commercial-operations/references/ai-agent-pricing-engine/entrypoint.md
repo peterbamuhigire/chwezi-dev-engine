@@ -24,7 +24,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Required Inputs
 
 - Per-feature commercial price points (from `software-pricing-strategy` + business-plan engine).
-- Per-tenant plan tier (`ai-entitlements-and-feature-gating`).
+- Per-tenant plan tier (`saas-entitlements-and-plan-gating`).
 - Tenant invoice currency and FX policy.
 - Per-feature vendor cost mix (LLM + tool API costs) from cost attribution (`ai-cost-per-tenant-attribution`).
 - Success contract per feature (intervention discount factors).

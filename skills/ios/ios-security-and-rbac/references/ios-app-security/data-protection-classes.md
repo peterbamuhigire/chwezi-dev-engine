@@ -191,6 +191,6 @@ Use backup exclusion for: large caches (saves user bandwidth), derivable data (t
 ## Cross-References
 
 - `keychain-secure-enclave.md` — for small secrets and for keys that unlock larger protected files.
-- `ios-data-persistence` skill — SwiftData and repository patterns where protection classes are wired in.
+- `ios-platform-capabilities` skill — SwiftData and repository patterns where protection classes are wired in.
 - `code-signing-entitlements.md` — app groups share files across targets; protection still applies.
 - `runtime-tamper-detection.md` — protection classes cannot help on a compromised OS, so pair with runtime checks on high-value apps.

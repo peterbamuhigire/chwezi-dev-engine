@@ -149,6 +149,6 @@ A tenant admin, or a security operator, must be able to terminate any active imp
 
 - `saas-admin-backoffice-tooling` section 5 - the impersonation workflow this expands.
 - `references/internal-roles-and-permissions.md` - which roles may impersonate.
-- `saas-control-plane-engineering` - the audit-log spine.
-- `dual-auth-rbac` - MFA and co-sign primitives.
+- `saas-architecture-strategy` - the audit-log spine.
+- `vibe-security-skill` - MFA and co-sign primitives.
 - `saas-tenant-data-portability-and-erasure` - why access to a tenant's data is itself a processing event.

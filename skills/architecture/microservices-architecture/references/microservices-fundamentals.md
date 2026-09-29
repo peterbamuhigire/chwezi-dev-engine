@@ -225,4 +225,4 @@ $redis->set("cart:{$userId}", json_encode($cartItems), 3600);
 - `microservices-architecture-models` — Proxy, Router Mesh, Fabric models
 - `microservices-communication` — Service discovery, sync vs async, inter-service auth
 - `microservices-resilience` — Circuit breaker, health checks, load balancing
-- `microservices-ai-integration` — AI as a microservice, AI gateway, async AI pipelines
+- `ai-app-architecture` — AI as a microservice, AI gateway, async AI pipelines

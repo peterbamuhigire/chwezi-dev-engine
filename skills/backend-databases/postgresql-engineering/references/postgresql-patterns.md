@@ -30,7 +30,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - The request is a "migrate from MySQL to PostgreSQL" plan for transactional workloads. MySQL stays primary in this engine; this skill exists to support pgvector and Supabase, not to replace MySQL.
-- The work is unrelated to PostgreSQL or would be better handled by `database-design-engineering`, `mysql-best-practices`, or `vector-databases`.
+- The work is unrelated to PostgreSQL or would be better handled by `database-design-engineering`, `mysql-best-practices`, or `ai-rag-patterns`.
 
 ## Required Inputs
 
@@ -94,7 +94,7 @@ Decision tree:
 
 | Project shape | Database choice |
 |---|---|
-| Existing MySQL SaaS, want to add semantic search | Keep MySQL; add Pinecone or Qdrant alongside (`vector-databases`). pgvector only if the team already wants to learn Postgres. |
+| Existing MySQL SaaS, want to add semantic search | Keep MySQL; add Pinecone or Qdrant alongside (`ai-rag-patterns`). pgvector only if the team already wants to learn Postgres. |
 | Greenfield SaaS that wants auth + DB + vectors managed | Supabase from day one. |
 | Self-hosted, single DB process, comfortable with PG ops | pgvector on PostgreSQL (Debian/Ubuntu VPS). |
 | Multi-modal (text + image embeddings) | Weaviate or Qdrant. Out of scope here. |
@@ -325,7 +325,7 @@ Read top-down looking for: index scan vs sequential scan, actual rows vs estimat
 
 ## 10. Cross-references
 
-- `vector-databases` for embedding generation, chunking, hybrid search, and vector store comparison.
+- `ai-rag-patterns` for embedding generation, chunking, hybrid search, and vector store comparison.
 - `ai-rag-patterns` for production RAG using pgvector or external vector stores.
 - `database-design-engineering` for tenancy, indexing, migrations.
 - `mysql-best-practices` for the engine's primary OLTP database.

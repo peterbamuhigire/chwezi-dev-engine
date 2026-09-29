@@ -76,7 +76,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/token-accounting-pipeline.md` — the data flow.
 - `references/model-price-table-template.md` — price table format + ops.
-- Companion: `ai-model-gateway`, `ai-usage-metering-and-billing`, `ai-cost-modeling`, `ai-on-saas-architecture`, `ai-entitlements-and-feature-gating`, `observability-monitoring`, `saas-rate-limiting-and-quotas`.
+- Companion: `ai-model-gateway`, `ai-usage-metering-and-billing`, `ai-cost-modeling`, `ai-on-saas-architecture`, `saas-entitlements-and-plan-gating`, `observability-monitoring`, `saas-rate-limiting-and-quotas`.
 - Incident handoff: cost-anomaly signals (`tenant_cost_anomaly_z3`, `feature_cost_runaway`) are detection signals in `ai-incident-detection-and-triage`. Anomaly alert payload must include `runbook` and `failure_class_hint: cost-runaway`. See `ai-incident-response-runbook` (class `cost-runaway`) for first mitigation (per-tenant or per-feature quota cap via `ai-model-gateway`) and `ai-rca-taxonomy` for cost-class root-cause categories (commercial.provider-price-change, infra.gateway-routing-change, agent.runaway-loop, model.prompt-regression with cost lens).
 
 <!-- dual-compat-end -->
@@ -250,7 +250,7 @@ The runtime + enforcement is `ai-agent-cost-and-step-budgets`. This skill consum
 - `ai-agent-runtime-architecture` — where the cost events originate.
 - `ai-model-gateway` — upstream emitter.
 - `ai-usage-metering-and-billing` — downstream commercial billing.
-- `ai-entitlements-and-feature-gating` — defines the caps.
+- `saas-entitlements-and-plan-gating` — defines the caps.
 - `ai-cost-modeling` — sets the targets you guardrail against.
 - `ai-observability-and-debugging` — anomaly investigation tools.
 

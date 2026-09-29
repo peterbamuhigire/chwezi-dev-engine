@@ -475,7 +475,7 @@ Cross-references:
 - `ai-model-gateway` — the LLM gateway design (provider abstraction, model selection per tier, fallback chains, per-tenant rate limit, audit, cost capture).
 - `ai-on-saas-architecture` — gateway as control-plane service.
 - `ai-cost-per-tenant-attribution` — what the gateway feeds.
-- `ai-entitlements-and-feature-gating` — gateway entitlement enforcement.
+- `saas-entitlements-and-plan-gating` — gateway entitlement enforcement.
 - `ai-prompt-injection-and-tenant-safety` — gateway safety-in / safety-out stages.
 
 Use this skill for the bare-metal SDK exploration; promote to `ai-model-gateway` before production traffic.

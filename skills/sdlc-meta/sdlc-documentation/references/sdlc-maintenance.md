@@ -78,7 +78,7 @@ Generate a complete **Software Maintenance Plan (SMP)** and supporting maintenan
 ## Load Order
 
 1. Load `world-class-engineering`.
-2. Load `reliability-engineering`, `engineering-management-system`, and `sdlc-post-deployment`.
+2. Load `reliability-engineering`, `world-class-engineering`, and `sdlc-post-deployment`.
 3. Load this skill to formalize the maintenance operating model from real production evidence.
 
 ## Executable Maintenance Standard

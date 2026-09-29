@@ -28,7 +28,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - The kill-switch (`ai-agent-safety-and-red-team`, `ai-incident-response-runbook`).
 - The replay system (`ai-agent-observability-and-replay`).
 - The eval harness (`ai-agent-eval`).
-- The drill cadence (`ai-incident-drill-and-game-day`, `ai-agent-drill-evidence-and-cadence`).
+- The drill cadence (`ai-incident-drill-and-game-day`, `ai-agent-compliance-controls/references/ai-agent-drill-evidence-and-cadence`).
 - The SOC 2 audit window (start / end dates) and the **System Description** authored by the SRS engine (control narratives, RACI, in-scope systems).
 
 ## Workflow
@@ -82,7 +82,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/trust-criteria-mapping.md` — Full TSC → agent control mapping with implementation, evidence, cadence per row.
 - `references/automated-evidence-collectors.md` — Python collector code per control with cron schedule.
-- Companion: `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`, `ai-agent-approval-audit-completeness`, `ai-agent-drill-evidence-and-cadence`, `ai-incident-evidence-capture`, `saas-control-plane-engineering`, `saas-admin-backoffice-tooling`.
+- Companion: `ai-agent-iso27001-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-evidence-automation`, `ai-agent-control-testing-and-attestation`, `ai-agent-compliance-controls/references/ai-agent-approval-audit-completeness`, `ai-agent-compliance-controls/references/ai-agent-drill-evidence-and-cadence`, `ai-incident-evidence-capture`, `saas-architecture-strategy`, `saas-admin-backoffice-tooling`.
 
 <!-- dual-compat-end -->
 

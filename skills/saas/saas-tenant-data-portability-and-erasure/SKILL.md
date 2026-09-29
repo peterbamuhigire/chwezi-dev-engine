@@ -57,12 +57,12 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## Do Not Use When
 
 - The task is general data classification — use compliance audit work in `vibe-security-skill` / `web-app-security-audit`.
-- The task is tenant lifecycle state machine — use `saas-control-plane-engineering`.
-- The task is region-specific compliance content — use `uganda-dppa-compliance` for Ugandan specifics.
+- The task is tenant lifecycle state machine — use `saas-architecture-strategy`.
+- The task is region-specific compliance content — use `dpia-generator` for Ugandan specifics.
 
 ## Required Inputs
 
-- Tenant lifecycle states (`saas-control-plane-engineering`).
+- Tenant lifecycle states (`saas-architecture-strategy`).
 - Map of every data store the SaaS uses (primary DBs, search, object storage, warehouse, CRM, ESP, analytics, third-party processors).
 - Regulatory profile (GDPR? POPIA? Uganda DPPA? CCPA? sector-specific HIPAA?).
 - Retention obligations (audit log 7 years; financial 10 years in most jurisdictions; backups 30 days).
@@ -119,7 +119,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - `references/erasure-cascade.md` — the per-store cascade including backups + warehouse.
 - `references/export-format-spec.md` — JSON-LD / CSV export package contents.
 - `references/requester-verification.md` — verification strength per request type.
-- Companion: `saas-control-plane-engineering`, `saas-admin-backoffice-tooling`, `multi-tenant-saas-architecture`, `uganda-dppa-compliance`, `vibe-security-skill`.
+- Companion: `saas-architecture-strategy`, `saas-admin-backoffice-tooling`, `multi-tenant-saas-architecture`, `dpia-generator`, `vibe-security-skill`.
 
 <!-- dual-compat-end -->
 
@@ -273,7 +273,7 @@ All require super-admin + audit log + co-sign for tenant-level erasure.
 - **EU GDPR:** Articles 15 (access), 17 (erasure), 20 (portability). 30-day response.
 - **UK GDPR:** Mirror of EU.
 - **South Africa POPIA:** Sections 23-24 (access, correction). Information Officer required.
-- **Uganda Data Protection and Privacy Act:** See `uganda-dppa-compliance`. NITA-U registration; 30-day response.
+- **Uganda Data Protection and Privacy Act:** See `dpia-generator`. NITA-U registration; 30-day response.
 - **Kenya Data Protection Act 2019:** Similar framework; Office of the Data Protection Commissioner.
 - **Nigeria NDPR:** Compliance audit annually for large processors.
 - **US CCPA / CPRA:** California-specific; "do not sell or share" plus deletion right.
@@ -283,10 +283,10 @@ For an African-focused agency: ensure POPIA + Uganda DPPA + Kenya DPA + GDPR are
 
 ## §11 Read Next
 
-- `saas-control-plane-engineering` — the tenant lifecycle this skill integrates with.
+- `saas-architecture-strategy` — the tenant lifecycle this skill integrates with.
 - `saas-admin-backoffice-tooling` — the staff workflow.
 - `multi-tenant-saas-architecture` — tenant isolation that underpins cascading deletes.
-- `uganda-dppa-compliance` — Ugandan specifics.
+- `dpia-generator` — Ugandan specifics.
 - `vibe-security-skill` — security review baseline.
 - `subscription-billing` — financial-record retention vs erasure tension.
 
@@ -328,4 +328,4 @@ This skill's orchestrator invokes the agent-memory leg as one of its tier coordi
 
 Audit-log entries about the tenant / subject are **redacted, not deleted** — see `ai-agent-audit-log-integrity`. Deleting log rows destroys the evidence that the erasure happened.
 
-Cross-links: `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`, `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls` (C1.2, P5), `ai-agent-hipaa-security-controls`, `uganda-dppa-compliance`.
+Cross-links: `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof`, `ai-agent-audit-log-integrity`, `ai-agent-soc2-controls` (C1.2, P5), `ai-agent-hipaa-security-controls`, `dpia-generator`.

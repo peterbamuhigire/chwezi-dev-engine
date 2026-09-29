@@ -22,7 +22,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## Required Inputs
 
-- Agent feature catalogue (which features ship to which tiers) — from `ai-entitlements-and-feature-gating`.
+- Agent feature catalogue (which features ship to which tiers) — from `saas-entitlements-and-plan-gating`.
 - Production task-success measurements (even rough) — from `ai-agent-eval` and `ai-agent-task-success-tracking`.
 - Plan-tier commercial frame — from `software-pricing-strategy` and the business-plan engine.
 - Mitigation primitives and their actual measured response times — from `ai-incident-response-runbook`.

@@ -71,7 +71,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - The AI feature is purely backend or batch (no interactive web surface) — use `ai-llm-integration` or `python-saas-integration` instead.
-- The task is a pure UX pattern question — use `ai-ux-patterns` or `ux-for-ai`.
+- The task is a pure UX pattern question — use `ai-ux-patterns` or `ai-agent-ux` (design-system-skills).
 - The task is full metering / billing strategy — use `ai-metering-billing` or `ai-saas-billing`.
 - The task is prompt or threat design — use `ai-prompt-engineering`, `ai-security`, or `llm-security`.
 
@@ -147,7 +147,7 @@ Load the following before this skill, in order:
 | Threat model | `vibe-security-skill` / `ai-security` / `llm-security` | required | informs prompt-injection, PII, and abuse controls |
 | Auth/authz matrix | `vibe-security-skill` | required | drives the role check inside the module gate |
 | SLO set | `observability-monitoring` | optional | calibrates fallback thresholds and kill-switch triggers |
-| Pricing / plan catalog | `saas-subscription-mastery` / `subscription-billing` | optional | determines `min_plan_tier` in the feature catalog |
+| Pricing / plan catalog | `subscription-billing` | optional | determines `min_plan_tier` in the feature catalog |
 
 ## Outputs
 

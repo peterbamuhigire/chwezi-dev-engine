@@ -58,7 +58,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 |---|---|---|---|
 | Capability use case and fallback | Product owner | required | Prevents unnecessary entitlement requests |
 | Privacy and threat assessment | `ios-security-and-rbac` | required for sensitive capabilities | Defines permission and data boundaries |
-| Supported device/OS matrix | `ios-quality-and-release` | required | Establishes availability branches |
+| Supported device/OS matrix | `mobile-platform-operations` | required | Establishes availability branches |
 
 ## Decision Rules
 
@@ -96,4 +96,4 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-end -->
 ## Read next
-- `ios-security-and-rbac` for protected capabilities; `ios-quality-and-release` for entitlement and device verification.
+- `ios-security-and-rbac` for protected capabilities; `mobile-platform-operations` for entitlement and device verification.

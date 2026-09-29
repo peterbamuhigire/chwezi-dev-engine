@@ -373,7 +373,7 @@ This skill covers AI module gating and token metering inside a SaaS. Adjacent sk
 
 - `ai-usage-metering-and-billing` — the commercial billing recipe: billable dimensions, AI credits, included allowance + overage, prepaid packs, Stripe Meters integration, invoice copy, proration.
 - `ai-cost-per-tenant-attribution` — the internal cost ledger: realtime per-tenant cost attribution, COGS guardrails, anomaly detection, kill-switches.
-- `ai-entitlements-and-feature-gating` — what gating keys the gateway checks per plan.
+- `saas-entitlements-and-plan-gating` — what gating keys the gateway checks per plan.
 - `ai-metering-billing` — the engineering ledger that records tokens.
 
 Use this skill for the SaaS-side overall model; load the specific skill for the implementation slice.

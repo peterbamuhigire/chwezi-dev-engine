@@ -21,8 +21,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - The task is platform implementation only; use `android-development`, `ios-development`, or `kmp-development`.
-- The task is only report UI; use `mobile-reports`.
-- The task is iOS-only App Store release; use `ios-quality-and-release`.
+- The task is only report UI; use `professional-word-output`.
 
 ## Required Inputs
 

@@ -340,8 +340,8 @@ See: `references/financial-statements.md`
 | Mobile reports | `jetpack-compose-ui` | Report screens with tables |
 | PDF export | `android-pdf-export`, `report-print-pdf` | Financial statement PDFs |
 | Security | `vibe-security-skill` | Protect financial data, audit trail |
-| Auth | `dual-auth-rbac` | Permission: who can post/void/view reports |
-| Inventory link | `inventory-management` | COGS posting on stock movements |
+| Auth | `vibe-security-skill` | Permission: who can post/void/view reports |
+| Inventory link | `inventory-costing-and-stock-accounting` (chwezi-accounting-doctrine) | COGS posting on stock movements |
 | Testing | `sdlc-testing` | Test every posting rule, every reversal |
 | Implementation | `implementation-status-auditor` (`../../sdlc-meta/implementation-status-auditor/references/plan-implementation.md`) | Execute accounting phases with TDD |
 | Audit | `implementation-status-auditor` | Verify accounting system completeness |

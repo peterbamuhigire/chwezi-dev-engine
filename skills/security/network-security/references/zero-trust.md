@@ -289,4 +289,4 @@ A hybrid approach is usually right: start with Phase 1 (IAP on admin panels) reg
 - `multi-tenant-saas-architecture` skill — tenant isolation principles that pair with zero-trust
 - `cicd-devsecops` skill — HashiCorp Vault for short-lived credential issuance
 - `microservices-communication` skill — inter-service authentication patterns
-- `dual-auth-rbac` skill — application-layer authorisation that sits on top of zero-trust
+- `vibe-security-skill` skill — application-layer authorisation that sits on top of zero-trust

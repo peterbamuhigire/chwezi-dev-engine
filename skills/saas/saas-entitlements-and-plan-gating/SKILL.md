@@ -119,7 +119,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - `references/entitlements-vs-feature-flags.md` — when each applies; how they coexist.
 - `references/limit-enforcement-patterns.md` — atomic counters, period rollover, distributed quotas.
 - `references/enterprise-override-model.md` — data-driven overrides for custom contracts.
-- Companion: `subscription-billing`, `product-led-growth`, `saas-rate-limiting-and-quotas`, `saas-control-plane-engineering`.
+- Companion: `subscription-billing`, `product-led-growth`, `saas-rate-limiting-and-quotas`, `saas-architecture-strategy`.
 
 <!-- dual-compat-end -->
 
@@ -370,15 +370,14 @@ Feed into `product-led-growth` skill's PQL scoring; coordinate with `saas-lifecy
 - `subscription-billing` — plan / price / subscription primitives.
 - `product-led-growth` — PQL + activation; coordinate with gates.
 - `saas-rate-limiting-and-quotas` — runtime quota enforcement.
-- `saas-control-plane-engineering` — the admin tool that issues overrides.
+- `saas-architecture-strategy` — the admin tool that issues overrides.
 - `saas-transactional-email-infrastructure` + `saas-lifecycle-email-orchestration` — coordinate gate denials with upgrade email sequences.
 
 ## AI Entitlements Addendum
 
-When the SaaS includes AI features, the entitlement catalogue extends with AI-specific keys (model tier, context length, generations/day, tools allow-list, KB size, agent steps, BYOK, fine-tune). The mapping and gateway-enforcement contract live in `ai-entitlements-and-feature-gating`.
+When the SaaS includes AI features, the entitlement catalogue extends with AI-specific keys (model tier, context length, generations/day, tools allow-list, KB size, agent steps, BYOK, fine-tune). The mapping and gateway-enforcement contract live in this skill (the retired `ai-entitlements-and-feature-gating` skill is an inactive alias of it).
 
 Cross-references:
-- `ai-entitlements-and-feature-gating` — AI-specific entitlement keys + gateway enforcement.
 - `ai-usage-metering-and-billing` — what is gated vs metered.
 - `ai-model-gateway` — runtime enforcement chokepoint.
 - `ai-on-saas-architecture` — control-plane positioning.

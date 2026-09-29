@@ -131,7 +131,7 @@ Outputs:
 | Message semantics | at-least-once vs exactly-once, ordering, deduplication | inline |
 | Saga / compensation plan | cross-service workflow with compensating actions | inline |
 
-## `engineering-management-system`
+## Engineering management (`world-class-engineering`; absorbed from the retired `engineering-management-system`)
 
 Inputs: team shape and scope.
 

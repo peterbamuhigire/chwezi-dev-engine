@@ -24,7 +24,7 @@ Frontend developers (JavaScript/Tabler), mobile developers (Kotlin/Retrofit), th
 
 - **`api-error-handling` skill** -- Error response format and SweetAlert2 integration
 - **`api-pagination` skill** -- Pagination request/response patterns
-- **`dual-auth-rbac` skill** -- Authentication and authorization flows
+- **`vibe-security-skill` skill** -- Authentication and authorization flows
 
 ---
 
@@ -96,7 +96,7 @@ Frontend developers (JavaScript/Tabler), mobile developers (Kotlin/Retrofit), th
 | Access Token | 1 hour | EncryptedSharedPreferences | POST /api/auth/refresh.php |
 | Refresh Token | 30 days | EncryptedSharedPreferences | Re-login required |
 
-**Refresh:** `POST /api/auth/refresh.php` with `{"refresh_token": "..."}` returns new access_token + new refresh_token (rotation). See: `dual-auth-rbac` skill for breach detection and token revocation.
+**Refresh:** `POST /api/auth/refresh.php` with `{"refresh_token": "..."}` returns new access_token + new refresh_token (rotation). See: `vibe-security-skill` skill for breach detection and token revocation.
 
 ### 2.5 Permission Model (RBAC)
 

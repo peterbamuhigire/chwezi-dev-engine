@@ -79,7 +79,7 @@ Generate a complete **Planning & Management** documentation suite for software d
 
 1. Load `world-class-engineering`.
 2. Load this skill to define the planning baseline and phase-entry gates.
-3. Pair it with `engineering-management-system`, `advanced-testing-strategy`, and `deployment-release-engineering` when the plan must be executable.
+3. Pair it with `world-class-engineering`, `advanced-testing-strategy`, and `deployment-release-engineering` when the plan must be executable.
 
 ## Executable Planning Standard
 

@@ -24,7 +24,7 @@ Load `world-class-engineering`, `gameplay-systems-engineering`, `level-world-and
 ## Do Not Use When
 
 - The task is generative AI, model training or an online LLM feature.
-- The task is animation rigging; use `blender-game-asset-production` and animation systems.
+- The task is animation rigging; use `game-3d-asset-pipeline` and animation systems.
 - The requested API is engine-specific but engine/version is unknown; freeze a versioned spike first.
 
 ## Required Inputs

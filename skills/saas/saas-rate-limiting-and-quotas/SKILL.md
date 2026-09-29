@@ -64,7 +64,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 ## Required Inputs
 
 - Plan × limit catalogue from `saas-entitlements-and-plan-gating`.
-- Deployment model (pool vs mixed vs silo) from `saas-deployment-models` — affects where enforcement lives.
+- Deployment model (pool vs mixed vs silo) from `saas-architecture-strategy` — affects where enforcement lives.
 - Tenant-count and request-volume estimates — drives algorithm + storage choice.
 - Existing edge/gateway/proxy in front of the app (Cloudflare, ALB, Nginx, Envoy, Kong).
 
@@ -119,7 +119,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - `references/algorithms.md` — token bucket, sliding window, leaky bucket, fixed window — when each fits.
 - `references/fair-queueing-patterns.md` — per-tenant queues, weighted fair queueing, DRR.
 - `references/redis-implementation.md` — atomic Lua scripts for token bucket + sliding window.
-- Companion: `saas-entitlements-and-plan-gating`, `saas-deployment-models`, `multi-tenant-saas-architecture`, `observability-monitoring`, `microservices-resilience`.
+- Companion: `saas-entitlements-and-plan-gating`, `saas-architecture-strategy`, `multi-tenant-saas-architecture`, `observability-monitoring`, `microservices-resilience`.
 
 <!-- dual-compat-end -->
 
@@ -332,7 +332,7 @@ Tenants who don't know they're being limited are angry tenants.
 ## §10 Read Next
 
 - `saas-entitlements-and-plan-gating` — defines what limits exist per plan.
-- `saas-deployment-models` — drives where enforcement lives.
+- `saas-architecture-strategy` — drives where enforcement lives.
 - `multi-tenant-saas-architecture` — tenant context drives the bucket keys.
 - `microservices-resilience` — circuit breakers, bulkheads (complementary to rate limits).
 - `observability-monitoring` — surface limits + denials in dashboards.
@@ -408,14 +408,14 @@ The user sees: "You've reached your concurrent-agent limit (3). Wait for an acti
 
 ### Cross-Plane Quotas
 
-Quotas are declared in `ai-entitlements-and-feature-gating` (catalogue) and enforced in the agent runtime (this skill's runtime layer). The two skills hold the contract:
+Quotas are declared in `saas-entitlements-and-plan-gating` (catalogue) and enforced in the agent runtime (this skill's runtime layer). The two skills hold the contract:
 - Entitlements: which keys exist, per-plan values, per-tenant overrides.
 - Rate limiting: which algorithms enforce them, which storage, which response shape.
 
 Cross-references:
 - `ai-agent-runtime-architecture` — where agent quotas are enforced.
 - `ai-agent-cost-and-step-budgets` — per-task budgets (the inner quota layer).
-- `ai-entitlements-and-feature-gating` — agent quota catalogue.
+- `saas-entitlements-and-plan-gating` — agent quota catalogue.
 - `ai-model-gateway` — implements per-tenant token+USD caps.
 - `ai-cost-per-tenant-attribution` — soft/hard ceilings with comms.
 - `ai-rag-multi-tenant` — KB-side caps.

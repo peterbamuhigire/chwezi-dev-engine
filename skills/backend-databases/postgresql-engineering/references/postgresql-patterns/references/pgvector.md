@@ -97,4 +97,4 @@ The B-tree on `tenant_id` and the GIN on `metadata` are still required. Vector i
 
 ## When to choose an external vector store instead
 
-Use pgvector when the team already runs PostgreSQL and the embedding count fits comfortably in memory (typically up to a few million vectors for HNSW). Move to Pinecone, Qdrant, or Weaviate when you need cross-region replication of the vector index, multi-modal embeddings, or hybrid search with built-in BM25 + dense ranking. See `vector-databases`.
+Use pgvector when the team already runs PostgreSQL and the embedding count fits comfortably in memory (typically up to a few million vectors for HNSW). Move to Pinecone, Qdrant, or Weaviate when you need cross-region replication of the vector index, multi-modal embeddings, or hybrid search with built-in BM25 + dense ranking. See `ai-rag-patterns`.

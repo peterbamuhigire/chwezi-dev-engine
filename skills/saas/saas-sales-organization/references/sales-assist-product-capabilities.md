@@ -108,7 +108,7 @@ Single page at `trust.yoursaas.com` exposing:
 ## See Also
 
 - `saas-sales-organization` — sales org design.
-- `saas-control-plane-engineering` — back-office tools that AE / CSM use.
+- `saas-architecture-strategy` — back-office tools that AE / CSM use.
 - `saas-sso-scim-enterprise-auth` — enterprise auth feature pack.
 - `subscription-billing` — custom-contract enforcement.
 - `saas-entitlements-and-plan-gating` — per-tenant overrides.

@@ -65,7 +65,6 @@ Each transition has a "cliff" — capabilities that **must** be in place before 
 
 ## See Also
 
-- `saas-architecture-strategy` — the umbrella skill.
-- `saas-control-plane-engineering` — most v2 capabilities live here.
+- `saas-architecture-strategy` — the umbrella skill; most v2 control-plane capabilities live here.
 - `subscription-billing` — billing baseline.
 - Mersch *Hacking SaaS*; *How to Run a SaaS Business* (Trio).

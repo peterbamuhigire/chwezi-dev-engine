@@ -172,4 +172,4 @@ A bundle that is machine-readable but ships with no README forces the subject to
 - `saas-tenant-data-portability-and-erasure` section 4 (export workflow), section 6 (verification).
 - `references/requester-verification.md` - who is allowed to receive an export.
 - `references/erasure-cascade.md` - the final export offered before erasure.
-- `uganda-dppa-compliance` - regional portability obligations.
+- `dpia-generator` - regional portability obligations.

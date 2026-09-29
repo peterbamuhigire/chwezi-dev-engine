@@ -15,7 +15,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Do Not Use When
 
 - The task is internal cost attribution to control unit economics — `ai-cost-per-tenant-attribution`.
-- The task is the boolean gate of which features the plan unlocks — `ai-entitlements-and-feature-gating`.
+- The task is the boolean gate of which features the plan unlocks — `saas-entitlements-and-plan-gating`.
 - The task is non-AI metered billing — `saas-entitlements-and-plan-gating` plus generic `subscription-billing` skills.
 
 ## Required Inputs
@@ -75,7 +75,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - `references/stripe-metered-billing-for-ai.md` — Stripe Meters and usage record integration recipe.
-- Companion: `ai-cost-per-tenant-attribution`, `ai-entitlements-and-feature-gating`, `ai-model-gateway`, `saas-entitlements-and-plan-gating`, `saas-rate-limiting-and-quotas`, `subscription-billing`.
+- Companion: `ai-cost-per-tenant-attribution`, `saas-entitlements-and-plan-gating`, `ai-model-gateway`, `saas-rate-limiting-and-quotas`, `subscription-billing`.
 
 <!-- dual-compat-end -->
 
@@ -253,7 +253,7 @@ Behind each line, a link to a usage drilldown that matches the credit ledger.
 ## §10 Read Next
 
 - `ai-cost-per-tenant-attribution` — the source data.
-- `ai-entitlements-and-feature-gating` — what's gated vs metered.
+- `saas-entitlements-and-plan-gating` — what's gated vs metered.
 - `ai-model-gateway` — emits `ai.cost.recorded`.
 - `saas-rate-limiting-and-quotas` — runtime enforcement of overage caps.
 - `subscription-billing` — broader billing context.

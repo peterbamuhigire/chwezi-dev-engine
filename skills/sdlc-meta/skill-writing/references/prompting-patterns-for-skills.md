@@ -472,7 +472,7 @@ Skills using prompting patterns produce:
 ## See Also
 
 - `skills/prompting-patterns-reference.md` - Complete pattern guide
-- `skills/feature-planning/references/prompting-patterns.md` - Implementation plan patterns
+- `skills/product-business/product-discovery/references/feature-planning/references/prompting-patterns.md` - Implementation plan patterns
 - `skills/doc-standards.md` - Documentation formatting standards
 
 ---

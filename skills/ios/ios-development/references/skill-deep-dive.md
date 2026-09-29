@@ -516,8 +516,8 @@ See [references/accessibility.md](references/accessibility.md) for full patterns
 | `mobile-saas-planning` | Planning documentation for SaaS companion apps |
 | `mobile-custom-icons` | PNG icon standards (no SF Symbols) |
 | `mobile-report-tables` | Table patterns for 25+ rows |
-| `mobile-reports` | Report screens, data visualisation, export |
+| `professional-word-output` | Report screens, data visualisation, export |
 | `api-pagination` | Infinite scroll patterns |
-| `dual-auth-rbac` | JWT authentication and RBAC |
+| `vibe-security-skill` | JWT authentication and RBAC |
 | `form-ux-design` | Cross-platform form UX patterns |
 | `references/concurrency.md` | async/await, actors, TaskGroup, Sendable, Swift 6.1/6.2 isolation model |

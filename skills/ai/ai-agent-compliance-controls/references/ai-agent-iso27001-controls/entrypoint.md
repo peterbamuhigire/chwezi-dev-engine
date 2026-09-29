@@ -76,7 +76,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - `references/annex-a-mapping.md` — Full Annex A → agent implementation table.
 - `references/evidence-collection-pipelines.md` — Pipelines per Annex A control.
-- Companion: `ai-agent-soc2-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-evidence-automation`, `ai-agent-runtime-architecture`, `ai-agent-tool-catalogue-and-action-gating`, `ai-incident-evidence-capture`, `saas-control-plane-engineering`.
+- Companion: `ai-agent-soc2-controls`, `ai-agent-hipaa-security-controls`, `ai-agent-audit-log-integrity`, `ai-agent-evidence-automation`, `ai-agent-runtime-architecture`, `ai-agent-tool-catalogue-and-action-gating`, `ai-incident-evidence-capture`, `saas-architecture-strategy`.
 
 <!-- dual-compat-end -->
 
@@ -196,7 +196,7 @@ Every agent incident creates an ISO incident record with the same id. Monthly ex
 
 ## §6 Compliance and Audit (A.5.34, A.5.36, A.5.37)
 
-- **A.5.34** Privacy: `ai-agent-memory-erasure-proof` evidence packs.
+- **A.5.34** Privacy: `ai-agent-compliance-controls/references/ai-agent-memory-erasure-proof` evidence packs.
 - **A.5.36** Compliance with policies: control test suite (`ai-agent-control-testing-and-attestation`) monthly run.
 - **A.5.37** Documented operating procedures: runbook in `docs/runbooks/agent-*.md`, exported into the evidence pack.
 

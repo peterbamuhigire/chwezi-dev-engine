@@ -7,7 +7,7 @@ Recipe to wire `ai.cost.recorded` events to Stripe so the customer's invoice lin
 - **Meter** — a billable dimension defined in Stripe (e.g., `ai_credits_overage`). Has a name, an event_name, a default_aggregation, and an event_payload_key.
 - **Meter Event** — a single usage report keyed by an `identifier` for idempotency. Aggregated by Stripe into the meter.
 - **Price (metered)** — a price object referencing a meter; charged at invoice close.
-- **Customer** — the Stripe customer = the tenant's billing entity (often same as the platform's Stripe Customer mirror, `saas-control-plane-engineering`).
+- **Customer** — the Stripe customer = the tenant's billing entity (often same as the platform's Stripe Customer mirror, `saas-architecture-strategy`).
 
 ## Setup
 
