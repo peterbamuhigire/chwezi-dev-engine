@@ -48,6 +48,109 @@ NONPORTABLE_SNIPPETS = {
     "latest VS Code Insiders build": "Do not require a specific editor build in portable skills.",
 }
 
+# Tier-1 lint refinements (M10-03-T12). The four rules are adapted from
+# addyosmani/agent-skills (MIT, https://github.com/addyosmani/agent-skills,
+# commit 2686b62), scripts/lib/skill-lint.js; paraphrased, not copied.
+#
+# Exemptions live HERE, in the validator, never in skill frontmatter, so a
+# contributor cannot switch a rule off by editing their own skill. Each entry
+# maps a skill name to {rule: written reason}. Rules: "sections",
+# "use-when", "host-yaml", "narration".
+EXEMPTIONS: dict[str, dict[str, str]] = {}
+# Frontmatter keys that would let a skill exempt itself; always an error.
+SELF_EXEMPTION_KEYS = {"exempt", "exemptions", "lint_exempt", "lint-exempt", "skip_validation", "skip-validation", "validator_exemptions"}
+FENCE_OPEN_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
+NEGATED_TRIGGER_RE = re.compile(
+    r"\b(?:do\s+not|don't|never|not)\s+(?:use|load|invoke|apply)\s+(?:this(?:\s+skill)?\s+)?(?:when|for|if|to)\b[^.;]*[.;]?",
+    re.IGNORECASE,
+)
+# SP-14: a description that narrates the workflow (step counts, sequencing,
+# "runs ...") invites an agent to follow the description instead of reading
+# the body. Adapted from obra/superpowers (MIT, https://github.com/obra/superpowers,
+# commit 8ca22dba9a94f28898bbce59f2537ff4d87c747d); paraphrased, not copied.
+NARRATION_PATTERNS = (
+    (re.compile(r"\b(?:\d+|two|three|four|five|six|seven|eight|nine|ten)[- ](?:step|phase|stage|pass)s?\b", re.IGNORECASE), "step or phase count"),
+    (re.compile(r"\bstep\s+\d+\b", re.IGNORECASE), "numbered step"),
+    (re.compile(r"\bthen\b", re.IGNORECASE), "sequencing word 'then'"),
+    (re.compile(r"\bruns\b", re.IGNORECASE), "'runs ...' narration"),
+)
+
+
+def is_exempt(skill_name: str, rule: str) -> bool:
+    return rule in EXEMPTIONS.get(skill_name, {})
+
+
+def strip_fenced_code(text: str) -> str:
+    """Remove CommonMark fenced code blocks (``` or ~~~, closing fence of the same
+    character and at least the opening length; an unclosed fence runs to the end)."""
+    kept: list[str] = []
+    fence: str | None = None
+    for line in text.splitlines():
+        if fence is None:
+            match = FENCE_OPEN_RE.match(line)
+            if match and not (match.group(1)[0] == "`" and "`" in match.group(2)):
+                fence = match.group(1)
+                continue
+            kept.append(line)
+        else:
+            stripped = line.strip()
+            if (
+                len(line) - len(line.lstrip(" ")) <= 3
+                and stripped
+                and set(stripped) == {fence[0]}
+                and len(stripped) >= len(fence)
+            ):
+                fence = None
+    return "\n".join(kept)
+
+
+def strip_negated_triggers(description: str) -> str:
+    return " ".join(NEGATED_TRIGGER_RE.sub(" ", description).split())
+
+
+def frontmatter_block(content: str) -> str | None:
+    match = re.match(r"^﻿?---\r?\n(.*?)\r?\n---", content, re.DOTALL)
+    return match.group(1) if match else None
+
+
+def host_yaml_errors(frontmatter_text: str) -> list[str]:
+    """Reject frontmatter a strict YAML host would refuse even if PyYAML accepts it:
+    tab indentation, an unclosed quote, or an unquoted ': ' inside a plain scalar."""
+    errors: list[str] = []
+    lines = frontmatter_text.splitlines()
+    for number, line in enumerate(lines, start=1):
+        indent = line[: len(line) - len(line.lstrip(" \t"))]
+        if "\t" in indent:
+            errors.append(f"Frontmatter line {number} is indented with a tab; strict YAML hosts reject it.")
+        match = re.match(r"^\s*(?:-\s+)?[A-Za-z0-9_-]+:\s+(.*)$", line)
+        if not match:
+            continue
+        value = match.group(1).rstrip()
+        if not value or value[0] in "|>[{&*!#":
+            continue
+        if value[0] in "\"'":
+            quote = value[0]
+            body = value[1:].replace(quote * 2, "") if quote == "'" else re.sub(r"\\.", "", value[1:])
+            if quote not in body:
+                closed = any(quote in later for later in lines[number:])
+                if not closed:
+                    errors.append(f"Frontmatter line {number} opens a {quote} quote that is never closed.")
+            continue
+        if re.search(r":\s", value) and not value.lstrip().startswith("#"):
+            errors.append(f"Frontmatter line {number} has an unquoted ': ' in a plain value; quote the value for strict YAML hosts.")
+    return errors
+
+
+def narration_warnings(description: str) -> list[str]:
+    found = [label for pattern, label in NARRATION_PATTERNS if pattern.search(description)]
+    if not found:
+        return []
+    return [
+        "Description narrates the workflow (" + ", ".join(found) + "). An agent may follow the "
+        "description instead of reading the body; keep the description to when to use the skill "
+        "and move the procedure into the body (SP-14)."
+    ]
+
 
 def read_utf8(path: Path) -> str:
     try:
@@ -134,8 +237,28 @@ def validate_frontmatter(frontmatter: dict, skill_dir: Path, errors: list[str]) 
             errors.append("`description` cannot contain angle brackets.")
         if len(stripped) > 350:
             errors.append("`description` exceeds the repository limit of 350 characters.")
-        if not stripped.lower().startswith("use when"):
-            errors.append("`description` must start with 'Use when'.")
+        skill_name = name.strip() if isinstance(name, str) else ""
+        if not is_exempt(skill_name, "use-when"):
+            if not stripped.lower().startswith("use when"):
+                errors.append("`description` must start with 'Use when'.")
+            else:
+                # Negated clauses ("do not use when ...") are stripped globally
+                # first, so they can never supply the positive trigger.
+                positive = strip_negated_triggers(stripped)
+                trigger = re.match(r"(?i)use when\w*\b[\s:,-]*(.*)", positive)
+                if not trigger or not re.search(r"[A-Za-z0-9]", trigger.group(1)):
+                    errors.append("`description` has no positive 'Use when' trigger once negated clauses are removed.")
+
+    self_exempt = SELF_EXEMPTION_KEYS & set(frontmatter.keys())
+    metadata_for_keys = frontmatter.get("metadata")
+    if isinstance(metadata_for_keys, dict):
+        self_exempt |= SELF_EXEMPTION_KEYS & set(metadata_for_keys.keys())
+    if self_exempt:
+        errors.append(
+            "Validator exemptions cannot be declared in skill frontmatter ("
+            + ", ".join(sorted(self_exempt))
+            + "); they live in quick_validate.py EXEMPTIONS with a written reason."
+        )
 
     metadata = frontmatter.get("metadata")
     if not isinstance(metadata, dict):
@@ -178,6 +301,11 @@ def validate_portable_sections(frontmatter: dict, body: str, errors: list[str]) 
         return
     metadata = frontmatter.get("metadata")
     metadata = metadata if isinstance(metadata, dict) else {}
+    name = frontmatter.get("name")
+    if isinstance(name, str) and is_exempt(name.strip(), "sections"):
+        return
+    # Headings inside fenced code are examples, not sections (CommonMark fences).
+    body = strip_fenced_code(body)
     groups = {
         "Use When": (["Use When"], "use_when"),
         "Do Not Use When": (["Do Not Use When", "Degraded mode"], "do_not_use_when"),
@@ -252,6 +380,10 @@ def validate_skill(skill_path: Path) -> tuple[bool, list[str]]:
         return False, [str(exc)]
 
     validate_frontmatter(frontmatter, skill_path, errors)
+    skill_name = str(frontmatter.get("name") or "").strip()
+    block = frontmatter_block(raw)
+    if block is not None and not is_exempt(skill_name, "host-yaml"):
+        errors.extend(host_yaml_errors(block))
     validate_portable_sections(frontmatter, body, errors)
     validate_local_links(skill_path, skill_md, body, errors)
 
@@ -264,6 +396,20 @@ def validate_skill(skill_path: Path) -> tuple[bool, list[str]]:
     return not errors, errors
 
 
+def collect_warnings(skill_path: Path) -> list[str]:
+    """Advisory findings that never change the exit status (SP-14 narration lint)."""
+    skill_md = Path(skill_path).resolve() / "SKILL.md"
+    try:
+        frontmatter, _body = parse_frontmatter(read_utf8(skill_md))
+    except (OSError, ValueError):
+        return []
+    description = frontmatter.get("description")
+    name = str(frontmatter.get("name") or "").strip()
+    if not isinstance(description, str) or is_exempt(name, "narration"):
+        return []
+    return narration_warnings(description)
+
+
 def main() -> int:
     if len(sys.argv) != 2:
         print("Usage: python -X utf8 quick_validate.py <skill_directory>")
@@ -271,6 +417,8 @@ def main() -> int:
 
     skill_dir = Path(sys.argv[1])
     valid, errors = validate_skill(skill_dir)
+    for warning in collect_warnings(skill_dir):
+        print(f"WARNING: {warning}")
     if valid:
         print("Skill is valid.")
         return 0

@@ -44,8 +44,15 @@ jobs:
 
       # Routing smoke test: fails if any fixtured task's expected skill falls
       # outside its top-N matches - i.e. a description drifted into ambiguity.
+      # --min-rank1 is the ratchet floor (measured p@1 minus 2 points; raise it,
+      # never lower it - chwezi-engine-agents evals/routing/baseline.json).
+      # --lint-fixtures rejects prompts that leak the expected slug or copy the
+      # description. Owned negatives run on every invocation. (M10-03)
       - name: Run routing smoke test
-        run: python -X utf8 scripts/routing_smoke_test.py
+        run: python -X utf8 scripts/routing_smoke_test.py --min-rank1 88 --lint-fixtures
+
+      - name: Run in-engine routing collision gate
+        run: python -X utf8 scripts/routing_smoke_test.py --collisions --collision-gate --threshold 0.5
 
       - name: Validate engine control plane
         run: python -X utf8 scripts/validate_engine_control_plane.py

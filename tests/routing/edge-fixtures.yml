@@ -13,13 +13,13 @@ fixtures:
     expect: ai-agent-governance-and-limits
   - task: "Create replayable traces and evaluation evidence for an AI agent workflow"
     expect: ai-agent-observability-evaluation
-  - task: "Use AI incident response for an LLM outage, customer communication and rollback after bad AI output ships"
+  - task: "A bad AI answer reached customers during an LLM outage; triage the incident, communicate, recover and write the postmortem"
     expect: ai-incident-response
   - task: "Design prompt templates and structured prompts for reliable LLM output"
     expect: ai-prompt-engineering
   - task: "Plan a controlled rollout and experiment for an AI feature with holdout metrics"
     expect: ai-feature-rollout-and-experimentation
-  - task: "Use ai-feature-spec to create a feature specification for an AI product capability"
+  - task: "Specify one AI-powered feature end to end: model choice, prompt contract, output schema, fallbacks and evaluation"
     expect: ai-feature-spec
   - task: "Design commercial operations for agent billing by completed tasks and refund policy"
     expect: ai-agent-commercial-operations
@@ -31,20 +31,30 @@ fixtures:
     expect: ai-agent-multi-agent-coordination
 
   # Architecture, API, and data
-  - task: "Use distributed systems patterns for consistency, queues, retries and failure modes"
+  - task: "Choose consistency, queue, retry and failure-mode approaches for services that talk over the network"
     expect: distributed-systems-patterns
   - task: "Create GraphQL schema patterns with resolver boundaries and authorization"
     expect: graphql-patterns
   - task: "Audit ecommerce platform requirements for checkout, catalog, payment and fulfillment"
     expect: ecommerce-platform-audit-requirements
-  - task: "Define a validation contract with evidence categories and release gates"
+  - task: "Define the evidence categories and release gates every specialist skill must declare before we ship"
     expect: validation-contract
-  - task: "Use database design engineering for tables, constraints, indexes and core product entities"
+    negatives:
+      - task: "Choose unit, integration and end-to-end test layers for the new module"
+        owner: advanced-testing-strategy
+      - task: "Plan the production release window, canary rollout and rollback steps"
+        owner: deployment-release-engineering
+  - task: "Plan the relational data model for a new SaaS: tables, constraints, indexing, migrations and tenancy"
     expect: database-design-engineering
-  - task: "Plan database reliability, replication lag, backup restore and operational failure handling"
+  - task: "Plan for replication lag, backup restore drills and database failure handling in production"
     expect: database-reliability
   - task: "Tune MySQL schema design and query patterns for application development"
     expect: mysql-engineering
+    negatives:
+      - task: "Tune PostgreSQL autovacuum, JSONB indexes and row-level security policies"
+        owner: postgresql-engineering
+      - task: "Model tenancy, domain entities and schema evolution for a new SaaS data architecture"
+        owner: database-design-engineering
   - task: "Operate MySQL backups, replication, slow query logs and production maintenance"
     expect: mysql-engineering
   - task: "Write PostgreSQL schema, indexes, functions and advanced SQL for a product backend"
@@ -53,15 +63,15 @@ fixtures:
     expect: postgresql-engineering
 
   # DevOps and reliability
-  - task: "Design cloud architecture with environments, networking, managed services and deployment pattern"
+  - task: "Lay out our cloud environments, networking, managed services and deployment pattern"
     expect: cloud-architecture
   - task: "Create deployment release plan, rollback plan and promotion gates"
     expect: deployment-release-engineering
-  - task: "Build a Docker development environment with compose services and local dependencies"
+  - task: "Set up a local environment in Docker with compose services and dependencies"
     expect: docker-development
-  - task: "Write infrastructure as code modules with state management and review gates"
+  - task: "Write Terraform modules with state management and review gates"
     expect: infrastructure-as-code
-  - task: "Use reliability engineering for service reliability objectives, error budgets and SRE release decisions"
+  - task: "Set service reliability objectives, error budgets and SRE release decisions"
     expect: reliability-engineering
   - task: "Create observability dashboards, logs, traces and alerts for production services"
     expect: observability-monitoring
@@ -69,8 +79,13 @@ fixtures:
   # Frontend and mobile
   - task: "Build a Next.js App Router application with server components and route handlers"
     expect: nextjs-app-router
-  - task: "Use image compression to compress uploaded images and define quality metrics for frontend assets"
+  - task: "Resize, strip metadata and re-encode uploaded images, and define quality metrics for frontend assets"
     expect: image-compression
+    negatives:
+      - task: "Manage the lifecycle of tenant logos and brand assets in the admin panel"
+        owner: saas-managed-visual-assets
+      - task: "Set a per-flow performance budget for the web app pages and a CI regression gate"
+        owner: frontend-performance
   - task: "Write UX microcopy, empty states and form completion content"
     expect: ux-content-strategy
   - task: "Build an Avalonia desktop application with MVVM patterns"
@@ -79,7 +94,7 @@ fixtures:
     expect: android-development
   - task: "Write test-driven Android code with unit and UI tests"
     expect: android-development
-  - task: "Build iOS monetization with StoreKit subscriptions and server notifications"
+  - task: "Sell subscriptions in our iOS app with StoreKit and server notifications"
     expect: ios-monetization
   - task: "Secure iOS app data with Keychain, App Attest and authorization rules"
     expect: ios-security-and-rbac
@@ -105,83 +120,140 @@ fixtures:
     expect: typescript-full-stack
 
   # SaaS and product
-  - task: "Design modular SaaS architecture with modules, extension points and tenant-aware boundaries"
+  - task: "Split our SaaS into modules with extension points and tenant-aware boundaries"
     expect: modular-saas-architecture
   - task: "Design a multi-tenant SaaS with tenant context propagation and isolation"
     expect: multi-tenant-saas-architecture
-  - task: "Build a SaaS accounting system with operational events and ledger handoff"
+  - task: "Build the accounting side of our SaaS product with operational events and a ledger handoff"
     expect: saas-accounting-system
-  - task: "Create SaaS admin backoffice tooling for support, operations and tenant management"
+  - task: "Create internal back-office tools for support, operations and tenant management in our SaaS"
     expect: saas-admin-backoffice-tooling
   - task: "Implement platform-managed authentication background pools, logo slots, favicon replacement, ordering, deletion and audited secure upload"
     expect: saas-managed-visual-assets
-  - task: "Use image compression to optimise an uploaded photo in the browser and canonically resize and re-encode it on the server"
+  - task: "Optimise an uploaded photo in the browser, then resize and re-encode it on the server"
     expect: image-compression
-  - task: "Define SaaS architecture strategy, deployment models and maturity roadmap"
+  - task: "Choose deployment models and a maturity roadmap for our multi-tenant SaaS platform"
     expect: saas-architecture-strategy
-  - task: "Calculate SaaS business metrics like MRR, ARR, churn and expansion"
+    negatives:
+      - task: "Isolate tenant data with row-level security and tenant-scoped caches"
+        owner: multi-tenant-saas-architecture
+      - task: "Split the monolith into microservices with service boundaries and messaging"
+        owner: microservices-architecture
+  - task: "Calculate MRR, ARR, churn and expansion for our SaaS subscription business"
     expect: saas-business-metrics
-  - task: "Design SaaS lifecycle email orchestration for onboarding and retention"
+  - task: "Plan onboarding and retention email sequences for our SaaS customers"
     expect: saas-lifecycle-email-orchestration
-  - task: "Design SaaS sales organization structure, pipeline roles and operating cadence"
+  - task: "Structure our SaaS sales team, pipeline roles and operating cadence"
     expect: saas-sales-organization
-  - task: "Use saas-seeder to seed a SaaS starter project with architecture defaults and production conventions"
+  - task: "Bootstrap our multi-tenant seeder template with environment, database, super admin and demo logins"
     expect: saas-seeder
-  - task: "Integrate Stripe payments, webhooks and checkout behavior"
+  - task: "Integrate Stripe checkout, webhooks and payment behaviour"
     expect: stripe-payments
 
   # Product-business and docs
   - task: "Specify a BDS intake and monitoring system with users, workflows and reporting"
     expect: bds-intake-and-monitoring-system-spec
-  - task: "Use content-writing to write blog or long-form content using the catalog's editorial standards"
+  - task: "Write a blog post or long-form article to the catalogue's editorial standards"
     expect: content-writing
   - task: "Improve customer service quality and measure service outcomes"
     expect: customer-service-excellence
-  - task: "Use excel-spreadsheets to create a professional spreadsheet with formulas, checks and presentation standards"
+  - task: "Build a professional Excel workbook with formulas, checks and presentation standards"
     expect: excel-spreadsheets
-  - task: "Use it-proposal-writing for an IT proposal with methodology, team, workplan and commercial logic"
+    negatives:
+      - task: "Produce the board report as a Word document with styles, tables and a contents page"
+        owner: professional-word-output
+      - task: "Analyse the sales CSV in pandas and chart the monthly trend"
+        owner: python-data-analytics
+  - task: "Write a proposal for an IT project with methodology, team, workplan and commercial logic"
     expect: it-proposal-writing
-  - task: "Plan product-led growth onboarding, activation and retention"
+  - task: "Plan self-serve onboarding, activation and retention so the product itself drives growth"
     expect: product-led-growth
-  - task: "Define product strategy, vision and capability roadmap"
+  - task: "Define the product vision, strategy and capability roadmap"
     expect: product-strategy-vision
   - task: "Create a professional Word document with quality checks"
     expect: professional-word-output
-  - task: "Use software-business-models to choose a software business model and commercial packaging"
+    negatives:
+      - task: "Build an Excel workbook with formulas, named ranges and charts"
+        owner: excel-spreadsheets
+      - task: "Write a long-form blog article in our editorial voice"
+        owner: content-writing
+  - task: "Choose how we make money from our software and how to package it commercially"
     expect: software-business-models
-  - task: "Set software pricing strategy and value metric"
+  - task: "Set prices and a value metric for our software product"
     expect: software-pricing-strategy
 
   # Security
   - task: "Run a code safety scan for insecure patterns, dependency risks and secrets"
     expect: code-safety-scanner
-  - task: "Use linux-security-hardening to harden a Linux server with firewall, SSH, packages and baseline controls"
+  - task: "Harden a Linux server with firewall, SSH, packages and baseline controls"
     expect: linux-security-hardening
-  - task: "Assess network security, segmentation, firewall rules and exposure"
+    negatives:
+      - task: "Review firewall rules, VLAN segmentation and external exposure across the office network"
+        owner: network-security
+      - task: "Set up Kubernetes deployments, ingress and autoscaling for the cluster"
+        owner: kubernetes-platform
+      - task: "Harden SSH, fail2ban and unattended upgrades on our Ubuntu server"
+        owner: linux-skills/linux-server-hardening
+  - task: "Assess segmentation, firewall rules and exposure across our network"
     expect: network-security
   - task: "Audit web app security with OWASP issues and practical remediation"
     expect: web-app-security-audit
 
   # Meta
-  - task: "Plan advanced testing strategy across unit, integration, contract and e2e layers"
+  - task: "Plan how we test across unit, integration, contract and e2e layers"
     expect: advanced-testing-strategy
-  - task: "Use AI-assisted development while preserving review quality and tests"
+  - task: "Coordinate AI-assisted planning and implementation while keeping human review and tests intact"
     expect: ai-assisted-development
-  - task: "Use doc-architect to create a documentation architecture for a software project"
+  - task: "Set up a documentation architecture for a software project"
     expect: doc-architect
-  - task: "Set git collaboration workflow, branching, review and merge rules"
+  - task: "Set branching, review and merge rules for the team's git workflow"
     expect: git-collaboration-workflow
   - task: "Audit implementation status against claims and evidence"
     expect: implementation-status-auditor
+    negatives:
+      - task: "Reproduce this intermittent regression and diagnose its cause with evidence before fixing it"
+        owner: systematic-bug-diagnosis
+      - task: "Plan contract and end-to-end test coverage for the payments service"
+        owner: advanced-testing-strategy
   - task: "Clean markdown lint issues and normalize documentation style"
     expect: doc-architect
-  - task: "Gather and structure project requirements before design"
+  - task: "Gather and structure the requirements for this project before design"
     expect: project-requirements
-  - task: "Write complete SDLC documentation for planning, design, testing and deployment"
+    negatives:
+      - task: "Test with prototypes and interviews whether this idea is worth building"
+        owner: product-discovery
+      - task: "Assess privacy risks to personal data before launching the feature"
+        owner: dpia-generator
+  - task: "Write the full lifecycle documents for planning, design, testing and deployment"
     expect: sdlc-documentation
   - task: "Safety-audit a skill engine and an imported skill for unsafe installers, routing and hallucination risks"
     expect: skill-engine-audit
   - task: "Update Claude documentation files and module headers"
     expect: doc-architect
-  - task: "Apply world-class engineering gates to a software delivery"
+  - task: "Check this change is secure, performant and maintainable before I claim it is done and open a PR"
     expect: world-class-engineering
+
+  # M10-03-T03: positives for the cross-engine collision skills (section 5.5 pairs); they carry owned negatives.
+  - task: "Score this finished release note for generic AI phrasing and give an evidence-backed A/B/C/F verdict"
+    expect: ai-slop-audit
+    negatives:
+      - task: "Apply real-time controls for specificity, verification and authored intent while producing this human-facing artefact"
+        owner: anti-ai-slop
+      - task: "Draft a long-form article for our engineering blog"
+        owner: content-writing
+  - task: "Stop AI slop creeping into the onboarding emails while I draft them; keep every claim specific and verified"
+    expect: anti-ai-slop
+    negatives:
+      - task: "Grade this finished report for AI slop and give it an A/B/C/F verdict with evidence"
+        owner: ai-slop-audit
+      - task: "Write the microcopy, error messages and empty states for the signup flow"
+        owner: ux-content-strategy
+  - task: "Build the PMS for a hotel with room bookings, housekeeping and the restaurant POS"
+    expect: hospitality-hotel-restaurant-systems
+    negatives:
+      - task: "Build the retail POS till, shifts, cash-up and sales receipts"
+        owner: pos-sales-operations-engineering
+      - task: "Design the ERP modules for procurement, inventory and finance in a manufacturing firm"
+        owner: saas-erp-system-design
+      - task: "Write a bankable business plan and feasibility study for a lakeside lodge"
+        owner: business-plan-skills/hospitality-hotel-restaurant

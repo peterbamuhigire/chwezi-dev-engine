@@ -1,0 +1,19 @@
+# In-engine routing collision allow-list (M10-03-T04).
+#
+# Read by `python -X utf8 scripts/routing_smoke_test.py --collisions --collision-gate`.
+# The gate fails on any in-engine pair at cosine >= 0.75 that is not listed here and
+# warns on pairs at or above --threshold (0.5 in CI). An entry records a deliberate
+# decision to keep two skills with overlapping routing vocabulary. Scores are the
+# lexical proxy, not live routing. Cross-engine pairs are governed by
+# chwezi-engine-agents/evals/routing/ownership.yaml, not by this file.
+pairs:
+  - pair: [mysql-engineering, postgresql-engineering]
+    score_at_decision: 0.627
+    reason: >-
+      Engine-specific siblings with deliberately parallel descriptions that differ
+      only in the database named (MySQL or PostgreSQL). The shared vocabulary is the
+      generic administration and tuning layer; the engine name is the discriminator,
+      and prompts that name the engine route correctly (fixtures and owned negatives
+      in both directions prove it). Warning-level only; revisit if a fixture misroutes.
+    decided_on: 2026-09-29
+    decided_by: orchestrator under Peter's delegated authority, 29 Sep 2026
