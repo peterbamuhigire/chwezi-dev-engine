@@ -1,0 +1,7 @@
+{
+  "id": "F07",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "task_prompt": "The order service accepts create requests through an authenticated HTTP endpoint (service/http_api.py) and an internal queue (service/queue_consumer.py). Only queue input is validated today. Apply one explicit boundary contract (docs/CONTRACT.md) to each untrusted entry point, using the installed validation package in vendor/. Run the public tests with: python -m unittest discover -s public_tests -t ."
+}

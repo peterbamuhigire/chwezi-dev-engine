@@ -1,0 +1,10 @@
+{
+  "id": "F15",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "task_prompt": "Read CLEANUP-REQUEST.md. Improve the readability and change safety of worker/parser.py and worker/retry.py. Do not remove error classification, trace points or the retry bound; the behaviour described in README.md must still hold.",
+  "manual_checks": [
+    {"id": "reviewer-edit-task", "status": "NOT_ASSESSED", "reason": "Oracle 'reviewer edit task completed without regression' and 'fewer lines cannot override worse reviewer understanding' need a human reviewer; the checker covers only the executable part."}
+  ]
+}

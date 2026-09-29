@@ -1,0 +1,8 @@
+{
+  "id": "F05",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "interface": "starter/docs/time-windows.md",
+  "notes": "The fourth caller (ledger/partitions.py) is in the starter but is not named in the task; only the withheld tests exercise it."
+}

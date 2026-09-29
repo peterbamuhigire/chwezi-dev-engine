@@ -1,0 +1,10 @@
+{
+  "name": "k-import-service",
+  "version": "1.4.0",
+  "private": true,
+  "description": "Synthetic import service fixture (no network, no external packages).",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test public_tests/"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "F04",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "interface": "starter/TASK.md",
+  "notes": "SQLite file databases in temporary folders; the checker restarts the process to prove persistence and injects a failure through QueryLayer.execute to prove atomicity."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "F09",
+  "language": "javascript+html",
+  "requires": ["python", "node"],
+  "public_test_command": ["node", "public_tests/test_dialog_public.js"],
+  "task_prompt": "The confirmation dialog for deleting an account (web/confirm-dialog.html and web/dialog-controller.js) restores focus incorrectly after a failed deletion, and its loading, error and retry states are unreliable. Repair the keyboard and assistive-technology flow while preserving the operation state, following the contract in README.md.",
+  "runtime_note": "The controller is exercised under Node.js with a small fake DOM owned by the checker; the checker exits 2 (NOT_ASSESSED) when node is absent. Real-browser matrix runs are not part of this checker.",
+  "manual_checks": [
+    {"id": "at-announcements", "status": "NOT_ASSESSED", "reason": "Oracle 'name/role/error announcements verified manually' needs a person with a screen reader (NVDA/JAWS/VoiceOver) on the pinned browser matrix; the checker only verifies the markup that makes announcements possible."},
+    {"id": "browser-matrix-zoom-narrow-viewport", "status": "NOT_ASSESSED", "reason": "Pinned Chromium/Firefox/WebKit, zoom and narrow-viewport paths from the withheld family need a browser run; not available to a stdlib checker."}
+  ]
+}

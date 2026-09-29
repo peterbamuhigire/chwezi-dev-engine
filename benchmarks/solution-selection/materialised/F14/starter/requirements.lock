@@ -1,0 +1,2 @@
+# Locked runtime dependencies (synthetic fixture; vendored under vendor/ for offline use)
+vetted-crypto==3.2.1

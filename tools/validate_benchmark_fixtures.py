@@ -8,7 +8,18 @@ from pathlib import Path
 
 
 REQUIRED_IDS = {f"F{index:02d}" for index in range(1, 17)}
-REQUIRED_FIELDS = {"id", "title", "stack", "initial_state", "public_task", "positive_oracles", "negative_oracles", "withheld_family", "materialisation_status", "owner_role", "time_limit_minutes"}
+REQUIRED_FIELDS = {"id", "title", "stack", "initial_state", "public_task", "short_prompt", "positive_oracles", "negative_oracles", "withheld_family", "materialisation_status", "owner_role", "time_limit_minutes"}
+
+# M10-05-T03/T04: ``short_prompt`` (the doctrine in one sentence, written from the title and public
+# task rather than the oracles) is required on every fixture and pressure scenario; it feeds the
+# short-prompt control arm. A ``MATERIALISED`` fixture must carry a 40-hex ``initial_commit`` (the
+# deterministic "fixture baseline" commit of starter + public tests, see
+# benchmarks/solution-selection/materialised/fixture_kit.py), a 64-hex ``hidden_manifest_hash`` for
+# its withheld tests (held outside version control) and a complete materialised folder.
+# ``--verify-commits`` recomputes each initial_commit with git.
+SHA1 = re.compile(r"^[0-9a-f]{40}$")
+SHA256 = re.compile(r"^[0-9a-f]{64}$")
+MATERIALISED_PARTS = ("fixture.json", "starter", "public_tests", "checker.py", "reference_good", "reference_bad")
 
 # Pressure scenarios (M10-04-T05): an optional case type for discipline-skill
 # RED/GREEN testing. They may sit in the ``pressure_scenarios`` array of
@@ -17,7 +28,7 @@ REQUIRED_FIELDS = {"id", "title", "stack", "initial_state", "public_task", "posi
 PRESSURE_FILE = "pressure-scenarios.json"
 PRESSURE_ID = re.compile(r"^PS\d{2}$")
 PRESSURE_TYPES = {"time", "sunk_cost", "authority", "economic", "exhaustion", "social", "pragmatic"}
-PRESSURE_FIELDS = {"id", "title", "target_skill", "discipline_gate", "pressures", "scenario", "forced_choice", "expected_disposition", "baseline_outcome", "with_skill_outcome", "materialisation_status"}
+PRESSURE_FIELDS = {"id", "title", "target_skill", "discipline_gate", "pressures", "scenario", "forced_choice", "expected_disposition", "baseline_outcome", "with_skill_outcome", "materialisation_status", "short_prompt"}
 CHOICES = {"A", "B", "C"}
 
 
@@ -73,13 +84,35 @@ def validate_pressure_scenarios(scenarios, errors: list[str], warnings: list[str
         if item.get("materialisation_status") not in {"NOT_ASSESSED", "MATERIALISED"}:
             errors.append(f"{sid} has unsupported materialisation_status")
         if "short_prompt" in item and (not isinstance(item["short_prompt"], str) or not item["short_prompt"].strip()):
-            errors.append(f"{sid} short_prompt must be a non-empty string when present")
+            errors.append(f"{sid} short_prompt must be a non-empty string")
         if "NOT_ASSESSED" in (item.get("baseline_outcome"), item.get("with_skill_outcome")) and not item.get("not_assessed_reason"):
             warnings.append(f"{sid} records NOT_ASSESSED outcomes without not_assessed_reason")
     return len(scenarios)
 
 
-def validate(path: Path) -> dict:
+def _materialised_errors(item: dict, suite_root: Path, verify_commits: bool) -> list[str]:
+    fid = item.get("id")
+    errors = []
+    if not isinstance(item.get("initial_commit"), str) or not SHA1.match(item["initial_commit"]):
+        errors.append(f"{fid} MATERIALISED needs a 40-hex initial_commit")
+    if not isinstance(item.get("hidden_manifest_hash"), str) or not SHA256.match(item["hidden_manifest_hash"]):
+        errors.append(f"{fid} MATERIALISED needs a 64-hex hidden_manifest_hash")
+    folder = suite_root / "materialised" / str(fid)
+    missing = [part for part in MATERIALISED_PARTS if not (folder / part).exists()]
+    if missing:
+        errors.append(f"{fid} MATERIALISED folder is missing {missing}")
+    elif verify_commits and not errors:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("fixture_kit", suite_root / "materialised" / "fixture_kit.py")
+        kit = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(kit)
+        actual = kit.baseline_commit(str(fid))
+        if actual != item["initial_commit"]:
+            errors.append(f"{fid} initial_commit {item['initial_commit']} does not match recomputed {actual}")
+    return errors
+
+
+def validate(path: Path, verify_commits: bool = False) -> dict:
     errors: list[str] = []
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -99,6 +132,10 @@ def validate(path: Path) -> dict:
         errors.extend(f"{item.get('id', index)} missing {field}" for field in sorted(missing))
         if item.get("materialisation_status") not in {"NOT_ASSESSED", "MATERIALISED"}:
             errors.append(f"{item.get('id')} has unsupported materialisation_status")
+        elif item["materialisation_status"] == "MATERIALISED":
+            errors.extend(_materialised_errors(item, path.parent, verify_commits))
+        if not isinstance(item.get("short_prompt"), str) or not item.get("short_prompt", "").strip():
+            errors.append(f"{item.get('id')} needs a non-empty short_prompt")
         if not isinstance(item.get("positive_oracles"), list) or not item["positive_oracles"]:
             errors.append(f"{item.get('id')} needs positive oracles")
         if not isinstance(item.get("negative_oracles"), list) or not item["negative_oracles"]:
@@ -122,14 +159,16 @@ def validate(path: Path) -> dict:
                 scenarios.extend(extra)
                 sources.append(PRESSURE_FILE)
     pressure_count = validate_pressure_scenarios(scenarios, errors, warnings)
-    return {"status": "FAIL" if errors else "PASS", "errors": errors, "warnings": warnings, "fixture_count": len(fixtures), "pressure_scenario_count": pressure_count, "pressure_scenario_sources": sources, "execution_status": payload.get("status")}
+    materialised = sorted(str(item.get("id")) for item in fixtures if isinstance(item, dict) and item.get("materialisation_status") == "MATERIALISED")
+    return {"status": "FAIL" if errors else "PASS", "errors": errors, "warnings": warnings, "fixture_count": len(fixtures), "materialised": materialised, "materialised_count": len(materialised), "pressure_scenario_count": pressure_count, "pressure_scenario_sources": sources, "execution_status": payload.get("status")}
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("path", nargs="?", type=Path, default=Path("benchmarks/solution-selection/fixtures.json"))
+    parser.add_argument("--verify-commits", action="store_true", help="recompute each MATERIALISED initial_commit with git")
     args = parser.parse_args()
-    result = validate(args.path)
+    result = validate(args.path, verify_commits=args.verify_commits)
     print(json.dumps(result, indent=2))
     return 0 if result["status"] == "PASS" else 1
 

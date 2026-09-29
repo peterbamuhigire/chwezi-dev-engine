@@ -1,0 +1,7 @@
+{
+  "id": "F13",
+  "language": "python+html",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "task_prompt": "Add scheduling to the booking page (scheduling/page.py, scheduling/booking.py) as described in docs/SCHEDULING-REQUIREMENTS.md: a date range with blackout explanations, keyboard exploration and account-locale display, validated on the server. Evaluate the native date input instead of assuming it wins, and record the decision. Run the public tests with: python -m unittest discover -s public_tests -t ."
+}

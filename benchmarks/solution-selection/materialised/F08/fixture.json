@@ -1,0 +1,7 @@
+{
+  "id": "F08",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "task_prompt": "The read API (app/read_api.py) is tenant-scoped, but the new export job (app/export_jobs.py) retrieves a document by global ID and forgets tenant and role scope. Make export authorisation consistent at enqueue and at execution time, using the installed auth library in lib/authkit.py and the identity provider in app/identity.py. Run the public tests with: python -m unittest discover -s public_tests -t ."
+}

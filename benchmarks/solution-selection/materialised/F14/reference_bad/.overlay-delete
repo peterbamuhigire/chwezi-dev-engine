@@ -1,0 +1,3 @@
+# The lazy cleanup drops the vetted dependency.
+vendor/vetted_crypto/__init__.py
+requirements.lock

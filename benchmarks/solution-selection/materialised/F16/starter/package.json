@@ -1,0 +1,8 @@
+{
+  "name": "text-service",
+  "version": "0.4.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": { "node": ">=20" },
+  "dependencies": {}
+}

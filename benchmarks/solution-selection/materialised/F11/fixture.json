@@ -1,0 +1,8 @@
+{
+  "id": "F11",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "task_prompt": "The notification job in notify/job.py retries any exception immediately and forever, and a transport timeout can happen after the provider has already accepted the message. Bound the retries with the delay policy in README.md, classify failures, preserve idempotency, make terminal failure observable and recoverable, and keep pending state on shutdown. Keep the public interfaces in notify/.",
+  "manual_checks": []
+}

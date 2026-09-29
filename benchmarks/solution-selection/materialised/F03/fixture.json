@@ -1,0 +1,6 @@
+{
+  "id": "F03",
+  "language": "javascript",
+  "requires": ["python", "node"],
+  "public_test_command": ["node", "--test", "public_tests/orders-import.test.js"]
+}

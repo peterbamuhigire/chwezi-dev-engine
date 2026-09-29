@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <title>Account settings</title>
+</head>
+<body>
+  <main>
+    <h1 id="page-heading" tabindex="-1">Account settings</h1>
+    <button id="delete-account" type="button" aria-haspopup="dialog">Delete account</button>
+
+    <div id="confirm-dialog" role="alertdialog" aria-modal="true"
+         aria-labelledby="confirm-title" aria-describedby="confirm-desc" hidden>
+      <h2 id="confirm-title">Delete this account?</h2>
+      <p id="confirm-desc">This removes the account and all its invoices. It cannot be undone.</p>
+      <p id="confirm-error" class="error" role="alert"></p>
+      <button id="confirm-ok" type="button">Delete account</button>
+      <button id="confirm-cancel" type="button">Cancel</button>
+    </div>
+  </main>
+  <script src="dialog-controller.js"></script>
+</body>
+</html>

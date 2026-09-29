@@ -1,0 +1,9 @@
+{
+  "id": "F16",
+  "language": "javascript",
+  "requires": ["python", "node"],
+  "public_test_command": ["node", "public_tests/test_cursor_public.js"],
+  "task_prompt": "Cursor movement and selection in text/cursor.js break on emoji sequences and combining marks. Make them grapheme-aware as README.md requires. Compare the standard/native facilities of the supported runtimes before adding any dependency, record the decision in DEPENDENCY-DECISION.md (alternatives, licence and version evidence, support boundary, removal trigger), and give unsupported runtimes a tested fallback or an explicit, tested support boundary.",
+  "runtime_note": "Checked with the local Node.js; the checker exits 2 (NOT_ASSESSED) when node is absent.",
+  "manual_checks": []
+}

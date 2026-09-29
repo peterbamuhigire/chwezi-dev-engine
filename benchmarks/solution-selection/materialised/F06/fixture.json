@@ -1,0 +1,8 @@
+{
+  "id": "F06",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "interface": "starter/README.md",
+  "notes": "The checker derives the golden corpus from the unmodified starter at run time and compares return values, exception types and messages, and audit-event order over every branch combination. 'Reviewer can explain the new control flow' stays a human review oracle; the checker only measures duplication and flags speculative plugin or registry frameworks."
+}

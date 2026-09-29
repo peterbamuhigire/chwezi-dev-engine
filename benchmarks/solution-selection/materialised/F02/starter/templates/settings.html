@@ -1,0 +1,13 @@
+<form method="post" action="/settings" novalidate>
+  <div class="field">
+    <label for="renewal-date">Renewal date</label>
+    <p id="renewal-date-help" class="help">Optional. Leave empty if the plan does not renew.</p>
+    <input type="text" id="renewal-date" name="renewal_date" value="$value" placeholder="YYYY-MM-DD" aria-describedby="renewal-date-help">
+    <p id="renewal-date-error" class="error" $error_hidden>$error</p>
+  </div>
+  <div class="field">
+    <label for="display-name">Display name</label>
+    <input type="text" id="display-name" name="display_name" autocomplete="nickname">
+  </div>
+  <button type="submit">Save settings</button>
+</form>

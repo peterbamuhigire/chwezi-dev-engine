@@ -1,0 +1,15 @@
+{
+  "id": "F10",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "interface": "starter/TASK.md",
+  "not_assessed_legs": [
+    {
+      "leg": "PostgreSQL integration (separately pinned image)",
+      "status": "NOT_ASSESSED",
+      "reason": "No pinned PostgreSQL image is available locally; only the portable SQLite leg is materialised and checked."
+    }
+  ],
+  "notes": "The checker interrupts backfill part-way with a SQLite progress handler, reconnects and re-runs it, and compares the result with a clean run."
+}

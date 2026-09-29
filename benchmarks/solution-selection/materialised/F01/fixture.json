@@ -1,0 +1,6 @@
+{
+  "id": "F01",
+  "language": "python",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."]
+}

@@ -1,0 +1,7 @@
+{
+  "id": "F02",
+  "language": "python+html",
+  "requires": ["python"],
+  "public_test_command": ["python", "-m", "unittest", "discover", "-s", "public_tests", "-t", "."],
+  "task_prompt": "The settings form (templates/settings.html, app/settings.py) uses a text field for the renewal date, a civil date with no time zone. Offer date selection, preserve keyboard entry, and validate at the server boundary as described in docs/FORM-CONTRACT.md. Run the public tests with: python -m unittest discover -s public_tests -t ."
+}
