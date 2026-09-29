@@ -78,15 +78,18 @@ def portable_contract_failures(text: str) -> list[str]:
     return failures
 
 
-BRIDGE_ALLOWED_SECTION = "## Never store book extractions"
+BRIDGE_ALLOWED_SECTION = "## Claude-only notes"
+BRIDGE_SECTION_MAX_LINES = 25
 
 
 def bridge_failures(text: str) -> list[str]:
-    """The bridge is the canonical import plus, at most, the copyright rule.
+    """Apply the portfolio Claude bridge contract.
 
-    The copyright section is deliberately duplicated from AGENTS.md so a
-    Claude session sees it even before the import resolves. Any other added
-    guidance is duplication and fails.
+    Contract: chwezi-engine-agents/docs/operations/claude-bridge-contract.md.
+    The bridge is the canonical import plus, at most, one ``## Claude-only
+    notes`` section of runner mechanics (no sub-headings, at most 25 lines
+    including its heading). Doctrine, including the book-extraction rule,
+    lives in AGENTS.md; any other added guidance is duplication and fails.
     """
     text = text.replace("\r\n", "\n")
     if text == EXPECTED_CLAUDE_BRIDGE:
@@ -97,6 +100,8 @@ def bridge_failures(text: str) -> list[str]:
     headings = re.findall(r"^#{1,6} .*$", remainder, re.MULTILINE)
     if not remainder.startswith(BRIDGE_ALLOWED_SECTION + "\n") or headings != [BRIDGE_ALLOWED_SECTION]:
         return ["bridge is not the canonical thin import"]
+    if len(remainder.rstrip("\n").splitlines()) > BRIDGE_SECTION_MAX_LINES:
+        return ["bridge Claude-only section exceeds 25 lines"]
     return []
 
 
@@ -281,10 +286,19 @@ def test_claude_bridge_mutation_is_rejected():
 
 
 def test_claude_bridge_extra_section_is_rejected():
-    allowed = EXPECTED_CLAUDE_BRIDGE + "\n## Never store book extractions\n\nRule text.\n"
+    allowed = EXPECTED_CLAUDE_BRIDGE + "\n## Claude-only notes\n\n- Read SKILL.md files directly.\n"
     assert bridge_failures(allowed) == []
     mutated = allowed + "\n## Duplicated routing\n\n- extra\n"
     assert bridge_failures(mutated) == ["bridge is not the canonical thin import"]
+    doctrine = EXPECTED_CLAUDE_BRIDGE + "\n## Never store book extractions\n\nRule text.\n"
+    assert bridge_failures(doctrine) == ["bridge is not the canonical thin import"]
+
+
+def test_claude_bridge_section_line_limit():
+    body = "".join(f"- note {index}\n" for index in range(23))
+    assert bridge_failures(EXPECTED_CLAUDE_BRIDGE + "\n## Claude-only notes\n\n" + body) == []
+    too_long = EXPECTED_CLAUDE_BRIDGE + "\n## Claude-only notes\n\n" + body + "- one more\n"
+    assert bridge_failures(too_long) == ["bridge Claude-only section exceeds 25 lines"]
 
 
 def test_current_active_count_matches_filesystem_and_documented_surfaces():

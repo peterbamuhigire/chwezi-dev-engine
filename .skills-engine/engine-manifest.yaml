@@ -2,6 +2,7 @@ schema_version: "1.0"
 engine_id: chwezi-dev-engine
 display_name: Chwezi Dev Engine
 contract_version: "1.0"
+version: "1.1.0"
 router:
   path: AGENTS.md
 skills:
@@ -34,3 +35,17 @@ source_of_truth:
   router: AGENTS.md
   skills: skills/**/SKILL.md
   references: references/**
+plugin_exclusions:
+  - path: "."
+    reason: "repository-level router SKILL.md; the plugin exposes the routed skills under skills/, and the router is read through AGENTS.md"
+  - path: "00-meta-initialization"
+    reason: "project-initialisation router outside skills/; counted active by the dev catalogue (167) but loaded by path at project start, not shipped as a plugin skill; the generator runs with --root skills"
+  - path: "00-meta-initialization/new-project"
+    reason: "project scaffold step under the initialisation router; same reason as 00-meta-initialization"
+invariants:
+  - id: book-extraction-ban
+    phrase: "Book extractions, book summaries and chapter-by-chapter notes must never be"
+  - id: not-assessed
+    phrase: "Missing execution, render, production, source, reviewer, or stakeholder evidence is `NOT ASSESSED`, never a pass."
+invariant_exemptions:
+  british-english: "No British English output rule exists in this engine's router (AGENTS.md, README.md, rules/); adding one is new doctrine outside M10-02 scope. Recorded for the orchestrator."
