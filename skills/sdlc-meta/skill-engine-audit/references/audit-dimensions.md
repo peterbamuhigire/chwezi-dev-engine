@@ -29,6 +29,7 @@ nothing the engine is responsible for.
 ## B. Group scoring
 Score each skill group /100 and each skill /100 in a table with a one-line justification. Note
 per skill: has reference files? has worked examples? cites doctrine? deep enough or stub?
+Fan-in evidence (inbound links, mentions, aliases, router and fixture references per skill) comes from `chwezi-engine-agents/scripts/skill_fanin.py --engine <engine> --json`; when the engine-agents checkout is absent, record fan-in as `NOT_ASSESSED`.
 
 ## C. Output-type readiness checklist (score each that applies /100)
 
