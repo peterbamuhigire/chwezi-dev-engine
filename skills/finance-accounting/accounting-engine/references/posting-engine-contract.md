@@ -48,3 +48,13 @@ $accounts = $resolver->forSale(
 ```
 
 If a mapping is missing, return a structured error naming the missing mapping and stop posting.
+
+## Starter Skeletons
+
+A PHP/MySQL starting point for this contract is kept in `chwezi-finance-engine-skeletons/`:
+
+- `chwezi-finance-engine-skeletons/php-mysql/posting-service-skeleton.php`: a posting service with the transaction, period lock, balance and idempotency checks listed above.
+- `chwezi-finance-engine-skeletons/php-mysql/schema.sql`: the ledger tables the skeleton expects.
+- `chwezi-finance-engine-skeletons/reviewer-checklist.md`: the pull-request checklist for any change that touches money.
+
+Treat them as starting points to review against this contract and the finance doctrine engine, not as finished code. (Moved here on 29 Sep 2026 from `skills/finance-accounting/_chwezi-finance-engine-skeletons/`, a folder with no `SKILL.md`.)

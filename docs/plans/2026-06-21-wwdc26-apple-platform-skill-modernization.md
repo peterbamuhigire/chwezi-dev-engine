@@ -79,6 +79,8 @@ The engine should become compatible with Apple platform development as of WWDC26
 
 Promote only when the plan owner accepts the catalog cost, or fold the content into existing retained references.
 
+> Moved 29 Sep 2026 (Kaizen M10-06, orphan-folder disposition): the eight TODO files below now live in `docs/plans/apple-todo-backlog/<name>.md`. They were planning notes, not skills, and their folders under `skills/ios/` held no `SKILL.md`. The table keeps the original paths as history.
+
 | TODO Path | Recommended Action | Reason |
 | --- | --- | --- |
 | `skills/ios/xcode-project-engineering/TODO.md` | Promote to active skill or fold into `ios-development/references/ios-project-setup.md`. | Xcode 27, Apple Silicon, Device Hub, MCP/ACP plugins, schemes, and signing now need stronger guidance. |

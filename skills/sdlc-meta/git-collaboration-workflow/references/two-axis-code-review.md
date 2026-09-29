@@ -26,5 +26,7 @@ still fail this axis; elegant code may still implement the wrong product.
 
 Fixture the method with one standards-pass/spec-fail change and one spec-pass/standards-fail change.
 
+The author's side of this loop (verifying each finding before changing code, and recording declined suggestions) is in [receiving-review-feedback.md](receiving-review-feedback.md).
+
 This reference adapts the independent Standards and Spec review mechanism studied in Matt Pocock's
 `mattpocock/skills` repository at commit `3cca18b`.

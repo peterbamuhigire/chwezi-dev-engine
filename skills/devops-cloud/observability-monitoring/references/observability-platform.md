@@ -196,7 +196,7 @@ Slim route spans are auto-captured. Use semantic attribute names: `http.method`,
 
 For mobile, OpenTelemetry ships RUM agents — `io.opentelemetry.android:android-agent` and the `opentelemetry-swift` SPM package. Both expose OTLP/HTTP and pair with Sentry mobile SDKs (§ Sentry Setup) for crash capture; OTel handles RUM and the cross-service trace. Bootstrap on the main thread as early as possible (Application.onCreate / didFinishLaunchingWithOptions). The Android agent's ANR detector correlates frozen frames with the active `trace_id`, so a jank spike in Grafana resolves to the Compose frame that blocked the main thread.
 
-Verify the latest stable BOM/SPM line at integration time — both lines have shipped on alpha tags. Full bootstrap snippets (Android Application + Compose `ScreenSpan`, iOS `TracedScreen` SwiftUI wrapper, `URLSessionInstrumentation`): `references/mobile-otel-bootstrap.md`.
+Verify the latest stable BOM/SPM line at integration time — both lines have shipped on alpha tags. Full bootstrap snippets (Android Application + Compose `ScreenSpan`, iOS `TracedScreen` SwiftUI wrapper, `URLSessionInstrumentation`): `observability-platform/references/mobile-otel-bootstrap.md`.
 
 ## Prometheus Metrics
 
@@ -430,7 +430,7 @@ Publish internally. Anonymise and publish externally for customer-impacting SEV1
 
 ## Production Dashboards
 
-Four dashboards every SaaS needs — **Service Health** (RED per service), **Infrastructure** (host CPU/memory/disk/network), **Business KPIs** (MRR, active users, signups, churn), **SLO Tracker** (current SLO % vs target, budget remaining per service). Pin all four to the on-call TV. During an incident, responders should not hunt dashboards — they should read them. PromQL recipes and recording-rule patterns: `references/dashboards-and-promql.md`.
+Four dashboards every SaaS needs — **Service Health** (RED per service), **Infrastructure** (host CPU/memory/disk/network), **Business KPIs** (MRR, active users, signups, churn), **SLO Tracker** (current SLO % vs target, budget remaining per service). Pin all four to the on-call TV. During an incident, responders should not hunt dashboards — they should read them. PromQL recipes and recording-rule patterns: `observability-platform/references/dashboards-and-promql.md`.
 
 ## AI-Workload Signals
 

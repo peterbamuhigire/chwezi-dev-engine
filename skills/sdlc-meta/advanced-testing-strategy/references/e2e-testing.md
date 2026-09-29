@@ -433,7 +433,7 @@ Shared state (DB rows, uploaded files) requires serial mode, per-worker isolatio
 
 ## CI Integration (GitHub Actions)
 
-Three jobs to wire up: install deps, cache npm and browsers, run tests in a shard matrix, upload the HTML report on failure. Use `npx playwright install --with-deps` so Linux system libraries land alongside the browser binaries. Combine `strategy.matrix.shard: [1/4, 2/4, 3/4, 4/4]` with `npx playwright test --shard=${{ matrix.shard }}` to scale wall-clock; cache `~/.cache/ms-playwright` keyed on `package-lock.json` so browser downloads only re-run on version bumps. Upload `playwright-report/` with `if: always()` so failed shards are inspectable from the PR. Full workflow YAML (production sharded + minimal scaffolder variant) lives in `references/github-actions-shard.md`.
+Three jobs to wire up: install deps, cache npm and browsers, run tests in a shard matrix, upload the HTML report on failure. Use `npx playwright install --with-deps` so Linux system libraries land alongside the browser binaries. Combine `strategy.matrix.shard: [1/4, 2/4, 3/4, 4/4]` with `npx playwright test --shard=${{ matrix.shard }}` to scale wall-clock; cache `~/.cache/ms-playwright` keyed on `package-lock.json` so browser downloads only re-run on version bumps. Upload `playwright-report/` with `if: always()` so failed shards are inspectable from the PR. Full workflow YAML (production sharded + minimal scaffolder variant) lives in `e2e-testing/references/github-actions-shard.md`.
 
 ## Debugging
 
@@ -468,7 +468,7 @@ Catch flakes early: `retries: 2` tolerates transient issues while reporting them
 
 ## Choosing Playwright vs Cypress
 
-Default to Playwright for new suites: cross-browser parity (WebKit), out-of-process Node-driven tests, first-class multi-tab and multi-origin, native mobile device emulation, free sharding without a paid dashboard. Pick Cypress only when the team already has it, the app is a single-origin SPA, and the live time-travel debugger is the highest-value feature. See `references/cypress-comparison.md` for the full decision table and migration notes.
+Default to Playwright for new suites: cross-browser parity (WebKit), out-of-process Node-driven tests, first-class multi-tab and multi-origin, native mobile device emulation, free sharding without a paid dashboard. Pick Cypress only when the team already has it, the app is a single-origin SPA, and the live time-travel debugger is the highest-value feature. See `e2e-testing/references/cypress-comparison.md` for the full decision table and migration notes.
 
 ## Companion Skills
 

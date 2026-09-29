@@ -229,8 +229,8 @@ monthly. Auditors will ask for evidence.
 
 - `network-security/references/firewall-architecture.md` — limit who can
   reach the apt proxy and ssh management plane.
-- `cicd-devsecops/SKILL.md` — centralised patching pipelines with Ansible.
-- `cicd-jenkins-debian/SKILL.md` — Jenkins scheduled job patterns.
+- `../../../devops-cloud/cicd-pipelines/references/cicd-devsecops.md` — centralised patching pipelines with Ansible.
+- `../../../devops-cloud/cicd-pipelines/references/cicd-jenkins-debian.md` — Jenkins scheduled job patterns.
 - `linux-security-hardening/references/boot-security.md` — reboot behaviour
   and secure boot verification.
 - `linux-security-hardening/references/cis-benchmark-checklist.md` — audit

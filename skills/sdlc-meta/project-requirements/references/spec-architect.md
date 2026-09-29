@@ -164,5 +164,5 @@ sdlc-user-deploy / manual-guide → Document for users
 ---
 
 **Back to:** [Skills Repository](../AGENTS.md)
-**Related:** [feature-planning](../feature-planning/SKILL.md) | [sdlc-planning](../sdlc-planning/SKILL.md) | [manual-guide](../manual-guide/SKILL.md)
+**Related:** [feature-planning](../feature-planning/SKILL.md) | [sdlc-planning](../../sdlc-documentation/references/sdlc-planning.md) | [manual-guide](../manual-guide/SKILL.md)
 **Last Updated:** 2026-02-20

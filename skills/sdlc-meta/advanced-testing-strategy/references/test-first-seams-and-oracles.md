@@ -29,3 +29,27 @@ For a decision that introduces a dependency, crosses a trust boundary, mutates
 data, handles money, or changes asynchronous recovery, include a mutation or
 withheld case that would fail if the safeguard disappeared. Keep the failed result
 and mutation scope in the evidence record.
+
+## When test-first has been selected
+
+This table applies only after the risk-scaled rule above has chosen test-first. It does not
+override the paragraph that says when not to force it.
+
+| Excuse | Reality |
+|---|---|
+| "The change is too small to test." | Small changes to money, stock and permission paths are where silent regressions live. The test is small too. |
+| "I will add the test after the code works." | A test written after the code has never failed, so nobody knows whether it can. Run it red first. |
+| "The existing tests already cover this." | Name the test and show it failing against the old behaviour. If you cannot, it does not cover it. |
+| "Mocking the database is enough." | A mock proves the call was made, not that the query, constraint or transaction is right. Use the real engine for the seam that matters. |
+| "The fixture data is too hard to build." | Hard fixtures point to a missing builder or seeder. Build it once; the next ten tests reuse it. |
+| "It passed on my machine." | Evidence is the command and its output in the shared environment, per `rules/common/verification.md`. |
+| "The new test passes, so the task is done." | The project's suite defines green, not the new test file alone. Run the full suite, or the agreed subset, before claiming done. |
+
+Do not write string-presence tests for prompts, skills or scripts: a test that only asserts a file
+contains a phrase passes whether or not the behaviour exists. Test the behaviour (run the script on a
+fixture, check the output), or record the check as a review item. The one allowed exception is a
+doctrine guard that pins an exact contract token a machine consumer depends on, such as a status
+word a parser reads, and it must say so in its name.
+
+(Excuse table adapted from obra/superpowers, MIT, https://github.com/obra/superpowers, commit
+8ca22dba9a94f28898bbce59f2537ff4d87c747d.)

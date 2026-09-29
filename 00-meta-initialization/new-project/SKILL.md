@@ -60,10 +60,13 @@ Fallback without write access: return the directory tree and file templates as a
 User says any of: "start a new project", "create a new project",
 "scaffold a project", "new client project", "initialize project"
 
-## MANDATORY FIRST STEP
-Before anything else, invoke `superpowers:brainstorming` to explore the project
-intent, requirements, and design. Do NOT skip this step. Do NOT ask clarifying
-questions before invoking brainstorming.
+## First Step: Shared Understanding
+Start with the engine's own design gate: `skills/sdlc-meta/world-class-engineering`
+§2 "Create Shared Understanding". Record user journeys, non-goals, scale and trust
+boundaries, ranked quality attributes and hard constraints, and state the ceremony
+class (spike, bounded or architectural) before scaffolding anything.
+If the Superpowers plugin is present, its process skills (for example
+`superpowers:brainstorming`) may be used; this engine's gates remain authoritative.
 
 ---
 

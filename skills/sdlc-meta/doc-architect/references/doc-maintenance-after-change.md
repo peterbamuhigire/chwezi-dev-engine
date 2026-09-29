@@ -44,13 +44,37 @@ Adapt to what the project actually has; do not create files the project does not
 
 ## Change-to-file map
 
-| Change | Always update | Update when affected |
-|---|---|---|
-| New feature | README usage, `docs/plans/NEXT_FEATURES.md`, `docs/plans/INDEX.md` | API, DATABASE, ARCHITECTURE, AGENTS, PROJECT_BRIEF, memory |
-| Tech-stack change | TECH_STACK | README setup, ARCHITECTURE, AGENTS workflows |
-| Architecture change | ARCHITECTURE | README overview, AGENTS patterns, PROJECT_BRIEF |
-| API or schema change | `docs/API.md` or `docs/DATABASE.md` | ARCHITECTURE contracts, AGENTS patterns, README usage |
-| Skill or routing change (skill engines) | Touched `SKILL.md` frontmatter and hero block, router, routing index, fixtures | Update note under `docs/updates/` |
+| Change | Class | Always update | Update when affected |
+|---|---|---|---|
+| Formatting, comments, tests-only or internal rename with no behaviour change | SKIP | Nothing | Tours and as-built docs only if a cited line moved (run the staleness step below) |
+| New feature | PARTIAL | README usage, `docs/plans/NEXT_FEATURES.md`, `docs/plans/INDEX.md` | API, DATABASE, ARCHITECTURE, AGENTS, PROJECT_BRIEF, memory, code tours that cover the feature |
+| API or schema change | PARTIAL | `docs/API.md` or `docs/DATABASE.md` | ARCHITECTURE contracts, AGENTS patterns, README usage |
+| Skill or routing change (skill engines) | PARTIAL | Touched `SKILL.md` frontmatter and hero block, router, routing index, fixtures | Update note under `docs/updates/` |
+| Architecture change (new module, trust boundary or data store) | ARCHITECTURE | ARCHITECTURE, architecture diagrams and their evidence | README overview, AGENTS patterns, PROJECT_BRIEF, `architect` and `new-joiner` code tours |
+| Tech-stack change, framework upgrade or large restructure | FULL | TECH_STACK, ARCHITECTURE, README setup, AGENTS workflows | Every code tour and as-built document; regenerate rather than patch |
+
+The class sets the depth: SKIP touches nothing unless a citation moved; PARTIAL touches the named
+documents; ARCHITECTURE adds the architecture set and the tours that explain structure; FULL
+treats every derived document as stale. When unsure, take the higher class.
+
+### Staleness check for tours and as-built documents
+
+Record a `generated_from_commit` field (full 40-character SHA) in every code tour and as-built
+document when it is written; for a `.tour` file, put it in the tour's description or handover
+note. To see whether the document is stale, list what changed in its scope since then:
+
+```bash
+git diff --name-only <generated_from_commit> HEAD -- app/Services/Invoicing routes/web.php
+```
+
+An empty list means the document is current for that scope. Any listed file means re-check the
+steps or sections that cite it, then run `scripts/validate_tour.py` for tours. The pathspec after
+`--` keeps the check scoped to what the document covers, so unrelated changes do not force a
+rewrite.
+
+(Change classes and scoped staleness adapted from Egonex-AI/Understand-Anything, MIT,
+https://github.com/Egonex-AI/Understand-Anything, commit
+`b05cc3b20990afca537b4fc0a49b4d7fbdc65bb0`.)
 
 When a project runs in several environments (for example Windows development, Ubuntu
 staging, Debian production), keep the environment table and cross-platform rules in

@@ -90,7 +90,7 @@ Strict compliance, on-prem                       -> Self-hosted K8s
 
 Rule: don't adopt K8s before you have enough services that orchestration + rollout + self-healing pays for the operational cost. If one person can deploy all your services with a shell script in 10 minutes, you don't need K8s yet.
 
-See `references/when-k8s-is-right.md`.
+See `kubernetes-fundamentals/references/when-k8s-is-right.md`.
 
 ## Core objects — the mental model
 
@@ -114,7 +114,7 @@ See `references/when-k8s-is-right.md`.
 
 **DaemonSet** — one Pod per node (agents, collectors).
 
-See `references/core-objects.md`.
+See `kubernetes-fundamentals/references/core-objects.md`.
 
 ## Minimal manifests (learn these by heart)
 
@@ -192,7 +192,7 @@ Anti-pattern: Deployment for a database. You will lose data on the first resched
 5. Exit code in describe: 137 = OOMKilled, 143 = SIGTERM, 1 = app error
 ```
 
-For symptom-by-symptom playbooks (CrashLoopBackOff, ImagePullBackOff, Pending, OOMKilled, Evicted, no endpoints, DNS, stuck rollouts, NotReady nodes) see `references/debugging-recipes.md`.
+For symptom-by-symptom playbooks (CrashLoopBackOff, ImagePullBackOff, Pending, OOMKilled, Evicted, no endpoints, DNS, stuck rollouts, NotReady nodes) see `kubernetes-fundamentals/references/debugging-recipes.md`.
 
 ## kubectl workflow
 
@@ -219,7 +219,7 @@ kubectl top pods
 kubectl top nodes
 ```
 
-Prefer `kubectl apply -k` (Kustomize) or Helm for real work — raw manifests are fine for learning. See `references/kubectl-workflow.md`.
+Prefer `kubectl apply -k` (Kustomize) or Helm for real work — raw manifests are fine for learning. See `kubernetes-fundamentals/references/kubectl-workflow.md`.
 
 ## Labels, selectors, annotations
 
@@ -237,7 +237,7 @@ Prefer `kubectl apply -k` (Kustomize) or Helm for real work — raw manifests ar
 
 Anti-pattern: making liveness call DB. DB blip → all Pods restart → cascade.
 
-See `references/probes-and-lifecycles.md`.
+See `kubernetes-fundamentals/references/probes-and-lifecycles.md`.
 
 ## Ingress controllers
 
@@ -246,7 +246,7 @@ See `references/probes-and-lifecycles.md`.
 - **Cloud LB-backed:** AWS LB Controller (ALB), GCP GCE Ingress — tighter cloud integration.
 - **Gateway API** — newer, standard-track replacement for Ingress. Use if your controller supports it.
 
-Pattern: one Ingress per app/tenant with TLS via cert-manager. See `references/ingress-controllers.md`.
+Pattern: one Ingress per app/tenant with TLS via cert-manager. See `kubernetes-fundamentals/references/ingress-controllers.md`.
 
 ## Cluster options
 
@@ -260,7 +260,7 @@ Pattern: one Ingress per app/tenant with TLS via cert-manager. See `references/i
 | **k3s / k0s** | Edge / on-prem, low-resource |
 | **kubeadm** | Only if you must self-host; expect ops cost |
 
-See `references/cluster-setup-eks-gke.md` and `references/local-kind-minikube.md`.
+See `kubernetes-fundamentals/references/cluster-setup-eks-gke.md` and `kubernetes-fundamentals/references/local-kind-minikube.md`.
 
 ## Anti-patterns
 
@@ -283,12 +283,12 @@ See `references/cluster-setup-eks-gke.md` and `references/local-kind-minikube.md
 
 ## References
 
-- `references/when-k8s-is-right.md`
-- `references/core-objects.md`
-- `references/kubectl-workflow.md`
-- `references/probes-and-lifecycles.md`
-- `references/ingress-controllers.md`
-- `references/cluster-setup-eks-gke.md`
-- `references/local-kind-minikube.md`
-- `references/anti-patterns.md`
-- `references/debugging-recipes.md`
+- `kubernetes-fundamentals/references/when-k8s-is-right.md`
+- `kubernetes-fundamentals/references/core-objects.md`
+- `kubernetes-fundamentals/references/kubectl-workflow.md`
+- `kubernetes-fundamentals/references/probes-and-lifecycles.md`
+- `kubernetes-fundamentals/references/ingress-controllers.md`
+- `kubernetes-fundamentals/references/cluster-setup-eks-gke.md`
+- `kubernetes-fundamentals/references/local-kind-minikube.md`
+- `kubernetes-fundamentals/references/anti-patterns.md`
+- `kubernetes-fundamentals/references/debugging-recipes.md`

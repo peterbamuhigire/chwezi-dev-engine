@@ -100,7 +100,7 @@ Business tenants (100s, medium, need isolation)             -> Namespace per ten
 Enterprise tenants (tens, custom SLAs, compliance)          -> Cluster per tenant
 ```
 
-See `references/multi-tenancy-models.md`.
+See `kubernetes-saas-delivery/references/multi-tenancy-models.md`.
 
 ## Isolation model — namespace vs vCluster vs cluster
 
@@ -111,11 +111,11 @@ Compliance / data residency / hard tenancy                  -> cluster per tenan
 Noisy-neighbour CPU/memory dominates and quotas don't fix   -> dedicated nodepool per tenant, then cluster
 ```
 
-A namespace is not a tenant boundary on its own. It becomes one only when you stack ResourceQuota + LimitRange + default-deny NetworkPolicy + Pod Security `restricted` + per-tenant ServiceAccount + tenant-scoped Role + per-tier PriorityClass + per-tenant ingress. See `references/multi-tenant-isolation.md` for the full checklist and tradeoffs.
+A namespace is not a tenant boundary on its own. It becomes one only when you stack ResourceQuota + LimitRange + default-deny NetworkPolicy + Pod Security `restricted` + per-tenant ServiceAccount + tenant-scoped Role + per-tier PriorityClass + per-tenant ingress. See `kubernetes-saas-delivery/references/multi-tenant-isolation.md` for the full checklist and tradeoffs.
 
 ## Service mesh — only if you need one
 
-Install a mesh when at least two hold: mTLS-everywhere is a compliance control, polyglot stack with no shared RPC library, cross-cluster service discovery, or per-tenant traffic shifting. Otherwise: cert-manager + SPIRE for mTLS, OpenTelemetry SDKs for telemetry, NetworkPolicy for segmentation. See `references/service-mesh-tradeoffs.md`.
+Install a mesh when at least two hold: mTLS-everywhere is a compliance control, polyglot stack with no shared RPC library, cross-cluster service discovery, or per-tenant traffic shifting. Otherwise: cert-manager + SPIRE for mTLS, OpenTelemetry SDKs for telemetry, NetworkPolicy for segmentation. See `kubernetes-saas-delivery/references/service-mesh-tradeoffs.md`.
 
 ## Namespace isolation
 
@@ -152,7 +152,7 @@ spec:
       max: { cpu: "2", memory: 2Gi }
 ```
 
-See `references/namespace-isolation.md`.
+See `kubernetes-saas-delivery/references/namespace-isolation.md`.
 
 ## GitOps with ArgoCD
 
@@ -207,7 +207,7 @@ spec:
 
 **ArgoCD vs Flux:** both are excellent. ArgoCD has better UI, ApplicationSets, and broader adoption. Flux is more GitOps-purist and pairs with Flagger for progressive delivery. Pick one; don't run both.
 
-See `references/gitops-argocd.md`.
+See `kubernetes-saas-delivery/references/gitops-argocd.md`.
 
 ## Progressive delivery
 
@@ -241,7 +241,7 @@ spec:
         - setWeight: 100
 ```
 
-See `references/progressive-delivery.md`.
+See `kubernetes-saas-delivery/references/progressive-delivery.md`.
 
 ## Tenant onboarding automation
 
@@ -262,7 +262,7 @@ Operators (custom controllers) or GitOps-driven automation:
 
 GitOps is recommended unless dynamic lifecycle is truly needed.
 
-See `references/tenant-onboarding-automation.md`.
+See `kubernetes-saas-delivery/references/tenant-onboarding-automation.md`.
 
 ## Per-tenant secrets
 
@@ -283,7 +283,7 @@ spec:
 
 Never hardcode tenant IDs in shared secrets. Never share DB credentials across tenants.
 
-See `references/per-tenant-secrets.md`.
+See `kubernetes-saas-delivery/references/per-tenant-secrets.md`.
 
 ## Observability per tenant
 
@@ -294,7 +294,7 @@ See `references/per-tenant-secrets.md`.
 
 Beware cardinality — a label with 10,000 unique values across metrics = Prometheus dies. Prefer tenant label only on key SLO metrics.
 
-See `references/tenant-observability.md`.
+See `kubernetes-saas-delivery/references/tenant-observability.md`.
 
 ## Cost allocation
 
@@ -303,7 +303,7 @@ See `references/tenant-observability.md`.
 - Monthly cost-per-tenant report fed to billing or product.
 - Outliers: flag tenants consuming >N× their plan quota.
 
-See `references/cost-allocation.md`.
+See `kubernetes-saas-delivery/references/cost-allocation.md`.
 
 ## Offboarding + data deletion
 
@@ -320,7 +320,7 @@ A clean offboarding procedure is as important as onboarding:
 
 Compliance note: some regions require verifiable deletion — document and test this path.
 
-See `references/offboarding-data-deletion.md`.
+See `kubernetes-saas-delivery/references/offboarding-data-deletion.md`.
 
 ## Anti-patterns
 
@@ -342,14 +342,14 @@ See `references/offboarding-data-deletion.md`.
 
 ## References
 
-- `references/multi-tenancy-models.md`
-- `references/namespace-isolation.md`
-- `references/gitops-argocd.md`
-- `references/progressive-delivery.md`
-- `references/tenant-onboarding-automation.md`
-- `references/per-tenant-secrets.md`
-- `references/tenant-observability.md`
-- `references/cost-allocation.md`
-- `references/offboarding-data-deletion.md`
-- `references/multi-tenant-isolation.md`
-- `references/service-mesh-tradeoffs.md`
+- `kubernetes-saas-delivery/references/multi-tenancy-models.md`
+- `kubernetes-saas-delivery/references/namespace-isolation.md`
+- `kubernetes-saas-delivery/references/gitops-argocd.md`
+- `kubernetes-saas-delivery/references/progressive-delivery.md`
+- `kubernetes-saas-delivery/references/tenant-onboarding-automation.md`
+- `kubernetes-saas-delivery/references/per-tenant-secrets.md`
+- `kubernetes-saas-delivery/references/tenant-observability.md`
+- `kubernetes-saas-delivery/references/cost-allocation.md`
+- `kubernetes-saas-delivery/references/offboarding-data-deletion.md`
+- `kubernetes-saas-delivery/references/multi-tenant-isolation.md`
+- `kubernetes-saas-delivery/references/service-mesh-tradeoffs.md`

@@ -34,5 +34,22 @@ flags, cross-platform APIs only) is evidence that code is *unlikely* to break on
 an untested platform, not evidence that it *was tested* there. Say which one you
 mean.
 
+## Claim, required evidence, not sufficient
+
+| Claim | Required evidence | Not sufficient |
+|---|---|---|
+| Tests pass | The exact command and its output, run after the last edit | "Should pass"; a run from before the change |
+| Build succeeds | The build command's exit status and output | The editor showing no red marks |
+| Bug fixed | The original failing reproduction, now passing | A new test written after the fix that never failed |
+| Migration safe | A dry run on a copy of the data and a written rollback path | Reading the migration file |
+| Hook works | The hook's own test file run, including a case built to fail | Running the hook once on a happy path |
+| Delegated agent reported success | The diff read by you and the delegated agent's check rerun by you | The agent's summary |
+| Document rendered | The output file opened, or its structure extracted and checked | The generator exiting with status 0 |
+| Requirement met | The acceptance check named in the plan, run and recorded | The code "looking complete" |
+
+Banned success phrasing, unless the same sentence cites the evidence above: "should pass", "looks correct", "probably works", "seems fine". Write what was run and what it returned instead. A check that could not run is `NOT_ASSESSED`, never a pass.
+
+(Claim table adapted from obra/superpowers, MIT, https://github.com/obra/superpowers, commit 8ca22dba9a94f28898bbce59f2537ff4d87c747d.)
+
 *Full testing-strategy decision framework (unit / integration / contract / e2e /
 regression / risk-based):* `sdlc-meta/advanced-testing-strategy`.

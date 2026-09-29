@@ -321,6 +321,6 @@ You still want FIM on:
   companion to FIM's state-time snapshots
 - `linux-security-hardening/references/rootkit-detection.md` — rootkit scanners
   overlap with FIM but don't replace it
-- `cicd-devsecops/SKILL.md` — image scanning as immutable-infra alternative
+- `../../../devops-cloud/cicd-pipelines/references/cicd-devsecops.md` — image scanning as immutable-infra alternative
 - `database-reliability/SKILL.md` — backup verification techniques apply to
   the AIDE baseline itself

@@ -116,6 +116,8 @@ inactive_skill_aliases:
   skills/sdlc-meta/update-claude-documentation: skills/sdlc-meta/doc-architect
   skills/sdlc-meta/skill-safety-audit: skills/sdlc-meta/skill-engine-audit
   skills/sdlc-meta/opensource-pipeline: skills/sdlc-meta/github-ops
+  skills/sdlc-meta/plan-implementation: skills/sdlc-meta/implementation-status-auditor
+  skills/sdlc-meta/spec-architect: skills/sdlc-meta/project-requirements
 planned_routes:
   doctrine/skills/ifrs-standards-suite:
     domain: finance

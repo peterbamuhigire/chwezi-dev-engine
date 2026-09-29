@@ -98,7 +98,7 @@ Implement comprehensive, standardized error response system for PHP REST APIs wi
 
 ## Additional Guidance
 
-Extended guidance for `api-error-handling` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `api-error-handling` was moved to [api-error-handling/references/skill-deep-dive.md](api-error-handling/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `Response Envelope Standard`

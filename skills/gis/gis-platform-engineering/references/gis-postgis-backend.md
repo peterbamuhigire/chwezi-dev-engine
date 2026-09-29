@@ -92,7 +92,7 @@ Global real-time location tracking (millions of writes/sec)     -> specialised (
 
 PostGIS is the default for anything beyond trivial point-in-circle queries. The MySQL spatial support works but lacks breadth, tooling, and ecosystem.
 
-See `references/when-postgis.md`.
+See `gis-postgis-backend/references/when-postgis.md`.
 
 ## Schema design — SRID choice
 
@@ -129,7 +129,7 @@ ORDER BY metres
 LIMIT 50;
 ```
 
-See `references/schema-srid-choice.md`.
+See `gis-postgis-backend/references/schema-srid-choice.md`.
 
 ## Geometry vs geography
 
@@ -161,7 +161,7 @@ CREATE INDEX idx_events_geom ON events USING BRIN (geom) WITH (pages_per_range =
 
 Always `ANALYZE` after bulk loads. Always check `EXPLAIN ANALYZE` — a spatial index that's not used means your query is wrong (often SRID mismatch or wrong function).
 
-See `references/spatial-indexes.md`.
+See `gis-postgis-backend/references/spatial-indexes.md`.
 
 ## Core spatial SQL you will use
 
@@ -207,7 +207,7 @@ ORDER BY geom <-> ST_SetSRID(ST_MakePoint(:lng, :lat), 4326)
 LIMIT 10;
 ```
 
-See `references/core-spatial-sql.md`.
+See `gis-postgis-backend/references/core-spatial-sql.md`.
 
 ## Performance patterns
 
@@ -228,7 +228,7 @@ WHERE geom && ST_MakeEnvelope(:minx, :miny, :maxx, :maxy, 4326)
 CREATE INDEX idx_listings_geog ON listings USING GIST ((geom::geography));
 ```
 
-See `references/performance-patterns.md`.
+See `gis-postgis-backend/references/performance-patterns.md`.
 
 ## Vector tiles (MVT)
 
@@ -253,7 +253,7 @@ $$ LANGUAGE SQL STABLE;
 
 Serve via `pg_tileserv` or a lightweight Node/Python service. Leaflet / Mapbox GL consume as vector tiles. Cache at the CDN.
 
-See `references/mvt-tiles.md`.
+See `gis-postgis-backend/references/mvt-tiles.md`.
 
 ## Geocoding
 
@@ -268,7 +268,7 @@ Pattern:
 User address -> normalise -> cache lookup -> API call (if miss) -> store lat/lng + provider -> return
 ```
 
-See `references/geocoding.md`.
+See `gis-postgis-backend/references/geocoding.md`.
 
 ## Hybrid MySQL + PostGIS
 
@@ -278,7 +278,7 @@ Many of our SaaS apps run on MySQL. Pattern: keep MySQL as app DB, add PostGIS a
 - **Shared reference data:** geofences stored in PostGIS, ID joined back to MySQL rows.
 - **Spatial answers cached** in MySQL where needed (e.g., `listing.nearest_transit_id`).
 
-Transactions don't span the two DBs — design for eventual consistency. See `references/hybrid-mysql-postgis.md`.
+Transactions don't span the two DBs — design for eventual consistency. See `gis-postgis-backend/references/hybrid-mysql-postgis.md`.
 
 ## Backup + migration
 
@@ -287,7 +287,7 @@ Transactions don't span the two DBs — design for eventual consistency. See `re
 - `ogr2ogr` for converting between formats (Shapefile, GeoJSON, KML → PostGIS, and back).
 - Keep `postgis_full_version()` output with backups — version drift matters.
 
-See `references/backup-migration.md`.
+See `gis-postgis-backend/references/backup-migration.md`.
 
 ## Tenant isolation — Row-Level Security
 
@@ -300,7 +300,7 @@ CREATE POLICY tenant_isolation ON listings
 
 Set `app.tenant_id` per session from the application. RLS makes cross-tenant leaks structurally impossible even if a query forgets the `WHERE` clause.
 
-See `references/tenant-isolation-rls.md`.
+See `gis-postgis-backend/references/tenant-isolation-rls.md`.
 
 ## Anti-patterns
 
@@ -323,14 +323,14 @@ See `references/tenant-isolation-rls.md`.
 
 ## References
 
-- `references/when-postgis.md`
-- `references/schema-srid-choice.md`
-- `references/spatial-indexes.md`
-- `references/core-spatial-sql.md`
-- `references/performance-patterns.md`
-- `references/mvt-tiles.md`
-- `references/geocoding.md`
-- `references/hybrid-mysql-postgis.md`
-- `references/backup-migration.md`
-- `references/tenant-isolation-rls.md`
-- `references/projections-deep.md` — CRS decision table, UTM zones for East Africa, `geometry` vs `geography`, `ST_Subdivide` for large polygons, BRIN vs GIST, KNN index rule
+- `gis-postgis-backend/references/when-postgis.md`
+- `gis-postgis-backend/references/schema-srid-choice.md`
+- `gis-postgis-backend/references/spatial-indexes.md`
+- `gis-postgis-backend/references/core-spatial-sql.md`
+- `gis-postgis-backend/references/performance-patterns.md`
+- `gis-postgis-backend/references/mvt-tiles.md`
+- `gis-postgis-backend/references/geocoding.md`
+- `gis-postgis-backend/references/hybrid-mysql-postgis.md`
+- `gis-postgis-backend/references/backup-migration.md`
+- `gis-postgis-backend/references/tenant-isolation-rls.md`
+- `gis-postgis-backend/references/projections-deep.md` — CRS decision table, UTM zones for East Africa, `geometry` vs `geography`, `ST_Subdivide` for large polygons, BRIN vs GIST, KNN index rule

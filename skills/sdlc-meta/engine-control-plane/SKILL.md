@@ -77,6 +77,13 @@ steps. The minimum lifecycle is `preflight`, `context`, `before_write`,
 evidence, destructive-action, and release gates fail closed or return
 `NOT ASSESSED`.
 
+Two further properties apply to advisory hooks only (safety gates keep failing
+closed on every attempt): an advisory hook blocks at most once per session,
+then lets the agent proceed with its note on record; and it softens to a
+nudge (a message, not a block) when its index or cache is stale for the
+target file. (Adapted from Graphify-Labs/graphify, Apache-2.0, commit
+`d6eaa8aae8df155874ebb1044302c055c286342a`.)
+
 ## Non-negotiables
 
 - Keep domain rules in their owning engine; do not create a second source of truth.

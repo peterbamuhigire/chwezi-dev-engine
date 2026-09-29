@@ -52,6 +52,10 @@ clear reasoning gap, not preemptively or as a default. Running architecture-grad
 work through a classification-tier model wastes correctness; running boilerplate
 through an architecture-tier model wastes cost for no quality gain in return.
 
+## Write each output in its register
+
+Client deliverables are R0 Formal, working prose is R1, and machine-facing agent output is R2 terse; R2 is rewritten into R1 before a person reads it. The register table and the always-preserve list are in `docs/continuous-improvement/english-output-standard-2026-09-02.md` ("Output registers").
+
 ## Do not spend review cycles on what the linter already enforces
 
 When automated format or lint checks already enforce a style rule, treat a

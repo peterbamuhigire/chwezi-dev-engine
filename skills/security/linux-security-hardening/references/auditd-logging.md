@@ -365,5 +365,5 @@ agent's `ossec.conf`. This is usually the lowest-effort option for SaaS fleets.
 - `linux-security-hardening/references/kernel-sysctl-hardening.md` — kernel tunables
 - `linux-security-hardening/references/file-integrity.md` — AIDE/FIM integration
 - `network-security/SKILL.md` — firewall and network logging
-- `cicd-devsecops/SKILL.md` — shipping host logs into the CI/CD pipeline
+- `../../../devops-cloud/cicd-pipelines/references/cicd-devsecops.md` — shipping host logs into the CI/CD pipeline
 - `claude-guides/database-standards.md` — audit tables for database events

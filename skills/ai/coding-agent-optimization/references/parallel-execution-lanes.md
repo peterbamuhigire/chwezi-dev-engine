@@ -47,8 +47,10 @@ Only run lanes concurrently when their write surfaces genuinely do not overlap.
 
 - Batch file reads, searches, status checks, and metadata queries into a single
   round of tool calls whenever they have no dependency between them.
-- Use isolated worktrees (`superpowers:using-git-worktrees` where available)
-  for large, unrelated implementation lanes running at the same time.
+- Use isolated worktrees for large, unrelated implementation lanes running at
+  the same time, following [worktree-safety.md](worktree-safety.md) (consent,
+  provenance, cleanup of only what this session created). The Superpowers
+  worktree skill is an optional helper where installed.
 - Start long-running builds, tests, backfills, or deploys as background
   processes and poll deliberately — do not block a turn waiting on one when
   other lanes can proceed.
@@ -69,6 +71,55 @@ Parallel execution result:
 - Fast path found: batched repo scan + focused tests
 - Verification: lint pass, unit pass, live smoke pass
 ```
+
+### Per-lane report shapes
+
+A lane writes its report for the controller, not for a person. Use one line per finding, in the
+shape for its lane type:
+
+| Lane type | Line shape | Example |
+|---|---|---|
+| Locate | `path:line — finding` | `app/Services/InvoiceService.php:142 — credit note posts without period check` |
+| Edit | `path:start-end — change` | `app/Services/InvoiceService.php:140-155 — added period lock guard before post` |
+| Review | `path:line: severity: problem. fix.` | `app/Http/Controllers/PosController.php:88: high: tenant id read from request body. Take it from the session.` |
+
+Severity is one of `critical`, `high`, `medium`, `low`.
+
+A lane that cannot finish starts its report with exactly one status token, then says why in one
+sentence:
+
+- `blocked.` a dependency, credential or other lane is missing;
+- `too-big.` the lane's scope needs splitting before it can be done safely;
+- `needs-confirm.` the next step is destructive or outside the stated scope;
+- `ambiguous.` the instruction supports two readings that lead to different changes;
+- `regressed.` a check that passed before the lane now fails.
+
+These lines are R2 (machine-facing) register. The controller rewrites them into R1 working prose
+before a human reads them, and keeps every path, number, identifier and error text exactly as
+written (see `docs/continuous-improvement/english-output-standard-2026-09-02.md`, "Output
+registers"). `tests/test_report_shapes.py` checks the three line shapes and the five tokens.
+
+(Report shapes and status tokens adapted from JuliusBrussee/caveman, MIT,
+https://github.com/JuliusBrussee/caveman, commit `2fd153c`.)
+
+## Dispatch and review controls
+
+1. **No steering of reviewers.** The controller never tells a reviewer what to ignore and never
+   pre-rates the severity of a finding. It passes the diff, the acceptance criteria and the
+   files; the reviewer decides what matters.
+2. **Declined to judge.** Every review report ends with a "declined to judge" list: the areas the
+   reviewer did not assess and why (no access, outside competence, not in the diff). An empty
+   list is stated as "declined to judge: none".
+3. **Capability tier, not model.** Each dispatch names a capability tier (`fast`, `standard` or
+   `deep`) and never a provider model identifier. The runner maps the tier to whatever it has.
+4. **No nested dispatch.** Subagents do not spawn subagents. A lane that needs more help returns
+   `too-big.` and the controller re-plans.
+5. **Fix-round circuit breaker.** A review-and-fix loop runs at most three rounds by default. If
+   the fourth round would be needed, stop and hand the task to the human owner with the
+   reviewer's open findings and the diff so far.
+
+(Dispatch controls adapted from obra/superpowers, MIT, https://github.com/obra/superpowers,
+commit 8ca22dba9a94f28898bbce59f2537ff4d87c747d.)
 
 ## Failure Modes
 

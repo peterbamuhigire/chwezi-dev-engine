@@ -67,11 +67,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
-- [references/practical-typescript.md](references/practical-typescript.md) - production TypeScript judgment for domain types, runtime boundaries, config typing, discriminated unions, and maintainability review.
+- [typescript-mastery/references/practical-typescript.md](typescript-mastery/references/practical-typescript.md) - production TypeScript judgment for domain types, runtime boundaries, config typing, discriminated unions, and maintainability review.
 <!-- dual-compat-end -->
 Production-grade TypeScript. Synthesised from Total TypeScript (Pocock), Ultimate TypeScript Handbook (Wellman), 250 Killer TypeScript One-Liners (Abella), and Programming TypeScript (Cherny).
 
-For code reviews, API boundary work, or domain model implementation, also load [references/practical-typescript.md](references/practical-typescript.md).
+For code reviews, API boundary work, or domain model implementation, also load [typescript-mastery/references/practical-typescript.md](typescript-mastery/references/practical-typescript.md).
 
 ---
 
@@ -477,5 +477,5 @@ type Status = typeof Status[keyof typeof Status];
 
 ## References
 
-- `references/generics-and-type-level.md` — depth on items 50-58 (generics as functions, distribution control, template literal DSLs, type tests, Prettify, tail-recursive types, codegen tradeoffs, soundness traps, compiler perf checklist).
+- `typescript-mastery/references/generics-and-type-level.md` — depth on items 50-58 (generics as functions, distribution control, template literal DSLs, type tests, Prettify, tail-recursive types, codegen tradeoffs, soundness traps, compiler perf checklist).
 

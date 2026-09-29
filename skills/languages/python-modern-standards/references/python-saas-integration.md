@@ -149,7 +149,7 @@ Ambiguous cases default to Pattern C — it's more forgiving at scale.
 
 Both patterns share the same Python codebase (`src/service_name/api/` + `src/service_name/workers/`), the same domain logic, and the same configuration.
 
-See `references/fastapi-sidecar.md` and `references/background-workers.md` for full project skeletons.
+See `python-saas-integration/references/fastapi-sidecar.md` and `python-saas-integration/references/background-workers.md` for full project skeletons.
 
 ## PHP ↔ Python contract
 
@@ -185,7 +185,7 @@ Worker job payloads use the same `{ok, data, error}` shape for results. PHP know
 
 Every job or sidecar call that mutates state must accept an `idempotency_key`. Workers deduplicate by key for at least 24 hours. PHP retries are safe.
 
-See `references/php-python-contract.md` for the HMAC implementation, error-code catalog, idempotency patterns, and versioning strategy.
+See `python-saas-integration/references/php-python-contract.md` for the HMAC implementation, error-code catalog, idempotency patterns, and versioning strategy.
 
 ## Multi-tenant safety
 
@@ -197,7 +197,7 @@ Every request and every job carries `tenant_id`. Python services:
 - Log `tenant_id` on every log line (via structlog contextvars).
 - Worker concurrency: one Python worker may process jobs for many tenants; never carry tenant state between jobs in module-level variables.
 
-See `references/tenant-isolation.md`.
+See `python-saas-integration/references/tenant-isolation.md`.
 
 ## File handoff (for large outputs)
 
@@ -211,7 +211,7 @@ Always include tenant_id in the storage path. Never trust the filename alone for
 
 **Cleanup:** temp files expire after 24–72 hours depending on use case. A scheduled sweep job removes expired files. Never rely on "someone will clean it up."
 
-See `references/file-handoff.md`.
+See `python-saas-integration/references/file-handoff.md`.
 
 ## Deployment on Debian/Ubuntu
 
@@ -279,7 +279,7 @@ location /internal/py/ {
 
 Never expose the sidecar to the public internet.
 
-See `references/deployment-debian.md` for venv strategies, secrets management, log rotation, zero-downtime restarts, and blue-green sidecar deployment.
+See `python-saas-integration/references/deployment-debian.md` for venv strategies, secrets management, log rotation, zero-downtime restarts, and blue-green sidecar deployment.
 
 ## Observability
 
@@ -291,7 +291,7 @@ Align Python logs with PHP logs so a single incident can be traced end-to-end.
 - **Traces:** OpenTelemetry if the team already uses it; otherwise correlation IDs are enough to start.
 - **Health checks:** `GET /health` on sidecar (liveness), `GET /ready` (readiness — checks DB/Redis). Workers expose a heartbeat key in Redis.
 
-See `references/observability.md`.
+See `python-saas-integration/references/observability.md`.
 
 ## Failure modes
 
@@ -303,7 +303,7 @@ Plan for Python being down, slow, or misbehaving.
 - **Poison messages:** workers catch exceptions per job, log, send to DLQ, continue processing. Never crash the worker on a single bad payload.
 - **Idempotency:** all retries are safe because workers dedupe by `idempotency_key`.
 
-See `references/failure-modes.md`.
+See `python-saas-integration/references/failure-modes.md`.
 
 ## Versioning + rollouts
 
@@ -320,11 +320,11 @@ See `references/failure-modes.md`.
 
 ## References
 
-- `references/fastapi-sidecar.md`
-- `references/background-workers.md`
-- `references/php-python-contract.md`
-- `references/file-handoff.md`
-- `references/tenant-isolation.md`
-- `references/deployment-debian.md`
-- `references/observability.md`
-- `references/failure-modes.md`
+- `python-saas-integration/references/fastapi-sidecar.md`
+- `python-saas-integration/references/background-workers.md`
+- `python-saas-integration/references/php-python-contract.md`
+- `python-saas-integration/references/file-handoff.md`
+- `python-saas-integration/references/tenant-isolation.md`
+- `python-saas-integration/references/deployment-debian.md`
+- `python-saas-integration/references/observability.md`
+- `python-saas-integration/references/failure-modes.md`

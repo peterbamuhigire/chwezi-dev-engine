@@ -239,3 +239,11 @@ fixtures:
     expect: ai-agent-compliance-controls
   - task: "Define SLA commitments and automatic service credits for our AI agent product"
     expect: ai-agent-commercial-operations
+
+  # --- M10-06 methodology and comprehension (29 Sep 2026) ---
+  - task: "A reviewer wants me to drop the retry wrapper and rename the service class; how do I decide whether they are right before changing anything?"
+    expect: git-collaboration-workflow
+  - task: "Map this legacy PHP invoicing module before I change how credit notes post"
+    expect: ai-assisted-development
+  - task: "Check that the code tour we wrote still points at real files and lines after last month's refactor"
+    expect: doc-architect

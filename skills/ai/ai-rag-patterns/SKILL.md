@@ -64,6 +64,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
+- [references/curated-corpus-worked-example.md](references/curated-corpus-worked-example.md): small curated corpus with BM25 ranking, per-domain score floors, calibrated abstention and a graded, fingerprinted golden set.
 <!-- dual-compat-end -->
 ## Overview
 

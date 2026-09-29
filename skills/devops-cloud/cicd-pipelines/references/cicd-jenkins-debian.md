@@ -411,7 +411,7 @@ To restore: stop Jenkins, restore JENKINS_HOME contents, start Jenkins.
 
 ## 8. Linux Hardening and Performance Tuning
 
-The Jenkins controller and a build agent share the same Debian/Ubuntu base but have different load shapes — keep two profiles. The generic OS baseline lives in `references/linux-systems-hardening.md` and the sibling `linux-security-hardening` skill; this section is the Jenkins-specific overlay. Full depth in `references/jenkins-host-tuning.md`.
+The Jenkins controller and a build agent share the same Debian/Ubuntu base but have different load shapes — keep two profiles. The generic OS baseline lives in `cicd-jenkins-debian/references/linux-systems-hardening.md` and the sibling `linux-security-hardening` skill; this section is the Jenkins-specific overlay. Full depth in `cicd-jenkins-debian/references/jenkins-host-tuning.md`.
 
 ### 8.1 CIS Benchmark baseline
 
@@ -424,7 +424,7 @@ Common to both: `vm.swappiness=10`, `kernel.dmesg_restrict=1`, `kernel.kptr_rest
 - Controller — long-lived TCP to UI clients, SCM webhooks, agents. Conservative `somaxconn`/`tcp_max_syn_backlog` aligned to the configured Jenkins thread pool; higher TCP keepalive cadence so dead agent connections are reaped.
 - Agent — short-lived heavy I/O across many parallel artefact pulls. Larger `net.core.{rmem,wmem}_max`, larger `tcp_{rmem,wmem}`, raised `net.netfilter.nf_conntrack_max`, raised `fs.file-max` and per-process `nofile`.
 
-Pattern, not values. Exact numbers come from the CIS benchmark and observed traffic. See `references/jenkins-host-tuning.md` §2 for concrete drop-in files.
+Pattern, not values. Exact numbers come from the CIS benchmark and observed traffic. See `cicd-jenkins-debian/references/jenkins-host-tuning.md` §2 for concrete drop-in files.
 
 ### 8.3 cgroups v2 resource isolation
 
@@ -494,6 +494,6 @@ Pick one tool — `lynis`, OpenSCAP SSG, or a custom asserter — and pin it. Do
 - `references/nginx-reverse-proxy.md` — Nginx TLS config for Jenkins
 - `references/multibranch-pipeline.md` — Multibranch pipeline setup for GitLab/GitHub
 - `references/shared-library.md` — Jenkins shared library for cross-repo pipeline patterns
-- `references/linux-systems-hardening.md` — generic sysctl, cgroups v2, auditd, AppArmor, fail2ban, BBR
-- `references/jenkins-host-tuning.md` — controller vs agent profiles, CIS baseline, verification harness
+- `cicd-jenkins-debian/references/linux-systems-hardening.md` — generic sysctl, cgroups v2, auditd, AppArmor, fail2ban, BBR
+- `cicd-jenkins-debian/references/jenkins-host-tuning.md` — controller vs agent profiles, CIS baseline, verification harness
 - Companion skill `linux-security-hardening` — OS-wide baseline; this skill is the Jenkins-specific overlay

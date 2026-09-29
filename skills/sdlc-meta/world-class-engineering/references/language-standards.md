@@ -94,7 +94,7 @@ All website copy, headings, CTAs, descriptions, and microcopy must follow this s
 
 ## Additional Guidance
 
-Extended guidance for `language-standards` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `language-standards` was moved to [language-standards/references/skill-deep-dive.md](language-standards/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `British English Spelling`

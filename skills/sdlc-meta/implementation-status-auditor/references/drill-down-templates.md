@@ -19,14 +19,29 @@ After the initial audit, users can request deep dives. Use these templates.
 
 ### Components
 
-| Component | Type | Status | File Path |
-|-----------|------|--------|-----------|
-| {name} | Model | ✅ Complete | `app/Models/X.php` |
-| {name} | Controller | ⚠️ Partial | `app/Http/Controllers/X.php` |
-| {name} | Migration | ✅ Complete | `database/migrations/X.php` |
-| {name} | Route | ❌ Missing | — |
-| {name} | UI Screen | ❌ Missing | — |
-| {name} | Test | ❌ Missing | — |
+| Component | Type | Status | File Path | Evidence |
+|-----------|------|--------|-----------|----------|
+| {name} | Model | ✅ Complete | `app/Models/X.php` | EXTRACTED: read `app/Models/X.php:12-40` |
+| {name} | Controller | ⚠️ Partial | `app/Http/Controllers/X.php` | INFERRED: LSP callers, index built {timestamp} at {full commit SHA}; verify in source before editing |
+| {name} | Migration | ✅ Complete | `database/migrations/X.php` | EXTRACTED: `Schema::create('x', ...)` at line 14 |
+| {name} | Route | ❌ Missing | — | EXTRACTED: `git grep -n "XController" routes/` returned nothing |
+| {name} | UI Screen | ❌ Missing | — | AMBIGUOUS: view name built from a variable in `XController::show`; flagged for review |
+| {name} | Test | ❌ Missing | — | EXTRACTED: no file under `tests/` names `X` |
+
+**Evidence tags.** Every status row carries one tag:
+
+| Tag | Meaning | Worked row |
+|---|---|---|
+| EXTRACTED | Read directly from source at the audited commit | `InvoiceController`, ✅ Complete. EXTRACTED: `routes/web.php:41` maps `POST /invoices` to `InvoiceController@store` |
+| INFERRED | Resolved by a tool or by reasoning; verify in source before acting | `CreditNoteService`, ⚠️ Partial. INFERRED: the index shows 2 callers; index built 2026-09-29T08:14Z at full commit `3f9c2a7e5b1d4c8f9a0b6e2d7c1f4a8b9e0d3c5a` |
+| AMBIGUOUS | Cannot be resolved statically; never counted as absent | `ReportExporter`, status unknown. AMBIGUOUS: the class name is built from `$type` at runtime; needs a runtime check |
+
+Structural-index evidence (LSP, ctags, a project map or a graph file) is accepted only when the row
+records the index build timestamp and the full commit SHA it was built from. An index result without
+both is treated as AMBIGUOUS. For PHP, "no callers" from an index also needs a grep on the method
+name (see `ai-assisted-development/references/graph-first-codebase-comprehension.md`). Tag
+vocabulary adapted from Graphify-Labs/graphify (Apache-2.0, https://github.com/Graphify-Labs/graphify,
+commit `d6eaa8aae8df155874ebb1044302c055c286342a`).
 
 ## Database Tables
 

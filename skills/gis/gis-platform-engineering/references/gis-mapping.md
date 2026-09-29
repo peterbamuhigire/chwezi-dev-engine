@@ -78,13 +78,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Leaflet-first mapping for web apps (default engine)
 - Optional OpenStreetMap tiles or other providers
 - Location selection (marker, polygon, rectangle) + map UI patterns
-- Geofencing enforcement with client + server validation (see geofencing.md)
+- Geofencing enforcement with client + server validation (see gis-mapping/geofencing.md)
 - Performance, clustering, and safe storage of spatial data
 
 ## Capability Index (Leaflet-First)
 
 Use this index to load only the section you need. Details live in
-[references/leaflet-capabilities.md](references/leaflet-capabilities.md).
+[gis-mapping/references/leaflet-capabilities.md](gis-mapping/references/leaflet-capabilities.md).
 
 1. **Basic Mapping & Visualization** (core Leaflet)
 2. **Spatial Queries** (Turf.js)
@@ -217,7 +217,7 @@ Geofencing must be enforced at two levels:
 - **UI constraint**: prevent invalid selections in the browser
 - **Server constraint**: verify boundaries in backend validation
 
-See geofencing.md for full patterns, point-in-polygon checks, and multi-geometry rules.
+See gis-mapping/geofencing.md for full patterns, point-in-polygon checks, and multi-geometry rules.
 
 ## UI Patterns
 
@@ -231,7 +231,7 @@ See geofencing.md for full patterns, point-in-polygon checks, and multi-geometry
 - Use marker clustering or server-side tiling
 - Lazy load heavy layers
 - Simplify large polygons for UI display
-- Pick a rendering strategy by feature count — see references/rendering-thresholds.md for the full table. Short form:
+- Pick a rendering strategy by feature count — see gis-mapping/references/rendering-thresholds.md for the full table. Short form:
   - < 200 features: plain markers/SVG
   - 200–2 000 points: `Leaflet.markercluster`
   - 200–5 000 polygons: `preferCanvas: true` on the map
@@ -246,7 +246,7 @@ See geofencing.md for full patterns, point-in-polygon checks, and multi-geometry
 - Client-side reprojection on every pan — project server-side, deliver EPSG:4326.
 - SVG renderer for 10 k+ polygons — switch to Canvas or vector tiles.
 - Heatmap under ~200 points — implies density that is not statistically there.
-- Two plugins for the same job (e.g. `leaflet-draw` and Geoman both active) — event collisions, see references/leaflet-plugins.md.
+- Two plugins for the same job (e.g. `leaflet-draw` and Geoman both active) — event collisions, see gis-mapping/references/leaflet-plugins.md.
 - Leaving `L.marker` default icon in production — image path breaks when bundled (Webpack/Vite); use a custom icon or shim.
 
 ## Backend Validation
@@ -273,8 +273,8 @@ Always validate coordinates server-side:
 
 ## References
 
-- geofencing.md (sub-skill)
-- references/leaflet-capabilities.md
-- references/leaflet-arcgis-equivalents.md (index)
-- references/leaflet-plugins.md — plugin selection matrix, compatibility checklist, plugin-vs-custom decision
-- references/rendering-thresholds.md — feature-count → strategy table, Canvas vs SVG vs WebGL, per-zoom simplification
+- gis-mapping/geofencing.md (sub-skill)
+- gis-mapping/references/leaflet-capabilities.md
+- gis-mapping/references/leaflet-arcgis-equivalents.md (index)
+- gis-mapping/references/leaflet-plugins.md — plugin selection matrix, compatibility checklist, plugin-vs-custom decision
+- gis-mapping/references/rendering-thresholds.md — feature-count → strategy table, Canvas vs SVG vs WebGL, per-zoom simplification

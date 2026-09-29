@@ -442,7 +442,7 @@ Speedup: 67% faster
 
 ## Additional Guidance
 
-Extended guidance for `orchestration-best-practices` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `orchestration-best-practices` was moved to [orchestration-best-practices/references/skill-deep-dive.md](orchestration-best-practices/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `Decision Tree: When to Use What`

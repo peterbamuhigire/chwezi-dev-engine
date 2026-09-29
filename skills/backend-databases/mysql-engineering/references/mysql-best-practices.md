@@ -80,9 +80,9 @@ Production-grade MySQL patterns for high-performance, secure, scalable SaaS appl
 
 **Access Policy (Required):** Frontend clients must never access the database directly. All data access must flow through backend services exposed via APIs.
 
-**Deep References:** `references/query-performance.md`, `references/indexing-deep-dive.md`, `references/server-tuning-mycnf.md`, `references/security-hardening.md`, `references/high-availability.md`, `references/advanced-sql-patterns.md`, `references/backup-recovery.md`, `references/transaction-locking.md`, `references/benchmarking-tools.md`
+**Deep References:** `mysql-best-practices/references/query-performance.md`, `mysql-best-practices/references/indexing-deep-dive.md`, `mysql-best-practices/references/server-tuning-mycnf.md`, `mysql-best-practices/references/security-hardening.md`, `mysql-best-practices/references/high-availability.md`, `mysql-best-practices/references/advanced-sql-patterns.md`, `mysql-best-practices/references/backup-recovery.md`, `mysql-best-practices/references/transaction-locking.md`, `mysql-best-practices/references/benchmarking-tools.md`
 
-**SQL References:** `references/stored-procedures.sql`, `references/triggers.sql`, `references/partitioning.sql`
+**SQL References:** `mysql-best-practices/references/stored-procedures.sql`, `mysql-best-practices/references/triggers.sql`, `mysql-best-practices/references/partitioning.sql`
 
 ## Deployment Environments
 
@@ -99,7 +99,7 @@ Production-grade MySQL patterns for high-performance, secure, scalable SaaS appl
 
 ## Additional Guidance
 
-Extended guidance for `mysql-best-practices` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `mysql-best-practices` was moved to [mysql-best-practices/references/skill-deep-dive.md](mysql-best-practices/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `When to Use`

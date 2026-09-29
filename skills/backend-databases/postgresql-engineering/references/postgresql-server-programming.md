@@ -121,7 +121,7 @@ $$;
 
 ## Additional Guidance
 
-Extended guidance for `postgresql-server-programming` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `postgresql-server-programming` was moved to [postgresql-server-programming/references/skill-deep-dive.md](postgresql-server-programming/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `Variables and Data Types`

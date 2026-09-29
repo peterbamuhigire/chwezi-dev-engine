@@ -131,7 +131,7 @@ bind-address                     = 127.0.0.1  # restrict to localhost; override 
 
 ## Additional Guidance
 
-Extended guidance for `mysql-administration` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `mysql-administration` was moved to [mysql-administration/references/skill-deep-dive.md](mysql-administration/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `2. GTID-Based Replication Setup`

@@ -1,0 +1,5 @@
+{
+  "name": "fixture/php-mysql-map",
+  "description": "Synthetic fixture for tests/test_php_mysql_map.py. Not application code.",
+  "autoload": { "psr-4": { "App\\": "app/" } }
+}

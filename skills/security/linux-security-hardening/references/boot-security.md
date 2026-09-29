@@ -224,4 +224,4 @@ disk. Defences in depth:
   controls for bootloader permissions and Secure Boot state.
 - `network-security/references/firewall-architecture.md` — isolating the
   management plane that hosts Tang and BMC.
-- `cicd-devsecops/SKILL.md` — signing artefacts and protecting build keys.
+- `../../../devops-cloud/cicd-pipelines/references/cicd-devsecops.md` — signing artefacts and protecting build keys.

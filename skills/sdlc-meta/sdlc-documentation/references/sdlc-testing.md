@@ -113,13 +113,13 @@ Testing documentation must make these explicit:
 
 | # | Document | File | Purpose | Audience | Phase |
 |---|----------|------|---------|----------|-------|
-| 1 | Software Test Plan | `templates/software-test-plan.md` | Testing strategy, tools, environments, schedule, completion criteria | QA leads, PMs, devs | After SRS + SDD |
-| 2 | Test Case Specifications | `templates/test-case-specifications.md` | Normative 29119-3 test cases: ID, objective, priority, traceability, preconditions, input, expected result | Test engineers, devs | During development |
-| 3 | Validation & Verification Plan | `templates/validation-verification-plan.md` | V&V approach (built right + right product) | QA mgrs, PMs, compliance | After SRS + SDD |
-| 4 | Validation Test Report | `templates/validation-test-report.md` | Test execution results and Go/No-Go release decision | PMs, stakeholders, QA | Before release |
-| 5 | Peer Review Report | `templates/peer-review-report.md` | Code, design, and document review findings | Dev team, tech leads | Throughout SDLC |
-| 6 | Incident Report | `templates/incident-report.md` | Anomaly record: ID, timing, context, description, impact, urgency, status | QA, dev leads | During execution |
-| 7 | Test Completion Report | `templates/test-completion-report.md` | Test summary, deviations, completion criteria met, residual risks, lessons learned | PMs, stakeholders, compliance | End of test phase |
+| 1 | Software Test Plan | `sdlc-testing/templates/software-test-plan.md` | Testing strategy, tools, environments, schedule, completion criteria | QA leads, PMs, devs | After SRS + SDD |
+| 2 | Test Case Specifications | `sdlc-testing/templates/test-case-specifications.md` | Normative 29119-3 test cases: ID, objective, priority, traceability, preconditions, input, expected result | Test engineers, devs | During development |
+| 3 | Validation & Verification Plan | `sdlc-testing/templates/validation-verification-plan.md` | V&V approach (built right + right product) | QA mgrs, PMs, compliance | After SRS + SDD |
+| 4 | Validation Test Report | `sdlc-testing/templates/validation-test-report.md` | Test execution results and Go/No-Go release decision | PMs, stakeholders, QA | Before release |
+| 5 | Peer Review Report | `sdlc-testing/templates/peer-review-report.md` | Code, design, and document review findings | Dev team, tech leads | Throughout SDLC |
+| 6 | Incident Report | `sdlc-testing/templates/incident-report.md` | Anomaly record: ID, timing, context, description, impact, urgency, status | QA, dev leads | During execution |
+| 7 | Test Completion Report | `sdlc-testing/templates/test-completion-report.md` | Test summary, deviations, completion criteria met, residual risks, lessons learned | PMs, stakeholders, compliance | End of test phase |
 
 ## Standards Basis
 
@@ -395,13 +395,13 @@ Before test execution begins, confirm:
 
 Each template provides the complete structure, section-by-section guidance, examples tailored to the tech stack, anti-patterns, and a quality checklist.
 
-1. [Software Test Plan](templates/software-test-plan.md)
-2. [Test Case Specifications](templates/test-case-specifications.md)
-3. [Validation & Verification Plan](templates/validation-verification-plan.md)
-4. [Validation Test Report](templates/validation-test-report.md)
-5. [Peer Review / Inspection Report](templates/peer-review-report.md)
-6. [Incident Report](templates/incident-report.md)
-7. [Test Completion Report](templates/test-completion-report.md)
+1. [Software Test Plan](sdlc-testing/templates/software-test-plan.md)
+2. [Test Case Specifications](sdlc-testing/templates/test-case-specifications.md)
+3. [Validation & Verification Plan](sdlc-testing/templates/validation-verification-plan.md)
+4. [Validation Test Report](sdlc-testing/templates/validation-test-report.md)
+5. [Peer Review / Inspection Report](sdlc-testing/templates/peer-review-report.md)
+6. [Incident Report](sdlc-testing/templates/incident-report.md)
+7. [Test Completion Report](sdlc-testing/templates/test-completion-report.md)
 
 ## References
 
@@ -410,5 +410,5 @@ Each template provides the complete structure, section-by-section guidance, exam
 ---
 
 **Back to:** [Skills Repository](../AGENTS.md)
-**Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [android-tdd](../android-tdd/SKILL.md) | [vibe-security-skill](../vibe-security-skill/SKILL.md) | [ai-error-handling](../ai-error-handling/SKILL.md)
+**Related:** [sdlc-planning](sdlc-planning.md) | [android-tdd](../android-tdd/SKILL.md) | [vibe-security-skill](../vibe-security-skill/SKILL.md) | [ai-error-handling](../ai-error-handling/SKILL.md)
 **Last Updated:** 2026-03-15 (upgraded to BS ISO/IEC/IEEE 29119-3:2013 per Winston, BS Standards; strengthened per Adjei 2023, Splunk Product is Docs)

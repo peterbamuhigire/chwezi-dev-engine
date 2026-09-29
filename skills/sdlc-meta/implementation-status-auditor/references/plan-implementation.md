@@ -383,6 +383,6 @@ The plan is NOT complete until:
 
 ## See Also
 
-- `references/execution-loop-detail.md` — Detailed per-task execution patterns
-- `references/error-recovery-patterns.md` — How to handle failures autonomously
-- `references/progress-tracking.md` — Logging, status updates, completion reports
+- `plan-implementation/references/execution-loop-detail.md` — Detailed per-task execution patterns
+- `plan-implementation/references/error-recovery-patterns.md` — How to handle failures autonomously
+- `plan-implementation/references/progress-tracking.md` — Logging, status updates, completion reports

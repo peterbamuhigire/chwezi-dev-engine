@@ -154,7 +154,7 @@ WINDOW w AS (PARTITION BY customer_id ORDER BY order_date
 
 ## Additional Guidance
 
-Extended guidance for `mysql-advanced-sql` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `mysql-advanced-sql` was moved to [mysql-advanced-sql/references/skill-deep-dive.md](mysql-advanced-sql/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `2. Recursive CTEs`

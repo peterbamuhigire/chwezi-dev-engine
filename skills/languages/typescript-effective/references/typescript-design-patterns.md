@@ -191,7 +191,7 @@ class ObjectPool<T> {
 
 ## Additional Guidance
 
-Extended guidance for `typescript-design-patterns` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `typescript-design-patterns` was moved to [typescript-design-patterns/references/skill-deep-dive.md](typescript-design-patterns/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `STRUCTURAL — Composing objects and classes`

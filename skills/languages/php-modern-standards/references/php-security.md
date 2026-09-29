@@ -119,10 +119,10 @@ session.save_path = "/var/lib/php/sessions"
 
 ### Session Fixation & Hijacking Prevention
 
-ðŸ“– **See `references/security-code-patterns.md` for complete SecureSession, InputValidator, OutputEncoder, CsrfGuard, and SecureUpload class implementations.**
+ðŸ“– **See `php-security/references/security-code-patterns.md` for complete SecureSession, InputValidator, OutputEncoder, CsrfGuard, and SecureUpload class implementations.**
 
 ```php
-// Key patterns (full classes in references/security-code-patterns.md):
+// Key patterns (full classes in php-security/references/security-code-patterns.md):
 SecureSession::start();                      // Secure session init
 SecureSession::regenerate();                 // On login/privilege change
 SecureSession::destroy();                    // On logout
@@ -136,7 +136,7 @@ validateSessionFingerprint();                // Bind to user agent
 ### Server-Side Validation (Never Trust Client)
 
 ```php
-// Full InputValidator class in references/security-code-patterns.md
+// Full InputValidator class in php-security/references/security-code-patterns.md
 InputValidator::email($input);               // filter_var FILTER_VALIDATE_EMAIL
 InputValidator::integer($input, 0, 1000);    // filter_var FILTER_VALIDATE_INT with range
 InputValidator::url($input);                 // Validate URL + restrict to http/https
@@ -154,7 +154,7 @@ preg_match('/^[a-zA-Z0-9_]{3,30}$/', $username);                       // Userna
 ### Context-Specific Encoding
 
 ```php
-// Full OutputEncoder class in references/security-code-patterns.md
+// Full OutputEncoder class in php-security/references/security-code-patterns.md
 OutputEncoder::html($input);   // htmlspecialchars(ENT_QUOTES | ENT_HTML5, 'UTF-8')
 OutputEncoder::js($input);     // json_encode(JSON_HEX_TAG | JSON_HEX_AMP | ...)
 OutputEncoder::url($input);    // rawurlencode()
@@ -228,7 +228,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-sr
 ## CSRF Protection
 
 ```php
-// Full CsrfGuard class in references/security-code-patterns.md
+// Full CsrfGuard class in php-security/references/security-code-patterns.md
 CsrfGuard::generate();              // bin2hex(random_bytes(32)) → session
 CsrfGuard::validate($token, 7200);  // hash_equals + time check
 CsrfGuard::field();                 // Hidden input HTML
@@ -242,7 +242,7 @@ if (!CsrfGuard::validate($_POST['csrf_token'])) { die('CSRF validation failed');
 ## File Upload Security
 
 ```php
-// Full SecureUpload class in references/security-code-patterns.md
+// Full SecureUpload class in php-security/references/security-code-patterns.md
 $errors = SecureUpload::validate($_FILES['upload']);  // Magic bytes + size + extension
 $filename = SecureUpload::store($_FILES['upload'], '/var/uploads/');  // Random filename
 ```
@@ -311,7 +311,7 @@ expose_php = Off
 ### Custom Error Handler
 
 ```php
-// Full error/exception handlers in references/security-code-patterns.md
+// Full error/exception handlers in php-security/references/security-code-patterns.md
 // Key pattern: log details server-side, show generic message to users
 set_error_handler(function (int $errno, string $errstr, string $errfile, int $errline): bool {
     error_log("[{$errno}] {$errstr} in {$errfile}:{$errline}");
@@ -327,7 +327,7 @@ set_error_handler(function (int $errno, string $errstr, string $errfile, int $er
 ## Cryptographic Best Practices
 
 ```php
-// Full encrypt/decrypt functions in references/security-code-patterns.md
+// Full encrypt/decrypt functions in php-security/references/security-code-patterns.md
 $token = bin2hex(random_bytes(32));                       // 64-char hex token
 $hash = password_hash($pw, PASSWORD_ARGON2ID, [           // Argon2id (ALWAYS)
     'memory_cost' => 65536, 'time_cost' => 4, 'threads' => 3,

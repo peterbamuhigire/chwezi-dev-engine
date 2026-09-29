@@ -457,7 +457,7 @@ Sizing rules:
 - Multi-team SaaS exposing many services with auth, rate-limit, transformation needs: Kong (DB-less + deck) wins on plugin maturity.
 - Kubernetes-first deployment with cert-manager-style automation: Traefik wins on providers and ACME.
 
-Deeper material — verbatim doc extracts, full HAProxy stick-table syntax, Kong DB-less reload mechanics, and Traefik ACME blocks — lives in `references/proxy-gateway-ops.md`.
+Deeper material — verbatim doc extracts, full HAProxy stick-table syntax, Kong DB-less reload mechanics, and Traefik ACME blocks — lives in `microservices-architecture-models/references/proxy-gateway-ops.md`.
 
 ---
 

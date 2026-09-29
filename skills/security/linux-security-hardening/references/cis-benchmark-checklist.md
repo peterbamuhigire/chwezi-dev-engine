@@ -291,4 +291,4 @@ stay machine-readable (JSON or CSV).
   full sysctl values for section 3.
 - `network-security/references/firewall-architecture.md` — design of the
   default-deny firewall in section 3.
-- `cicd-devsecops/SKILL.md` — automating Lynis/OpenSCAP scans in CI.
+- `../../../devops-cloud/cicd-pipelines/references/cicd-devsecops.md` — automating Lynis/OpenSCAP scans in CI.

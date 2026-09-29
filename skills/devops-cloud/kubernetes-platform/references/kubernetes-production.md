@@ -130,13 +130,13 @@ Watch a ConfigMap and bounce Pods                        -> CronJob is enough
 Tenant lifecycle in SaaS                                 -> GitOps + ApplicationSet first; operator only if dynamic
 ```
 
-Rule: install before you build. See `references/crd-operators.md` for the build/install/avoid matrix and CRD hygiene.
+Rule: install before you build. See `kubernetes-production/references/crd-operators.md` for the build/install/avoid matrix and CRD hygiene.
 
 ## Cluster and node upgrades
 
 Upgrades are releases, not chores. Pre-flight: run `kube-no-trouble`/`pluto` against Git for removed APIs, verify a Velero restore in a sandbox, drain-test one canary node.
 
-Order: control plane -> node groups one at a time -> add-ons (CNI first, mesh last). Every workload with replicas > 1 has a PDB; a PDB of `minAvailable: 100%` blocks drain forever. See `references/upgrade-runbook.md`.
+Order: control plane -> node groups one at a time -> add-ons (CNI first, mesh last). Every workload with replicas > 1 has a PDB; a PDB of `minAvailable: 100%` blocks drain forever. See `kubernetes-production/references/upgrade-runbook.md`.
 
 ## Helm vs Kustomize
 
@@ -149,7 +149,7 @@ Strict "WYSIWYG" manifests                     -> Kustomize
 
 We use **Helm** for shipped packages and **Kustomize** for simple in-house env overlays. Never both for the same workload.
 
-See `references/helm-vs-kustomize.md`.
+See `kubernetes-production/references/helm-vs-kustomize.md`.
 
 ## Resource management
 
@@ -164,7 +164,7 @@ Rules:
 - Measure before setting — `kubectl top` and Prometheus `container_memory_working_set_bytes`, `rate(container_cpu_usage_seconds_total[5m])`.
 - Gradually reduce over-provisioning using VPA in recommend mode.
 
-See `references/resource-management.md`.
+See `kubernetes-production/references/resource-management.md`.
 
 ## HPA — Horizontal Pod Autoscaler
 
@@ -193,7 +193,7 @@ spec:
 - Scale up fast, scale down slow.
 - For queue-depth-based or custom metrics: install Prometheus Adapter.
 
-See `references/autoscaling-hpa-vpa.md`.
+See `kubernetes-production/references/autoscaling-hpa-vpa.md`.
 
 ## Stateful workloads
 
@@ -209,7 +209,7 @@ StatefulSet + PVC for databases, caches, brokers:
 
 For databases, strongly consider managed (RDS, Cloud SQL, Neon) before in-cluster. In-cluster DBs make sense only with serious ops maturity.
 
-See `references/stateful-workloads.md`.
+See `kubernetes-production/references/stateful-workloads.md`.
 
 ## External secrets
 
@@ -221,7 +221,7 @@ Never commit `Secret` manifests to Git (even base64 is not encryption). Options:
 
 Pattern: external-secrets + cloud secret manager is our default in cloud; SOPS for air-gapped or self-hosted.
 
-See `references/secrets-external-secrets.md`.
+See `kubernetes-production/references/secrets-external-secrets.md`.
 
 ## Observability stack
 
@@ -238,7 +238,7 @@ Install via kube-prometheus-stack Helm chart.
 
 **Golden signals per service:** latency, traffic, errors, saturation.
 
-See `references/observability-stack.md`.
+See `kubernetes-production/references/observability-stack.md`.
 
 ## RBAC + Pod Security
 
@@ -264,7 +264,7 @@ metadata:
 
 Restricted disallows: privilege escalation, hostPath, hostNetwork, running as root, etc.
 
-See `references/rbac-and-pod-security.md`.
+See `kubernetes-production/references/rbac-and-pod-security.md`.
 
 ## NetworkPolicies — default deny
 
@@ -281,7 +281,7 @@ Then add explicit allows per workload (e.g., api can reach db, web can reach api
 
 Requires a CNI that enforces NetworkPolicy: Calico, Cilium, or Azure CNI. Flannel does not.
 
-See `references/network-policies.md`.
+See `kubernetes-production/references/network-policies.md`.
 
 ## Admission control — OPA Gatekeeper or Kyverno
 
@@ -297,7 +297,7 @@ Policy-as-code enforcement at cluster admission:
 **Kyverno** — YAML-based policies, easier for most teams.
 **OPA Gatekeeper** — Rego-based, more powerful, steeper curve.
 
-See `references/admission-control-opa-kyverno.md`.
+See `kubernetes-production/references/admission-control-opa-kyverno.md`.
 
 ## Image scanning
 
@@ -316,7 +316,7 @@ velero backup create weekly-$(date +%Y%m%d) --include-namespaces production --tt
 - Scheduled backups with Velero Schedule.
 - Regular restore drills — backups you never restore are hope, not a backup.
 
-See `references/backup-velero.md`.
+See `kubernetes-production/references/backup-velero.md`.
 
 ## Cost control
 
@@ -325,7 +325,7 @@ See `references/backup-velero.md`.
 - **Spot / preemptible nodes** — for stateless, fault-tolerant workloads. Use node taints + tolerations to steer.
 - **Idle resource alerts** — requests far above usage = over-provisioning.
 
-See `references/cost-control.md`.
+See `kubernetes-production/references/cost-control.md`.
 
 ## Anti-patterns
 
@@ -345,16 +345,16 @@ See `references/cost-control.md`.
 
 ## References
 
-- `references/helm-vs-kustomize.md`
-- `references/resource-management.md`
-- `references/autoscaling-hpa-vpa.md`
-- `references/stateful-workloads.md`
-- `references/secrets-external-secrets.md`
-- `references/observability-stack.md`
-- `references/rbac-and-pod-security.md`
-- `references/network-policies.md`
-- `references/admission-control-opa-kyverno.md`
-- `references/backup-velero.md`
-- `references/cost-control.md`
-- `references/upgrade-runbook.md`
-- `references/crd-operators.md`
+- `kubernetes-production/references/helm-vs-kustomize.md`
+- `kubernetes-production/references/resource-management.md`
+- `kubernetes-production/references/autoscaling-hpa-vpa.md`
+- `kubernetes-production/references/stateful-workloads.md`
+- `kubernetes-production/references/secrets-external-secrets.md`
+- `kubernetes-production/references/observability-stack.md`
+- `kubernetes-production/references/rbac-and-pod-security.md`
+- `kubernetes-production/references/network-policies.md`
+- `kubernetes-production/references/admission-control-opa-kyverno.md`
+- `kubernetes-production/references/backup-velero.md`
+- `kubernetes-production/references/cost-control.md`
+- `kubernetes-production/references/upgrade-runbook.md`
+- `kubernetes-production/references/crd-operators.md`

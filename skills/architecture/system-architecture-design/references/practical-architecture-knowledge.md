@@ -167,7 +167,7 @@ Use a mix of:
 - process checks: lead time, review cycle time, deployment frequency
 - runtime checks: error budget, saturation, queue lag, cache hit rate
 - security checks: vulnerable dependency gates, secret scanning, auth coverage
-- documentation checks: ADRs present for irreversible decisions, diagrams current
+- documentation checks: ADRs present for irreversible decisions, diagrams current (diagram-versus-code drift: [architecture-as-code.md](architecture-as-code.md))
 
 Keep fitness functions close to the risk. Do not add a check unless a failing
 result would trigger a concrete action.

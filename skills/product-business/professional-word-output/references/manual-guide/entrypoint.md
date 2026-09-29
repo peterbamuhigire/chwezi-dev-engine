@@ -244,5 +244,5 @@ Organize manuals with a clear hierarchy:
 ---
 
 **Back to:** [Skills Repository](../AGENTS.md)
-**Related:** [sdlc-user-deploy](../sdlc-user-deploy/SKILL.md) | [doc-architect](../doc-architect/SKILL.md) | [feature-planning](../feature-planning/SKILL.md)
+**Related:** [sdlc-user-deploy](../../../../sdlc-meta/sdlc-documentation/references/sdlc-user-deploy.md) | [doc-architect](../doc-architect/SKILL.md) | [feature-planning](../feature-planning/SKILL.md)
 **Last Updated:** 2026-02-20

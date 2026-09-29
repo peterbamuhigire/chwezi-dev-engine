@@ -398,4 +398,4 @@ machine-readable output is in `/var/log/lynis-report.dat`.
 - `linux-security-hardening/references/rootkit-detection.md` — many kernel
   rootkits are blocked by `kexec_load_disabled` and module blacklists
 - `network-security/SKILL.md` — nftables/UFW rules that complement network sysctls
-- `cicd-devsecops/SKILL.md` — automating Lynis in CI for drift detection
+- `../../../devops-cloud/cicd-pipelines/references/cicd-devsecops.md` — automating Lynis in CI for drift detection

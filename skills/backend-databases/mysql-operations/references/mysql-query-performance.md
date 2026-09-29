@@ -112,7 +112,7 @@ Look for `"cost_info"` → `"read_cost"` + `"eval_cost"` to understand why the o
 
 ## Additional Guidance
 
-Extended guidance for `mysql-query-performance` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `mysql-query-performance` was moved to [mysql-query-performance/references/skill-deep-dive.md](mysql-query-performance/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `2. Index Selection — Why MySQL Ignores Your Index`

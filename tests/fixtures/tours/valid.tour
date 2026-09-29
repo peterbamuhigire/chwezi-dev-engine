@@ -1,0 +1,14 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Invoice posting (fixture)",
+  "persona": "vibecoder",
+  "description": "Valid fixture: every anchor exists on disk and is in range.",
+  "steps": [
+    { "directory": "tests/fixtures/tours/project", "title": "Project root", "description": "Synthetic project for the validator tests." },
+    { "file": "tests/fixtures/tours/project/README.md", "line": 1, "title": "Read me", "description": "What the fixture contains." },
+    { "file": "tests/fixtures/tours/project/public/index.php", "line": 7, "title": "Front controller", "description": "Tenant is resolved before routing." },
+    { "file": "tests/fixtures/tours/project/app/Services/InvoicePoster.php", "selection": { "start": { "line": 13, "character": 0 }, "end": { "line": 22, "character": 0 } }, "title": "Posting", "description": "One transaction wraps the journal insert." },
+    { "file": "tests/fixtures/tours/project/app/Services/InvoicePoster.php", "pattern": "public function post", "title": "Entry method", "description": "Pattern anchor survives line drift." },
+    { "title": "Next steps", "description": "You can now trace an invoice to its journal line." }
+  ]
+}

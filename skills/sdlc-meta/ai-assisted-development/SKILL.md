@@ -161,3 +161,7 @@ security, supply chain, and measured evidence for optimisation claims.
   when code or an answer depends on a library's current, version-specific API,
   configuration, or setup; resolve the library, query the live docs, and cite
   the version (absorbed from the retired `documentation-lookup` skill).
+- Load [graph-first codebase comprehension](references/graph-first-codebase-comprehension.md)
+  before changing an unfamiliar or legacy module: query an existing index first, apply the
+  staleness rules and EXTRACTED/INFERRED/AMBIGUOUS tags, and never accept "zero callers" in PHP
+  without a grep.

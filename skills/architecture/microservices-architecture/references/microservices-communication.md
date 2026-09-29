@@ -333,7 +333,7 @@ Three engines cover three different shapes of "async":
   and runs are time-boxed.
 
 For deployment topology, full retry semantics, signals/queries, XCom, HA, and
-backup discipline see `references/workflow-engines.md`.
+backup discipline see `microservices-communication/references/workflow-engines.md`.
 
 ### n8n
 
@@ -488,7 +488,7 @@ Temporal — the cluster overhead is not justified.
 ---
 
 **See also:**
-- `references/workflow-engines.md` — n8n / Temporal / Airflow deep dive: deployment topology, full retry semantics, signals/queries/child workflows, XCom, HA, backup, security
+- `microservices-communication/references/workflow-engines.md` — n8n / Temporal / Airflow deep dive: deployment topology, full retry semantics, signals/queries/child workflows, XCom, HA, backup, security
 - `microservices-architecture-models` — where service discovery is handled (Proxy/Router/Fabric)
 - `microservices-resilience` — retry, timeout, circuit breaker for synchronous calls
 - `microservices-ai-integration` — async AI job queue pattern

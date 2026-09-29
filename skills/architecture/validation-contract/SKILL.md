@@ -123,7 +123,7 @@ Skills exempt from declaring (non-exhaustive):
 
 - `world-class-engineering`, `skill-composition-standards`, `validation-contract` itself.
 - `system-architecture-design`, `engineering-management-system`, `git-collaboration-workflow`.
-- `feature-planning`, `spec-architect`.
+- `feature-planning`, and spec authoring in `project-requirements` (`../../sdlc-meta/project-requirements/references/spec-architect.md`).
 - All `superpowers:*` skills.
 
 When a skill straddles the line, the default is **declare**. False positives are cheaper than silent omissions.

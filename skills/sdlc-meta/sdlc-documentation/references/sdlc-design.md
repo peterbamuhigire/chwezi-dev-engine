@@ -112,12 +112,12 @@ Design documents must define:
 
 | # | Document | File | Purpose | Audience | Length |
 |---|----------|------|---------|----------|--------|
-| 1 | System Design Document | `templates/system-design-document.md` | Overall architecture, components, interactions | Architects, senior devs, tech leads | 20-40 pages |
-| 2 | Technical Specification | `templates/technical-specification.md` | Implementation details, algorithms, data structures | Developers implementing the system | 20-40 pages |
-| 3 | Interface Control Document | `templates/interface-control-document.md` | Interface contracts between components/systems | Integration engineers, API consumers | 15-30 pages |
-| 4 | Database Design Document | `templates/database-design-document.md` | Schema, data models, relationships, procedures | DBAs, backend developers | 20-40 pages |
-| 5 | Code Documentation Standards | `templates/code-documentation-standards.md` | Inline comments, docstrings, documentation rules | All developers | 10-20 pages |
-| 6 | API Documentation | `templates/api-documentation.md` | Endpoint specs, auth, errors, SDK examples | Frontend/mobile devs, integrators | 20-40 pages |
+| 1 | System Design Document | `sdlc-design/templates/system-design-document.md` | Overall architecture, components, interactions | Architects, senior devs, tech leads | 20-40 pages |
+| 2 | Technical Specification | `sdlc-design/templates/technical-specification.md` | Implementation details, algorithms, data structures | Developers implementing the system | 20-40 pages |
+| 3 | Interface Control Document | `sdlc-design/templates/interface-control-document.md` | Interface contracts between components/systems | Integration engineers, API consumers | 15-30 pages |
+| 4 | Database Design Document | `sdlc-design/templates/database-design-document.md` | Schema, data models, relationships, procedures | DBAs, backend developers | 20-40 pages |
+| 5 | Code Documentation Standards | `sdlc-design/templates/code-documentation-standards.md` | Inline comments, docstrings, documentation rules | All developers | 10-20 pages |
+| 6 | API Documentation | `sdlc-design/templates/api-documentation.md` | Endpoint specs, auth, errors, SDK examples | Frontend/mobile devs, integrators | 20-40 pages |
 
 ## Prerequisites
 
@@ -301,12 +301,12 @@ Run after generating all documents:
 
 Each template provides the complete structure, section-by-section guidance, example excerpts, anti-patterns, and a quality checklist.
 
-1. [System Design Document](templates/system-design-document.md)
-2. [Technical Specification](templates/technical-specification.md)
-3. [Interface Control Document](templates/interface-control-document.md)
-4. [Database Design Document](templates/database-design-document.md)
-5. [Code Documentation Standards](templates/code-documentation-standards.md)
-6. [API Documentation](templates/api-documentation.md)
+1. [System Design Document](sdlc-design/templates/system-design-document.md)
+2. [Technical Specification](sdlc-design/templates/technical-specification.md)
+3. [Interface Control Document](sdlc-design/templates/interface-control-document.md)
+4. [Database Design Document](sdlc-design/templates/database-design-document.md)
+5. [Code Documentation Standards](sdlc-design/templates/code-documentation-standards.md)
+6. [API Documentation](sdlc-design/templates/api-documentation.md)
 
 ## References
 
@@ -315,5 +315,5 @@ Each template provides the complete structure, section-by-section guidance, exam
 ---
 
 **Back to:** [Skills Repository](../AGENTS.md)
-**Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [feature-planning](../feature-planning/SKILL.md) | [mysql-best-practices](../mysql-best-practices/SKILL.md) | [api-error-handling](../api-error-handling/SKILL.md)
+**Related:** [sdlc-planning](sdlc-planning.md) | [feature-planning](../feature-planning/SKILL.md) | [mysql-best-practices](../../../backend-databases/mysql-engineering/references/mysql-best-practices.md) | [api-error-handling](../../../architecture/api-design-first/references/api-error-handling.md)
 **Last Updated:** 2026-03-15 (strengthened per Adjei 2023, Winston, Etter 2016)

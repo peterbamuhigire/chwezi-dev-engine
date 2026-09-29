@@ -1,0 +1,51 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Invoice posting (fixture)",
+  "persona": "vibecoder",
+  "description": "Failing fixture: step 5 names a file added after the tour ref (tour/absent-at-ref). Run by tests/test_validate_tour.py against a temporary repository where tag fixture-base predates LatePoster.php.",
+  "steps": [
+    {
+      "directory": "tests/fixtures/tours/project",
+      "title": "Project root",
+      "description": "Synthetic project for the validator tests."
+    },
+    {
+      "file": "tests/fixtures/tours/project/README.md",
+      "line": 1,
+      "title": "Read me",
+      "description": "What the fixture contains."
+    },
+    {
+      "file": "tests/fixtures/tours/project/public/index.php",
+      "line": 7,
+      "title": "Front controller",
+      "description": "Tenant is resolved before routing."
+    },
+    {
+      "file": "tests/fixtures/tours/project/app/Services/InvoicePoster.php",
+      "selection": {
+        "start": {
+          "line": 13,
+          "character": 0
+        },
+        "end": {
+          "line": 22,
+          "character": 0
+        }
+      },
+      "title": "Posting",
+      "description": "One transaction wraps the journal insert."
+    },
+    {
+      "file": "tests/fixtures/tours/project/app/Services/LatePoster.php",
+      "line": 1,
+      "title": "Late service",
+      "description": "Added after the ref."
+    },
+    {
+      "title": "Next steps",
+      "description": "You can now trace an invoice to its journal line."
+    }
+  ],
+  "ref": "fixture-base"
+}

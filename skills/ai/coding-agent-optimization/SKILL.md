@@ -37,6 +37,8 @@ adapter: [Codex](references/codex.md) or [Claude Code](references/claude-code.md
 - Run already-decomposed independent work concurrently (batched reads, subagents,
   worktrees, verification lanes) without write collisions or false completion;
   load [parallel execution lanes](references/parallel-execution-lanes.md).
+- Create, use or remove a Git worktree for a lane; load
+  [worktree safety](references/worktree-safety.md) first.
 
 Do not use this skill to design an application agent runtime, an in-product
 multi-agent protocol, or a provider gateway. Route those tasks to

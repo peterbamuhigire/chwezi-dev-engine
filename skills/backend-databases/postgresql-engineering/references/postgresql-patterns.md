@@ -78,17 +78,17 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
-- `references/mysql-to-postgres.md` for the side-by-side translation table.
-- `references/jsonb-and-fts.md` for JSONB operators, GIN indexing, and full-text search.
-- `references/pgvector.md` for pgvector install, distance operators, and HNSW vs IVFFlat tuning.
-- `references/supabase-rls.md` for the Supabase position and worked RLS policies on embeddings.
-- `references/pgbouncer.md` for pooling modes, sizing, and the prepared-statement pitfall.
-- `references/operations.md` for pg_dump, pg_basebackup, replication, and EXPLAIN ANALYZE.
+- `postgresql-patterns/references/mysql-to-postgres.md` for the side-by-side translation table.
+- `postgresql-patterns/references/jsonb-and-fts.md` for JSONB operators, GIN indexing, and full-text search.
+- `postgresql-patterns/references/pgvector.md` for pgvector install, distance operators, and HNSW vs IVFFlat tuning.
+- `postgresql-patterns/references/supabase-rls.md` for the Supabase position and worked RLS policies on embeddings.
+- `postgresql-patterns/references/pgbouncer.md` for pooling modes, sizing, and the prepared-statement pitfall.
+- `postgresql-patterns/references/operations.md` for pg_dump, pg_basebackup, replication, and EXPLAIN ANALYZE.
 <!-- dual-compat-end -->
 
 ## 1. Why PostgreSQL is in this engine
 
-PostgreSQL is added alongside MySQL to enable pgvector and Supabase projects. MySQL stays primary for transactional workloads. A reader who reaches this skill expecting a "migrate to Postgres" guide is in the wrong place. See `00-front-matter/polyglot-persistence.md` and `references/mysql-to-postgres.md`.
+PostgreSQL is added alongside MySQL to enable pgvector and Supabase projects. MySQL stays primary for transactional workloads. A reader who reaches this skill expecting a "migrate to Postgres" guide is in the wrong place. See `00-front-matter/polyglot-persistence.md` and `postgresql-patterns/references/mysql-to-postgres.md`.
 
 Decision tree:
 
@@ -101,7 +101,7 @@ Decision tree:
 
 ## 2. PostgreSQL for MySQL developers
 
-Use modern PostgreSQL idioms over the legacy SQL most MySQL devs already know. The full translation table is in `references/mysql-to-postgres.md`. Five things you need now:
+Use modern PostgreSQL idioms over the legacy SQL most MySQL devs already know. The full translation table is in `postgresql-patterns/references/mysql-to-postgres.md`. Five things you need now:
 
 Auto-incrementing primary keys. Use `GENERATED ALWAYS AS IDENTITY` (PostgreSQL 10+), not the legacy `SERIAL` macro. Source: postgresql.org/docs/current/ddl-identity-columns.html.
 
@@ -135,7 +135,7 @@ UUIDs, ENUM, and ARRAY. `gen_random_uuid()` ships in PostgreSQL 13+ without requ
 
 ## 3. JSONB
 
-JSONB is binary-decomposed JSON with operator support and indexability. The full operator reference and decision table are in `references/jsonb-and-fts.md`. Working set:
+JSONB is binary-decomposed JSON with operator support and indexability. The full operator reference and decision table are in `postgresql-patterns/references/jsonb-and-fts.md`. Working set:
 
 | Operator | Meaning | Example |
 |---|---|---|
@@ -188,7 +188,7 @@ PostgreSQL FTS supports stemming dictionaries per language, weighted ranking via
 
 ## 5. pgvector
 
-This is the section that earns the skill its place in the engine. All snippets below are from the pgvector README at github.com/pgvector/pgvector v0.8.2. Full HNSW vs IVFFlat tuning detail is in `references/pgvector.md`.
+This is the section that earns the skill its place in the engine. All snippets below are from the pgvector README at github.com/pgvector/pgvector v0.8.2. Full HNSW vs IVFFlat tuning detail is in `postgresql-patterns/references/pgvector.md`.
 
 Install (PostgreSQL 13+ required):
 
@@ -268,7 +268,7 @@ create policy "tenant_isolation_insert" on embeddings
   with check ( tenant_id = (select auth.jwt() ->> 'tenant_id')::bigint );
 ```
 
-The supabase-js query builder does not natively understand pgvector operators. Wrap vector queries in a SQL function and call it via `supabase.rpc()`. See `references/supabase-rls.md` for the full pattern and a per-tenant policy template.
+The supabase-js query builder does not natively understand pgvector operators. Wrap vector queries in a SQL function and call it via `supabase.rpc()`. See `postgresql-patterns/references/supabase-rls.md` for the full pattern and a per-tenant policy template.
 
 ## 7. PgBouncer
 
@@ -284,7 +284,7 @@ Default for web/SaaS workloads: transaction pooling. Switch to session pooling f
 
 Prepared-statement pitfall. Prepared statements break in transaction pooling unless the client uses simple-protocol or PgBouncer 1.21+ with `server_prepared_statements = on`. Fix by upgrading PgBouncer, enabling that setting, or moving the offending app to a session-mode pool on a separate port.
 
-Sizing rule of thumb: `pool_size` per database is roughly twice the PostgreSQL host's CPU cores; total client connections may be 10-20x `pool_size`. Tune from observed `pg_stat_activity` waiting counts. See `references/pgbouncer.md`.
+Sizing rule of thumb: `pool_size` per database is roughly twice the PostgreSQL host's CPU cores; total client connections may be 10-20x `pool_size`. Tune from observed `pg_stat_activity` waiting counts. See `postgresql-patterns/references/pgbouncer.md`.
 
 ## 8. Operations
 
@@ -301,7 +301,7 @@ Physical backup with `pg_basebackup` (full cluster, foundation for streaming rep
 pg_basebackup -D /var/lib/postgresql/backup -Ft -z -P
 ```
 
-WAL archiving uses `archive_mode = on` and `archive_command` in `postgresql.conf`. Point-in-time recovery requires WAL plus a base backup. Streaming replication ships WAL to a hot standby; logical replication ships row-level changes through publications and subscriptions. See `references/operations.md`.
+WAL archiving uses `archive_mode = on` and `archive_command` in `postgresql.conf`. Point-in-time recovery requires WAL plus a base backup. Streaming replication ships WAL to a hot standby; logical replication ships row-level changes through publications and subscriptions. See `postgresql-patterns/references/operations.md`.
 
 `EXPLAIN (ANALYZE, BUFFERS)` is the single most valuable habit:
 

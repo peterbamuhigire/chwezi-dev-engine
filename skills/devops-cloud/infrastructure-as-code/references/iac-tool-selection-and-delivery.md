@@ -21,7 +21,7 @@ every job is the usual design error.
 Decision rule: provisioning tool creates the box and its neighbours; image or
 config tool decides what runs inside; orchestrator keeps it running. For a
 single Debian VPS client, a provisioning module plus an Ansible role is enough;
-Kubernetes is not a default (see `../../kubernetes-fundamentals/references/when-k8s-is-right.md`).
+Kubernetes is not a default (see `../../kubernetes-platform/references/kubernetes-fundamentals/references/when-k8s-is-right.md`).
 
 ## 2. Terraform or OpenTofu
 

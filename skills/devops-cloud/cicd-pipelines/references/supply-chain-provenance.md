@@ -5,7 +5,7 @@ package, mobile binary, installer, IaC module), when a client or regulator asks
 "how do you know production runs what you reviewed", or when a deploy gate
 should refuse unverified artifacts. Container signing mechanics with Cosign and
 admission control live in
-`../../cicd-devsecops/references/container-runtime-security.md`; hardening of
+`cicd-devsecops/references/container-runtime-security.md`; hardening of
 the workflow that produces the artifact lives in
 `github-actions-security-hardening.md`.
 

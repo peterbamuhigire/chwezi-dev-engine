@@ -190,7 +190,7 @@ try {
 
 ## Additional Guidance
 
-Extended guidance for `api-pagination` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `api-pagination` was moved to [api-pagination/references/skill-deep-dive.md](api-pagination/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `Android Client Pattern`

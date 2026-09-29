@@ -172,7 +172,7 @@ Secrets must be centrally managed with auth, rotation, revocation, and audit. Va
 - **Rotation runbook** — every critical credential has a documented rotation job: quarterly for static keys, monthly for signing keys, on-event for compromise. Rotation is scripted and idempotent.
 - **Emergency revocation** — `vault lease revoke -prefix` cancels every dynamic credential under a path; documented as an incident-response step.
 
-Deep runbook: [references/vault-operations.md](references/vault-operations.md). Installation and HA/DR: [references/vault-secrets-lifecycle.md](references/vault-secrets-lifecycle.md).
+Deep runbook: [cicd-devsecops/references/vault-operations.md](cicd-devsecops/references/vault-operations.md). Installation and HA/DR: [cicd-devsecops/references/vault-secrets-lifecycle.md](cicd-devsecops/references/vault-secrets-lifecycle.md).
 
 ## Compliance Controls
 
@@ -183,7 +183,7 @@ Technical controls have to map to frameworks or they are not auditable. Map once
 - **SOC 2 CC series** — CC6 (logical access), CC7 (system operations), CC8 (change management), CC9 (risk mitigation) map directly to pipeline gates and deployment records.
 - **Audit evidence checklist** — artefact digest, SBOM, signed deployment record, access logs, scan output, approvers, dated waivers. Retain for the longer of 3 years or the framework requirement.
 
-Per-framework control mapping: [references/compliance-controls.md](references/compliance-controls.md). Broader framework coverage: [references/compliance-mapping.md](references/compliance-mapping.md).
+Per-framework control mapping: [cicd-devsecops/references/compliance-controls.md](cicd-devsecops/references/compliance-controls.md). Broader framework coverage: [cicd-devsecops/references/compliance-mapping.md](cicd-devsecops/references/compliance-mapping.md).
 
 ## Container Runtime Security
 
@@ -194,7 +194,7 @@ Image scans catch known CVEs. Runtime policy catches what the image cannot — p
 - **Runtime detection** — Falco (or equivalent eBPF-based sensor) watches syscalls and flags suspicious behaviour: shell spawned in a container that should have no shell, reads of `/etc/shadow`, outbound connections to unknown IPs.
 - **Least-privilege pod spec** — `runAsNonRoot: true`, `readOnlyRootFilesystem: true`, dropped capabilities, `seccompProfile: RuntimeDefault`, network policies that default-deny and explicitly allow required flows.
 
-Implementation detail: [references/container-runtime-security.md](references/container-runtime-security.md).
+Implementation detail: [cicd-devsecops/references/container-runtime-security.md](cicd-devsecops/references/container-runtime-security.md).
 
 ## Review Checklist
 
@@ -239,7 +239,7 @@ Key rotation:
 - `vault operator rekey` rotates root and recovery keys; requires a quorum of unseal-key holders.
 - Transit keys rotate with `vault write -f transit/keys/<name>/rotate`; old versions remain available for decryption until explicitly trimmed.
 
-Deeper deployment, HA, DR, and engine reference: [references/vault-secrets-lifecycle.md](references/vault-secrets-lifecycle.md). AppRole, dynamic credentials, and rotation runbooks: [references/vault-operations.md](references/vault-operations.md).
+Deeper deployment, HA, DR, and engine reference: [cicd-devsecops/references/vault-secrets-lifecycle.md](cicd-devsecops/references/vault-secrets-lifecycle.md). AppRole, dynamic credentials, and rotation runbooks: [cicd-devsecops/references/vault-operations.md](cicd-devsecops/references/vault-operations.md).
 
 ## PKI Lifecycle
 
@@ -305,7 +305,7 @@ Auth methods to know:
 
 Auto-rotation on a database role uses `default_ttl` (lease TTL) plus `rotation_period` (root-credential rotation). The Vault Agent Injector renders dynamic credentials into pods via annotations without code changes in the app.
 
-Working examples for AWS, Transit, the two-tier PKI bootstrap, the Kubernetes auth method, the JWT/OIDC auth method (with the GitHub Actions consumer step), and the Vault Agent Injector annotation pattern are in [references/vault-operations.md](references/vault-operations.md).
+Working examples for AWS, Transit, the two-tier PKI bootstrap, the Kubernetes auth method, the JWT/OIDC auth method (with the GitHub Actions consumer step), and the Vault Agent Injector annotation pattern are in [cicd-devsecops/references/vault-operations.md](cicd-devsecops/references/vault-operations.md).
 
 ### ISO 27001 Controls Mapping
 
@@ -372,7 +372,7 @@ Install on Kubernetes via the `falcosecurity/falco` Helm chart with `driver.kind
 
 A custom rule pack should at minimum cover: shell spawned in a container that should have none, reads of `/etc/shadow`, writes to `/etc/cron.d`, execution of the `vault` binary outside the Vault namespace, and outbound connections to IPs not on the egress allow-list.
 
-Install commands, the shell-in-container rule, and the Falcosidekick routing config: [references/container-runtime-security.md](references/container-runtime-security.md).
+Install commands, the shell-in-container rule, and the Falcosidekick routing config: [cicd-devsecops/references/container-runtime-security.md](cicd-devsecops/references/container-runtime-security.md).
 
 ### OPA/Gatekeeper Admission Policies
 
@@ -385,7 +385,7 @@ Gatekeeper is a validating and mutating admission webhook that enforces CRD-base
 
 Ship at least three concrete Gatekeeper constraints in any production cluster: required image registry (only `registry.example.com/*` allowed), required CPU and memory resource limits on every container, and disallowed `hostPath` volumes outside an explicit allow-list of operator namespaces. Enable API-server audit logging with `--audit-policy-file` capturing `RequestResponse` on `admissionregistration.k8s.io` resources so denials are reviewable.
 
-Install manifest, a `runAsNonRoot` ConstraintTemplate, and a deploy-time Constraint example: [references/container-runtime-security.md](references/container-runtime-security.md).
+Install manifest, a `runAsNonRoot` ConstraintTemplate, and a deploy-time Constraint example: [cicd-devsecops/references/container-runtime-security.md](cicd-devsecops/references/container-runtime-security.md).
 
 ### Trivy and Grype Container Scanning
 
@@ -397,16 +397,16 @@ CVE threshold policy for the engine:
 
 Pick Trivy or Grype as the primary build-time gate to keep results deterministic; both produce CVE reports against OS packages and language ecosystems and can be paired with `cosign attest` to bind a CycloneDX SBOM to the image digest.
 
-Trivy GitHub Action with SARIF upload, SBOM attestation command, and the `.trivyignore` template are in [references/container-runtime-security.md](references/container-runtime-security.md).
+Trivy GitHub Action with SARIF upload, SBOM attestation command, and the `.trivyignore` template are in [cicd-devsecops/references/container-runtime-security.md](cicd-devsecops/references/container-runtime-security.md).
 
 ## References
 
-- [references/security-gate-governance.md](references/security-gate-governance.md): Gate policy, suppression hygiene, and evidence retention.
-- [references/vault-operations.md](references/vault-operations.md): AppRole auth, dynamic DB credentials, PKI, and rotation runbooks.
-- [references/vault-secrets-lifecycle.md](references/vault-secrets-lifecycle.md): Vault install, unseal, HA, DR, and secrets engine depth.
-- [references/compliance-controls.md](references/compliance-controls.md): ISO 27001, PCI-DSS, and SOC 2 control mapping with audit-evidence checklist.
-- [references/compliance-mapping.md](references/compliance-mapping.md): Broader cross-framework compliance mapping.
-- [references/container-runtime-security.md](references/container-runtime-security.md): Falco rules, OPA/Gatekeeper policies, and distroless base images.
-- [references/ansible-security-automation.md](references/ansible-security-automation.md): Hardening automation across the fleet.
-- [../cicd-pipeline-design/references/pipeline-governance.md](../cicd-pipeline-design/references/pipeline-governance.md): Pipeline governance and trusted delivery rules.
+- [cicd-devsecops/references/security-gate-governance.md](cicd-devsecops/references/security-gate-governance.md): Gate policy, suppression hygiene, and evidence retention.
+- [cicd-devsecops/references/vault-operations.md](cicd-devsecops/references/vault-operations.md): AppRole auth, dynamic DB credentials, PKI, and rotation runbooks.
+- [cicd-devsecops/references/vault-secrets-lifecycle.md](cicd-devsecops/references/vault-secrets-lifecycle.md): Vault install, unseal, HA, DR, and secrets engine depth.
+- [cicd-devsecops/references/compliance-controls.md](cicd-devsecops/references/compliance-controls.md): ISO 27001, PCI-DSS, and SOC 2 control mapping with audit-evidence checklist.
+- [cicd-devsecops/references/compliance-mapping.md](cicd-devsecops/references/compliance-mapping.md): Broader cross-framework compliance mapping.
+- [cicd-devsecops/references/container-runtime-security.md](cicd-devsecops/references/container-runtime-security.md): Falco rules, OPA/Gatekeeper policies, and distroless base images.
+- [cicd-devsecops/references/ansible-security-automation.md](cicd-devsecops/references/ansible-security-automation.md): Hardening automation across the fleet.
+- [cicd-pipeline-design/references/pipeline-governance.md](cicd-pipeline-design/references/pipeline-governance.md): Pipeline governance and trusted delivery rules.
 - [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): DevOps and security-adjacent workflow patterns derived from the supplied books.

@@ -343,7 +343,7 @@ See: `references/financial-statements.md`
 | Auth | `dual-auth-rbac` | Permission: who can post/void/view reports |
 | Inventory link | `inventory-management` | COGS posting on stock movements |
 | Testing | `sdlc-testing` | Test every posting rule, every reversal |
-| Implementation | `plan-implementation` | Execute accounting phases with TDD |
+| Implementation | `implementation-status-auditor` (`../../sdlc-meta/implementation-status-auditor/references/plan-implementation.md`) | Execute accounting phases with TDD |
 | Audit | `implementation-status-auditor` | Verify accounting system completeness |
 
 ## Anti-Patterns

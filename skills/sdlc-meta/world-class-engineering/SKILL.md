@@ -124,6 +124,10 @@ Before proposing code or architecture, define:
 
 Use shared language and explicit examples. Requirements are not complete until engineering, product, design, and operations would interpret the system the same way.
 
+State the ceremony class aloud before designing: spike, bounded or architectural. A spike answers one question with throwaway code (`product-discovery/references/question-answering-prototypes.md`); a bounded change stays inside an existing module with a known seam; an architectural change adds a module, a trust boundary or a data store.
+The ratchet only goes up: hidden complexity moves a task to a higher class, and nothing moves it down. An approval covers only the stage actually presented, not the stages after it.
+Where the Superpowers plugin is installed its brainstorming skill may help; this gate stays authoritative. (Ceremony ratchet adapted from obra/superpowers, MIT, https://github.com/obra/superpowers, commit 8ca22dba9a94f28898bbce59f2537ff4d87c747d.)
+
 ### 3. Design the Shape
 
 Choose system boundaries deliberately:
@@ -199,6 +203,23 @@ Use the release gates in [references/world-class-gates.md](references/world-clas
 - convert useful lessons into automation, tests, runbooks, or simpler architecture
 - reassess branch strategy, pipeline stages, and alerting if the team depends on heroics
 - keep the feedback loop visible with deployment frequency, lead time, change failure rate, and recovery time
+
+## Solution Selection
+
+Before a substantive change, write the short record in [references/solution-selection.md](references/solution-selection.md): understand the existing flow, ask whether new code is needed at all, reuse the repository, prefer the standard library or platform, check installed dependencies, then choose the smallest option that keeps every requirement and safeguard. Worked cases are in [references/solution-selection-examples.md](references/solution-selection-examples.md).
+
+Smallest never means removing a safeguard. On ERP, accounting, POS and SaaS money or authorisation paths, these are never simplified away:
+
+- audit-trail writes;
+- idempotency keys on retried or integration-driven writes;
+- database constraints (keys, uniqueness, checks);
+- period locks;
+- segregation-of-duties checks;
+- tenant scoping on every query and write;
+- structured logging on money and authorisation paths;
+- reconciliation records.
+
+A proposal that drops any item above is a failed simplification, whatever it saves.
 
 ## Non-Negotiable Standards
 
@@ -312,6 +333,7 @@ Use these prompts while working:
 - [references/executable-engineering-system.md](references/executable-engineering-system.md): Delivery-system rules, artifacts, and operating loops derived from the supplied books.
 - [references/world-class-gates.md](references/world-class-gates.md): Release gates for engineering, security, performance, UX, and operations.
 - [references/verification-loop.md](references/verification-loop.md): Per-change six-phase completion gate and report format.
+- [references/quality-bar-guard.md](references/quality-bar-guard.md): Write the project quality bar once, place checks by cost, guard diffs against weakening, ratchet upwards only.
 
 ## Inputs
 

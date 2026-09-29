@@ -278,7 +278,7 @@ Before handing the script to the operator, verify:
 The companions below are the *kinds* of skill you will most often pair with this one. Re-enumerate the library at author-time to confirm names and discover new arrivals — never work from this list as a frozen registry.
 
 - `superpowers:writing-plans` or `feature-planning` — author the underlying plan first.
-- `superpowers:executing-plans` or `plan-implementation` — what each prompt invokes when it runs.
+- `implementation-status-auditor` (its `../sdlc-meta/implementation-status-auditor/references/plan-implementation.md` method) — what each prompt follows when it runs; `superpowers:executing-plans` is an optional helper where that plugin is installed.
 - `superpowers:subagent-driven-development` — fan-out discipline.
 - `superpowers:dispatching-parallel-agents` — when to parallelise.
 - `superpowers:verification-before-completion` — the closing gate of every prompt.
@@ -303,6 +303,7 @@ catalogue. The local `world-class-engineering` skill owns implementation gates;
 above are not installation requirements.
 
 - [Tracer-bullet work graphs and expand-contract](references/tracer-bullet-work-graphs.md)
+- [Plan header and proportion check](references/plan-header-and-proportion.md): spec pointer, verbatim global constraints, per-node interfaces, review focus, one reasonable thing per step
 
 ## Evidence Produced
 

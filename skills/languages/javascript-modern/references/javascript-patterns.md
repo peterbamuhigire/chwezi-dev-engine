@@ -38,7 +38,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## Workflow
 
 - Read this `SKILL.md` first, then load only the referenced deep-dive files that are necessary for the task.
-- Load `references/scalable-js-oop-patterns.md` when choosing patterns, reviewing OOP/prototype code, or preventing large-module decay.
+- Load `javascript-patterns/references/scalable-js-oop-patterns.md` when choosing patterns, reviewing OOP/prototype code, or preventing large-module decay.
 - Apply the ordered guidance, checklists, and decision rules in this skill instead of cherry-picking isolated snippets.
 - Produce the deliverable with assumptions, risks, and follow-up work made explicit when they matter.
 
@@ -68,8 +68,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
-- `references/scalable-js-oop-patterns.md` — OOP/prototype rules, pattern selection, async patterns, and anti-pattern review.
-- `references/source-register-dev-engine.md` — local EPUB sources used for this development-engine upgrade.
+- `javascript-patterns/references/scalable-js-oop-patterns.md` — OOP/prototype rules, pattern selection, async patterns, and anti-pattern review.
+- `javascript-patterns/references/source-register-dev-engine.md` — local EPUB sources used for this development-engine upgrade.
 <!-- dual-compat-end -->
 Production-grade patterns for structuring JavaScript in PHP-backed SaaS applications.
 
@@ -119,7 +119,7 @@ const InvoiceForm = (() => {
 
 ## Additional Guidance
 
-Extended guidance for `javascript-patterns` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `javascript-patterns` was moved to [javascript-patterns/references/skill-deep-dive.md](javascript-patterns/references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `Pattern 2 — Observer / EventBus (PubSub)`

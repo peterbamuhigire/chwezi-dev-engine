@@ -1,6 +1,6 @@
 ---
 name: git-collaboration-workflow
-description: Use when planning branch strategy, making commits, reviewing diffs, resolving conflicts, preparing pull requests, or shipping releases. Covers trunk-friendly collaboration, commit hygiene, conflict recovery, and CI-linked release discipline.
+description: Use when planning branch strategy, making commits, reviewing diffs, deciding whether reviewer feedback is right, resolving conflicts, preparing pull requests, or shipping releases. Covers trunk-friendly collaboration, commit hygiene, conflict recovery, and CI-linked release discipline.
 metadata:
   portable: true
   compatible_with:
@@ -28,6 +28,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - [Two-axis code review](references/two-axis-code-review.md)
 - [Two-axis review record](templates/two-axis-review.md)
+- [Receiving review feedback](references/receiving-review-feedback.md): verify each comment against code and tests, respond with evidence, record declined suggestions
 - [Intent-led merge-conflict resolution](references/intent-led-conflict-resolution.md)
 ## Book-informed practice route
 

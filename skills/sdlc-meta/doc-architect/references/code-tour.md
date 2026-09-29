@@ -88,6 +88,36 @@ the tour text still renders, which hides the cause.
 Content-only steps (title and description, no anchor) are for the closing step; never make the
 first step content-only.
 
+## Topology-ordered tour
+
+Order steps by how the code is wired, not by folder name or by what you happened to read first.
+
+1. **Score entry points.** Conventional entry files score highest: for PHP `public/index.php`,
+   `index.php` and the route files (`routes/web.php`, `routes/api.php`); for Node `server.js` or
+   the `main` in `package.json`; for Python `manage.py` or `__main__.py`. Add weight for files at
+   the repository root and for files in the top tenth by fan-out (they import or call many
+   others). A root README is the natural first stop when it explains how to run the system.
+2. **Prefer fan-in on the path.** Among files reached from the entry point, visit first the ones
+   many others depend on (high fan-in): the base controller, the tenant resolver, the posting
+   service. A reader who understands them understands most callers.
+3. **Dependency depth sets the band.** Measure depth from the chosen entry point: depth 0 to 1 is
+   orientation, depth 2 to 3 is the core execution path, deeper files appear only for the edge
+   case or gotcha the persona needs.
+4. **Merge tight coupling.** Files that always change together or call each other in a cycle (a
+   controller and its form request, a model and its observer) become one step, with a `selection`
+   or `pattern` anchor in the most important file and the others named in the description.
+5. **Place non-code stops after the code they explain.** Schema files, migrations, deployment
+   manifests and configuration follow the code path that uses them, not the front of the tour.
+
+Reconcile the resulting order with the persona budget in the Workflow table rather than any fixed
+range: map the bands onto the persona's step count (for a `new-joiner` tour of 9 to 13 steps,
+roughly 2 orientation, 6 to 8 core, 1 to 2 edge-case and 1 closing step). If the topology needs
+more steps than the budget, cut the deepest band first; if it needs fewer, stop early.
+
+(Topology ordering adapted from Egonex-AI/Understand-Anything, MIT,
+https://github.com/Egonex-AI/Understand-Anything, commit
+`b05cc3b20990afca537b4fc0a49b4d7fbdc65bb0`. Paraphrased; no text copied.)
+
 ## Writing rule: SMIG
 
 Each description answers **Situation** (what the reader is looking at), **Mechanism** (how it
@@ -129,6 +159,20 @@ Cover changed files first in PR tours; scope monorepo tours to the relevant pack
 what the reader can now do, not a recap.
 
 ## Evidence and currentness
+
+Validate a tour mechanically before handing it over:
+
+```powershell
+python -X utf8 skills/sdlc-meta/doc-architect/scripts/validate_tour.py .tours/new-joiner-invoicing.tour --repo-root <project>
+```
+
+The script checks that every file exists at the tour's `ref` (or on disk when `ref` is absent),
+that line and selection ranges are in range, that step 1 is anchored to a file or directory, and
+that the step count sits inside the persona budget. Failures carry distinct codes such as
+`tour/missing-file` and `tour/line-out-of-range`. Record a `generated_from_commit` (full SHA) in
+the tour's description or handover note so staleness can be checked later (see
+`doc-maintenance-after-change.md`).
+
 
 Format source: `microsoft/codetour` repository and its `https://aka.ms/codetour-schema` schema.
 Step types and `ref` behaviour carried over from the absorbed skill; not re-verified against the

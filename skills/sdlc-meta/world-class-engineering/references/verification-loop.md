@@ -9,6 +9,8 @@ Absorbed from the retired `sdlc-meta/verification-loop` skill (origin: adapted f
 `skills/verification-loop/SKILL.md`). Command examples are illustrative; use the project's own
 scripts and confirm tool flags against the installed versions.
 
+What counts as evidence for each kind of claim, including a delegated agent's report, is in the claim table in `rules/common/verification.md`.
+
 A fixed, ordered gate: build, types, lint, tests, security scan, diff review. Each phase gates
 the next. A build failure stops the sequence; type or lint results for code that does not
 compile are meaningless.

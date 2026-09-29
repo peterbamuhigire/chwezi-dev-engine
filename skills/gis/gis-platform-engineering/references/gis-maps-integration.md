@@ -92,7 +92,7 @@ Open-source stack preference, no vendor lock-in                  -> MapLibre
 
 **MapLibre GL** is the OSS fork of Mapbox GL v1. Same API, no vendor keys, compatible with MVT tiles you host yourself. Strong default for cost-conscious SaaS.
 
-See `references/leaflet-vs-google-vs-mapbox.md`.
+See `gis-maps-integration/references/leaflet-vs-google-vs-mapbox.md`.
 
 ## Google Maps JavaScript API setup
 
@@ -124,7 +124,7 @@ const map = new Map(el, { center: { lat: 0.3476, lng: 32.5825 }, zoom: 13 });
 new Marker({ map, position: { lat: 0.3476, lng: 32.5825 }, title: "Kampala" });
 ```
 
-See `references/google-maps-setup-keys.md`.
+See `gis-maps-integration/references/google-maps-setup-keys.md`.
 
 ## Markers, InfoWindows, overlays
 
@@ -151,7 +151,7 @@ ac.addListener("place_changed", () => {
 });
 ```
 
-**Fields** parameter is critical — requesting fields you don't use multiplies cost. See `references/google-places-autocomplete.md`.
+**Fields** parameter is critical — requesting fields you don't use multiplies cost. See `gis-maps-integration/references/google-places-autocomplete.md`.
 
 ## Directions + routes
 
@@ -171,7 +171,7 @@ const result = await service.route({
 renderer.setDirections(result);
 ```
 
-See `references/google-routing-directions.md`.
+See `gis-maps-integration/references/google-routing-directions.md`.
 
 ## Styling
 
@@ -207,13 +207,13 @@ map.on("load", () => {
 
 Vector tile sources beat raster for zoom and performance. Style with simple expressions; drive layout from data without re-rendering.
 
-See `references/mapbox-gl-basics.md`.
+See `gis-maps-integration/references/mapbox-gl-basics.md`.
 
 ## Mapbox offline (mobile)
 
 Mobile SDKs (iOS/Android) support offline region downloads. Web Mapbox GL does not have native offline but can use service workers to cache tiles.
 
-See `references/mapbox-offline.md`.
+See `gis-maps-integration/references/mapbox-offline.md`.
 
 ## Styling comparison (quick)
 
@@ -237,7 +237,7 @@ Track by:
 
 Rule: every map provider request costs real money. Review monthly spend; compare to alternatives yearly.
 
-See `references/cost-control-quotas.md`.
+See `gis-maps-integration/references/cost-control-quotas.md`.
 
 ## Accessibility
 
@@ -248,7 +248,7 @@ See `references/cost-control-quotas.md`.
 - Never require drag-to-place without an alternative address input.
 - Don't rely solely on colour for differentiation.
 
-See `references/a11y-maps.md`.
+See `gis-maps-integration/references/a11y-maps.md`.
 
 ## Anti-patterns
 
@@ -269,13 +269,13 @@ See `references/a11y-maps.md`.
 
 ## References
 
-- `references/leaflet-vs-google-vs-mapbox.md`
-- `references/google-maps-setup-keys.md`
-- `references/google-places-autocomplete.md`
-- `references/google-routing-directions.md`
-- `references/mapbox-gl-basics.md`
-- `references/mapbox-offline.md`
-- `references/styling-comparison.md`
-- `references/cost-control-quotas.md`
-- `references/a11y-maps.md`
-- `references/vector-tile-pipeline.md` — MVT vs raster decision, tippecanoe flags, zoom strategy, Mapbox GL per-layer performance rules, self-hosted sprites/glyphs
+- `gis-maps-integration/references/leaflet-vs-google-vs-mapbox.md`
+- `gis-maps-integration/references/google-maps-setup-keys.md`
+- `gis-maps-integration/references/google-places-autocomplete.md`
+- `gis-maps-integration/references/google-routing-directions.md`
+- `gis-maps-integration/references/mapbox-gl-basics.md`
+- `gis-maps-integration/references/mapbox-offline.md`
+- `gis-maps-integration/references/styling-comparison.md`
+- `gis-maps-integration/references/cost-control-quotas.md`
+- `gis-maps-integration/references/a11y-maps.md`
+- `gis-maps-integration/references/vector-tile-pipeline.md` — MVT vs raster decision, tippecanoe flags, zoom strategy, Mapbox GL per-layer performance rules, self-hosted sprites/glyphs

@@ -117,12 +117,12 @@ Delivery documents must define:
 
 | # | Document | File | Purpose | Audience | Phase |
 |---|----------|------|---------|----------|-------|
-| 1 | Software User Manual | `templates/software-user-manual.md` | End-user guide for using the software | End users, staff, franchise owners | Pre-launch |
-| 2 | Operations / Deployment Manual | `templates/operations-deployment-manual.md` | Deploy, configure, and manage in production | SysAdmins, DevOps, IT ops | Pre-launch |
-| 3 | Training Materials | `templates/training-materials.md` | Onboarding, tutorials, assessments | New users, trainers, HR | Pre-launch |
-| 4 | Release Notes | `templates/release-notes.md` | Communicate changes per version | All stakeholders | Each release |
-| 5 | Maintenance Manual | `templates/maintenance-manual.md` | Ongoing maintenance and troubleshooting | Support engineers, on-call, DevOps | Post-launch |
-| 6 | README File | `templates/readme-file.md` | Project introduction for developers | Developers, contributors, evaluators | Project start |
+| 1 | Software User Manual | `sdlc-user-deploy/templates/software-user-manual.md` | End-user guide for using the software | End users, staff, franchise owners | Pre-launch |
+| 2 | Operations / Deployment Manual | `sdlc-user-deploy/templates/operations-deployment-manual.md` | Deploy, configure, and manage in production | SysAdmins, DevOps, IT ops | Pre-launch |
+| 3 | Training Materials | `sdlc-user-deploy/templates/training-materials.md` | Onboarding, tutorials, assessments | New users, trainers, HR | Pre-launch |
+| 4 | Release Notes | `sdlc-user-deploy/templates/release-notes.md` | Communicate changes per version | All stakeholders | Each release |
+| 5 | Maintenance Manual | `sdlc-user-deploy/templates/maintenance-manual.md` | Ongoing maintenance and troubleshooting | Support engineers, on-call, DevOps | Post-launch |
+| 6 | README File | `sdlc-user-deploy/templates/readme-file.md` | Project introduction for developers | Developers, contributors, evaluators | Project start |
 
 ## Audience Segmentation
 
@@ -347,12 +347,12 @@ Each file must stay under 500 lines. Split into subdirectories as needed.
 
 Each template provides the complete structure, section-by-section guidance, example excerpts, anti-patterns, and a quality checklist.
 
-1. [Software User Manual](templates/software-user-manual.md)
-2. [Operations / Deployment Manual](templates/operations-deployment-manual.md)
-3. [Training Materials](templates/training-materials.md)
-4. [Release Notes](templates/release-notes.md)
-5. [Maintenance Manual](templates/maintenance-manual.md)
-6. [README File](templates/readme-file.md)
+1. [Software User Manual](sdlc-user-deploy/templates/software-user-manual.md)
+2. [Operations / Deployment Manual](sdlc-user-deploy/templates/operations-deployment-manual.md)
+3. [Training Materials](sdlc-user-deploy/templates/training-materials.md)
+4. [Release Notes](sdlc-user-deploy/templates/release-notes.md)
+5. [Maintenance Manual](sdlc-user-deploy/templates/maintenance-manual.md)
+6. [README File](sdlc-user-deploy/templates/readme-file.md)
 
 ## References
 
@@ -361,6 +361,6 @@ Each template provides the complete structure, section-by-section guidance, exam
 ---
 
 **Back to:** [Skills Repository](../AGENTS.md)
-**Related:** [sdlc-planning](../sdlc-planning/SKILL.md) | [sdlc-design](../sdlc-design/SKILL.md) | [sdlc-testing](../sdlc-testing/SKILL.md) | [manual-guide](../manual-guide/SKILL.md) | [google-play-store-review](../google-play-store-review/SKILL.md)
+**Related:** [sdlc-planning](sdlc-planning.md) | [sdlc-design](sdlc-design.md) | [sdlc-testing](sdlc-testing.md) | [manual-guide](../manual-guide/SKILL.md) | [google-play-store-review](../google-play-store-review/SKILL.md)
 **Last Updated:** 2026-03-15 (strengthened per Etter 2016, Cone 2023, Splunk Product is Docs)
 

@@ -114,13 +114,13 @@ Planning documents must define more than scope. They must define:
 
 | # | Document | File | Purpose | Audience | Length |
 |---|----------|------|---------|----------|--------|
-| 1 | Project Vision & Scope | `templates/project-vision-scope.md` | Establish the "why" and "what" | Stakeholders, sponsors, investors | 15-30 pages |
-| 2 | Software Development Plan | `templates/software-development-plan.md` | Management & technical approach | PM, dev leads, QA | 20-40 pages |
-| 3 | Configuration Management Plan | `templates/configuration-management-plan.md` | Change & version control processes | DevOps, dev leads, release mgrs | 15-25 pages |
-| 4 | Quality Assurance Plan | `templates/quality-assurance-plan.md` | Quality processes & standards | QA team, devs, PM | 15-25 pages |
-| 5 | Risk Management Plan | `templates/risk-management-plan.md` | Identify, assess, mitigate risks | PM, stakeholders, dev leads | 15-25 pages |
-| 6 | Software Requirements Spec | `templates/software-requirements-spec.md` | Full functional & non-functional requirements | Devs, QA, stakeholders, architects | 30-60 pages |
-| 7 | Feasibility Study Report | `templates/feasibility-study-report.md` | Viability analysis before commitment | Decision makers, investors, sponsors | 15-30 pages |
+| 1 | Project Vision & Scope | `sdlc-planning/templates/project-vision-scope.md` | Establish the "why" and "what" | Stakeholders, sponsors, investors | 15-30 pages |
+| 2 | Software Development Plan | `sdlc-planning/templates/software-development-plan.md` | Management & technical approach | PM, dev leads, QA | 20-40 pages |
+| 3 | Configuration Management Plan | `sdlc-planning/templates/configuration-management-plan.md` | Change & version control processes | DevOps, dev leads, release mgrs | 15-25 pages |
+| 4 | Quality Assurance Plan | `sdlc-planning/templates/quality-assurance-plan.md` | Quality processes & standards | QA team, devs, PM | 15-25 pages |
+| 5 | Risk Management Plan | `sdlc-planning/templates/risk-management-plan.md` | Identify, assess, mitigate risks | PM, stakeholders, dev leads | 15-25 pages |
+| 6 | Software Requirements Spec | `sdlc-planning/templates/software-requirements-spec.md` | Full functional & non-functional requirements | Devs, QA, stakeholders, architects | 30-60 pages |
+| 7 | Feasibility Study Report | `sdlc-planning/templates/feasibility-study-report.md` | Viability analysis before commitment | Decision makers, investors, sponsors | 15-30 pages |
 
 ## Generation Workflow
 
@@ -314,13 +314,13 @@ Run after generating all documents:
 
 Each template provides the complete structure, section-by-section guidance, example excerpts, anti-patterns, and a quality checklist.
 
-1. [Project Vision & Scope](templates/project-vision-scope.md)
-2. [Software Development Plan](templates/software-development-plan.md)
-3. [Configuration Management Plan](templates/configuration-management-plan.md)
-4. [Quality Assurance Plan](templates/quality-assurance-plan.md)
-5. [Risk Management Plan](templates/risk-management-plan.md)
-6. [Software Requirements Specification](templates/software-requirements-spec.md)
-7. [Feasibility Study Report](templates/feasibility-study-report.md)
+1. [Project Vision & Scope](sdlc-planning/templates/project-vision-scope.md)
+2. [Software Development Plan](sdlc-planning/templates/software-development-plan.md)
+3. [Configuration Management Plan](sdlc-planning/templates/configuration-management-plan.md)
+4. [Quality Assurance Plan](sdlc-planning/templates/quality-assurance-plan.md)
+5. [Risk Management Plan](sdlc-planning/templates/risk-management-plan.md)
+6. [Software Requirements Specification](sdlc-planning/templates/software-requirements-spec.md)
+7. [Feasibility Study Report](sdlc-planning/templates/feasibility-study-report.md)
 
 ## References
 

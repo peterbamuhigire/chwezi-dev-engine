@@ -328,12 +328,12 @@ Most organisations should start with showback. Chargeback works only when "Every
 - Runner sizing: match runner CPU/memory to the largest stage's actual peak, not its theoretical peak; oversized runners idle most of the time.
 - Schedule non-prod environments off outside business hours where the pipeline owns the lifecycle.
 
-See [references/finops.md](references/finops.md) for worked examples, deeper governance patterns, and acceptance criteria for the FinOps section of a pipeline review.
+See [cicd-pipeline-design/references/finops.md](cicd-pipeline-design/references/finops.md) for worked examples, deeper governance patterns, and acceptance criteria for the FinOps section of a pipeline review.
 
 ## References
 
-- [references/pipeline-governance.md](references/pipeline-governance.md): Pipeline trust, evidence, and stop-the-line response.
-- [references/finops.md](references/finops.md): FinOps deep reference — lifecycle phase rules, tagging enforcement, ResourceQuota + LimitRange examples, runner crossover analysis, budget patterns, showback-to-chargeback transition, and review acceptance criteria.
+- [cicd-pipeline-design/references/pipeline-governance.md](cicd-pipeline-design/references/pipeline-governance.md): Pipeline trust, evidence, and stop-the-line response.
+- [cicd-pipeline-design/references/finops.md](cicd-pipeline-design/references/finops.md): FinOps deep reference — lifecycle phase rules, tagging enforcement, ResourceQuota + LimitRange examples, runner crossover analysis, budget patterns, showback-to-chargeback transition, and review acceptance criteria.
 - [../deployment-release-engineering/references/deployment-pipeline.md](../deployment-release-engineering/references/deployment-pipeline.md): Canonical release stage model and release packet.
 - [../deployment-release-engineering/references/devops-book-patterns.md](../deployment-release-engineering/references/devops-book-patterns.md): DevOps value-stream, deployment, GitOps, observability, DevSecOps, and PHP runtime delivery patterns.
 - [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): CI/CD and DevOps patterns derived from the supplied books.

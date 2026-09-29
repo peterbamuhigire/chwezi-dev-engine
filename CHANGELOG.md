@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-09-29 - Kaizen M10-06: methodology and comprehension absorption
+
+- Engine-native design gate replaces the mandatory Superpowers step in `new-project`; ceremony
+  classes, claim/evidence table, Excuse/Reality table, dispatch controls, worktree safety,
+  receiving review, plan header, quality-bar guard, output registers and lane report shapes.
+- Comprehension: graph-first reference, evidence tags, topology-ordered tours, tour validator,
+  architecture-as-code with a commit-pinned evidence verifier, and a read-only PHP/MySQL route map
+  (pilot KEEP). Active catalogue unchanged at 167; aliases 76 -> 78; routing fixtures 184 -> 187.
+- 45 tracked orphan folders dispositioned (merge, quarantine, alias). See
+  `docs/updates/2026-09-29-m10-06-methodology-and-comprehension.md`.
+
 ## 2026-09-24 - Kaizen: book-extraction retirement, currentness, consolidation
 
 - Removed `book-extractions/`; knowledge folded into task references; guardrail rejects extraction
