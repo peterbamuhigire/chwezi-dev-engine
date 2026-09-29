@@ -23,7 +23,7 @@ cd chwezi-dev-engine
 
 On Windows PowerShell, run `./install.ps1 -scope project`. The wrappers expose scope and dry-run options; consult their help before installing. The active catalogue is routed by the [skill index](docs/skill-routing-index.md) and current `SKILL.md` files.
 
-## Skills
+## Capabilities
 
 | Category | Skill groups | Coverage |
 |---|---|---|
