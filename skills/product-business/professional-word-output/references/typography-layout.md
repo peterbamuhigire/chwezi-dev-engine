@@ -19,7 +19,7 @@
 
 - **Never apply direct formatting to individual paragraphs.** Every typographic decision must live inside a named Word style. Direct formatting creates inconsistency the moment content is edited or reused.
 - Use a **maximum of two typefaces** per document: one for headings (display), one for body. Three typefaces signals amateur work.
-- **Serif vs. sans-serif:** sans-serif (Calibri, Aptos, Arial) reads well on screens and in short documents. Serif (Georgia, Times New Roman) is preferred for long-form print documents above 15 pages.
+- **Serif vs. sans-serif:** a plain sans (Public Sans; Word-safe fallback Segoe UI, then Calibri) reads well on screens and in short documents. A text serif (Source Serif 4; Word-safe fallback Georgia) is preferred for long-form print documents above 15 pages. Never pick a face from the design engine's banned list (`design-system-skills/doctrine/references/ai-slop-banned-fonts.json`).
 - **Avoid decorative or novelty fonts** in any professional context. They undermine credibility before the reader reads a single word.
 - **Size hierarchy must be consistent:** each heading level should differ by at least 2pt from the level below it.
 - Never use ALLCAPS in body text — use small caps (character formatting) if emphasis is required.
@@ -32,17 +32,19 @@
 
 | Element | Font | Size | Weight | Colour |
 |---|---|---|---|---|
-| Document Title | Calibri Light | 28pt | Bold | #1F3864 (Navy) |
-| Subtitle | Calibri | 13pt | Italic | #595959 (Mid-grey) |
-| Heading 1 | Calibri Light | 16pt | Bold | #1F3864 (Navy) |
-| Heading 2 | Calibri Light | 13pt | Bold | #2E5D8A (Steel) |
-| Heading 3 | Calibri | 11pt | Bold | #4472C4 (Accent blue) |
-| Heading 4 | Calibri | 11pt | Bold Italic | #262626 (Near-black) |
-| Body / Normal | Calibri | 11pt | Regular | #262626 |
-| Code / Verbatim | Consolas | 9.5pt | Regular | #1A1A1A |
-| Block Quote | Calibri | 11pt | Italic | #595959 |
-| Caption | Calibri | 9pt | Regular | #595959 |
-| Footer / Header | Calibri | 9pt | Regular | #595959 |
+| Document Title | Source Serif 4 | 28pt | Bold | #1F3864 (Navy) |
+| Subtitle | Source Serif 4 | 13pt | Italic | #595959 (Mid-grey) |
+| Heading 1 | Source Serif 4 | 16pt | Bold | #1F3864 (Navy) |
+| Heading 2 | Source Serif 4 | 13pt | Bold | #2E5D8A (Steel) |
+| Heading 3 | Public Sans | 11pt | Bold | #4472C4 (Accent blue) |
+| Heading 4 | Public Sans | 11pt | Bold Italic | #262626 (Near-black) |
+| Body / Normal | Public Sans | 11pt | Regular | #262626 |
+| Code / Verbatim | JetBrains Mono | 9.5pt | Regular | #1A1A1A |
+| Block Quote | Public Sans | 11pt | Italic | #595959 |
+| Caption | Public Sans | 9pt | Regular | #595959 |
+| Footer / Header | Public Sans | 9pt | Regular | #595959 |
+
+**Word-safe fallbacks.** Source Serif 4, Public Sans and JetBrains Mono are SIL OFL faces, so embed and subset them (File > Options > Save > Embed fonts in the file > Embed only the characters used). Where embedding is not possible (Word for the web, a locked-down client machine, or a template the client must edit without the fonts), use the stated fallback instead: Georgia for Source Serif 4; Segoe UI, then Calibri, for Public Sans; Consolas for JetBrains Mono. Name the fallback in the delivery note; a silent substitution is a defect. The pairing follows the design engine's DOCX baseline (`design-system-skills`, skill `docx-report-and-document-formatting`) and its fallback tier (`doctrine/references/system-font-fallbacks.md`); never use a face on its banned list (`doctrine/references/ai-slop-banned-fonts.json`).
 
 ### Academic / Formal Report Stack
 

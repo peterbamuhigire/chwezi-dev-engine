@@ -70,17 +70,17 @@ The heart of WeasyPrint work is the stylesheet.
   --brand-primary: #0B5FFF;
   --brand-text:    #111827;
   --brand-muted:   #6B7280;
-  --brand-font:    "Inter", sans-serif;
+  --brand-font:    "Public Sans", "Segoe UI", sans-serif;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("fonts/Inter-Regular.ttf") format("truetype");
+  font-family: "Public Sans";
+  src: url("fonts/PublicSans-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 @font-face {
-  font-family: "Inter";
-  src: url("fonts/Inter-Bold.ttf") format("truetype");
+  font-family: "Public Sans";
+  src: url("fonts/PublicSans-Bold.ttf") format("truetype");
   font-weight: 700;
 }
 

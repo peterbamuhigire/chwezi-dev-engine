@@ -79,10 +79,10 @@ System fonts are not portable. Ship your brand's TTFs with the app.
 ```python
 def register_fonts(brand):
     base = Path(__file__).parent / "fonts"
-    pdfmetrics.registerFont(TTFont(brand.font_family,          str(base / "Inter-Regular.ttf")))
-    pdfmetrics.registerFont(TTFont(f"{brand.font_family}-B",   str(base / "Inter-Bold.ttf")))
-    pdfmetrics.registerFont(TTFont(f"{brand.font_family}-I",   str(base / "Inter-Italic.ttf")))
-    pdfmetrics.registerFont(TTFont(f"{brand.font_family}-BI",  str(base / "Inter-BoldItalic.ttf")))
+    pdfmetrics.registerFont(TTFont(brand.font_family,          str(base / "PublicSans-Regular.ttf")))
+    pdfmetrics.registerFont(TTFont(f"{brand.font_family}-B",   str(base / "PublicSans-Bold.ttf")))
+    pdfmetrics.registerFont(TTFont(f"{brand.font_family}-I",   str(base / "PublicSans-Italic.ttf")))
+    pdfmetrics.registerFont(TTFont(f"{brand.font_family}-BI",  str(base / "PublicSans-BoldItalic.ttf")))
     from reportlab.pdfbase.pdfmetrics import registerFontFamily
     registerFontFamily(
         brand.font_family,

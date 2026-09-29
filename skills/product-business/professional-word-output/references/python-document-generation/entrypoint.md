@@ -126,7 +126,7 @@ import xlsxwriter
 wb = xlsxwriter.Workbook(path, {"constant_memory": True, "default_date_format": "yyyy-mm-dd"})
 brand = Brand.from_tenant(tenant)   # see branding-system.md
 
-fmt_title = wb.add_format({"bold": True, "font_size": 18, "font_color": brand.primary, "font_name": "Inter"})
+fmt_title = wb.add_format({"bold": True, "font_size": 18, "font_color": brand.primary, "font_name": brand.font_family})
 fmt_kpi_label = wb.add_format({"bold": True, "font_color": "#555", "font_size": 10})
 fmt_kpi_value = wb.add_format({"bold": True, "font_size": 24, "font_color": brand.primary, "num_format": "#,##0"})
 fmt_header = wb.add_format({"bold": True, "bg_color": brand.primary, "font_color": "white", "border": 1})
@@ -186,7 +186,7 @@ doc = SimpleDocTemplate(path, pagesize=A4,
                         topMargin=25*mm, bottomMargin=20*mm)
 
 styles = getSampleStyleSheet()
-h1 = ParagraphStyle("h1", parent=styles["Heading1"], textColor=colors.HexColor(brand.primary), fontName="Helvetica-Bold")
+h1 = ParagraphStyle("h1", parent=styles["Heading1"], textColor=colors.HexColor(brand.primary), fontName=f"{brand.font_family}-B")  # register_fonts(brand) first; see pdf-reportlab.md
 
 story = [
     Image(logo_path, width=40*mm, height=15*mm),
@@ -238,7 +238,7 @@ class Brand:
     success: str = "#059669"
     danger: str = "#DC2626"
     warning: str = "#D97706"
-    font_family: str = "Inter"
+    font_family: str = "Public Sans"   # SIL OFL; never a banned face
     logo_path: Path
     footer_tagline: str = ""
 

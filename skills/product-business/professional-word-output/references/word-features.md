@@ -306,7 +306,7 @@ Always enable: Header & Footer → Different First Page = True. The cover page c
 
 - **Angle:** 45° diagonal (standard) or horizontal for readability
 - **Transparency:** 50–65% — visible but not competing with content
-- **Font:** Calibri or Arial, 80–100pt, Semi-bold
+- **Font:** the document's body face (Public Sans; Word-safe fallback Segoe UI), 80–100pt, Semi-bold
 - **Colour:** Grey (#BBBBBB) for most. Red (#C00000) only for DRAFT on legal/financial documents.
 
 ### Insert via

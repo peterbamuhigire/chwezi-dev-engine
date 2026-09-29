@@ -181,8 +181,8 @@ def register_brand_fonts_once():
     # Expensive: parse TTF headers. Do it once per process.
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
-    pdfmetrics.registerFont(TTFont("Inter", FONT_DIR / "Inter-Regular.ttf"))
-    pdfmetrics.registerFont(TTFont("Inter-B", FONT_DIR / "Inter-Bold.ttf"))
+    pdfmetrics.registerFont(TTFont("PublicSans", FONT_DIR / "PublicSans-Regular.ttf"))
+    pdfmetrics.registerFont(TTFont("PublicSans-B", FONT_DIR / "PublicSans-Bold.ttf"))
     return True
 ```
 

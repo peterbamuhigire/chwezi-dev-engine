@@ -223,18 +223,20 @@ doc.styles['Normal'].paragraph_format.widow_control = True
 
 ## Typography Specification
 
-Read `references/typography-layout.md` for full font stacks and spacing tables. The standard corporate stack:
+Read `references/typography-layout.md` for full font stacks and spacing tables. The standard corporate stack pairs Source Serif 4 headings with a Public Sans body: a formal, institutional serif over a plain, legible sans. State the pairing and the reason in the delivery note before formatting; do not open in Word's default face out of habit.
 
 | Element | Font | Size | Colour |
 |---|---|---|---|
-| Title | Calibri Light | 28pt Bold | #1F3864 |
-| Heading 1 | Calibri Light | 16pt Bold | #1F3864 |
-| Heading 2 | Calibri Light | 13pt Bold | #2E5D8A |
-| Heading 3 | Calibri | 11pt Bold | #4472C4 |
-| Body / Normal | Calibri | 11pt Regular | #262626 |
-| Code | Consolas | 9.5pt Regular | #1A1A1A |
-| Caption | Calibri | 9pt Regular | #595959 |
-| Header/Footer | Calibri | 9pt Regular | #595959 |
+| Title | Source Serif 4 | 28pt Bold | #1F3864 |
+| Heading 1 | Source Serif 4 | 16pt Bold | #1F3864 |
+| Heading 2 | Source Serif 4 | 13pt Bold | #2E5D8A |
+| Heading 3 | Public Sans | 11pt Bold | #4472C4 |
+| Body / Normal | Public Sans | 11pt Regular | #262626 |
+| Code | JetBrains Mono | 9.5pt Regular | #1A1A1A |
+| Caption | Public Sans | 9pt Regular | #595959 |
+| Header/Footer | Public Sans | 9pt Regular | #595959 |
+
+**Word-safe fallbacks.** Source Serif 4, Public Sans and JetBrains Mono are SIL OFL faces, so embed and subset them (File > Options > Save > Embed fonts in the file > Embed only the characters used). Where embedding is not possible (Word for the web, a locked-down client machine, or a template the client must edit without the fonts), use the stated fallback instead: Georgia for Source Serif 4; Segoe UI, then Calibri, for Public Sans; Consolas for JetBrains Mono. Name the fallback in the delivery note; a silent substitution is a defect. The pairing follows the design engine's DOCX baseline (`design-system-skills`, skill `docx-report-and-document-formatting`) and its fallback tier (`doctrine/references/system-font-fallbacks.md`); never use a face on its banned list (`doctrine/references/ai-slop-banned-fonts.json`).
 
 **Heading 1 visual anchor:** 4.5pt navy left border bar — applied via style paragraph border, not manual formatting.
 
@@ -371,7 +373,7 @@ A professional cover page contains:
 ## Watermarks
 
 Apply when document status requires it:
-- **DRAFT** — grey diagonal, 50% transparency, 80pt Calibri Semi-Bold
+- **DRAFT** — grey diagonal, 50% transparency, 80pt Public Sans SemiBold (Word-safe fallback: Segoe UI Semibold)
 - **CONFIDENTIAL** — grey diagonal, same spec
 - **INTERNAL USE ONLY** — same spec
 

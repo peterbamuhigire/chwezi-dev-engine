@@ -30,7 +30,7 @@ class Brand:
     info:       str = "#2563EB"
 
     # Typography.
-    font_family:        str = "Inter"
+    font_family:        str = "Public Sans"   # SIL OFL; ship the TTFs
     font_family_mono:   str = "JetBrains Mono"
 
     # Assets.
@@ -54,7 +54,7 @@ class Brand:
             primary=tenant.brand_primary or "#0B5FFF",
             secondary=tenant.brand_secondary or "#6B7280",
             accent=tenant.brand_accent or "#F59E0B",
-            font_family=tenant.brand_font_family or "Inter",
+            font_family=tenant.brand_font_family or "Public Sans",
             logo_path=Path(tenant.logo_path),
             tenant_name=tenant.name,
             footer_tagline=tenant.footer_tagline or "",
@@ -216,7 +216,7 @@ wb.set_properties({
 
 The font declared in `brand.font_family` must be installed in the render environment:
 
-- xlsxwriter: the font must be resolvable by Excel on the viewer's machine. If unsure, stick to widely available families (Inter — embed via the system; Arial/Calibri as safe fallbacks). Set a graceful fallback in `add_format({"font_name": brand.font_family})` — Excel will substitute silently.
+- xlsxwriter: the font must be resolvable by Excel on the viewer's machine. Excel cannot embed fonts, so a viewer without the brand face sees a substitute. Ship Public Sans where you control the machines; otherwise state the fallback (Segoe UI, then Calibri) in the delivery note, and deliver PDF when the typography must be exact. Excel substitutes silently, so the note is the only record of the fallback.
 - python-docx: Word falls back too. Set the font at the style level; do not fight it.
 - ReportLab: register the TTFs explicitly with `pdfmetrics.registerFont`. Without this, reportlab uses Helvetica. See `pdf-reportlab.md`.
 - WeasyPrint: `@font-face` directives, or install the TTFs at `/usr/share/fonts/` and let fontconfig find them.

@@ -37,9 +37,12 @@ CODE_INK = RGBColor(0x1A, 0x1A, 0x1A)
 MUTED = RGBColor(0x59, 0x59, 0x59)   # Caption, header, footer
 
 # --- Font stacks -----------------------------------------------------------
-FONT_HEADING = "Calibri Light"
-FONT_BODY = "Calibri"
-FONT_CODE = "Consolas"
+# Design-engine DOCX baseline: Source Serif 4 headings, Public Sans body, JetBrains Mono code
+# (all SIL OFL; embed and subset them). Word-safe fallbacks when they cannot be embedded:
+# Georgia, Segoe UI then Calibri, Consolas. Never use a face on the design engine's banned list.
+FONT_HEADING = "Source Serif 4"
+FONT_BODY = "Public Sans"
+FONT_CODE = "JetBrains Mono"
 
 
 def set_run_fonts(font_obj, name: str) -> None:
