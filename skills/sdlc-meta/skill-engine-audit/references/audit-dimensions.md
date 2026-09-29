@@ -13,6 +13,8 @@ nothing the engine is responsible for.
    checklists / boilerplate stubs that re-route to doctrine?
 4. **Worked examples & applied proof** — does each craft skill ship a real worked example
    (before/after, applied spec, sample artifact)? (Usually the lowest-scoring dimension.)
+   Evaluation evidence counts here only when executed: cite Tier-3 `grading.json` results and
+   benchmark self-tests; planned but unexecuted cases are `NOT_ASSESSED` and add nothing.
 5. **Standards currency** — does it encode the CURRENT standards of its field (versions, numbered
    criteria, thresholds)? Or is it stale?
 6. **Coverage / output-type readiness** — can it actually drive every deliverable type it's for,
@@ -22,7 +24,11 @@ nothing the engine is responsible for.
    "last mile" to a shippable artifact.
 9. **Redundancy & hygiene** — duplicate skills, overlapping scopes, dead/legacy content.
 10. **Discovery & routing** — can the right skill be found (clear descriptions, glob-discoverable,
-    no stale index)? Does it reference cross-cutting engines correctly?
+    no stale index)? Does it reference cross-cutting engines correctly? **Measured, not judged:**
+    score it as the Engine Eval Readiness (`scoring-rubric.md`), citing the routing smoke test
+    (p@1, owned negatives), the fixture coverage count, the union collision scan
+    (`validate-runtime-skill-budget.py --collisions --ownership`) and the route-oracle report. With
+    no harness output the score cannot exceed 50.
 11. **Safety & integrity** — no unsafe instructions, no hallucination-prone guidance, sourcing
     discipline.
 

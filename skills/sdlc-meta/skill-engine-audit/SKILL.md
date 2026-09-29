@@ -42,6 +42,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
    before reading individual skill bodies. Use its compact exception register to minimise context loading.
    Also run the repository's source-ingestion guardrail and block the audit on
    raw ebooks, large book-extraction files, or likely reconstructive full text.
+   Then run the evaluation harness before scoring anything: the catalogue validator list (T1), the
+   routing smoke test and union collision scan (T2) and any Tier-3 grading (T3). Score routing and
+   evaluation from that output with the Engine Eval Readiness formula in
+   `references/scoring-rubric.md`: `NOT_ASSESSED` = 0, and routing cannot exceed 50 without harness output.
 1. **Scope it.** Read the engine's router(s) (`README.md` / `CLAUDE.md` / `AGENTS.md`) and its
    doctrine. Glob `skills/**/SKILL.md` to list every group and skill. Identify the output types
    the engine is responsible for (audit ALL of them — web, iOS, Android, web apps, cross-platform,
@@ -100,7 +104,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 
 - `references/compliance-normalisation-workflow.md` - reusable, token-efficient conformance process.
 - `scripts/engine_compliance.py` - read-only inventory by default; narrowly scoped safe fixes with `--fix-safe`.
-- `references/scoring-rubric.md` — the strict bar and bands.
+- `references/scoring-rubric.md` — the strict bar and bands, and the measured Engine Eval Readiness sub-score.
+- `references/eval-readiness-worked-example.md` — Readiness arithmetic with Tier 3 unexecuted; raw, measured-constrained and published scores.
 - `references/audit-dimensions.md` — every aspect to rank + the output-type checklist.
 - `references/parallel-agent-method.md` — the audit-agent fleet and how to brief it.
 - `references/report-structure.md` — the multi-file report template.

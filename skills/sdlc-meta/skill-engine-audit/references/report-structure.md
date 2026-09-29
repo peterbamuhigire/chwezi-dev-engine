@@ -15,7 +15,8 @@ one concern per file, with a README index. This is the proven structure.
 | `06-standards-benchmark.md` | agent (cited) | What world-class looks like now; primary sources. |
 | `07-hardening-existing-skills.md` | agent | Concrete `references/*` + `examples/*` per skill. |
 | `08-reading-list.md` | agent (cited) | Material to buy & extract, tiered, mapped to groups. |
-| `09-master-scorecard.md` | synthesis | Every dimension + group + output type + overall /100. |
+| `09-master-scorecard.md` | synthesis | Every dimension + group + output type + overall /100, marked measured, judged or `NOT_ASSESSED`; raw, measured-constrained and published numbers. |
+| `11-measured-evidence.md` | synthesis | Harness commands, exit codes and outputs (T1 validators, T2 routing and collisions, T3 grading), the Engine Eval Readiness arithmetic and every `NOT_ASSESSED` slot with its cause. |
 | `10-roadmap-to-world-class.md` | synthesis | Phased plan with a target score after each phase. |
 
 ## Rules
