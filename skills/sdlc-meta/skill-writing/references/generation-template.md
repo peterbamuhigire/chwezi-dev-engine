@@ -103,7 +103,7 @@ Both platforms (cross-platform)
 
 ### Bundled Resources
 - scripts/pdf_generator.php: BasePDFGenerator class
-- references/mpdf_config.md: Exact mPDF configuration parameters
+- `references/mpdf_config.md`: exact mPDF configuration parameters when that file exists in the host skill.
 ```
 
 ---
@@ -137,7 +137,7 @@ All PDF classes extend `BasePDFGenerator` in `scripts/pdf_generator.php`.
 2. Call `initPDF()` before adding any content
 3. Use CMYK colour values throughout
 4. Log errors to `/var/log/pdf-errors.log`
-5. For full config reference: see [references/mpdf_config.md](references/mpdf_config.md)
+5. For full config reference, read `references/mpdf_config.md` when that file exists in the host skill
 
 ## Common Pitfalls
 

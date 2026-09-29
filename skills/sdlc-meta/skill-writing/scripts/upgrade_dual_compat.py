@@ -14,7 +14,22 @@ from pathlib import Path
 import yaml
 
 
-REPO_ROOT = Path(__file__).resolve().parents[4]
+def _find_repo_root() -> Path:
+    """Return the engine root that holds this skill, whatever its depth.
+
+    Engine copies of this script are byte-identical mirrors of the canonical
+    chwezi-dev-engine file, so the root is found by walking up to the first
+    directory with a ``.git`` entry or an ``AGENTS.md`` router instead of a
+    fixed ``parents[n]`` depth.
+    """
+    here = Path(__file__).resolve()
+    for parent in here.parents[1:]:
+        if (parent / ".git").exists() or (parent / "AGENTS.md").is_file():
+            return parent
+    return here.parents[min(4, len(here.parents) - 1)]
+
+
+REPO_ROOT = _find_repo_root()
 ACTIVE_ROOTS = (REPO_ROOT / "skills", REPO_ROOT / "00-meta-initialization")
 MARKER_START = "<!-- dual-compat-start -->"
 MARKER_END = "<!-- dual-compat-end -->"

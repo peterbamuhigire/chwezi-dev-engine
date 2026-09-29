@@ -34,6 +34,9 @@ DEFAULT_EXTERNAL_ENGINE_ROOTS: tuple[str, ...] = ()
 DEFAULT_MAX_ACTIVE_SKILLS = 200
 MAX_DESCRIPTION_CHARS = 350
 MAX_SKILL_MD_LINES = 500
+# Report-only size warning beside the line cap (M10-04-T07, Caveman CV-06):
+# long lines can hide a large file under the line cap, so bytes are also shown.
+DEFAULT_MAX_SKILL_MD_BYTES = 20480
 FRONTMATTER_RE = re.compile(r"^\ufeff?---\r?\n(.*?)\r?\n---\r?\n?", re.DOTALL)
 ALIASES_YML = REPO_ROOT / "docs" / "skill-aliases.yml"
 
@@ -107,6 +110,15 @@ def parse_args() -> argparse.Namespace:
         "--report-only",
         action="store_true",
         help="Print findings but exit 0. Useful before the catalog is below the cap.",
+    )
+    parser.add_argument(
+        "--max-skill-bytes",
+        type=int,
+        default=DEFAULT_MAX_SKILL_MD_BYTES,
+        help=(
+            "Report-only warning threshold for SKILL.md size in bytes. "
+            f"Default: {DEFAULT_MAX_SKILL_MD_BYTES}. Never changes the exit status."
+        ),
     )
     return parser.parse_args()
 
@@ -286,6 +298,23 @@ def check_line_counts(records: list[SkillRecord]) -> list[Finding]:
     return findings
 
 
+def check_skill_bytes(records: list[SkillRecord], max_bytes: int = DEFAULT_MAX_SKILL_MD_BYTES) -> list[Finding]:
+    """Warn (never error) when a SKILL.md exceeds the byte threshold."""
+    findings: list[Finding] = []
+    for record in records:
+        size = record.path.stat().st_size
+        if size > max_bytes:
+            findings.append(
+                Finding(
+                    "warning",
+                    "skill-bytes",
+                    record.relpath,
+                    f"SKILL.md is {size} bytes; report-only threshold is {max_bytes} ({record.line_count} lines)",
+                )
+            )
+    return findings
+
+
 def check_source_ingestion(root: Path = REPO_ROOT) -> list[Finding]:
     return [
         Finding("error", item.code, item.path, item.message)
@@ -436,6 +465,7 @@ def main() -> int:
     findings.extend(check_duplicate_names(records))
     findings.extend(check_descriptions(records))
     findings.extend(check_line_counts(records))
+    findings.extend(check_skill_bytes(records, args.max_skill_bytes))
     findings.extend(check_source_ingestion())
     findings.extend(check_broken_references(roots))
     findings.extend(check_alias_integrity(records))

@@ -1,6 +1,6 @@
 ---
 name: skill-engine-audit
-description: Use when auditing, grading, benchmarking, or conforming a skills engine, or safety-gating one new, changed, or imported skill for unsafe installers, credential harvesting, prompt injection, exfiltration, excess permissions, or retained source content. Measures taxonomy, contracts, routing, safety, and readiness.
+description: Use when auditing, grading, benchmarking, or conforming a skills engine, safety-gating one new, changed, or imported skill for unsafe installers, credential harvesting, prompt injection, exfiltration, excess permissions, or retained source content, or vetting a third-party skill repo before borrowing from it.
 metadata:
   portable: true
   compatible_with:
@@ -18,6 +18,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 - A single new, changed, copied, or third-party skill must pass the safety gate before
   acceptance → load `references/skill-safety-gate.md` and return its Safe / Needs Review /
   Unsafe verdict (skip the engine-wide workflow below).
+- Vetting a third-party skill repository or awesome-list before borrowing from it, or running
+  the quarterly ecosystem scan → load `references/ecosystem-scan-and-intake.md`.
 - Deciding whether an engine is "world-class" and what to add/harden to get there.
 - Producing a comprehensive, ranked, evidence-based report on an engine's quality and coverage.
 
@@ -104,6 +106,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com.
 - `references/report-structure.md` — the multi-file report template.
 - `references/skill-safety-gate.md` — load when clearing one new, changed, or imported skill,
   or scoring the safety dimension per skill (absorbed from the retired `skill-safety-audit`).
+- `references/ecosystem-scan-and-intake.md` — seven-step quarterly scan and third-party intake;
+  verdicts go to the agents `docs/security/third-party-skill-register.json`.
 - Sibling skills: `skill-writing`, `skill-taxonomy-and-routing`,
   `ai-slop-audit`.
 ## Inputs

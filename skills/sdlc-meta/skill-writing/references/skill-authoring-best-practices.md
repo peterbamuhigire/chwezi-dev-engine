@@ -241,11 +241,11 @@ with pdfplumber.open("file.pdf") as pdf:
 
 ## Advanced features
 
-**Form filling**: See [FORMS.md](FORMS.md) for complete guide
-**API reference**: See [REFERENCE.md](REFERENCE.md) for all methods
-**Examples**: See [EXAMPLES.md](EXAMPLES.md) for common patterns
+**Form filling**: An illustrative `FORMS.md` file would hold the complete guide.
+**API reference**: An illustrative `REFERENCE.md` file would hold all methods.
+**Examples**: An illustrative `EXAMPLES.md` file would hold common patterns.
 
-Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.
+The filenames above are illustrative; do not imply that those files exist in this repository.
 
 ### Pattern 2: Domain-specific organization
 
@@ -267,10 +267,10 @@ SKILL.md:
 
 ## Available datasets
 
-**Finance**: Revenue, ARR, billing → See [reference/finance.md](reference/finance.md)
-**Sales**: Opportunities, pipeline, accounts → See [reference/sales.md](reference/sales.md)
-**Product**: API usage, features → See [reference/product.md](reference/product.md)
-**Marketing**: Campaigns, attribution → See [reference/marketing.md](reference/marketing.md)
+**Finance**: Revenue, ARR, billing → an illustrative `reference/finance.md` file.
+**Sales**: Opportunities, pipeline, accounts → an illustrative `reference/sales.md` file.
+**Product**: API usage, features → an illustrative `reference/product.md` file.
+**Marketing**: Campaigns, attribution → an illustrative `reference/marketing.md` file.
 
 ## Quick search
 
@@ -290,14 +290,14 @@ Show basic content and link to advanced content:
 
 ## Creating documents
 
-Use docx-js for new documents. See [DOCX-JS.md](DOCX-JS.md).
+Use docx-js for new documents; an illustrative `DOCX-JS.md` file would describe the workflow.
 
 ## Editing documents
 
 For simple edits, modify the XML directly.
 
-**For tracked changes**: See [REDLINING.md](REDLINING.md)
-**For OOXML details**: See [OOXML.md](OOXML.md)
+**For tracked changes**: an illustrative `REDLINING.md` file would describe the workflow.
+**For OOXML details**: an illustrative `OOXML.md` file would describe the workflow.
 
 ## Avoid deeply nested references
 

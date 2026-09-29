@@ -68,6 +68,14 @@ Do not label every role Markdown file an agent. State whether the artefact is a 
 - Do not add meta-docs inside skills such as `README.md` or `CHANGELOG.md`.
 - Keep shared expertise in one canonical, model-neutral source. Adapters may point to it but must not copy its full content.
 - Keep project-wide instruction files short: project rules, routing, safety, and links belong there; specialist bodies do not.
+- Write skill text in British English and in the imperative; add only guidance the model would not reliably infer.
+- Invoke bundled scripts through their interpreter (`python -X utf8 scripts/<name>.py`), never as a bare path.
+
+### Canonical Source and Engine Stubs
+
+This file is the canonical Chwezi authoring standard (record: `chwezi-engine-agents/docs/operations/decisions/skill-writing-canonical.md`). Other engines carry a `skill-writing` pointer stub plus byte mirrors of the scripts they call, registered in `chwezi-engine-agents/catalog/shared-assets.yaml`; change the standard here, re-sync the mirrors, then run `chwezi-engine-agents/scripts/render_host_files.py --check`. Research-skill revisions in `digital-research-engine` also pass its replay gate.
+
+Scripts that remove files quarantine rather than delete them; follow [bundled-script safety](references/bundled-script-safety.md).
 
 The boolean `metadata.portable` and list-valued `metadata.compatible_with` are
 this repository's local authoring contract. They do not establish conformance
@@ -88,6 +96,15 @@ Every reusable specialist instruction must define:
 5. **Output contract** — named artefacts, required sections, evidence, acceptance criteria, and handoff target.
 
 For capability-based wording, write "when repository search is available, inspect the code before answering" rather than naming a vendor command. Put runner-specific tool names, model selection, directories, and delegation syntax only in adapters.
+
+Contract section rules (harvested from the engine copies, M10-04):
+
+- Record each required input with its source and its if-absent behaviour: stop, fallback, or a qualified result.
+- Degraded mode returns the narrowest qualified result and marks every unrun check `NOT ASSESSED`; an unavailable check is never a pass.
+- Decision tables name the failure or risk each branch avoids, not the action again.
+- Pair every anti-pattern with a concrete correction (`Fix:`).
+- Give each extracted reference a back-link to its parent skill.
+- Delegate authoring only in non-overlapping skill cohorts; shared routers, validators, CI, and baselines stay with one owner.
 
 ## Authoring Workflow
 
@@ -190,6 +207,10 @@ Test at least:
 - A failure or stop-condition case.
 - The required output shape and evidence fields.
 
+Use the host engine's routing threshold (usually the expected skill in the router's top three). Stop on a collision and repair the distinction. Recover from a validator or routing failure by fixing the named contract; never weaken the gate or baseline.
+
+For discipline skills, also run the RED/GREEN/REFACTOR pressure method in [discipline-skill pressure testing](references/discipline-skill-pressure-testing.md), and only after a RED baseline shows the gate is skipped.
+
 ## Quality Standard
 
 Every skill in this repo should help the agent produce outputs that are:
@@ -245,6 +266,8 @@ For attention-sensitive skills, load only the reference that governs the current
 - [Invocation ownership](references/invocation-ownership.md) for explicit, implicit, and adapter behaviour.
 - [Leading words](references/leading-words-and-trigger-design.md) for descriptions and routing fixtures.
 - [Completion and handoff](references/completion-criteria-and-handoff.md) for sequential workflows and resumability.
+- [Discipline-skill pressure testing](references/discipline-skill-pressure-testing.md) for RED/GREEN/REFACTOR, pressure scenarios, the micro-test protocol, and the Excuse/Reality template.
+- [Form matches failure](references/form-matches-failure.md) for choosing a prohibition, recipe, required slot, or conditional from the observed failure.
 
 ### Book and Source-File Distillation Rule
 
@@ -292,6 +315,8 @@ When improving an existing skill:
 - Define permissions, read-only/write boundaries, stop conditions, output schema, and handoff target.
 - Ensure adapters reference the canonical source and contain only runner-specific metadata or commands.
 - Add positive, negative, collision, limited-capability, and failure-path test prompts.
+- Match the instruction form to the failure type (prohibition, recipe, required slot, or conditional) using [form matches failure](references/form-matches-failure.md).
+- For a discipline skill, record a RED baseline pressure scenario before adding prohibitions or Excuse/Reality rows; see [discipline-skill pressure testing](references/discipline-skill-pressure-testing.md).
 
 ## Validation
 
@@ -330,11 +355,11 @@ After creating or updating a skill:
 
 ## Inputs
 
-| Artefact | Required? | Why |
-|---|---|---|
-| Reusable problem and trigger examples | yes | Establish scope and routing |
-| Neighbouring skill descriptions | yes | Prevent collisions |
-| Runner capabilities and permission boundary | yes | Define safe execution |
+| Artefact | Required? | Why | If absent |
+|---|---|---|---|
+| Reusable problem and trigger examples | yes | Establish scope and routing | Stop; a skill without a repeatable job has no stable contract |
+| Neighbouring skill descriptions | yes | Prevent collisions | Search the live catalogue before drafting |
+| Runner capabilities and permission boundary | yes | Define safe execution | Default to read-only and name the missing authority |
 
 ## Decision rules
 

@@ -37,6 +37,19 @@ only when source verification is explicitly in scope.
    chapter-by-chapter structure that could substitute for the source; shadow-library metadata.
    Apply [source distillation and copyright](../../skill-writing/references/source-distillation-and-copyright.md)
    as the acceptance gate.
+9. **Global agent-configuration edits** - an installer, setup step or first-run command that
+   writes outside the repository into the agent's own configuration: `~/.claude/CLAUDE.md`,
+   hook entries in `~/.claude/settings.json` or a project `.claude/settings.json`,
+   `~/.codex/config.toml` or `~/.codex/hooks.json`, or an `AGENTS.md` outside the repository.
+   Such a write changes how every later session routes, even in unrelated projects. How the
+   step is fetched is item 1; this item is about what it changes once run.
+10. **Git-hook installation** - writing or appending to `.git/hooks/*` (post-commit,
+    post-checkout, pre-push and similar), setting `core.hooksPath`, or registering merge
+    drivers. The hook then runs code on every commit or checkout, outside any skill invocation.
+11. **Default outbound model routing** - document, code or client content sent by default to
+    a model provider the user did not choose, for example auto-selecting a backend from
+    whichever API key happens to be set. Content leaving the host must follow an explicit,
+    per-run provider choice; a local-only option must exist for confidential material.
 
 Safe patterns: existing project tools and scripts, approved dependency managers already in use,
 and internal utilities present in the workspace.
@@ -54,7 +67,48 @@ and internal utilities present in the workspace.
 8. Record the verdict with the inspected surfaces listed.
 
 Red-flag phrases: "run this remote script", "install X from this URL", "paste your API key",
-"disable security settings", "run as administrator/root".
+"disable security settings", "run as administrator/root",
+"registers a hook", "adds a section to your global CLAUDE.md", "auto-detects the provider from
+your API keys".
+
+## Worked example: Graphify (items 9-11)
+
+Source read-only at a pinned commit; nothing installed. Graphify-Labs/graphify (Apache-2.0,
+https://github.com/Graphify-Labs/graphify, commit d6eaa8aae8df155874ebb1044302c055c286342a).
+Line numbers below refer to that commit; no code or text is copied.
+
+| Item | Where at the pinned commit | Behaviour |
+|---|---|---|
+| 9 | `graphify/install.py` l.732-749 (`install()`), writer l.375-418 (`_register_always_on_block`), block text l.365-374 | A global `graphify install` resolves `~/.claude/CLAUDE.md` (or `$CLAUDE_CONFIG_DIR/CLAUDE.md`) and appends or refreshes a `# graphify` registration block in it |
+| 9 | `graphify/install.py` l.329-364 (`_claude_pretooluse_hooks`), l.1859-1880 (`_install_claude_hook`), called from `claude_install` l.1831-1858 | `graphify claude install` merges two PreToolUse hooks (one matching Bash and Grep, one matching Read and Glob; 10 s timeout) into `.claude/settings.json`; each spawns the tool on every search or read call |
+| 10 | `graphify/hooks.py` l.628-656 (`_install_hook`), l.864-892 (`install`) | `graphify hook install` writes or appends post-commit and post-checkout hooks (honouring `core.hooksPath`) and registers a merge driver |
+| 11 | `README.md` l.592-593 | Headless extraction picks the provider from whichever API key is set (Gemini, then Kimi, then Claude, and so on); Kimi routes content to Moonshot AI servers |
+
+Verdict under this gate: **Needs Review** at minimum; never run the global install on a host
+whose `~/.claude/CLAUDE.md` is the engine router. The existing portfolio disposition (Graphify
+rejected for this host, P06) stands.
+
+## Bounded outbound check (positive exemplar)
+
+Not every network call is a red flag. Archify's update-awareness check shows what a bounded
+one looks like. Adapted in paraphrase from tt-a1i/archify (`scripts/check-update.mjs`,
+`references/update-awareness.md`; MIT, https://github.com/tt-a1i/archify, commit
+0e4949f910a8e390bd3b4933883a4dcabad571be). No text copied. The six properties:
+
+1. **Timeout** - the request gives up quickly (about one second) and never blocks the work.
+2. **Response cap** - the body read is capped (32 KiB), so a hostile server cannot flood it.
+3. **TTL with back-off** - it checks at most about once a day and backs off after failures
+   (6 h, then 24 h); the cache refuses symlinks and junctions.
+4. **Opt-out variable** - one environment variable (`ARCHIFY_UPDATE_CHECK_DISABLED=1`)
+   disables both the network call and any state writes.
+5. **Notice without install** - the result is shown as information; nothing is downloaded,
+   installed or executed, and no identifier, prompt or project data is sent.
+6. **Silence is never consent** - the agent treats the notice as information only; applying an
+   update needs an explicit human instruction.
+
+Checklist question for every candidate: *For each outbound call in the skill, its scripts or
+its installer, which of the six properties does it have?* Any call missing one is a finding;
+a call that sends document or code content is item 11, not an update check.
 
 ## Verdict rules
 

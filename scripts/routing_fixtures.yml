@@ -247,3 +247,5 @@ fixtures:
     expect: ai-assisted-development
   - task: "Check that the code tour we wrote still points at real files and lines after last month's refactor"
     expect: doc-architect
+  - task: "Vet this third-party skill repo before we borrow from it"
+    expect: skill-engine-audit
