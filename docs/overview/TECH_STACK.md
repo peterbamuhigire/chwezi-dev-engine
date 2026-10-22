@@ -12,6 +12,9 @@ toolchains rather than repository dependencies.
 It also includes WWDC26-era Apple development guidance, but Xcode, Swift, and
 Apple SDKs are downstream project toolchains rather than runtime dependencies
 of this repository.
+PHP runtime and Composer references are downstream application toolchains;
+the repository records current PHP lifecycle/security sources and migration
+checks without adding a PHP runtime dependency.
 
 ## Tooling
 

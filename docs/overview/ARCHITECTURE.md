@@ -16,6 +16,7 @@ at a plan result. None of these helpers executes external side effects.
 | Component | Responsibility |
 | --- | --- |
 | `skills/` | Main skill catalog for engineering, AI, SaaS, mobile, game development, security, UX, product, and operations, including C#/.NET and consolidated enterprise Java/JVM entrypoints. |
+| `skills/languages/php-modern-standards/` | PHP code and application compatibility guidance, with dated runtime-upgrade evidence; host/package cutover remains with the Linux operations engine. |
 | External `chwezi-accounting-doctrine` checkout | Canonical finance doctrine; kept outside the runtime skill catalog. |
 | `00-meta-initialization/` | Entry-point workflow for SDLC documentation setup. |
 | `docs/skill-routing-index.md` | Human routing map for consolidated and legacy skill names. |

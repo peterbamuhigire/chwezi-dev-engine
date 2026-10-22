@@ -119,7 +119,7 @@ Generated from the active `SKILL.md` files under `skills/` and `00-meta-initiali
 | Languages | [`java-enterprise-development`](skills/languages/java-enterprise-development/SKILL.md) | Builds and modernises Java/JVM services with Spring Boot, Jakarta EE and Hibernate. |
 | Languages | [`javascript-modern`](skills/languages/javascript-modern/SKILL.md) | Writes modern JavaScript: modules, async flows, error handling and performance. |
 | Languages | [`nodejs-development`](skills/languages/nodejs-development/SKILL.md) | Builds Node.js services, APIs, workers and CLIs with logging, tests and scaling. |
-| Languages | [`php-modern-standards`](skills/languages/php-modern-standards/SKILL.md) | Writes PHP 8+ and Laravel code to PSR standards with secure request handling. |
+| Languages | [`php-modern-standards`](skills/languages/php-modern-standards/SKILL.md) | Writes PHP 8+ and Laravel code to PSR standards, with current security-patch and staged runtime-upgrade guidance. |
 | Languages | [`python-data-analytics`](skills/languages/python-data-analytics/SKILL.md) | Computes KPIs, cohorts, financial maths and statistical tests in Python and pandas. |
 | Languages | [`python-data-pipelines`](skills/languages/python-data-pipelines/SKILL.md) | Builds idempotent Python ETL, OCR and document-ingestion pipelines. |
 | Languages | [`python-ml-predictive`](skills/languages/python-ml-predictive/SKILL.md) | Adds forecasting, classification and anomaly detection with scikit-learn, Prophet and statsmodels. |

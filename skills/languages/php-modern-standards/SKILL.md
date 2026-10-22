@@ -20,7 +20,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - For long-lived PHP application work, load `references/world-class-php-oop-clean-architecture.md` before designing controllers, services, repositories, or domain objects.
 - For containerized PHP work, pair with `docker-development`.
-- Pin a supported PHP branch before choosing language features. On 2026-09-24 php.net listed 8.4 and 8.5 in active support, 8.3 security-only to 31 Dec 2027, and 8.2 security-only to 31 Dec 2026; 8.1 and earlier are end of life. Re-check <https://www.php.net/supported-versions.php> at execution time and flag any project on an EOL or near-EOL branch as an upgrade risk.
+- Pin a supported PHP branch before choosing language features. Check <https://www.php.net/supported-versions.php> at execution time; record the access date and branch support state rather than relying on a copied lifecycle table.
+- For a minor-branch upgrade, assess the application's PHP and extension constraints, run every intervening migration guide, validate the locked dependencies under the actual target runtime, and test the application before production cutover. Follow [`references/php-runtime-upgrades.md`](references/php-runtime-upgrades.md).
 
 ## Evidence Produced
 
@@ -33,6 +34,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Use the `references/` directory for deep detail after reading the core workflow below.
 - Use the `examples/` directory for concrete patterns when implementation shape matters.
+- Use [`references/php-runtime-upgrades.md`](references/php-runtime-upgrades.md) for a staged PHP 8.5 compatibility and release procedure.
 <!-- dual-compat-end -->
 Production-grade PHP patterns for maintainable, testable, secure, high-performance applications.
 

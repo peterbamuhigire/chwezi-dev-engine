@@ -12,6 +12,12 @@ coding agents and human operators select reusable workflows for software
 engineering, AI systems, SaaS operations, finance-doctrine orchestration, mobile development,
 security, UX, and SDLC documentation.
 
+PHP engineering guidance now pairs application compatibility checks for staged
+minor-version upgrades with an explicit handoff to the Linux operations engine
+for OS packages, web handlers, workers, and production cutovers. The 2026-10-22
+security/currentness record covers the emergency PHP RCE release and PHP 8.5
+validation path.
+
 The current catalog includes a consolidated enterprise Java/JVM engineering
 route and WWDC26-era Apple development guidance across iOS,
 mobile operations, AI, App Intents/Siri/Spotlight, StoreKit, quality/release,

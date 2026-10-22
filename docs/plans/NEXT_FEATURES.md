@@ -35,6 +35,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-10-22 | PHP emergency security and PHP 8.5 upgrade guidance | Added source-current critical RCE patch context, vendor-specific patch handoff, and staged app/runtime compatibility checks across the PHP and Linux skills engines. |
 | 2026-09-11 | Matt Pocock workflow Kaizen | Returned the catalogue to the 170 baseline; subsequent retained hospitality coverage is now counted as 171 and is subject to the contract repair and review gate. |
 | 2026-09-05 | Enterprise Java engineering capability | Added one consolidated Java/JVM route with currentness register, deep decision references, evidence templates, production diagnostics, Oracle integration, routing fixtures, and an enterprise reference scenario. |
 | 2026-08-20 | Eleven-engine control plane | Registered `windows-admin-engine-skills` as the eleventh canonical engine, added its adoption contract, and extended deterministic registry validation. |

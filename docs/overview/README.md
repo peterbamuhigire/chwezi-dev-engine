@@ -7,6 +7,11 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [2026-10-22 PHP security and runtime-upgrade update](../updates/2026-10-22-php-security-and-runtime-upgrades.md)
+adds source-dated guidance for the critical PHP RCE advisories, vendor package
+patching, and staged PHP 8.5 compatibility checks. The Linux operations engine
+owns host and service changes; this engine owns application compatibility.
+
 The [2026-09-19 bounded agent-contract wave](../updates/2026-09-19-engineering-kaizen-wave.md)
 adds versioned context, prompt, tool-approval, action-budget and deterministic
 planning utilities under `tools/ai/`; live host integration remains
