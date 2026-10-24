@@ -250,6 +250,7 @@ Never silently skip operator actions.
 ## Anti-Patterns
 
 - Hardcoded skill paths (`/Users/alice/skills/...`) — environments differ.
+- Operator commands that run through a skills, scratch, or temp directory, or that need a path argument - each must be one short line (see `rules/common/user-run-scripts.md`).
 - Skill names in the script header but not re-stated in subagent prompts — subagents lose them.
 - A single mega-prompt covering > ~30 Tasks — context exhaustion, lost discipline.
 - Verification commands omitted "to keep the prompt short" — verification is the prompt.
@@ -264,6 +265,7 @@ Before handing the script to the operator, verify:
 
 - [ ] Every prompt names verified domain skills and any available process skills it needs.
 - [ ] No absolute path to a skill file appears anywhere in the script.
+- [ ] Every command the operator must run is one short line (package script, `./scripts/<name>`, or a bare command on `PATH`); none goes through a skills, scratch, or temp directory.
 - [ ] Every fan-out subagent prompt re-injects the skill names it needs.
 - [ ] Every fan-out has explicit, non-overlapping file scope.
 - [ ] Every prompt ends with a verification gate that names exact commands.

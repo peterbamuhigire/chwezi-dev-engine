@@ -25,7 +25,8 @@ rules/
 │   ├── security.md
 │   ├── coding-style.md
 │   ├── verification.md
-│   └── agentic-engineering.md
+│   ├── agentic-engineering.md
+│   └── user-run-scripts.md
 └── README.md        # this file
 ```
 
