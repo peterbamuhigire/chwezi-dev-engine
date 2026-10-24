@@ -2,7 +2,7 @@
 
 ## Change
 
-A script the user is asked to run is now launched by one line with the shortest path that resolves from where they already are: a package or task command, a project-root-relative `./scripts/<name>.sh`, a bare command on `PATH`, or `~/<name>.sh` for a one-off. Skills-directory, scratch and temp paths are no longer handed to users, and no script may require an output-path argument.
+A script the user is asked to run is now launched by one line with the shortest path that resolves from where they already are: a package or task command, a project-root-relative `./scripts/<name>.sh`, a bare command on `PATH`, or `~/<name>.sh` for a one-off. Skills-directory, scratch and temp paths are no longer handed to users, no script may require an output-path argument, and a script that writes only to a file must say so on the terminal.
 
 - New always-on rule [`rules/common/user-run-scripts.md`](../../rules/common/user-run-scripts.md), listed in `rules/README.md` and in the `AGENTS.md` read-first table.
 - `skills/execution-plan-scripts` gains an anti-pattern and an Authoring Checklist item, so operator commands inside generated plans follow the same rule.

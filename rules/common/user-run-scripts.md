@@ -16,8 +16,10 @@ that resolves from where they already are: a package or task command
 `./scripts/<name>.sh`, a bare command on `PATH`, or `~/<name>.sh` for a one-off.
 Never hand over a path through a skills directory, a scratch or temp directory,
 or any location that exists for one session only, and never require an
-output-path argument; default the output next to the script. Long paths wrap in
-terminals and pick up stray newlines when copied. Commands run by a machine (CI,
+output-path argument; default the output next to the script. A script that
+writes its results to a file prints one line to the terminal before and after,
+naming the file, because silence reads as failure. Long paths wrap in terminals
+and pick up stray newlines when copied. Commands run by a machine (CI,
 cron, cloud-init) are exempt.
 
 For a script that runs as root or changes state, also give the user a short
