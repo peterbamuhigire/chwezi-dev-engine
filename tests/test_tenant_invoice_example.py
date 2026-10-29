@@ -68,3 +68,12 @@ def test_tenant_invoice_validator_rejects_unbounded_next_query(tmp_path: Path) -
     result = run_validator(copied)
     assert result.returncode == 1
     assert "return 400" in result.stderr
+
+
+def test_tenant_invoice_validator_requires_manual_review_exercise(tmp_path: Path) -> None:
+    copied = tmp_path / "tenant-invoice-listing"
+    shutil.copytree(EXAMPLE, copied)
+    (copied / "review-exercise.md").unlink()
+    result = run_validator(copied)
+    assert result.returncode == 1
+    assert "review-exercise.md" in result.stderr

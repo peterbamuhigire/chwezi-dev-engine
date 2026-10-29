@@ -2,6 +2,10 @@
 
 This read-only example follows a server-authenticated tenant boundary across a PHP service/controller, OpenAPI contract, Next.js App Router page/handler, and Compose screen. The fixture uses synthetic data only. The listing path does not create or post ledger entries; accounting treatment and posting rules remain owned by Chwezi Accounting Doctrine.
 
+The [manual review exercise](review-exercise.md) contains the unsafe synthetic specimen
+from the practitioner review and the four expected finding groups. It is marked
+non-executable and must not be copied into an application.
+
 ## Evidence and limits
 
 The PHP source and executable test are copied from the prepared disposable fixture. The 15-check test runs against PDO SQLite. The MySQL migration is illustrative and has not been applied to MySQL. It requires an application-specific migration framework, matching column types, existing identity/session verification, and a reviewed rollback plan before use.

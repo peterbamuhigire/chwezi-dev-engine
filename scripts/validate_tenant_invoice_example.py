@@ -9,6 +9,7 @@ import sys
 
 REQUIRED_FILES = (
     "README.md",
+    "review-exercise.md",
     "api.yaml",
     "php/2026_10_29_create_tenant_invoices.sql",
     "php/invoice-list.php",
@@ -34,6 +35,13 @@ def validate(root: Path) -> list[str]:
     for relative in REQUIRED_FILES:
         if not (root / relative).is_file():
             errors.append(f"missing required example file: {relative}")
+
+    review_path = root / "review-exercise.md"
+    if review_path.is_file():
+        review = review_path.read_text(encoding="utf-8").lower()
+        for expected in ("do not run or deploy", "interpolated", "tenant predicate", "n+1", "unescaped", "journalpostingservice"):
+            if expected not in review:
+                errors.append(f"review exercise is missing expected defect evidence: {expected}")
 
     dal_path = root / "nextjs/lib/invoices.ts"
     if dal_path.is_file():
