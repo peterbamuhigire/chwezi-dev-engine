@@ -21,6 +21,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - For long-lived PHP application work, load `references/world-class-php-oop-clean-architecture.md` before designing controllers, services, repositories, or domain objects.
 - For containerized PHP work, pair with `docker-development`.
 - Pin a supported PHP branch before choosing language features. Check <https://www.php.net/supported-versions.php> at execution time; record the access date and branch support state rather than relying on a copied lifecycle table.
+- Before a release or runtime upgrade, check current PHP security advisories against the actual PHP package/build, SAPI, extensions, and enabled features. PHP source-version equality does not prove that a distribution package or Windows dependency rebuild is present; record unresolved applicability in `docs/source-registers/skills-engine-currentness-2026-09.json`.
 - For a minor-branch upgrade, assess the application's PHP and extension constraints, run every intervening migration guide, validate the locked dependencies under the actual target runtime, and test the application before production cutover. Follow [`references/php-runtime-upgrades.md`](references/php-runtime-upgrades.md).
 
 ## Evidence Produced

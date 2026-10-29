@@ -40,6 +40,7 @@ Use this parent skill as the active PostgreSQL engineering entrypoint. Keep impl
    - `references/postgresql-server-programming.md` for functions, triggers, and server-side behaviour.
 3. Administration, performance incidents, tuning, backups, and production operations also route here (the retired `postgresql-operations` skill is an inactive alias of this skill).
 4. Pair with `ai-rag-patterns` only when pgvector or AI platform concerns are central.
+5. Before selecting a server or client version, verify supported majors, current minor releases, and security fixes on the official PostgreSQL support and security pages; record the target version and check date. Do not infer the supported-version range from this skill or an example.
 
 ## Quality Standards
 

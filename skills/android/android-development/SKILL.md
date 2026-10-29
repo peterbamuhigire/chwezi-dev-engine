@@ -47,8 +47,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 Production-grade Android development standards for AI-assisted implementation. Kotlin-first with Jetpack Compose, following modern Android best practices.
 
 **Core Stack:** Kotlin 100% | Jetpack Compose (default UI toolkit) | MVVM + Clean Architecture | Hilt DI
-**Min SDK:** 29 (Android 10) | **Target SDK:** 35 (Android 15)
-**Compatibility:** Must run flawlessly on BOTH the minSdk (oldest supported) AND the latest stable Android release
+**Min SDK:** Choose from the product's supported-device policy. **Play target:** API 36 or higher for general new apps and updates, verified 2026-10-29; check the official requirement for platform-specific exceptions before release. **Compatibility:** test the declared minSdk and the latest stable Android release that the project supports. Current source snapshot identifies Android 17/API 37 as released; this is a compatibility target, not the Play submission target.
 **Reference App:** [Now in Android](https://github.com/android/nowinandroid) - Google's official sample demonstrating these standards in a production-quality codebase
 
 ## When to Use
@@ -203,11 +202,11 @@ Our apps MUST work for the few people still holding older devices, but MUST ALSO
 
 **Mandatory rules:**
 
-1. **`enableEdgeToEdge()` is REQUIRED** — Call it in `MainActivity.onCreate()` before `super.onCreate()`. Android 15 (API 35) enforces edge-to-edge for apps targeting SDK 35. Without it, the app **crashes immediately** on Android 15 devices. This is non-negotiable.
+1. **Handle edge-to-edge insets deliberately** — Android 15 enforces edge-to-edge for apps targeting API 35 and higher. Use the AndroidX edge-to-edge helper where it fits the app, then verify status/navigation bar contrast, cutouts, IME, and content insets on the supported device range. Missing the helper is not evidence by itself that the app crashes.
 2. **Do NOT set `window.statusBarColor` directly** — It is deprecated and conflicts with edge-to-edge. Let `enableEdgeToEdge()` handle system bar colors. Only control light/dark icon appearance via `WindowCompat.getInsetsController().isAppearanceLightStatusBars`.
-3. **Test on at least two Android versions** — Always verify on both the minSdk emulator (Android 10) AND a recent Android (14/15) emulator or device before shipping.
+3. **Test the actual support boundary** — Verify the declared minSdk and a current stable Android emulator/device before shipping; add API 35+ inset tests when targeting API 35 or higher.
 4. **Guard version-specific APIs** — When using APIs added after minSdk, wrap them in `if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.X)` checks.
-5. **Keep targetSdk current** — Target the latest stable SDK (currently 35). Do not lag behind — Google Play requires recent targetSdk and newer Android versions enforce stricter behavior for apps that target them.
+5. **Keep targetSdk current** — Check the official Play target requirement for the app category at release time. As verified 2026-10-29, general new apps and updates must target API 36 or higher; platform-specific exceptions differ. Keep `compileSdk` compatibility separate from `targetSdk` and verify the actual Gradle/AGP/dependency combination.
 6. **Use `AppCompatActivity`** when locale switching is needed (`AppCompatDelegate.setApplicationLocales()`). Otherwise prefer `ComponentActivity` for pure Compose apps.
 
 **Correct MainActivity pattern:**
@@ -216,12 +215,24 @@ Our apps MUST work for the few people still holding older devices, but MUST ALSO
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()  // Before super
-        enableEdgeToEdge()     // Before super — MANDATORY for targetSdk 35
+        enableEdgeToEdge()     // Apply only with a reviewed inset strategy
         super.onCreate(savedInstanceState)
         setContent { ... }
     }
 }
 ```
+
+## Version and security currency
+
+Before selecting an Android, Kotlin, Compose, Gradle, AGP, PHP, or database
+version, check the official release/support and security sources recorded in
+`docs/source-registers/skills-engine-currentness-2026-09.json`. The checked
+2026-10-29 snapshot identifies Android 17/API 37, Kotlin 2.4.21, and Compose
+BOM 2026.09.00 as the current source-listed values at that date; re-check them
+and their compatibility at implementation time. A Play target requirement is
+not a statement about the latest Android runtime. For Kotlin 2.0 and later the
+Compose compiler plugin follows the Kotlin version; still validate the chosen
+toolchain with a real build.
 
 ### Security
 
