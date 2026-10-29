@@ -79,6 +79,15 @@ fixtures:
   # Frontend and mobile
   - task: "Build a Next.js App Router application with server components and route handlers"
     expect: nextjs-app-router
+  - task: "Implement a tenant-authorized Next.js App Router server page with async searchParams and tenant-filtered data access"
+    expect: nextjs-app-router
+    negatives:
+      - task: "Build reusable React components and hooks for a browser-only widget without Next.js routing or server components"
+        owner: react-development
+      - task: "Write an OpenAPI schema for the invoice listing endpoint and standard error responses"
+        owner: api-design-first
+  - task: "Secure a Next.js App Router route handler against cross-tenant reads and shared private-data caching"
+    expect: nextjs-app-router
   - task: "Resize, strip metadata and re-encode uploaded images, and define quality metrics for frontend assets"
     expect: image-compression
     negatives:

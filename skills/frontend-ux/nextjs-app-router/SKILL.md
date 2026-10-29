@@ -1,6 +1,6 @@
 ---
 name: nextjs-app-router
-description: Use when implementing or reviewing a Next.js App Router application with server and client components, route handlers, middleware, caching, authentication, streaming, or deployment. Use react-development for framework-neutral components and api-design-first for external APIs.
+description: Use when implementing or reviewing a Next.js App Router application with server and client components, route handlers, Proxy migration, caching, authentication, streaming, or deployment. Use react-development for framework-neutral components and api-design-first for external APIs.
 metadata:
   portable: true
   compatible_with:
@@ -14,7 +14,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-start -->
 ## Use When
 
-- Next.js App Router patterns for production — server/client components, parallel routes, advanced middleware, RBAC three-tier, Redis caching, background jobs (BullMQ), data fetching, auth, deployment, CI/CD. Sources: Rambert (Advanced Next.js)...
+- Next.js App Router patterns for production — server/client components, parallel routes, Proxy migration, server-side authorization, caching, background jobs (BullMQ), data fetching, authentication, deployment, and CI/CD.
 
 ## Evidence Produced
 
@@ -26,6 +26,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- For private tenant-owned data and auth/cache boundaries, load [`references/tenant-data-security.md`](references/tenant-data-security.md).
 <!-- dual-compat-end -->
 ## Project Setup
 
@@ -58,6 +59,9 @@ app/
 
 ```tsx
 // Server component (default) — async, zero JS to client
+// Public, non-sensitive example only. For user-specific data, authenticate at
+// the data-access boundary and avoid shared/static caching; see the tenant
+// data security reference below.
 export default async function UsersPage() {
   const users = await fetch('https://api.example.com/users', {
     cache: 'force-cache',        // static
@@ -92,8 +96,9 @@ export default function Counter() {
 ### Dynamic Routes + generateStaticParams
 
 ```tsx
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const post = await fetchPost(params.slug);
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await fetchPost(slug);
   return <article><h1>{post.title}</h1></article>;
 }
 export async function generateStaticParams() {
@@ -153,33 +158,17 @@ export const getUser = cache(async (id: string) => db.user.findUnique({ where: {
 
 ## Route Handlers (API Routes)
 
-```ts
-// app/api/users/route.ts
-export async function GET() {
-  return NextResponse.json(await db.user.findMany());
-}
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  return NextResponse.json(await db.user.create({ data: body }), { status: 201 });
-}
-```
+Route Handlers are public entry points. Authenticate and authorize in the
+data-access function on every request; never return an unscoped table scan. See
+`references/tenant-data-security.md` for the complete read-only example.
 
 ---
 
 ## Server Actions
 
-```tsx
-'use server';
-import { revalidatePath } from 'next/cache';
-export async function createTodo(formData: FormData) {
-  const title = formData.get('title') as string;
-  await db.todo.create({ data: { title } });
-  revalidatePath('/todos');
-}
-
-// Use directly in form — no API route needed
-<form action={createTodo}><input name="title" /><button>Add</button></form>
-```
+Treat each Server Action as a public endpoint: authenticate, authorize,
+validate, mutate, then revalidate only the affected path or tag. Do not rely on
+a hidden UI control or page-level check for authorization.
 
 ### Server Actions vs API Routes
 
@@ -190,37 +179,20 @@ export async function createTodo(formData: FormData) {
 
 ---
 
-## Middleware
+## Proxy and request routing
 
 ```ts
-// middleware.ts — project root
+// proxy.ts — project root. A redirect is only a navigation aid.
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  const { pathname, url } = request.nextUrl;
-
-  // Auth redirect
-  const token = request.cookies.get('token')?.value;
-  if (!token && pathname.startsWith('/dashboard')) {
-    return NextResponse.redirect(new URL('/login', url));
+export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const hasSessionCookie = Boolean(request.cookies.get('session')?.value);
+  if (!hasSessionCookie && pathname.startsWith('/dashboard')) {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
-
-  // IP blocking
-  const ip = request.ip || request.headers.get('x-forwarded-for') || '';
-  const blocked = ['192.168.1.100'];
-  if (blocked.includes(ip)) return new NextResponse('Forbidden', { status: 403 });
-
-  // Geo-routing
-  const country = request.geo?.country;
-  if (country === 'FR' && !pathname.startsWith('/fr')) {
-    return NextResponse.rewrite(new URL('/fr' + pathname, url));
-  }
-
-  // Custom headers
-  const res = NextResponse.next();
-  res.headers.set('X-Request-ID', crypto.randomUUID());
-  return res;
+  return NextResponse.next();
 }
 
 export const config = { matcher: ['/dashboard/:path*', '/api/:path*'] };
@@ -228,31 +200,16 @@ export const config = { matcher: ['/dashboard/:path*', '/api/:path*'] };
 
 ---
 
-## RBAC — Three-Tier Protection
+## Authorization and tenant data access
 
 ```ts
-// Tier 1: Middleware (route-level gating)
-if (pathname.startsWith('/admin')) {
-  const role = request.cookies.get('role')?.value;
-  if (role !== 'admin') return NextResponse.redirect(new URL('/unauthorized', url));
-}
-
-// Tier 2: Server component (page-level protection)
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
-export default async function AdminPage() {
-  const session = await auth();
-  if (!session || session.user.role !== 'admin') redirect('/unauthorized');
-  return <div>Admin Panel</div>;
-}
-
-// Tier 3: API route (data-level protection)
-export async function GET(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== 'admin')
-    return Response.json({ error: 'Unauthorized' }, { status: 403 });
-  return Response.json(await db.adminData.findMany());
-}
+Proxy may perform an optimistic redirect from the presence of a session cookie.
+It must not trust a role cookie, establish tenant membership, or replace a
+server-side authorization check. Verify the session and permission in a
+server-only data-access layer for each page, Route Handler, and Server Action.
+Apply the verified tenant predicate in the database query and return an
+allowlisted DTO. See `references/tenant-data-security.md` for a complete
+read-only invoice path and negative cases.
 ```
 
 ---
@@ -265,22 +222,11 @@ import Redis from 'ioredis';
 const redis = new Redis(process.env.REDIS_URL!);
 export default redis;
 
-// API route with cache-aside pattern
-export async function GET() {
-  const cached = await redis.get('users');
-  if (cached) return Response.json(JSON.parse(cached));
-
-  const users = await db.user.findMany();
-  await redis.set('users', JSON.stringify(users), 'EX', 600); // 10 min
-  return Response.json(users);
-}
-
-// Invalidate on mutation
-export async function POST(request: NextRequest) {
-  const user = await db.user.create({ data: await request.json() });
-  await redis.del('users');
-  return Response.json(user, { status: 201 });
-}
+User-specific results must not use a shared cache key or a shared static
+render. Establish authorization before reading data. If a cache is introduced,
+prove key isolation, invalidation, expiry, and failure behaviour for the
+verified tenant and permission context; otherwise keep the path uncached and
+private. Cache invalidation is not an authorization control.
 ```
 
 ---
