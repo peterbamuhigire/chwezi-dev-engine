@@ -62,7 +62,7 @@ def test_tenant_invoice_validator_rejects_lossy_bigint_json_number(tmp_path: Pat
 def test_tenant_invoice_validator_rejects_unbounded_next_query(tmp_path: Path) -> None:
     copied = tmp_path / "tenant-invoice-listing"
     shutil.copytree(EXAMPLE, copied)
-    path = copied / "nextjs/app/invoices/route.ts"
+    path = copied / "nextjs/app/api/invoices/route.ts"
     source = path.read_text(encoding="utf-8").replace("status: 400", "status: 200")
     path.write_text(source, encoding="utf-8")
     result = run_validator(copied)
@@ -77,3 +77,13 @@ def test_tenant_invoice_validator_requires_manual_review_exercise(tmp_path: Path
     result = run_validator(copied)
     assert result.returncode == 1
     assert "review-exercise.md" in result.stderr
+
+
+def test_tenant_invoice_validator_rejects_page_route_collision(tmp_path: Path) -> None:
+    copied = tmp_path / "tenant-invoice-listing"
+    shutil.copytree(EXAMPLE, copied)
+    collision = copied / "nextjs/app/invoices/route.ts"
+    collision.write_text("export async function GET() { return Response.json({}); }\n", encoding="utf-8")
+    result = run_validator(copied)
+    assert result.returncode == 1
+    assert "same /invoices route segment" in result.stderr

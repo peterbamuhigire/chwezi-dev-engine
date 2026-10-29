@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Read-only illustrative contract. Authentication and tenant are established by the server session.
 paths:
-  /invoices:
+  /api/invoices:
     get:
       summary: List invoices visible to the authenticated tenant
       parameters:

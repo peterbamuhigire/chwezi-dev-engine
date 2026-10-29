@@ -15,7 +15,8 @@ REQUIRED_FILES = (
     "php/invoice-list.php",
     "php/test.php",
     "nextjs/app/invoices/page.tsx",
-    "nextjs/app/invoices/route.ts",
+    "nextjs/app/api/invoices/route.ts",
+    "nextjs/types/server-only.d.ts",
     "nextjs/lib/invoices.ts",
     "android/InvoiceListScreen.kt",
 )
@@ -80,7 +81,7 @@ def validate(root: Path) -> list[str]:
         if "id: { type: string" not in contract or "amount_minor: { type: string" not in contract:
             errors.append("API contract must represent SQL BIGINT identifiers and amounts as strings")
 
-    route_path = root / "nextjs/app/invoices/route.ts"
+    route_path = root / "nextjs/app/api/invoices/route.ts"
     if route_path.is_file():
         route = route_path.read_text(encoding="utf-8")
         if "Cache-Control" not in route or "private, no-store" not in route:
@@ -89,6 +90,10 @@ def validate(root: Path) -> list[str]:
             errors.append("Route Handler must return 400 for invalid listing input")
         if "ForbiddenError" not in route or "UnauthenticatedError" not in route:
             errors.append("Route Handler must map unauthenticated and forbidden failures")
+
+    conflicting_route = root / "nextjs/app/invoices/route.ts"
+    if conflicting_route.exists():
+        errors.append("page and Route Handler cannot occupy the same /invoices route segment")
 
     page_path = root / "nextjs/app/invoices/page.tsx"
     if page_path.is_file():
