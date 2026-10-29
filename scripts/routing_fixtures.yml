@@ -115,6 +115,17 @@ fixtures:
         owner: mysql-engineering
       - task: "Build a scheduled Python ETL pipeline that loads CSV exports into the warehouse"
         owner: python-data-pipelines
+  - task: "Implement a PHP tenant-scoped invoice repository with bound filters and an explicit response DTO"
+    expect: php-modern-standards
+    negatives:
+      - task: "Tune MySQL replication, binary logs and production backup retention"
+        owner: mysql-engineering
+      - task: "Define the versioned OpenAPI invoice contract before application implementation"
+        owner: api-design-first
+  - task: "Write PHP integration tests proving invoice tenant isolation, permission denial and escaped output"
+    expect: php-modern-standards
+  - task: "Build a PHP 8.5 service and controller for a read-only invoice listing with bounded query input"
+    expect: php-modern-standards
   - task: "Compute cohort retention and funnel metrics and IRR in Python where SQL is unwieldy"
     expect: python-data-analytics
     negatives:
