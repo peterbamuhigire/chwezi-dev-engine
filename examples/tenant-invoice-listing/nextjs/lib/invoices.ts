@@ -14,10 +14,31 @@ export type InvoiceDto = {
   customer: string;
 };
 
+export type ParsedInvoiceQuery = { search: string; limit: number };
+
+export function parseInvoiceListQuery(
+  searches: string[],
+  limits: string[],
+): ParsedInvoiceQuery | null {
+  if (searches.length > 1 || limits.length > 1) return null;
+  const search = searches[0] ?? '';
+  if (search.length > 120) return null;
+
+  const rawLimit = limits[0];
+  if (rawLimit === undefined) return { search, limit: 20 };
+  if (!/^\d+$/.test(rawLimit)) return null;
+  const limit = Number(rawLimit);
+  if (!Number.isSafeInteger(limit) || limit < 1 || limit > 100) return null;
+  return { search, limit };
+}
+
 export async function listInvoicesForCurrentTenant(
   search: string,
   limit: number,
 ): Promise<InvoiceDto[]> {
+  if (search.length > 120 || !Number.isSafeInteger(limit) || limit < 1 || limit > 100) {
+    throw new RangeError('Invalid invoice-list query');
+  }
   const session = await auth();
   if (!session?.user?.id || !session.user.tenantId) {
     throw new UnauthenticatedError();

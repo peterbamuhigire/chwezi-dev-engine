@@ -1,18 +1,23 @@
 import { NextResponse } from 'next/server';
 import {
   ForbiddenError,
+  parseInvoiceListQuery,
   UnauthenticatedError,
   listInvoicesForCurrentTenant,
 } from '@/lib/invoices';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const search = (url.searchParams.get('q') ?? '').slice(0, 120);
-  const rawLimit = Number(url.searchParams.get('limit') ?? 20);
-  const limit = Number.isInteger(rawLimit) ? Math.max(1, Math.min(rawLimit, 100)) : 20;
+  const parsed = parseInvoiceListQuery(
+    url.searchParams.getAll('q'),
+    url.searchParams.getAll('limit'),
+  );
+  if (!parsed) {
+    return NextResponse.json({ error: 'Invalid listing input' }, { status: 400 });
+  }
 
   try {
-    const data = await listInvoicesForCurrentTenant(search, limit);
+    const data = await listInvoicesForCurrentTenant(parsed.search, parsed.limit);
     return NextResponse.json({ data }, {
       headers: { 'Cache-Control': 'private, no-store' },
     });

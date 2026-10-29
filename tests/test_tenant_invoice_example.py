@@ -57,3 +57,14 @@ def test_tenant_invoice_validator_rejects_lossy_bigint_json_number(tmp_path: Pat
     result = run_validator(copied)
     assert result.returncode == 1
     assert "decimal strings" in result.stderr
+
+
+def test_tenant_invoice_validator_rejects_unbounded_next_query(tmp_path: Path) -> None:
+    copied = tmp_path / "tenant-invoice-listing"
+    shutil.copytree(EXAMPLE, copied)
+    path = copied / "nextjs/app/invoices/route.ts"
+    source = path.read_text(encoding="utf-8").replace("status: 400", "status: 200")
+    path.write_text(source, encoding="utf-8")
+    result = run_validator(copied)
+    assert result.returncode == 1
+    assert "return 400" in result.stderr

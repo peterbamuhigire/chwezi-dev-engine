@@ -55,6 +55,10 @@ def validate(root: Path) -> list[str]:
             errors.append("SQL BIGINT identifiers and amounts must cross the API as decimal strings")
         if dal.count(".toString()") < 2:
             errors.append("SQL BIGINT identifiers and amounts must be serialized explicitly")
+        if "parseInvoiceListQuery" not in dal or "searches.length > 1" not in dal or "limits.length > 1" not in dal:
+            errors.append("Next.js query parser must reject repeated search and limit parameters")
+        if "search.length > 120" not in dal or "limit > 100" not in dal:
+            errors.append("Next.js query parser must enforce the API length and page bounds")
 
     php_path = root / "php/invoice-list.php"
     if php_path.is_file():
@@ -73,6 +77,8 @@ def validate(root: Path) -> list[str]:
         route = route_path.read_text(encoding="utf-8")
         if "Cache-Control" not in route or "private, no-store" not in route:
             errors.append("private Route Handler response must disable shared caching")
+        if "parseInvoiceListQuery" not in route or "status: 400" not in route:
+            errors.append("Route Handler must return 400 for invalid listing input")
         if "ForbiddenError" not in route or "UnauthenticatedError" not in route:
             errors.append("Route Handler must map unauthenticated and forbidden failures")
 

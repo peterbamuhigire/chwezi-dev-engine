@@ -2,26 +2,29 @@ import { redirect } from 'next/navigation';
 import type { InvoiceDto } from '@/lib/invoices';
 import {
   ForbiddenError,
+  parseInvoiceListQuery,
   UnauthenticatedError,
   listInvoicesForCurrentTenant,
 } from '@/lib/invoices';
 
 type PageProps = {
-  searchParams: Promise<{ q?: string; limit?: string }>;
+  searchParams: Promise<{ q?: string | string[]; limit?: string | string[] }>;
 };
 
 export const dynamic = 'force-dynamic';
 
 export default async function InvoicesPage({ searchParams }: PageProps) {
   const query = await searchParams;
-  const search = (query.q ?? '').slice(0, 120);
-  const requestedLimit = Number(query.limit ?? 20);
-  const limit = Number.isInteger(requestedLimit)
-    ? Math.max(1, Math.min(requestedLimit, 100))
-    : 20;
+  const parsed = parseInvoiceListQuery(
+    query.q === undefined ? [] : Array.isArray(query.q) ? query.q : [query.q],
+    query.limit === undefined ? [] : Array.isArray(query.limit) ? query.limit : [query.limit],
+  );
+  if (!parsed) {
+    return <main><h1>Invoices</h1><p role="alert">Invalid invoice-list query.</p></main>;
+  }
   let invoices: InvoiceDto[];
   try {
-    invoices = await listInvoicesForCurrentTenant(search, limit);
+    invoices = await listInvoicesForCurrentTenant(parsed.search, parsed.limit);
   } catch (error) {
     if (error instanceof UnauthenticatedError) redirect('/login');
     if (error instanceof ForbiddenError) {

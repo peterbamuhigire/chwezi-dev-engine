@@ -22,6 +22,18 @@ export type InvoiceDto = {
   customer: string;
 };
 
+export function parseInvoiceListQuery(searches: string[], limits: string[]) {
+  if (searches.length > 1 || limits.length > 1) return null;
+  const search = searches[0] ?? '';
+  if (search.length > 120) return null;
+  const rawLimit = limits[0];
+  if (rawLimit === undefined) return { search, limit: 20 };
+  if (!/^\d+$/.test(rawLimit)) return null;
+  const limit = Number(rawLimit);
+  if (!Number.isSafeInteger(limit) || limit < 1 || limit > 100) return null;
+  return { search, limit };
+}
+
 export async function listInvoicesForCurrentTenant(
   search: string,
   limit: number,
@@ -89,20 +101,21 @@ import {
   ForbiddenError,
   UnauthenticatedError,
   listInvoicesForCurrentTenant,
+  parseInvoiceListQuery,
 } from '@/lib/invoices';
 
-type PageProps = { searchParams: Promise<{ q?: string; limit?: string }> };
+type PageProps = { searchParams: Promise<{ q?: string | string[]; limit?: string | string[] }> };
 export const dynamic = 'force-dynamic';
 
 export default async function InvoicesPage({ searchParams }: PageProps) {
   const query = await searchParams;
-  const search = (query.q ?? '').slice(0, 120);
-  const parsedLimit = Number(query.limit ?? 20);
-  const limit = Number.isInteger(parsedLimit)
-    ? Math.max(1, Math.min(parsedLimit, 100))
-    : 20;
+  const parsed = parseInvoiceListQuery(
+    query.q === undefined ? [] : Array.isArray(query.q) ? query.q : [query.q],
+    query.limit === undefined ? [] : Array.isArray(query.limit) ? query.limit : [query.limit],
+  );
+  if (!parsed) return <p role="alert">Invalid invoice-list query.</p>;
   try {
-    const invoices = await listInvoicesForCurrentTenant(search, limit);
+    const invoices = await listInvoicesForCurrentTenant(parsed.search, parsed.limit);
     return <InvoiceTable invoices={invoices} />;
   } catch (error) {
     if (error instanceof UnauthenticatedError) redirect('/login');
@@ -112,7 +125,7 @@ export default async function InvoicesPage({ searchParams }: PageProps) {
 }
 ```
 
-`InvoiceTable` above is the application's accessible table component; provide it in the project and test its empty and loading states. A Route Handler should call the same DAL, map unauthenticated and forbidden failures to 401/403, and set `Cache-Control: private, no-store`. It must not accept a tenant identifier as authority from query, body, header, or an unsigned cookie.
+`InvoiceTable` above is the application's accessible table component; provide it in the project and test its empty and loading states. A Route Handler should parse and bound query parameters before calling the same DAL, map invalid/unauthenticated/forbidden failures to 400/401/403, and set `Cache-Control: private, no-store`. It must not accept a tenant identifier as authority from query, body, header, or an unsigned cookie.
 
 ## Proxy boundary
 
