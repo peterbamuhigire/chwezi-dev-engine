@@ -950,6 +950,54 @@
       "confidence": "high for provider documentation at access time",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "No public marketplace submission or acceptance was performed."
+    },
+    {
+      "id": "android-agp-api-support-2026-10-29",
+      "title": "Android Gradle plugin and API level support table",
+      "ref": "https://developer.android.com/build/releases/about-agp",
+      "tier": 1,
+      "accessed": "2026-10-29",
+      "verified_at": "2026-10-29",
+      "review_after": "2026-11-05",
+      "freshness_class": "platform",
+      "as_of": "2026-10-29",
+      "scope": "Official Android Developers table for minimum AGP versions supported by Android API levels; lists API 37 support beginning at AGP 9.1.1.",
+      "support_status": "context-bound",
+      "confidence": "high for table contents at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Does not establish the compatibility of every project plugin or dependency."
+    },
+    {
+      "id": "android-agp-9-1-notes-2026-10-29",
+      "title": "Android Gradle plugin 9.1 release notes",
+      "ref": "https://developer.android.com/build/releases/agp-9-1-0-release-notes",
+      "tier": 1,
+      "accessed": "2026-10-29",
+      "verified_at": "2026-10-29",
+      "review_after": "2026-11-05",
+      "freshness_class": "platform",
+      "as_of": "2026-10-29",
+      "scope": "Official AGP 9.1 release notes; AGP 9.1.1 uses Gradle 9.3.1 minimum and JDK 17 minimum.",
+      "support_status": "context-bound",
+      "confidence": "high for stated compatibility at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "A minimum supported Gradle/JDK combination does not certify this specimen or other plugins."
+    },
+    {
+      "id": "kotlin-compose-migration-2026-10-29",
+      "title": "Compose compiler Gradle plugin migration guide",
+      "ref": "https://kotlinlang.org/docs/compose-compiler-migration-guide.html",
+      "tier": 1,
+      "accessed": "2026-10-29",
+      "verified_at": "2026-10-29",
+      "review_after": "2026-11-05",
+      "freshness_class": "platform",
+      "as_of": "2026-10-29",
+      "scope": "Official Kotlin guidance for the Compose compiler Gradle plugin and Kotlin version alignment.",
+      "support_status": "context-bound",
+      "confidence": "high for guidance at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Does not establish compatibility of a project plugin set without a build."
     }
   ],
   "claims": [
@@ -1157,7 +1205,10 @@
         "android-17-release-2026-10-29",
         "android-security-bulletin-october-2026",
         "kotlin-release-2026-10-29",
-        "compose-setup-2026-10-29"
+        "compose-setup-2026-10-29",
+        "android-agp-api-support-2026-10-29",
+        "android-agp-9-1-notes-2026-10-29",
+        "kotlin-compose-migration-2026-10-29"
       ]
     },
     {

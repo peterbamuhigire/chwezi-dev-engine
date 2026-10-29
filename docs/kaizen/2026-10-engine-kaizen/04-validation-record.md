@@ -17,11 +17,12 @@ the observed run outputs for this cycle; they do not establish production behavi
 
 | Check | Result |
 |---|---|
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `218 passed, 3 skipped`. This includes the repository suite and new packaging/tenant-example tests. |
+| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `219 passed, 3 skipped`. This includes the repository suite and new packaging/tenant-example tests. |
 | `python scripts/validate_tenant_invoice_example.py` | Exit 0; required files and coded tenant/auth/cache invariants found. This is structural evidence. |
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `11 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query and missing-review-artifact regressions, package path/shape, count exclusions and an over-cap CLI failure case. |
-| `php examples/tenant-invoice-listing/php/test.php` | `15 checks passed`; synthetic PDO SQLite only. It exercises tenant isolation, auth/permission denial, bounds, bound query behavior, HTML escaping, empty result, and no journal mutation. It does not establish MySQL compatibility. |
-| `python scripts/check_package_file_budget.py` | Exit 0; checkout `2778` entries including `.git`; package-oriented `2497` entries after documented directory exclusions. Both are at or below the official `5000` archive-entry limit documented in `openai-plugin-submission-errors-2026-10-29`. This is a local inventory, not a generated archive or directory acceptance test. |
+| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `12 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query, page/handler route collision, missing-review-artifact regressions, package path/shape, count exclusions and an over-cap CLI failure case. |
+| `php examples/tenant-invoice-listing/php/test.php` | `15 checks passed`; synthetic PDO SQLite. It exercises tenant isolation, auth/permission denial, bounds, bound query behavior, HTML escaping, empty result, and no journal mutation. |
+| Optional MySQL fixture run against a disposable MySQL `8.4.13` container | `15 checks passed`; migration applied to a fresh isolated database. This is not production deployment, backup/restore, or migration-framework proof. |
+| `python scripts/check_package_file_budget.py` | Exit 0; checkout `2788` entries including `.git`; package-oriented `2498` entries after documented directory exclusions. Both are below the documented hard `5000` archive-entry limit. This is a local inventory, not a generated archive or directory acceptance test. |
 | `python -m json.tool docs/source-registers/skills-engine-currentness-2026-09.json` | Exit 0; currentness register parses as JSON. |
 | `git diff --check` | Exit 0 at the recorded run. |
 
@@ -38,6 +39,33 @@ checkout entries and `2468` package-oriented entries in
 owned and its exclusion/counting method is documented in
 `scripts/check_package_file_budget.py`; the two measurements are not presented as a
 before/after trend because the method is not shown to be identical.
+
+### Disposable runtime specimens
+
+The Next.js teaching slice was copied to `/tmp/chwezi-portfolio-kaizen/next-build`,
+installed with exact direct versions Next.js `16.4.3`, React `19.3.0`, TypeScript
+`7.0.2`, Prisma `7.10.1`, and `server-only` `0.0.1`, then built with `next build` and
+checked with `tsc --noEmit`. `npm audit --audit-level=low` reported zero findings in
+that isolated dependency tree on 2026-10-29; this is a point-in-time package audit, not
+a security guarantee. The first build exposed a real App Router page/handler collision
+at `/invoices`; the handler was moved to `/api/invoices`, and a regression test now
+rejects the conflicting placement. A production-mode server with unauthenticated auth
+and a throwing database stub returned `401` for `GET /api/invoices`, `400` for malformed,
+duplicate, and overlong query values, and `200` for the page shell at `/invoices`.
+Authenticated database integration remains `NOT_ASSESSED`.
+
+The Compose excerpt was copied to a disposable Gradle project and compiled with JDK 25,
+AGP `9.1.1`, Gradle `9.3.1`, Kotlin `2.4.21`, Compose BOM `2026.09.00`, and compileSdk
+`37`. `:app:assembleDebug` succeeded. An initial attempt with AGP `9.0.1` failed AAR
+metadata checks because selected AndroidX Compose artifacts required a newer AGP; retry
+used the official AGP/API support pairing linked below. The Android SDK emitted an SDK
+XML version warning (the tool understood through version `3` but encountered version `4`).
+No emulator, UI rendering, Play upload, or release-signing path was tested.
+
+The MySQL run used a loopback-only disposable MySQL `8.4.13` container, a fresh empty
+database, and the example migration file. The optional test mode prints the active PDO
+driver and keeps the default SQLite run separate. It exercises this illustrative schema
+and application-level fixture only; it does not establish production readiness.
 
 ## Native discovery and package evidence
 
@@ -94,11 +122,15 @@ modules. The Windows rebuild suffix is not evidence about that Linux installatio
 - [Android Play target requirements](https://support.google.com/googleplay/android-developer/answer/11926878),
   [Android 17 release](https://developer.android.com/about/versions/17),
   [October 2026 Android Security Bulletin](https://source.android.com/docs/security/bulletin/2026/2026-10-01),
+  [AGP/API support table](https://developer.android.com/build/releases/about-agp),
+  [AGP 9.1 release notes](https://developer.android.com/build/releases/agp-9-1-0-release-notes),
+  [Compose compiler migration guide](https://kotlinlang.org/docs/compose-compiler-migration-guide.html),
   [Kotlin releases](https://kotlinlang.org/docs/releases.html), and
   [Compose setup](https://developer.android.com/develop/ui/compose/setup).
-  The checked records distinguish Play target from compatibility API (synthesis) and do not prove
-  a Gradle/AGP combination or that a particular OEM device has applied the bulletin's
-  fixes.
+  The official AGP table lists API 37 support beginning at AGP 9.1.1; release notes
+  pair AGP 9.1.1 with Gradle 9.3.1 and JDK 17 minimum. The checked records distinguish
+  Play target from compile API (synthesis) and do not prove that a particular OEM device
+  has applied the bulletin's fixes.
 - The [OpenAI model catalogue](https://developers.openai.com/api/docs/models),
   [API changelog](https://developers.openai.com/api/docs/changelog), and
   [model-selection guidance](https://developers.openai.com/api/docs/guides/model-selection)
@@ -112,6 +144,7 @@ modules. The Windows rebuild suffix is not evidence about that Linux installatio
   current-session model are `NOT_ASSESSED`; see external detail in
   `/tmp/chwezi-portfolio-kaizen/packaging-research.md`.
 
-No full Next.js dependency install/build, real DB migration, Android Gradle build or
-emulator, deployed security assessment, archive submission, or stakeholder sign-off was
-performed. Those states remain `NOT_ASSESSED`.
+The disposable Next, MySQL, and Android compile checks above do not constitute production
+integration. Emulator rendering, deployed security assessment, authenticated database
+integration, archive submission, and stakeholder sign-off were not performed and remain
+`NOT_ASSESSED`.
