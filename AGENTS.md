@@ -179,6 +179,32 @@ the cross-engine orchestration vocabulary and implementation patterns. Native
 hooks are optional; scripts, CI gates, or explicit skill steps must preserve
 the same fail-closed and NOT ASSESSED semantics.
 
+## October 2026 applied-slice and native discovery evidence
+
+For tenant-owned Next.js data, route through `skills/frontend-ux/nextjs-app-router`
+and load its `references/tenant-data-security.md`. Proxy redirects are only
+optimistic navigation checks; verify session, current tenant membership and
+permission at the server-only data-access boundary for every page, Route
+Handler, and Server Action. Do not copy a shared unscoped private-data cache.
+
+For Codex offline prompt-input, native plugin loading does not guarantee that
+all manifest skills fit the default context. The October 2026 experiment is
+recorded in `docs/kaizen/2026-10-engine-kaizen/04-validation-record.md`. When
+the task needs the complete manifest inventory, the verified explicit
+invocation is:
+
+```sh
+codex -m gpt-6-luna -c model_reasoning_effort="high" -c skills.max_context_tokens=10000 debug prompt-input
+```
+
+This is an invocation-level setting only; do not mutate user configuration
+automatically. The observed default invocation loaded 130 of 165 manifest
+paths; this command loaded all 165 in the isolated offline test. Preserve both
+Claude and Codex runtime adapters, and do not imply that repository-active skill
+counts equal native runtime declaration counts. See the cycle report for the
+2-declaration native manifest, context limits, supported file cap, and
+unassessed account/public-marketplace evidence.
+
 ## Quality Guardrails (always-on)
 
 Two cross-cutting skills under `skills/sdlc-meta/` govern output quality for every

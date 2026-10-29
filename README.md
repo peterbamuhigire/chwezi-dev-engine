@@ -6,6 +6,13 @@ The engine produces working engineering artefacts rather than advice: architectu
 
 ## Installation
 
+The [2026-10 engine Kaizen](docs/kaizen/2026-10-engine-kaizen/README.md)
+adds a tenant-scoped invoice teaching slice, updates Next.js and Android
+currency guidance, and records native Claude/Codex discovery limits. Its
+runtime, marketplace, and deployment evidence is scoped to the tested
+environments; read the validation record before treating an example as
+production proof.
+
 **Prerequisites.** Git. Node.js 18 or later for the standalone installer (CI uses Node 24). Python 3.11 or later for the Codex model-policy helper; Python 3.12 with `pip install -r requirements-ci.txt` (pytest 9.0.3, PyYAML 6.0.2) to run the validators and tests.
 
 **Claude Code plugin (recommended).** The repository is its own marketplace (`.claude-plugin/marketplace.json`, marketplace `chwezi-engineering`, plugin `engineering`):
@@ -16,6 +23,8 @@ The engine produces working engineering artefacts rather than advice: architectu
 ```
 
 The plugin manifest (`.claude-plugin/plugin.json`) ships the 165 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
+
+**Codex portable package.** Root `plugin.json` uses the portable Agent Plugins format and the repo-scoped catalog lives at `.agents/plugins/marketplace.json`. It discovers the root `skills/` directory; the two `00-meta-initialization/` workflows remain documented clone-based entrypoints. Codex and Claude keep separate host catalogs. Adding the repo marketplace changes the user's Codex marketplace state. This repository does not automatically edit that state or submit a public listing.
 
 **Standalone installer (no plugin system, or project-local scope).** `install.sh` and `install.ps1` delegate to `scripts/install-engine.js`, which copies skills, agents, hooks and rules into `~/.claude` (`--scope user`, the default) or `./.claude` (`--scope project`) and records every file it writes in `.chwezi/install-state.json`:
 
@@ -35,6 +44,18 @@ python <engine-root>/.codex/ensure_model_policy.py --runtime codex --check
 ```
 
 Run `--apply` only if the check reports drift. Claude Code skips this step.
+
+If an offline `debug prompt-input` check must enumerate the entire plugin skill
+manifest, use the measured invocation documented in [the October 2026
+validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md):
+
+```sh
+codex -m gpt-6-luna -c model_reasoning_effort="high" -c skills.max_context_tokens=10000 debug prompt-input
+```
+
+This invocation-level budget affects the initial skill list. The checked default
+loaded 130 of 165 declared plugin skill paths; the explicit budget loaded all
+165 in the isolated offline run. It does not alter persistent user settings.
 
 **Manual route.** Clone the repository, then have the agent read [`CLAUDE.md`](CLAUDE.md) (which imports `AGENTS.md`), the [skill routing index](docs/skill-routing-index.md), and only the `SKILL.md` files the task needs. Expose `skills/` and `00-meta-initialization/` to the working agent; [docs/USING-IN-A-PROJECT.md](docs/USING-IN-A-PROJECT.md) covers submodule, sibling-clone and read-only-mount wiring.
 

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "chwezi-dev-engine",
+  "version": "1.1.0",
+  "description": "Reusable Chwezi engineering workflows for software architecture, implementation, review, security, testing and delivery.",
+  "author": {
+    "name": "Peter Bamuhigire"
+  },
+  "repository": "https://github.com/peterbamuhigire/chwezi-dev-engine",
+  "license": "MIT",
+  "keywords": [
+    "engineering",
+    "architecture",
+    "security",
+    "testing",
+    "sdlc"
+  ]
+}
