@@ -17,11 +17,11 @@ the observed run outputs for this cycle; they do not establish production behavi
 
 | Check | Result |
 |---|---|
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `217 passed, 3 skipped`. This includes the repository suite and new packaging/tenant-example tests. |
+| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `218 passed, 3 skipped`. This includes the repository suite and new packaging/tenant-example tests. |
 | `python scripts/validate_tenant_invoice_example.py` | Exit 0; required files and coded tenant/auth/cache invariants found. This is structural evidence. |
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `10 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT and invalid-query regression cases, package path/shape, count exclusions and an over-cap CLI failure case. |
+| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `11 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query and missing-review-artifact regressions, package path/shape, count exclusions and an over-cap CLI failure case. |
 | `php examples/tenant-invoice-listing/php/test.php` | `15 checks passed`; synthetic PDO SQLite only. It exercises tenant isolation, auth/permission denial, bounds, bound query behavior, HTML escaping, empty result, and no journal mutation. It does not establish MySQL compatibility. |
-| `python scripts/check_package_file_budget.py` | Exit 0; checkout `2754` entries including `.git`; package-oriented `2496` entries after documented directory exclusions. Both are at or below the official `5000` archive-entry limit documented in `openai-plugin-submission-errors-2026-10-29`. This is a local inventory, not a generated archive or directory acceptance test. |
+| `python scripts/check_package_file_budget.py` | Exit 0; checkout `2778` entries including `.git`; package-oriented `2497` entries after documented directory exclusions. Both are at or below the official `5000` archive-entry limit documented in `openai-plugin-submission-errors-2026-10-29`. This is a local inventory, not a generated archive or directory acceptance test. |
 | `python -m json.tool docs/source-registers/skills-engine-currentness-2026-09.json` | Exit 0; currentness register parses as JSON. |
 | `git diff --check` | Exit 0 at the recorded run. |
 

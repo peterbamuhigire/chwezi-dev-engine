@@ -5,14 +5,15 @@ This update is scoped to the Dev Engine repository. See the [Kaizen evidence ind
 ## Changes
 
 - Replaced unsafe Next.js role-cookie, unscoped query, global private cache, and unchecked mutation examples with a server-only tenant data-access reference and a read-only example. Added structural and negative regression tests.
-- Added a synthetic PHP, OpenAPI, Next.js and Compose tenant invoice slice. PHP reports `15` passing checks against PDO SQLite; this is not MySQL deployment evidence. Next.js and Compose were not built.
+- Added a synthetic PHP, OpenAPI, Next.js and Compose tenant invoice slice. The [PHP test fixture](../../examples/tenant-invoice-listing/php/test.php) reports `15` passing checks against PDO SQLite; this is not MySQL deployment evidence. Next.js and Compose were not built.
+- Added a clearly marked [non-executable review exercise](../../examples/tenant-invoice-listing/review-exercise.md) that records the four grouped defects in the prepared specimen; it is not a model benchmark.
 - Updated Android guidance to distinguish Google Play's target requirement from the compatibility platform, and removed an unsupported crash assertion.
 - Added selected official currentness/security advisory records and runtime-selection guidance for Next.js, PHP, PostgreSQL, MySQL, Android, Kotlin and Compose.
 - Added root Codex portable plugin and repository marketplace manifests, documented the measured invocation-level skill-list budget, and added checkout/package-oriented file cap checks.
 
 ## Verification boundary
 
-The repository test suite reports `217 passed, 3 skipped`; routing and catalogue outcomes,
+The repository test suite reports `218 passed, 3 skipped`; routing and catalogue outcomes,
 native prompt-input evidence, source links, exact command strings and all unassessed areas
 are recorded in the Kaizen validation report. A local manifest shape check does not imply
 public marketplace acceptance. The current checkout/package-oriented inventory is not a
