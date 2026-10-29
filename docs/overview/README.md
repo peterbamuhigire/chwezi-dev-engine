@@ -7,6 +7,12 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [2026-10 Dev Engine Kaizen](../kaizen/2026-10-engine-kaizen/README.md)
+records bounded PHP/Next.js/Compose invoice examples, Next.js tenant-isolation
+repairs, Android and database currentness evidence, and native discovery
+measurements. Production and public-marketplace acceptance remain scoped as
+`NOT_ASSESSED` where no such proof was run.
+
 The [2026-10-22 PHP security and runtime-upgrade update](../updates/2026-10-22-php-security-and-runtime-upgrades.md)
 adds source-dated guidance for the critical PHP RCE advisories, vendor package
 patching, and staged PHP 8.5 compatibility checks. The Linux operations engine

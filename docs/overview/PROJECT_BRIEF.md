@@ -2,6 +2,10 @@
 
 ## Summary
 
+The October 2026 Kaizen adds a tenant-scoped invoice example across PHP, a
+Next.js App Router, and Compose, with runtime limits and native discovery
+evidence recorded in `docs/kaizen/2026-10-engine-kaizen/`.
+
 The engineering runtime contract now has fixture-tested local utilities for
 versioned context, prompt/data boundaries, provenance-bound tool approval,
 bounded action budgets and pure deterministic planning. These are host-facing

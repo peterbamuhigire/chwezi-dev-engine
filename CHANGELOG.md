@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-29 - Dev Engine security, currentness and package evidence
+
+- Replaced unsafe Next.js role-cookie/global-cache examples with server-side tenant authorization guidance and a tested illustrative read-only invoice path; added routing and regression checks.
+- Added a synthetic PHP/OpenAPI/Next.js/Compose invoice slice, with a 15-check PDO SQLite fixture and an explicit unverified MySQL/Android/Next build boundary.
+- Updated Android Play target and platform-currentness guidance; added selected PHP/PostgreSQL advisory checks and source records.
+- Added portable Codex plugin and repository marketplace manifests, file-budget checks, and the measured prompt-input context-budget invocation.
+- Evidence, limits and scorecard: [`docs/kaizen/2026-10-engine-kaizen/`](docs/kaizen/2026-10-engine-kaizen/README.md).
+
 ## 2026-09-29 - Kaizen M10-06: methodology and comprehension absorption
 
 - Engine-native design gate replaces the mandatory Superpowers step in `new-project`; ceremony

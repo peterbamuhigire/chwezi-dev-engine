@@ -26,6 +26,8 @@ at a plan result. None of these helpers executes external side effects.
 | `docs/world-class-exemplars/` | Shared running example and benchmark reference outputs. |
 | `docs/sept-matt-pocock/` | Verified external-repository comparison, cross-engine ownership map, execution runbook, and 2026-09-11 completion/evidence record. It is evidence, not an active skill root. |
 | `examples/full-stack-saas-reference/` | End-to-end SaaS evidence pack exercising architecture, API, security, reliability, and release skills. |
+| `examples/tenant-invoice-listing/` | Synthetic read-only invoice slice across PHP, Next.js, OpenAPI, and Compose; runtime limitations are stated in its README. |
+| `docs/kaizen/2026-10-engine-kaizen/` | Frozen baseline, selected changes, validation, final report, and next-cycle handoff for the October 2026 engine Kaizen. |
 | `templates/delivery-dod/` | Shared delivery evidence pack template for implementation outputs. |
 | `scripts/skill_catalog_guardrails.py` | Static guardrail scan: active count, duplicate names, frontmatter, UTF-8, description length, `SKILL.md` line count, broken `references/`/`templates/` links, and alias integrity (unrouted, stale, dangling). |
 | `scripts/routing_smoke_test.py` + fixture YAML files | Routing precision measurement: scores fixtured tasks from `scripts/routing_fixtures.yml` and `tests/routing/edge-fixtures.yml` against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |

@@ -15,6 +15,11 @@ of this repository.
 PHP runtime and Composer references are downstream application toolchains;
 the repository records current PHP lifecycle/security sources and migration
 checks without adding a PHP runtime dependency.
+Android, Kotlin, Compose, Next.js, and database versions are also downstream
+toolchains. The 2026-10 Kaizen's dated currentness and security applicability
+records live in `docs/kaizen/2026-10-engine-kaizen/04-validation-record.md` and
+`docs/source-registers/skills-engine-currentness-2026-09.json`; neither is a
+substitute for checking the target project's exact runtime and dependency set.
 
 ## Tooling
 
