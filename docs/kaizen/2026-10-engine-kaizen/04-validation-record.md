@@ -17,9 +17,9 @@ the observed run outputs for this cycle; they do not establish production behavi
 
 | Check | Result |
 |---|---|
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `219 passed, 3 skipped`. This includes the repository suite and new packaging/tenant-example tests. |
+| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `220 passed, 3 skipped` after the acceptance-review count-walk regression was added. This includes the repository suite and packaging/tenant-example tests. |
 | `python scripts/validate_tenant_invoice_example.py` | Exit 0; required files and coded tenant/auth/cache invariants found. This is structural evidence. |
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `12 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query, page/handler route collision, missing-review-artifact regressions, package path/shape, count exclusions and an over-cap CLI failure case. |
+| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `13 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query, page/handler route collision, missing-review-artifact regressions, package path/shape, count exclusions, an over-cap CLI failure, and fail-closed walk-error behavior. |
 | `php examples/tenant-invoice-listing/php/test.php` | `15 checks passed`; synthetic PDO SQLite. It exercises tenant isolation, auth/permission denial, bounds, bound query behavior, HTML escaping, empty result, and no journal mutation. |
 | Optional MySQL fixture run against a disposable MySQL `8.4.13` container | `15 checks passed`; migration applied to a fresh isolated database. This is not production deployment, backup/restore, or migration-framework proof. |
 | `python scripts/check_package_file_budget.py` | Exit 0; checkout `2788` entries including `.git`; package-oriented `2498` entries after documented directory exclusions. Both are below the documented hard `5000` archive-entry limit. This is a local inventory, not a generated archive or directory acceptance test. |

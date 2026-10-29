@@ -12,7 +12,8 @@ LIMIT = 5000
 
 def counts(root: Path) -> tuple[int, int]:
     checkout = package = 0
-    for directory, dirs, files in os.walk(root, followlinks=False):
+    walk_errors: list[OSError] = []
+    for directory, dirs, files in os.walk(root, followlinks=False, onerror=walk_errors.append):
         current = Path(directory)
         # Count symlink entries, but do not traverse a symlink directory.
         linked_dirs = [name for name in dirs if (current / name).is_symlink()]
@@ -27,6 +28,8 @@ def counts(root: Path) -> tuple[int, int]:
             parts = (current / name).relative_to(root).parts
             if not any(part in PACKAGE_EXCLUSIONS for part in parts):
                 package += 1
+    if walk_errors:
+        raise OSError(f"could not count all entries under {root}: {walk_errors[0]}")
     return checkout, package
 
 
@@ -34,7 +37,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("root", nargs="?", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
-    checkout, package = counts(args.root.resolve())
+    try:
+        checkout, package = counts(args.root.resolve())
+    except OSError as exc:
+        print(f"FAIL: could not count all entries: {exc}")
+        return 1
     print(f"checkout entries (including .git): {checkout}")
     print(f"package-oriented entries (documented exclusions): {package}")
     if checkout > LIMIT or package > LIMIT:

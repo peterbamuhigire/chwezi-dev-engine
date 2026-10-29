@@ -7,6 +7,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts"))
+import check_package_file_budget
 from check_package_file_budget import LIMIT, counts
 
 
@@ -60,3 +61,17 @@ def test_budget_command_fails_above_the_hard_cap(tmp_path: Path) -> None:
     )
     assert result.returncode == 1
     assert "FAIL: each count must be at most 5000" in result.stdout
+
+
+def test_budget_count_fails_closed_when_walk_skips_a_directory(tmp_path: Path, monkeypatch) -> None:
+    def failed_walk(root, *, followlinks, onerror):
+        onerror(PermissionError("fixture permission failure"))
+        return iter(())
+
+    monkeypatch.setattr(check_package_file_budget.os, "walk", failed_walk)
+    try:
+        counts(tmp_path)
+    except OSError as exc:
+        assert "could not count all entries" in str(exc)
+    else:
+        raise AssertionError("partial file inventory must not be accepted")
