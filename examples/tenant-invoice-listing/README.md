@@ -18,6 +18,24 @@ The Android source is a Compose screen excerpt, not a complete application. The 
 
 This artifact does not prove production readiness, MySQL deployment compatibility, Android release compliance, or protection against all security vulnerabilities. Validate the exact dependency and runtime versions, advisories, identity provider, schema, accessibility, and deployment before adopting it.
 
+## Known gaps
+
+Found by the 2026-10-31 review of this slice; they are real and not yet fixed because each
+needs a build, a device or a database that the review host did not have. Do not copy the
+slice as a finished listing.
+
+- **First page only.** The query is `ORDER BY id LIMIT n` with no cursor and no next-page
+  field in the contract, so rows beyond the limit cannot be reached. Add keyset pagination
+  across the SQL, contract, PHP, Next.js and Compose layers together.
+- **Raw minor units are shown to users.** The contract carries no currency exponent, so the
+  UI cannot format money correctly. Add the exponent or a display amount to the contract.
+- **Errors are not problem details.** Error bodies are `{ "error": ... }` with no schema, the
+  engine's API guidance cites RFC 9457, and `api.yaml` declares no security scheme.
+- **Smaller items.** `%` and `_` in the search act as wildcards; the migration has no rollback
+  statement; the denied state has no landmark; Compose strings are hard-coded English with no
+  live-region semantics; no evidence pack from `templates/delivery-dod/evidence-pack.md`
+  accompanies the slice.
+
 ## Check
 
 ```sh
