@@ -17,6 +17,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Work | Why | Start Point |
 | --- | --- | --- |
+| Work the October 2026 pass-2 handoff | Open items: the tracked user-local settings file, the invoice slice's contract gaps, 24 duplicate-heading skills, 84 broken links, 13 skills at full routing coverage, date-gated currency checks. | `docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md` |
 | Close evidence gaps exposed by the repaired contract gate | The former gate scanned only one family. Missing declarations and product evidence must be assessed in their domain, not filled with boilerplate. | `docs/audits/2026-09-06-kaizen/portfolio-progress.md` and `skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all` |
 | Produce applied proof for the Pocock workflow Kaizen | Repository mechanisms and deterministic fixtures are complete, but real-project outcomes, host invocation traces, fresh-agent handoffs, and independent review remain `NOT ASSESSED`. | Use `docs/sept-matt-pocock/11-kaizen-completion-record.md`; pilot one diagnosis and one decision-frontier project before the 2026-10-11 re-audit. |
 | Grow the routing fixture set with each new skill | The smoke test only guards routes it has fixtures for. | Add a case to `scripts/routing_fixtures.yml` for any skill a neighbour could shadow. |

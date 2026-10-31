@@ -162,6 +162,21 @@ Known baseline as of 2026-09-24 (verify with the script; do not trust this prose
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour
   could steal traffic from.
 
+### Hygiene and currency gates added 2026-10-31
+
+- `scripts/check_source_register.py` fails when an active source record is past its review
+  date or a claim names a superseded or quarantined record. Re-read the primary page, add a
+  dated record and move the old one to `superseded_sources`; never extend a date unread.
+- `scripts/content_hygiene.py` (run by the catalogue guardrails) fails on host-specific
+  paths in active content, new duplicate H2 headings and new broken relative links.
+  Baselines in `docs/quality-gates/` may only shrink.
+- `python scripts/routing_smoke_test.py --coverage --max-zero-positive 1` reports fixture
+  coverage per skill; add a positive fixture with every new skill.
+- Review routes start at `skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md`
+  and its domain-owned checks table.
+- Evidence for the October 2026 passes: `docs/kaizen/2026-10-engine-kaizen/` and
+  `docs/kaizen/2026-10-engine-kaizen-pass-2/`.
+
 ## Engine control plane
 
 The shared agent, command, hook, evidence, and handoff contract is defined in

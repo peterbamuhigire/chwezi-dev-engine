@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-31 - Dev Engine kaizen pass 2: currency, tooling portability and hygiene gates
+
+- Re-read all 27 overdue source records against primary pages and reconciled the AI-platform register; overdue records 27 to 0. Added `scripts/check_source_register.py` and a CI step so a lapsed review date fails the build.
+- Added `scripts/engine_roots.py`: the control-plane and approval validators now resolve sibling engines from repeatable parent folders, `CHWEZI_ENGINES_ROOT`, former directory names and per-engine overrides, with no drive paths built in.
+- Connected review work to its owning checks: a root router row, a domain-owned checks table in the review gate, and the posting-service name aligned with the accounting skill.
+- Added `scripts/content_hygiene.py` (host-specific paths, duplicate H2 headings, broken relative links; ratchets that may only shrink). Removed host paths and leaked tool markup from active content, merged 57 skills' duplicate sections losslessly (65 to 24 files with a duplicate), repaired 33 links.
+- Added a first positive routing fixture for 42 skills and `--coverage` with a CI ceiling; precision@1 177/196 to 219/239.
+- Evidence, scores and open items: [`docs/kaizen/2026-10-engine-kaizen-pass-2/`](docs/kaizen/2026-10-engine-kaizen-pass-2/README.md).
+
 ## 2026-10-29 - Dev Engine security, currentness and package evidence
 
 - Replaced unsafe Next.js role-cookie/global-cache examples with server-side tenant authorization guidance and a tested illustrative read-only invoice path; added routing and regression checks.
