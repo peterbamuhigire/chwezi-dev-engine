@@ -20,6 +20,7 @@ from typing import Iterable
 import yaml
 
 from source_ingestion_guardrail import scan as scan_source_ingestion
+import content_hygiene
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -322,6 +323,11 @@ def check_source_ingestion(root: Path = REPO_ROOT) -> list[Finding]:
     ]
 
 
+def check_content_hygiene(root: Path = REPO_ROOT) -> list[Finding]:
+    """Machine-specific paths in active content (see scripts/content_hygiene.py)."""
+    return [Finding("error", code, Path(rel), message) for code, rel, message in content_hygiene.check_machine_paths(root)]
+
+
 def check_broken_references(roots: list[Path]) -> list[Finding]:
     """Flag SKILL.md links to references/templates/scripts that do not exist.
 
@@ -467,6 +473,7 @@ def main() -> int:
     findings.extend(check_line_counts(records))
     findings.extend(check_skill_bytes(records, args.max_skill_bytes))
     findings.extend(check_source_ingestion())
+    findings.extend(check_content_hygiene())
     findings.extend(check_broken_references(roots))
     findings.extend(check_alias_integrity(records))
     findings.extend(check_empty_directories(roots))
