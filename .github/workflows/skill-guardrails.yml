@@ -57,6 +57,12 @@ jobs:
       - name: Validate engine control plane
         run: python -X utf8 scripts/validate_engine_control_plane.py
 
+      # Fails when any active source record is past its review date, a claim
+      # names a superseded or quarantined record, or a quarantine lacks a
+      # reason. Passing proves dates and metadata only, not claim support.
+      - name: Check source registers
+        run: python -X utf8 scripts/check_source_register.py
+
       # The plugin's PreToolUse hook blocks destructive shell commands; its
       # pattern tests and hook-configuration tests must pass on every change.
       - name: Test plugin hooks
