@@ -10,6 +10,7 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 
 - [At a glance](#at-a-glance)
 - [Start here](#start-here)
+- [Capabilities](#capabilities)
 - [Find the right skill](#find-the-right-skill)
 - [How it works](#how-it-works)
 - [What is inside](#what-is-inside)
@@ -47,7 +48,11 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 
 3. **Use.** Name the skill in your request, for example: "Use `api-design-first` to define the contract for the invoice listing endpoint." Pick the name from [Find the right skill](#find-the-right-skill).
 
-## Find the right skill
+## Capabilities
+
+The engine holds 167 active skills in 18 categories (165 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
+
+### Find the right skill
 
 Use this engine when software work needs a repeatable method and evidence a reviewer can check: a design, a review, a security audit or a release gate. The names below come from the routing fixtures, so each task is one the engine's routing test already uses.
 
