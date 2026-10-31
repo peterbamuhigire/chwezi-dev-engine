@@ -4,22 +4,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import engine_roots  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
-ENGINE_DIRS = {
-    "chwezi-dev-engine": ROOT,
-    "srs": Path(r"C:\wamp64\www\chwezi-sdlc-documentation"),
-    "business-plan": Path(r"C:\wamp64\www\business-plan-skills"),
-    "website": Path(r"C:\wamp64\www\website-skills"),
-    "social-media": Path(r"C:\wamp64\www\social-media-skills"),
-    "linux": Path(r"C:\wamp64\www\linux-skills"),
-    "proposal": Path(r"C:\wamp64\www\proposal-skills"),
-    "accounting": Path(r"C:\wamp64\www\chwezi-accounting-doctrine"),
-    "design": Path(r"C:\wamp64\www\chwezi-design-engine"),
-    "digital-research": Path(r"C:\wamp64\www\digital-research-engine"),
-    "windows-admin": Path(r"C:\wamp64\www\windows-admin-engine-skills"),
-}
+# The eleven engines that carry an approval adapter. The private political engine does not.
+ADAPTER_ENGINES = tuple(sorted(engine_id for engine_id in engine_roots.ENGINE_DIR_ALIASES if engine_id != "political"))
 REQUIRED = {"action_type", "class", "side_effect", "owner", "allowed_approver_roles",
             "requires_dual_approval", "preview_required", "approval_ttl_seconds",
             "idempotency_required", "rollback", "verification", "sensitive_fields"}
@@ -68,26 +61,49 @@ def validate_adapter(path: Path, expected_engine: str) -> list[str]:
     return errors
 
 
+def locate(engine_id: str, roots: list[Path], overrides: dict[str, Path]) -> tuple[Path | None, list[Path]]:
+    """Find an engine checkout: explicit id=path override, then this checkout, then the parent folders."""
+    if engine_id in overrides:
+        return overrides[engine_id], [overrides[engine_id]]
+    if engine_id == "chwezi-dev-engine":
+        return ROOT, [ROOT]
+    tried = engine_roots.candidates(engine_id, roots)
+    return engine_roots.first_existing(tried), tried
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--engine-root", action="append", type=Path, default=[],
-                        help="Optional root override, in id=path form")
+    parser.add_argument("--engine-root", action="append", default=[],
+                        help="Checkout override for one engine, in id=path form")
+    parser.add_argument(
+        "--workspace-root",
+        action="append",
+        type=Path,
+        help=f"Parent folder containing local engine directories; repeat for several. Falls back to ${engine_roots.ENV_ROOTS}, then to the parent of this checkout.",
+    )
     args = parser.parse_args()
-    dirs = dict(ENGINE_DIRS)
+    overrides: dict[str, Path] = {}
     for override in args.engine_root:
-        if "=" not in str(override):
+        if "=" not in override:
             parser.error("--engine-root must be id=path")
-        engine, path = str(override).split("=", 1)
-        dirs[engine] = Path(path)
+        engine, path = override.split("=", 1)
+        if engine not in ADAPTER_ENGINES:
+            parser.error(f"unknown engine id {engine!r}")
+        overrides[engine] = Path(path)
+    roots = engine_roots.normalise_roots(args.workspace_root) or engine_roots.roots_from_env() or [ROOT.parent]
     errors: list[str] = []
-    for engine, directory in dirs.items():
+    for engine in ADAPTER_ENGINES:
+        directory, tried = locate(engine, roots, overrides)
+        if directory is None:
+            errors.append(f"{engine}: no checkout found (looked for {', '.join(path.name for path in tried)} under the given parent folders)")
+            continue
         path = directory / "docs" / "approval-adapter.json"
         if not path.is_file():
-            errors.append(f"{engine}: missing {path}")
+            errors.append(f"{engine}: missing docs/approval-adapter.json in the {directory.name} checkout")
             continue
         errors.extend(validate_adapter(path, engine))
     print("approval-adapter-validator:")
-    print(f"- adapters: {len(dirs)}")
+    print(f"- adapters: {len(ADAPTER_ENGINES)}")
     print(f"- findings: {len(errors)}")
     for error in errors:
         print(f"[FAIL] {error}")

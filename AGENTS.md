@@ -167,11 +167,12 @@ Known baseline as of 2026-09-24 (verify with the script; do not trust this prose
 The shared agent, command, hook, evidence, and handoff contract is defined in
 `docs/engine-control-plane.md` and registered in
 `docs/engine-control-plane.json`. Validate it with
-`python scripts/validate_engine_control_plane.py`; use
-`--workspace-root C:\wamp64\www` for installed-checkout validation. The registry
-has twelve entries; use repeated `--engine <id>` options for an explicitly scoped
-portfolio. All eleven checkouts confirmed by Peter on 2026-09-06 are in `www`;
-do not resolve their removed `source/repos` duplicates. See
+`python scripts/validate_engine_control_plane.py`; for installed-checkout validation
+pass `--workspace-root <parent>` once per folder that holds engine checkouts (or set
+`CHWEZI_ENGINES_ROOT`). `scripts/engine_roots.py` resolves current and former directory
+names per device. The registry has twelve entries; use repeated `--engine <id>` options
+for an explicitly scoped portfolio. Resolve only checkouts in the supplied parents; do
+not resolve removed `source/repos` duplicates. See
 `docs/audits/2026-09-06-kaizen/portfolio-progress.md` for the active Kaizen cycle.
 
 Domain engines remain the source of truth for their doctrine. This engine owns

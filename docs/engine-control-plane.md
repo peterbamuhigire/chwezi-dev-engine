@@ -15,7 +15,7 @@ handoffs, and bounded recovery. Its registry is
 | Finance/accounting controls | `chwezi-accounting-doctrine` |
 | Visual/presentation controls | `chwezi-design-engine` |
 | Windows host, domain, fleet, and hybrid administration | `windows-admin-engine-skills` |
-| Political doctrine and political writing | `D:\political-skills` |
+| Political doctrine and political writing | `political-essay-skills` (private; resolved per device, not in the public catalogue) |
 | Tool adapters and native hooks | Host adapter or CI; never duplicated in domain doctrine |
 
 ## Portfolio Kaizen currentness gate
@@ -34,8 +34,8 @@ blocks standardisation.
 
 `windows-admin` is a first-class registry engine covering Windows workstations and
 servers, Active Directory, identity/security, networking, storage, recovery, fleet,
-and hybrid administration. Its canonical local checkout is
-`C:\wamp64\www\windows-admin-engine-skills`; the registry contract is present, but
+and hybrid administration. Its checkout directory is
+`windows-admin-engine-skills`, resolved per device; the registry contract is present, but
 the checkout, `AGENTS.md`, and `docs/control-plane-adoption.md` are now present.
 Its native catalogue, routing, source-ingestion, and control-plane checks pass;
 live Windows/domain/fleet lab evidence remains claim-specific and must be marked
@@ -71,11 +71,14 @@ validation result, and an owner.
 
 Each engine registry entry identifies its domain agents, thin command surfaces,
 minimum hooks, evidence types, and adoption document. The registry validator
-checks all twelve engines and, when run with `--workspace-root C:\wamp64\www`,
-verifies their routers and adoption documents are present:
+checks all twelve engines and, when given the parent folder or folders that hold the
+checkouts, verifies their routers and adoption documents are present. Repeat
+`--workspace-root` for each parent folder, or set `CHWEZI_ENGINES_ROOT` (parents separated
+by the platform path separator). `scripts/engine_roots.py` also tries each engine's former
+directory names, and `SKILL_ENGINE_ROOT_<ID>` pins one checkout exactly:
 
-```powershell
-python scripts/validate_engine_control_plane.py --workspace-root C:\wamp64\www
+```sh
+python scripts/validate_engine_control_plane.py --workspace-root <parent-1> --workspace-root <parent-2>
 ```
 
 This is intentionally a small control plane. It prevents duplicated persona
@@ -118,7 +121,7 @@ Router and adoption files must resolve inside the selected checkout. Internal
 links are accepted; external or broken contract links fail. An explicit
 checkout override may itself be a link, with its resolved root as the boundary.
 
-The user's 2026-09-06 scope contains eleven engines under `C:/wamp64/www`.
+The user's 2026-09-06 scope contains eleven engines, kept in one or more parent folders on each device.
 The registry additionally describes `political`, which is outside this local
 operation. Repeated `--engine <id>` options limit installed-checkout validation
 without omitting any registry-shape checks. Default installed validation still
