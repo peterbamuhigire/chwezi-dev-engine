@@ -1,0 +1,395 @@
+# Books cited
+
+Books named in this repository's skills, references, source registers, audits and continuous-improvement records. They are citations only. The engine paraphrases operational guidance and stores no book text. Entries give the author, year and publisher only where the repository records them. Books that appear only in purchase lists or suggested-reading lists are omitted.
+
+See [Cited sources](README.md) for the other source lists. Versions, standards and thresholds come from current primary sources, not from books.
+
+384 books. 89 are recorded without an author and are listed after the authored entries.
+
+- Aaron *Profitable Blog Topics*.
+- Abella *250 Killer TypeScript One-Liners*.
+- Agius and Clancey *Faster, Smarter, Louder*.
+- Akintoye, A. (2024) *Mastering Design Patterns in TypeScript*. Juri Books.
+- Aleks, N. and Farhi, D. (2023) *Black Hat GraphQL*. No Starch Press.
+- Alves (2020) *Unity 3D*.
+- Ross Anderson *Security Engineering*.
+- Annable *Kubernetes: A Comprehensive Step-by-Step Guide*.
+- Laurie Annis *Blender 3D for Jobseekers*.
+- Antonio *Pro React*.
+- Łapiński *Vulkan Cookbook*.
+- Aremu (2025) *DeepSeek AI from Beginner to Paid Professional*.
+- Dan Ariely *Predictably Irrational*.
+- Tal Ater *Building Progressive Web Apps*. O'Reilly.
+- Baker et al. *Computer Graphics with OpenGL*.
+- Bandura, A. (1977) *Social Learning Theory*. Prentice Hall.
+- Bean *The Accidental Instructional Designer*.
+- Chris Belanger and Jawwad Ahmad *Mastering Git*.
+- Arijan Belec (2022) *Blender 3D Incredible Models*.
+- Adam Bellemare (2020) *Building Event-Driven Microservices*. O'Reilly.
+- Benedict *How to Build a Business Warren Buffett Would Buy*.
+- Betsy Beyer et al. *Site Reliability Engineering*.
+- Bhat (2023) *Ultimate Tailwind CSS Handbook*. BPB.
+- Bly *How to Write and Sell Simple Information*.
+- Boeira (2023) *Lean Game Development*.
+- Booz and Fritchey (2024) *Introduction to PostgreSQL for the Data Professional*.
+- Borges, D. and Campbell, D. (2026) *AI Security Engineering*.
+- Bornet *The Human-Agent Orchestrator*.
+- Borromeo (2022) *Hands-On Unity 2022 Game Development*.
+- Adrienne Braganza *Looks Good to Me: Constructive Code Reviews*.
+- Steven Branson (2020) *UX / UI Design*.
+- Brener, J. (2024) *Mastering RAG for AI Agents*.
+- Yevgeniy Brikman (2025) *Fundamentals of DevOps and Software Delivery*.
+- Yevgeniy Brikman *Terraform: Up & Running*.
+- Bringhurst *The Elements of Typographic Style*.
+- Simon Brown *Software Architecture for Developers*.
+- Burns, Beda and Hightower *Kubernetes: Up and Running*.
+- Wes Bush *Product-Led Growth*. Product-Led Alliance.
+- Cacheaux and Berlin *Advanced iOS App Architecture*. Ray Wenderlich Press.
+- Cagan, M. (2017) *INSPIRED: How to Create Tech Products Customers Love*. Wiley.
+- Cagle (2024) *Architecting Enterprise AI Applications*.
+- Craig Caldwell (2025) *Story Structure and Development*.
+- Campbell and Majors (2017) *Database Reliability Engineering*. O'Reilly.
+- Carman (2018) *Visual Design Concepts for Mobile Games*.
+- Casciaro and Mammino (2020) *Node.js Design Patterns*. Packt.
+- Alexio Cassani (2025) *Code Revealed*.
+- Chakraborty (2025) *DeepSeek AI: A Comprehensive Guide*.
+- Chen (2023) *Pandas for Everyone*.
+- Boris Cherny (2019) *Programming TypeScript*. O'Reilly.
+- Chintale *DevOps Design Patterns*.
+- Ciceri et al. *Software Architecture Metrics*.
+- Matt Cone (2023) *The Markdown Guide*.
+- Coombs, P. (2005) *IT Project Proposals: Writing to Win*. Cambridge University Press.
+- Lucas da Costa *Testing JavaScript Applications*. Manning.
+- Croll and Yoskovitz *Lean Analytics*. O'Reilly.
+- Joshua Crotts (2024) *Learning Java: A Test-Driven Approach*. Springer.
+- Csikszentmihalyi, M. (1990) *Flow: The Psychology of Optimal Experience*. Harper & Row.
+- Cusumano, M. A. (2004) *The Business of Software: What Every Manager, Programmer, and Entrepreneur Must Know to Thrive and Survive in Good Times and Bad*. Free Press.
+- Aki D. (2024) *LLM, Transformer, RAG AI*.
+- Anna Dahlström *Storytelling in Design*.
+- Raj Abhijit Dandekar *Build a DeepSeek Model (From Scratch)*.
+- R. Sarma Danturthi *Database and Application Security: A Practitioner's Guide*.
+- Usama Dar *PostgreSQL Server Programming*. Packt.
+- Dash, S. K. (2025) *Mastering Software Product Management*. Orange Education.
+- Day (2024) *Hands-On APIs for AI and Data Science*.
+- Pamala B. Deacon (2020) *UX and UI Design Strategy*.
+- Despoudis, T. (2024) *Build AI-Enhanced Web Apps*. Packt.
+- Devitt, Ryan et al. *Arrive: A Design Innovation Framework to Deliver Breakthrough Services, Products and Experiences*. Routledge.
+- Stephanie Diamond *Claude For Dummies*.
+- Dingare *CI/CD Pipeline Using Jenkins Unleashed*.
+- Ray Dinwiddie (2022) *PHP Security and Session Management*.
+- Dormehl (2014) *The Formula*.
+- Dowling (2026) *Building Machine Learning Systems with a Feature Store*.
+- Stéphane Duguin *Cybersecurity for NGOs*.
+- Dynowski and Dulak (2025) *Learning API Styles*.
+- Eddy *Blog It Right*.
+- Ehrhardt et al. *Corporate Finance: A Focused Approach*.
+- Sean Ellis and Morgan Brown *Hacking Growth*. Currency.
+- Jessica Enders *Designing UX: Forms*.
+- Eric Evans *Domain-Driven Design*.
+- Eyal, N. and Hoover, R. (2014) *Hooked: How to Build Habit-Forming Products*. Portfolio/Penguin.
+- Eyal, N. and Hoover, R. (2014) *Hooked: Supplemental Workbook*. NirAndFar.com.
+- Zoltan Fekeshazi (c. 2017) *Product Managers' Guide to UX Design*. UX Studio.
+- Felicia (2021) *Godot from Zero to Proficiency (Advanced)*.
+- Fernandez, O. (2024) *Patterns of Application Development Using AI*.
+- Fielding *The Brand Book*.
+- Mike Fishbein *Growth Hacking with Content Marketing*.
+- Neal Ford et al. *Building Evolutionary Architectures*.
+- Nicole Forsgren, Jez Humble and Gene Kim *Accelerate*.
+- Martin Fowler *Refactoring*.
+- Fusco (2023) *Large Scale Apps with React and TypeScript*.
+- Cory Gackenheimer (2013) *Node.js Recipes*. Apress.
+- Garbugli *Find Your Market*.
+- Garbugli *The SaaS Email Marketing Playbook*.
+- Niranjan Gattupalli and RaviTeja Amerineni (2026) *Mastering Salesforce Quality*.
+- Trisha Gee *What to Look for in a Code Review*.
+- JJ Geewax *API Design Patterns*.
+- George *Excel 2019 Advanced Topics*.
+- Gerber *The E-Myth Enterprise*.
+- Josh Goldberg (2022) *Learning TypeScript*. O'Reilly.
+- Tod Golding *Building Multi-Tenant SaaS Architectures*.
+- Goodwin (2016) *Polished Game Development*.
+- Google *Building Secure and Reliable Systems*.
+- Google *The Site Reliability Workbook*.
+- Ian Gorton *Foundations of Scalable Systems*. O'Reilly.
+- Gough, Bryant and Auburn *Mastering API Architecture*. O'Reilly.
+- Trey Grainger (2024) *AI-Powered Search*. Manning.
+- Grant (2018) *101 UX Principles*.
+- Graves *Writing for Profit*.
+- Greever (2020) *Articulating Design Decisions*.
+- Rana Gujral *The AI Instinct*.
+- Jason van Gumster and Stefan Maurus (2025) *Farming Simulator Modding With Blender*.
+- Gurbani, N. (2024) *Mastering RESTful API Development with Go*.
+- Felipe Gutierrez (2019) *Pro Spring Boot 2*. Springer/Apress.
+- Felipe Gutierrez and DaShaun Carter (2026) *Pro Spring Boot 4*. Springer/Apress.
+- Habib (2025) *Building Agents with OpenAI Agents SDK*. Packt.
+- Armin Halač (2024) *A Complete Guide to Character Rigging for Games Using Blender*.
+- Hamilton *Email Storyselling Playbook*.
+- Stephen Haney (2015) *Game Development with Swift*. Packt.
+- Hansen *How to Build a Subscription Business — 29 Steps to Subscription Mastery*.
+- Hargis, Carey et al. *Developing Quality Technical Information*.
+- Hartwell and Chen *Archetypes in Branding*.
+- Hauge *Storytelling Made Easy*.
+- Mark Heckler (2021) *Spring Boot: Up & Running*. O'Reilly.
+- Jay Heizer *Operations Management*. Pearson.
+- Theresa Hill *3D Game Development Practical Introduction*.
+- Hill-Whittall (2015) *The Indie Game Developer Handbook*.
+- Joseph Hocking (2022) *Unity in Action, Third Edition: Multiplatform Game Development in C#*. Manning.
+- Celia Hodent (2022) *What UX Is Really About*. CRC Press.
+- Hodjat, B. and Blondeau, A. (2026) *The Agentic Enterprise*.
+- Hoffman *Web Application Security*.
+- Daniel R. Holt *Modern Data Systems*.
+- Alexandra Horowitz *On Looking*.
+- Horton and Vice *Mastering React*.
+- Drew Hoskins *The Product-Minded Engineer*.
+- Paul Hudson *Swift Design Patterns*. Hacking with Swift.
+- Humble and Farley (2010) *Continuous Delivery*. Addison-Wesley.
+- Chip Huyen (2022) *Designing ML Systems*.
+- Chip Huyen (2025) *AI Engineering*. O'Reilly.
+- Indocan Publications (2022) *A Quick Guide to Software as a Service (SaaS): Beginner Insight*.
+- Danny Iny *Blog Post Ideas: 21 Proven Ways*.
+- Jain (2024) *Modern Web Applications with Next.js*.
+- John *The Instant 2020–2021 Guide on Subscription Billing for SaaS*.
+- Johnson (2025) *Practical JSON Design and Usage*.
+- Johnson, P. (2024) *Modern API Design*.
+- Jolowicz (2024) *Hypermodern Python Tooling*.
+- Jones (2023) *Driving Data Quality with Data Contracts*.
+- Jordan *ICDL Word*.
+- Josyula et al. (2024) *Mastering Retrieval-Augmented Generation*. BPB.
+- Kahneman, D. (2011) *Thinking, Fast and Slow*. Farrar, Straus and Giroux.
+- Metin Karatas (2024) *Developing AI Applications*.
+- Almantas Karpavicius *Software Craftsmanship Using AI*.
+- Vlad Khononov *Learning Domain-Driven Design*. O'Reilly.
+- Kim (2023) *The Next.js Handbook*.
+- Kim, Humble, Debois and Willis (2021) *The DevOps Handbook*. IT Revolution.
+- Kim, W. C. and Mauborgne, R. (2005) *Blue Ocean Strategy*. Harvard Business School Press.
+- King *Product Marketing Misunderstood*.
+- Kirkpatrick *Four Levels of Training Evaluation*.
+- Kits For Life (2025) *Mastering DeepSeek-v3*.
+- Laura Klein (2013) *UX for Lean Startups*.
+- Martin Kleppmann (2017) *Designing Data-Intensive Applications*. O'Reilly.
+- Kohavi, Tang and Xu *Trustworthy Online Controlled Experiments*. Cambridge.
+- van der Kooij and Pizarro *Blueprints for a SaaS Sales Organization*.
+- Kothand *One Hour Content Plan*.
+- Krause (2024) *The Complete Developer*.
+- Jesper Wisborg Krogh (2020) *MySQL 8 Query Performance Tuning*. Apress.
+- Megan Krone *Navigating the Dissertation Writing Process*.
+- Krug, S. (2014) *Don't Make Me Think, Revisited: A Common Sense Approach to Web Usability*. New Riders/Peachpit.
+- Kumar (2023) *Fluent React*. O'Reilly.
+- Kumar et al. (2024) *Mastering MySQL Administration*.
+- LaGrone, B. (2016) *Web Design Blueprints*. Packt.
+- Langley et al. *The Improvement Guide*.
+- Will Larson *Staff Engineer*.
+- Laster (2023) *Learning GitHub Actions*.
+- Levinson and McLaughlin (2004) *Guerrilla Marketing for Consultants*.
+- Jaime Levy (2015) *UX Strategy*. O'Reilly.
+- Li et al. (2021) *Creating Games with Unity, Substance Painter, & Maya*.
+- Greg Lim *Next.js 13 + Prisma*.
+- Lima *Fundamentals of Writing*.
+- Liu *DNS and BIND*.
+- Rebecca Livermore *Blogger's Quick Guide*.
+- Lockridge and Van Ittersum *Writing Workflows*.
+- Josh Long and Kenny Bastani (2017) *Cloud Native Java*. O'Reilly.
+- Marko Luksa *Kubernetes in Action*. Manning.
+- Maioli (2018) *Fixing Bad UX*.
+- Charity Majors, Liz Fong-Jones and George Miranda *Observability Engineering*. O'Reilly.
+- Manning and Buttfield-Addison (2017) *Mobile Game Development with Unity*.
+- Martin (2023) *PHP Advanced*.
+- Andrea De Mauro (2024) *AI Applications Made Easy*.
+- Maxwell *7 Steps to Better Writing*.
+- Malcolm McDonald *Web Security for Developers*.
+- Mersch (2022) *Hacking SaaS*.
+- Metts and Welfle (2020) *Strategic Writing for UX*.
+- Jonathan Middaugh (2020) *255 Java Interview Success Questions*.
+- David Millet et al. (2012) *Blender 3D: Noob to Pro*.
+- Mark Moeykens (2024) *SwiftData Mastery in SwiftUI*. Big Mountain Studio.
+- Sanjeev Mohan *Designing the AI-Driven Data Foundations*.
+- Kief Morris *Infrastructure as Code*. O'Reilly.
+- Tony Mullen (2011) *Introducing Character Animation with Blender*.
+- Josef Müller-Brockmann (1981) *Grid Systems in Graphic Design*.
+- Mark Murphy *Elements of Android Room*.
+- Murray (2021) *C# Game Programming Cookbook for Unity 3D*.
+- Nate Murray (2019) *Fullstack Node.js*. Leanpub.
+- Nadalin *WASEC*.
+- Nekrasov *Swift Recipes for iOS Developers*.
+- Nelson (2024) *Software Engineering for Data Scientists*.
+- Sam Newman *Building Microservices*.
+- Daniel Nichter (2022) *Efficient MySQL Performance*. O'Reilly.
+- Noble *How to Write a Grant*.
+- Norman, D. (2013) *The Design of Everyday Things*. Basic Books.
+- Greg Nudelman (2024) *UX for AI: A Framework for Product Design*. Wiley.
+- Michael Nygard *Release It!*.
+- Regina Obe and Leo Hsu *PostgreSQL: Up and Running*. O'Reilly.
+- Joseph Okonkwo (2025) *Growth Engineering*. Wiley.
+- Olesen-Bagneux (2023) *The Enterprise Data Catalog*.
+- Oliveira (2024) *AI Strategies for Web Development*.
+- Osmani (2026) *Web Performance Engineering in the Age of AI*.
+- Paduraru, E. (2024) *Roots of UI/UX Design*. Creative Tim.
+- Raghuvir Pai, Gopinath Chattopadhyay and Anne Gibbs (eds.) (2026) *Advances in Intelligent Asset Management and Maintenance*.
+- Panzarella, L. (2022) *UI/UX Web Design Simply Explained*.
+- Alex Petrov (2019) *Database Internals*. O'Reilly.
+- La Piana *The Nonprofit Strategy Revolution*.
+- Heydon Pickering and Andy Bell *Every Layout*.
+- Matt Pocock (2026) *Total TypeScript*. No Starch Press.
+- Porter, M. E. (1980) *Competitive Strategy*. Free Press.
+- Van Der Post *Python in Excel Advanced*.
+- Rambert (2024) *Advanced Next.js for Everyone*.
+- Rawat *CI/CD Pipeline with Docker and Jenkins*.
+- Gwynne Richards *Warehouse Management*. Kogan Page.
+- Richards and Ford *Fundamentals of Software Architecture*.
+- Marc Roche *Business English Speaking: Advanced Masterclass — Speak Advanced ESL Business English with Confidence & Elegance*.
+- Marc Roche *Business English Vocabulary: Advanced Masterclass*. IDM Business and Law.
+- Santana Roldán (2024) *React 18 Design Patterns and Best Practices*. Packt.
+- Josh Rosso, Rich Lander, Alex Brand and John Harris *Production Kubernetes*. O'Reilly.
+- Rowse *Problogger*.
+- Sara Rubinelli (2026) *Institutional Health Communication in the Information Age*.
+- Narendar Singh Saini *iOS Developer Solutions Guide*.
+- Schmidlin *The Art of Company Valuation and Financial Statement Analysis*.
+- Scolastici and Nolte (2013) *Mobile Game Design Essentials*.
+- Adam D. Scott (2020) *JavaScript Everywhere*. O'Reilly.
+- Marco Secchi (2023) *Multiplayer Game Development with Unreal Engine 5*. Packt.
+- Marco Secchi (2024) *Artificial Intelligence in Unreal Engine 5*.
+- Seid (2017) *Franchise Management For Dummies*.
+- Derek Selander *Advanced Apple Debugging & Reverse Engineering*.
+- Seok *Unity Game Development*.
+- Sheehan *The Pocket Guide to Product Launches*.
+- Sheth and Singh *Ace the Data Science Interview*.
+- Len Silverston *The Data Model Resource Book*.
+- Mark Simon (2023) *Leveling Up with SQL*. Apress.
+- Smith, J. (2024) *RAG Generative AI: A Practical Guide*.
+- Sommerfeld (2024) *Unlock PHP 8*.
+- Manuel Spigolon *Accelerating Server-Side Development with Fastify*. Packt.
+- David Spuler (2024) *Generative AI Applications*.
+- Stallings *Network Security Essentials: Applications and Standards*.
+- Stetson, C. (2017) *NGINX Microservices Reference Architecture*. NGINX Inc.
+- Phil Sturgeon *Build APIs You Won't Hate*.
+- Stuttard and Pinto *The Web Application Hacker's Handbook*.
+- Synechron (2018) *Bridge the User Experience Gap in Enterprise Applications for Financial Services & Insurance*.
+- Technology Grant News (2010) *Winning at IT: Grant Writing for Technology Grants*.
+- Tidwell, J., Brewer, C. and Valencia, A. (2020) *Designing Interfaces*. O'Reilly.
+- Trio *How to Run a SaaS Business*.
+- D. Truman *JavaScript Object-Oriented Programming By Examples*.
+- Tien Tzuo *Subscribed*.
+- Urban *Advanced Excel for Productivity*.
+- Bin Uzayr (2022) *Mastering GitHub Pages: A Beginner's Guide*.
+- Bin Uzayr (ed.) (2023) *Mastering React Native: A Beginner's Guide*.
+- Enrico Valenza (2015) *Blender 3D Cookbook*.
+- Dan Vanderkam (2024) *Effective TypeScript*. O'Reilly.
+- Vanier, Garnier and Hristov (2019) *Advanced MySQL 8*. Packt.
+- Eric Vennaro *iOS Development at Scale*.
+- Roberto Verganti (2016) *Overcrowded*. MIT Press.
+- Vic *Microsoft Word 2022 for Beginners & Pros*.
+- Walkenbach and Alexander *Microsoft Excel 365 Bible*.
+- Walling (2023) *The SaaS Playbook*.
+- Craig Walls *Spring in Action*.
+- Donny Wals (2025) *Practical Swift Concurrency*.
+- John Walsh, Uzi Ailon and Matt Barker *Identity Security for Software Development*.
+- Watkinson *The Grid*.
+- Watson et al. *Supply Chain Network Design*.
+- Aniket Wattamwar (2026) *Algorithms Every Programmer Should Know*. Manning Early Access.
+- Webb *What Customers Crave*.
+- Dan Wellman (2023) *Ultimate TypeScript Handbook*.
+- Wempen *Advanced Microsoft Word 2016*.
+- Wengler (2026) *Automate Excel with Python*.
+- John Whalen (2019) *Design for How People Think*. O'Reilly Media.
+- Whitmell *Business Writing Essentials*.
+- Karl Wiegers *Software Requirements Essentials*.
+- Kristopher Wilson *The Clean Architecture in PHP*.
+- Steve Wilson *The Developer's Playbook for Large Language Model Security*.
+- Winning By Design *The SaaS Sales Method for Account Executives*.
+- Winning By Design *The SaaS Sales Method Fundamentals*.
+- Wood *The Marketing Plan Handbook*.
+- Wroblewski (2008) *Web Form Design: Filling in the Blanks*.
+- Yablonski, J. (2024) *Laws of UX*. O'Reilly.
+- Yang, C. D. (2024) *Building User Interfaces for Modern Web Applications: React Programming*. PA-ADOPT open textbook.
+
+Recorded without an author:
+
+- *.NET MAUI Projects: A guide to building applications for Windows, macOS, Android, and iOS* (2025).
+- *97 Things Every Application Security Professional Should Know*.
+- *The AI Cybersecurity Handbook*.
+- *AI for Game Developers* (2005).
+- *Analyzing Websites*.
+- *Applying the Kaizen in Africa* (2018).
+- *ArcGIS Pro Manual*.
+- *Artificial Intelligence for .NET*.
+- *Bandit Algorithms for Website Optimization*.
+- *Basic Math for Game Development with Unity 3D*.
+- *Become an Effective Software Engineering Manager*.
+- *A Bug Hunter's Diary*.
+- *Building a Data and AI Platform with PostgreSQL* (2025).
+- *Building and Distributing Agentic AI Solutions*.
+- *C# 12 for Cloud, Web, and Desktop Applications*.
+- *C# 14 and .NET 10 - Modern Cross-Platform Development Fundamentals*.
+- *The Chicago Manual of Style*.
+- *CI/CD Unleashed*.
+- *Clean Code with TypeScript*.
+- *Clear Written Communication*. 50Minutes.
+- *Continuous Deployment*.
+- *Core C# and .NET Quick Reference*.
+- *Decoding JavaScript Design Patterns*.
+- *Designing for AI*.
+- *DevOps for PHP Developers*.
+- *Digital Image Processing*.
+- *Digital Storytelling*.
+- *Docker for PHP Developers*.
+- *The Effective Engineer*.
+- *Excel 2025 All-in-One Step-by-Step Guide*.
+- *Full-Stack Web Development with TypeScript 5*.
+- *Fullstack GraphQL*.
+- *Fullstack React with TypeScript*. Newline.
+- *The Fundamentals of UX Writing*.
+- *Generating Efficient PHP* (2023). php[architect].
+- *GIS Succinctly*.
+- *Git Fundamentals for New Developers*.
+- *Git Mastery Accelerated Crash Course*.
+- *Google Maps JavaScript API Cookbook*.
+- *Grokking Web Application Security*. Manning.
+- *HashiCorp Vault: The Definitive Guide*.
+- *HTTP: The Definitive Guide*.
+- *Information Dashboard Design*.
+- *Internet and Web Application Security*.
+- *Introduction to Information Retrieval*.
+- *iOS 18 Programming for Beginners*.
+- *iOS Application Security: The Definitive Guide for Hackers and Developers*.
+- *iOS TDD by Tutorials*. RayWenderlich.
+- *Kubernetes Best Practices*.
+- *KUBERNETES: A Simple Guide*.
+- *Leaflet in Practice*.
+- *Learning C# Through Small Projects* (2024).
+- *Learning JavaScript Data Structures and Algorithms*.
+- *Leveling Up as a Tech Lead*.
+- *Master Software Architecture*.
+- *Mastering ArcGIS Enterprise*.
+- *Mastering Java Spring Boot: Advanced Techniques and Best Practices*.
+- *Mastering Linux Security and Hardening*.
+- *Mastering Local SEO with Google Maps*.
+- *Mastering PostgreSQL*. Manning.
+- *Mastering Prompt Engineering*.
+- *Microsoft Excel Bible 2026*.
+- *Microsoft Visual C#: Introduction to Object Oriented Programming*.
+- *Modern DevOps Practices*.
+- *Modern Software Engineering*.
+- *Modern Web Cartography*.
+- *Network Security Firewalls and VPNs*. Jones & Bartlett.
+- *Node.js Fundamentals*.
+- *Parallel Programming with C# and .NET*.
+- *PCI DSS: A Practical Guide*.
+- *Perfect Software and Other Illusions About Testing*.
+- *PHP 8: Principles and Practices of Object-Oriented Programming*.
+- *Platform Enterprise*.
+- *Practical Linux Security Cookbook*.
+- *Pro Git*.
+- *Python Tricks*.
+- *Real Estate and GIS*.
+- *Retention Point*.
+- *Security Automation with Ansible 2*.
+- *Software Design*.
+- *Software Development Pearls*.
+- *Software Engineering at Google*.
+- *Strategic DevOps*.
+- *TypeScript Mini Reference*.
+- *Ultimate Excel Formula & Function Reference Guide*.
+- *UNIX Internals: The New Frontiers*.
+- *Video Game Storytelling*.
+- *Wicked Cool Shell Scripts*.
+- *Zero to Mastery in Network Security*.
