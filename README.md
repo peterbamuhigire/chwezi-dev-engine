@@ -1,8 +1,161 @@
 # Chwezi Dev Engine
 
-Chwezi Dev Engine is the engineering catalogue of the Chwezi skill engines: 167 routed `SKILL.md` files that tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. It covers system and API architecture, relational databases, distributed systems, application and infrastructure security, Python, TypeScript/JavaScript, PHP, Java, C#/.NET, Kotlin and Swift, web, Android, iOS and cross-platform mobile clients, AI and agent systems, multi-tenant SaaS and ERP platforms, DevOps and cloud delivery, game development, GIS, and the product and commercial decisions around software. A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engineering/SKILL.md), applies to every change: small, explained changes, explicit failure handling, evidence scaled to risk, and a verify-before-done gate. The engine applies published standards where the work calls for them, including the OWASP Top 10 2025, OWASP ASVS 5.0.0, the OWASP Top 10 for LLM Applications and API Security Top 10, ISO/IEC 27001:2022, SOC 2 Trust Services Criteria, PCI DSS v4.0.1, the NIST AI RMF, ISO/IEC 42001:2023, the EU AI Act, GDPR and Uganda's Data Protection and Privacy Act 2019, WCAG 2.2 AA, OpenAPI 3.1, RFC 9457, SLSA v1.2, PSR-12, ISO/IEC/IEEE 29119 and the C4 model. Accounting treatment (IFRS/IAS) is owned by the separate [Chwezi Accounting Doctrine](https://github.com/peterbamuhigire/chwezi-accounting-doctrine) engine; this engine implements it in software.
+Chwezi Dev Engine is a catalogue of 167 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
 
-The engine produces working engineering artefacts rather than advice: architecture records and C4 diagrams whose claims are pinned to a commit and checked by `verify_diagram_evidence.py`; OpenAPI contracts; database schemas and migration plans; threat models, authorisation matrices, Data Protection Impact Assessments and severity-rated security audit reports; test strategies and Release Evidence Bundles; CI/CD pipelines, Terraform, Docker and Kubernetes configurations; traceable requirements with acceptance criteria and SDLC document sets; AI feature specifications, evaluation harnesses and cost models; game design and production plans; implementation-status audits with completion blueprints; CodeTour onboarding walkthroughs; and validated Word and Excel deliverables. It serves software engineers, technical leads, architects, product owners, QA and delivery reviewers, and the consultants of Chwezi Core Systems, working through Claude Code, Codex or any agent that can read Markdown. Repository tests check the catalogue count, evidence sections and routing fixtures on every change.
+It is for software engineers, technical leads, architects, product owners, QA and delivery reviewers, and the consultants of Chwezi Core Systems. Use it through Claude Code, Codex or any agent that can read Markdown, when work should follow a written method and leave evidence a reviewer can check.
+
+A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engineering/SKILL.md), applies to every change: small, explained changes, explicit failure handling, evidence scaled to risk and a verify-before-done gate.
+
+**Contents**
+
+- [At a glance](#at-a-glance)
+- [Start here](#start-here)
+- [Find the right skill](#find-the-right-skill)
+- [How it works](#how-it-works)
+- [What is inside](#what-is-inside)
+- [Installation](#installation)
+- [Verify](#verify)
+- [Quality and improvement](#quality-and-improvement)
+- [What the October 2026 kaizen improved](#what-the-october-2026-kaizen-improved)
+- [Date-triggered gates](#date-triggered-gates)
+- [References](#references)
+- [Contributing and licence](#contributing-and-licence)
+
+## At a glance
+
+- **167 active skills** in 18 categories, plus 78 retired names kept as redirects.
+- **165 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
+- **239 routing fixtures.** The expected skill ranks first for 219 (91.6%) and in the top three for all 239. The test is a lexical proxy, not live routing.
+- **273 tests pass and 3 are skipped** (pytest 9.0.3, Linux, 2026-10-31).
+- **72 dated source records** back volatile facts. A CI step fails when one passes its review date. The first failure date is 2026-11-04.
+- **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
+
+## Start here
+
+1. **Install.** In Claude Code, add the repository as a marketplace, then install the plugin. Other routes (Codex, standalone installer, manual) are under [Installation](#installation).
+
+   ```text
+   /plugin marketplace add peterbamuhigire/chwezi-dev-engine
+   /plugin install engineering@chwezi-engineering
+   ```
+
+2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 167` and exits 0 on the current tree.
+
+   ```sh
+   python3 -X utf8 scripts/skill_catalog_guardrails.py
+   ```
+
+3. **Use.** Name the skill in your request, for example: "Use `api-design-first` to define the contract for the invoice listing endpoint." Pick the name from [Find the right skill](#find-the-right-skill).
+
+## Find the right skill
+
+Use this engine when software work needs a repeatable method and evidence a reviewer can check: a design, a review, a security audit or a release gate. The names below come from the routing fixtures, so each task is one the engine's routing test already uses.
+
+| Task | Skill |
+|---|---|
+| Define an API contract first, with versioning, idempotency and an error model | [`api-design-first`](skills/architecture/api-design-first/SKILL.md) |
+| Design the data model, tenancy and indexes for a multi-tenant ERP | [`database-design-engineering`](skills/backend-databases/database-design-engineering/SKILL.md) |
+| Check a web application for OWASP vulnerabilities | [`web-app-security-audit`](skills/security/web-app-security-audit/SKILL.md) |
+| Threat-model a payment API and write abuse cases | [`vibe-security-skill`](skills/security/vibe-security-skill/SKILL.md) |
+| Review a pull request that an AI agent wrote | [`ai-assisted-development`](skills/sdlc-meta/ai-assisted-development/SKILL.md) |
+| Run build, types, lint, tests and diff review before claiming a fix is done | [`world-class-engineering`](skills/sdlc-meta/world-class-engineering/SKILL.md) |
+| Diagnose an intermittent production bug | [`systematic-bug-diagnosis`](skills/sdlc-meta/systematic-bug-diagnosis/SKILL.md) |
+| Design the unit, integration and end-to-end test strategy for a service | [`advanced-testing-strategy`](skills/sdlc-meta/advanced-testing-strategy/SKILL.md) |
+| Build a CI/CD pipeline with build, test and deployment stages | [`cicd-pipelines`](skills/devops-cloud/cicd-pipelines/SKILL.md) |
+| Add retrieval-augmented generation with chunking, embeddings and a vector store | [`ai-rag-patterns`](skills/ai/ai-rag-patterns/SKILL.md) |
+| Add SAML single sign-on and SCIM provisioning for enterprise customers | [`saas-sso-scim-enterprise-auth`](skills/saas/saas-sso-scim-enterprise-auth/SKILL.md) |
+| Charge monthly with proration, trials and dunning for failed cards | [`subscription-billing`](skills/saas/subscription-billing/SKILL.md) |
+
+Every skill is listed in the [skill catalogue](docs/skill-catalogue.md).
+
+Some work belongs to a neighbouring engine:
+
+- Visual design, typography and UI appearance: the Chwezi design engine.
+- IFRS and IAS rules, statutory values and period close: the [Chwezi Accounting Doctrine](https://github.com/peterbamuhigire/chwezi-accounting-doctrine) engine. This engine implements that treatment in software.
+- Complete website delivery, content and SEO: the Chwezi website engine.
+- Formal SRS and lifecycle specifications: the Chwezi SDLC documentation engine.
+
+## How it works
+
+- The router is the root [`SKILL.md`](SKILL.md), with [`AGENTS.md`](AGENTS.md) and [`CLAUDE.md`](CLAUDE.md), which imports `AGENTS.md`. It maps an intent to a skill family.
+- The agent loads one skill's `SKILL.md` and only the `references/` files that the task needs.
+- Two always-on skills govern output quality. `anti-ai-slop` applies while an artefact is produced. `ai-slop-audit` runs after each major iteration and at release.
+- Retired skill names redirect to current skills. The [skill routing index](docs/skill-routing-index.md) explains the map, and [`docs/skill-aliases.yml`](docs/skill-aliases.yml) holds the machine-readable form.
+- Volatile facts such as versions, dates and vendor policies come from the dated records in `docs/source-registers/`, not from skill text.
+- Repository tests check the catalogue count, evidence sections and routing fixtures on every change.
+
+The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`](docs/overview/ARCHITECTURE.md).
+
+## What is inside
+
+[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 167 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
+
+| Category | Folder | Skills |
+|---|---|---:|
+| Project initialisation | [`00-meta-initialization/`](00-meta-initialization/) | 2 |
+| SDLC and engineering method | [`skills/sdlc-meta/`](skills/sdlc-meta/) | 20 |
+| Execution planning | [`skills/execution-plan-scripts/`](skills/execution-plan-scripts/) | 1 |
+| Architecture | [`skills/architecture/`](skills/architecture/) | 7 |
+| Backend and databases | [`skills/backend-databases/`](skills/backend-databases/) | 4 |
+| Security | [`skills/security/`](skills/security/) | 6 |
+| Languages | [`skills/languages/`](skills/languages/) | 12 |
+| Frontend and UX engineering | [`skills/frontend-ux/`](skills/frontend-ux/) | 9 |
+| Android | [`skills/android/`](skills/android/) | 1 |
+| iOS | [`skills/ios/`](skills/ios/) | 4 |
+| Cross-platform mobile | [`skills/mobile-cross/`](skills/mobile-cross/) | 3 |
+| AI and agent systems | [`skills/ai/`](skills/ai/) | 26 |
+| SaaS platforms | [`skills/saas/`](skills/saas/) | 18 |
+| Product and business | [`skills/product-business/`](skills/product-business/) | 15 |
+| Finance implementation | [`skills/finance-accounting/`](skills/finance-accounting/) | 4 |
+| DevOps and cloud | [`skills/devops-cloud/`](skills/devops-cloud/) | 8 |
+| Game development | [`skills/game-development/`](skills/game-development/) | 25 |
+| GIS | [`skills/gis/`](skills/gis/) | 2 |
+| **Total** | | **167** |
+
+### Catalogue size
+
+The active count is a checked surface. `tests/test_engine_control_plane.py` compares it with the files on disk, so update it in the same change that adds or retires a skill. `scripts/skill_catalog_guardrails.py` enforces the maximum.
+
+| Measure | Value |
+|---|---:|
+| Active `SKILL.md` files | 167 |
+| Guardrail maximum | 200 |
+| Inactive `ALIAS.md` redirects | 78 |
+| Skills shipped by the Claude plugin manifest | 165 |
+| Routing fixtures | 239 |
+
+### What the skills produce
+
+The engine produces working engineering artefacts, not advice:
+
+- Architecture records and C4 diagrams whose claims are pinned to a commit and checked by `verify_diagram_evidence.py`.
+- OpenAPI contracts, database schemas and migration plans.
+- Threat models, authorisation matrices, Data Protection Impact Assessments and severity-rated security audit reports.
+- Test strategies and Release Evidence Bundles.
+- CI/CD pipelines, Terraform, Docker and Kubernetes configurations.
+- Traceable requirements with acceptance criteria, and SDLC document sets.
+- AI feature specifications, evaluation harnesses and cost models.
+- Game design and production plans.
+- Implementation-status audits with completion blueprints, and CodeTour onboarding walkthroughs.
+- Validated Word and Excel deliverables.
+
+### Standards applied
+
+The engine applies published standards where the work calls for them:
+
+- **Security and assurance:** OWASP Top 10 2025, OWASP ASVS 5.0.0, the OWASP Top 10 for LLM Applications and API Security Top 10, ISO/IEC 27001:2022, SOC 2 Trust Services Criteria, PCI DSS v4.0.1 and SLSA v1.2.
+- **AI and privacy:** the NIST AI RMF, ISO/IEC 42001:2023, the EU AI Act, GDPR and Uganda's Data Protection and Privacy Act 2019.
+- **Web, API and code:** WCAG 2.2 AA, OpenAPI 3.1, RFC 9457 and PSR-12.
+- **Testing and design records:** ISO/IEC/IEEE 29119 and the C4 model.
+
+### Beyond the skills
+
+- `agents/` holds 10 reviewer and planning agents, such as `security-reviewer` and `tdd-guide`.
+- `hooks/` holds a destructive-command gate and the plugin hook configuration, each with a test.
+- `rules/` holds the always-on rules. Start at [`rules/README.md`](rules/README.md).
+- `templates/` holds API, architecture, delivery, reliability and security templates, and a work-graph template.
+- `examples/` holds a full-stack SaaS reference and a synthetic tenant invoice slice.
+- `docs/` holds the records. Start at the [documentation index](docs/README.md).
 
 ## Installation
 
@@ -54,7 +207,9 @@ loaded 130 of 165 declared plugin skill paths; the explicit budget loaded all
 
 **Manual route.** Clone the repository, then have the agent read [`CLAUDE.md`](CLAUDE.md) (which imports `AGENTS.md`), the [skill routing index](docs/skill-routing-index.md), and only the `SKILL.md` files the task needs. Expose `skills/` and `00-meta-initialization/` to the working agent; [docs/USING-IN-A-PROJECT.md](docs/USING-IN-A-PROJECT.md) covers submodule, sibling-clone and read-only-mount wiring.
 
-**Verify.** Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). Each exited 0 on the current tree on Linux (Fedora, Python 3.14.8, Node 22.23.1) on 2026-10-31.
+## Verify
+
+Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). Each exited 0 on the current tree on Linux (Fedora, Python 3.14.8, Node 22.23.1) on 2026-10-31.
 
 ```sh
 python3 -m pip install -r requirements-ci.txt
@@ -102,48 +257,6 @@ Checks that need more than the CI steps, none of them part of CI:
 - **Other scripts.** `scripts/check_package_file_budget.py`, `scripts/source_ingestion_guardrail.py` and `scripts/validate_work_graph.py templates/work-graph.yml` need only Python and exited 0.
 - **Not needed.** No validator in this repository calls PowerShell (`pwsh`), Pandoc, Mermaid, LibreOffice, a browser or a container. `install.ps1` and `scripts/install-pdf-binaries.ps1` are Windows helpers that were not run in the October 2026 passes. Skills mention those tools only as downstream project requirements.
 
-## Capabilities
-
-Generated from the active `SKILL.md` files under `skills/` and `00-meta-initialization/`; the 78 inactive `ALIAS.md` redirects are excluded. The root [`SKILL.md`](SKILL.md) is the engineering baseline router and is not counted.
-
-Each skill, with a one-line description, is in the [skill catalogue](docs/skill-catalogue.md).
-
-| Category | Folder | Skills |
-|---|---|---:|
-| Project initialisation | [`00-meta-initialization/`](00-meta-initialization/) | 2 |
-| SDLC and engineering method | [`skills/sdlc-meta/`](skills/sdlc-meta/) | 20 |
-| Execution planning | [`skills/execution-plan-scripts/`](skills/execution-plan-scripts/) | 1 |
-| Architecture | [`skills/architecture/`](skills/architecture/) | 7 |
-| Backend and databases | [`skills/backend-databases/`](skills/backend-databases/) | 4 |
-| Security | [`skills/security/`](skills/security/) | 6 |
-| Languages | [`skills/languages/`](skills/languages/) | 12 |
-| Frontend and UX engineering | [`skills/frontend-ux/`](skills/frontend-ux/) | 9 |
-| Android | [`skills/android/`](skills/android/) | 1 |
-| iOS | [`skills/ios/`](skills/ios/) | 4 |
-| Cross-platform mobile | [`skills/mobile-cross/`](skills/mobile-cross/) | 3 |
-| AI and agent systems | [`skills/ai/`](skills/ai/) | 26 |
-| SaaS platforms | [`skills/saas/`](skills/saas/) | 18 |
-| Product and business | [`skills/product-business/`](skills/product-business/) | 15 |
-| Finance implementation | [`skills/finance-accounting/`](skills/finance-accounting/) | 4 |
-| DevOps and cloud | [`skills/devops-cloud/`](skills/devops-cloud/) | 8 |
-| Game development | [`skills/game-development/`](skills/game-development/) | 25 |
-| GIS | [`skills/gis/`](skills/gis/) | 2 |
-| **Total** | | **167** |
-
-## Catalogue size
-
-The active count is a checked surface: `tests/test_engine_control_plane.py` compares it with the files on disk, so update it in the same change that adds or retires a skill. `scripts/skill_catalog_guardrails.py` enforces the maximum.
-
-| Measure | Value |
-|---|---:|
-| Active `SKILL.md` files | 167 |
-| Guardrail maximum | 200 |
-| Inactive `ALIAS.md` redirects | 78 |
-| Skills shipped by the Claude plugin manifest | 165 |
-| Routing fixtures | 239 |
-
-Routing: the [skill routing index](docs/skill-routing-index.md) maps retired slugs to their current skills, and [`docs/skill-aliases.yml`](docs/skill-aliases.yml) holds the machine-readable form. Operating rules for agents are in [`AGENTS.md`](AGENTS.md); contribution rules are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
-
 ## Quality and improvement
 
 Improvement work follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md). Evidence for the October 2026 passes lives in two folders, each with a scope record, a frozen baseline scorecard, a backlog, an experiment log, a validation record, a final report and a next-cycle handoff:
@@ -162,7 +275,7 @@ Improvement work follows the Observe, Baseline, Select, Experiment, Check, Stand
 - Currency rows not re-read in pass 2: the legacy hospitality register (review date 2026-10-14, now past), the Apple developer documentation row, the OpenAI Codex availability article (quarantined after an HTTP 403) and the Kubernetes latest version (inferred, not labelled by the source).
 - The 29 October [validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md) reports a Next.js build, a Compose build and a MySQL fixture run of the invoice slice, each in a disposable environment outside this repository; neither pass 2 nor this documentation round could repeat them. Not established by any pass: emulator or browser rendering, authenticated database integration, live-model routing, production behaviour and independent human review. These are `NOT_ASSESSED`, never a pass.
 
-### What the October 2026 kaizen improved
+## What the October 2026 kaizen improved
 
 Each item is a kept change on `main`, with its commit confirmed in Git history and the evidence in the [29 October](docs/kaizen/2026-10-engine-kaizen/03-experiment-log.md) and [pass-2](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md) experiment logs. "Re-measured" means the check was run again on 2026-10-31, on the tree before pass 2 (`27a602b`) and on the current tree; other figures are copied from the evidence file named. Fixtures and static checks support most items; none is production proof, and the open findings above are not fixed by them.
 
@@ -201,7 +314,7 @@ Each item is a kept change on `main`, with its commit confirmed in Git history a
 
 Tried and reverted in pass 2, so not counted above: widening the `accounting-engine` description (no gain under the proxy), merging `Anti-Patterns` pairs in 19 skills (text landed outside its section), one `skill-writing` merge (crossed the 20,480-byte report threshold) and an over-broad link repair. See the [pass-2 log](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md).
 
-### Date-triggered gates
+## Date-triggered gates
 
 `scripts/check_source_register.py` fails, and so does the **Check source registers** CI step, when an active source record's `review_after` date is before the check date. Passing proves dates and metadata only; it does not prove that a page supports a claim. The calendar below was produced on 2026-10-31 by running the check with `--as-of` on each date shown and on the day before it. On the first date it exits 1:
 
@@ -237,3 +350,11 @@ The skills, source registers, audits and improvement records cite 384 books, 49 
 - [Third-party attributions](docs/source-registers/m10-06-third-party-attributions.md): the per-file record of what was adapted from each repository.
 
 The [reference index](docs/references/README.md) explains the lists.
+
+## Contributing and licence
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`AGENTS.md`](AGENTS.md) before you change the engine. They set the catalogue cap (150 to 180 active skills, hard cap 200), the skill-writing standard and the rule against storing book extractions.
+
+Run the [Verify](#verify) steps, and report any you could not run as `NOT ASSESSED`.
+
+Author: Peter Bamuhigire. Licence: MIT, see [`LICENSE`](LICENSE).
