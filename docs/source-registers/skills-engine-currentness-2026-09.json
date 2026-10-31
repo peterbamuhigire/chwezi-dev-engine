@@ -1125,6 +1125,22 @@
       "confidence": "medium: text search of the page",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Read by text search of the page, not a full read."
+    },
+    {
+      "id": "openai-changelog-2026-10-31",
+      "title": "OpenAI API changelog",
+      "ref": "https://developers.openai.com/api/docs/changelog",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "volatile",
+      "as_of": "2026-10-31",
+      "scope": "Page lists, newest first: 2026-10-30 GPT-6 Rosalind released for approved trusted-access organisations; 2026-10-28 API credits for eligible ChatGPT Pro and Business subscribers; 2026-10-26 GPT-6.1 Terra released; 2026-10-22 Decisions API generally available with gpt-6-luna; 2026-10-21 per-project service-tier limits. No entry mentions Codex models or the Evals platform.",
+      "support_status": "context-bound",
+      "confidence": "high for the five entries read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Only the five newest entries were read. A specialised model for approved organisations is not a candidate for the engineering default; account entitlement, comparative quality, latency and cost remain NOT_ASSESSED."
     }
   ],
   "claims": [
@@ -1518,6 +1534,16 @@
         "bedrock-agents-classic-2026-10-31",
         "kubernetes-docs-version-2026-10-31",
         "react-versions-2026-10-31"
+      ]
+    },
+    {
+      "id": "claim-model-policy-review-2026-10-31",
+      "requires_currentness": true,
+      "source_ids": [
+        "openai-changelog-2026-10-31",
+        "openai-model-catalog-2026-10-29",
+        "openai-gpt6-luna-model-details-2026-10-31",
+        "openai-latest-model-guidance-2026-10-31"
       ]
     }
   ],
