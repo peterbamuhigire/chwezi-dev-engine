@@ -40,6 +40,7 @@ When a task requires external research, use the Digital Research Engine at `C:\w
 | TypeScript, JavaScript, Python, PHP, C#/.NET, Java/JVM, Spring, Jakarta EE, Hibernate, Maven, Gradle, WebLogic, Quarkus, Micronaut, Helidon, GraalVM | `skills/languages/*` |
 | SaaS tenancy, pricing, billing, entitlements, SSO/SCIM, portability, admin tooling | `skills/saas/*` |
 | Security audit, code safety, DPIA, Linux hardening, network security | `skills/security/*` |
+| Review a change or pull request before merge, whether generated or hand-written | `skills/sdlc-meta/ai-assisted-development` (`references/ai-generated-code-review-gate.md`), then each owner its domain-owned checks table names: tenant, SQL, data access, output encoding, ledger writes |
 | Product discovery, business metrics, documents, spreadsheets, proposal readiness, delivery control | `skills/product-business/*` |
 | SDLC documentation, skill writing, catalog guardrails, world-class engineering gates | `skills/sdlc-meta/*` and `00-meta-initialization/*` |
 | Finance/accounting rules, statutory values, IFRS, close, audit, payroll, tax | External `chwezi-accounting-doctrine`; local finance skills only orchestrate implementation |

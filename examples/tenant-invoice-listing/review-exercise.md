@@ -25,9 +25,19 @@ $db->exec("INSERT INTO journal_lines(account_id, amount) VALUES (1, 100)");
 3. **Unescaped output:** a customer name is emitted as HTML without context-appropriate
    escaping. Escape rendered text and keep semantic table headings.
 4. **Ledger mutation in a read path:** the listing writes a journal line directly, outside
-   the doctrine-controlled `JournalPostingService` and without its authorised balanced
-   transaction boundary. Remove posting from the read path; any separate posting flow
-   must route through that service.
+   the single posting service and without its authorised balanced transaction boundary.
+   Remove posting from the read path; any separate posting flow must route through that
+   service. The Dev Engine's accounting skill names it `LedgerPostingService::post()` or
+   "the project-equivalent single posting service"; a task brief may call the same boundary
+   `JournalPostingService`. The name varies by project, the rule does not.
+
+## Where the engine states each check
+
+Each finding group has a named owner. The
+[review gate's domain-owned checks table](../../skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md#domain-owned-checks-to-load-for-a-mixed-defect-diff)
+links the check for SQL injection, the tenant predicate, the N+1 query, output escaping
+and the posting boundary. A reviewer who loads only the generic gate will catch the first
+three groups; the fourth needs the accounting owner.
 
 This is a manual practitioner review, not a model benchmark or proof that routing detects
 these vulnerabilities. The corrected teaching slice is in the neighboring PHP example;

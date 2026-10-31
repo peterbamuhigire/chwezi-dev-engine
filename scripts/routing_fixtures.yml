@@ -389,3 +389,10 @@ fixtures:
     expect: doc-architect
   - task: "Vet this third-party skill repo before we borrow from it"
     expect: skill-engine-audit
+
+  # --- Kaizen pass 2 (31 Oct 2026): review before merge ---
+  - task: "Review a pull request that mixes SQL built from request input, a query with no tenant filter, a per-row lookup loop and a direct write to the journal table before it merges"
+    expect: ai-assisted-development
+    negatives:
+      - task: "Run a security scan of the whole codebase for exposed secrets and unsafe dependencies before deployment"
+        owner: code-safety-scanner

@@ -132,6 +132,14 @@ target instead.
 
 ## Broad Routing Groups
 
+## Reviewing a change before merge
+
+A pull request, a generated diff or a pasted snippet routes first to
+`skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md`.
+Its domain-owned checks table sends the reviewer on to the tenant, SQL, data-access,
+output-encoding and ledger-write owners. A review that touches journal or ledger tables
+must also load `skills/finance-accounting/accounting-engine`.
+
 ## Hospitality systems
 
 Hotel, resort, lodge, inn, guest-house, restaurant, bar, catering, event-venue,

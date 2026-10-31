@@ -41,6 +41,20 @@ Code generators optimise for satisfying the prompt. Non-functional qualities (pe
 | Supply chain | Package that does not exist, is unmaintained, has an incompatible licence, or was not in the approved list | Hallucinated or typo-squatted package names |
 | Consistency | Violates local conventions (error model, logging, naming, layering) | Second HTTP client, parallel validation scheme |
 
+## Domain-owned checks to load for a mixed-defect diff
+
+The blocking table names a defect class; the owning skill holds the test for it. A review that touches data access or money loads the owners below, because no single skill covers all four.
+
+| Defect class seen in the diff | Owning skill and check | What the reviewer confirms |
+|---|---|---|
+| SQL built from request input | [`php-modern-standards` injection patterns](../../../languages/php-modern-standards/references/php-security/references/injection-attack-patterns.md) | Every value is a bound parameter; identifiers come from an allow-list; no string concatenation reaches the driver. |
+| Tenant predicate missing, or tenant taken from the client | [`multi-tenant-saas-architecture` tenant context](../../../saas/multi-tenant-saas-architecture/references/tenant-context-propagation.md) | Tenant comes from the verified server session, every query on a tenant table filters on it, and joins carry the tenant on both sides. |
+| Query inside a loop (N+1) | [`php-modern-standards` data access patterns](../../../languages/php-modern-standards/references/database-orm-patterns.md) | One joined or batched query with a bounded page size; the query count is asserted in a test. |
+| Unescaped output | [`php-modern-standards` output encoding](../../../languages/php-modern-standards/references/php-security/references/xss-deep-dive.md) | Escaping matches the output context; the rendered page has a test with hostile input. |
+| Ledger or journal write outside the single posting service | [`accounting-engine` reviewer checklist, posting boundary](../../../finance-accounting/accounting-engine/references/chwezi-finance-engine-skeletons/reviewer-checklist.md) | No insert, update or delete on journal tables outside `LedgerPostingService::post()` or the project's equivalent single service; a read path never posts. Posting rules stay with the accounting doctrine. |
+
+Name the owner you loaded in the review record. A diff with a ledger write and no accounting owner named is incomplete, whatever else passed.
+
 ## Decision rules
 
 | Condition | Decision | Wrong choice |
@@ -69,6 +83,7 @@ An agent generates a React customer-search screen for a Mbarara SACCO's staff po
 ```text
 Change: <PR link>          Flow: <critical flow>       Provenance: <tool, prompt/plan link, generated %>
 Budgets applied: <perf / a11y / security refs>
+Domain-owned checks loaded: <tenant / SQL / data access / output / ledger, or none apply>
 Blocking checks: <pass | fail + finding per dimension, or NOT_ASSESSED with reason>
 Measurements: <before/after numbers and conditions>
 Pruned: <what was removed>
