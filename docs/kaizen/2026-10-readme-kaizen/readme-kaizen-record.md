@@ -84,10 +84,11 @@ The README table of results in "Verify" still matches these outputs. `NOT_ASSESS
 ```text
 links: old README 314 targets; new README 61; moved to docs 262; LOST 0
 commands: old README 27; kept in README 27; moved to docs 0; LOST 0
-anchors: 2 README.md#anchor links in tracked files; BROKEN 0
 in-page links: 12 anchors used; BROKEN 0
 RESULT: OK
 ```
+
+The anchors line is left out of the block above, because its literal text matches the checker's own anchor pattern. It reported 2 links to README headings in tracked files (`#installation` from `REPLICATE-ROUTING.md` and `#find-the-right-skill` from the catalogue page) and 0 broken.
 
 An earlier run, with the checker version that compared link strings without resolving the file location, flagged 154 links as lost. They were the skill links re-based from `skills/x/SKILL.md` to `../skills/x/SKILL.md` in the catalogue page. I confirmed with an independent normalising script that all 262 moved targets resolve to the same files and that every relative link in the README and the new pages exists on disk. The updated checker now agrees.
 
