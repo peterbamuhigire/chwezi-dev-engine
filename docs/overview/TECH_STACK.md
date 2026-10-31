@@ -3,7 +3,7 @@
 ## Repository Type
 
 This is a documentation and skills repository. Most source files are Markdown
-and YAML, with a small amount of Python and PowerShell for maintenance.
+and YAML, with a small amount of Python, Node.js and PowerShell for maintenance.
 The catalog now includes C#/.NET implementation guidance, but .NET is not a
 runtime dependency of this repository.
 It includes enterprise Java/JVM guidance, but the JDK, Maven, Gradle, Spring,
@@ -29,12 +29,14 @@ canonical JSON and SHA-256 hashes; no provider SDK or package was added.
 | Tool | Use |
 | --- | --- |
 | Git | Version control. |
-| PowerShell | Primary local shell on Windows. |
-| Python 3 | Catalog, routing, work-graph, two-axis review, diagnosis, lifecycle, and control-plane validation. |
-| pytest | Repository validator tests, including temporary portfolio fixtures and malformed-input cases. Live installed-portfolio checks are opt-in and report unavailable execution separately. |
-| PyYAML | YAML parsing for `scripts/skill_catalog_guardrails.py` and `scripts/routing_smoke_test.py`. |
-| GitHub Actions | CI: runs both gates on every push and PR (`.github/workflows/skill-guardrails.yml`). |
-| ripgrep | Fast file and text search. |
+| PowerShell | Windows only: `install.ps1` and the optional `scripts/install-pdf-binaries.ps1`. No validator needs it; not run in the October 2026 passes. |
+| Node.js | 18 or later for the standalone installer (`scripts/install-engine.js`) and the hook tests in `hooks/`. CI uses Node 24; the 2026-10-31 run used Node 22. |
+| Python 3 | Catalog, routing, work-graph, two-axis review, diagnosis, lifecycle, source-register and control-plane validation. CI uses 3.12; the 2026-10-31 run used 3.14. Invoke as `python3` on Linux. |
+| pytest | Repository validator tests (273 passed, 3 skipped on 2026-10-31), including temporary portfolio fixtures and malformed-input cases. Pinned to 9.0.3 in `requirements-ci.txt`. Live installed-portfolio checks are opt-in (`SKILL_ENGINE_LIVE_TESTS=1`) and report unavailable execution separately. |
+| PyYAML | YAML parsing for the guardrail, routing and register scripts. Pinned to 6.0.2 in `requirements-ci.txt`; 6.0.3 also passed. |
+| PHP CLI | Optional: runs the invoice example's PDO SQLite fixture (`php examples/tenant-invoice-listing/php/test.php`). Not used by CI. |
+| GitHub Actions | CI: runs ten validation steps on every push to `main` and every pull request (`.github/workflows/skill-guardrails.yml`). |
+| ripgrep | Optional file and text search; not installed on the Fedora validation host, where `find` does the same job. |
 | Markdown | Skill bodies, plans, references, guides, and docs. |
 | YAML | Skill frontmatter, alias registry, and routing fixtures. |
 | JSON | Machine-readable twelve-entry control-plane registry; local checkout validation can target an explicit subset. |
@@ -42,20 +44,23 @@ canonical JSON and SHA-256 hashes; no provider SDK or package was added.
 
 ## Important Commands
 
-```powershell
-rg --files -g "SKILL.md"
-python -X utf8 scripts\skill_catalog_guardrails.py --report-only
-python -X utf8 scripts\routing_smoke_test.py
-python -X utf8 scripts\routing_smoke_test.py --collisions
-python -X utf8 scripts\validate_work_graph.py templates\work-graph.yml
-python -X utf8 skills\languages\python-modern-standards\scripts\desktop_suite_packager.py --help
+```sh
+find skills 00-meta-initialization -name SKILL.md | wc -l   # active skills; 167 on 2026-10-31
+python3 -X utf8 scripts/skill_catalog_guardrails.py --report-only
+python3 -X utf8 scripts/routing_smoke_test.py
+python3 -X utf8 scripts/routing_smoke_test.py --collisions
+python3 -X utf8 scripts/validate_work_graph.py templates/work-graph.yml
+python3 -X utf8 skills/languages/python-modern-standards/scripts/desktop_suite_packager.py --help
 ```
+
+The root `README.md` section "Verify" lists the complete CI set and what each check
+needs.
 
 The routing smoke test has no external dependency beyond PyYAML; it models the
 routing signal (skill name + description) as TF-IDF and asserts fixtured tasks
 match the expected skill. It does not call an LLM, so CI stays deterministic.
 
-Optional PDF helper setup:
+Optional PDF helper setup (Windows only; not run in the October 2026 passes):
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\install-pdf-binaries.ps1
@@ -65,7 +70,8 @@ powershell -ExecutionPolicy Bypass -File scripts\install-pdf-binaries.ps1
 
 | Environment | Role | Requirements |
 | --- | --- | --- |
-| Windows | Primary editing and maintenance environment. | PowerShell, Git, Python 3, ripgrep recommended. |
+| Windows | Editing and maintenance environment on the maintainer's Windows machines. | PowerShell, Git, Python 3, ripgrep recommended; not re-run in the October 2026 passes. |
+| Fedora Linux | Editing and validation environment on the maintainer's Linux workstation. | Git, Python 3, Node.js; every CI step ran here on 2026-10-31. |
 | Ubuntu | Secondary validation target. | Python 3, Git, shell-compatible paths where possible. |
 | Debian | Production-like downstream environment. | Keep docs and scripts portable. |
 

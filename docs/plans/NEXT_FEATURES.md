@@ -17,7 +17,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Work the October 2026 pass-2 handoff | Open items: the tracked user-local settings file, the invoice slice's contract gaps, 24 duplicate-heading skills, 84 broken links, 13 skills at full routing coverage, date-gated currency checks. | `docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md` |
+| Work the October 2026 pass-2 handoff | Open items: the tracked user-local settings file, the invoice slice's contract gaps, 24 duplicate-heading skills, 84 broken links, 13 skills at full routing coverage, date-gated currency checks (the first source-register failure falls on 2026-11-04; calendar in the root `README.md`). | `docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md` |
 | Close evidence gaps exposed by the repaired contract gate | The former gate scanned only one family. Missing declarations and product evidence must be assessed in their domain, not filled with boilerplate. | `docs/audits/2026-09-06-kaizen/portfolio-progress.md` and `skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all` |
 | Produce applied proof for the Pocock workflow Kaizen | Repository mechanisms and deterministic fixtures are complete, but real-project outcomes, host invocation traces, fresh-agent handoffs, and independent review remain `NOT ASSESSED`. | Use `docs/sept-matt-pocock/11-kaizen-completion-record.md`; pilot one diagnosis and one decision-frontier project before the 2026-10-11 re-audit. |
 | Grow the routing fixture set with each new skill | The smoke test only guards routes it has fixtures for. | Add a case to `scripts/routing_fixtures.yml` for any skill a neighbour could shadow. |
@@ -28,14 +28,15 @@ adapter and durable replay store are warranted; live execution evidence is
 
 | Work | Why | Start Point |
 | --- | --- | --- |
-| Promote `--collisions` to an enforced gate with an allowlist | It is a report tool today; an allowlisted threshold would auto-block future near-duplicate skills. | Add the intentional platform/concern-split pairs to an allowlist, then fail CI on new high-similarity pairs. |
 | Review `docs/skills-trimminhg.md` filename | The apparent typo makes discovery harder. | Rename only if references are updated in the same change. |
-| Add `requirements.txt` for Python tooling | PyYAML is the only dependency; CI installs it ad hoc. | Pin `pyyaml` so local and CI environments match. |
 
 ## Recently Completed
 
 | Date | Work | Summary |
 | --- | --- | --- |
+| 2026-10-31 | Dev Engine kaizen pass 2 | Cleared 27 overdue source records and added the source-register check; made the control-plane and approval validators resolve siblings from configurable roots; added host-path, duplicate-heading and broken-link ratchets; first positive routing fixture for 42 skills plus a coverage ceiling. Evidence: `docs/kaizen/2026-10-engine-kaizen-pass-2/`. |
+| 2026-10-29 | Dev Engine kaizen pass 1 | Tenant-scoped invoice teaching slice, Next.js tenant-isolation repairs, Android and database currentness, portable Codex plugin manifests. Evidence: `docs/kaizen/2026-10-engine-kaizen/`. |
+| 2026-09-29 | Collision gate and pinned test dependencies | `--collisions --collision-gate` with `docs/routing-collision-allowlist.yml` runs in CI; `requirements-ci.txt` pins pytest and PyYAML (added 2026-09-20), replacing the earlier "promote collisions" and "add requirements.txt" items. |
 | 2026-10-22 | PHP emergency security and PHP 8.5 upgrade guidance | Added source-current critical RCE patch context, vendor-specific patch handoff, and staged app/runtime compatibility checks across the PHP and Linux skills engines. |
 | 2026-09-11 | Matt Pocock workflow Kaizen | Returned the catalogue to the 170 baseline; subsequent retained hospitality coverage is now counted as 171 and is subject to the contract repair and review gate. |
 | 2026-09-05 | Enterprise Java engineering capability | Added one consolidated Java/JVM route with currentness register, deep decision references, evidence templates, production diagnostics, Oracle integration, routing fixtures, and an enterprise reference scenario. |
@@ -59,6 +60,7 @@ adapter and durable replay store are warranted; live execution evidence is
 
 1. Add a routing fixture for every newly added skill, and widen coverage of the
    AI and SaaS clusters where near-synonyms cluster.
-2. Decide whether to promote the collision detector to an allowlisted hard gate.
+2. Pick one pair of duplicate `Anti-Patterns` sections and merge it by hand, as the
+   pass-2 handoff proposes, before touching the other 19.
 3. Convert the highest-value `ALIAS.md` content into retained parent
    `references/` files where the parent does not already contain the material.

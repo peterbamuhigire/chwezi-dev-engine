@@ -27,14 +27,17 @@ at a plan result. None of these helpers executes external side effects.
 | `docs/sept-matt-pocock/` | Verified external-repository comparison, cross-engine ownership map, execution runbook, and 2026-09-11 completion/evidence record. It is evidence, not an active skill root. |
 | `examples/full-stack-saas-reference/` | End-to-end SaaS evidence pack exercising architecture, API, security, reliability, and release skills. |
 | `examples/tenant-invoice-listing/` | Synthetic read-only invoice slice across PHP, Next.js, OpenAPI, and Compose; runtime limitations are stated in its README. |
-| `docs/kaizen/2026-10-engine-kaizen/` | Frozen baseline, selected changes, validation, final report, and next-cycle handoff for the October 2026 engine Kaizen. |
+| `docs/kaizen/2026-10-engine-kaizen/` and `docs/kaizen/2026-10-engine-kaizen-pass-2/` | Frozen baseline, selected changes, validation, final report, and next-cycle handoff for the two October 2026 engine Kaizen passes. |
 | `templates/delivery-dod/` | Shared delivery evidence pack template for implementation outputs. |
 | `scripts/skill_catalog_guardrails.py` | Static guardrail scan: active count, duplicate names, frontmatter, UTF-8, description length, `SKILL.md` line count, broken `references/`/`templates/` links, and alias integrity (unrouted, stale, dangling). |
 | `scripts/routing_smoke_test.py` + fixture YAML files | Routing precision measurement: scores fixtured tasks from `scripts/routing_fixtures.yml` and `tests/routing/edge-fixtures.yml` against skill descriptions and fails when an expected skill drifts out of its top matches. `--collisions` reports near-duplicate skills. |
+| `scripts/check_source_register.py` | Fails on an active source record past its review date, a claim that names a superseded or quarantined record, or missing dates and scope; metadata only, not claim support. `--as-of` previews a future date. |
+| `scripts/content_hygiene.py` + `docs/quality-gates/*-baseline.json` | Host-specific paths, duplicate `##` headings and broken relative links under the active roots; the baselines may only shrink. Run by the catalogue guardrails. |
+| `scripts/engine_roots.py` | Resolves sibling engine checkouts from repeatable parent folders, `CHWEZI_ENGINES_ROOT`, per-engine overrides and former directory names; used by the control-plane and approval validators. |
 | `scripts/validate_work_graph.py` and `scripts/validate_two_axis_review.py` | Deterministic gates for dependency frontiers, evidence-backed completion, and independent spec/standards review verdicts. |
 | `docs/engine-control-plane.json` + `scripts/validate_engine_control_plane.py` | Twelve-entry registry with separate registry-only and scoped installed-checkout validation; explicit overrides never fall back silently. |
 | `skills/sdlc-meta/skill-writing/scripts/contract_gate.py` | Evidence declarations checked recursively across both active roots; empty inventories and unmatched skill selectors fail. |
-| `.github/workflows/skill-guardrails.yml` | CI: runs both gates on every push and PR touching skills, doctrine, aliases, fixtures, or the scripts. |
+| `.github/workflows/skill-guardrails.yml` | CI: ten validation steps on every push to `main` and every pull request (guardrails, guardrail unit tests, test suite, routing, fixture coverage, collisions, control plane, source registers, hook tests, evidence contract gate). |
 | `skills/sdlc-meta/skill-composition-standards/references/` | Artifact templates (ADR, entity model, threat model, release/rollback plan, runbook, test plan) and the closing Delivery Definition of Done pack. |
 | `skills/languages/python-modern-standards/scripts/desktop_suite_packager.py` | Model-neutral project generator for a committed desktop-suite manifest, generated launcher/spec/installer/CI files, stale-generation check, and release evidence. |
 | `skills/languages/java-enterprise-development/` | One active Java/JVM implementation route with progressively loaded references for Spring, Jakarta EE, Oracle, persistence, build/test/security, production operations, and modernisation. |
@@ -75,15 +78,20 @@ runtime skill catalog.
 
 ## Validation And Enforcement
 
-The catalogue's invariants are gated, not just documented. Two scripts run in CI
-on every push and PR and fail the build on a violation:
+The catalogue's invariants are gated, not just documented. These checks run in CI
+and fail the build on a violation (the root `README.md` section "Verify" lists every
+command and what it needs):
 
 - `skill_catalog_guardrails.py` - structural integrity (count, duplicates,
   frontmatter, line count, description length, broken references, alias
-  integrity).
+  integrity) and, through `content_hygiene.py`, host paths, duplicate headings and
+  broken relative links.
 - `routing_smoke_test.py` - routing precision against `routing_fixtures.yml`
   and `tests/routing/edge-fixtures.yml`; catches descriptions drifting into
-  ambiguity.
+  ambiguity. `--coverage` and `--collisions --collision-gate` add fixture-coverage
+  and description-collision gates.
+- `check_source_register.py` - review dates of the dated source registers.
+- `validate_engine_control_plane.py`, the hook tests and `contract_gate.py --all`.
 
 Implementation work closes with the Delivery Definition of Done pack
 (`skill-composition-standards/references/delivery-definition-of-done.md`), which
@@ -96,7 +104,8 @@ the output is operable by a team that did not write it.
 2. Load only necessary local references.
 3. Apply the smallest accurate edit.
 4. Update routing and overview docs if behavior or catalog policy changed.
-5. Run both gates: the guardrail report and the routing smoke test.
+5. Run the gates: at least the guardrail report and the routing smoke test, and the
+   full set in the root `README.md` ("Verify") before a change is called done.
 6. Record significant documentation repairs in `docs/updates/`.
 
 ## Known Constraints

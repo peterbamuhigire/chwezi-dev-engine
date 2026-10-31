@@ -7,6 +7,15 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [2026-10 Dev Engine Kaizen, pass 2](../kaizen/2026-10-engine-kaizen-pass-2/README.md)
+(2026-10-31) cleared all 27 overdue source records, made the control-plane and
+approval validators resolve sibling engines on any machine, added gates for
+host paths, duplicate headings, broken links and source-register review dates,
+and gave 42 skills their first positive routing fixture. Its final report
+publishes 62.5/100 raw and capped; open items and the date-triggered gate
+calendar are in the [handoff](../kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md)
+and the root `README.md`.
+
 The [2026-10 Dev Engine Kaizen](../kaizen/2026-10-engine-kaizen/README.md)
 records bounded PHP/Next.js/Compose invoice examples, Next.js tenant-isolation
 repairs, Android and database currentness evidence, and native discovery
@@ -79,9 +88,11 @@ presentation-layer Apple UI guidance lives in the external
 | Quality gates | `docs/quality-gates/` | Release blockers and engineering anti-slop governance. |
 | Full workflow example | `examples/full-stack-saas-reference/` | FieldOps Ledger end-to-end SaaS evidence pack. |
 | Delivery templates | `templates/delivery-dod/` | Reusable evidence-pack template for implementation deliverables. |
-| Maintenance scripts | `scripts/` | Guardrail validator, routing smoke test, and setup helpers. |
-| Engine control plane | `docs/engine-control-plane.json`, `skills/sdlc-meta/engine-control-plane/` | Shared agents, commands, hooks, evidence, handoffs, and bounded recovery across eleven engines. |
-| CI gates | `.github/workflows/skill-guardrails.yml` | Runs the guardrails and routing smoke test on every push and PR. |
+| Maintenance scripts | `scripts/` | Catalogue guardrails, routing smoke test, source-register and content-hygiene checks, engine-root resolver, control-plane and approval validators, installer and setup helpers. |
+| Engine control plane | `docs/engine-control-plane.json`, `skills/sdlc-meta/engine-control-plane/` | Shared agents, commands, hooks, evidence, handoffs, and bounded recovery across the twelve registered engines. |
+| CI gates | `.github/workflows/skill-guardrails.yml` | Runs ten validation steps (guardrails, tests, routing, fixture coverage, collisions, control plane, source registers, hooks, contract gate) on every push and PR. |
+| Kaizen evidence | `docs/kaizen/` | Scope, baseline, backlog, experiments, validation, final report and next-cycle handoff for the October 2026 passes. |
+| Documentation index | `docs/README.md` | Where each kind of record lives. |
 | Integrator + client docs | `docs/USING-IN-A-PROJECT.md`, `docs/CLIENT-VALUE-BRIEF.md` | How to apply the catalogue in a real repo; plain-language client value. |
 | Long-form references | `claude-guides/`, `blog-posts/` | Companion writing. Book extractions are never stored (see `AGENTS.md`). |
 
@@ -91,11 +102,13 @@ presentation-layer Apple UI guidance lives in the external
 2. Read the skill `SKILL.md` and only the references needed for the task.
 3. Keep skill frontmatter concise and accurate.
 4. Update routing docs when a parent skill absorbs or supersedes another skill.
-5. Run both gates before finishing catalog maintenance (CI runs the same two):
+5. Run the gates before finishing catalog maintenance. The two quick ones are below;
+   the full set that CI runs, with what each needs, is in the root `README.md`
+   under "Verify":
 
-   ```powershell
-   python -X utf8 scripts\skill_catalog_guardrails.py --report-only
-   python -X utf8 scripts\routing_smoke_test.py --report-only
+   ```sh
+   python3 -X utf8 scripts/skill_catalog_guardrails.py --report-only
+   python3 -X utf8 scripts/routing_smoke_test.py --report-only
    ```
 
 ## Current Catalog Policy
@@ -107,8 +120,10 @@ presentation-layer Apple UI guidance lives in the external
   engine; reference-only checkouts stay outside the runtime skill catalog.
 - Current active catalog size is 167 skills. The 2026-09-24 consolidation merged 18 overlapping
   skills into references of their owners; the hard cap remains 200.
-- Current routing smoke-test suite contains 184 fixtures, with 96% precision@1
-  (178/184) and 100% precision@3 (184/184); the active Kaizen target is at least 95% top-1.
+- Current routing smoke-test suite (measured 2026-10-31) contains 239 fixtures, with 91.6%
+  precision@1 (219/239) and 100% precision@3 (239/239). The earlier 96% figure came from a
+  smaller fixture set; the target of at least 95% top-1 is not met on the larger set, and CI
+  enforces a floor of 89% (`--min-rank1 89`). The proxy is lexical, not live model routing.
 - Inactive aliases are retained as `ALIAS.md` and routed through
   `docs/skill-aliases.yml`.
 - Duplicate finance entrypoints under `skills/finance/` have been deactivated
@@ -116,14 +131,22 @@ presentation-layer Apple UI guidance lives in the external
 
 ## Enforced Invariants
 
-The catalogue is a gated engine, not just a document set. Two scripts run in CI
-(`.github/workflows/skill-guardrails.yml`) and fail the build on:
+The catalogue is a gated engine, not just a document set. CI
+(`.github/workflows/skill-guardrails.yml`) fails the build on:
 
 - duplicate frontmatter names, over-cap active count, oversized `SKILL.md`,
   over-length descriptions, malformed frontmatter;
 - broken `references/`/`templates/` links and stale or dangling aliases;
-- a fixtured routing task whose expected skill drifts out of its top matches
-  (routing precision is measured, not assumed).
+- host-specific paths in active content, new duplicate `##` headings and new
+  broken relative links under the active roots (ratchets in `docs/quality-gates/`
+  that may only shrink);
+- a fixtured routing task whose expected skill drifts out of its top matches, a
+  rank-1 precision below the floor, a fixture that leaks its expected skill name,
+  more than one skill without a positive fixture, or a non-allow-listed
+  description collision (routing precision is measured, not assumed);
+- an active source record past its review date;
+- a malformed control-plane registry, a failing hook test, or a missing evidence
+  declaration in any active skill.
 
 Meaningful implementation work also carries a Delivery Definition of Done pack
 (`skills/sdlc-meta/skill-composition-standards/references/delivery-definition-of-done.md`):
@@ -141,3 +164,5 @@ operable by a team that did not write it.
 - [Using the catalogue in a project](../USING-IN-A-PROJECT.md)
 - [Client value brief](../CLIENT-VALUE-BRIEF.md)
 - [Production-readiness audit](../evaluation/2026-05-30-production-readiness-audit.md)
+- [Documentation index](../README.md)
+- [Kaizen evidence, pass 2](../kaizen/2026-10-engine-kaizen-pass-2/README.md)

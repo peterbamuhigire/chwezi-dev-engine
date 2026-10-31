@@ -4,7 +4,10 @@
 
 The October 2026 Kaizen adds a tenant-scoped invoice example across PHP, a
 Next.js App Router, and Compose, with runtime limits and native discovery
-evidence recorded in `docs/kaizen/2026-10-engine-kaizen/`.
+evidence recorded in `docs/kaizen/2026-10-engine-kaizen/`. Pass 2 of the same
+month (`docs/kaizen/2026-10-engine-kaizen-pass-2/`) repaired source currency,
+validator portability and content hygiene; its final report publishes 62.5/100
+raw and capped, and the 95/100 target is not reached.
 
 The engineering runtime contract now has fixture-tested local utilities for
 versioned context, prompt/data boundaries, provenance-bound tool approval,
@@ -50,8 +53,9 @@ See `docs/engine-control-plane.md` and the audit's portfolio progress record.
   meaningful change carries a Delivery Definition of Done pack (tests, release,
   rollback, runbook, maintenance notes).
 - Preserve deep references without making every skill entrypoint heavy.
-- Support Windows, Ubuntu, and Debian consumers with portable Markdown and
-  Python tooling.
+- Support Windows, Fedora, Ubuntu, and Debian consumers with portable Markdown and
+  Python tooling. The full validator set ran on Fedora Linux on 2026-10-31 and
+  CI runs on Ubuntu; Windows was not re-run in the October 2026 passes.
 - Give downstream Python projects a repeatable path from multiple scripts or
   GUIs to a launcher, shared executable suite, portable archive, installer,
   signing boundary, CI build, and release evidence.
@@ -80,5 +84,11 @@ See `docs/engine-control-plane.md` and the audit's portfolio progress record.
 - New skills can shadow a neighbour's routing. Add a fixture to
   `scripts/routing_fixtures.yml` for any skill a sibling could steal traffic
   from, so the smoke test guards it.
+- The October 2026 pass-2 handoff
+  (`docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md`) lists what is still
+  open: a user-local settings file tracked in this public repository, the invoice
+  example's contract gaps, 24 skills with a duplicate heading, 84 broken relative
+  links, thin routing coverage, and source records that start failing the review-date
+  check from 2026-11-04 (calendar in the root `README.md`).
 - Apple beta-era APIs can change after WWDC26; keep code examples
   availability-gated and source-labeled until final release notes are reviewed.

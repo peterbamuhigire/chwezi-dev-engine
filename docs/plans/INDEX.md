@@ -9,7 +9,9 @@ This index lists planning documents and their current status.
 | Engine phases | `engine-phases/00-engine-roadmap-index.md` | Active roadmap |
 | Catalog priorities | `NEXT_FEATURES.md` | Active |
 | Matt Pocock workflow comparison | `../sept-matt-pocock/README.md` | Repository-level Kaizen implemented; production and independent proof remain NOT ASSESSED |
-| Sequential portfolio Kaizen | `../audits/2026-09-06-kaizen/portfolio-progress.md` | Active; eleven confirmed checkouts under `www` |
+| October 2026 engine Kaizen, pass 2 | `../kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md` | Complete 2026-10-31 (62.5/100 raw and capped); handoff items open |
+| October 2026 engine Kaizen, pass 1 | `../kaizen/2026-10-engine-kaizen/06-next-cycle.md` | Complete 2026-10-29; open items carried into pass 2 |
+| Sequential portfolio Kaizen | `../audits/2026-09-06-kaizen/portfolio-progress.md` | Active; eleven confirmed checkouts |
 | WWDC26 Apple platform modernization | `2026-06-21-wwdc26-apple-platform-skill-modernization.md` | Implemented 2026-06-21 |
 | Production-readiness audit | `../evaluation/2026-05-30-production-readiness-audit.md` | Complete; all six checklist questions PASS |
 | Eleven-engine control plane | `../updates/2026-08-20-eleven-engine-control-plane.md` | Implemented; Windows engine registered and local-router checks PASS |
@@ -23,6 +25,8 @@ This index lists planning documents and their current status.
 
 | Date | File |
 | --- | --- |
+| 2026-10-31 | `../updates/2026-10-31-dev-engine-kaizen-pass-2.md` |
+| 2026-10-29 | `../updates/2026-10-29-dev-engine-security-currentness-and-packaging.md` |
 | 2026-10-22 | `../updates/2026-10-22-php-security-and-runtime-upgrades.md` |
 | 2026-07-17 | `../updates/2026-07-17-python-desktop-suite-automation.md` |
 | 2026-05-30 | `../updates/2026-05-30-csharp-dotnet-skill.md` |
