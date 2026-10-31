@@ -354,7 +354,7 @@ Most severe first.
 - **Package checks** (`f162535`, `27a602b`).
   - Before: the Codex plugin shape and the package entry limit had no check in this repository.
   - Now: root `plugin.json`, `.agents/plugins/marketplace.json` and `scripts/check_package_file_budget.py`, with an over-cap failure test and a fail-closed case for unreadable paths.
-  - Re-measured: 2523 package-oriented entries against a limit of 5000. The documented context-budget invocation raised the skill paths that an offline Codex `debug prompt-input` loads from 130 to 165 of 165 (validation record; invocation-level, not re-run). Public marketplace acceptance is not assessed.
+  - Re-measured: 2524 package-oriented entries against a limit of 5000. The documented context-budget invocation raised the skill paths that an offline Codex `debug prompt-input` loads from 130 to 165 of 165 (validation record; invocation-level, not re-run). Public marketplace acceptance is not assessed.
 
 ### Checks that only tighten
 
@@ -444,5 +444,7 @@ The [reference index](docs/references/README.md) explains the lists.
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`AGENTS.md`](AGENTS.md) before you change the engine. They set the catalogue cap (150 to 180 active skills, hard cap 200), the skill-writing standard and the rule against storing book extractions.
 
 Run the [Verify](#verify) steps, and report any you could not run as `NOT ASSESSED`.
+
+To keep this README readable, follow the conventions in the Standardise section of the [README kaizen record](docs/kaizen/2026-10-readme-kaizen/readme-kaizen-record.md).
 
 Author: Peter Bamuhigire. Licence: MIT, see [`LICENSE`](LICENSE).

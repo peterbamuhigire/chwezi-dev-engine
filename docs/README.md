@@ -1,7 +1,7 @@
 # Documentation index
 
 Where each kind of record lives. Start with the root [`README.md`](../README.md) for what the
-engine is, how to install it, how to run its validators and what the October 2026 kaizen improved, and [`AGENTS.md`](../AGENTS.md) for
+engine is, which skill to use for common tasks, how to install it, how to run its validators and what the October 2026 kaizen improved, and [`AGENTS.md`](../AGENTS.md) for
 the router that agents read. Dated records (audits, updates, kaizen cycles) are history: they
 describe the tree as it was on their date, and some still name the former repository name or a
 Windows checkout path.
@@ -11,7 +11,9 @@ Windows checkout path.
 | Need | File |
 |---|---|
 | What the repository is, the file model and the policy | [`overview/README.md`](overview/README.md), then [`overview/PROJECT_BRIEF.md`](overview/PROJECT_BRIEF.md), [`overview/ARCHITECTURE.md`](overview/ARCHITECTURE.md), [`overview/TECH_STACK.md`](overview/TECH_STACK.md) |
+| Every active skill, by category, with a one-line description | [`skill-catalogue.md`](skill-catalogue.md) |
 | Which skill replaced a retired slug | [`skill-routing-index.md`](skill-routing-index.md) and [`skill-aliases.yml`](skill-aliases.yml) |
+| Books, repositories, standards and websites the skills cite | [`references/README.md`](references/README.md), [`references/books.md`](references/books.md), [`references/sources.md`](references/sources.md) |
 | Using the catalogue from another repository | [`USING-IN-A-PROJECT.md`](USING-IN-A-PROJECT.md) |
 | Plain-language value statement for clients | [`CLIENT-VALUE-BRIEF.md`](CLIENT-VALUE-BRIEF.md) |
 | What is planned next | [`plans/NEXT_FEATURES.md`](plans/NEXT_FEATURES.md) and [`plans/INDEX.md`](plans/INDEX.md) |
@@ -22,6 +24,7 @@ Windows checkout path.
 |---|---|
 | [`kaizen/2026-10-engine-kaizen/`](kaizen/2026-10-engine-kaizen/README.md) | The 29 October 2026 pass: scope, frozen baseline, backlog, experiment log, validation record, final report and next-cycle handoff. |
 | [`kaizen/2026-10-engine-kaizen-pass-2/`](kaizen/2026-10-engine-kaizen-pass-2/README.md) | The 31 October 2026 pass, same seven records. Its [final report](kaizen/2026-10-engine-kaizen-pass-2/05-final-report.md) holds the latest published score and its [handoff](kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md) the open findings. |
+| [`kaizen/2026-10-readme-kaizen/`](kaizen/2026-10-readme-kaizen/readme-kaizen-record.md) | The 31 October 2026 README kaizen: baseline metrics, what changed, checks, and the conventions for editing the root README. |
 | [`quality-gates/`](quality-gates/anti-slop-governance.md) | Release-blocking gates, anti-slop governance, and the duplicate-heading and broken-link baselines that may only shrink. |
 | [`source-registers/`](source-registers/ai-platforms.md) | Dated source records for volatile platform, AI, security and framework facts; checked by `scripts/check_source_register.py`. |
 | [`audits/`](audits/2026-09-06-kaizen/portfolio-progress.md) | Dated audit records, including the 2026-09-06 portfolio cycle and the 2026-09-29 re-audit. |
