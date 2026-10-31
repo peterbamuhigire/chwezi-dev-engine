@@ -324,8 +324,9 @@ def check_source_ingestion(root: Path = REPO_ROOT) -> list[Finding]:
 
 
 def check_content_hygiene(root: Path = REPO_ROOT) -> list[Finding]:
-    """Machine-specific paths in active content (see scripts/content_hygiene.py)."""
-    return [Finding("error", code, Path(rel), message) for code, rel, message in content_hygiene.check_machine_paths(root)]
+    """Host-specific paths and duplicate H2 headings (see scripts/content_hygiene.py)."""
+    found = content_hygiene.check_machine_paths(root) + content_hygiene.check_duplicate_headings(root)
+    return [Finding("error", code, Path(rel), message) for code, rel, message in found]
 
 
 def check_broken_references(roots: list[Path]) -> list[Finding]:

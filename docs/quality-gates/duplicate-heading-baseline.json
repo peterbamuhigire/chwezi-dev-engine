@@ -1,0 +1,80 @@
+{
+  "note": "Exact duplicate H2 headings in active SKILL.md files. This list may only shrink: fix a skill, then delete its entry.",
+  "skills": {
+    "skills/ai/ai-agent-commercial-operations/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-agent-compliance-controls/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-agent-observability-evaluation/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-agent-runtime-architecture/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-analytics/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-app-architecture/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-cost-and-metering/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-economic-value-engine/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-evaluation/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-feature-rollout-and-experimentation/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-feature-spec/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-incident-response/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-llm-integration/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-model-gateway/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-observability-and-debugging/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-prompt-engineering/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/ai/ai-web-apps/SKILL.md": [
+      "anti-patterns",
+      "decision rules",
+      "inputs",
+      "outputs"
+    ],
+    "skills/ai/openai-agents-sdk/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/architecture/validation-contract/SKILL.md": [
+      "companion skills"
+    ],
+    "skills/mobile-cross/pwa-offline-first/SKILL.md": [
+      "inputs"
+    ],
+    "skills/saas/multi-tenant-saas-architecture/SKILL.md": [
+      "decision rules"
+    ],
+    "skills/sdlc-meta/ai-slop-audit/SKILL.md": [
+      "see also"
+    ],
+    "skills/sdlc-meta/skill-writing/SKILL.md": [
+      "anti-patterns"
+    ],
+    "skills/security/vibe-security-skill/SKILL.md": [
+      "anti-patterns"
+    ]
+  }
+}

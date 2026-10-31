@@ -69,3 +69,34 @@ def test_allowlist_needs_path_contains_and_reason(tmp_path):
 
 def test_repository_has_no_machine_specific_paths_in_active_content():
     assert ch.check_machine_paths(ROOT) == []
+
+
+# --- duplicate headings --------------------------------------------------------------
+
+SKILL = "---\nname: x\ndescription: d\n---\n\n# X\n\n## Use When\n\n- a\n\n## References\n\n- one\n\n```md\n## References\n```\n"
+
+
+def test_duplicate_h2_outside_code_fences_is_found(tmp_path):
+    write(tmp_path, "skills/a/SKILL.md", SKILL)
+    assert ch.duplicate_headings(tmp_path) == {}
+    write(tmp_path, "skills/b/SKILL.md", SKILL + "\n## references\n\n- two\n")
+    assert ch.duplicate_headings(tmp_path) == {"skills/b/SKILL.md": ["references"]}
+
+
+def test_new_duplicate_fails_and_fixed_baseline_entry_must_be_removed(tmp_path):
+    write(tmp_path, "skills/b/SKILL.md", SKILL + "\n## References\n\n- two\n")
+    baseline = tmp_path / "docs/quality-gates/duplicate-heading-baseline.json"
+    write(tmp_path, "docs/quality-gates/duplicate-heading-baseline.json", json.dumps({"skills": {}}))
+    findings = ch.check_duplicate_headings(tmp_path, baseline)
+    assert [f[0] for f in findings] == ["duplicate-heading"]
+    baseline.write_text(json.dumps({"skills": {"skills/b/SKILL.md": ["references"]}}), encoding="utf-8")
+    assert ch.check_duplicate_headings(tmp_path, baseline) == []
+    write(tmp_path, "skills/b/SKILL.md", SKILL)  # the duplicate is fixed
+    findings = ch.check_duplicate_headings(tmp_path, baseline)
+    assert [f[0] for f in findings] == ["duplicate-heading-baseline"]
+
+
+def test_repository_duplicate_headings_match_the_recorded_baseline():
+    assert ch.check_duplicate_headings(ROOT) == []
+    recorded = json.loads((ROOT / "docs/quality-gates/duplicate-heading-baseline.json").read_text(encoding="utf-8"))["skills"]
+    assert recorded == ch.duplicate_headings(ROOT)
