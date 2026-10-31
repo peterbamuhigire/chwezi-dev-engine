@@ -777,6 +777,4 @@ class DataProcessorAgent:
             return pd.read_parquet(file_path).to_dict('records')
         else:
             raise ValueError(f"Unsupported file format: {file_path}")
-</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\01-agent-folder-structure.md
 ```

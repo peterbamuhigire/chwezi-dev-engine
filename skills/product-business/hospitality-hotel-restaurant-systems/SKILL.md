@@ -121,7 +121,7 @@ folio/report state reconciles and the event trail is complete.
 
 ## References
 
-- `C:\wamp64\www\chwezi-dev-engine\docs\skill-routing-index.md`
-- `C:\wamp64\www\chwezi-dev-engine\docs\source-registers\hospitality-currentness-2026-09.json`
+- `docs/skill-routing-index.md`
+- `docs/source-registers/hospitality-currentness-2026-09.json`
 
 <!-- dual-compat-end -->

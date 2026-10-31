@@ -1782,5 +1782,4 @@ jobs:
 - [ ] Rollback procedures
 - [ ] Documentation updates
 
-This comprehensive integration and deployment framework provides everything needed to deploy agent systems to production with proper monitoring, security, and scalability.</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\08-integration-deployment.md
+This comprehensive integration and deployment framework provides everything needed to deploy agent systems to production with proper monitoring, security, and scalability.

@@ -114,7 +114,7 @@ Before declaring ANY feature with API calls "complete", you MUST verify:
 # Verify the endpoint actually exists in code
 
 # For PHP:
-grep -r "sales-agent-portal.php" C:\wamp64\www\birdc_erp\public\api\
+grep -r "sales-agent-portal.php" <project>/public/api/
 
 # For action-based APIs:
 # Open the PHP file and verify the action exists in the switch/match statement
@@ -331,10 +331,10 @@ curl -H "Authorization: Bearer $TOKEN" \
 **Check backend endpoint exists:**
 ```bash
 # Search for endpoint definition
-grep -n "sales_by_product" C:\wamp64\www\birdc_erp\public\api\sales-agent-portal.php
+grep -n "sales_by_product" <project>/public/api/sales-agent-portal.php
 
 # Check service method exists
-grep -n "getSalesByProduct" C:\wamp64\www\birdc_erp\src\Services\Sales\*.php
+grep -n "getSalesByProduct" <project>/src/Services/Sales/*.php
 ```
 
 **Check Android DTO field names:**

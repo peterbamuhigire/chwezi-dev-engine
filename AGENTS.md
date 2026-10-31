@@ -36,8 +36,8 @@ Project context: if the working project root holds a `PROJECT.md` with `project_
 ## Mandatory Digital Research currentness gate for Kaizen
 
 Every Kaizen audit, skill edit, reference update, validator change, and
-standardisation decision MUST begin with the Digital Research Engine at
-`C:\wamp64\www\digital-research-engine`. Read its `source-evaluation` and
+standardisation decision MUST begin with the Digital Research Engine (`digital-research-engine`;
+resolve its checkout on this device from the engine-routing table). Read its `source-evaluation` and
 `source-verification` skills and the currentness gate reference
 `docs/continuous-improvement/kaizen-currentness-gate.md`.
 
@@ -273,7 +273,7 @@ any artifact.
 
 Local note (kept outside the shared trigger block so the block stays identical across engines).
 Migration status: UI/UX design skills are migrating OUT of this repo's `skills/frontend-ux/`
-into `C:\wamp64\www\chwezi-design-engine`. Migrated skills (`ux-principles-101`,
+into `chwezi-design-engine` (resolved per device). Migrated skills (`ux-principles-101`,
 `pos-sales-ui-design`, `pos-restaurant-ui-standard`) are inactive `ALIAS.md` stubs redirected
 via `docs/skill-aliases.yml`; check that registry before loading any `frontend-ux` design skill.
 
@@ -283,4 +283,4 @@ For a prompt handoff, read the local [domain prompt contract](docs/ai-prompting/
 
 ## PORTFOLIO CRAFT CONTRACT
 
-Load `C:\wamp64\www\chwezi-engine-agents\docs\operations\portfolio-craft-standard-2026-09-04.md` when available. Build software, APIs, AI systems, and technical artefacts in named vertical slices: frame the user outcome and failure consequence, select one flow, inspect existing architecture and data flow, make the smallest useful change, run normal and failure checks, review rendered or operational behaviour where relevant, refine, and record evidence before proceeding. Code must be understood in context; interfaces, dependencies, states, observability, and rollback are part of the work. Do not generate a whole product as one opaque batch. Apply `Observe -> Baseline -> Select -> Experiment -> Check -> Standardise -> Teach -> Re-measure` to kaizen itself. Missing execution, render, production, source, reviewer, or stakeholder evidence is `NOT ASSESSED`, never a pass.
+Load `chwezi-engine-agents/docs/operations/portfolio-craft-standard-2026-09-04.md` (resolve that engine per device) when available. Build software, APIs, AI systems, and technical artefacts in named vertical slices: frame the user outcome and failure consequence, select one flow, inspect existing architecture and data flow, make the smallest useful change, run normal and failure checks, review rendered or operational behaviour where relevant, refine, and record evidence before proceeding. Code must be understood in context; interfaces, dependencies, states, observability, and rollback are part of the work. Do not generate a whole product as one opaque batch. Apply `Observe -> Baseline -> Select -> Experiment -> Check -> Standardise -> Teach -> Re-measure` to kaizen itself. Missing execution, render, production, source, reviewer, or stakeholder evidence is `NOT ASSESSED`, never a pass.

@@ -147,8 +147,8 @@ PMS, POS, room, folio, KOT, KDS, housekeeping, night-audit, menu/BOM, or
 hospitality operations work routes to:
 
 - `skills/product-business/hospitality-hotel-restaurant-systems/SKILL.md`
-- `C:\wamp64\www\chwezi-sdlc-documentation\02-requirements-engineering\hospitality-operating-model-srs\SKILL.md`
-- `C:\wamp64\www\chwezi-accounting-doctrine\skills\11-sector-and-fund-accounting\hospitality-and-restaurant-pack\SKILL.md` whenever money, inventory, tax or reconciliation is involved.
+- `chwezi-sdlc-documentation/02-requirements-engineering/hospitality-operating-model-srs/SKILL.md` (resolve that engine per device)
+- `chwezi-accounting-doctrine/skills/11-sector-and-fund-accounting/hospitality-and-restaurant-pack/SKILL.md` (resolve that engine per device) whenever money, inventory, tax or reconciliation is involved.
 
 The Maduuka audit standard is the companion acceptance reference; code or a
 screen is not implementation proof without executable normal, failure,

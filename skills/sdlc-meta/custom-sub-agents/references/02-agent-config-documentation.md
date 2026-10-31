@@ -656,5 +656,3 @@ A: Increase connection pool size and timeouts
 - **v1.2.0** (2024-01-15): Added forecasting capabilities
 - **v1.1.0** (2024-01-01): Improved performance and caching
 - **v1.0.0** (2023-12-01): Initial release
-  </content>
-  <parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\02-agent-config-documentation.md

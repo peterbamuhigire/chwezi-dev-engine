@@ -1821,5 +1821,4 @@ module.exports = { ConductorMonitor };
 - **Performance**: Parallel execution of independent tasks
 - **Maintainability**: Clear separation of concerns and responsibilities
 
-This architecture enables building robust, scalable agent systems that can handle complex real-world scenarios while maintaining reliability and performance.</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\06-parent-sub-agent.md
+This architecture enables building robust, scalable agent systems that can handle complex real-world scenarios while maintaining reliability and performance.

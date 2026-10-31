@@ -15,3 +15,11 @@ The work was performed on `kaizen/2026-10`. Evidence is limited to listed comman
 source snapshots and synthetic fixtures. Production deployment, a live Next.js build,
 Android build/emulator behavior, MySQL deployment, public marketplace acceptance,
 and account-specific runtime availability were not established by this cycle.
+
+## Evidence availability
+
+References marked `<external>` point to preparation artefacts and logs that were kept
+outside the repository during the cycle and were not retained. Claims that rest only on
+those artefacts cannot be re-checked from this repository. The [pass-2
+record](../2026-10-engine-kaizen-pass-2/00-scope-and-evidence.md) re-ran the checks that
+this host could repeat and labels the rest `NOT_ASSESSED`.

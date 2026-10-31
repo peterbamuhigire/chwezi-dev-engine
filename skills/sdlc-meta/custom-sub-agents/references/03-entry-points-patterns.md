@@ -562,5 +562,4 @@ module.exports = {
 };
 ```
 
-This template provides a solid foundation for any agent's entry point, ensuring consistency and maintainability across your agent ecosystem.</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\03-entry-points-patterns.md
+This template provides a solid foundation for any agent's entry point, ensuring consistency and maintainability across your agent ecosystem.

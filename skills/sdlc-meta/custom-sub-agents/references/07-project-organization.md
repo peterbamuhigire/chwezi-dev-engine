@@ -2007,5 +2007,4 @@ module.exports = { RegistryAnalytics };
 - **Scaling**: Systems that need to scale agent instances
 - **Testing**: Need mock agents and test isolation
 
-This organization provides a robust foundation for building and managing complex agent ecosystems with proper governance, monitoring, and scalability.</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\07-project-organization.md
+This organization provides a robust foundation for building and managing complex agent ecosystems with proper governance, monitoring, and scalability.

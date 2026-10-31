@@ -1,7 +1,7 @@
 # Validation record
 
-Access date: 2026-10-29. Commands ran in `/home/peter/.claude/skills/skills-web-dev`.
-External prep artifacts are under `/tmp/chwezi-portfolio-kaizen/`. Commands below are
+Access date: 2026-10-29. Commands ran in the engine checkout.
+External prep artifacts are under `<external>/`. Commands below are
 the observed run outputs for this cycle; they do not establish production behavior.
 
 ## Registered validators
@@ -10,16 +10,16 @@ the observed run outputs for this cycle; they do not establish production behavi
 |---|---|
 | `python scripts/routing_smoke_test.py --lint-fixtures` | Exit 0; `167` active skills, `196` fixtures, precision@1 `177/196 (90.3%)`, precision@3 `196/196 (100.0%)`; `82` owned negatives, `78` pass, `0` fail, `4` `NOT_ASSESSED`; fixture lint `0`, failures `0`. This is a lexical proxy, not live routing. |
 | `python -X utf8 scripts/skill_catalog_guardrails.py` | Exit 0; `167` active skills, `14` report-only warnings, `0` errors. Warnings are skill-size observations, not test failures. |
-| `python scripts/validate_engine_control_plane.py --workspace-root ..` | Exit 1; registry contains `12` engine entries and parent alias layout reports missing routers for the installed set. This is an environment/path-layout failure, not recorded as a pass. Baseline details: `/tmp/chwezi-portfolio-kaizen/dev-prep/validator-1.log`. |
-| `python scripts/validate_engine_control_plane.py --workspace-root /tmp/chwezi-portfolio-kaizen/workspace --engine accounting --engine business-plan --engine chwezi-dev-engine --engine design --engine digital-research --engine linux --engine proposal --engine social-media --engine srs --engine website --engine windows-admin` | Exit 0; registry shape valid and all `11` selected public engine contracts pass. The extra private `political` entry is excluded and `NOT_ASSESSED`; it is not a pass. |
+| `python scripts/validate_engine_control_plane.py --workspace-root ..` | Exit 1; registry contains `12` engine entries and parent alias layout reports missing routers for the installed set. This is an environment/path-layout failure, not recorded as a pass. Baseline details: `<external>/dev-prep/validator-1.log`. |
+| `python scripts/validate_engine_control_plane.py --workspace-root <external>/workspace --engine accounting --engine business-plan --engine chwezi-dev-engine --engine design --engine digital-research --engine linux --engine proposal --engine social-media --engine srs --engine website --engine windows-admin` | Exit 0; registry shape valid and all `11` selected public engine contracts pass. The extra private `political` entry is excluded and `NOT_ASSESSED`; it is not a pass. |
 
 ## Automated and runtime checks
 
 | Check | Result |
 |---|---|
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q` | `220 passed, 3 skipped` after the acceptance-review count-walk regression was added. This includes the repository suite and packaging/tenant-example tests. |
+| `<venv>/bin/python -m pytest -q` | `220 passed, 3 skipped` after the acceptance-review count-walk regression was added. This includes the repository suite and packaging/tenant-example tests. |
 | `python scripts/validate_tenant_invoice_example.py` | Exit 0; required files and coded tenant/auth/cache invariants found. This is structural evidence. |
-| `/tmp/linux-kaizen-checks/venv/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `13 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query, page/handler route collision, missing-review-artifact regressions, package path/shape, count exclusions, an over-cap CLI failure, and fail-closed walk-error behavior. |
+| `<venv>/bin/python -m pytest -q tests/test_tenant_invoice_example.py tests/test_plugin_packaging.py` | `13 passed`; includes valid cases, missing tenant predicate, role-cookie, lossy BIGINT, invalid-query, page/handler route collision, missing-review-artifact regressions, package path/shape, count exclusions, an over-cap CLI failure, and fail-closed walk-error behavior. |
 | `php examples/tenant-invoice-listing/php/test.php` | `15 checks passed`; synthetic PDO SQLite. It exercises tenant isolation, auth/permission denial, bounds, bound query behavior, HTML escaping, empty result, and no journal mutation. |
 | Optional MySQL fixture run against a disposable MySQL `8.4.13` container | `15 checks passed`; migration applied to a fresh isolated database. This is not production deployment, backup/restore, or migration-framework proof. |
 | `python scripts/check_package_file_budget.py` | Exit 0; checkout `2788` entries including `.git`; package-oriented `2498` entries after documented directory exclusions. Both are below the documented hard `5000` archive-entry limit. This is a local inventory, not a generated archive or directory acceptance test. |
@@ -31,18 +31,18 @@ register. It reports `27` overdue pre-existing source records; these were not si
 renewed because this cycle did not re-verify their claims. A temporary subset containing
 the `25` selected cycle sources and `8` matching claims reports zero metadata/date
 findings, while explicitly retaining `claim support NOT ASSESSED` in the validator's
-meaning. Subset path: `/tmp/chwezi-portfolio-kaizen/dev-prep/dev-cycle-currentness-subset.json`.
+meaning. Subset path: `<external>/dev-prep/dev-cycle-currentness-subset.json`.
 
 The earlier baseline inventory used a separately prepared method and reported `2552`
 checkout entries and `2468` package-oriented entries in
-`/tmp/chwezi-portfolio-kaizen/packaging-research.md`. The current checker is repository
+`<external>/packaging-research.md`. The current checker is repository
 owned and its exclusion/counting method is documented in
 `scripts/check_package_file_budget.py`; the two measurements are not presented as a
 before/after trend because the method is not shown to be identical.
 
 ### Disposable runtime specimens
 
-The Next.js teaching slice was copied to `/tmp/chwezi-portfolio-kaizen/next-build`,
+The Next.js teaching slice was copied to `<external>/next-build`,
 installed with exact direct versions Next.js `16.4.3`, React `19.3.0`, TypeScript
 `7.0.2`, Prisma `7.10.1`, and `server-only` `0.0.1`, then built with `next build` and
 checked with `tsc --noEmit`. `npm audit --audit-level=low` reported zero findings in
@@ -79,8 +79,8 @@ codex -m gpt-6-luna -c model_reasoning_effort="high" -c skills.max_context_token
 
 loaded `165/165` paths with none missing in the measured offline run. The underlying
 summary files are outside the repository:
-`/tmp/chwezi-portfolio-kaizen/native-discovery/chwezi-dev-engine/summary.json` and
-`/tmp/chwezi-portfolio-kaizen/native-discovery-budget/chwezi-dev-engine/summary.json`.
+`<external>/native-discovery/chwezi-dev-engine/summary.json` and
+`<external>/native-discovery-budget/chwezi-dev-engine/summary.json`.
 This is invocation evidence for that runtime, not universal host/account behavior.
 Official context-budget details are in the source register as
 `openai-skills-context-budget-2026-10-29`.
@@ -137,12 +137,12 @@ modules. The Windows rebuild suffix is not evidence about that Linux installatio
   were checked for the model-policy gate. The changelog records `gpt-6.1-terra` on
   2026-10-26; the catalog lists `gpt-6-astra`, `gpt-6.1-sol`, `gpt-6.1-terra`, and
   `gpt-6-luna`. Provider task-positioning is guidance, not an independent comparison.
-  The local Codex cache `/home/peter/.codex/models_cache.json` reported fetch time
+  The local Codex cache `<home>/.codex/models_cache.json` reported fetch time
   `2026-10-29T06:57:01.252184381Z` and all four IDs with `high` reasoning available.
   Decision: retain the authorized `gpt-6-luna` / `high` pin; release recency alone is
   not task-fit evidence. Comparative quality, latency, cost, account entitlement, and
   current-session model are `NOT_ASSESSED`; see external detail in
-  `/tmp/chwezi-portfolio-kaizen/packaging-research.md`.
+  `<external>/packaging-research.md`.
 
 The disposable Next, MySQL, and Android compile checks above do not constitute production
 integration. Emulator rendering, deployed security assessment, authenticated database

@@ -65,7 +65,7 @@ All SaaS projects deploy across three environments:
 
 | Environment | OS | Database | Web Root |
 |---|---|---|---|
-| **Development** | Windows 11 (WAMP) | MySQL 8.x | `C:\wamp64\www\{project}\` |
+| **Development** | Windows 11 (WAMP) | MySQL 8.x | `<WAMP root>\www\{project}\` |
 | **Staging** | Ubuntu VPS | MySQL 8.x | `/var/www/html/{project}/` |
 | **Production** | Debian VPS | MySQL 8.x | `/var/www/html/{project}/` |
 

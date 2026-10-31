@@ -2569,5 +2569,4 @@ module.exports = {
 - **Registry**: Many agents to manage
 - **Factory**: Complex agent setup
 
-This structure enables building sophisticated agent systems that are maintainable, testable, and scalable.</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\05-advanced-patterns.md
+This structure enables building sophisticated agent systems that are maintainable, testable, and scalable.

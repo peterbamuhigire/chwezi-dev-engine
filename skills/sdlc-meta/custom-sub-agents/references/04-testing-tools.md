@@ -1611,5 +1611,4 @@ Move reusable logic to tools/
 Test everything thoroughly in tests/
 ```
 
-This structure ensures maintainable, testable, and reliable agents.</content>
-<parameter name="filePath">c:\wamp64\www\birdc_erp\skills\custom-sub-agents\references\04-testing-tools.md
+This structure ensures maintainable, testable, and reliable agents.
