@@ -100,3 +100,29 @@ def test_repository_duplicate_headings_match_the_recorded_baseline():
     assert ch.check_duplicate_headings(ROOT) == []
     recorded = json.loads((ROOT / "docs/quality-gates/duplicate-heading-baseline.json").read_text(encoding="utf-8"))["skills"]
     assert recorded == ch.duplicate_headings(ROOT)
+
+
+# --- broken links --------------------------------------------------------------------
+
+def test_broken_relative_links_are_found_and_placeholders_and_urls_are_ignored(tmp_path):
+    write(tmp_path, "skills/a/SKILL.md", "---\nname: a\ndescription: d\n---\n[ok](references/r.md) [gone](references/missing.md#x) [web](https://e.org/x) [tpl](references/<topic>.md) [anchor](#top)\n")
+    write(tmp_path, "skills/a/references/r.md", "[parent](../SKILL.md) [bad](../nothing.md)\n```md\n[fenced](ignored.md)\n```\n")
+    found = ch.broken_links(tmp_path)
+    assert found == {"skills/a/SKILL.md": ["references/missing.md#x"], "skills/a/references/r.md": ["../nothing.md"]}
+
+
+def test_new_broken_link_fails_and_repaired_baseline_entry_must_be_removed(tmp_path):
+    write(tmp_path, "skills/a/SKILL.md", "[gone](missing.md)\n")
+    baseline = tmp_path / "docs/quality-gates/broken-link-baseline.json"
+    write(tmp_path, "docs/quality-gates/broken-link-baseline.json", json.dumps({"files": {}}))
+    assert [f[0] for f in ch.check_broken_links(tmp_path, baseline)] == ["broken-link"]
+    baseline.write_text(json.dumps({"files": {"skills/a/SKILL.md": ["missing.md"]}}), encoding="utf-8")
+    assert ch.check_broken_links(tmp_path, baseline) == []
+    write(tmp_path, "skills/a/missing.md", "now present\n")
+    assert [f[0] for f in ch.check_broken_links(tmp_path, baseline)] == ["broken-link-baseline"]
+
+
+def test_repository_broken_links_match_the_recorded_baseline():
+    assert ch.check_broken_links(ROOT) == []
+    recorded = json.loads((ROOT / "docs/quality-gates/broken-link-baseline.json").read_text(encoding="utf-8"))["files"]
+    assert recorded == ch.broken_links(ROOT)

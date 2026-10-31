@@ -1,0 +1,193 @@
+{
+  "note": "Relative Markdown links under active skill roots that do not resolve. This list may only shrink: repair a link, then delete its entry.",
+  "files": {
+    "skills/ai/ai-agent-sla-and-customer-commitments/ALIAS.md": [
+      "references/provider-recourse-and-multi-agent-attribution.md"
+    ],
+    "skills/ai/ai-agent-sla-and-customer-commitments/references/routing.md": [
+      "ai-agent-customer-sla-dashboard/entrypoint.md",
+      "ai-agent-sla-and-commitments/entrypoint.md",
+      "ai-agent-sla-credit-automation/entrypoint.md"
+    ],
+    "skills/android/android-data-persistence/references/android-room/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/android/android-data-persistence/references/android-room.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/backend-databases/database-internals/references/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/devops-cloud/cicd-pipelines/references/cicd-devsecops.md": [
+      "../world-class-engineering/references/source-patterns.md"
+    ],
+    "skills/devops-cloud/cicd-pipelines/references/cicd-pipeline-design.md": [
+      "../deployment-release-engineering/references/deployment-pipeline.md",
+      "../deployment-release-engineering/references/devops-book-patterns.md",
+      "../world-class-engineering/references/source-patterns.md"
+    ],
+    "skills/finance-accounting/finance/finance-ui-pattern-library/references/lint-checks.md": [
+      "active|pending|done|cancelled"
+    ],
+    "skills/frontend-ux/ux-principles-101/references/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/game-development/blender-game-asset-production/references/blender-production-contract.md": [
+      "../SKILL.md"
+    ],
+    "skills/game-development/blender-game-asset-production/references/rig-animation-and-export-gates.md": [
+      "../SKILL.md"
+    ],
+    "skills/gis/gis-platform-engineering/references/gis-mapping/references/leaflet-capabilities.md": [
+      "public/farmer-profile.php"
+    ],
+    "skills/ios/ios-ai-ml/references/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-architecture/references/ios-architecture-advanced/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-architecture/references/ios-architecture-advanced.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-architecture/references/ios-production-patterns/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-architecture/references/ios-production-patterns.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-architecture/references/ios-swift-design-patterns/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-architecture/references/ios-swift-design-patterns.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-data-persistence/references/ios-swiftdata/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-data-persistence/references/ios-swiftdata.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-data-persistence/references/skill-deep-dive.md": [
+      "../SKILL.md",
+      "references/icloud-sync.md"
+    ],
+    "skills/ios/ios-development/references/ios-project-setup.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-development/references/ios-swift-recipes.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-platform-capabilities/references/ios-biometric-login.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-platform-capabilities/references/ios-bluetooth-printing.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-platform-capabilities/references/ios-networking-advanced.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-quality-and-release/references/app-store-review/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-quality-and-release/references/app-store-review.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-quality-and-release/references/ios-stability-solutions/skill-deep-dive.md": [
+      "../SKILL.md"
+    ],
+    "skills/ios/ios-quality-and-release/references/ios-stability-solutions.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/ios/ios-quality-and-release/references/ios-tdd/skill-deep-dive.md": [
+      "../SKILL.md",
+      "references/advanced-tdd-patterns.md"
+    ],
+    "skills/ios/ios-quality-and-release/references/ios-tdd.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/mobile-cross/kmp-development/references/kmp-tdd.md": [
+      "references/skill-deep-dive.md"
+    ],
+    "skills/product-business/product-discovery/references/feature-planning/references/pos-mandatory-requirements.md": [
+      "../skill.md"
+    ],
+    "skills/product-business/product-discovery/references/feature-planning/references/skill-deep-dive.md": [
+      "references/pos-mandatory-requirements.md"
+    ],
+    "skills/product-business/professional-word-output/references/manual-guide/entrypoint.md": [
+      "../AGENTS.md",
+      "../doc-architect/SKILL.md",
+      "../feature-planning/SKILL.md"
+    ],
+    "skills/sdlc-meta/project-requirements/references/spec-architect.md": [
+      "../AGENTS.md",
+      "../feature-planning/SKILL.md",
+      "../manual-guide/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-design.md": [
+      "../AGENTS.md",
+      "../feature-planning/SKILL.md",
+      "../sdlc-lifecycle.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-maintenance.md": [
+      "../AGENTS.md",
+      "../sdlc-lifecycle.md",
+      "../sdlc-post-deployment/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-planning.md": [
+      "../AGENTS.md",
+      "../feature-planning/SKILL.md",
+      "../mobile-saas-planning/SKILL.md",
+      "../project-requirements/SKILL.md",
+      "../sdlc-lifecycle.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-post-deployment.md": [
+      "../AGENTS.md",
+      "../sdlc-lifecycle.md",
+      "../sdlc-maintenance/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-testing/templates/peer-review-report.md": [
+      "../../android-tdd/SKILL.md",
+      "../../php-modern-standards/SKILL.md",
+      "../../vibe-security-skill/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-testing.md": [
+      "../AGENTS.md",
+      "../ai-error-handling/SKILL.md",
+      "../android-tdd/SKILL.md",
+      "../sdlc-lifecycle.md",
+      "../vibe-security-skill/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy/templates/maintenance-manual.md": [
+      "../../vibe-security-skill/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy/templates/operations-deployment-manual.md": [
+      "../../google-play-store-review/SKILL.md",
+      "../../saas-seeder/SKILL.md",
+      "../../vibe-security-skill/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy/templates/readme-file.md": [
+      "../../saas-seeder/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy/templates/release-notes.md": [
+      "../../google-play-store-review/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy/templates/software-user-manual.md": [
+      "../../manual-guide/SKILL.md",
+      "../../report-print-pdf/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy/templates/training-materials.md": [
+      "../../manual-guide/SKILL.md"
+    ],
+    "skills/sdlc-meta/sdlc-documentation/references/sdlc-user-deploy.md": [
+      "../AGENTS.md",
+      "../google-play-store-review/SKILL.md",
+      "../manual-guide/SKILL.md",
+      "../sdlc-lifecycle.md"
+    ],
+    "skills/security/dual-auth-rbac/references/skill-deep-dive.md": [
+      "../SKILL.md"
+    ]
+  }
+}
