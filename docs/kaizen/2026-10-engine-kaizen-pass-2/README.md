@@ -12,6 +12,7 @@ to listed commands, source snapshots read on 2026-10-31 and synthetic fixtures.
 - [Validation record](04-validation-record.md)
 - [Final assessment](05-final-report.md)
 - [Next cycle handoff](06-next-cycle.md)
+- [Documentation follow-ups](07-docs-followups.md), added by the 2026-10-31 documentation wave
 
 Not established by this pass: a real `pytest` run, a Next.js or Compose build, a MySQL
 migration run, live-model routing, production behaviour or independent review.

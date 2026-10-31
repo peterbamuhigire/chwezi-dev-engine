@@ -24,8 +24,8 @@ No directory in this table should be treated as an active `SKILL.md` surface.
 |---|---|---|---|
 | `skills/ai-entitlements-and-feature-gating/references` | Retained legacy shell | Active equivalent is `skills/ai/ai-entitlements-and-feature-gating` | Keep empty until the legacy top-level path is removed by a dedicated migration |
 | `skills/ai-feature-rollout-and-experimentation/references` | Retained legacy shell | Active equivalent is `skills/ai/ai-feature-rollout-and-experimentation` | Keep empty; do not add references here |
-| `skills/enterprise-ux-process/assets` | Externalized design shell | Canonical design content lives in `design-system-skills` | Keep only if route remains documented; otherwise remove in a migration PR |
-| `skills/enterprise-ux-process/scripts` | Externalized design shell | Canonical design content lives in `design-system-skills` | Keep only if route remains documented; otherwise remove in a migration PR |
+| `skills/enterprise-ux-process/assets` | Externalized design shell | Canonical design content lives in `chwezi-design-engine` (former local folder `design-system-skills`) | Keep only if route remains documented; otherwise remove in a migration PR |
+| `skills/enterprise-ux-process/scripts` | Externalized design shell | Canonical design content lives in `chwezi-design-engine` | Keep only if route remains documented; otherwise remove in a migration PR |
 | `skills/fixed-assets-and-depreciation/references` | Finance doctrine shell | Canonical finance doctrine lives in `chwezi-accounting-doctrine` | Do not populate in this engine |
 | `skills/inventory-costing/references` | Finance doctrine shell | Route to `doctrine/skills/inventory-costing-and-stock-accounting` or external finance engine | Do not populate in this engine |
 | `skills/multicurrency-and-fx/references` | Finance doctrine shell | Route to external finance engine | Do not populate in this engine |

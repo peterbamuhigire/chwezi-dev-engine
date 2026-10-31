@@ -24,7 +24,9 @@ Every Kaizen operation across all twelve engines—engine audits, skill or
 reference edits, validator changes, routing changes, and standardisation
 decisions—must begin with the Digital Research Engine's source-evaluation and
 source-verification workflow. The canonical contract is
-[`kaizen-currentness-gate.md`](../../digital-research-engine/docs/continuous-improvement/kaizen-currentness-gate.md).
+`docs/continuous-improvement/kaizen-currentness-gate.md` in the Digital Research
+engine (resolve that checkout per device; it is a sibling repository, so no relative
+link is given).
 Current standards, policies, laws, technologies, versions, commands, security
 controls, benchmarks, and lifecycle claims require dated, scoped, reviewable
 primary-source evidence. Missing or ambiguous evidence is `NOT_ASSESSED` and
@@ -116,7 +118,9 @@ With a workspace root, checkout checks are strict. `SKILL_ENGINE_ROOT_<ID>`
 (hyphens replaced with underscores, uppercase) selects one authoritative
 checkout. An invalid override fails rather than silently falling back. Without
 an override, use the supplied workspace's engine directory. The research
-directory is `digital-research-engine`. Home-directory duplicates are excluded.
+directory may be named `digital-research-engine`, `chwezi-research-engine` or
+`digital-research-skills`; `scripts/engine_roots.py` tries them in that order, and
+lists the former names of the other engines. Home-directory duplicates are excluded.
 Router and adoption files must resolve inside the selected checkout. Internal
 links are accepted; external or broken contract links fail. An explicit
 checkout override may itself be a link, with its resolved root as the boundary.
