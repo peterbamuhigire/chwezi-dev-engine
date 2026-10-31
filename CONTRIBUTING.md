@@ -7,21 +7,30 @@ no-book-extraction rule.
 
 ## Before you open a pull request
 
-Run the checks the CI workflow (`.github/workflows/skill-guardrails.yml`) runs,
-from the repository root, and paste the real results:
+Install the pinned dependencies once (`python3 -m pip install -r
+requirements-ci.txt`: pytest and PyYAML; Node.js is needed for the hook tests).
+Then run the checks the CI workflow (`.github/workflows/skill-guardrails.yml`)
+runs, from the repository root, and paste the real results:
 
 ```
-python -X utf8 scripts/skill_catalog_guardrails.py
-python -X utf8 -m pytest tests -q -p no:cacheprovider
-python -X utf8 scripts/routing_smoke_test.py
-python -X utf8 scripts/validate_engine_control_plane.py
+python3 -X utf8 scripts/skill_catalog_guardrails.py
+python3 -X utf8 -m unittest tests/test_skill_catalog_guardrails.py
+python3 -X utf8 -m pytest tests -q -p no:cacheprovider
+python3 -X utf8 scripts/routing_smoke_test.py --min-rank1 89 --lint-fixtures
+python3 -X utf8 scripts/routing_smoke_test.py --coverage --max-zero-positive 1
+python3 -X utf8 scripts/routing_smoke_test.py --collisions --collision-gate --threshold 0.5
+python3 -X utf8 scripts/validate_engine_control_plane.py
+python3 -X utf8 scripts/check_source_register.py
 node hooks/test-destructive-bash-gate.js && node hooks/test-plugin-hook-config.js
-python -X utf8 skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all
+python3 -X utf8 skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all
 git diff --check
 ```
 
-A check you could not run is reported as `NOT ASSESSED` with the reason, never
-as a pass. Use British English.
+The README section "Verify" lists what each check needs and the results measured
+on Linux. Adding a skill also needs a positive routing fixture in
+`scripts/routing_fixtures.yml`; the ratchets in `docs/quality-gates/` may only
+shrink. A check you could not run is reported as `NOT ASSESSED` with the reason,
+never as a pass. Use British English.
 
 ## If you are an AI agent
 

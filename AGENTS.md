@@ -68,6 +68,9 @@ accurate, portable, easy to route, and below the active skill cap.
 | Alias registry | `docs/skill-aliases.yml` |
 | Current priorities | `docs/plans/NEXT_FEATURES.md` |
 | Always-on cross-cutting rules (security, coding style, verification, user-run scripts) | `rules/README.md` |
+| Documentation index | `docs/README.md` |
+| How to run every validator, and what each needs | `README.md`, section "Verify" |
+| October 2026 kaizen evidence, open findings, date-triggered gates | `docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md`; `README.md`, section "Quality and improvement" |
 
 ## Working Rules
 
@@ -130,18 +133,23 @@ must be routed through `docs/skill-aliases.yml`.
 
 ## Guardrails
 
-Run this after catalog routing or skill frontmatter changes:
+Run this after catalog routing or skill frontmatter changes (use `python` or
+`py -3` where `python3` is not installed):
 
-```powershell
-python -X utf8 scripts\skill_catalog_guardrails.py --report-only
+```sh
+python3 -X utf8 scripts/skill_catalog_guardrails.py --report-only
 ```
+
+The complete validator set, with the dependencies each check needs and the
+results measured on Linux, is in `README.md` under "Verify"; the CI workflow
+runs the same steps. `pytest` and `PyYAML` are pinned in `requirements-ci.txt`.
 
 For a Codex or plugin runtime, also run the cross-engine validator from
 `chwezi-engine-agents/scripts/validate-runtime-skill-budget.py` against the
 exact skill roots exposed by that host. The per-repository guardrail cannot
 measure the assembled runtime metadata budget.
 
-Known baseline as of 2026-09-24 (verify with the script; do not trust this prose):
+Known baseline as of 2026-10-31 (verify with the script; do not trust this prose):
 
 - Active `SKILL.md` files: 167.
 - Target active catalog size: 150-180 (upper bound raised from 170 to 180 by Peter Bamuhigire,
@@ -150,7 +158,9 @@ Known baseline as of 2026-09-24 (verify with the script; do not trust this prose
   taking the catalogue from 185 to 167 without losing capability. Preserve the hard cap of 200;
   new active entrypoints still need routing evidence and a collision check.
 - Hard cap tracked by the guardrail script: 200.
-- Duplicate frontmatter names: 0; near-duplicate pairs (collision-checked): 0.
+- Duplicate frontmatter names: 0. Collision gate (`--collisions --collision-gate --threshold 0.5`):
+  0 errors at or above 0.75 similarity and one allow-listed pair, `mysql-engineering` and
+  `postgresql-engineering`, at 0.627.
 - The guardrail script now also fails on broken `references/`/`templates/` links
   and on stale or dangling aliases, and runs in CI on every push and PR.
 - The same gate rejects raw ebook formats, any file under a book-extraction
@@ -160,35 +170,44 @@ Known baseline as of 2026-09-24 (verify with the script; do not trust this prose
 - `scripts/routing_smoke_test.py` measures routing precision against
   `scripts/routing_fixtures.yml` and runs in the same CI job; `--collisions`
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour
-  could steal traffic from.
+  could steal traffic from. Measured 2026-10-31: 239 fixtures, precision@1 219/239
+  (91.6%), precision@3 239/239; CI floor `--min-rank1 89`. The proxy is lexical, not
+  live model routing.
 
 ### Hygiene and currency gates added 2026-10-31
 
 - `scripts/check_source_register.py` fails when an active source record is past its review
   date or a claim names a superseded or quarantined record. Re-read the primary page, add a
   dated record and move the old one to `superseded_sources`; never extend a date unread.
+  The first date-triggered failure is 2026-11-04 (five Next.js records); the full calendar
+  is in `README.md` under "Date-triggered gates".
 - `scripts/content_hygiene.py` (run by the catalogue guardrails) fails on host-specific
   paths in active content, new duplicate H2 headings and new broken relative links.
   Baselines in `docs/quality-gates/` may only shrink.
-- `python scripts/routing_smoke_test.py --coverage --max-zero-positive 1` reports fixture
+- `python3 scripts/routing_smoke_test.py --coverage --max-zero-positive 1` reports fixture
   coverage per skill; add a positive fixture with every new skill.
 - Review routes start at `skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md`
   and its domain-owned checks table.
 - Evidence for the October 2026 passes: `docs/kaizen/2026-10-engine-kaizen/` and
-  `docs/kaizen/2026-10-engine-kaizen-pass-2/`.
+  `docs/kaizen/2026-10-engine-kaizen-pass-2/`. Latest published score: 62.5/100 raw and
+  capped (pass 2's final report); the 95/100 target is not reached.
+- Open item for the maintainer: `.claude/settings.local.json` is tracked in this public
+  repository and names Windows user-profile paths. Do not edit, copy or untrack it without
+  the maintainer's decision; untracking does not remove it from history.
 
 ## Engine control plane
 
 The shared agent, command, hook, evidence, and handoff contract is defined in
 `docs/engine-control-plane.md` and registered in
 `docs/engine-control-plane.json`. Validate it with
-`python scripts/validate_engine_control_plane.py`; for installed-checkout validation
+`python3 scripts/validate_engine_control_plane.py`; for installed-checkout validation
 pass `--workspace-root <parent>` once per folder that holds engine checkouts (or set
 `CHWEZI_ENGINES_ROOT`). `scripts/engine_roots.py` resolves current and former directory
-names per device. The registry has twelve entries; use repeated `--engine <id>` options
-for an explicitly scoped portfolio. Resolve only checkouts in the supplied parents; do
-not resolve removed `source/repos` duplicates. See
-`docs/audits/2026-09-06-kaizen/portfolio-progress.md` for the active Kaizen cycle.
+names per device. The registry has twelve entries, one of them (`political`) private;
+use repeated `--engine <id>` options for the eleven public engines, otherwise an
+installed-checkout run exits 1 on a host without the private checkout. Resolve only
+checkouts in the supplied parents; do not resolve removed `source/repos` duplicates. See
+`docs/audits/2026-09-06-kaizen/portfolio-progress.md` for the 2026-09-06 portfolio cycle.
 
 Domain engines remain the source of truth for their doctrine. This engine owns
 the cross-engine orchestration vocabulary and implementation patterns. Native
@@ -239,8 +258,9 @@ artefact type, above any domain skill:
 
 | Environment | Role | Notes |
 | --- | --- | --- |
-| Windows | Primary local editing environment. | PowerShell examples should work here. |
-| Ubuntu | Secondary validation environment. | Keep paths and scripts portable. |
+| Windows | Local editing environment on the maintainer's Windows machines. | PowerShell examples should work here; not re-run in the October 2026 passes (`NOT ASSESSED`). |
+| Fedora Linux | Local editing and validation environment on the maintainer's Linux workstation. | Every check in `README.md` "Verify" ran here on 2026-10-31 with `python3`. |
+| Ubuntu | Secondary validation environment; CI runs on `ubuntu-latest`. | Keep paths and scripts portable. |
 | Debian | Production-like consumer environment. | Avoid OS-specific assumptions in skills. |
 
 This repository has no app database. If a skill discusses MySQL, PostgreSQL, or
@@ -257,6 +277,8 @@ skill documentation, load [`docs/continuous-improvement/english-output-standard-
 When documentation is changed, keep these files aligned:
 
 - `README.md`
+- `CHANGELOG.md`
+- `docs/README.md`
 - `docs/overview/README.md`
 - `docs/overview/PROJECT_BRIEF.md`
 - `docs/overview/TECH_STACK.md`
