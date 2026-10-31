@@ -27,6 +27,10 @@ Modes:
   --lint-fixtures   also fail when a prompt contains its expected slug, or its
                     word-trigram overlap with the expected description is >= 0.6.
   --report-only     print metrics; always exit 0.
+  --coverage        print fixture coverage per skill: skills with no positive fixture and
+                    skills with three positives plus two owned negatives. With
+                    --max-zero-positive N it fails when more than N skills have no
+                    positive fixture (ratchet: lower N as fixtures are added, never raise it).
   --collisions      print the most similar skill pairs (consolidation candidates).
   --collision-gate  with --collisions: fail on pairs >= 0.75 and warn on pairs
                     >= --threshold, unless allow-listed in
@@ -274,6 +278,44 @@ def run_fixtures(report_only: bool, min_rank1: float | None = None, lint: bool =
     return 0
 
 
+def coverage(catalogue: dict[str, dict[str, str]], fixtures: list[dict]) -> dict:
+    """Fixture coverage per skill. An owned negative is one that names an owner skill."""
+    positives: Counter = Counter()
+    owned: Counter = Counter()
+    for fx in fixtures:
+        expect = fx["expect"]
+        if expect not in catalogue:
+            continue
+        positives[expect] += 1
+        owned[expect] += sum(1 for negative in fx.get("negatives") or [] if negative.get("owner"))
+    skills = sorted(catalogue)
+    return {
+        "skills": len(skills),
+        "zero_positive": [s for s in skills if positives[s] == 0],
+        "with_positive": sum(1 for s in skills if positives[s] > 0),
+        "with_owned_negative": sum(1 for s in skills if owned[s] > 0),
+        "full": [s for s in skills if positives[s] >= 3 and owned[s] >= 2],
+    }
+
+
+def show_coverage(max_zero_positive: int | None, base: Path = REPO_ROOT, fixture_files=FIXTURE_FILES) -> int:
+    report = coverage(read_catalogue(base), load_fixtures(fixture_files))
+    print("routing-fixture-coverage:")
+    print(f"- active skills: {report['skills']}")
+    print(f"- skills with at least one positive fixture: {report['with_positive']}")
+    print(f"- skills with no positive fixture: {len(report['zero_positive'])}")
+    print(f"- skills with at least one owned negative: {report['with_owned_negative']}")
+    print(f"- skills with three positives and two owned negatives: {len(report['full'])}")
+    for slug in report["zero_positive"]:
+        print(f"  no positive: {slug}")
+    if max_zero_positive is not None:
+        print(f"- zero-positive ceiling: {max_zero_positive}")
+        if len(report["zero_positive"]) > max_zero_positive:
+            print(f"[FAIL] RATCHET: {len(report['zero_positive'])} skills have no positive fixture; ceiling is {max_zero_positive}")
+            return 1
+    return 0
+
+
 def load_allowlist(path: Path = ALLOWLIST_FILE) -> dict[frozenset[str], dict]:
     if not path.exists():
         return {}
@@ -329,6 +371,8 @@ def show_collisions(threshold: float, limit: int, gate: bool = False, base: Path
 def main() -> int:
     ap = argparse.ArgumentParser(description="Routing smoke test for the skills catalogue.")
     ap.add_argument("--report-only", action="store_true", help="Print metrics but always exit 0.")
+    ap.add_argument("--coverage", action="store_true", help="Print fixture coverage per skill and exit.")
+    ap.add_argument("--max-zero-positive", type=int, default=None, help="With --coverage: fail when more skills than this have no positive fixture.")
     ap.add_argument("--collisions", action="store_true", help="Print most-similar skill pairs and exit.")
     ap.add_argument("--collision-gate", action="store_true", help="With --collisions: fail on non-allow-listed pairs >= 0.75.")
     ap.add_argument("--threshold", type=float, default=0.45, help="Collision cosine threshold (default 0.45).")
@@ -336,6 +380,8 @@ def main() -> int:
     ap.add_argument("--min-rank1", type=float, default=None, help="Fail when precision@1 (percent) is below this floor.")
     ap.add_argument("--lint-fixtures", action="store_true", help="Fail on slug-bearing or description-copying fixture prompts.")
     args = ap.parse_args()
+    if args.coverage:
+        return show_coverage(args.max_zero_positive)
     if args.collisions:
         return show_collisions(args.threshold, args.limit, args.collision_gate)
     return run_fixtures(args.report_only, args.min_rank1, args.lint_fixtures)

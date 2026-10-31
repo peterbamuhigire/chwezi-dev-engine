@@ -49,7 +49,12 @@ jobs:
       # --lint-fixtures rejects prompts that leak the expected slug or copy the
       # description. Owned negatives run on every invocation. (M10-03)
       - name: Run routing smoke test
-        run: python -X utf8 scripts/routing_smoke_test.py --min-rank1 88 --lint-fixtures
+        run: python -X utf8 scripts/routing_smoke_test.py --min-rank1 89 --lint-fixtures
+
+      # Fixture coverage ratchet: every skill but one has a positive fixture; the
+      # ceiling may be lowered, never raised.
+      - name: Check routing fixture coverage
+        run: python -X utf8 scripts/routing_smoke_test.py --coverage --max-zero-positive 1
 
       - name: Run in-engine routing collision gate
         run: python -X utf8 scripts/routing_smoke_test.py --collisions --collision-gate --threshold 0.5
