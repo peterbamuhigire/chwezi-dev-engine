@@ -20,6 +20,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Control-plane service inventory from `saas-architecture-strategy`.
+- Audit log spec from `saas-architecture-strategy`.
+- Tenant lifecycle states from `saas-architecture-strategy`.
+- Compliance posture (SOC2, ISO27001, HIPAA?) — determines required guardrails.
+- Internal roles (super admin, support engineer, billing ops, finance, security, customer success).
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -60,14 +68,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The task is the control-plane services architecture — use `saas-architecture-strategy`; this skill is the UI/UX layer on top.
 - The task is the audit log schema itself — use `saas-architecture-strategy` §6.
 - The task is general RBAC — use `vibe-security-skill` and `multi-tenant-saas-architecture`.
-
-## Required Inputs
-
-- Control-plane service inventory from `saas-architecture-strategy`.
-- Audit log spec from `saas-architecture-strategy`.
-- Tenant lifecycle states from `saas-architecture-strategy`.
-- Compliance posture (SOC2, ISO27001, HIPAA?) — determines required guardrails.
-- Internal roles (super admin, support engineer, billing ops, finance, security, customer success).
 
 ## Workflow
 

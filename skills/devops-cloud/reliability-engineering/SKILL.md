@@ -75,6 +75,12 @@ Reliability claims use user-visible outcomes and tested recovery behavior. Retri
 <!-- dual-compat-end -->
 Use this skill when correctness under ideal conditions is not enough. The goal is to keep important workflows safe, available enough, diagnosable, and recoverable under load, dependency failure, stale state, and operator error.
 
+Skill-specific references:
+
+- [references/reliability-patterns.md](references/reliability-patterns.md): Design rules for timeouts, retries, queues, and degradation.
+- [references/incident-readiness.md](references/incident-readiness.md): Incident preparation and recovery prompts.
+- [references/reliability-verification.md](references/reliability-verification.md): Reliability drills, overload checks, and evidence expectations.
+
 ## Load Order
 
 1. Load `world-class-engineering`.
@@ -199,9 +205,3 @@ For meaningful reliability work, produce:
 - [ ] Degradation behavior is defined for dependency failures.
 - [ ] Recovery paths and owners are explicit.
 - [ ] Reliability claims are backed by tests, simulations, or staged evidence.
-
-## References
-
-- [references/reliability-patterns.md](references/reliability-patterns.md): Design rules for timeouts, retries, queues, and degradation.
-- [references/incident-readiness.md](references/incident-readiness.md): Incident preparation and recovery prompts.
-- [references/reliability-verification.md](references/reliability-verification.md): Reliability drills, overload checks, and evidence expectations.

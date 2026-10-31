@@ -78,6 +78,12 @@ Inspect telemetry read-only by default. Deploy collectors, change retention, cre
 <!-- dual-compat-end -->
 Use this skill when a system must be diagnosable in production. It covers operational telemetry, not just analytics. The goal is to make failures understandable, actionable, and bounded.
 
+Skill-specific references:
+
+- [references/alert-design.md](references/alert-design.md): Alert severity and routing rules.
+- [references/diagnosis-first-observability.md](references/diagnosis-first-observability.md): Event design, cardinality, release markers, and AI telemetry.
+- [references/slo-template.md](references/slo-template.md): SLO template and service questions.
+
 ## Load Order
 
 1. Load `world-class-engineering`.
@@ -245,9 +251,3 @@ For significant systems, produce:
 - [ ] SLOs reflect user impact, not internal implementation trivia.
 - [ ] Audit events are defined for material actions.
 - [ ] Sensitive data is excluded or redacted from telemetry.
-
-## References
-
-- [references/alert-design.md](references/alert-design.md): Alert severity and routing rules.
-- [references/diagnosis-first-observability.md](references/diagnosis-first-observability.md): Event design, cardinality, release markers, and AI telemetry.
-- [references/slo-template.md](references/slo-template.md): SLO template and service questions.

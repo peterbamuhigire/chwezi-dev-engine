@@ -63,6 +63,13 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 <!-- dual-compat-end -->
 Use this skill when the system must encode real business operations, not just CRUD screens. It is optimized for multi-tenant business software where configurability, correctness, and audit trails matter.
 
+Skill-specific references:
+
+- [references/domain-modeling.md](references/domain-modeling.md): Core entities, controls, and workflow review prompts.
+- Load the external `chwezi-accounting-doctrine` inventory and logistics skill for inventory policy, transportation, trade documentation, and shipment exception patterns.
+- [../saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md](../saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md): Double-entry bookkeeping, subledgers, ERP finance configuration, cost accounting, controls, reconciliations, and close patterns.
+- Load `modular-saas-architecture`, `multi-tenant-saas-architecture`, and `database-design-engineering` when implementing the design.
+
 ## Design Priorities
 
 - Domain correctness before UI convenience.
@@ -190,12 +197,6 @@ For ERP projects involving manufacturing, wholesale, distribution, import/export
 
 For ERP projects with billing, fees, POS, payroll, inventory valuation, grants, patient billing, school fees, donor funds, manufacturing cost, or statutory reporting, pair this skill with `saas-accounting-system` and load `saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md`. The design should model GL, subledgers, control accounts, fiscal periods, posting rules, reconciliation, close, dimensions, cost centres, profit centres, tax, fixed assets, and management reporting as first-class capabilities.
 
-## References
-
-- [references/domain-modeling.md](references/domain-modeling.md): Core entities, controls, and workflow review prompts.
-- Load the external `chwezi-accounting-doctrine` inventory and logistics skill for inventory policy, transportation, trade documentation, and shipment exception patterns.
-- [../saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md](../saas-accounting-system/references/accounting-bookkeeping-erp-patterns.md): Double-entry bookkeeping, subledgers, ERP finance configuration, cost accounting, controls, reconciliations, and close patterns.
-- Load `modular-saas-architecture`, `multi-tenant-saas-architecture`, and `database-design-engineering` when implementing the design.
 ## Quality Standards
 
 The design must expose authoritative records, valid transitions, approval segregation, tenant extensions, audit events, integration failures, and reporting ownership without shared-table ambiguity.

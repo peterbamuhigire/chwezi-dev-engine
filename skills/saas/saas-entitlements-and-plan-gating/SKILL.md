@@ -20,6 +20,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Plan catalogue (from `subscription-billing`): tier names, features per tier, limits per tier.
+- Pricing model decisions (per-seat, usage-based, hybrid) from product.
+- List of features to gate + list of limits to enforce.
+- Override policy: how enterprise contracts customise entitlements without code changes.
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -61,13 +68,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The task is experimentation feature flags (A/B tests, gradual rollout) — feature flags ≠ entitlements; see §3.
 - The task is per-tenant data isolation — use `multi-tenant-saas-architecture`.
 - The task is enterprise SSO/SCIM — use `saas-sso-scim-enterprise-auth`.
-
-## Required Inputs
-
-- Plan catalogue (from `subscription-billing`): tier names, features per tier, limits per tier.
-- Pricing model decisions (per-seat, usage-based, hybrid) from product.
-- List of features to gate + list of limits to enforce.
-- Override policy: how enterprise contracts customise entitlements without code changes.
 
 ## Workflow
 

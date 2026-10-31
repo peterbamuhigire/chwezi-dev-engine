@@ -31,6 +31,20 @@ ArcGIS Enterprise administration for regulated / established GIS environments, p
 
 **Prerequisites:** Load the `gis-platform-engineering` skill for the spatial backend (its `gis-postgis-backend` reference) and the map client (its `gis-mapping` or `gis-maps-integration` reference), and `multi-tenant-saas-architecture` for tenant isolation.
 
+Skill-specific references:
+
+- `references/when-arcgis-enterprise.md`
+- `references/arcgis-components.md`
+- `references/publishing-services.md`
+- `references/arcgis-security-roles.md`
+- `references/arcgis-backup-dr.md`
+- `references/property-search-spatial.md`
+- `references/neighbourhood-analysis.md`
+- `references/catchment-isochrones.md`
+- `references/market-heatmaps.md`
+- `references/real-estate-saas-integration.md`
+- `references/arcgis-pro-workflows.md` — geodatabase invariants, topology rules for parcels, branch vs traditional versioning, georeferencing with RMS targets, service pre-flight checklist
+
 ## When this skill applies
 
 - Operating or integrating with ArcGIS Enterprise (Portal, Server, Data Store, Web Adaptor).
@@ -223,19 +237,6 @@ If the ArcGIS environment or service metadata is unavailable, provide a read-onl
 - `gis-platform-engineering` skill (its `gis-maps-integration` reference) — client mapping.
 - `multi-tenant-saas-architecture` — tenant isolation end-to-end.
 
-## References
-
-- `references/when-arcgis-enterprise.md`
-- `references/arcgis-components.md`
-- `references/publishing-services.md`
-- `references/arcgis-security-roles.md`
-- `references/arcgis-backup-dr.md`
-- `references/property-search-spatial.md`
-- `references/neighbourhood-analysis.md`
-- `references/catchment-isochrones.md`
-- `references/market-heatmaps.md`
-- `references/real-estate-saas-integration.md`
-- `references/arcgis-pro-workflows.md` — geodatabase invariants, topology rules for parcels, branch vs traditional versioning, georeferencing with RMS targets, service pre-flight checklist
 ## Inputs
 | Artefact | Required? | Purpose |
 |---|---|---|

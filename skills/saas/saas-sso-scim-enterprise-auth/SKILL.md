@@ -20,6 +20,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Current auth implementation (which provider / framework — Cognito, Auth0, Clerk, Supabase Auth, custom, etc.).
+- Identity model from `saas-architecture-strategy` (users + memberships).
+- Enterprise-tier definition from `subscription-billing` (which plan gates enterprise auth).
+- Custom-domain strategy from `saas-architecture-strategy` / `multi-tenant-saas-architecture`.
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -61,13 +68,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The task is the customer-facing tenant-admin auth screen — use `vibe-security-skill`.
 - The task is internal staff auth — use `vibe-security-skill` + MFA + the back-office privileged-access workflow in `saas-admin-backoffice-tooling`.
 - The task is OAuth as a *client* (calling Google/Stripe APIs) — use `vibe-security-skill`.
-
-## Required Inputs
-
-- Current auth implementation (which provider / framework — Cognito, Auth0, Clerk, Supabase Auth, custom, etc.).
-- Identity model from `saas-architecture-strategy` (users + memberships).
-- Enterprise-tier definition from `subscription-billing` (which plan gates enterprise auth).
-- Custom-domain strategy from `saas-architecture-strategy` / `multi-tenant-saas-architecture`.
 
 ## Workflow
 

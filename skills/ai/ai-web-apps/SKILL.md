@@ -120,6 +120,17 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 This skill specialises the generic integration patterns in `ai-architecture-patterns` for a Next.js + Vercel AI SDK runtime. It is the AI-specialist seat in the architecture: it turns a feature concept plus upstream context/threat artifacts into four concrete deliverables the rest of the stack can depend on.
 
+Skill-specific references:
+
+- `references/module-gate.md` — feature catalog, tenant flags, kill switch, audit, rollout choreography.
+- `references/token-ledger-and-budgets.md` — ledger schema, budget guard, quota gate, cost estimation, join queries.
+- `references/provider-abstraction.md` — factory, request schema, model selection table, fallback policy.
+- `references/output-guardrails.md` — three-layer guardrails, tool-result validation, streaming validation, prompt-injection hooks.
+- `references/streaming-and-ui-patterns.md` — streaming route, `useChat`, `streamUI` generators, multi-modal, middleware pipeline, light rate limits.
+- `references/mcp-integration.md` — MCP server + client, authority tiers, lifecycle, observability.
+
+*Source base: Despoudis, T. — Build AI-Enhanced Web Apps (Packt, 2024), adapted to the repository contract model.*
+
 ## Prerequisites
 
 Load the following before this skill, in order:
@@ -349,14 +360,3 @@ Production rate limits are Redis-backed (e.g. Upstash); the LRU snippet in `refe
 - `ai-feature-spec` — how to write the feature contract this skill consumes.
 - `ai-ux-patterns` — streaming UX, confidence indicators, progressive disclosure.
 - `nextjs-app-router` — server/client components, middleware, RBAC three-tier.
-
-## References
-
-- `references/module-gate.md` — feature catalog, tenant flags, kill switch, audit, rollout choreography.
-- `references/token-ledger-and-budgets.md` — ledger schema, budget guard, quota gate, cost estimation, join queries.
-- `references/provider-abstraction.md` — factory, request schema, model selection table, fallback policy.
-- `references/output-guardrails.md` — three-layer guardrails, tool-result validation, streaming validation, prompt-injection hooks.
-- `references/streaming-and-ui-patterns.md` — streaming route, `useChat`, `streamUI` generators, multi-modal, middleware pipeline, light rate limits.
-- `references/mcp-integration.md` — MCP server + client, authority tiers, lifecycle, observability.
-
-*Source base: Despoudis, T. — Build AI-Enhanced Web Apps (Packt, 2024), adapted to the repository contract model.*

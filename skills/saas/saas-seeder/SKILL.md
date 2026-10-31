@@ -51,6 +51,21 @@ If database, credentials, or target environment are unavailable, return a dry-ru
 <!-- dual-compat-end -->
 Bootstrap a new multi-tenant SaaS project using the SaaS Seeder Template with proper three-tier panel architecture, Argon2ID authentication, and franchise isolation.
 
+Skill-specific references:
+
+**Complete documentation in subdirectories:**
+
+- `references/architecture.md` - Complete architectural standards
+- `references/workflow.md` - Detailed step-by-step workflow
+- `references/troubleshooting.md` - Common issues and solutions
+- `references/php-tooling.md` - PHP development tools setup and usage guide
+
+**External references:**
+
+- `../../docs/PANEL-STRUCTURE.md` - Three-tier architecture guide
+- `../../AGENTS.md` - Development guidelines
+- `../project-requirements/` - Skill for creating requirements docs
+
 ## Security Baseline (Required)
 
 Always load and apply the **Vibe Security Skill** for any seeder work that touches web pages, APIs, authentication, data access, or file handling. Treat its checklist as mandatory.
@@ -427,21 +442,6 @@ saas-seeder/
 ├── fix-database.ps1      # Fix script
 └── AGENTS.md             # Development guide
 ```
-
-## References
-
-**Complete documentation in subdirectories:**
-
-- `references/architecture.md` - Complete architectural standards
-- `references/workflow.md` - Detailed step-by-step workflow
-- `references/troubleshooting.md` - Common issues and solutions
-- `references/php-tooling.md` - PHP development tools setup and usage guide
-
-**External references:**
-
-- `../../docs/PANEL-STRUCTURE.md` - Three-tier architecture guide
-- `../../AGENTS.md` - Development guidelines
-- `../project-requirements/` - Skill for creating requirements docs
 
 ## Quality Assurance
 

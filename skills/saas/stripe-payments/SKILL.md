@@ -19,6 +19,13 @@ metadata:
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Target stack (PHP, Node.js, or both), runtime versions, deploy target.
+- UX requirements (hosted redirect, embedded form, custom UI) and PCI scope target.
+- Currencies to charge, settlement country, and whether SCA-regulated regions apply.
+- Where secrets live (Vault, AWS Secrets Manager, env files in dev only).
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -57,13 +64,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The work is recurring billing, plan changes, dunning, proration, metered usage, or revenue recognition. Use `subscription-billing`.
 - The work is Stripe Connect, marketplaces, or split payments. Out of scope.
 - Tax registration strategy and filing operations. Stripe Tax docs handle this directly.
-
-## Required Inputs
-
-- Target stack (PHP, Node.js, or both), runtime versions, deploy target.
-- UX requirements (hosted redirect, embedded form, custom UI) and PCI scope target.
-- Currencies to charge, settlement country, and whether SCA-regulated regions apply.
-- Where secrets live (Vault, AWS Secrets Manager, env files in dev only).
 
 ## Workflow
 

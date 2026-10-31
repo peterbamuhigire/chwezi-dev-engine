@@ -53,6 +53,15 @@ Decisions link a driver to a chosen option, rejected alternatives, consequences,
 - [Deep-module design and design-it-twice](references/deep-module-design.md) - interface depth, seams, deletion tests, and independent option comparison.
 - [Hexagonal architecture (ports and adapters)](references/hexagonal-ports-and-adapters.md) - load when designing or refactoring a module's internal boundary: inbound/outbound ports, adapters, composition root, dependency inversion, per-boundary tests, and slice-by-slice migration (TypeScript, PHP, Java, Kotlin, Go).
 - For confirmed domain terminology and decision ownership, consume the SRS engine's canonical `domain-language-and-decisions` reference through its router.
+
+Skill-specific references:
+
+- [references/adr-template.md](references/adr-template.md): Decision record format and architecture review prompts.
+- [references/architecture-execution-model.md](references/architecture-execution-model.md): Architecture artifacts, release-aware boundaries, and flow design.
+- [references/platform-as-product-feedback.md](references/platform-as-product-feedback.md): Platform-as-product ownership, decision rights, consumer feedback, and sustainability checks.
+- [references/architecture-as-code.md](references/architecture-as-code.md): architecture-as-code with C4 vocabulary, stable element IDs, commit-pinned evidence checked by `scripts/verify_diagram_evidence.py`, and diagram drift as a fitness function.
+- [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Architecture review patterns derived from the supplied books.
+
 ## Book-informed practice route
 
 Use [the slice, review, and recovery practice](../../sdlc-meta/world-class-engineering/references/slice-review-and-recovery-practice.md) for workload-led trade-offs, ownership, data truth, failure containment, and evolution.
@@ -226,14 +235,6 @@ Split a service or module when:
 - [ ] Security and tenant boundaries align with module boundaries.
 - [ ] Consistency model and compensation strategy are explicit where workflows cross boundaries.
 - [ ] Architecture deliverables include context map, critical-flow table, and dependency view.
-
-## References
-
-- [references/adr-template.md](references/adr-template.md): Decision record format and architecture review prompts.
-- [references/architecture-execution-model.md](references/architecture-execution-model.md): Architecture artifacts, release-aware boundaries, and flow design.
-- [references/platform-as-product-feedback.md](references/platform-as-product-feedback.md): Platform-as-product ownership, decision rights, consumer feedback, and sustainability checks.
-- [references/architecture-as-code.md](references/architecture-as-code.md): architecture-as-code with C4 vocabulary, stable element IDs, commit-pinned evidence checked by `scripts/verify_diagram_evidence.py`, and diagram drift as a fitness function.
-- [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Architecture review patterns derived from the supplied books.
 
 ## Inputs
 | Input | Required | Purpose |

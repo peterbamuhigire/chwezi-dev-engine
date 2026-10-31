@@ -37,6 +37,23 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 The house style for Python in our PHP + Android + iOS SaaS stack. Every Python file in our projects must follow this skill. Other Python skills (saas-integration, data-analytics, document-generation, ml-predictive, data-pipelines) assume you have read this first.
 
+Skill-specific references:
+
+- `references/project-layout.md`
+- `references/tooling-uv-ruff.md`
+- `references/python-version-and-environment-policy.md`
+- `references/typing-mypy-pyright.md`
+- `references/pydantic-v2-patterns.md`
+- `references/logging-structlog.md`
+- `references/async-vs-sync.md`
+- `references/error-handling.md`
+- `references/testing-pytest.md`
+- `references/security-baseline.md`
+- `references/anti-patterns.md`
+- `references/api-container-sidecar-engineering.md`
+- `references/python-desktop-distribution.md`
+- `scripts/desktop_suite_packager.py`
+
 ## When this skill applies
 
 - Starting any Python project, service, script, or job worker.
@@ -319,23 +336,6 @@ When the task requires it, load:
 - `python-ml-predictive` — forecasting, classification, anomaly detection.
 - `python-data-pipelines` — ETL, OCR, image processing, API syncs.
 - `references/python-desktop-distribution.md` — executable suites, installers, signing, CI, and clean-machine release checks.
-
-## References
-
-- `references/project-layout.md`
-- `references/tooling-uv-ruff.md`
-- `references/python-version-and-environment-policy.md`
-- `references/typing-mypy-pyright.md`
-- `references/pydantic-v2-patterns.md`
-- `references/logging-structlog.md`
-- `references/async-vs-sync.md`
-- `references/error-handling.md`
-- `references/testing-pytest.md`
-- `references/security-baseline.md`
-- `references/anti-patterns.md`
-- `references/api-container-sidecar-engineering.md`
-- `references/python-desktop-distribution.md`
-- `scripts/desktop_suite_packager.py`
 
 ## Decision Rules
 

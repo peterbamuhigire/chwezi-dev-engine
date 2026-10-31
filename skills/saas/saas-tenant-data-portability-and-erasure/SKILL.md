@@ -20,6 +20,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Tenant lifecycle states (`saas-architecture-strategy`).
+- Map of every data store the SaaS uses (primary DBs, search, object storage, warehouse, CRM, ESP, analytics, third-party processors).
+- Regulatory profile (GDPR? POPIA? Uganda DPPA? CCPA? sector-specific HIPAA?).
+- Retention obligations (audit log 7 years; financial 10 years in most jurisdictions; backups 30 days).
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -59,13 +66,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The task is general data classification — use compliance audit work in `vibe-security-skill` / `web-app-security-audit`.
 - The task is tenant lifecycle state machine — use `saas-architecture-strategy`.
 - The task is region-specific compliance content — use `dpia-generator` for Ugandan specifics.
-
-## Required Inputs
-
-- Tenant lifecycle states (`saas-architecture-strategy`).
-- Map of every data store the SaaS uses (primary DBs, search, object storage, warehouse, CRM, ESP, analytics, third-party processors).
-- Regulatory profile (GDPR? POPIA? Uganda DPPA? CCPA? sector-specific HIPAA?).
-- Retention obligations (audit log 7 years; financial 10 years in most jurisdictions; backups 30 days).
 
 ## Workflow
 

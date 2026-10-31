@@ -30,6 +30,19 @@ Build and maintain apps where the same types flow from database to backend to fr
 
 **Prerequisites:** Load `typescript-effective` for production idioms. Load `typescript-mastery` for type-system depth.
 
+Skill-specific references:
+
+- `references/monorepo-turborepo.md`
+- `references/fastify-backend.md`
+- `references/trpc-end-to-end.md`
+- `references/rest-plus-openapi.md`
+- `references/prisma-vs-drizzle.md`
+- `references/zod-shared-schemas.md`
+- `references/auth-patterns.md`
+- `references/testing-full-stack.md`
+- `references/docker-node-production.md`
+- `references/large-scale-react-ts.md` - load when designing folder structure, state ownership, HTTP/API client seams, config, i18n, primitives, or test layout for a large React + TS app.
+
 ## When this skill applies
 
 - Greenfield TypeScript web app (React + Node).
@@ -253,19 +266,6 @@ See `references/docker-node-production.md`.
 - `react-development` / `nextjs-app-router` — frontend.
 - `nodejs-development` — Node runtime patterns.
 - `postgresql-fundamentals` / `mysql-best-practices` — data layer specifics.
-
-## References
-
-- `references/monorepo-turborepo.md`
-- `references/fastify-backend.md`
-- `references/trpc-end-to-end.md`
-- `references/rest-plus-openapi.md`
-- `references/prisma-vs-drizzle.md`
-- `references/zod-shared-schemas.md`
-- `references/auth-patterns.md`
-- `references/testing-full-stack.md`
-- `references/docker-node-production.md`
-- `references/large-scale-react-ts.md` - load when designing folder structure, state ownership, HTTP/API client seams, config, i18n, primitives, or test layout for a large React + TS app.
 
 ## Decision Rules
 

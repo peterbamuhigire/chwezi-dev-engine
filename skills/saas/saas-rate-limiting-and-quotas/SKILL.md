@@ -20,6 +20,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Plan × limit catalogue from `saas-entitlements-and-plan-gating`.
+- Deployment model (pool vs mixed vs silo) from `saas-architecture-strategy` — affects where enforcement lives.
+- Tenant-count and request-volume estimates — drives algorithm + storage choice.
+- Existing edge/gateway/proxy in front of the app (Cloudflare, ALB, Nginx, Envoy, Kong).
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -60,13 +67,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The task is general application performance — use `frontend-performance` / backend perf skills.
 - The task is the entitlements engine itself (what limits exist per plan) — use `saas-entitlements-and-plan-gating`. This skill is the *enforcement* runtime.
 - The task is queue-based fair scheduling alone — use queue-specific skills.
-
-## Required Inputs
-
-- Plan × limit catalogue from `saas-entitlements-and-plan-gating`.
-- Deployment model (pool vs mixed vs silo) from `saas-architecture-strategy` — affects where enforcement lives.
-- Tenant-count and request-volume estimates — drives algorithm + storage choice.
-- Existing edge/gateway/proxy in front of the app (Cloudflare, ALB, Nginx, Envoy, Kong).
 
 ## Workflow
 

@@ -30,6 +30,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - [Two-axis review record](templates/two-axis-review.md)
 - [Receiving review feedback](references/receiving-review-feedback.md): verify each comment against code and tests, respond with evidence, record declined suggestions
 - [Intent-led merge-conflict resolution](references/intent-led-conflict-resolution.md)
+
+Skill-specific references:
+
+- [references/review-and-release.md](references/review-and-release.md): Pull request, merge, and release checklists.
+- [references/trunk-based-delivery.md](references/trunk-based-delivery.md): Short-lived branch and integration rules.
+- [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): Git workflows derived from the supplied PDFs.
+
 ## Book-informed practice route
 
 Use [the slice, review, and recovery practice](../world-class-engineering/references/slice-review-and-recovery-practice.md) for reviewable commits, PR evidence, conflict recovery, and safe history changes.
@@ -144,12 +151,6 @@ See [references/review-and-release.md](references/review-and-release.md) for PR 
 - Destructive recovery without first inspecting reflog-friendly options.
 - PRs that ship without migration, rollback, or verification notes when needed.
 - Treating Git workflow as separate from release engineering and CI health.
-
-## References
-
-- [references/review-and-release.md](references/review-and-release.md): Pull request, merge, and release checklists.
-- [references/trunk-based-delivery.md](references/trunk-based-delivery.md): Short-lived branch and integration rules.
-- [../world-class-engineering/references/source-patterns.md](../world-class-engineering/references/source-patterns.md): Git workflows derived from the supplied PDFs.
 
 ## Degraded Mode
 

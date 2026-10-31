@@ -20,6 +20,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
 | Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
 
+Skill-specific inputs:
+
+- The customer's words (verbatim where possible) and the channel they used.
+- Account context: tenure, value, prior issues, contract terms.
+- The actual failure: what happened, what was promised, what gap.
+- Authority limits of the agent handling the interaction (refund cap, credit cap, escalation triggers).
+
 ## Capability and permission contract
 
 Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
@@ -61,13 +68,6 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 - The work is product feature evaluation; use `product-discovery`.
 - The work is internal team conflict unrelated to a customer; use a coaching framework.
 - The work is marketing copy at the top of the funnel; use the marketing/positioning skill.
-
-## Required Inputs
-
-- The customer's words (verbatim where possible) and the channel they used.
-- Account context: tenure, value, prior issues, contract terms.
-- The actual failure: what happened, what was promised, what gap.
-- Authority limits of the agent handling the interaction (refund cap, credit cap, escalation triggers).
 
 ## Workflow
 

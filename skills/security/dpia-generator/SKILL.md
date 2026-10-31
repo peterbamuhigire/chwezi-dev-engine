@@ -28,6 +28,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
 <!-- dual-compat-end -->
+
+Skill-specific references:
+
+- Data Protection and Privacy Act 2019 (No. 9 of 2019) — Section 23 (breach), Section 9 (special data)
+- Data Protection and Privacy Regulations 2021 — Regulation 12 (DPIA), Regulation 33 (breach notification)
+- `domains/uganda/references/regulations.md`
+- `domains/uganda/references/dppa-pii-classification.md`
+- `uganda-dppa-compliance/SKILL.md` — prerequisite skill
+
 ## Purpose
 
 Generate a Uganda Data Protection and Privacy Act 2019 — compliant Data Protection Impact Assessment (DPIA) document for a specific processing operation that has been flagged with `[DPIA-REQUIRED]`. Implements Regulation 12 of the Data Protection and Privacy Regulations 2021.
@@ -206,13 +215,6 @@ Before marking this skill complete:
 
 ---
 
-## References
-
-- Data Protection and Privacy Act 2019 (No. 9 of 2019) — Section 23 (breach), Section 9 (special data)
-- Data Protection and Privacy Regulations 2021 — Regulation 12 (DPIA), Regulation 33 (breach notification)
-- `domains/uganda/references/regulations.md`
-- `domains/uganda/references/dppa-pii-classification.md`
-- `uganda-dppa-compliance/SKILL.md` — prerequisite skill
 ## Capability contract
 
 Default to read-only access to requirements, data flows, vendors, controls, and policies. Network research is required only for current law or regulator guidance; implementation edits need separate authority.

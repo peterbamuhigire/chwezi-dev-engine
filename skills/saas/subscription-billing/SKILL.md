@@ -19,6 +19,13 @@ metadata:
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Plan catalogue intent: tier names, included features, billing intervals, target currencies.
+- Lifecycle policy: trial length, upgrade/downgrade timing, cancellation grace, pause allowance.
+- Recovery policy: retry window, end-of-dunning disposition (cancel / unpaid / past_due).
+- Tax footprint: jurisdictions where the business has nexus and registration status.
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -57,13 +64,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The work is one-time payments, webhook signature verification, or 3DS/SCA primitives — use `stripe-payments`.
 - The work is revenue recognition, deferred-revenue ledger entries, or ASC-606 categorisation — use `saas-accounting-system`.
 - The work is cohort retention dashboards, MRR/ARR analytics, or growth experimentation — use `saas-growth-metrics`.
-
-## Required Inputs
-
-- Plan catalogue intent: tier names, included features, billing intervals, target currencies.
-- Lifecycle policy: trial length, upgrade/downgrade timing, cancellation grace, pause allowance.
-- Recovery policy: retry window, end-of-dunning disposition (cancel / unpaid / past_due).
-- Tax footprint: jurisdictions where the business has nexus and registration status.
 
 ## Workflow
 
@@ -110,6 +110,13 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 <!-- dual-compat-end -->
 
 Use this skill when recurring revenue must be intentional rather than incidental. The goal is to design plans, lifecycle transitions, recovery workflows, and finance signals that support retention, predictable revenue, and trustworthy customer experience.
+
+Skill-specific references:
+
+- [references/dunning-management.md](references/dunning-management.md): Failed-payment recovery flows, retry cadence, suspension logic.
+- [references/metered-billing.md](references/metered-billing.md): Usage pricing models, recording patterns, billing-cycle resets.
+- [references/revenue-recognition.md](references/revenue-recognition.md): Deferred revenue mechanics handed off to `saas-accounting-system`.
+- [references/price-versioning-and-plan-migration.md](references/price-versioning-and-plan-migration.md): load when changing prices, retiring a plan, or migrating/grandfathering existing subscriptions.
 
 ## Load Order
 
@@ -440,10 +447,3 @@ A common anti-pattern is one negative line "Discount". The four patterns have **
 - [../saas-accounting-system/SKILL.md](../saas-accounting-system/SKILL.md): Double-entry accounting, deferred revenue ledgers, and billing-to-GL reconciliation.
 - [../saas-business-metrics/SKILL.md](../saas-business-metrics/SKILL.md): MRR/ARR, NRR, cohort retention, churn analysis.
 - [../../product-business/software-pricing-strategy/SKILL.md](../../product-business/software-pricing-strategy/SKILL.md): Value-based pricing and plan architecture.
-
-## References
-
-- [references/dunning-management.md](references/dunning-management.md): Failed-payment recovery flows, retry cadence, suspension logic.
-- [references/metered-billing.md](references/metered-billing.md): Usage pricing models, recording patterns, billing-cycle resets.
-- [references/revenue-recognition.md](references/revenue-recognition.md): Deferred revenue mechanics handed off to `saas-accounting-system`.
-- [references/price-versioning-and-plan-migration.md](references/price-versioning-and-plan-migration.md): load when changing prices, retiring a plan, or migrating/grandfathering existing subscriptions.

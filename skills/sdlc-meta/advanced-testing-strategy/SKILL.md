@@ -29,6 +29,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Load `references/e2e-testing.md` when browser, API journey, Playwright/Cypress, or full workflow end-to-end coverage is required.
 - Load [test-first seams and independent oracles](references/test-first-seams-and-oracles.md) when a behaviour benefits from Red-Green-Refactor.
 - Load [automated and manual accessibility testing](references/accessibility-testing-automated-and-manual.md) when a release needs accessibility evidence: axe-core in Playwright, keyboard and screen-reader passes (VoiceOver, NVDA, TalkBack), reflow/zoom, and what automation cannot catch.
+
+Skill-specific references:
+
+- [references/risk-driven-testing.md](references/risk-driven-testing.md): Test-layer selection, determinism, and flake policy.
+- [references/test-matrix-template.md](references/test-matrix-template.md): Test plan by risk and layer.
+- [references/release-evidence.md](references/release-evidence.md): What must be true before shipping.
+- Pairwise combinatorial test design (parameter model, constraints, coverage statement): see the `chwezi-sdlc-documentation` reference [05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md](https://github.com/peterbamuhigire/chwezi-sdlc-documentation/blob/main/05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md).
+
 ## Book-informed practice route
 
 Use [the slice, review, and recovery practice](../world-class-engineering/references/slice-review-and-recovery-practice.md) to connect product scenarios, measurable NFRs, negative cases, and human-verified AI test drafts.
@@ -178,13 +186,6 @@ See [references/test-matrix-template.md](references/test-matrix-template.md).
 - [ ] End-to-end tests are focused on the highest-value flows.
 - [ ] Manual verification covers the platform or UX gaps automation cannot.
 - [ ] Release evidence makes residual risk explicit.
-
-## References
-
-- [references/risk-driven-testing.md](references/risk-driven-testing.md): Test-layer selection, determinism, and flake policy.
-- [references/test-matrix-template.md](references/test-matrix-template.md): Test plan by risk and layer.
-- [references/release-evidence.md](references/release-evidence.md): What must be true before shipping.
-- Pairwise combinatorial test design (parameter model, constraints, coverage statement): see the `chwezi-sdlc-documentation` reference [05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md](https://github.com/peterbamuhigire/chwezi-sdlc-documentation/blob/main/05-testing-documentation/02-test-plan/references/pairwise-combinatorial-test-design.md).
 
 ## Decision Rules
 

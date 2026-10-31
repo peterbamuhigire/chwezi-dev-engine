@@ -53,6 +53,13 @@ If stakeholders or sources are unavailable, produce a question register and labe
 <!-- dual-compat-end -->
 Create comprehensive requirements documentation for a new SaaS project through a guided AI-assisted interview process.
 
+Skill-specific references:
+
+- Template files in `docs/project-requirements/*.template`
+- `saas-seeder` skill for bootstrapping after requirements
+- `../../AGENTS.md` - Project-specific documentation after bootstrap
+- Multi-tenant patterns: All franchise-scoped data needs franchise_id
+
 ## When to Use
 
 Use when starting a new SaaS project from the template:
@@ -412,13 +419,6 @@ Ready to bootstrap? Use:
 - Create generic documentation (make it specific to their SaaS)
 - Overwhelm with too many questions at once
 - Forget to save progress incrementally
-
-## References
-
-- Template files in `docs/project-requirements/*.template`
-- `saas-seeder` skill for bootstrapping after requirements
-- `../../AGENTS.md` - Project-specific documentation after bootstrap
-- Multi-tenant patterns: All franchise-scoped data needs franchise_id
 
 ## Cross-References to SDLC Skills
 

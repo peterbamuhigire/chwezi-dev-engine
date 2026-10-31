@@ -31,6 +31,20 @@ Use Python when SQL stops being the right tool: multi-step transformations, stat
 
 **Prerequisites:** Load `python-modern-standards` and `python-saas-integration` before this skill.
 
+Skill-specific references:
+
+- `references/analytics-method-selection-and-governance.md`
+- `references/pandas-idioms.md`
+- `references/tidy-reshaping-and-missing-data.md`
+- `references/notebooks-to-production-code.md`
+- `references/loading-data.md`
+- `references/cohort-funnel-retention.md`
+- `references/financial-math.md`
+- `references/accounting-finance-analytics.md`
+- `references/statistics-and-anomalies.md`
+- `references/geospatial-analytics.md`
+- `references/performance-and-polars.md`
+
 ## When this skill applies
 
 - Computing cohort retention, funnel conversion, churn curves.
@@ -223,20 +237,6 @@ Analytics results don't live in Python — they return to PHP or become document
 - `python-document-generation` — render the DataFrame as a branded Excel dashboard or PDF.
 - `python-ml-predictive` — when the question is "what happens next" instead of "what happened".
 - `python-data-pipelines` — when data needs to be fetched/cleaned before analysis.
-
-## References
-
-- `references/analytics-method-selection-and-governance.md`
-- `references/pandas-idioms.md`
-- `references/tidy-reshaping-and-missing-data.md`
-- `references/notebooks-to-production-code.md`
-- `references/loading-data.md`
-- `references/cohort-funnel-retention.md`
-- `references/financial-math.md`
-- `references/accounting-finance-analytics.md`
-- `references/statistics-and-anomalies.md`
-- `references/geospatial-analytics.md`
-- `references/performance-and-polars.md`
 
 ## Decision Rules
 

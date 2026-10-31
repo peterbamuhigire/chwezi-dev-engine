@@ -60,6 +60,14 @@ The schema enforces material invariants with types, constraints, and transaction
 <!-- dual-compat-end -->
 Use this skill when schema choices will shape correctness, performance, or future maintainability. It complements vendor-specific database skills by focusing on design logic that survives framework changes.
 
+Skill-specific references:
+
+- [references/data-review-checklist.md](references/data-review-checklist.md): Schema and migration review prompts.
+- [references/live-data-evolution.md](references/live-data-evolution.md): Expand-contract, backfills, verification, and rollback posture.
+- [references/data-contracts-and-schema-evolution.md](references/data-contracts-and-schema-evolution.md): Load when another team, service, model, or report consumes the data: ODCS v3.2.0 contract template, lifecycle, change classification, CI gates, publishing patterns.
+- [references/metadata-catalog-and-lineage-design.md](references/metadata-catalog-and-lineage-design.md): Load when designing a data catalog, glossary, classification scheme, or lineage, or exposing catalog metadata to AI assistants and agents.
+- [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Source-derived patterns for design quality and website/data analysis.
+
 ## Load Order
 
 1. Load `world-class-engineering`.
@@ -206,14 +214,6 @@ For substantive database work, produce:
 - [ ] Audit, retention, and archival rules are documented.
 - [ ] Reporting needs do not distort the transactional model without justification.
 - [ ] Replica lag, projections, or CDC assumptions are explicit where they matter.
-
-## References
-
-- [references/data-review-checklist.md](references/data-review-checklist.md): Schema and migration review prompts.
-- [references/live-data-evolution.md](references/live-data-evolution.md): Expand-contract, backfills, verification, and rollback posture.
-- [references/data-contracts-and-schema-evolution.md](references/data-contracts-and-schema-evolution.md): Load when another team, service, model, or report consumes the data: ODCS v3.2.0 contract template, lifecycle, change classification, CI gates, publishing patterns.
-- [references/metadata-catalog-and-lineage-design.md](references/metadata-catalog-and-lineage-design.md): Load when designing a data catalog, glossary, classification scheme, or lineage, or exposing catalog metadata to AI assistants and agents.
-- [../../sdlc-meta/world-class-engineering/references/source-patterns.md](../../sdlc-meta/world-class-engineering/references/source-patterns.md): Source-derived patterns for design quality and website/data analysis.
 
 ## Capability contract
 Design schemas and migration plans by default. Apply DDL, backfills, retention jobs, or production queries only with explicit database and environment authority.

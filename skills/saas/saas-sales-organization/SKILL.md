@@ -66,6 +66,19 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 <!-- dual-compat-end -->
 Design a sales organisation that matches your product motion, customer segment, and deal size. This skill is the "how we sell" counterpart to `saas-business-metrics`, `subscription-billing`, `software-pricing-strategy`.
 
+Skill-specific references:
+
+- `references/sales-motions-picker.md`
+- `references/roles-specialisation.md`
+- `references/pipeline-stages.md`
+- `references/lead-to-cash.md`
+- `references/territory-design.md`
+- `references/quota-commission-design.md`
+- `references/sales-ops-fundamentals.md`
+- `references/forecasting-accuracy.md`
+- `references/onboarding-ramp.md`
+- `references/hiring-rubrics.md`
+
 ## When this skill applies
 
 - Founder-led sales has worked; it's time for the first hires.
@@ -250,18 +263,6 @@ See `references/hiring-rubrics.md`.
 - `product-strategy-vision` — product direction that the sales org communicates.
 - `competitive-analysis-pm` — win/loss analysis inputs.
 
-## References
-
-- `references/sales-motions-picker.md`
-- `references/roles-specialisation.md`
-- `references/pipeline-stages.md`
-- `references/lead-to-cash.md`
-- `references/territory-design.md`
-- `references/quota-commission-design.md`
-- `references/sales-ops-fundamentals.md`
-- `references/forecasting-accuracy.md`
-- `references/onboarding-ramp.md`
-- `references/hiring-rubrics.md`
 ## Quality Standards
 
 Role design, stage exits, capacity, quota, compensation, handoffs, and ramp measures must derive from one declared sales motion and named customer segment.

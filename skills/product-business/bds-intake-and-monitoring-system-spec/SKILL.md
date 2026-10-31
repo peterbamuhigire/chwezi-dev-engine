@@ -20,6 +20,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
 | Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
 
+Skill-specific inputs:
+
+- Application form fields and eligibility/award criteria.
+- Monitoring indicators and reporting cadence.
+- User roles, reviewers, experts, donor/client viewers, and administrators.
+- Data-protection and consent constraints for the relevant countries.
+- Expected tool route: spreadsheet, form tool, Airtable-like base, or app.
+
 ## Capability and permission contract
 
 Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
@@ -61,14 +69,6 @@ Use this skill to write requirements for the operational system behind a BDS or 
 - The task is only public campaign copy.
 - There is no selection, monitoring, or reporting workflow.
 - You are building software without first defining the data and control model.
-
-## Required Inputs
-
-- Application form fields and eligibility/award criteria.
-- Monitoring indicators and reporting cadence.
-- User roles, reviewers, experts, donor/client viewers, and administrators.
-- Data-protection and consent constraints for the relevant countries.
-- Expected tool route: spreadsheet, form tool, Airtable-like base, or app.
 
 ## Workflow
 

@@ -31,6 +31,20 @@ Real statistical / machine-learning models for SaaS features: forecasting, class
 
 **Prerequisites:** Load `python-modern-standards` and `python-saas-integration` before this skill. Load `python-data-analytics` for feature engineering.
 
+Skill-specific references:
+
+- `references/when-ml-vs-llm-vs-rules.md`
+- `references/data-prep.md`
+- `references/forecasting-prophet.md`
+- `references/forecasting-statsmodels.md`
+- `references/classification-regression-sklearn.md`
+- `references/anomaly-detection.md`
+- `references/evaluation-metrics.md`
+- `references/model-serving.md`
+- `references/monitoring-and-drift.md`
+- `references/ml-system-architecture-fti.md`
+- `references/explainability.md`
+
 ## When this skill applies
 
 - Demand / sales / cash-flow forecasting (time-series).
@@ -248,20 +262,6 @@ Load `references/ml-system-architecture-fti.md` when the model must run beyond a
 - Storing model artifacts in git. Use a models/ directory that's gitignored; artifact store is S3 or similar.
 - Retraining nightly "just because." Retrain on a trigger.
 - Ignoring calibration on probability outputs shown to users. A "40% churn risk" is meaningless unless calibrated.
-
-## References
-
-- `references/when-ml-vs-llm-vs-rules.md`
-- `references/data-prep.md`
-- `references/forecasting-prophet.md`
-- `references/forecasting-statsmodels.md`
-- `references/classification-regression-sklearn.md`
-- `references/anomaly-detection.md`
-- `references/evaluation-metrics.md`
-- `references/model-serving.md`
-- `references/monitoring-and-drift.md`
-- `references/ml-system-architecture-fti.md`
-- `references/explainability.md`
 
 ## See also
 

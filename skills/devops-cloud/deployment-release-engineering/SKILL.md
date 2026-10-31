@@ -80,6 +80,15 @@ If staging, telemetry, or rollback execution is unavailable, produce a read-only
 <!-- dual-compat-end -->
 Use this skill when shipping software to real users. It turns implementation output into releasable output. The focus is safe deployment, fast rollback, and evidence-based release decisions.
 
+Skill-specific references:
+
+- [references/deployment-pipeline.md](references/deployment-pipeline.md): Stage model, release packet, and rollout heuristics.
+- [references/release-checklist.md](references/release-checklist.md): Pre-deploy and post-deploy checks.
+- [references/rollout-selection.md](references/rollout-selection.md): Load when choosing the core strategy (downtime, rolling new-before-old, rolling replace-in-place, blue-green) plus add-ons (canary, toggle, promotion, dark launch), and when deciding rollback vs toggle-disable vs roll-forward per change.
+- [references/devops-book-patterns.md](references/devops-book-patterns.md): Value-stream, pipeline, observability, DevSecOps, PHP, cloud-native, and GitOps patterns from the supplied DevOps books.
+- [references/delivery-feedback-evidence.md](references/delivery-feedback-evidence.md): Book-derived release hypotheses, model lineage, independent verification, guardrails, and post-release learning.
+- [../docker-development/references/php-python-js-container-delivery.md](../docker-development/references/php-python-js-container-delivery.md): Docker image, Compose, CI, registry, and runtime promotion standards for PHP, Python, and JavaScript services.
+
 ## Load Order
 
 1. Load `world-class-engineering`.
@@ -233,12 +242,3 @@ For significant releases, produce:
 - [ ] Rollback path is explicit and realistic.
 - [ ] Post-deploy verification is defined.
 - [ ] Monitoring and alert watch list is attached to the release.
-
-## References
-
-- [references/deployment-pipeline.md](references/deployment-pipeline.md): Stage model, release packet, and rollout heuristics.
-- [references/release-checklist.md](references/release-checklist.md): Pre-deploy and post-deploy checks.
-- [references/rollout-selection.md](references/rollout-selection.md): Load when choosing the core strategy (downtime, rolling new-before-old, rolling replace-in-place, blue-green) plus add-ons (canary, toggle, promotion, dark launch), and when deciding rollback vs toggle-disable vs roll-forward per change.
-- [references/devops-book-patterns.md](references/devops-book-patterns.md): Value-stream, pipeline, observability, DevSecOps, PHP, cloud-native, and GitOps patterns from the supplied DevOps books.
-- [references/delivery-feedback-evidence.md](references/delivery-feedback-evidence.md): Book-derived release hypotheses, model lineage, independent verification, guardrails, and post-release learning.
-- [../docker-development/references/php-python-js-container-delivery.md](../docker-development/references/php-python-js-container-delivery.md): Docker image, Compose, CI, registry, and runtime promotion standards for PHP, Python, and JavaScript services.

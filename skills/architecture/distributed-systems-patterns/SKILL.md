@@ -61,6 +61,11 @@ Every remote interaction has a timeout and failure policy. Every retried side ef
 <!-- dual-compat-end -->
 Use this skill when a design crosses process, service, queue, or region boundaries. The goal is to keep distributed complexity deliberate and bounded rather than accidental.
 
+Skill-specific references:
+
+- [references/consistency-decision-matrix.md](references/consistency-decision-matrix.md): How to choose synchronous, asynchronous, strong, or eventual consistency.
+- [references/messaging-checklist.md](references/messaging-checklist.md): Event, queue, and saga review prompts.
+
 ## Load Order
 
 1. Load `world-class-engineering`.
@@ -168,11 +173,6 @@ For distributed-system work, produce:
 - [ ] Ordering assumptions are explicit.
 - [ ] Consistency and compensation strategy match business risk.
 - [ ] Operational detection exists for stuck, duplicated, or divergent workflows.
-
-## References
-
-- [references/consistency-decision-matrix.md](references/consistency-decision-matrix.md): How to choose synchronous, asynchronous, strong, or eventual consistency.
-- [references/messaging-checklist.md](references/messaging-checklist.md): Event, queue, and saga review prompts.
 
 ## Capability contract
 Model boundaries, messages, and failure semantics by default. Do not provision brokers, replay events, or mutate production state unless explicitly authorised.

@@ -46,6 +46,23 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 <!-- dual-compat-end -->
 The rules that make every skill in this repository compose cleanly with every other skill. Two concerns in one skill, because they are two faces of the same question: "what does this skill promise, and what is it allowed to expect?"
 
+Skill-specific references:
+
+- `references/house-style-checklist.md` — 20-point review checklist
+- `references/normalisation-playbook.md` — how to upgrade a legacy skill
+- `references/baseline-contract-register.md` — full artifact-contract register per baseline skill type
+- `references/context-map-template.md`
+- `references/adr-template.md`
+- `references/critical-flow-template.md`
+- `references/openapi-contract.md`
+- `references/error-model.md`
+- `references/threat-model-template.md`
+- `references/slo-template.md`
+- `references/release-plan-template.md`
+- `references/rollback-plan-template.md`
+- `references/runbook-template.md`
+- `references/test-plan-template.md`
+
 ## When this skill applies
 
 - Creating a new skill — load this before `skill-writing`.
@@ -317,23 +334,6 @@ prove that the assembled catalog fits.
 - `skill-writing` — authoring process, validator, frontmatter rules.
 - `world-class-engineering` — repository-wide quality bar that references this skill.
 - `advanced-testing-strategy`, `observability-monitoring`, `reliability-engineering`, `deployment-release-engineering` — the operability baseline skills whose contracts anchor the repository.
-
-## References
-
-- `references/house-style-checklist.md` — 20-point review checklist
-- `references/normalisation-playbook.md` — how to upgrade a legacy skill
-- `references/baseline-contract-register.md` — full artifact-contract register per baseline skill type
-- `references/context-map-template.md`
-- `references/adr-template.md`
-- `references/critical-flow-template.md`
-- `references/openapi-contract.md`
-- `references/error-model.md`
-- `references/threat-model-template.md`
-- `references/slo-template.md`
-- `references/release-plan-template.md`
-- `references/rollback-plan-template.md`
-- `references/runbook-template.md`
-- `references/test-plan-template.md`
 
 ## Capability contract
 

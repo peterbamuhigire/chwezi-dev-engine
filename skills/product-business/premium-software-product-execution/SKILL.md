@@ -20,6 +20,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
 | Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
 
+Skill-specific inputs:
+
+- Target buyer, paying customer, users, business model, budget range, and competitive alternatives.
+- Product purpose, core workflows, financial impact, risk removed, data/control requirements, and service commitments.
+- Existing proof assets, case studies, demos, screenshots, references, audits, SEO/content assets, and support process.
+
 ## Capability and permission contract
 
 Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
@@ -57,12 +63,6 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 - The task is a tiny internal technical fix with no product, buyer, UX, pricing, proof, or delivery-quality implications.
 - The user explicitly wants low-cost commodity execution and accepts weak proof, weak discovery, weak support, or low visual/service quality.
-
-## Required Inputs
-
-- Target buyer, paying customer, users, business model, budget range, and competitive alternatives.
-- Product purpose, core workflows, financial impact, risk removed, data/control requirements, and service commitments.
-- Existing proof assets, case studies, demos, screenshots, references, audits, SEO/content assets, and support process.
 
 ## Workflow
 

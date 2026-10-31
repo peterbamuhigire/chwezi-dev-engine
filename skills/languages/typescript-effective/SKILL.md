@@ -30,6 +30,18 @@ Production-grade TypeScript beyond the type system. Every rule here lifts real c
 
 **Prerequisite:** Load `references/typescript-mastery.md` for type-system depth. Use this skill for day-to-day production idioms.
 
+Skill-specific references:
+
+- `references/tsconfig-production.md`
+- `references/effective-ts-items.md`
+- `references/clean-code-ts.md`
+- `references/error-handling-result.md`
+- `references/zod-boundaries.md`
+- `references/migration-js-to-ts.md`
+- `references/build-performance.md`
+- `references/testing-vitest.md`
+- `references/anti-patterns.md`
+
 ## When this skill applies
 
 - Code review on TypeScript PRs.
@@ -238,18 +250,6 @@ vitest run --coverage --coverage.thresholds.lines=80
 - `references/typescript-design-patterns.md` — GoF patterns in TS.
 - `typescript-full-stack` — shared types FE↔BE, Zod everywhere.
 - `react-development` / `nextjs-app-router` — framework-specific.
-
-## References
-
-- `references/tsconfig-production.md`
-- `references/effective-ts-items.md`
-- `references/clean-code-ts.md`
-- `references/error-handling-result.md`
-- `references/zod-boundaries.md`
-- `references/migration-js-to-ts.md`
-- `references/build-performance.md`
-- `references/testing-vitest.md`
-- `references/anti-patterns.md`
 
 ## Decision Rules
 

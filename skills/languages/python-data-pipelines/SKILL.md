@@ -31,6 +31,20 @@ Bring data into the SaaS from outside systems and unstructured inputs — APIs, 
 
 **Prerequisites:** Load `python-modern-standards` and `python-saas-integration` before this skill.
 
+Skill-specific references:
+
+- `references/pipeline-architecture.md`
+- `references/etl-external-apis.md`
+- `references/ocr-tesseract.md`
+- `references/pdf-extraction.md`
+- `references/document-parsing-toolkit.md` — full catalogue of PDF + EPUB Python libraries (PyMuPDF, pdfplumber, pypdf, camelot, ocrmypdf, pdf2image, ebooklib, unstructured) plus the poppler / tesseract / ghostscript system dependencies
+- `references/image-processing-pillow.md`
+- `references/scheduling.md`
+- `references/validation-and-deadletter.md`
+- `references/multi-tenant-pipelines.md`
+- `references/observability-pipelines.md`
+- [references/data-quality-checks-and-lineage.md](references/data-quality-checks-and-lineage.md) — load when the pipeline publishes to or reads from a data-contract interface: check placement, ODCS quality-rule mapping, SLO measurement, OpenLineage emission
+
 ## When this skill applies
 
 - Syncing data from external APIs: Stripe, payment gateways, bank feeds, tax portals, government APIs.
@@ -265,20 +279,6 @@ See `references/observability-pipelines.md`.
 - `python-data-analytics` — to analyze the data once loaded.
 - `python-document-generation` — to produce reports from pipeline outputs.
 - `photo-management` — for the web/mobile upload side of image pipelines.
-
-## References
-
-- `references/pipeline-architecture.md`
-- `references/etl-external-apis.md`
-- `references/ocr-tesseract.md`
-- `references/pdf-extraction.md`
-- `references/document-parsing-toolkit.md` — full catalogue of PDF + EPUB Python libraries (PyMuPDF, pdfplumber, pypdf, camelot, ocrmypdf, pdf2image, ebooklib, unstructured) plus the poppler / tesseract / ghostscript system dependencies
-- `references/image-processing-pillow.md`
-- `references/scheduling.md`
-- `references/validation-and-deadletter.md`
-- `references/multi-tenant-pipelines.md`
-- `references/observability-pipelines.md`
-- [references/data-quality-checks-and-lineage.md](references/data-quality-checks-and-lineage.md) — load when the pipeline publishes to or reads from a data-contract interface: check placement, ODCS quality-rule mapping, SLO measurement, OpenLineage emission
 
 ## Decision Rules
 

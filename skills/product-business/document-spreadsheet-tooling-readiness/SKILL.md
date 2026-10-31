@@ -20,6 +20,10 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
 | Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
 
+Skill-specific inputs:
+
+- Desired output formats, local tooling access, plugin/connector availability, and any required templates.
+
 ## Capability and permission contract
 
 Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
@@ -54,10 +58,6 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 ## Do Not Use When
 
 - The user only asks for plain Markdown or a conceptual outline and no generated file is claimed.
-
-## Required Inputs
-
-- Desired output formats, local tooling access, plugin/connector availability, and any required templates.
 
 ## Workflow
 

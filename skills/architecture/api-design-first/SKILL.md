@@ -95,6 +95,18 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 - Companion skill: `graphql-patterns` — schema-first Apollo Server + TypeScript patterns when choosing GraphQL over REST for client-shaped reads.
 <!-- dual-compat-end -->
 
+Skill-specific references:
+
+- [references/rest-conventions.md](references/rest-conventions.md) — URLs, methods, status codes, envelope, pagination, middleware order, health checks, PHP controller skeleton.
+- [references/openapi-workflow.md](references/openapi-workflow.md) — six-step workflow, OpenAPI 3.1 skeleton, versioning, HATEOAS, HTTP caching (ETags), GraphQL decision.
+- [references/auth-and-security.md](references/auth-and-security.md) — security headers, CORS, auth-method selection, API key, JWT, OAuth2, rate limiting, idempotency keys.
+- [references/implementation-checklist.md](references/implementation-checklist.md) — pre-merge checklist, observability notes handed to `observability-monitoring`, hand-off table to other skills.
+- [references/practical-api-architecture.md](references/practical-api-architecture.md) — API product-contract checks, versioning lifecycle, idempotency, and error semantics.
+- [references/api-you-wont-hate-rules.md](references/api-you-wont-hate-rules.md) — API action plan, resource design, JSON ergonomics, pagination, embedding, versioning, and endpoint tests.
+- [references/source-register-api-you-wont-hate.md](references/source-register-api-you-wont-hate.md) — local EPUB source register for the API-design upgrade.
+- [references/skill-deep-dive.md](references/skill-deep-dive.md) — index redirect for the legacy deep-dive; kept for backward compatibility.
+- [references/api-error-handling.md](references/api-error-handling.md), [references/api-pagination.md](references/api-pagination.md), and [references/api-testing-verification.md](references/api-testing-verification.md) - absorbed API specialist entrypoints.
+
 ## Prerequisites
 
 Load these skills first:
@@ -256,18 +268,6 @@ Detail, status-code mapping, and pagination mechanics live in `references/rest-c
 - `reliability-engineering` — consumes the idempotency map for retry and circuit-breaker design.
 - `deployment-release-engineering` — consumes the versioning plan for migration choreography and rollback windows.
 - `vibe-security-skill` — consumes the auth model to build the threat model and abuse-case list.
-
-## References
-
-- [references/rest-conventions.md](references/rest-conventions.md) — URLs, methods, status codes, envelope, pagination, middleware order, health checks, PHP controller skeleton.
-- [references/openapi-workflow.md](references/openapi-workflow.md) — six-step workflow, OpenAPI 3.1 skeleton, versioning, HATEOAS, HTTP caching (ETags), GraphQL decision.
-- [references/auth-and-security.md](references/auth-and-security.md) — security headers, CORS, auth-method selection, API key, JWT, OAuth2, rate limiting, idempotency keys.
-- [references/implementation-checklist.md](references/implementation-checklist.md) — pre-merge checklist, observability notes handed to `observability-monitoring`, hand-off table to other skills.
-- [references/practical-api-architecture.md](references/practical-api-architecture.md) — API product-contract checks, versioning lifecycle, idempotency, and error semantics.
-- [references/api-you-wont-hate-rules.md](references/api-you-wont-hate-rules.md) — API action plan, resource design, JSON ergonomics, pagination, embedding, versioning, and endpoint tests.
-- [references/source-register-api-you-wont-hate.md](references/source-register-api-you-wont-hate.md) — local EPUB source register for the API-design upgrade.
-- [references/skill-deep-dive.md](references/skill-deep-dive.md) — index redirect for the legacy deep-dive; kept for backward compatibility.
-- [references/api-error-handling.md](references/api-error-handling.md), [references/api-pagination.md](references/api-pagination.md), and [references/api-testing-verification.md](references/api-testing-verification.md) - absorbed API specialist entrypoints.
 
 ## Capability contract
 Default to contract design and validation. Write specifications or generate clients only when authorised; do not deploy gateways, rotate credentials, or change production routes without approval.

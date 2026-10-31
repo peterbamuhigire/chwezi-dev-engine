@@ -20,6 +20,13 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- Context map and critical-flow table from `system-architecture-design`.
+- Access-pattern list from `database-design-engineering` (so isolation model matches real queries).
+- Threat model / abuse cases from `vibe-security-skill`.
+- Panel and user-type list from product requirements (super admin, tenant admin, end user, and their sub-types).
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -59,13 +66,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The work is about business-module composition rather than tenant boundaries — use `modular-saas-architecture`.
 - The work is pure schema shaping inside an already-defined tenant model — use `database-design-engineering` and `mysql-best-practices`.
 
-## Required Inputs
-
-- Context map and critical-flow table from `system-architecture-design`.
-- Access-pattern list from `database-design-engineering` (so isolation model matches real queries).
-- Threat model / abuse cases from `vibe-security-skill`.
-- Panel and user-type list from product requirements (super admin, tenant admin, end user, and their sub-types).
-
 ## Workflow
 
 - Produce the tenant-isolation map, panel layout, permission model, and audit plan as the deliverables named in Outputs.
@@ -88,6 +88,12 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 <!-- dual-compat-end -->
 
 Production-grade multi-tenant SaaS architecture with three-panel separation, zero-trust enforcement, strict tenant isolation, and comprehensive audit trails. This skill defines the tenant and auth boundaries that every downstream module, API, and data query inherits.
+
+Skill-specific references:
+
+- `references/database-schema.md` — tenant, user, audit, and tenant-scoped table schemas with indexes and partitioning.
+- `references/permission-model.md` — RBAC schema, permission resolution algorithm, caching, middleware, hierarchical and conditional permissions.
+- `documentation/migration.md` — adding `tenant_id` safely, zero-downtime migration, single-to-multi-tenant phases, rollback.
 
 ## Prerequisites
 
@@ -443,11 +449,6 @@ Archival is reversible until a configured retention cut-off; archived tenants ar
 - `modular-saas-architecture` — when the platform also composes pluggable business modules inside the tenancy defined here.
 - `mysql-best-practices` — MySQL engine-specific execution of the schema patterns here.
 
-## References
-
-- `references/database-schema.md` — tenant, user, audit, and tenant-scoped table schemas with indexes and partitioning.
-- `references/permission-model.md` — RBAC schema, permission resolution algorithm, caching, middleware, hierarchical and conditional permissions.
-- `documentation/migration.md` — adding `tenant_id` safely, zero-downtime migration, single-to-multi-tenant phases, rollback.
 ## AI Services Isolation Addendum
 
 Tenant isolation patterns apply one level deeper when AI is in play. The transactional patterns in this skill (RLS / schema-per-tenant / DB-per-tenant) extend to AI asset classes — vector stores, prompts, fine-tunes, eval datasets, conversation logs, retrieval caches, audit log payloads. The dedicated skill is `ai-tenant-isolation-patterns`.

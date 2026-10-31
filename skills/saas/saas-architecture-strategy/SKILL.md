@@ -20,6 +20,14 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Current architecture, plans, policies, and constraints | yes | Preserve enforceable behaviour |
 | Production data or verified evidence | conditional | Validate thresholds and migrations |
 
+Skill-specific inputs:
+
+- The business capabilities the SaaS will serve, named and prioritised.
+- The enterprise consumption profile: tenant size distribution, residency requirements, integration surface, regulatory regime.
+- The operating model: support tiers, deployment cadence, who runs production, billing/metering granularity.
+- Constraints: cloud provider commitments, data sovereignty, compliance frameworks, existing licences.
+- Scaling expectations: peak concurrency, throughput, growth curve, latency targets per tenant tier.
+
 ## Capability and permission contract
 
 Default to read-only analysis. Change configuration, billing, identity, tenant data, infrastructure, or customer communications only with explicit authority, least-privilege credentials, tenant scope, rollback, and auditable approval. Never expose secrets or cross tenant boundaries.
@@ -58,13 +66,6 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - The product is internal-only with a single tenant — use generic application architecture guidance.
 - The work is a single component refactor with no tenancy, residency, or consumption-model implication.
 - The decision is a vendor selection without architectural commitment; defer until a target architecture is shaped.
-
-## Required Inputs
-- The business capabilities the SaaS will serve, named and prioritised.
-- The enterprise consumption profile: tenant size distribution, residency requirements, integration surface, regulatory regime.
-- The operating model: support tiers, deployment cadence, who runs production, billing/metering granularity.
-- Constraints: cloud provider commitments, data sovereignty, compliance frameworks, existing licences.
-- Scaling expectations: peak concurrency, throughput, growth curve, latency targets per tenant tier.
 
 ## Workflow
 1. **Map business capabilities first.** Before any tenancy decision, list the capabilities the SaaS delivers and rank them by differentiation, regulatory weight, and shared-vs-bespoke pressure. See `references/architecture-to-business-capability-map.md`.

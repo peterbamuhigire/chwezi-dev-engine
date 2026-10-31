@@ -20,6 +20,11 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 | Source evidence, constraints, and owner | yes | Ground recommendations and accountability |
 | Approved budget, customer data, or production artefacts | conditional | Support high-impact execution |
 
+Skill-specific inputs:
+
+- Business objective, target market, and the product or feature idea under review.
+- Available research, usage data, constraints, and stakeholder context.
+
 ## Capability and permission contract
 
 Default to read-only analysis and drafting. Do not publish, send, price, promise, alter customer records, commit budget, or modify production artefacts without explicit authority and a named approver. Minimise confidential data, preserve provenance, and keep reversible copies.
@@ -57,11 +62,6 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 
 - The work is already defined at feature level and only needs implementation sequencing.
 - The request is a narrow screen-level UX refinement with no product-risk question.
-
-## Required Inputs
-
-- Business objective, target market, and the product or feature idea under review.
-- Available research, usage data, constraints, and stakeholder context.
 
 ## Workflow
 
