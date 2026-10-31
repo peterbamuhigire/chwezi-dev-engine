@@ -396,3 +396,89 @@ fixtures:
     negatives:
       - task: "Run a security scan of the whole codebase for exposed secrets and unsafe dependencies before deployment"
         owner: code-safety-scanner
+
+  # --- Kaizen pass 2 (31 Oct 2026): first positive fixture for each skill that had none ---
+  - task: "Which accounting doctrine applies to this change and what control evidence do we need before the finance module is released"
+    expect: accounting-finance-controller
+  - task: "Design the control loop for tenant agents with retries, step caps and durable resume after a worker crash"
+    expect: ai-agent-runtime-architecture
+  - task: "Red-team our support agent for indirect prompt injection through retrieved documents and unsafe tool chains"
+    expect: ai-agent-safety-and-red-team
+  - task: "Give executives dashboards of predictive and NLP insight for our SaaS product"
+    expect: ai-analytics
+  - task: "Estimate the return on an AI feature and decide which AI-powered products deliver measurable business value"
+    expect: ai-economic-value-engine
+  - task: "Trace prompts and responses per tenant and build replay tooling so support can see why the assistant answered that way"
+    expect: ai-observability-and-debugging
+  - task: "Rank candidate AI use cases for this module in a register showing impact, effort, cost and risk"
+    expect: ai-opportunity-canvas
+  - task: "Build a chat page with streaming answers, retrieval, tool calls and per-tenant token budgets"
+    expect: ai-web-apps
+  - task: "Ship our game to iPad and Mac with controller support, haptics, cloud saves, signing and notarisation"
+    expect: apple-game-platform-delivery
+  - task: "Audit how agent roles, command surfaces, hooks and handoffs are wired across the engines and where recovery is bounded"
+    expect: engine-control-plane
+  - task: "Import sprite atlases, tile sets and skeletal animation for the 2D game and validate its particle effects"
+    expect: game-2d-art-animation-and-vfx-pipeline
+  - task: "Prepare rigged characters and props with LODs and collision from Blender and export glTF for the game"
+    expect: game-3d-asset-pipeline
+  - task: "Add control remapping, subtitles, colour-blind options and translations to the game and review content for cultural safety"
+    expect: game-accessibility-localisation-and-player-safety
+  - task: "Make enemies perceive the player, choose actions and navigate crowds without blocking each other"
+    expect: game-ai-behaviour-and-navigation
+  - task: "Integrate music, ambience, dialogue and footsteps with a mix that stays within the memory budget"
+    expect: game-audio-implementation
+  - task: "Create reproducible build pipelines for the Unity and Android game with symbols, signing boundaries and manifests"
+    expect: game-build-release-engineering
+  - task: "Define telemetry funnels, retention metrics and virtual currency sources and sinks for the live game"
+    expect: game-data-analytics-and-live-economy
+  - task: "Plan a whole game project from concept to vertical slice, certification and launch"
+    expect: game-development-orchestration
+  - task: "Work out quaternion interpolation, collision geometry and camera maths for the physics in the game"
+    expect: game-math-and-simulation
+  - task: "Design branching quests, characters and dialogue for an interactive story in the game"
+    expect: game-narrative-and-interactive-story-design
+  - task: "Threat-model the game server: validate player actions, protect the in-game economy and detect cheating bots"
+    expect: game-security-anti-cheat-and-abuse
+  - task: "Estimate, staff and contract an outsourced game with milestones, a statement of work and change control"
+    expect: game-studio-delivery-and-commercial-operations
+  - task: "Plan playtests, balance passes, save migration checks and compatibility testing before the game ships"
+    expect: game-testing-polish
+  - task: "Specify engine-neutral movement, combat, inventory and save and load systems for the game"
+    expect: gameplay-systems-architecture
+  - task: "Administer ArcGIS Enterprise: publish services, set roles and plan backup and disaster recovery for real estate maps"
+    expect: gis-enterprise-domain
+  - task: "Add a map with geocoding and PostGIS spatial queries behind an API"
+    expect: gis-platform-engineering
+  - task: "Export our Godot project to Android and iOS and profile its scenes, signals and GDScript"
+    expect: godot-mobile-game-development
+  - task: "Run an evidence-backed audit with a baseline and small experiments to improve this engineering engine"
+    expect: kaizen-improvement-system
+  - task: "Turn a game mechanic idea into falsifiable hypotheses and a prototype with measured results"
+    expect: lean-game-product-development
+  - task: "Produce levels, encounters and streaming partitions with procedural generation for the open world"
+    expect: level-world-and-content-production
+  - task: "Design the core loop, touch controls and onboarding for a mobile game with the player fantasy defined"
+    expect: mobile-game-design
+  - task: "Enforce frame time, memory, battery and thermal budgets for the mobile game on low-end phones"
+    expect: mobile-game-performance
+  - task: "Prepare store submission, ratings, privacy answers, in-app purchases and staged rollout for the Android and iOS game"
+    expect: mobile-game-release-liveops
+  - task: "Implement functional and presentation currency with exchange rate tables and revaluation of foreign balances under IAS 21"
+    expect: multicurrency-and-fx
+  - task: "Design authoritative server multiplayer with prediction, reconciliation, matchmaking and reconnect"
+    expect: online-multiplayer-and-game-backend
+  - task: "Build a Python agent with tool handoffs, guardrails and tracing on OpenAI's agent framework"
+    expect: openai-agents-sdk
+  - task: "Diagnose the render pipeline: shaders, shadows, lighting and GPU frame cost"
+    expect: real-time-game-graphics
+  - task: "Design a configurable ERP platform with multi-step approval workflows, modules and audit trails"
+    expect: saas-erp-system-design
+  - task: "Make sure this release clears two independent adversarial reviewers before it ships"
+    expect: santa-method
+  - task: "Normalise this skill to the repository house style with capability boundaries and input and output contracts"
+    expect: skill-composition-standards
+  - task: "Restructure the C# Unity mobile project, profile it and package it for Android and iOS"
+    expect: unity-mobile-game-development
+  - task: "Restructure the Unreal game with C++ and Blueprints, Gameplay Framework classes and packaging automation"
+    expect: unreal-game-development
