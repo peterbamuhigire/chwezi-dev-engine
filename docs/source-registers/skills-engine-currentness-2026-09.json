@@ -17,18 +17,6 @@
       "scope": "Current W3C accessibility recommendation and conformance language."
     },
     {
-      "id": "isc-bind-status",
-      "title": "BIND 9 status and downloads",
-      "ref": "https://www.isc.org/bind/",
-      "tier": 1,
-      "accessed": "2026-09-01",
-      "verified_at": "2026-09-01",
-      "review_after": "2026-10-01",
-      "freshness_class": "platform",
-      "as_of": "2026-09-01",
-      "scope": "Current ISC release/status/support information; do not hard-code versions without rechecking."
-    },
-    {
       "id": "ietf-dnssec-bcp",
       "title": "RFC 9364 DNS Security Extensions",
       "ref": "https://www.rfc-editor.org/rfc/rfc9364.html",
@@ -65,42 +53,6 @@
       "scope": "IFRS Foundation effective-date and standard-status information; local reporting basis still controls."
     },
     {
-      "id": "nist-ai-rmf",
-      "title": "NIST AI Risk Management Framework",
-      "ref": "https://www.nist.gov/itl/ai-risk-management-framework",
-      "tier": 1,
-      "accessed": "2026-09-01",
-      "verified_at": "2026-09-01",
-      "review_after": "2026-10-01",
-      "freshness_class": "platform",
-      "publication_date": "2023-01-26",
-      "scope": "Current NIST AI RMF status and supporting resources; page notes that AI RMF 1.0 is being revised."
-    },
-    {
-      "id": "ms-windows-lifecycle",
-      "title": "Microsoft Lifecycle",
-      "ref": "https://learn.microsoft.com/en-us/lifecycle/",
-      "tier": 1,
-      "accessed": "2026-09-01",
-      "verified_at": "2026-09-01",
-      "review_after": "2026-10-01",
-      "freshness_class": "platform",
-      "as_of": "2026-09-01",
-      "scope": "Windows and Microsoft product lifecycle and support-status claims."
-    },
-    {
-      "id": "ms-powershell-lifecycle",
-      "title": "PowerShell Support Lifecycle",
-      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-support-lifecycle?view=powershell-7.5",
-      "tier": 1,
-      "accessed": "2026-09-01",
-      "verified_at": "2026-09-01",
-      "review_after": "2026-10-01",
-      "freshness_class": "platform",
-      "as_of": "2026-09-01",
-      "scope": "PowerShell 7 stable/LTS/support claims; Windows PowerShell 5.1 is a separate OS component."
-    },
-    {
       "id": "ms-windows-security-baselines",
       "title": "Windows security baselines",
       "ref": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines",
@@ -123,18 +75,6 @@
       "freshness_class": "platform",
       "as_of": "2026-09-01",
       "scope": "Security Compliance Toolkit tools and versioned baseline workflow."
-    },
-    {
-      "id": "ms-intune-security-baselines",
-      "title": "Intune security baselines for Windows devices",
-      "ref": "https://learn.microsoft.com/en-us/intune/device-security/security-baselines/overview",
-      "tier": 1,
-      "accessed": "2026-09-01",
-      "verified_at": "2026-09-01",
-      "review_after": "2026-10-01",
-      "freshness_class": "platform",
-      "as_of": "2026-09-01",
-      "scope": "Current Intune security-baseline feature and platform-support claims."
     },
     {
       "id": "ms-windows-server-docs",
@@ -168,150 +108,6 @@
       "uncertainty": "First-party taxonomy; detector accuracy, prevalence and universal authorship inference NOT_ASSESSED. Superseded record impeccable-slop-page-2026-09-03 (web page only, no commit). Pointer refreshed under my-10-kaizen M10-09 on 2026-09-29."
     },
     {
-      "id": "openai-image-prompting-2026-09-16",
-      "title": "OpenAI Image prompting guide",
-      "ref": "https://developers.openai.com/api/docs/guides/image-prompting",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current OpenAI image prompting guidance for composition, references, text, editing, preservation, and evaluation.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific; other image models may interpret prompts differently."
-    },
-    {
-      "id": "openai-image-generation-2026-09-16",
-      "title": "OpenAI Image generation guide",
-      "ref": "https://developers.openai.com/api/docs/guides/image-generation",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current OpenAI image generation and editing workflow, including multi-turn refinement.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific; account and model availability are not established by this page."
-    },
-    {
-      "id": "openai-model-catalog-2026-09-16",
-      "title": "OpenAI Models catalogue",
-      "ref": "https://developers.openai.com/api/docs/models",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Model names and catalogue status visible on the current OpenAI developer documentation page.",
-      "support_status": "verified",
-      "confidence": "high for catalogue content at access time",
-      "owner": "digital-research-engine",
-      "uncertainty": "Account entitlement and active Codex runtime availability are NOT_ASSESSED."
-    },
-    {
-      "id": "openai-prompt-engineering-2026-09-16",
-      "title": "OpenAI Prompt engineering guide",
-      "ref": "https://developers.openai.com/api/docs/guides/prompt-engineering",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current OpenAI guidance on instruction/data separation, examples, context, code-managed prompts, testing, and rollout.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific; do not treat this as a universal model-behaviour guarantee."
-    },
-    {
-      "id": "openai-evals-2026-09-16",
-      "title": "OpenAI Evals guide",
-      "ref": "https://developers.openai.com/api/docs/guides/evals",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current OpenAI evaluation-data and grader workflow.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific API details; evaluation quality still depends on representative data and grader design."
-    },
-    {
-      "id": "openai-safety-best-practices-2026-09-16",
-      "title": "OpenAI Safety best practices",
-      "ref": "https://developers.openai.com/api/docs/guides/safety-best-practices",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current OpenAI application safety and human-oversight guidance.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific; controls must be adapted to the actual product and threat model."
-    },
-    {
-      "id": "anthropic-claude-code-best-practices-2026-09-16",
-      "title": "Anthropic Claude Code best practices",
-      "ref": "https://code.claude.com/docs/en/best-practices",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current Anthropic guidance on verification evidence, explore-plan-code separation, context management, and bounded delegation.",
-      "support_status": "verified",
-      "confidence": "high within Claude Code scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Runner-specific; controls must be rechecked in each adapter."
-    },
-    {
-      "id": "ms-powershell-shouldprocess-2026-09-16",
-      "title": "Microsoft PowerShell ShouldProcess guidance",
-      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-shouldprocess?view=powershell-7.6",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current PowerShell WhatIf/Confirm and explicit nested-operation validation guidance.",
-      "support_status": "verified",
-      "confidence": "high for documented PowerShell behaviour",
-      "owner": "digital-research-engine",
-      "uncertainty": "Exact behaviour depends on command/module implementation; test the actual function and dependency chain."
-    },
-    {
-      "id": "ms-powershell-approved-verbs-2026-09-16",
-      "title": "Microsoft PowerShell approved-verb guidance",
-      "ref": "https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/useapprovedverbs?view=ps-modules",
-      "tier": 1,
-      "accessed": "2026-09-16",
-      "verified_at": "2026-09-16",
-      "review_after": "2026-10-16",
-      "freshness_class": "platform",
-      "as_of": "2026-09-16",
-      "scope": "Current PSScriptAnalyzer approved-verb rule and Get-Verb convention.",
-      "support_status": "verified",
-      "confidence": "high for naming guidance",
-      "owner": "digital-research-engine",
-      "uncertainty": "Naming guidance does not prove functional correctness."
-    },
-    {
       "id": "w3c-validator-user-docs-2026-09-16",
       "title": "W3C Markup Validator user documentation",
       "ref": "https://validator.w3.org/docs/users.html",
@@ -326,134 +122,6 @@
       "confidence": "high for validator scope",
       "owner": "digital-research-engine",
       "uncertainty": "A validator does not replace accessibility, browser, visual, or content review."
-    },
-    {
-      "id": "openai-prompt-engineering-2026-09-17",
-      "title": "OpenAI Prompt engineering guide",
-      "ref": "https://developers.openai.com/api/docs/guides/prompt-engineering",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current OpenAI guidance on instruction/data separation, examples, context, code-managed prompts, testing, and rollout.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific; do not treat this as a universal model-behaviour guarantee."
-    },
-    {
-      "id": "openai-latest-model-guidance-2026-09-17",
-      "title": "OpenAI latest model guidance",
-      "ref": "https://developers.openai.com/api/docs/guides/latest-model",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current OpenAI model-specific prompting guidance: lead with the outcome, state constraints/evidence/side effects/output shape, and calibrate process detail to the task.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific and model-specific; do not promote into universal engine rules."
-    },
-    {
-      "id": "openai-model-catalog-2026-09-17",
-      "title": "OpenAI Models catalogue",
-      "ref": "https://developers.openai.com/api/docs/models",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current OpenAI model identifiers and catalogue positioning at access time; entitlement is separate.",
-      "support_status": "verified",
-      "confidence": "high for catalogue content at access time",
-      "owner": "digital-research-engine",
-      "uncertainty": "Account entitlement and active Codex runtime availability are NOT_ASSESSED."
-    },
-    {
-      "id": "openai-evals-2026-09-17",
-      "title": "OpenAI Evals guide",
-      "ref": "https://developers.openai.com/api/docs/guides/evals",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current OpenAI evaluation workflow using test data, schemas, criteria, graders, and comparison runs.",
-      "support_status": "verified",
-      "confidence": "high within OpenAI provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific API details; evaluation quality still depends on representative data and grader design."
-    },
-    {
-      "id": "anthropic-prompting-2026-09-17",
-      "title": "Anthropic prompt engineering: templates and variables",
-      "ref": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current Anthropic guidance on clarity, context, examples, structured boundaries, role, long-context work, tool use, research criteria, and agentic safety.",
-      "support_status": "verified",
-      "confidence": "high within Anthropic provider scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-specific; exact model behaviour and claimed gains are not universal."
-    },
-    {
-      "id": "anthropic-claude-code-best-practices-2026-09-17",
-      "title": "Anthropic Claude Code best practices",
-      "ref": "https://code.claude.com/docs/en/best-practices",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current Anthropic guidance on verification evidence, explore-plan-code separation, context management, and bounded delegation.",
-      "support_status": "verified",
-      "confidence": "high within Claude Code scope",
-      "owner": "digital-research-engine",
-      "uncertainty": "Runner-specific; controls must be rechecked in each adapter."
-    },
-    {
-      "id": "ms-powershell-shouldprocess-2026-09-17",
-      "title": "Microsoft PowerShell ShouldProcess guidance",
-      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-shouldprocess?view=powershell-7.6",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current PowerShell WhatIf/Confirm and nested-operation validation guidance.",
-      "support_status": "verified",
-      "confidence": "high for documented PowerShell behaviour",
-      "owner": "digital-research-engine",
-      "uncertainty": "Exact behaviour depends on command/module implementation; test the actual function and dependency chain."
-    },
-    {
-      "id": "ms-powershell-approved-verbs-2026-09-17",
-      "title": "Microsoft PowerShell approved-verb guidance",
-      "ref": "https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/useapprovedverbs?view=ps-modules",
-      "tier": 1,
-      "accessed": "2026-09-17",
-      "verified_at": "2026-09-17",
-      "review_after": "2026-10-17",
-      "freshness_class": "platform",
-      "as_of": "2026-09-17",
-      "scope": "Current PSScriptAnalyzer approved-verb rule and Get-Verb convention.",
-      "support_status": "verified",
-      "confidence": "high for naming guidance",
-      "owner": "digital-research-engine",
-      "uncertainty": "Naming guidance does not prove functional correctness."
     },
     {
       "id": "w3c-validator-user-docs-2026-09-17",
@@ -472,100 +140,21 @@
       "uncertainty": "A validator does not replace accessibility, browser, visual, or content review."
     },
     {
-      "id": "openai-model-catalog-2026-09-25",
-      "title": "OpenAI models catalog",
-      "ref": "https://developers.openai.com/api/docs/models",
-      "tier": 1,
-      "accessed": "2026-09-25",
-      "verified_at": "2026-09-25",
-      "review_after": "2026-10-25",
-      "freshness_class": "platform",
-      "as_of": "2026-09-25",
-      "scope": "Current official GPT-6 family IDs, product positioning, reasoning levels and listed API prices; not comparative local task-quality evidence.",
-      "support_status": "verified",
-      "confidence": "high for published catalog facts",
-      "owner": "digital-research-engine",
-      "uncertainty": "Provider-published positioning is not an independent benchmark; latency and workload-specific quality comparisons were not assessed."
-    },
-    {
-      "id": "openai-gpt56-luna-model-details-2026-09-25",
-      "title": "GPT-5.6 Luna model details",
-      "ref": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
-      "tier": 1,
-      "accessed": "2026-09-25",
-      "verified_at": "2026-09-25",
-      "review_after": "2026-10-25",
-      "freshness_class": "platform",
-      "as_of": "2026-09-25",
-      "scope": "Official GPT-5.6 Luna cost positioning and published API input/output prices, checked for comparison with GPT-6 Luna.",
-      "support_status": "verified",
-      "confidence": "high for published model details",
-      "owner": "digital-research-engine",
-      "uncertainty": "API prices are not a measure of Codex plan usage cost or total task cost."
-    },
-    {
-      "id": "cisco-ios-xe-hardening-2026-09-25",
-      "title": "Cisco IOS XE Software Hardening Guide",
-      "ref": "https://sec.cloudapps.cisco.com/security/center/resources/IOS_XE_hardening",
-      "tier": 1,
-      "accessed": "2026-09-27",
-      "verified_at": "2026-09-27",
-      "review_after": "2026-10-27",
-      "freshness_class": "platform",
-      "as_of": "2026-09-27",
-      "scope": "Cisco IOS XE management-plane guidance: prefer SSH to clear-text Telnet, use vty/tty controls including access-class and exec-timeout; confirm exact target-platform support before use.",
-      "support_status": "verified",
-      "confidence": "high for the statements in this Cisco guide",
-      "owner": "digital-research-engine",
-      "uncertainty": "Official Cisco IOS XE guidance; target model, release, feature support, and local policy must still be checked before operational use. Publication/version date is not stated on the inspected page."
-    },
-    {
-      "id": "openai-codex-model-availability-2026-09-25",
-      "title": "ChatGPT Work and Codex model availability",
-      "ref": "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
-      "tier": 1,
-      "accessed": "2026-09-25",
-      "verified_at": "2026-09-25",
-      "review_after": "2026-10-25",
-      "freshness_class": "platform",
-      "as_of": "2026-09-25",
-      "scope": "Official statement that GPT-6 Luna is a Work/Codex model and availability depends on plan, workspace settings and rollout.",
-      "support_status": "verified",
-      "confidence": "high for documented availability conditions",
-      "owner": "digital-research-engine",
-      "uncertainty": "Does not establish this user's plan/workspace entitlement by itself."
-    },
-    {
-      "id": "openai-gpt6-luna-model-details-2026-09-25",
-      "title": "GPT-6 Luna model details",
-      "ref": "https://developers.openai.com/api/docs/models/gpt-6-luna",
-      "tier": 1,
-      "accessed": "2026-09-25",
-      "verified_at": "2026-09-25",
-      "review_after": "2026-10-25",
-      "freshness_class": "platform",
-      "as_of": "2026-09-25",
-      "scope": "Official gpt-6-luna model ID, supported high reasoning effort, product positioning, context/output limits and published API prices.",
-      "support_status": "verified",
-      "confidence": "high for published model details",
-      "owner": "digital-research-engine",
-      "uncertainty": "API catalog presence and prices do not prove Codex plan entitlement or local comparative performance."
-    },
-    {
       "id": "play-target-2026-10-29",
       "title": "Google Play target API level requirement",
       "ref": "https://support.google.com/googleplay/android-developer/answer/11926878?hl=en",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
-      "review_after": "2026-11-05",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Google Play submission target API requirement for general new applications and updates; platform-specific exceptions differ.",
       "support_status": "context-bound",
       "confidence": "high within stated Play category/date",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Does not establish a specific app's category, granted extension, or acceptance."
+      "uncertainty": "Does not establish a specific app's category, granted extension, or acceptance.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "android-17-release-2026-10-29",
@@ -604,16 +193,17 @@
       "title": "Kotlin releases",
       "ref": "https://kotlinlang.org/docs/releases.html",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
-      "review_after": "2026-11-05",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Official release listing; page displayed Kotlin 2.4.21 dated 2026-10-08.",
       "support_status": "context-bound",
       "confidence": "high for listed release at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Does not prove compatibility with a project's Android Gradle Plugin or dependencies."
+      "uncertainty": "Does not prove compatibility with a project's Android Gradle Plugin or dependencies.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "compose-setup-2026-10-29",
@@ -652,8 +242,8 @@
       "title": "Next.js v16.4.3 release",
       "ref": "https://github.com/vercel/next.js/releases/tag/v16.4.3",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
       "review_after": "2026-11-03",
       "freshness_class": "platform",
       "publication_date": "2026-10-23",
@@ -661,23 +251,26 @@
       "support_status": "context-bound",
       "confidence": "high for the repository release listing at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Canary versions may be newer but are prereleases; latest stable status must be rechecked at use time."
+      "uncertainty": "Canary versions may be newer but are prereleases; latest stable status must be rechecked at use time.",
+      "as_of": "2026-10-31",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "nextjs-support-policy-2026-10-29",
       "title": "Next.js support policy",
       "ref": "https://nextjs.org/support-policy",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
       "review_after": "2026-11-03",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Official support table identifies Next.js 16.x as Active LTS and Next.js 15.x as Maintenance LTS through 2027-01-31.",
       "support_status": "context-bound",
       "confidence": "high for the support table at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Support state is time-sensitive and does not prove application compatibility or vulnerability status."
+      "uncertainty": "Support state is time-sensitive and does not prove application compatibility or vulnerability status.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "next-authentication-2026-10-29",
@@ -780,32 +373,34 @@
       "title": "PHP supported versions",
       "ref": "https://www.php.net/supported-versions.php",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
-      "review_after": "2026-11-05",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Official PHP branch support table for 8.2 to 8.5 as displayed on access date.",
       "support_status": "context-bound",
       "confidence": "high for official table at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Distribution/vendor backports and extension compatibility are separate."
+      "uncertainty": "Distribution/vendor backports and extension compatibility are separate.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "postgresql-support-2026-10-29",
       "title": "PostgreSQL versioning policy and support table",
       "ref": "https://www.postgresql.org/support/versioning/",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
-      "review_after": "2026-11-05",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Official support status and minor release table; listed supported majors were 14 to 18 and current 18 minor was 18.6.",
       "support_status": "context-bound",
       "confidence": "high for official support page at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "No particular application version was selected or deployed."
+      "uncertainty": "No particular application version was selected or deployed.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "postgresql-security-2026-10-29",
@@ -844,16 +439,17 @@
       "title": "OpenAI model catalogue",
       "ref": "https://developers.openai.com/api/docs/models",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
-      "review_after": "2026-11-29",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Official provider model catalogue and reasoning effort details; local cache separately observed at the timestamp in the external packaging-research record.",
       "support_status": "context-bound",
       "confidence": "high for public catalogue at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Account entitlement, active model for this session, comparative quality, latency and cost are NOT_ASSESSED."
+      "uncertainty": "Account entitlement, active model for this session, comparative quality, latency and cost are NOT_ASSESSED.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "openai-changelog-2026-10-29",
@@ -956,16 +552,17 @@
       "title": "Android Gradle plugin and API level support table",
       "ref": "https://developer.android.com/build/releases/about-agp",
       "tier": 1,
-      "accessed": "2026-10-29",
-      "verified_at": "2026-10-29",
-      "review_after": "2026-11-05",
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
       "freshness_class": "platform",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-31",
       "scope": "Official Android Developers table for minimum AGP versions supported by Android API levels; lists API 37 support beginning at AGP 9.1.1.",
       "support_status": "context-bound",
       "confidence": "high for table contents at access time",
       "owner": "Chwezi Dev Engine",
-      "uncertainty": "Does not establish the compatibility of every project plugin or dependency."
+      "uncertainty": "Does not establish the compatibility of every project plugin or dependency.",
+      "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
       "id": "android-agp-9-1-notes-2026-10-29",
@@ -998,6 +595,536 @@
       "confidence": "high for guidance at access time",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Does not establish compatibility of a project plugin set without a build."
+    },
+    {
+      "id": "isc-bind-status-2026-10-31",
+      "title": "ISC BIND release status",
+      "ref": "https://www.isc.org/bind/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "ISC page listed 9.20.30 as Current Stable, 9.21.27 as Development and 9.18.50 as end of life (headline: June 2026 marks end of life for BIND 9.18).",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Release and end-of-life dates in the page table were not clearly labelled in the fetched text; versions must be re-read before any is named in a skill."
+    },
+    {
+      "id": "nist-ai-rmf-2026-10-31",
+      "title": "NIST AI Risk Management Framework",
+      "ref": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-12-31",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "NIST page: AI RMF 1.0 released 2023-01-26 and stated to be under revision; Generative AI Profile NIST-AI-600-1 released 2024-07-26; critical-infrastructure profile concept note released 2026-04-07.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The page shows no last-updated date and gives no revision timetable.",
+      "publication_date": "2023-01-26"
+    },
+    {
+      "id": "ms-windows-lifecycle-2026-10-31",
+      "title": "Microsoft product and services lifecycle",
+      "ref": "https://learn.microsoft.com/en-us/lifecycle/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Lifecycle landing page reachable. Product-level support dates were not read; usable only to locate per-product lifecycle pages.",
+      "support_status": "partial",
+      "confidence": "medium: landing page only",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "No product support date is asserted by this record."
+    },
+    {
+      "id": "ms-powershell-lifecycle-2026-10-31",
+      "title": "PowerShell support lifecycle",
+      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-support-lifecycle?view=powershell-7.6",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-11",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page (ms.date 2026-08-13): current LTS PowerShell 7.6.6 supported to 2028-11-14; stable 7.5.11 and LTS 7.4.20 supported to 2026-11-10; 7.7-preview.3 is preview; Windows PowerShell 5.1 is a separate Windows component.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Support dates follow the .NET policy and can change; patch numbers move monthly."
+    },
+    {
+      "id": "ms-intune-security-baselines-2026-10-31",
+      "title": "Intune security baselines overview",
+      "ref": "https://learn.microsoft.com/en-us/intune/device-security/security-baselines/overview",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page (ms.date 2026-09-30): baselines for Windows 11 and Windows 10 version 1809 and later; states Windows 10 reached end of support on 2025-10-14 and remains an allowed Intune version; lists Windows 10 and later baseline versions 23H2 to 26H2.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Baseline versions change with each Windows release; confirm in the Intune admin centre."
+    },
+    {
+      "id": "openai-image-prompting-2026-10-31",
+      "title": "OpenAI image prompting guide",
+      "ref": "https://developers.openai.com/api/docs/guides/image-prompting",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Guide covers composition, text rendering, reference-image roles, editing and preservation, and model evaluation; states GPT Image 1.5 is scheduled to shut down on 2026-12-01 and GPT Image 1 shut down on 2026-10-23.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Provider-specific; other image models interpret prompts differently; account availability is not established."
+    },
+    {
+      "id": "openai-image-generation-2026-10-31",
+      "title": "OpenAI image generation guide",
+      "ref": "https://developers.openai.com/api/docs/guides/image-generation",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Guide names gpt-image-2.5-sunburst and gpt-image-2.5-flare; describes generation and editing through the Image API and multi-turn editing through the Responses API.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The fetch read the first 100000 of 114889 characters. Provider-specific; availability depends on account."
+    },
+    {
+      "id": "openai-prompt-engineering-2026-10-31",
+      "title": "OpenAI prompt engineering guide",
+      "ref": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Guide: developer and user message roles, XML delimiters for data, few-shot examples, code-managed prompt builders, tests and evaluations before changing production prompts; saved prompt objects de-emphasised from 2026-06-03 and v1/prompts scheduled to shut down on 2026-11-30.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Provider-specific; not a universal model-behaviour guarantee."
+    },
+    {
+      "id": "openai-evals-2026-10-31",
+      "title": "OpenAI evals guide",
+      "ref": "https://developers.openai.com/api/docs/guides/evals",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Guide describes define-run-analyse with JSONL test data and graders; the page states the OpenAI Evals platform becomes read-only for existing users on 2026-10-31 and shuts down on 2026-11-30.",
+      "support_status": "partial",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Deprecated platform: do not recommend this workflow for new work. Engine evaluation guidance is provider-neutral; no skill names the Evals API (search 2026-10-31)."
+    },
+    {
+      "id": "openai-safety-best-practices-2026-10-31",
+      "title": "OpenAI safety best practices",
+      "ref": "https://developers.openai.com/api/docs/guides/safety-best-practices",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Guide recommends moderation, red-teaming for prompt injection, input and output limits, user reporting, stable safety identifiers and human review of outputs in high-stakes domains and code generation.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Provider-specific; adapt controls to the product and threat model. No date shown on the page."
+    },
+    {
+      "id": "anthropic-claude-code-best-practices-2026-10-31",
+      "title": "Claude Code best practices",
+      "ref": "https://code.claude.com/docs/en/best-practices",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page sections: tell Claude what it cannot see; give Claude a check to run (including a Stop hook); enforce rules with hooks, permission rules and the sandbox; subagents, cost and context management; parallel and scheduled runs.",
+      "support_status": "partial",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The earlier explore-plan-code wording is not a section of the current page and is dropped. Runner-specific; recheck per adapter."
+    },
+    {
+      "id": "ms-powershell-shouldprocess-2026-10-31",
+      "title": "PowerShell ShouldProcess deep dive",
+      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-shouldprocess?view=powershell-7.6",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page (last updated 2026-04-08) covers SupportsShouldProcess, ShouldProcess(), WhatIf, Confirm and ConfirmImpact.",
+      "support_status": "partial",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The earlier nested-operation validation wording is not confirmed (one passing mention) and is dropped; test the actual function and its dependency chain."
+    },
+    {
+      "id": "ms-powershell-approved-verbs-2026-10-31",
+      "title": "PSScriptAnalyzer UseApprovedVerbs rule",
+      "ref": "https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/useapprovedverbs?view=ps-modules",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page (last updated 2026-07-21) documents the UseApprovedVerbs rule and the Get-Verb convention.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Naming guidance does not prove functional correctness."
+    },
+    {
+      "id": "openai-latest-model-guidance-2026-10-31",
+      "title": "OpenAI latest-model prompting guidance",
+      "ref": "https://developers.openai.com/api/docs/guides/latest-model",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page gives prompting practice for the GPT-6 family (initiative, instruction following, style, subagent delegation, testing and verification) and states it reflects behaviour seen with GPT-6 Astra; page metadata names gpt-6-astra as the latest model.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Provider and model specific; the provider says to test against the chosen model and workload. The engine's Codex pin is unchanged."
+    },
+    {
+      "id": "anthropic-prompting-2026-10-31",
+      "title": "Claude prompting best practices",
+      "ref": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "The old prompt-templates URL now redirects (301) to the page titled Prompting best practices; it covers clarity, examples, XML structure, roles, long context, tool use, agentic and research tasks.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Provider-specific; exact model behaviour and claimed gains are not universal."
+    },
+    {
+      "id": "openai-gpt56-luna-model-details-2026-10-31",
+      "title": "GPT-5.6 Luna model page",
+      "ref": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page exists and does not mark the model deprecated or superseded; published text prices are 0.2 per million input tokens, 1.2 per million output tokens and 0.02 per million cached input tokens (currency as displayed by the page).",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Comparison record only. The engine policy forbids selecting GPT-5.6; prices are not Codex plan usage or total task cost."
+    },
+    {
+      "id": "cisco-ios-xe-hardening-2026-10-31",
+      "title": "Cisco IOS XE hardening guide",
+      "ref": "https://sec.cloudapps.cisco.com/security/center/resources/IOS_XE_hardening",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page recommends 'transport input ssh' over Telnet and rlogin, authentication on all lines, access-class or transport restrictions, and exec-timeout for idle sessions.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "No revision date shown; the fetch read the first 100000 of 161663 characters; target model, release and feature support must be checked before use."
+    },
+    {
+      "id": "openai-gpt6-luna-model-details-2026-10-31",
+      "title": "GPT-6 Luna model page",
+      "ref": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Model ID gpt-6-luna; reasoning effort levels none, low, medium (default), high, xhigh and max; context window 1,050,000 tokens; maximum output 128,000 tokens; published prices 0.1 per million input tokens and 0.5 per million output tokens (currency as displayed by the page).",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Catalogue presence and prices do not prove Codex plan entitlement or local comparative performance."
+    },
+    {
+      "id": "owasp-top10-2025-2026-10-31",
+      "title": "OWASP Top 10:2025",
+      "ref": "https://top10.owasp.org/2025",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-12-31",
+      "freshness_class": "current",
+      "as_of": "2026-10-31",
+      "scope": "Current edition is OWASP Top 10:2025 with categories A01 Broken Access Control, A02 Security Misconfiguration, A03 Software Supply Chain Failures, A04 Cryptographic Failures, A05 Injection, A06 Insecure Design, A07 Authentication Failures, A08 Software or Data Integrity Failures, A09 Security Logging and Alerting Failures, A10 Mishandling of Exceptional Conditions. The old owasp.org/Top10/2025 address answers 308 to this host.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "No day-level publication date was shown by the page."
+    },
+    {
+      "id": "owasp-asvs-5-0-0-2026-10-31",
+      "title": "OWASP ASVS 5.0.0",
+      "ref": "https://asvs.owasp.org/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-12-31",
+      "freshness_class": "current",
+      "as_of": "2026-10-31",
+      "scope": "Page labels ASVS 5.0.0 as the stable release, published 2025-05-30. The old owasp.org/asvs address answers 308 to this host.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The page did not say whether a newer version is in development; requirements must stay version-qualified.",
+      "publication_date": "2025-05-30"
+    },
+    {
+      "id": "pci-dss-v4-0-1-2026-10-31",
+      "title": "PCI DSS document library",
+      "ref": "https://www.pcisecuritystandards.org/document_library/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-12-31",
+      "freshness_class": "regulatory",
+      "as_of": "2026-10-31",
+      "scope": "Library features PCI DSS v4.0.1 as the current version with a v4.0 to v4.0.1 summary of changes; the fetch showed no newer version or errata.",
+      "support_status": "partial",
+      "confidence": "medium: publication date not read",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The publication-date column did not render in the fetched text; applicability depends on the entity's validation scope."
+    },
+    {
+      "id": "slsa-spec-v1-2-2026-10-31",
+      "title": "SLSA specification",
+      "ref": "https://slsa.dev/spec/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-12-31",
+      "freshness_class": "current",
+      "as_of": "2026-10-31",
+      "scope": "Specification landing page shows Version 1.2, status Approved.",
+      "support_status": "partial",
+      "confidence": "medium: version and status only",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Release date and level definitions were not shown on the fetched page."
+    },
+    {
+      "id": "compose-bom-mapping-2026-10-31",
+      "title": "Compose BOM mapping",
+      "ref": "https://developer.android.com/develop/ui/compose/bom/bom-mapping",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Mapping table lists 2026.09.00 first and 2026.08.00 second; for 2026.09.00 the first entries map to Compose foundation, runtime and ui 1.12.1 and material3 1.4.0.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The fetch read 100000 of 107690 characters, and the library-to-BOM alignment was inferred from column order."
+    },
+    {
+      "id": "android-agp-latest-stable-2026-10-31",
+      "title": "Android Gradle Plugin releases",
+      "ref": "https://developer.android.com/build/releases/about-agp",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page lists AGP 9.5 as the newest stable release and AGP 9.6 as preview; its API-level table lists API 37 support from AGP 9.1.1.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Gradle and JDK pairings for 9.5 were ambiguous in the fetched text and are not asserted."
+    },
+    {
+      "id": "mysql-84-release-index-2026-10-31",
+      "title": "MySQL 8.4 release notes index",
+      "ref": "https://dev.mysql.com/doc/relnotes/mysql/8.4/en/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Index lists 8.4.13 (2026-10-20) as the newest 8.4 release, then 8.4.12 (2026-08-18); page generated 2026-10-26.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Package-specific applicability of fixes is not established."
+    },
+    {
+      "id": "openai-api-docs-landing-2026-10-31",
+      "title": "OpenAI API documentation landing page",
+      "ref": "https://developers.openai.com/api/docs/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Landing page lists Agents API, Agents SDK, Responses API, tools, prompt caching, deployment checklist and GPT-5.x and GPT-6 upgrade guides; the Assistants API is marked retired with a migration guide.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "No date shown; some titles appear twice under different URLs."
+    },
+    {
+      "id": "openai-docs-moves-2026-10-31",
+      "title": "OpenAI documentation address changes",
+      "ref": "https://developers.openai.com/api/docs/changelog",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "HTTP redirects observed: platform.openai.com/docs/changelog answers 301 to developers.openai.com/api/docs/changelog; developers.openai.com/codex answers 308 to learn.chatgpt.com/docs.",
+      "support_status": "context-bound",
+      "confidence": "high for redirect headers",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Redirect targets were not themselves re-read, except the skills context-budget page on learn.chatgpt.com read on 2026-10-29."
+    },
+    {
+      "id": "claude-code-docs-move-2026-10-31",
+      "title": "Claude Code documentation address",
+      "ref": "https://code.claude.com/docs/en/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "docs.anthropic.com/en/docs/claude-code/ answers 301 to code.claude.com/docs/en/; the best-practices page on the new host was read.",
+      "support_status": "context-bound",
+      "confidence": "high for redirect headers",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Redirect headers are server-supplied."
+    },
+    {
+      "id": "anthropic-tool-use-overview-2026-10-31",
+      "title": "Tool use with Claude",
+      "ref": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page describes client tools, Anthropic-schema client tools and server tools (web search, web fetch, code execution, tool search), the MCP connector, strict tool use and a per-model tool-use token table.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Model names and prices on the page change often; do not copy them into skills."
+    },
+    {
+      "id": "gemini-function-calling-2026-10-31",
+      "title": "Gemini API function calling",
+      "ref": "https://ai.google.dev/gemini-api/docs/function-calling",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page covers function declarations, parallel and compositional calling and tool_choice modes; examples use gemini-3.8-flash; a banner announces Gemini 4 Argon.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The fetch read 100000 of 146526 characters; model names change quickly."
+    },
+    {
+      "id": "bedrock-agents-classic-2026-10-31",
+      "title": "Amazon Bedrock Agents",
+      "ref": "https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Page states Amazon Bedrock Agents is now Agents Classic, no longer open to new customers, with Bedrock AgentCore as the similar capability; existing customers continue as normal.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The AgentCore documentation was not read beyond the link."
+    },
+    {
+      "id": "kubernetes-docs-version-2026-10-31",
+      "title": "Kubernetes documentation home",
+      "ref": "https://kubernetes.io/docs/home/",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Version selector lists v1.37 first.",
+      "support_status": "partial",
+      "confidence": "medium: inferred from selector order",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "The page does not label v1.37 as latest; that reading is inferred from position."
+    },
+    {
+      "id": "react-versions-2026-10-31",
+      "title": "React versions",
+      "ref": "https://react.dev/versions",
+      "tier": 1,
+      "accessed": "2026-10-31",
+      "verified_at": "2026-10-31",
+      "review_after": "2026-11-30",
+      "freshness_class": "platform",
+      "as_of": "2026-10-31",
+      "scope": "Versions page lists React 19.3 (v19.3.0) and v19.2.7.",
+      "support_status": "context-bound",
+      "confidence": "medium: text search of the page",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Read by text search of the page, not a full read."
     }
   ],
   "claims": [
@@ -1012,8 +1139,12 @@
       "id": "claim-bind-current",
       "requires_currentness": true,
       "source_ids": [
+        "isc-bind-status-2026-10-31"
+      ],
+      "previous_source_ids": [
         "isc-bind-status"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-dnssec-bcp",
@@ -1040,22 +1171,34 @@
       "id": "claim-ai-rmf-status",
       "requires_currentness": true,
       "source_ids": [
+        "nist-ai-rmf-2026-10-31"
+      ],
+      "previous_source_ids": [
         "nist-ai-rmf"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-windows-lifecycle",
       "requires_currentness": true,
       "source_ids": [
+        "ms-windows-lifecycle-2026-10-31"
+      ],
+      "previous_source_ids": [
         "ms-windows-lifecycle"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-powershell-support",
       "requires_currentness": true,
       "source_ids": [
+        "ms-powershell-lifecycle-2026-10-31"
+      ],
+      "previous_source_ids": [
         "ms-powershell-lifecycle"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-windows-security-baselines",
@@ -1063,8 +1206,14 @@
       "source_ids": [
         "ms-windows-security-baselines",
         "ms-sct",
+        "ms-intune-security-baselines-2026-10-31"
+      ],
+      "previous_source_ids": [
+        "ms-windows-security-baselines",
+        "ms-sct",
         "ms-intune-security-baselines"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-windows-server-docs",
@@ -1084,48 +1233,77 @@
       "id": "claim-domain-prompt-structure",
       "requires_currentness": true,
       "source_ids": [
+        "openai-image-prompting-2026-10-31",
+        "openai-image-generation-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-image-prompting-2026-09-16",
         "openai-image-generation-2026-09-16"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-openai-model-catalog-2026-09-16",
       "requires_currentness": true,
       "source_ids": [
+        "openai-model-catalog-2026-10-29"
+      ],
+      "previous_source_ids": [
         "openai-model-catalog-2026-09-16"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-prompt-envelope-and-lifecycle-2026-09-16",
       "requires_currentness": true,
       "source_ids": [
+        "openai-prompt-engineering-2026-10-31",
+        "anthropic-claude-code-best-practices-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-prompt-engineering-2026-09-16",
         "anthropic-claude-code-best-practices-2026-09-16"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-prompt-evaluation-and-rollout-2026-09-16",
       "requires_currentness": true,
       "source_ids": [
+        "openai-prompt-engineering-2026-10-31",
+        "openai-evals-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-prompt-engineering-2026-09-16",
         "openai-evals-2026-09-16"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-agent-safety-oversight-2026-09-16",
       "requires_currentness": true,
       "source_ids": [
+        "openai-safety-best-practices-2026-10-31",
+        "anthropic-claude-code-best-practices-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-safety-best-practices-2026-09-16",
         "anthropic-claude-code-best-practices-2026-09-16"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-powershell-prompt-safety-2026-09-16",
       "requires_currentness": true,
       "source_ids": [
+        "ms-powershell-shouldprocess-2026-10-31",
+        "ms-powershell-approved-verbs-2026-10-31"
+      ],
+      "previous_source_ids": [
         "ms-powershell-shouldprocess-2026-09-16",
         "ms-powershell-approved-verbs-2026-09-16"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-frontend-generated-markup-validation-2026-09-16",
@@ -1138,34 +1316,55 @@
       "id": "claim-prompt-card-evidence-first-2026-09-17",
       "requires_currentness": true,
       "source_ids": [
+        "openai-prompt-engineering-2026-10-31",
+        "anthropic-prompting-2026-10-31",
+        "anthropic-claude-code-best-practices-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-prompt-engineering-2026-09-17",
         "anthropic-prompting-2026-09-17",
         "anthropic-claude-code-best-practices-2026-09-17"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-prompt-eval-failure-slices-2026-09-17",
       "requires_currentness": true,
       "source_ids": [
+        "openai-prompt-engineering-2026-10-31",
+        "openai-evals-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-prompt-engineering-2026-09-17",
         "openai-evals-2026-09-17"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-prompt-model-adapter-2026-09-17",
       "requires_currentness": true,
       "source_ids": [
+        "openai-latest-model-guidance-2026-10-31",
+        "openai-model-catalog-2026-10-29"
+      ],
+      "previous_source_ids": [
         "openai-latest-model-guidance-2026-09-17",
         "openai-model-catalog-2026-09-17"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-prompt-powershell-safety-2026-09-17",
       "requires_currentness": true,
       "source_ids": [
+        "ms-powershell-shouldprocess-2026-10-31",
+        "ms-powershell-approved-verbs-2026-10-31"
+      ],
+      "previous_source_ids": [
         "ms-powershell-shouldprocess-2026-09-17",
         "ms-powershell-approved-verbs-2026-09-17"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-frontend-generated-markup-validation-2026-09-17",
@@ -1178,24 +1377,27 @@
       "id": "claim-gpt6-luna-current-catalog-2026-09-25",
       "requires_currentness": true,
       "source_ids": [
+        "openai-model-catalog-2026-10-29",
+        "openai-gpt6-luna-model-details-2026-10-31",
+        "openai-gpt56-luna-model-details-2026-10-31"
+      ],
+      "previous_source_ids": [
         "openai-model-catalog-2026-09-25",
         "openai-gpt6-luna-model-details-2026-09-25",
         "openai-gpt56-luna-model-details-2026-09-25"
-      ]
-    },
-    {
-      "id": "claim-gpt6-luna-codex-availability-2026-09-25",
-      "requires_currentness": true,
-      "source_ids": [
-        "openai-codex-model-availability-2026-09-25"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-cisco-ios-xe-ssh-vty-hardening-2026-09-25",
       "requires_currentness": true,
       "source_ids": [
+        "cisco-ios-xe-hardening-2026-10-31"
+      ],
+      "previous_source_ids": [
         "cisco-ios-xe-hardening-2026-09-25"
-      ]
+      ],
+      "reverified": "2026-10-31"
     },
     {
       "id": "claim-android-currentness-2026-10-29",
@@ -1272,6 +1474,540 @@
         "openai-plugin-submission-errors-2026-10-29",
         "claude-plugin-marketplace-docs-2026-10-29"
       ]
+    },
+    {
+      "id": "claim-standards-currentness-2026-10-31",
+      "requires_currentness": true,
+      "source_ids": [
+        "owasp-top10-2025-2026-10-31",
+        "owasp-asvs-5-0-0-2026-10-31",
+        "pci-dss-v4-0-1-2026-10-31",
+        "slsa-spec-v1-2-2026-10-31"
+      ]
+    },
+    {
+      "id": "claim-android-toolchain-latest-2026-10-31",
+      "requires_currentness": true,
+      "source_ids": [
+        "compose-bom-mapping-2026-10-31",
+        "android-agp-latest-stable-2026-10-31",
+        "kotlin-release-2026-10-29",
+        "play-target-2026-10-29"
+      ]
+    },
+    {
+      "id": "claim-runtime-support-2026-10-31",
+      "requires_currentness": true,
+      "source_ids": [
+        "php-supported-versions-2026-10-29",
+        "postgresql-support-2026-10-29",
+        "mysql-84-release-index-2026-10-31",
+        "nextjs-release-2026-10-29",
+        "nextjs-support-policy-2026-10-29"
+      ]
+    },
+    {
+      "id": "claim-ai-platform-register-2026-10-31",
+      "requires_currentness": true,
+      "source_ids": [
+        "openai-api-docs-landing-2026-10-31",
+        "openai-docs-moves-2026-10-31",
+        "claude-code-docs-move-2026-10-31",
+        "anthropic-tool-use-overview-2026-10-31",
+        "gemini-function-calling-2026-10-31",
+        "bedrock-agents-classic-2026-10-31",
+        "kubernetes-docs-version-2026-10-31",
+        "react-versions-2026-10-31"
+      ]
     }
-  ]
+  ],
+  "superseded_sources": [
+    {
+      "id": "isc-bind-status",
+      "title": "BIND 9 status and downloads",
+      "ref": "https://www.isc.org/bind/",
+      "tier": 1,
+      "accessed": "2026-09-01",
+      "verified_at": "2026-09-01",
+      "review_after": "2026-10-01",
+      "freshness_class": "platform",
+      "as_of": "2026-09-01",
+      "scope": "Current ISC release/status/support information; do not hard-code versions without rechecking.",
+      "superseded_by": "isc-bind-status-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "nist-ai-rmf",
+      "title": "NIST AI Risk Management Framework",
+      "ref": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "tier": 1,
+      "accessed": "2026-09-01",
+      "verified_at": "2026-09-01",
+      "review_after": "2026-10-01",
+      "freshness_class": "platform",
+      "publication_date": "2023-01-26",
+      "scope": "Current NIST AI RMF status and supporting resources; page notes that AI RMF 1.0 is being revised.",
+      "superseded_by": "nist-ai-rmf-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-windows-lifecycle",
+      "title": "Microsoft Lifecycle",
+      "ref": "https://learn.microsoft.com/en-us/lifecycle/",
+      "tier": 1,
+      "accessed": "2026-09-01",
+      "verified_at": "2026-09-01",
+      "review_after": "2026-10-01",
+      "freshness_class": "platform",
+      "as_of": "2026-09-01",
+      "scope": "Windows and Microsoft product lifecycle and support-status claims.",
+      "superseded_by": "ms-windows-lifecycle-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-powershell-lifecycle",
+      "title": "PowerShell Support Lifecycle",
+      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-support-lifecycle?view=powershell-7.5",
+      "tier": 1,
+      "accessed": "2026-09-01",
+      "verified_at": "2026-09-01",
+      "review_after": "2026-10-01",
+      "freshness_class": "platform",
+      "as_of": "2026-09-01",
+      "scope": "PowerShell 7 stable/LTS/support claims; Windows PowerShell 5.1 is a separate OS component.",
+      "superseded_by": "ms-powershell-lifecycle-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-intune-security-baselines",
+      "title": "Intune security baselines for Windows devices",
+      "ref": "https://learn.microsoft.com/en-us/intune/device-security/security-baselines/overview",
+      "tier": 1,
+      "accessed": "2026-09-01",
+      "verified_at": "2026-09-01",
+      "review_after": "2026-10-01",
+      "freshness_class": "platform",
+      "as_of": "2026-09-01",
+      "scope": "Current Intune security-baseline feature and platform-support claims.",
+      "superseded_by": "ms-intune-security-baselines-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-image-prompting-2026-09-16",
+      "title": "OpenAI Image prompting guide",
+      "ref": "https://developers.openai.com/api/docs/guides/image-prompting",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current OpenAI image prompting guidance for composition, references, text, editing, preservation, and evaluation.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific; other image models may interpret prompts differently.",
+      "superseded_by": "openai-image-prompting-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-image-generation-2026-09-16",
+      "title": "OpenAI Image generation guide",
+      "ref": "https://developers.openai.com/api/docs/guides/image-generation",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current OpenAI image generation and editing workflow, including multi-turn refinement.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific; account and model availability are not established by this page.",
+      "superseded_by": "openai-image-generation-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-model-catalog-2026-09-16",
+      "title": "OpenAI Models catalogue",
+      "ref": "https://developers.openai.com/api/docs/models",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Model names and catalogue status visible on the current OpenAI developer documentation page.",
+      "support_status": "verified",
+      "confidence": "high for catalogue content at access time",
+      "owner": "digital-research-engine",
+      "uncertainty": "Account entitlement and active Codex runtime availability are NOT_ASSESSED.",
+      "superseded_by": "openai-model-catalog-2026-10-29",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-prompt-engineering-2026-09-16",
+      "title": "OpenAI Prompt engineering guide",
+      "ref": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current OpenAI guidance on instruction/data separation, examples, context, code-managed prompts, testing, and rollout.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific; do not treat this as a universal model-behaviour guarantee.",
+      "superseded_by": "openai-prompt-engineering-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-evals-2026-09-16",
+      "title": "OpenAI Evals guide",
+      "ref": "https://developers.openai.com/api/docs/guides/evals",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current OpenAI evaluation-data and grader workflow.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific API details; evaluation quality still depends on representative data and grader design.",
+      "superseded_by": "openai-evals-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-safety-best-practices-2026-09-16",
+      "title": "OpenAI Safety best practices",
+      "ref": "https://developers.openai.com/api/docs/guides/safety-best-practices",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current OpenAI application safety and human-oversight guidance.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific; controls must be adapted to the actual product and threat model.",
+      "superseded_by": "openai-safety-best-practices-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "anthropic-claude-code-best-practices-2026-09-16",
+      "title": "Anthropic Claude Code best practices",
+      "ref": "https://code.claude.com/docs/en/best-practices",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current Anthropic guidance on verification evidence, explore-plan-code separation, context management, and bounded delegation.",
+      "support_status": "verified",
+      "confidence": "high within Claude Code scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Runner-specific; controls must be rechecked in each adapter.",
+      "superseded_by": "anthropic-claude-code-best-practices-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-powershell-shouldprocess-2026-09-16",
+      "title": "Microsoft PowerShell ShouldProcess guidance",
+      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-shouldprocess?view=powershell-7.6",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current PowerShell WhatIf/Confirm and explicit nested-operation validation guidance.",
+      "support_status": "verified",
+      "confidence": "high for documented PowerShell behaviour",
+      "owner": "digital-research-engine",
+      "uncertainty": "Exact behaviour depends on command/module implementation; test the actual function and dependency chain.",
+      "superseded_by": "ms-powershell-shouldprocess-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-powershell-approved-verbs-2026-09-16",
+      "title": "Microsoft PowerShell approved-verb guidance",
+      "ref": "https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/useapprovedverbs?view=ps-modules",
+      "tier": 1,
+      "accessed": "2026-09-16",
+      "verified_at": "2026-09-16",
+      "review_after": "2026-10-16",
+      "freshness_class": "platform",
+      "as_of": "2026-09-16",
+      "scope": "Current PSScriptAnalyzer approved-verb rule and Get-Verb convention.",
+      "support_status": "verified",
+      "confidence": "high for naming guidance",
+      "owner": "digital-research-engine",
+      "uncertainty": "Naming guidance does not prove functional correctness.",
+      "superseded_by": "ms-powershell-approved-verbs-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-prompt-engineering-2026-09-17",
+      "title": "OpenAI Prompt engineering guide",
+      "ref": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current OpenAI guidance on instruction/data separation, examples, context, code-managed prompts, testing, and rollout.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific; do not treat this as a universal model-behaviour guarantee.",
+      "superseded_by": "openai-prompt-engineering-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-latest-model-guidance-2026-09-17",
+      "title": "OpenAI latest model guidance",
+      "ref": "https://developers.openai.com/api/docs/guides/latest-model",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current OpenAI model-specific prompting guidance: lead with the outcome, state constraints/evidence/side effects/output shape, and calibrate process detail to the task.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific and model-specific; do not promote into universal engine rules.",
+      "superseded_by": "openai-latest-model-guidance-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-model-catalog-2026-09-17",
+      "title": "OpenAI Models catalogue",
+      "ref": "https://developers.openai.com/api/docs/models",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current OpenAI model identifiers and catalogue positioning at access time; entitlement is separate.",
+      "support_status": "verified",
+      "confidence": "high for catalogue content at access time",
+      "owner": "digital-research-engine",
+      "uncertainty": "Account entitlement and active Codex runtime availability are NOT_ASSESSED.",
+      "superseded_by": "openai-model-catalog-2026-10-29",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-evals-2026-09-17",
+      "title": "OpenAI Evals guide",
+      "ref": "https://developers.openai.com/api/docs/guides/evals",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current OpenAI evaluation workflow using test data, schemas, criteria, graders, and comparison runs.",
+      "support_status": "verified",
+      "confidence": "high within OpenAI provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific API details; evaluation quality still depends on representative data and grader design.",
+      "superseded_by": "openai-evals-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "anthropic-prompting-2026-09-17",
+      "title": "Anthropic prompt engineering: templates and variables",
+      "ref": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current Anthropic guidance on clarity, context, examples, structured boundaries, role, long-context work, tool use, research criteria, and agentic safety.",
+      "support_status": "verified",
+      "confidence": "high within Anthropic provider scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-specific; exact model behaviour and claimed gains are not universal.",
+      "superseded_by": "anthropic-prompting-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "anthropic-claude-code-best-practices-2026-09-17",
+      "title": "Anthropic Claude Code best practices",
+      "ref": "https://code.claude.com/docs/en/best-practices",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current Anthropic guidance on verification evidence, explore-plan-code separation, context management, and bounded delegation.",
+      "support_status": "verified",
+      "confidence": "high within Claude Code scope",
+      "owner": "digital-research-engine",
+      "uncertainty": "Runner-specific; controls must be rechecked in each adapter.",
+      "superseded_by": "anthropic-claude-code-best-practices-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-powershell-shouldprocess-2026-09-17",
+      "title": "Microsoft PowerShell ShouldProcess guidance",
+      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-shouldprocess?view=powershell-7.6",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current PowerShell WhatIf/Confirm and nested-operation validation guidance.",
+      "support_status": "verified",
+      "confidence": "high for documented PowerShell behaviour",
+      "owner": "digital-research-engine",
+      "uncertainty": "Exact behaviour depends on command/module implementation; test the actual function and dependency chain.",
+      "superseded_by": "ms-powershell-shouldprocess-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "ms-powershell-approved-verbs-2026-09-17",
+      "title": "Microsoft PowerShell approved-verb guidance",
+      "ref": "https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/useapprovedverbs?view=ps-modules",
+      "tier": 1,
+      "accessed": "2026-09-17",
+      "verified_at": "2026-09-17",
+      "review_after": "2026-10-17",
+      "freshness_class": "platform",
+      "as_of": "2026-09-17",
+      "scope": "Current PSScriptAnalyzer approved-verb rule and Get-Verb convention.",
+      "support_status": "verified",
+      "confidence": "high for naming guidance",
+      "owner": "digital-research-engine",
+      "uncertainty": "Naming guidance does not prove functional correctness.",
+      "superseded_by": "ms-powershell-approved-verbs-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-model-catalog-2026-09-25",
+      "title": "OpenAI models catalog",
+      "ref": "https://developers.openai.com/api/docs/models",
+      "tier": 1,
+      "accessed": "2026-09-25",
+      "verified_at": "2026-09-25",
+      "review_after": "2026-10-25",
+      "freshness_class": "platform",
+      "as_of": "2026-09-25",
+      "scope": "Current official GPT-6 family IDs, product positioning, reasoning levels and listed API prices; not comparative local task-quality evidence.",
+      "support_status": "verified",
+      "confidence": "high for published catalog facts",
+      "owner": "digital-research-engine",
+      "uncertainty": "Provider-published positioning is not an independent benchmark; latency and workload-specific quality comparisons were not assessed.",
+      "superseded_by": "openai-model-catalog-2026-10-29",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-gpt56-luna-model-details-2026-09-25",
+      "title": "GPT-5.6 Luna model details",
+      "ref": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "tier": 1,
+      "accessed": "2026-09-25",
+      "verified_at": "2026-09-25",
+      "review_after": "2026-10-25",
+      "freshness_class": "platform",
+      "as_of": "2026-09-25",
+      "scope": "Official GPT-5.6 Luna cost positioning and published API input/output prices, checked for comparison with GPT-6 Luna.",
+      "support_status": "verified",
+      "confidence": "high for published model details",
+      "owner": "digital-research-engine",
+      "uncertainty": "API prices are not a measure of Codex plan usage cost or total task cost.",
+      "superseded_by": "openai-gpt56-luna-model-details-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "cisco-ios-xe-hardening-2026-09-25",
+      "title": "Cisco IOS XE Software Hardening Guide",
+      "ref": "https://sec.cloudapps.cisco.com/security/center/resources/IOS_XE_hardening",
+      "tier": 1,
+      "accessed": "2026-09-27",
+      "verified_at": "2026-09-27",
+      "review_after": "2026-10-27",
+      "freshness_class": "platform",
+      "as_of": "2026-09-27",
+      "scope": "Cisco IOS XE management-plane guidance: prefer SSH to clear-text Telnet, use vty/tty controls including access-class and exec-timeout; confirm exact target-platform support before use.",
+      "support_status": "verified",
+      "confidence": "high for the statements in this Cisco guide",
+      "owner": "digital-research-engine",
+      "uncertainty": "Official Cisco IOS XE guidance; target model, release, feature support, and local policy must still be checked before operational use. Publication/version date is not stated on the inspected page.",
+      "superseded_by": "cisco-ios-xe-hardening-2026-10-31",
+      "superseded_on": "2026-10-31"
+    },
+    {
+      "id": "openai-gpt6-luna-model-details-2026-09-25",
+      "title": "GPT-6 Luna model details",
+      "ref": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "tier": 1,
+      "accessed": "2026-09-25",
+      "verified_at": "2026-09-25",
+      "review_after": "2026-10-25",
+      "freshness_class": "platform",
+      "as_of": "2026-09-25",
+      "scope": "Official gpt-6-luna model ID, supported high reasoning effort, product positioning, context/output limits and published API prices.",
+      "support_status": "verified",
+      "confidence": "high for published model details",
+      "owner": "digital-research-engine",
+      "uncertainty": "API catalog presence and prices do not prove Codex plan entitlement or local comparative performance.",
+      "superseded_by": "openai-gpt6-luna-model-details-2026-10-31",
+      "superseded_on": "2026-10-31"
+    }
+  ],
+  "quarantined_sources": [
+    {
+      "id": "openai-codex-model-availability-2026-09-25",
+      "title": "ChatGPT Work and Codex model availability",
+      "ref": "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+      "tier": 1,
+      "accessed": "2026-09-25",
+      "verified_at": "2026-09-25",
+      "review_after": "2026-10-25",
+      "freshness_class": "platform",
+      "as_of": "2026-09-25",
+      "scope": "Official statement that GPT-6 Luna is a Work/Codex model and availability depends on plan, workspace settings and rollout.",
+      "support_status": "verified",
+      "confidence": "high for documented availability conditions",
+      "owner": "digital-research-engine",
+      "uncertainty": "Does not establish this user's plan/workspace entitlement by itself.",
+      "quarantine": {
+        "status": "NOT_ASSESSED",
+        "reason": "The official help article returned HTTP 403 to automated fetch on 2026-10-31, so the availability statement could not be re-read. Local runtime availability was recorded separately in the 2026-10-29 validation record.",
+        "date": "2026-10-31",
+        "reverify_by": "2026-11-30"
+      }
+    }
+  ],
+  "quarantined_claims": [
+    {
+      "id": "claim-gpt6-luna-codex-availability-2026-09-25",
+      "requires_currentness": true,
+      "source_ids": [
+        "openai-codex-model-availability-2026-09-25"
+      ],
+      "quarantine": {
+        "status": "NOT_ASSESSED",
+        "date": "2026-10-31",
+        "reverify_by": "2026-11-30"
+      }
+    }
+  ],
+  "last_reconciled": "2026-10-31"
 }
