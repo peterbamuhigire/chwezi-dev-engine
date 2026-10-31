@@ -90,7 +90,7 @@ Per-module exporters (one object per feature module):
 
 ## Additional Guidance
 
-Extended guidance for `android-pdf-export` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `android-pdf-export` was moved to [references/skill-deep-dive.md](android-pdf-export/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `Dependencies`

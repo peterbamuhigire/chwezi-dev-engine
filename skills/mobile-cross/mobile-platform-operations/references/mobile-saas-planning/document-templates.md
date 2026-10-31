@@ -2,7 +2,7 @@
 
 Detailed content requirements for each of the 7 planning documents. The agent must follow these templates when generating documentation for a new Android SaaS app.
 
-[Back to SKILL.md](../SKILL.md)
+[Back to SKILL.md](../../SKILL.md)
 
 ---
 

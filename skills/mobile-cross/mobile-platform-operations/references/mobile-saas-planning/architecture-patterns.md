@@ -2,7 +2,7 @@
 
 Production-ready Kotlin patterns for the SDS document. Use these as templates when generating architecture code examples.
 
-[Back to SKILL.md](../SKILL.md)
+[Back to SKILL.md](../../SKILL.md)
 
 ---
 

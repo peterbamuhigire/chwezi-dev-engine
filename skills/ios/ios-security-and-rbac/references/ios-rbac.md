@@ -133,7 +133,7 @@ Use `ScenePhase` to detect app foreground transitions for staleness checks.
 
 ## Additional Guidance
 
-Extended guidance for `ios-rbac` was moved to [references/skill-deep-dive.md](references/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
+Extended guidance for `ios-rbac` was moved to [references/skill-deep-dive.md](ios-rbac/skill-deep-dive.md) to keep this entrypoint compact and fast to load.
 
 Use that deep dive for:
 - `PermissionManager (@Observable)`

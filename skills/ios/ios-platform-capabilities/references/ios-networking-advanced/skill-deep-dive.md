@@ -1,6 +1,6 @@
 # ios-networking-advanced Deep Dive
 
-This file contains the extended guidance moved out of [../SKILL.md](../SKILL.md) so the skill entrypoint stays under the repository size limit.
+This file contains the extended guidance moved out of [../SKILL.md](../../SKILL.md) so the skill entrypoint stays under the repository size limit.
 
 ## Included Sections
 
@@ -322,7 +322,7 @@ request.httpBody = body
 
 ## Section 8: Network Reachability + Offline Queue
 
-See [references/offline-queue.md](references/offline-queue.md) — `NWPathMonitor` `@Observable` wrapper, actor-based offline queue, drain-on-reconnect pattern, and `isExpensive` (cellular) detection.
+See [references/offline-queue.md](offline-queue.md) — `NWPathMonitor` `@Observable` wrapper, actor-based offline queue, drain-on-reconnect pattern, and `isExpensive` (cellular) detection.
 
 ---
 
@@ -360,7 +360,7 @@ let avatarData = try await deduplicator.fetch(key: "avatar-\(userId)") {
 
 ## Section 10: Combine + URLSession (Legacy)
 
-See [references/combine-networking.md](references/combine-networking.md). Use `async/await` for all new networking. Combine is only relevant when chaining with other Combine publishers (e.g. debounced search, timer-based polling).
+See [references/combine-networking.md](combine-networking.md). Use `async/await` for all new networking. Combine is only relevant when chaining with other Combine publishers (e.g. debounced search, timer-based polling).
 
 ---
 
@@ -389,7 +389,7 @@ func fetchAll(ids: [String]) async throws -> [UserProfile] {
 
 **Data race rule**: Never mutate shared state from inside `addTask` closures. Return values; collect via `for await` sequentially outside the group.
 
-See [references/structured-concurrency.md](references/structured-concurrency.md) for bounded concurrency, cancellation propagation, Task priorities, and detached tasks.
+See [references/structured-concurrency.md](structured-concurrency.md) for bounded concurrency, cancellation propagation, Task priorities, and detached tasks.
 
 ---
 

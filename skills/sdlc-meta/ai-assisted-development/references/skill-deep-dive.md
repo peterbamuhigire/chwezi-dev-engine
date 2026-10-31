@@ -72,7 +72,7 @@ Human: Approve and deploy
 
 ## The 5 Orchestration Strategies (Summary)
 
-**📖 See [orchestration-strategies.md](references/orchestration-strategies.md) for complete details with code examples.**
+**📖 See [orchestration-strategies.md](orchestration-strategies.md) for complete details with code examples.**
 
 ### Strategy 1: Sequential AI Workflow
 
@@ -174,7 +174,7 @@ Fallback → Degraded mode
 
 ## The 3 AI Orchestration Patterns (Summary)
 
-**📖 See [ai-patterns.md](references/ai-patterns.md) for complete details with code examples.**
+**📖 See [ai-patterns.md](ai-patterns.md) for complete details with code examples.**
 
 ### Pattern 1: Agent Handoff (Pipeline)
 
@@ -242,7 +242,7 @@ Agent 1 → Output → [HUMAN REVIEW] → Approved? YES → Agent 2
 
 ## Real-World Examples (Summary)
 
-**📖 See [practical-examples.md](references/practical-examples.md) for complete detailed walkthroughs.**
+**📖 See [practical-examples.md](practical-examples.md) for complete detailed walkthroughs.**
 
 ### Example 1: MADUUKA - Franchise Inventory Sync
 
@@ -437,9 +437,9 @@ Agent → Output → [HUMAN REVIEW] → Approved? → Next agent
 - Always include quality validation and human oversight
 
 **Next steps:**
-1. 📖 Read [orchestration-strategies.md](references/orchestration-strategies.md) for detailed strategy examples
-2. 📖 Read [ai-patterns.md](references/ai-patterns.md) for AI-specific patterns
-3. 📖 Read [practical-examples.md](references/practical-examples.md) for real MADUUKA and BRIGHTSOMA walkthroughs
+1. 📖 Read [orchestration-strategies.md](orchestration-strategies.md) for detailed strategy examples
+2. 📖 Read [ai-patterns.md](ai-patterns.md) for AI-specific patterns
+3. 📖 Read [practical-examples.md](practical-examples.md) for real MADUUKA and BRIGHTSOMA walkthroughs
 4. Apply to your own projects!
 
 ---

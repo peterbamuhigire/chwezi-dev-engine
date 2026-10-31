@@ -506,7 +506,7 @@ VStack { Text("Order #1042"); Text("UGX 85,000") }
     .accessibilityElement(children: .combine)       // reads as one element
 ```
 
-See [references/accessibility.md](references/accessibility.md) for full patterns, UIKit equivalents, and the App Store approval checklist.
+See [references/accessibility.md](accessibility.md) for full patterns, UIKit equivalents, and the App Store approval checklist.
 
 ## Integration with Other Skills
 

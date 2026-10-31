@@ -2,7 +2,7 @@
 
 Patterns for bridging an existing web SaaS backend to a native Android client. Covers API contract design, response handling, pagination, offline queue, and conflict resolution.
 
-[Back to SKILL.md](../SKILL.md)
+[Back to SKILL.md](../../SKILL.md)
 
 ---
 

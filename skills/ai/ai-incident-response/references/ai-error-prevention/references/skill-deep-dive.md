@@ -1,6 +1,6 @@
 # ai-error-prevention Deep Dive
 
-This file contains the extended guidance moved out of [../SKILL.md](../SKILL.md) so the skill entrypoint stays under the repository size limit.
+This file contains the extended guidance moved out of [../SKILL.md](../../../SKILL.md) so the skill entrypoint stays under the repository size limit.
 
 ## Included Sections
 
@@ -51,7 +51,7 @@ YOU MUST: Verify, test, catch mistakes, know when to trust/distrust
 
 ## The 7 Prevention Strategies (Quick Reference)
 
-**📖 See [prevention-strategies.md](references/prevention-strategies.md) for complete details with examples.**
+**📖 See [prevention-strategies.md](prevention-strategies.md) for complete details with examples.**
 
 ### Strategy 1: Verification-First
 
@@ -177,7 +177,7 @@ If Claude struggles → Code might be wrong
 
 ## Common Claude Failure Modes (Summary)
 
-**📖 See [failure-modes.md](references/failure-modes.md) for detailed prevention strategies.**
+**📖 See [failure-modes.md](failure-modes.md) for detailed prevention strategies.**
 
 ### Failure Mode 1: Incomplete Understanding
 ```
@@ -276,7 +276,7 @@ Prevention: Explicitly demand edge case handling with test cases
 
 ## App-Specific Prevention (Summary)
 
-**📖 See [app-specific-prevention.md](references/app-specific-prevention.md) for complete checklists.**
+**📖 See [app-specific-prevention.md](app-specific-prevention.md) for complete checklists.**
 
 ### MADUUKA (Franchise ERP)
 ```
@@ -462,9 +462,9 @@ Result: Minimal errors, maximum efficiency, lowest token waste
 **Result:** 50-75% fewer tokens wasted, higher quality code, faster development
 
 **Next Steps:**
-1. 📖 Read [prevention-strategies.md](references/prevention-strategies.md) for detailed strategy examples
-2. 📖 Read [failure-modes.md](references/failure-modes.md) for failure prevention
-3. 📖 Read [app-specific-prevention.md](references/app-specific-prevention.md) for your app's checklist
+1. 📖 Read [prevention-strategies.md](prevention-strategies.md) for detailed strategy examples
+2. 📖 Read [failure-modes.md](failure-modes.md) for failure prevention
+3. 📖 Read [app-specific-prevention.md](app-specific-prevention.md) for your app's checklist
 4. Apply to your next Claude request!
 
 ---
