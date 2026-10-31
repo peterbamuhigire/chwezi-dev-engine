@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-31 - Dev Engine documentation wave after kaizen pass 2
+
+- Install and validation instructions corrected for Linux: `python3` throughout, the ten CI steps with the pinned dependencies and what each needs, `--min-rank1 89` (was 88), and `bash install.sh` because the file is tracked without its executable bit (`fa5c972`, `ef47b6a`).
+- New root README sections "Quality and improvement" and "Date-triggered gates": evidence folders, the latest published score (62.5/100 raw and capped), open findings, and the calendar of source-register review dates from 2026-11-04, each date checked by running `scripts/check_source_register.py --as-of` (`fa5c972`).
+- Measured figures replace stale ones in the overview documents: 239 routing fixtures at 91.6% precision@1 (was 184 at 96%), CI gate list, tool table, completed items moved out of the open list; new `docs/README.md` index and `docs/kaizen/2026-10-engine-kaizen-pass-2/07-docs-followups.md` (`17280b9`, `844bef8`).
+- Engine names corrected where a document named the research or design engine by a former name or a link outside the repository (`844bef8`).
+- Portfolio-managed router sentences checked with the shared renderer: nothing to change.
+- Pass-2 commits by theme, for reference: currency `f970df0`, `ca94e6b`, `842965b`; portable validators `9979773`; review route `a6735a5`; host paths `39a6898`, `3b7b3f6`; duplicate headings `feccc13`, `d12c250`, `f3b0705`; links `0ca42e0`, `625e5e7`; routing fixtures `9f0369e`, `c4e691f`; invoice slice gaps `8bec17a`; evidence `5eb55c8`, `79df717`.
+
 ## 2026-10-31 - Dev Engine kaizen pass 2: currency, tooling portability and hygiene gates
 
 - Re-read all 27 overdue source records against primary pages and reconciled the AI-platform register; overdue records 27 to 0. Added `scripts/check_source_register.py` and a CI step so a lapsed review date fails the build.
