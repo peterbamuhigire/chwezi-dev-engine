@@ -22,6 +22,16 @@ metadata:
 
 - Produce: gateway API contract, routing table, quota enforcement, audit/cost events, fallback chain, and operational runbook.
 
+Skill-specific outputs:
+
+- Gateway HTTP contract + SDK in N languages used by feature teams.
+- Provider adapter set with capability matrix.
+- Fallback policy per tier.
+- Token / USD ceiling policy per plan.
+- Region routing table.
+- Audit log + cost ledger schema (lives in audit skill).
+- Kill-switch UX + back-office wiring (`saas-admin-backoffice-tooling`).
+
 ## Capability and permission boundaries
 
 Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
@@ -107,16 +117,6 @@ When the gateway is part of a wider AI data foundation, load [AI data foundation
 - Audit log writes are best-effort (lost on crash) — compliance and billing diverge.
 - Hard caps without a degraded-mode option — tenants hit the cap and the whole product breaks.
 - Gateway leaks provider-specific error shapes to feature code — re-coupling.
-
-## Outputs
-
-- Gateway HTTP contract + SDK in N languages used by feature teams.
-- Provider adapter set with capability matrix.
-- Fallback policy per tier.
-- Token / USD ceiling policy per plan.
-- Region routing table.
-- Audit log + cost ledger schema (lives in audit skill).
-- Kill-switch UX + back-office wiring (`saas-admin-backoffice-tooling`).
 
 ## Evidence Produced
 

@@ -24,6 +24,11 @@ metadata:
 - Produce: priced offer, billing rules, refund decision matrix, revenue-treatment handoff, and commercial control register.
 - When commitments apply, also produce: SLA schedule, SLI/SLO definitions, dashboard specification, breach and credit workflow, and customer evidence.
 
+Skill-specific outputs:
+
+- A concrete deliverable matched to the request: architecture, implementation plan, audit, policy, runbook, UX flow, test strategy, or operating model.
+- The selected consolidated reference files and any assumptions, risks, evidence requirements, or follow-up actions that affect execution.
+
 ## Capability and permission boundaries
 
 Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
@@ -91,10 +96,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Treating AI-specific billing, compliance, safety, or UX concerns as generic SaaS work without checking AI failure modes.
 - Hiding retired skill names; old slugs must remain discoverable through [references/routing.md](references/routing.md).
 
-## Outputs
-
-- A concrete deliverable matched to the request: architecture, implementation plan, audit, policy, runbook, UX flow, test strategy, or operating model.
-- The selected consolidated reference files and any assumptions, risks, evidence requirements, or follow-up actions that affect execution.
 ## References
 
 - [references/routing.md](references/routing.md) maps retired child skill slugs to their consolidated reference folders.

@@ -109,6 +109,19 @@ rendering context, transparency, or small-scale legibility requires it.
 - ❌ Enlarging images
 - ❌ Using blocking UI (must be transparent to user)
 
+Skill-specific anti-patterns:
+
+- Trusting client output. Fix: decode and validate media on the server.
+- Treating `file.type`, extension, or magic bytes alone as authoritative. Fix: require content
+  detection plus a successful bounded decode and canonical re-encode.
+- Uploading the original after failure without consent. Fix: show a recoverable error and record the reason.
+- Enlarging a small source. Fix: preserve its original dimensions.
+- Blocking the interface during compression. Fix: provide asynchronous progress, cancellation, and retry.
+- Applying one quality value to every format. Fix: tune by codec and inspect representative images.
+- Converting transparent logos/favicons to JPEG. Fix: use PNG or alpha-capable WebP.
+- Naming durable objects from the original filename. Fix: generate opaque random keys and store
+  original names only as protected metadata when required.
+
 ## References (Load as Needed)
 
 - Client implementation: references/client.md
@@ -131,19 +144,6 @@ rendering context, transparency, or small-scale legibility requires it.
 - Bandwidth reduction $85$–$97\%$
 
 ## Checklist
-
-## Anti-Patterns
-
-- Trusting client output. Fix: decode and validate media on the server.
-- Treating `file.type`, extension, or magic bytes alone as authoritative. Fix: require content
-  detection plus a successful bounded decode and canonical re-encode.
-- Uploading the original after failure without consent. Fix: show a recoverable error and record the reason.
-- Enlarging a small source. Fix: preserve its original dimensions.
-- Blocking the interface during compression. Fix: provide asynchronous progress, cancellation, and retry.
-- Applying one quality value to every format. Fix: tune by codec and inspect representative images.
-- Converting transparent logos/favicons to JPEG. Fix: use PNG or alpha-capable WebP.
-- Naming durable objects from the original filename. Fix: generate opaque random keys and store
-  original names only as protected metadata when required.
 
 ## Capability contract
 

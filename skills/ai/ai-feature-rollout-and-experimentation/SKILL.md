@@ -22,6 +22,16 @@ metadata:
 
 - Produce: rollout plan, allocation rules, experiment analysis, rollback triggers, and release decision.
 
+Skill-specific outputs:
+
+- Rollout taxonomy specification.
+- Flag and targeting policy.
+- Shadow-mode runner code.
+- A/B experiment design template.
+- Auto-rollback rules and alert wiring.
+- Tenant consent / opt-out surface.
+- Release runbook template.
+
 ## Capability and permission boundaries
 
 Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
@@ -100,16 +110,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Tenant opt-out implemented as a UI hint that doesn't actually disable the model call.
 - Shadow-mode that compares only on a tiny sample. Confidence is illusion.
 - "Soft launch" with no rollout plan. Six tenants find a critical bug at the same time.
-
-## Outputs
-
-- Rollout taxonomy specification.
-- Flag and targeting policy.
-- Shadow-mode runner code.
-- A/B experiment design template.
-- Auto-rollback rules and alert wiring.
-- Tenant consent / opt-out surface.
-- Release runbook template.
 
 ## Evidence Produced
 

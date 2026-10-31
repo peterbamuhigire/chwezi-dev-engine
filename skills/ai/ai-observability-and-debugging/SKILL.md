@@ -22,6 +22,15 @@ metadata:
 
 - Produce: trace schema, dashboards, replay procedure, redaction controls, alert rules, and ticket-to-trace workflow.
 
+Skill-specific outputs:
+
+- AI trace schema spec.
+- Gateway span instrumentation.
+- Replay CLI + back-office UI.
+- "Show me why" UX patterns.
+- Ticket-trace linking workflow.
+- Dashboard set.
+
 ## Capability and permission boundaries
 
 Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
@@ -97,15 +106,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Replay tool that calls live providers — distorts production cost and rate limits.
 - Per-tenant dashboards that aggregate everything; no drill into a specific request.
 - "Show me why" that's a model-generated rationalisation rather than actual citations + retrieval traces.
-
-## Outputs
-
-- AI trace schema spec.
-- Gateway span instrumentation.
-- Replay CLI + back-office UI.
-- "Show me why" UX patterns.
-- Ticket-trace linking workflow.
-- Dashboard set.
 
 ## Evidence Produced
 

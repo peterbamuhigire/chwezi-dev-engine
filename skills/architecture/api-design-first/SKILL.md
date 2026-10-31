@@ -60,6 +60,17 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 - Storing API keys in plaintext — a database leak becomes an immediate credential leak.
 - Mutating an existing version's response schema — every client with hard-coded parsers breaks.
 
+Skill-specific anti-patterns:
+
+- **Spec-after-code.** The team writes endpoints and exports the OpenAPI spec from code annotations. Fix: draft the spec in a PR first, get sign-off from at least one consumer, then implement.
+- **Tenant from body.** `POST /api/v1/invoices { "franchise_id": 42, "amount": 100 }`. Fix: derive `franchise_id` from the authenticated token server-side; ignore any tenant field on the wire.
+- **403 on wrong-tenant.** `GET /api/v1/invoices/999` returns `403 Forbidden` when invoice 999 belongs to another tenant. Fix: return `404 Not Found` — 403 leaks that the resource exists.
+- **Wildcard CORS with credentials.** `Access-Control-Allow-Origin: *` plus `Access-Control-Allow-Credentials: true`. Fix: echo only origins from an allow-list; set credentials true only for those origins.
+- **Raw API key storage.** `INSERT INTO api_keys (key) VALUES ('sk_live_abc123')`. Fix: store `key_hash = SHA-256(key)`, return the raw key once on creation, never again.
+- **Unversioned breaking change.** The team removes a field from `GET /api/v1/invoices/{id}` because nobody "should" be using it. Fix: ship as `v2`, keep `v1` unchanged, emit `Deprecation` + `Sunset` headers on `v1`.
+- **No idempotency on payments.** `POST /api/v1/payments` charges the card. Network retry charges it again. Fix: require `Idempotency-Key` header, store `(tenant, user, key) -> response` for 24 h, replay the stored response on duplicate.
+- **Unbounded page size.** `GET /api/v1/invoices?per_page=100000`. Fix: clamp `per_page` to a hard maximum (e.g. 100) server-side.
+
 ## Outputs
 
 - OpenAPI 3.1 contract covering every endpoint, schema, error, rate-limit header, and example.
@@ -68,6 +79,16 @@ Design APIs as contracts before code. This skill produces the OpenAPI 3.1 contra
 - Idempotency map: which endpoints require `Idempotency-Key`, scope, TTL.
 - Observability notes: per-endpoint span names, SLO class, log fields, audit events.
 - Implementation checklist result.
+
+Skill-specific outputs:
+
+| Artifact                | Consumed by                                                        | Template                                                                                  |
+|-------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| OpenAPI 3.1 contract    | frontend, mobile, SDK, `advanced-testing-strategy` (contract tests)| `skill-composition-standards/references/openapi-contract.md`                              |
+| Error model             | frontend, mobile, `advanced-testing-strategy`                      | `skill-composition-standards/references/error-model.md`                                   |
+| Auth model              | `vibe-security-skill`, `mobile-rbac`, `ios-rbac` | inline in spec (`components.securitySchemes`) + role/scope matrix in `auth-and-security.md` |
+| Idempotency map         | `reliability-engineering`, `stripe-payments`                       | inline table — see `references/auth-and-security.md`                                      |
+| Observability notes     | `observability-monitoring`                                         | inline table — see `references/implementation-checklist.md`                               |
 
 ## Evidence Produced
 
@@ -138,16 +159,6 @@ Load alongside:
 | Failure-mode list        | `system-architecture-design`    | optional  | Informs degradation behaviour on dependency outages                |
 | Threat model             | `vibe-security-skill`           | optional  | Informs auth, rate-limit, and abuse-case rules                     |
 | Tenancy model            | `database-design-engineering`   | required  | Proves tenant isolation at the API boundary                        |
-
-## Outputs
-
-| Artifact                | Consumed by                                                        | Template                                                                                  |
-|-------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| OpenAPI 3.1 contract    | frontend, mobile, SDK, `advanced-testing-strategy` (contract tests)| `skill-composition-standards/references/openapi-contract.md`                              |
-| Error model             | frontend, mobile, `advanced-testing-strategy`                      | `skill-composition-standards/references/error-model.md`                                   |
-| Auth model              | `vibe-security-skill`, `mobile-rbac`, `ios-rbac` | inline in spec (`components.securitySchemes`) + role/scope matrix in `auth-and-security.md` |
-| Idempotency map         | `reliability-engineering`, `stripe-payments`                       | inline table — see `references/auth-and-security.md`                                      |
-| Observability notes     | `observability-monitoring`                                         | inline table — see `references/implementation-checklist.md`                               |
 
 ## Non-negotiables
 
@@ -249,17 +260,6 @@ The canonical envelope produced by this skill — every downstream client depend
 ```
 
 Detail, status-code mapping, and pagination mechanics live in `references/rest-conventions.md`.
-
-## Anti-patterns
-
-- **Spec-after-code.** The team writes endpoints and exports the OpenAPI spec from code annotations. Fix: draft the spec in a PR first, get sign-off from at least one consumer, then implement.
-- **Tenant from body.** `POST /api/v1/invoices { "franchise_id": 42, "amount": 100 }`. Fix: derive `franchise_id` from the authenticated token server-side; ignore any tenant field on the wire.
-- **403 on wrong-tenant.** `GET /api/v1/invoices/999` returns `403 Forbidden` when invoice 999 belongs to another tenant. Fix: return `404 Not Found` — 403 leaks that the resource exists.
-- **Wildcard CORS with credentials.** `Access-Control-Allow-Origin: *` plus `Access-Control-Allow-Credentials: true`. Fix: echo only origins from an allow-list; set credentials true only for those origins.
-- **Raw API key storage.** `INSERT INTO api_keys (key) VALUES ('sk_live_abc123')`. Fix: store `key_hash = SHA-256(key)`, return the raw key once on creation, never again.
-- **Unversioned breaking change.** The team removes a field from `GET /api/v1/invoices/{id}` because nobody "should" be using it. Fix: ship as `v2`, keep `v1` unchanged, emit `Deprecation` + `Sunset` headers on `v1`.
-- **No idempotency on payments.** `POST /api/v1/payments` charges the card. Network retry charges it again. Fix: require `Idempotency-Key` header, store `(tenant, user, key) -> response` for 24 h, replay the stored response on duplicate.
-- **Unbounded page size.** `GET /api/v1/invoices?per_page=100000`. Fix: clamp `per_page` to a hard maximum (e.g. 100) server-side.
 
 ## Read next
 

@@ -36,6 +36,20 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 - Do not replace the domain-specific rules below with generic advice or load unrelated references.
 
+Skill-specific anti-patterns:
+
+- A skill with no Outputs declaration (every skill produces something).
+- A skill that claims an input that no upstream skill produces — the input does not actually exist.
+- Output described in prose rather than pointing at a template — loses composability.
+- "References" section that is just a list of bullet points without the files existing.
+- Decision rules written as prose paragraphs instead of tables / ladders.
+- Anti-patterns section that lists principles ("avoid tight coupling") rather than concrete before/after examples.
+- Neighbour skill not mentioned anywhere, leaving overlap ambiguous.
+- Skill over 500 lines with no `references/` directory.
+- Canonical instructions coupled to one runner's command names, model names, or directory conventions.
+- A role persona presented as a skill without a repeatable procedure and output contract.
+- An adapter that duplicates the canonical instruction body and can drift from it.
+
 ## Outputs
 
 - Produce the named artefacts and evidence specified by the core output contract below.
@@ -314,20 +328,6 @@ coordination engine's validator against the exact roots exposed by the host,
 including deliberately enabled plugin skill roots. Keep the runtime set below
 the entry-count and aggregate metadata limits; a per-repository pass does not
 prove that the assembled catalog fits.
-
-## Anti-patterns
-
-- A skill with no Outputs declaration (every skill produces something).
-- A skill that claims an input that no upstream skill produces — the input does not actually exist.
-- Output described in prose rather than pointing at a template — loses composability.
-- "References" section that is just a list of bullet points without the files existing.
-- Decision rules written as prose paragraphs instead of tables / ladders.
-- Anti-patterns section that lists principles ("avoid tight coupling") rather than concrete before/after examples.
-- Neighbour skill not mentioned anywhere, leaving overlap ambiguous.
-- Skill over 500 lines with no `references/` directory.
-- Canonical instructions coupled to one runner's command names, model names, or directory conventions.
-- A role persona presented as a skill without a repeatable procedure and output contract.
-- An adapter that duplicates the canonical instruction body and can drift from it.
 
 ## Read next
 

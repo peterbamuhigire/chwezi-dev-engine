@@ -37,6 +37,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Treating examples as copy-paste truth without checking fit and failure modes.
 - Loading every reference by default instead of progressive disclosure.
 
+Skill-specific anti-patterns:
+
+- Scanning only one layer and declaring the app secure
+- Fixing issues before completing the full scan (lose context)
+- Rating everything as CRITICAL (desensitizes the team)
+- Ignoring INFO findings (they become vulnerabilities when combined)
+- Auditing only new code without reviewing existing patterns
+- Skipping the dependency audit (most common attack vector)
+
 ## Outputs
 
 - A concrete result fitting the task: audit report, remediation plan, or review findings.
@@ -404,15 +413,6 @@ Scan these patterns:
 
 Return findings as a structured list sorted by severity.
 ```
-
-## Anti-Patterns
-
-- Scanning only one layer and declaring the app secure
-- Fixing issues before completing the full scan (lose context)
-- Rating everything as CRITICAL (desensitizes the team)
-- Ignoring INFO findings (they become vulnerabilities when combined)
-- Auditing only new code without reviewing existing patterns
-- Skipping the dependency audit (most common attack vector)
 
 ## Layer 9: Network-Layer Security (Audit View)
 

@@ -74,6 +74,17 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 
 - Tenant-isolation map, panel definitions, permission priority model, and audit plan (see the Outputs table below).
 
+Skill-specific outputs:
+
+| Artifact | Consumed by | Template |
+|---|---|---|
+| Tenant-isolation map (isolation model + `tenant_id` rules per table) | `database-design-engineering`, `api-design-first` | inline (this skill) |
+| Panel definitions (super admin, tenant admin, end user) | `api-design-first`, `kubernetes-saas-delivery` | inline |
+| Permission priority model (user/tenant override/role/default deny) | `vibe-security-skill`, `api-design-first` | inline + `references/permission-model.md` |
+| Session and JWT plan (prefixing, lifetimes, rotation) | `api-design-first`, `vibe-security-skill` | inline |
+| Audit event set and retention policy | `observability-monitoring`, `reliability-engineering` | inline |
+| Migration plan (single-tenant to multi-tenant) | `database-design-engineering`, `deployment-release-engineering` | `documentation/migration.md` |
+
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
@@ -122,17 +133,6 @@ Load these first, in order:
 | Access-pattern list | `database-design-engineering` | required | chooses shared-DB-with-`tenant_id` vs DB-per-tenant |
 | Threat model | `vibe-security-skill` | required | informs audit rules and abuse cases |
 | Panel and user-type list | product requirements | required | determines role and scope per panel |
-
-## Outputs
-
-| Artifact | Consumed by | Template |
-|---|---|---|
-| Tenant-isolation map (isolation model + `tenant_id` rules per table) | `database-design-engineering`, `api-design-first` | inline (this skill) |
-| Panel definitions (super admin, tenant admin, end user) | `api-design-first`, `kubernetes-saas-delivery` | inline |
-| Permission priority model (user/tenant override/role/default deny) | `vibe-security-skill`, `api-design-first` | inline + `references/permission-model.md` |
-| Session and JWT plan (prefixing, lifetimes, rotation) | `api-design-first`, `vibe-security-skill` | inline |
-| Audit event set and retention policy | `observability-monitoring`, `reliability-engineering` | inline |
-| Migration plan (single-tenant to multi-tenant) | `database-design-engineering`, `deployment-release-engineering` | `documentation/migration.md` |
 
 ## Non-negotiables
 

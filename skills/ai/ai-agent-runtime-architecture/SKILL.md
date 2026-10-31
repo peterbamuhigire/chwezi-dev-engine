@@ -20,6 +20,15 @@ metadata:
 ## Outputs
 - Produce the runtime state machine, persistence contract, failure matrix, operational controls, and test evidence.
 
+Skill-specific outputs:
+
+- Agent vs workflow vs cron decision table for every candidate feature.
+- `agent_tasks` and `agent_steps` table schemas.
+- State-machine diagram + transitions.
+- Execution substrate decision (inline / queue / Temporal-class) with rationale.
+- Budget enforcement integration points.
+- Task lifecycle event taxonomy.
+
 ## Capability and permission boundaries
 Read/search are required. Runtime implementation, queue changes, migrations, replay, and cancellation tests require explicit authority and isolated fixtures.
 
@@ -95,15 +104,6 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Step / token / wallclock budgets only logged, not enforced. Logging is not a control.
 - Agent loop and tool execution in the same process as the web app. A runaway agent OOMs the API.
 - No `feature` or `prompt_version` recorded on the task row. Replay impossible.
-
-## Outputs
-
-- Agent vs workflow vs cron decision table for every candidate feature.
-- `agent_tasks` and `agent_steps` table schemas.
-- State-machine diagram + transitions.
-- Execution substrate decision (inline / queue / Temporal-class) with rationale.
-- Budget enforcement integration points.
-- Task lifecycle event taxonomy.
 
 ## Evidence Produced
 

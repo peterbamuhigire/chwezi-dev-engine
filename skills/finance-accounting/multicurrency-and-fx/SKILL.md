@@ -38,6 +38,14 @@ metadata:
 |---|---|---|
 | FX policy, postings, and reconciliation | Ledger and reporting workflows | Rate provenance, balanced entries, explained differences |
 
+Skill-specific outputs:
+
+- Currency policy.
+- FX-rate schema.
+- Revaluation job design.
+- Realised/unrealised FX posting matrix.
+- FX reconciliation report.
+
 ## Capability contract
 
 Read and search are required. Rate imports, remeasurement journals, translation entries, and historical corrections require explicit authority, period controls, and reconciliation evidence.
@@ -105,11 +113,3 @@ Month-end revaluation:
 - Revalue open monetary items at closing rate.
 - Difference goes to unrealised forex gain/loss and revaluation adjustment.
 - Reverse or update according to the tenant close policy in the next period.
-
-## Outputs
-
-- Currency policy.
-- FX-rate schema.
-- Revaluation job design.
-- Realised/unrealised FX posting matrix.
-- FX reconciliation report.

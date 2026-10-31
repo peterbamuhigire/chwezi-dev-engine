@@ -22,6 +22,14 @@ metadata:
 
 - Produce: prioritised opportunity register, value model, sensitivity cases, evidence gaps, and build/no-build recommendation.
 
+Skill-specific outputs:
+
+- AI opportunity map with value, feasibility, risk, and recommended sequence.
+- Business case with assumptions, ROI model, cost drivers, and non-financial benefits.
+- AI product brief or PRD with user stories, acceptance criteria, data needs, evaluation plan, and rollout stages.
+- Architecture recommendation with model, RAG/tool/workflow choice, governance, and operating model.
+- No-build recommendation when AI cannot be justified.
+
 ## Capability and permission boundaries
 
 Default to read-only analysis. Read only scoped records; redact secrets and regulated data. Writes, execution, network calls, production configuration, customer communication, billing changes, and delegation require explicit authority and an identified owner. Never widen tenant, time-window, or system scope implicitly.
@@ -108,14 +116,6 @@ Prioritize high-value, high-feasibility, low-regret use cases first. Defer low-v
 - **Predictive engine**: Forecasts demand, churn, risk, maintenance, fraud, or cash flow.
 - **Autonomous workflow**: Executes bounded actions with tool contracts, audit logs, and human approval gates.
 - **AI analytics layer**: Turns operational data into segmentation, anomaly detection, root-cause analysis, and dashboards.
-
-## Outputs
-
-- AI opportunity map with value, feasibility, risk, and recommended sequence.
-- Business case with assumptions, ROI model, cost drivers, and non-financial benefits.
-- AI product brief or PRD with user stories, acceptance criteria, data needs, evaluation plan, and rollout stages.
-- Architecture recommendation with model, RAG/tool/workflow choice, governance, and operating model.
-- No-build recommendation when AI cannot be justified.
 
 ## Quality Standards
 

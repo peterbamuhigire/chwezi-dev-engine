@@ -56,11 +56,31 @@ Specialist frontend skill. Produces the three deliverables that give a team an o
 - Declaring a budget without naming the device class and network.
 - Adding a regression gate that only warns and never blocks.
 
+Skill-specific anti-patterns:
+
+- **Global budget for the whole app.** Before: "JS < 200KB". After: per-flow budget with device class, e.g. "Product listing on Moto G Power, 4G: JS < 200KB, LCP p75 < 2.2s". A flat global budget lets heavy flows hide behind light ones.
+- **Anti-patterns as principles, not mechanics.** Before: "Avoid tight coupling between UI and API". After: "Do not `await` sequential API calls inside a server component that blocks streaming — use `Promise.all` or move non-critical data to a `<Suspense>` boundary". Concrete fix, concrete diagnostic.
+- **Lighthouse score as the sole KPI.** Before: "We target Lighthouse 90+ on PRs". After: Lighthouse CI is one lane in the gate; field LCP/INP/CLS p75 drive the alerting contract. Lab-only optimisation masks real-user regressions on low-end devices.
+- **Lazy-loading the LCP image.** Before: `<img src="hero.jpg" loading="lazy">`. After: `<img src="hero.jpg" loading="eager" fetchpriority="high" width=... height=...>` plus `<link rel="preload" as="image" ...>` when the hero is below the HTML discoverability point.
+- **Animating layout-triggering properties.** Before: `transition: width 300ms` on a sidebar. After: `transition: transform 300ms` with the sidebar off-canvas and translated in. Avoids forced layout on every frame.
+- **Regression gate that only warns.** Before: CI job posts a comment with `size-limit` delta. After: job fails the required check when any entry exceeds budget; baseline regeneration is a deliberate PR. Non-blocking gates decay within two sprints.
+- **Inventing frontend-only dashboards.** Before: a bespoke Grafana board owned by the frontend team. After: SLIs published on the RUM dashboard defined by `observability-monitoring`, with alert routing through the shared on-call pipeline.
+- **Preloading everything.** Before: ten `<link rel="preload">` tags. After: preload only the LCP image and one critical font; everything else competes for bandwidth on the critical path.
+
 ## Outputs
 
 - Performance budget per critical flow.
 - Measurement plan (SLIs, source, reporting surface, alert thresholds).
 - Regression gate in CI.
+
+Skill-specific outputs:
+
+| Artifact | Consumed by | Template |
+|---|---|---|
+| Performance budget per critical flow | `deployment-release-engineering`, `observability-monitoring`, QA | `references/budgets-and-regression-gate.md` |
+| Measurement plan (SLIs, sources, reporting, thresholds) | `observability-monitoring`, on-call | `references/budgets-and-regression-gate.md` |
+| Regression gate in CI | `cicd-pipelines`, `deployment-release-engineering` | `references/budgets-and-regression-gate.md` |
+| Framework recipe notes | `react-development`, `nextjs-app-router`, Vue/Nuxt specialists | `references/framework-recipes.md` |
 
 ## Evidence Produced
 
@@ -98,15 +118,6 @@ Read and search the application and measurement configuration first. Editing and
 | Device + network mix | product/analytics | required | Determines the reference device class and throttling profile |
 | API error model | `api-design-first` | optional | Informs retry + fallback UI budget |
 | Threat model | `vibe-security-skill` | optional | Gates CSP and third-party script decisions |
-
-## Outputs
-
-| Artifact | Consumed by | Template |
-|---|---|---|
-| Performance budget per critical flow | `deployment-release-engineering`, `observability-monitoring`, QA | `references/budgets-and-regression-gate.md` |
-| Measurement plan (SLIs, sources, reporting, thresholds) | `observability-monitoring`, on-call | `references/budgets-and-regression-gate.md` |
-| Regression gate in CI | `cicd-pipelines`, `deployment-release-engineering` | `references/budgets-and-regression-gate.md` |
-| Framework recipe notes | `react-development`, `nextjs-app-router`, Vue/Nuxt specialists | `references/framework-recipes.md` |
 
 ## Non-negotiables
 
@@ -202,17 +213,6 @@ A blocking CI job with at least: `size-limit` per entry, Lighthouse CI score and
 - Loading-path tactics (images, JS, CSS, fonts, hints, compression): `references/loading-performance.md`.
 - Rendering, CLS, and INP mechanics: `references/rendering-and-inp.md`.
 - Framework recipes (React, Next.js App Router, Vue, vanilla, service workers): `references/framework-recipes.md`.
-
-## Anti-patterns
-
-- **Global budget for the whole app.** Before: "JS < 200KB". After: per-flow budget with device class, e.g. "Product listing on Moto G Power, 4G: JS < 200KB, LCP p75 < 2.2s". A flat global budget lets heavy flows hide behind light ones.
-- **Anti-patterns as principles, not mechanics.** Before: "Avoid tight coupling between UI and API". After: "Do not `await` sequential API calls inside a server component that blocks streaming — use `Promise.all` or move non-critical data to a `<Suspense>` boundary". Concrete fix, concrete diagnostic.
-- **Lighthouse score as the sole KPI.** Before: "We target Lighthouse 90+ on PRs". After: Lighthouse CI is one lane in the gate; field LCP/INP/CLS p75 drive the alerting contract. Lab-only optimisation masks real-user regressions on low-end devices.
-- **Lazy-loading the LCP image.** Before: `<img src="hero.jpg" loading="lazy">`. After: `<img src="hero.jpg" loading="eager" fetchpriority="high" width=... height=...>` plus `<link rel="preload" as="image" ...>` when the hero is below the HTML discoverability point.
-- **Animating layout-triggering properties.** Before: `transition: width 300ms` on a sidebar. After: `transition: transform 300ms` with the sidebar off-canvas and translated in. Avoids forced layout on every frame.
-- **Regression gate that only warns.** Before: CI job posts a comment with `size-limit` delta. After: job fails the required check when any entry exceeds budget; baseline regeneration is a deliberate PR. Non-blocking gates decay within two sprints.
-- **Inventing frontend-only dashboards.** Before: a bespoke Grafana board owned by the frontend team. After: SLIs published on the RUM dashboard defined by `observability-monitoring`, with alert routing through the shared on-call pipeline.
-- **Preloading everything.** Before: ten `<link rel="preload">` tags. After: preload only the LCP image and one critical font; everything else competes for bandwidth on the critical path.
 
 ## Read next
 
