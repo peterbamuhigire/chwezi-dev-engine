@@ -159,11 +159,19 @@ The engine applies published standards where the work calls for them:
 
 ## Installation
 
-This repository was formerly named `skills-web-dev`, and an older clone may still sit in a folder of that name; every command below works from whatever the folder is called. What the October 2026 improvement passes did, and what they did not establish, is summarised under [Quality and improvement](#quality-and-improvement); read the validation records there before treating an example as production proof.
+This repository was formerly named `skills-web-dev`. An older clone may still sit in a folder of that name. Every command below works from whatever the folder is called.
 
-**Prerequisites.** Git. Node.js 18 or later for the standalone installer and the hook tests (CI uses Node 24; the checks in this file were last run on Node 22). Python 3.11 or later for the Codex model-policy helper. For the validators and tests, `pip install -r requirements-ci.txt` installs pytest 9.0.3 and PyYAML 6.0.2; CI runs them on Python 3.12, and the 2026-10-31 run on Linux used Python 3.14 with PyYAML 6.0.3. Commands below use `python3`; on Windows use `python` or `py -3`.
+**Prerequisites.**
 
-**Claude Code plugin (recommended).** The repository is its own marketplace (`.claude-plugin/marketplace.json`, marketplace `chwezi-engineering`, plugin `engineering`):
+- Git.
+- Node.js 18 or later, for the standalone installer and the hook tests. CI uses Node 24. The checks in this file were last run on Node 22.
+- Python 3.11 or later, for the Codex model-policy helper.
+- For the validators and tests, `pip install -r requirements-ci.txt` installs pytest 9.0.3 and PyYAML 6.0.2. CI runs them on Python 3.12. The 2026-10-31 run on Linux used Python 3.14 with PyYAML 6.0.3.
+- Commands use `python3`. On Windows, use `python` or `py -3`.
+
+### Claude Code plugin (recommended)
+
+The repository is its own marketplace: `.claude-plugin/marketplace.json`, marketplace `chwezi-engineering`, plugin `engineering`.
 
 ```text
 /plugin marketplace add peterbamuhigire/chwezi-dev-engine
@@ -172,9 +180,33 @@ This repository was formerly named `skills-web-dev`, and an older clone may stil
 
 The plugin manifest (`.claude-plugin/plugin.json`) ships the 165 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
 
-**Codex portable package.** Root `plugin.json` uses the portable Agent Plugins format and the repo-scoped catalog lives at `.agents/plugins/marketplace.json`. It discovers the root `skills/` directory; the two `00-meta-initialization/` workflows remain documented clone-based entrypoints. Codex and Claude keep separate host catalogs. Adding the repo marketplace changes the user's Codex marketplace state. This repository does not automatically edit that state or submit a public listing.
+### Codex
 
-**Standalone installer (no plugin system, or project-local scope).** `install.sh` and `install.ps1` delegate to `scripts/install-engine.js`, which copies skills, agents, hooks and rules into `~/.claude` (`--scope user`, the default) or `./.claude` (`--scope project`) and records every file it writes in `.chwezi/install-state.json` inside that target folder:
+Root `plugin.json` uses the portable Agent Plugins format. The repo-scoped catalogue is `.agents/plugins/marketplace.json`. It discovers the root `skills/` directory. The two `00-meta-initialization/` workflows stay clone-based entry points. Codex and Claude keep separate host catalogues.
+
+Adding the repo marketplace changes the user's Codex marketplace state. This repository does not edit that state or submit a public listing.
+
+Point Codex at the clone. It reads [`AGENTS.md`](AGENTS.md) as the router. Before substantive work, run the bounded model-policy check described in [`.codex/README.md`](.codex/README.md):
+
+```text
+python3 <engine-root>/.codex/ensure_model_policy.py --runtime codex --check
+```
+
+Run `--apply` only if the check reports drift. It exits 1 and prints `DRIFT` when the Codex configuration is missing or differs. Claude Code skips this step: `--runtime claude --check` prints `NOT_APPLICABLE` and exits 0.
+
+An offline `debug prompt-input` check may need to list the whole plugin skill manifest. Use the measured invocation in [the October 2026 validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md):
+
+```sh
+codex -m gpt-6-luna -c model_reasoning_effort="high" -c skills.max_context_tokens=10000 debug prompt-input
+```
+
+This invocation-level budget affects the initial skill list only. The checked default loaded 130 of 165 declared plugin skill paths. The explicit budget loaded all 165 in the isolated offline run. It does not alter persistent user settings.
+
+### Standalone installer
+
+Use this when there is no plugin system, or when you want project-local scope.
+
+`install.sh` and `install.ps1` delegate to `scripts/install-engine.js`. It copies skills, agents, hooks and rules into `~/.claude` (`--scope user`, the default) or `./.claude` (`--scope project`). It records every file it writes in `.chwezi/install-state.json` inside that folder.
 
 ```sh
 git clone https://github.com/peterbamuhigire/chwezi-dev-engine.git
@@ -183,29 +215,17 @@ bash install.sh --scope project --dry-run   # print the plan, write nothing
 bash install.sh --scope project
 ```
 
-Run the wrapper with `bash`: the file is tracked without its executable bit, so `./install.sh` fails with "Permission denied" on a fresh Linux clone. On Windows PowerShell, run `.\install.ps1 --scope project` (the same flags pass through to the Node installer; not run in the October 2026 passes). `node scripts/install-engine.js uninstall --engine <name>`, `doctor` and `list-installed` manage an existing install; `<name>` is the folder the engine was cloned into (`chwezi-dev-engine` for the clone above), and `list-installed` prints it. Uninstall removes only files the installer recorded. On 2026-10-31 a real install into an empty home folder, `doctor`, a dry-run uninstall and a real uninstall all exited 0, and the uninstall left only the install-state record.
+- Run the wrapper with `bash`. The file is tracked without its executable bit, so `./install.sh` fails with "Permission denied" on a fresh Linux clone.
+- On Windows PowerShell, run `.\install.ps1 --scope project`. The same flags pass through to the Node installer. This was not run in the October 2026 passes.
+- `node scripts/install-engine.js uninstall --engine <name>`, `doctor` and `list-installed` manage an existing install. `<name>` is the folder the engine was cloned into (`chwezi-dev-engine` for the clone above). `list-installed` prints it.
+- Uninstall removes only files the installer recorded.
+- On 2026-10-31, a real install into an empty home folder, `doctor`, a dry-run uninstall and a real uninstall all exited 0. The uninstall left only the install-state record.
 
-**Codex.** Point Codex at the clone; it reads [`AGENTS.md`](AGENTS.md) as the router. Before substantive work, run the bounded model-policy check described in [`.codex/README.md`](.codex/README.md):
+### Manual route
 
-```text
-python3 <engine-root>/.codex/ensure_model_policy.py --runtime codex --check
-```
+Clone the repository. Have the agent read [`CLAUDE.md`](CLAUDE.md), the [skill routing index](docs/skill-routing-index.md), and only the `SKILL.md` files the task needs. Expose `skills/` and `00-meta-initialization/` to the working agent.
 
-Run `--apply` only if the check reports drift (it exits 1 and prints `DRIFT` when the Codex configuration is missing or differs). Claude Code skips this step; `--runtime claude --check` prints `NOT_APPLICABLE` and exits 0.
-
-If an offline `debug prompt-input` check must enumerate the entire plugin skill
-manifest, use the measured invocation documented in [the October 2026
-validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md):
-
-```sh
-codex -m gpt-6-luna -c model_reasoning_effort="high" -c skills.max_context_tokens=10000 debug prompt-input
-```
-
-This invocation-level budget affects the initial skill list. The checked default
-loaded 130 of 165 declared plugin skill paths; the explicit budget loaded all
-165 in the isolated offline run. It does not alter persistent user settings.
-
-**Manual route.** Clone the repository, then have the agent read [`CLAUDE.md`](CLAUDE.md) (which imports `AGENTS.md`), the [skill routing index](docs/skill-routing-index.md), and only the `SKILL.md` files the task needs. Expose `skills/` and `00-meta-initialization/` to the working agent; [docs/USING-IN-A-PROJECT.md](docs/USING-IN-A-PROJECT.md) covers submodule, sibling-clone and read-only-mount wiring.
+[`docs/USING-IN-A-PROJECT.md`](docs/USING-IN-A-PROJECT.md) covers submodule, sibling-clone and read-only-mount wiring.
 
 ## Verify
 
@@ -228,7 +248,7 @@ git diff --check
 
 | Check | Needs | Result, 2026-10-31 |
 |---|---|---|
-| Catalogue guardrails (also runs the host-path, duplicate-heading and broken-link ratchets) | Python, PyYAML | 167 active skills, 0 errors, 14 size warnings (warnings never change the exit status) |
+| Catalogue guardrails (the script also runs the host-path, duplicate-heading and broken-link ratchets) | Python, PyYAML | 167 active skills, 0 errors, 14 size warnings (warnings never change the exit status) |
 | Guardrail unit tests | Python | 10 tests OK |
 | Test suite | Python, pytest, PyYAML, Git | 273 passed, 3 skipped |
 | Routing smoke test (a lexical proxy, not live routing) | Python, PyYAML | 239 fixtures; precision@1 219/239 (91.6%), precision@3 239/239; 83 owned negatives, 4 `NOT_ASSESSED` |
@@ -239,11 +259,15 @@ git diff --check
 | Hook tests | Node | 61/61 and 7/7 |
 | Evidence-declaration contract gate | Python | 161 skills scanned, 0 errors, 6 exempt |
 
-The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`), which are `NOT ASSESSED` here.
+The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`). They are `NOT ASSESSED` here.
 
-Checks that need more than the CI steps, none of them part of CI:
+### Checks beyond CI
 
-- **Sibling checkouts.** Give the validators the folders that hold the other engines, once per folder or as `CHWEZI_ENGINES_ROOT` (folders separated by `:`; `;` on Windows). Former directory names such as `srs-skills` are found by `scripts/engine_roots.py`. List the eleven public engines with `--engine`, because the twelfth, `political`, is private and not installed on most hosts and makes an unscoped run exit 1:
+None of these is part of CI.
+
+- **Sibling checkouts.** Give the validators the folders that hold the other engines, once per folder or as `CHWEZI_ENGINES_ROOT` (folders separated by `:`, or `;` on Windows). `scripts/engine_roots.py` finds former directory names such as `srs-skills`.
+
+  List the eleven public engines with `--engine`. The twelfth, `political`, is private and not installed on most hosts, so an unscoped run exits 1:
 
   ```sh
   python3 -X utf8 scripts/validate_engine_control_plane.py --workspace-root <parent-1> --workspace-root <parent-2> \
@@ -252,71 +276,133 @@ Checks that need more than the CI steps, none of them part of CI:
   python3 -X utf8 scripts/validate_approval_adapters.py --workspace-root <parent-1> --workspace-root <parent-2>
   ```
 
-  Both exited 0 on 2026-10-31 (11 engines in scope; 11 adapters, 0 findings). Without parent folders the adapter validator exits 1 unless the siblings sit next to this checkout.
-- **Applied examples.** `python3 -X utf8 scripts/validate_tenant_invoice_example.py` (Python only) prints `PASS`. `php examples/tenant-invoice-listing/php/test.php` needs the PHP CLI with PDO SQLite and printed `15 checks passed`. The Next.js, Compose, MySQL and Android layers of that example need their own toolchains and were not re-run here (`NOT ASSESSED`).
+  Both exited 0 on 2026-10-31 (11 engines in scope; 11 adapters, 0 findings). Without parent folders, the adapter validator exits 1 unless the siblings sit next to this checkout.
+- **Applied examples.** `python3 -X utf8 scripts/validate_tenant_invoice_example.py` needs only Python and prints `PASS`. `php examples/tenant-invoice-listing/php/test.php` needs the PHP CLI with PDO SQLite and printed `15 checks passed`.
+- **Not re-run here.** The Next.js, Compose, MySQL and Android layers of that example need their own toolchains (`NOT ASSESSED`).
 - **Other scripts.** `scripts/check_package_file_budget.py`, `scripts/source_ingestion_guardrail.py` and `scripts/validate_work_graph.py templates/work-graph.yml` need only Python and exited 0.
-- **Not needed.** No validator in this repository calls PowerShell (`pwsh`), Pandoc, Mermaid, LibreOffice, a browser or a container. `install.ps1` and `scripts/install-pdf-binaries.ps1` are Windows helpers that were not run in the October 2026 passes. Skills mention those tools only as downstream project requirements.
+- **Not needed.** No validator in this repository calls PowerShell (`pwsh`), Pandoc, Mermaid, LibreOffice, a browser or a container. Skills mention those tools only as downstream project requirements.
+- **Windows helpers.** `install.ps1` and `scripts/install-pdf-binaries.ps1` were not run in the October 2026 passes.
 
 ## Quality and improvement
 
-Improvement work follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md). Evidence for the October 2026 passes lives in two folders, each with a scope record, a frozen baseline scorecard, a backlog, an experiment log, a validation record, a final report and a next-cycle handoff:
+Improvement work follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md).
+
+Evidence for the October 2026 passes lives in two folders. Each holds a scope record, a frozen baseline scorecard, a backlog, an experiment log, a validation record, a final report and a next-cycle handoff.
 
 - [`docs/kaizen/2026-10-engine-kaizen/`](docs/kaizen/2026-10-engine-kaizen/README.md), the 29 October pass.
 - [`docs/kaizen/2026-10-engine-kaizen-pass-2/`](docs/kaizen/2026-10-engine-kaizen-pass-2/README.md), the 31 October pass. Its [final report](docs/kaizen/2026-10-engine-kaizen-pass-2/05-final-report.md) is the source of the scores below.
 
-**Latest published score.** Pass 2 rated the engine 62.5/100 raw (the mean of ten dimension ratings), and the Portfolio Standard cap, `min(raw, 65)`, leaves 62.5/100. The 29 October pass published 59.5 raw and 59.5 capped. The two figures are not a trend: pass 2 scored the whole tree afresh and found items the first pass had not checked. The ratings are a practitioner's judgement, not an external audit or benchmark, and the 95/100 target was not reached; it remains a target.
+Read the validation records before you treat an example as production proof.
 
-**Open findings that matter to a reader.** The full list, with reasons, is the pass-2 [next-cycle handoff](docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md).
+### Latest published score
 
-- `.claude/settings.local.json` is a user-local settings file that is tracked in this public repository and names Windows user-profile paths. It is escalated to the maintainer: untracking it keeps the file on disk but does not remove it from Git history. Do not copy it.
-- The invoice slice in `examples/tenant-invoice-listing/` has known contract gaps (no pagination, errors not in RFC 9457 form, raw minor units shown to users, `LIKE` wildcards in search, no migration rollback, accessibility semantics, no evidence pack). Its README lists them; do not copy the slice as a finished listing.
-- 24 skills still carry a duplicate `##` heading and 84 relative links in 52 files do not resolve. Both are held by ratchets (`docs/quality-gates/`) that may only shrink.
-- Routing coverage is thin: 13 of 167 skills have three positive fixtures and two owned negatives, and `new-project` has no fixture.
-- Currency rows not re-read in pass 2: the legacy hospitality register (review date 2026-10-14, now past), the Apple developer documentation row, the OpenAI Codex availability article (quarantined after an HTTP 403) and the Kubernetes latest version (inferred, not labelled by the source).
-- The 29 October [validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md) reports a Next.js build, a Compose build and a MySQL fixture run of the invoice slice, each in a disposable environment outside this repository; neither pass 2 nor this documentation round could repeat them. Not established by any pass: emulator or browser rendering, authenticated database integration, live-model routing, production behaviour and independent human review. These are `NOT_ASSESSED`, never a pass.
+Pass 2 rated the engine 62.5/100 raw, the mean of ten dimension ratings. The Portfolio Standard cap, `min(raw, 65)`, leaves 62.5/100. The 29 October pass published 59.5 raw and 59.5 capped.
+
+The two figures are not a trend. Pass 2 scored the whole tree afresh and found items the first pass had not checked. The ratings are a practitioner's judgement, not an external audit or benchmark. The 95/100 target was not reached and remains a target.
+
+### Open findings that matter to a reader
+
+The full list, with reasons, is the pass-2 [next-cycle handoff](docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md).
+
+- **Local settings file.** `.claude/settings.local.json` is a user-local settings file. It is tracked in this public repository and names Windows user-profile paths. It is escalated to the maintainer. Untracking keeps the file on disk but does not remove it from Git history. Do not copy it.
+- **Invoice slice gaps.** `examples/tenant-invoice-listing/` has known contract gaps: no pagination, errors not in RFC 9457 form, raw minor units shown to users, `LIKE` wildcards in search, no migration rollback, accessibility semantics and no evidence pack. Its README lists them. Do not copy the slice as a finished listing.
+- **Hygiene ratchets.** 24 skills still carry a duplicate `##` heading. 84 relative links in 52 files do not resolve. Ratchets in `docs/quality-gates/` hold both counts, and they may only shrink.
+- **Thin routing coverage.** 13 of 167 skills have three positive fixtures and two owned negatives. `new-project` has no fixture.
+- **Currency rows not re-read in pass 2.** These are the legacy hospitality register (review date 2026-10-14, now past), the Apple developer documentation row, the OpenAI Codex availability article (quarantined after an HTTP 403) and the Kubernetes latest version (inferred, not labelled by the source).
+- **Builds not repeated.** The 29 October validation record reports a Next.js build, a Compose build and a MySQL fixture run of the invoice slice. Each ran in a disposable environment outside this repository. Pass 2 and the documentation round that followed could not repeat them.
+- **Not established by any pass:** emulator or browser rendering, authenticated database integration, live-model routing, production behaviour and independent human review. These are `NOT_ASSESSED`, never a pass.
 
 ## What the October 2026 kaizen improved
 
-Each item is a kept change on `main`, with its commit confirmed in Git history and the evidence in the [29 October](docs/kaizen/2026-10-engine-kaizen/03-experiment-log.md) and [pass-2](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md) experiment logs. "Re-measured" means the check was run again on 2026-10-31, on the tree before pass 2 (`27a602b`) and on the current tree; other figures are copied from the evidence file named. Fixtures and static checks support most items; none is production proof, and the open findings above are not fixed by them.
+Each item is a kept change on `main`, with its commit confirmed in Git history. The evidence is in the [29 October](docs/kaizen/2026-10-engine-kaizen/03-experiment-log.md) and [pass-2](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md) experiment logs.
 
-**Defects fixed in guidance, most severe first**
+"Re-measured" means the check was run again on 2026-10-31, on the tree before pass 2 (`27a602b`) and on the current tree. Other figures are copied from the evidence file named. Fixtures and static checks support most items. None is production proof, and the open findings above are not fixed by them.
 
-- **Next.js tenant boundary.** The skill taught a role cookie as authority, a global users cache, an unscoped read and an unchecked mutation. It now puts session, tenant-membership and permission checks at the server-only data-access boundary ([`tenant-data-security.md`](skills/frontend-ux/nextjs-app-router/references/tenant-data-security.md)). Re-measured: `scripts/validate_tenant_invoice_example.py` prints `PASS` and `tests/test_tenant_invoice_example.py` passes (7 tests). A disposable `next build` on 29 October found a page and route-handler collision at `/invoices`, fixed with a regression test (validation record; not re-run here). `e00f12f`, `e0cc114`, `b7177be`.
-- **Next.js 16 drift.** Examples used synchronous `params` and a `middleware.ts` that read `request.ip` and `request.geo`. They now use async `params` and `proxy.ts`, and say that a Proxy redirect is only a navigation aid. Checked against the official upgrade guide on 2026-10-29 (source record `next16-upgrade-2026-10-29`). `e00f12f`.
-- **Android currency.** The skill gave API 35 as the Play target and claimed that omitting one edge-to-edge helper crashes the app. It now separates the Play target (API 36 or higher, verified 2026-10-29; re-read before release) from the latest platform release (Android 17, API 37), a compatibility target, and drops the unsupported crash claim. A disposable Compose excerpt built with `:app:assembleDebug` on 29 October; no emulator run. The same commit added an advisory-check line to the PHP and PostgreSQL skills. `4ba4c2d`.
-- **Overdue source records.** 27 of 65 records were past review, including AI-platform rows the router names as a first stop. Each primary page was re-read on 2026-10-31: 26 snapshots moved to `superseded_sources`, one record quarantined after an HTTP 403, two claims narrowed where the page no longer supported them. The pages show OpenAI's Evals platform and `v1/prompts` due to shut down on 2026-11-30 and Bedrock Agents closed to new customers; no skill depended on them. Re-measured: 27 findings (exit 1) on the earlier register, 0 (exit 0) now. The check covers dates and metadata, not whether a page supports a claim. `f970df0`.
+### Defects fixed in guidance
 
-**Tooling that failed on this host**
+Most severe first.
 
-- **Cross-engine validators.** The control-plane and approval validators hard-coded one Windows layout and former repository names, so both exited 1 here. `scripts/engine_roots.py` now takes repeatable parent folders, `CHWEZI_ENGINES_ROOT`, former directory names and per-engine overrides. Re-measured for the eleven public engines: control plane exit 1 (5 findings; the old script accepts one parent folder) to exit 0 with both of this host's parent folders; approval adapters exit 1 (10 findings) to exit 0 (11 adapters). A twelve-engine run still exits 1 because the private `political` checkout is not installed (`NOT_ASSESSED`). `9979773`.
-- **Host paths and leaked markup.** Router and skill text named one machine's drive-rooted checkout, and eight references ended in leaked tool markup. Both were removed, and `scripts/content_hygiene.py` now fails the catalogue gate on host paths. Re-measured with that guard: 54 findings on the earlier tree (the evidence counts 30 real lines by hand; the guard also covers the validators and pass-1 evidence links), 0 now. `39a6898`, `3b7b3f6`.
-- **Package checks.** The Codex plugin shape and the package entry limit had no check in this repository. Added root `plugin.json`, `.agents/plugins/marketplace.json` and `scripts/check_package_file_budget.py`, with an over-cap failure test and a fail-closed case for unreadable paths. Re-measured: 2519 package-oriented entries against a limit of 5000. The documented context-budget invocation raised the skill paths loaded by an offline Codex `debug prompt-input` from 130 to 165 of 165 (validation record; invocation-level, not re-run). Public marketplace acceptance is not assessed. `f162535`, `27a602b`.
+- **Next.js tenant boundary** (`e00f12f`, `e0cc114`, `b7177be`).
+  - Before: the skill taught a role cookie as authority, a global users cache, an unscoped read and an unchecked mutation.
+  - Now: session, tenant-membership and permission checks sit at the server-only data-access boundary ([`tenant-data-security.md`](skills/frontend-ux/nextjs-app-router/references/tenant-data-security.md)).
+  - Re-measured: `scripts/validate_tenant_invoice_example.py` prints `PASS`, and `tests/test_tenant_invoice_example.py` passes (7 tests). A disposable `next build` on 29 October found a page and route-handler collision at `/invoices`. It was fixed with a regression test ([validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md); not re-run here).
+- **Next.js 16 drift** (`e00f12f`).
+  - Before: examples used synchronous `params` and a `middleware.ts` that read `request.ip` and `request.geo`.
+  - Now: they use async `params` and `proxy.ts`, and say that a Proxy redirect is only a navigation aid.
+  - Checked against the official upgrade guide on 2026-10-29 (source record `next16-upgrade-2026-10-29`).
+- **Android currency** (`4ba4c2d`).
+  - Before: the skill gave API 35 as the Play target. It claimed that omitting one edge-to-edge helper crashes the app.
+  - Now: it separates the Play target (API 36 or higher, verified 2026-10-29; re-read before release) from the latest platform release (Android 17, API 37), which is a compatibility target. The unsupported crash claim is gone. The same commit added an advisory-check line to the PHP and PostgreSQL skills.
+  - Checked: a disposable Compose excerpt built with `:app:assembleDebug` on 29 October. There was no emulator run.
+- **Overdue source records** (`f970df0`).
+  - Before: 27 of 65 records were past review, including AI-platform rows the router names as a first stop.
+  - Now: each primary page was re-read on 2026-10-31. 26 snapshots moved to `superseded_sources`, one record was quarantined after an HTTP 403, and two claims were narrowed where the page no longer supported them. The pages show OpenAI's Evals platform and `v1/prompts` due to shut down on 2026-11-30, and Bedrock Agents closed to new customers. No skill depended on them.
+  - Re-measured: 27 findings (exit 1) on the earlier register, 0 (exit 0) now. The check covers dates and metadata, not whether a page supports a claim.
 
-**Checks that only tighten**
+### Tooling that failed on this host
 
-- **Source-register gate.** `scripts/check_source_register.py` and a CI step fail when an active record is past its review date, a claim cites a superseded or quarantined record, or a quarantine has no reason; the calendar below shows when it next fires. The same pass recorded the 2026-10-31 model-currentness review (Luna/high pin retained, comparison `NOT_ASSESSED`, due by 2026-12-28). `ca94e6b`, `842965b`.
-- **Duplicate headings.** Normalising skills to the contract appended blocks to existing sections and left repeated `##` headings. 57 skills were merged with a per-file check that only one heading and one label changed, and a ratchet blocks new duplicates. Re-measured: 65 files with an exact duplicate H2 to 24. `feccc13`, `d12c250`, `f3b0705`.
-- **Broken links.** The old check read only `references/` and `templates/` links. 33 links in 19 files were repaired where the target resolved uniquely, and the check now covers all Markdown under the active roots. Re-measured: 111 broken file-and-target pairs in 70 files to 84 in 52. `0ca42e0`, `625e5e7`.
-- **Routing fixtures.** 42 skills had no positive fixture. Each gained one, `--coverage` reports the gap, and CI enforces a ceiling of one and a rank-1 floor of 89 (was 88). Re-measured: skills with no positive fixture 43 to 1 (`new-project`); precision@1 177/196 (90.3%) to 219/239 (91.6%), precision@3 100% both times. The proxy is lexical, not live routing. `9f0369e`, `c4e691f`.
+- **Cross-engine validators** (`9979773`).
+  - Before: the control-plane and approval validators hard-coded one Windows layout and former repository names, so both exited 1 here.
+  - Now: `scripts/engine_roots.py` takes repeatable parent folders, `CHWEZI_ENGINES_ROOT`, former directory names and per-engine overrides.
+  - Re-measured for the eleven public engines: control plane exit 1 (5 findings; the old script accepts one parent folder) to exit 0 with both of this host's parent folders. Approval adapters exit 1 (10 findings) to exit 0 (11 adapters). A twelve-engine run still exits 1 because the private `political` checkout is not installed (`NOT_ASSESSED`).
+- **Host paths and leaked markup** (`39a6898`, `3b7b3f6`).
+  - Before: router and skill text named one machine's drive-rooted checkout, and eight references ended in leaked tool markup.
+  - Now: both are removed, and `scripts/content_hygiene.py` fails the catalogue gate on host paths.
+  - Re-measured with that guard: 54 findings on the earlier tree, 0 now. The evidence counts 30 real lines by hand. The guard also covers the validators and pass-1 evidence links.
+- **Package checks** (`f162535`, `27a602b`).
+  - Before: the Codex plugin shape and the package entry limit had no check in this repository.
+  - Now: root `plugin.json`, `.agents/plugins/marketplace.json` and `scripts/check_package_file_budget.py`, with an over-cap failure test and a fail-closed case for unreadable paths.
+  - Re-measured: 2523 package-oriented entries against a limit of 5000. The documented context-budget invocation raised the skill paths that an offline Codex `debug prompt-input` loads from 130 to 165 of 165 (validation record; invocation-level, not re-run). Public marketplace acceptance is not assessed.
 
-**Routing and examples**
+### Checks that only tighten
 
-- **Review route.** A review that crosses SQL, tenant scope, query shape, output encoding and ledger writes had no route to the five owning checks, and the exercise named a posting service that differed from the owning skill. Added a router row, a routing-index section, a table in [`ai-generated-code-review-gate.md`](skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md) naming the owning skill for each defect class, one fixture and 4 tests; renaming one table link fails a test (evidence). The full original review request still misroutes at rank 1 under the proxy. `a6735a5`.
-- **Invoice slice.** The practitioner task had no reproducible cross-layer proof of tenant isolation. Added a synthetic PHP, OpenAPI, Next.js and Compose slice in `examples/tenant-invoice-listing/`, a PHP fixture and an unsafe-code review exercise. Re-measured: the fixture prints `15 checks passed` against a PDO SQLite synthetic database; a disposable MySQL 8.4.13 run also passed 15 checks on 29 October (validation record). Pass 2 then listed the slice's unfixed gaps in its README so it is not copied as finished. `2288c75`, `bd4a03b`, `8bec17a`.
+- **Source-register gate** (`ca94e6b`, `842965b`).
+  - `scripts/check_source_register.py` and a CI step fail when an active record is past its review date, a claim cites a superseded or quarantined record, or a quarantine has no reason. The [calendar](#date-triggered-gates) shows when it next fires.
+  - The same pass recorded the 2026-10-31 model-currentness review: Luna/high pin retained, comparison `NOT_ASSESSED`, due by 2026-12-28.
+- **Duplicate headings** (`feccc13`, `d12c250`, `f3b0705`).
+  - Normalising skills to the contract appended blocks to existing sections and left repeated `##` headings.
+  - 57 skills were merged, with a per-file check that only one heading and one label changed. A ratchet blocks new duplicates.
+  - Re-measured: files with an exact duplicate H2 fell from 65 to 24.
+- **Broken links** (`0ca42e0`, `625e5e7`).
+  - The old check read only `references/` and `templates/` links. 33 links in 19 files were repaired where the target resolved uniquely. The check now covers all Markdown under the active roots.
+  - Re-measured: broken file-and-target pairs fell from 111 in 70 files to 84 in 52.
+- **Routing fixtures** (`9f0369e`, `c4e691f`).
+  - 42 skills had no positive fixture. Each gained one. `--coverage` reports the gap, and CI enforces a ceiling of one and a rank-1 floor of 89 (was 88).
+  - Re-measured: skills with no positive fixture fell from 43 to 1 (`new-project`). Precision@1 rose from 177/196 (90.3%) to 219/239 (91.6%). Precision@3 was 100% both times. The proxy is lexical, not live routing.
 
-**Overall measures** (the per-item figures above are not repeated here)
+### Routing and examples
+
+- **Review route** (`a6735a5`).
+  - Before: a review that crosses SQL, tenant scope, query shape, output encoding and ledger writes had no route to the five owning checks. The exercise also named a posting service that differed from the owning skill.
+  - Now: a router row, a routing-index section, one fixture, 4 tests, and a table in [`ai-generated-code-review-gate.md`](skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md) that names the owning skill for each defect class. Renaming one table link fails a test.
+  - The full original review request still misroutes at rank 1 under the proxy.
+- **Invoice slice** (`2288c75`, `bd4a03b`, `8bec17a`).
+  - Before: the practitioner task had no reproducible cross-layer proof of tenant isolation.
+  - Now: a synthetic PHP, OpenAPI, Next.js and Compose slice in `examples/tenant-invoice-listing/`, a PHP fixture and an unsafe-code review exercise.
+  - Re-measured: the fixture prints `15 checks passed` against a PDO SQLite synthetic database. A disposable MySQL 8.4.13 run also passed 15 checks on 29 October (validation record). Pass 2 then listed the slice's unfixed gaps in its README so it is not copied as finished.
+
+### Overall measures
 
 | Measure | Before | After | Basis |
 |---|---|---|---|
-| Rating, raw and capped at `min(raw, 65)`, ten dimensions | 29 Oct 46.5 and 46.5; pass 2 55.0 and 55.0 | 29 Oct 59.5 and 59.5; pass 2 62.5 and 62.5 | Copied from both [final reports](docs/kaizen/2026-10-engine-kaizen-pass-2/05-final-report.md); the cap did not bind; the passes scored different trees, so the pass-2 and 29 October figures are not a trend |
-| Test suite, pytest 9.0.3 | 220 passed, 3 skipped | 273 passed, 3 skipped | Re-measured on both trees in a scratch virtual environment; the system `python3` has no pytest |
+| Rating, raw and capped at `min(raw, 65)`, ten dimensions | 29 Oct 46.5 and 46.5; pass 2 55.0 and 55.0 | 29 Oct 59.5 and 59.5; pass 2 62.5 and 62.5 | Copied from both [final reports](docs/kaizen/2026-10-engine-kaizen-pass-2/05-final-report.md). The cap did not bind. The passes scored different trees, so the figures are not a trend |
+| Test suite, pytest 9.0.3 | 220 passed, 3 skipped | 273 passed, 3 skipped | Re-measured on both trees in a scratch virtual environment. The system `python3` has no pytest |
 | 29 October suite and routing precision@1 | 207 passed; 173/191 | 220 passed; 177/196 | Copied from the 29 October [baseline](docs/kaizen/2026-10-engine-kaizen/01-baseline-scorecard.md) and [validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md) |
 
-Tried and reverted in pass 2, so not counted above: widening the `accounting-engine` description (no gain under the proxy), merging `Anti-Patterns` pairs in 19 skills (text landed outside its section), one `skill-writing` merge (crossed the 20,480-byte report threshold) and an over-broad link repair. See the [pass-2 log](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md).
+Tried and reverted in pass 2, so not counted above:
+
+- Widening the `accounting-engine` description (no gain under the proxy).
+- Merging `Anti-Patterns` pairs in 19 skills (text landed outside its section).
+- One `skill-writing` merge (it crossed the 20,480-byte report threshold).
+- An over-broad link repair.
+
+The [pass-2 log](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md) has the details.
 
 ## Date-triggered gates
 
-`scripts/check_source_register.py` fails, and so does the **Check source registers** CI step, when an active source record's `review_after` date is before the check date. Passing proves dates and metadata only; it does not prove that a page supports a claim. The calendar below was produced on 2026-10-31 by running the check with `--as-of` on each date shown and on the day before it. On the first date it exits 1:
+`scripts/check_source_register.py` fails when an active source record's `review_after` date is before the check date. The **Check source registers** CI step runs it. A pass proves dates and metadata only. It does not prove that a page supports a claim.
+
+Each row below was checked on 2026-10-31 by running the check with `--as-of` on that date and on the day before. On the first date of a row, it exits 1:
 
 ```sh
 python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-04
@@ -337,7 +423,7 @@ python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-04
 | 2027-01-30 | 2 | 71 | Next.js authentication and data-security guides |
 | 2027-09-02 | 1 | 72 | IETF DNSSEC best practice |
 
-The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`; never extend a date unread. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
+The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
 
 ## References
 
