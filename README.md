@@ -25,9 +25,9 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 
 - **167 active skills** in 18 categories, plus 78 retired names kept as redirects.
 - **165 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
-- **239 routing fixtures.** The expected skill ranks first for 219 (91.6%) and in the top three for all 239. The test is a lexical proxy, not live routing.
+- **239 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 219 (91.6%) and in the top three for all 239. The test matches words in skill descriptions, so it is not live routing.
 - **273 tests pass and 3 are skipped** (pytest 9.0.3, Linux, 2026-10-31).
-- **72 dated source records** back volatile facts. A CI step fails when one passes its review date. The first failure date is 2026-11-04.
+- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. The first failure date is 2026-11-04.
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -259,7 +259,9 @@ git diff --check
 | Hook tests | Node | 61/61 and 7/7 |
 | Evidence-declaration contract gate | Python | 161 skills scanned, 0 errors, 6 exempt |
 
-The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`). They are `NOT ASSESSED` here.
+The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`). `NOT ASSESSED` means a check could not be run here. It is never reported as a pass.
+
+A ratchet is a recorded baseline of known problems. A new problem fails the check, and the baseline may only shrink.
 
 ### Checks beyond CI
 
@@ -285,7 +287,7 @@ None of these is part of CI.
 
 ## Quality and improvement
 
-Improvement work follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md).
+Improvement work (kaizen, the Japanese term for continuous improvement) follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md).
 
 Evidence for the October 2026 passes lives in two folders. Each holds a scope record, a frozen baseline scorecard, a backlog, an experiment log, a validation record, a final report and a next-cycle handoff.
 
