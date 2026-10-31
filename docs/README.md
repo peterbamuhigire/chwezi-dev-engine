@@ -1,7 +1,7 @@
 # Documentation index
 
 Where each kind of record lives. Start with the root [`README.md`](../README.md) for what the
-engine is, how to install it and how to run its validators, and [`AGENTS.md`](../AGENTS.md) for
+engine is, how to install it, how to run its validators and what the October 2026 kaizen improved, and [`AGENTS.md`](../AGENTS.md) for
 the router that agents read. Dated records (audits, updates, kaizen cycles) are history: they
 describe the tree as it was on their date, and some still name the former repository name or a
 Windows checkout path.
