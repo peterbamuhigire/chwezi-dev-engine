@@ -6,14 +6,9 @@ The engine produces working engineering artefacts rather than advice: architectu
 
 ## Installation
 
-The [2026-10 engine Kaizen](docs/kaizen/2026-10-engine-kaizen/README.md)
-adds a tenant-scoped invoice teaching slice, updates Next.js and Android
-currency guidance, and records native Claude/Codex discovery limits. Its
-runtime, marketplace, and deployment evidence is scoped to the tested
-environments; read the validation record before treating an example as
-production proof.
+This repository was formerly named `skills-web-dev`, and an older clone may still sit in a folder of that name; every command below works from whatever the folder is called. What the October 2026 improvement passes did, and what they did not establish, is summarised under [Quality and improvement](#quality-and-improvement); read the validation records there before treating an example as production proof.
 
-**Prerequisites.** Git. Node.js 18 or later for the standalone installer (CI uses Node 24). Python 3.11 or later for the Codex model-policy helper; Python 3.12 with `pip install -r requirements-ci.txt` (pytest 9.0.3, PyYAML 6.0.2) to run the validators and tests.
+**Prerequisites.** Git. Node.js 18 or later for the standalone installer and the hook tests (CI uses Node 24; the checks in this file were last run on Node 22). Python 3.11 or later for the Codex model-policy helper. For the validators and tests, `pip install -r requirements-ci.txt` installs pytest 9.0.3 and PyYAML 6.0.2; CI runs them on Python 3.12, and the 2026-10-31 run on Linux used Python 3.14 with PyYAML 6.0.3. Commands below use `python3`; on Windows use `python` or `py -3`.
 
 **Claude Code plugin (recommended).** The repository is its own marketplace (`.claude-plugin/marketplace.json`, marketplace `chwezi-engineering`, plugin `engineering`):
 
@@ -26,24 +21,24 @@ The plugin manifest (`.claude-plugin/plugin.json`) ships the 165 skills under `s
 
 **Codex portable package.** Root `plugin.json` uses the portable Agent Plugins format and the repo-scoped catalog lives at `.agents/plugins/marketplace.json`. It discovers the root `skills/` directory; the two `00-meta-initialization/` workflows remain documented clone-based entrypoints. Codex and Claude keep separate host catalogs. Adding the repo marketplace changes the user's Codex marketplace state. This repository does not automatically edit that state or submit a public listing.
 
-**Standalone installer (no plugin system, or project-local scope).** `install.sh` and `install.ps1` delegate to `scripts/install-engine.js`, which copies skills, agents, hooks and rules into `~/.claude` (`--scope user`, the default) or `./.claude` (`--scope project`) and records every file it writes in `.chwezi/install-state.json`:
+**Standalone installer (no plugin system, or project-local scope).** `install.sh` and `install.ps1` delegate to `scripts/install-engine.js`, which copies skills, agents, hooks and rules into `~/.claude` (`--scope user`, the default) or `./.claude` (`--scope project`) and records every file it writes in `.chwezi/install-state.json` inside that target folder:
 
 ```sh
 git clone https://github.com/peterbamuhigire/chwezi-dev-engine.git
 cd chwezi-dev-engine
-./install.sh --scope project --dry-run   # print the plan, write nothing
-./install.sh --scope project
+bash install.sh --scope project --dry-run   # print the plan, write nothing
+bash install.sh --scope project
 ```
 
-On Windows PowerShell, run `.\install.ps1 --scope project` (the same flags pass through to the Node installer). `node scripts/install-engine.js uninstall --engine chwezi-dev-engine`, `doctor` and `list-installed` manage an existing install; uninstall removes only files the installer recorded.
+Run the wrapper with `bash`: the file is tracked without its executable bit, so `./install.sh` fails with "Permission denied" on a fresh Linux clone. On Windows PowerShell, run `.\install.ps1 --scope project` (the same flags pass through to the Node installer; not run in the October 2026 passes). `node scripts/install-engine.js uninstall --engine <name>`, `doctor` and `list-installed` manage an existing install; `<name>` is the folder the engine was cloned into (`chwezi-dev-engine` for the clone above), and `list-installed` prints it. Uninstall removes only files the installer recorded. On 2026-10-31 a real install into an empty home folder, `doctor`, a dry-run uninstall and a real uninstall all exited 0, and the uninstall left only the install-state record.
 
 **Codex.** Point Codex at the clone; it reads [`AGENTS.md`](AGENTS.md) as the router. Before substantive work, run the bounded model-policy check described in [`.codex/README.md`](.codex/README.md):
 
 ```text
-python <engine-root>/.codex/ensure_model_policy.py --runtime codex --check
+python3 <engine-root>/.codex/ensure_model_policy.py --runtime codex --check
 ```
 
-Run `--apply` only if the check reports drift. Claude Code skips this step.
+Run `--apply` only if the check reports drift (it exits 1 and prints `DRIFT` when the Codex configuration is missing or differs). Claude Code skips this step; `--runtime claude --check` prints `NOT_APPLICABLE` and exits 0.
 
 If an offline `debug prompt-input` check must enumerate the entire plugin skill
 manifest, use the measured invocation documented in [the October 2026
@@ -59,13 +54,53 @@ loaded 130 of 165 declared plugin skill paths; the explicit budget loaded all
 
 **Manual route.** Clone the repository, then have the agent read [`CLAUDE.md`](CLAUDE.md) (which imports `AGENTS.md`), the [skill routing index](docs/skill-routing-index.md), and only the `SKILL.md` files the task needs. Expose `skills/` and `00-meta-initialization/` to the working agent; [docs/USING-IN-A-PROJECT.md](docs/USING-IN-A-PROJECT.md) covers submodule, sibling-clone and read-only-mount wiring.
 
-**Verify.**
+**Verify.** Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). Each exited 0 on the current tree on Linux (Fedora, Python 3.14.8, Node 22.23.1) on 2026-10-31.
 
 ```sh
-python -X utf8 scripts/skill_catalog_guardrails.py
-python -X utf8 -m pytest tests -q
-python -X utf8 scripts/routing_smoke_test.py --min-rank1 88 --lint-fixtures
+python3 -m pip install -r requirements-ci.txt
+python3 -X utf8 scripts/skill_catalog_guardrails.py
+python3 -X utf8 -m unittest tests/test_skill_catalog_guardrails.py
+python3 -X utf8 -m pytest tests -q -p no:cacheprovider
+python3 -X utf8 scripts/routing_smoke_test.py --min-rank1 89 --lint-fixtures
+python3 -X utf8 scripts/routing_smoke_test.py --coverage --max-zero-positive 1
+python3 -X utf8 scripts/routing_smoke_test.py --collisions --collision-gate --threshold 0.5
+python3 -X utf8 scripts/validate_engine_control_plane.py
+python3 -X utf8 scripts/check_source_register.py
+node hooks/test-destructive-bash-gate.js && node hooks/test-plugin-hook-config.js
+python3 -X utf8 skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all
+git diff --check
 ```
+
+| Check | Needs | Result, 2026-10-31 |
+|---|---|---|
+| Catalogue guardrails (also runs the host-path, duplicate-heading and broken-link ratchets) | Python, PyYAML | 167 active skills, 0 errors, 14 size warnings (warnings never change the exit status) |
+| Guardrail unit tests | Python | 10 tests OK |
+| Test suite | Python, pytest, PyYAML, Git | 273 passed, 3 skipped |
+| Routing smoke test (a lexical proxy, not live routing) | Python, PyYAML | 239 fixtures; precision@1 219/239 (91.6%), precision@3 239/239; 83 owned negatives, 4 `NOT_ASSESSED` |
+| Fixture coverage | Python, PyYAML | 166 of 167 skills have a positive fixture; `new-project` has none |
+| Description collisions | Python, PyYAML | 1 pair above 0.5 (`mysql-engineering` and `postgresql-engineering`), allow-listed |
+| Control-plane registry | Python | 12 registry entries; installed checkouts are `NOT ASSESSED` unless parent folders are given (below) |
+| Source registers | Python | 72 active sources, 0 findings, 15 review dates within 14 days; see the [calendar](#date-triggered-gates) |
+| Hook tests | Node | 61/61 and 7/7 |
+| Evidence-declaration contract gate | Python | 161 skills scanned, 0 errors, 6 exempt |
+
+The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`), which are `NOT ASSESSED` here.
+
+Checks that need more than the CI steps, none of them part of CI:
+
+- **Sibling checkouts.** Give the validators the folders that hold the other engines, once per folder or as `CHWEZI_ENGINES_ROOT` (folders separated by `:`; `;` on Windows). Former directory names such as `srs-skills` are found by `scripts/engine_roots.py`. List the eleven public engines with `--engine`, because the twelfth, `political`, is private and not installed on most hosts and makes an unscoped run exit 1:
+
+  ```sh
+  python3 -X utf8 scripts/validate_engine_control_plane.py --workspace-root <parent-1> --workspace-root <parent-2> \
+    --engine accounting --engine business-plan --engine chwezi-dev-engine --engine design --engine digital-research \
+    --engine linux --engine proposal --engine social-media --engine srs --engine website --engine windows-admin
+  python3 -X utf8 scripts/validate_approval_adapters.py --workspace-root <parent-1> --workspace-root <parent-2>
+  ```
+
+  Both exited 0 on 2026-10-31 (11 engines in scope; 11 adapters, 0 findings). Without parent folders the adapter validator exits 1 unless the siblings sit next to this checkout.
+- **Applied examples.** `python3 -X utf8 scripts/validate_tenant_invoice_example.py` (Python only) prints `PASS`. `php examples/tenant-invoice-listing/php/test.php` needs the PHP CLI with PDO SQLite and printed `15 checks passed`. The Next.js, Compose, MySQL and Android layers of that example need their own toolchains and were not re-run here (`NOT ASSESSED`).
+- **Other scripts.** `scripts/check_package_file_budget.py`, `scripts/source_ingestion_guardrail.py` and `scripts/validate_work_graph.py templates/work-graph.yml` need only Python and exited 0.
+- **Not needed.** No validator in this repository calls PowerShell (`pwsh`), Pandoc, Mermaid, LibreOffice, a browser or a container. `install.ps1` and `scripts/install-pdf-binaries.ps1` are Windows helpers that were not run in the October 2026 passes. Skills mention those tools only as downstream project requirements.
 
 ## Capabilities
 
@@ -271,8 +306,54 @@ The active count is a checked surface: `tests/test_engine_control_plane.py` comp
 |---|---:|
 | Active `SKILL.md` files | 167 |
 | Guardrail maximum | 200 |
+| Inactive `ALIAS.md` redirects | 78 |
+| Skills shipped by the Claude plugin manifest | 165 |
+| Routing fixtures | 239 |
 
 Routing: the [skill routing index](docs/skill-routing-index.md) maps retired slugs to their current skills, and [`docs/skill-aliases.yml`](docs/skill-aliases.yml) holds the machine-readable form. Operating rules for agents are in [`AGENTS.md`](AGENTS.md); contribution rules are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## Quality and improvement
+
+Improvement work follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md). Evidence for the October 2026 passes lives in two folders, each with a scope record, a frozen baseline scorecard, a backlog, an experiment log, a validation record, a final report and a next-cycle handoff:
+
+- [`docs/kaizen/2026-10-engine-kaizen/`](docs/kaizen/2026-10-engine-kaizen/README.md), the 29 October pass.
+- [`docs/kaizen/2026-10-engine-kaizen-pass-2/`](docs/kaizen/2026-10-engine-kaizen-pass-2/README.md), the 31 October pass. Its [final report](docs/kaizen/2026-10-engine-kaizen-pass-2/05-final-report.md) is the source of the scores below.
+
+**Latest published score.** Pass 2 rated the engine 62.5/100 raw (the mean of ten dimension ratings), and the Portfolio Standard cap, `min(raw, 65)`, leaves 62.5/100. The 29 October pass published 59.5 raw and 59.5 capped. The two figures are not a trend: pass 2 scored the whole tree afresh and found items the first pass had not checked. The ratings are a practitioner's judgement, not an external audit or benchmark, and the 95/100 target was not reached; it remains a target.
+
+**Open findings that matter to a reader.** The full list, with reasons, is the pass-2 [next-cycle handoff](docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md).
+
+- `.claude/settings.local.json` is a user-local settings file that is tracked in this public repository and names Windows user-profile paths. It is escalated to the maintainer: untracking it keeps the file on disk but does not remove it from Git history. Do not copy it.
+- The invoice slice in `examples/tenant-invoice-listing/` has known contract gaps (no pagination, errors not in RFC 9457 form, raw minor units shown to users, `LIKE` wildcards in search, no migration rollback, accessibility semantics, no evidence pack). Its README lists them; do not copy the slice as a finished listing.
+- 24 skills still carry a duplicate `##` heading and 84 relative links in 52 files do not resolve. Both are held by ratchets (`docs/quality-gates/`) that may only shrink.
+- Routing coverage is thin: 13 of 167 skills have three positive fixtures and two owned negatives, and `new-project` has no fixture.
+- Currency rows not re-read in pass 2: the legacy hospitality register (review date 2026-10-14, now past), the Apple developer documentation row, the OpenAI Codex availability article (quarantined after an HTTP 403) and the Kubernetes latest version (inferred, not labelled by the source).
+- Not established by any pass: Next.js, Compose, MySQL and Android builds of the invoice slice, live-model routing, production behaviour and independent human review. These are `NOT_ASSESSED`, never a pass.
+
+### Date-triggered gates
+
+`scripts/check_source_register.py` fails, and so does the **Check source registers** CI step, when an active source record's `review_after` date is before the check date. Passing proves dates and metadata only; it does not prove that a page supports a claim. The calendar below was produced on 2026-10-31 by running the check with `--as-of` on each date shown and on the day before it. On the first date it exits 1:
+
+```sh
+python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-04
+```
+
+| First failing `--as-of` date | Records lapsing that day | Failing in total | Topics |
+|---|---:|---:|---|
+| 2026-11-04 | 5 | 5 | Next.js release, support policy, upgrade guide, October and November security notices |
+| 2026-11-06 | 9 | 14 | Android 17, Android security bulletin, AGP and Compose notes, Kotlin and Compose migration, PHP security and Brotli, PostgreSQL and MySQL security |
+| 2026-11-12 | 1 | 15 | PowerShell support lifecycle |
+| 2026-11-30 | 6 | 21 | OpenAI changelog, model selection, skills context budget, plugin format and submission, Claude plugin marketplace |
+| 2026-12-01 | 34 | 55 | The main batch: Play target, Kotlin, PHP supported versions, PostgreSQL support, OpenAI, Anthropic, Gemini and Bedrock guidance, Windows, Intune, PowerShell, Cisco, BIND, Kubernetes, React, MySQL 8.4 |
+| 2026-12-02 | 6 | 61 | WCAG 2.2, ASVS, IFRS 18, Windows security baselines and server documentation |
+| 2026-12-17 | 1 | 62 | W3C validator user documentation |
+| 2026-12-18 | 1 | 63 | W3C validator user documentation (second record) |
+| 2026-12-30 | 1 | 64 | Impeccable slop catalogue |
+| 2027-01-01 | 5 | 69 | NIST AI RMF, OWASP Top 10 2025, ASVS 5.0.0, PCI DSS 4.0.1, SLSA 1.2 |
+| 2027-01-30 | 2 | 71 | Next.js authentication and data-security guides |
+| 2027-09-02 | 1 | 72 | IETF DNSSEC best practice |
+
+The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`; never extend a date unread. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
 
 ## References
 
