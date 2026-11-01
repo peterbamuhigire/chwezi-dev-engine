@@ -97,14 +97,14 @@ Cache::increment("login_rate_limit:$ip", 1);
 Cache::put("login_rate_limit:$ip", $requests + 1, 60); // 1 min
 ```
 
-**CAPTCHA After Failed Attempts:**
+**Turnstile After Failed Attempts:**
 ```php
 $attempts = Cache::get("login_attempts:$username", 0);
 
 if ($attempts >= 3) {
-    // Require CAPTCHA
-    if (!$request->captcha_verified) {
-        throw new AuthException('Please complete the CAPTCHA');
+    // Require a server-verified Turnstile result
+    if (!$request->turnstile_verified) {
+        throw new AuthException('Please complete the security check');
     }
 }
 ```

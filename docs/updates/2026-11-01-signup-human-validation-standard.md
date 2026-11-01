@@ -1,0 +1,9 @@
+# Signup human-validation standard
+
+Added a shared security reference for web and Android signup flows. Web signup defaults to Cloudflare Turnstile Managed mode with backend Siteverify validation. Android signup defaults to Firebase App Check using Play Integrity, with a Turnstile WebView fallback when expected attestation is unavailable. Registration and resend flows share server-side checks; confirmed provider outages use stricter limits, mandatory email confirmation, and alerts, while invalid tokens remain failures. Independent rate limits, staged rollout, test coverage, secret handling, and privacy review are required.
+
+Replaced the remaining legacy provider example in the security skill. The threat-model example now uses risk-triggered Turnstile and does not imply every public endpoint must challenge every request. The controls address bot-driven automated abuse and do not replace identity, authentication, authorisation, or email confirmation.
+
+Current provider claims were checked against official Cloudflare and Firebase documentation on 1 November 2026. Review by 1 February 2027. The supplied PDFs remain external inputs and were not copied into this repository.
+
+Model-currentness preflight: OpenAI's [Model Release Notes](https://help.openai.com/en/articles/9624314-model-release-notes) record GPT-6.1 Terra (26 October 2026) and limited GPT-6 Rosalind Research (30 October 2026); the [official model directory](https://developers.openai.com/api/docs/models) lists GPT-6 Astra, GPT-6.1 Sol, GPT-6.1 Terra, and GPT-6 Luna. Checked 1 November 2026. No model-policy change is proposed. The active account/runtime model catalogue is not exposed to this task, so account availability and comparative policy evaluation are NOT_ASSESSED; retain the existing policy unchanged pending its normal review.

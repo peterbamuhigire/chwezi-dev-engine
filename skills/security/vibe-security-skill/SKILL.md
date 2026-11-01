@@ -153,12 +153,12 @@ Wrong-choice failure: hot-rotating a JWT key without `kid` overlap invalidates e
 ### Rate limit shape per endpoint class
 
 ```text
-Login / password reset                                    -> 5 per 15 min per IP AND per username; CAPTCHA after 3
+Login / password reset                                    -> 5 per 15 min per IP AND per username; Turnstile after 3
 Registration                                              -> 3 per hour per IP; email verification required
 Read API, authenticated                                   -> 1000/min per user, 10k/min per tenant
 Write API, authenticated                                  -> 100/min per user; quota by plan
 Expensive endpoint (search, export, AI)                  -> cost-weighted quota (token budget, not request count)
-Public unauthenticated endpoint                           -> per-IP + CAPTCHA/Turnstile after threshold
+Public unauthenticated endpoint                           -> per-IP + Turnstile after threshold
 Webhook intake                                            -> per-sender signature; reject unsigned within 1 second
 ```
 
@@ -389,6 +389,8 @@ CREATE POLICY tenant_isolation ON orders
 | Security | Abuse-case catalogue | Markdown doc listing misuse scenarios and mitigations | `docs/security/abuse-cases-checkout.md` |
 
 ## References
+
+- [Signup Human Validation Standard](references/signup-human-validation.md) — required when designing or reviewing account creation, signup verification, or signup-related resend endpoints.
 
 - `references/owasp-mapping.md` — OWASP Top 10 2025 complete map with code.
 - `../../architecture/api-design-first/references/api-security-owasp-top10.md` — load when the target is an HTTP/GraphQL/gRPC/webhook API: OWASP API Security Top 10 (2023) controls with a negative-test proof per risk.

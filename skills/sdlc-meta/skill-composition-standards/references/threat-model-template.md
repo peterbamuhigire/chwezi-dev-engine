@@ -42,7 +42,7 @@ Use STRIDE categories. For each, list threats, ratings, and mitigations.
 
 | Threat | Likelihood | Impact | Risk | Mitigation |
 |---|---|---|---|---|
-| credential stuffing against login | high | high | H | rate limit + CAPTCHA + breach-password check |
+| credential stuffing against login | high | high | H | rate limit + risk-triggered Turnstile + breach-password check |
 | session token theft via XSS | medium | critical | H | HttpOnly + Secure + SameSite cookies + CSP |
 | API key in client bundle | high | critical | H | never ship server keys to client; restrict public keys by referrer/IP |
 
@@ -85,7 +85,7 @@ Use STRIDE categories. For each, list threats, ratings, and mitigations.
 
 Not defensive — intentional misuse scenarios:
 
-- Scraper extracts product catalogue via public API → mitigation: API quota + Turnstile on first unauth request.
+- Scraper extracts product catalogue via public API → mitigation: API quota + risk-triggered Turnstile for browser-originated traffic where appropriate.
 - Fraudster uses stolen cards in checkout → mitigation: 3DS; velocity checks; chargeback monitoring.
 - Competitor creates fake accounts for reviews → mitigation: email verification; device fingerprint; moderation.
 

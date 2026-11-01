@@ -152,7 +152,7 @@ Login is the single most attacked page in any app. Assume an adversary is runnin
 - **Alert on patterns:** credential stuffing (many accounts, low per-account rate), brute force (one account, high rate), impossible travel.
 - **MFA on admin accounts (non-negotiable) and on user accounts (strongly recommended).** TOTP via authenticator app; recovery codes; WebAuthn for higher-value accounts.
 - **Account lockouts must be reversible and must not enable account-locking attacks.** Prefer exponential backoff and MFA challenges to hard locks.
-- **CAPTCHA is a last-resort rate limiter, not a primary control.** Invisible variants (hCaptcha Enterprise, Turnstile) hurt users the least.
+- **Human verification is one layer of abuse control, not a substitute for rate limits or account safeguards.** Use the engine's Cloudflare Turnstile standard when a challenge is justified.
 - **Password-reset flows are login flows.** Rate limit, generic messages, expire reset tokens quickly (15 minutes), one-use only.
 
 ## 9. Defending a form that accepts user input

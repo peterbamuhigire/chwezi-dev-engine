@@ -215,7 +215,7 @@ $throttle->clearOnSuccess($_SERVER['REMOTE_ADDR']);
 
 **Additional strategies:**
 - Incremental delay after each failure (`sleep(min($attempts, 5))`)
-- CAPTCHA after N failures
+- Turnstile after a risk-based number of failed attempts, with server-side token verification
 - 2FA as ultimate brute-force prevention
 - Server-level: `fail2ban` to block IPs at firewall
 

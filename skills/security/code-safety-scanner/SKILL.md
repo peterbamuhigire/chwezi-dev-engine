@@ -163,7 +163,7 @@ Check for:
 
 - Email verification missing after signup
 - No rate limiting on login/signup endpoints
-- No CAPTCHA or bot protection
+- No Turnstile or equivalent bot protection on an endpoint that handles public signup when the applicable policy requires it
 - Password stored without hashing (check for plaintext storage)
 - No input validation on email/username fields
 - Missing CSRF protection on auth forms

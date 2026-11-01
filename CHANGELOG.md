@@ -80,3 +80,6 @@
 - Added engineering anti-slop governance, release-blocking gates, and benchmark/cross-engine standards reference.
 - Added Phase 1, Phase 2, and final upgrade reports.
 - Rebuilt the root `README.md` around the July 2026 operating model.
+# 2026-11-01
+
+- Added the signup human-validation standard to the engineering skills and threat model, with Turnstile as the web default and Play Integrity plus Turnstile fallback for Android.

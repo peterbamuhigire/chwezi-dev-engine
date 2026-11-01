@@ -26,7 +26,7 @@ Each abuse case captures:
 - Target: public product/pricing API.
 - Steps: iterate ids or pagination without auth; export to CSV.
 - Detection: sustained high request rate from narrow IP range; low session depth.
-- Mitigation: per-IP rate limit + CAPTCHA on first unauth request; Turnstile; product-level decoy records.
+- Mitigation: per-IP and account-level rate limits; apply the [Signup Human Validation Standard](signup-human-validation.md) to signup flows; product-level decoy records where appropriate.
 - Residual: distributed residential-proxy abuse still possible.
 
 ### AC-2 Credential stuffing
@@ -98,7 +98,7 @@ Each abuse case captures:
 - Target: password reset endpoint.
 - Steps: POST /password-reset with email; compare response.
 - Detection: high rate of unique-email resets from a single source.
-- Mitigation: constant-time response (same message whether the email exists or not); rate limit; CAPTCHA.
+- Mitigation: constant-time response (same message whether the email exists or not); rate limit; apply the [Signup Human Validation Standard](signup-human-validation.md) to signup-related requests.
 - Residual: side-channel (email delivery latency) — low severity.
 
 ### AC-10 Webhook replay

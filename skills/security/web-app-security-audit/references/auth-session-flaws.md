@@ -77,8 +77,8 @@ function loginAttempt(string $email, string $password): ?int {
 - Rate limit per account (e.g. 5 failures / 15 minutes) AND per IP (e.g. 20 failures /
   15 minutes). Both limits — either alone is bypassable.
 - Progressive delay: add 1s, 2s, 4s, 8s to response time on successive failures.
-- CAPTCHA after 3-5 failures on an account or IP.
-- Account lockout is risky (it becomes a DoS vector). Prefer rate limiting + CAPTCHA.
+- Turnstile after 3-5 failures on an account or IP when risk-based challenge escalation is justified.
+- Account lockout is risky (it becomes a DoS vector). Prefer rate limiting + Turnstile escalation.
 - Alert on anomalous patterns: many accounts tried from one IP, many IPs against one
   account, logins from new geographies, logins from known breach-dump IP ranges.
 - Device fingerprinting (UA + Accept-Language + IP reputation) to require step-up auth
@@ -384,7 +384,7 @@ flaws:
 - [ ] Password minimum length ≥ 12; breached passwords rejected (HIBP k-anonymity)
 - [ ] No user enumeration on login, signup, or password reset endpoints
 - [ ] Login response timing is constant regardless of user existence
-- [ ] Rate limiting on login per-account AND per-IP, with CAPTCHA escalation
+- [ ] Rate limiting on login per-account AND per-IP, with Turnstile escalation where justified
 - [ ] MFA enforced for all admin accounts; TOTP or WebAuthn preferred
 - [ ] Session ID regenerated on login, MFA, and privilege change
 - [ ] Session cookies set with `HttpOnly`, `Secure`, `SameSite=Lax` or `Strict`
