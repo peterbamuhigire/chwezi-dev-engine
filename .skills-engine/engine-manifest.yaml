@@ -39,7 +39,7 @@ plugin_exclusions:
   - path: "."
     reason: "repository-level router SKILL.md; the plugin exposes the routed skills under skills/, and the router is read through AGENTS.md"
   - path: "00-meta-initialization"
-    reason: "project-initialisation router outside skills/; counted active by the dev catalogue (167) but loaded by path at project start, not shipped as a plugin skill; the generator runs with --root skills"
+    reason: "project-initialisation router outside skills/; counted active by the dev catalogue (168) but loaded by path at project start, not shipped as a plugin skill; the generator runs with --root skills"
   - path: "00-meta-initialization/new-project"
     reason: "project scaffold step under the initialisation router; same reason as 00-meta-initialization"
 invariants:

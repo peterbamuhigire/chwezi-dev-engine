@@ -1,6 +1,6 @@
 # Skill catalogue
 
-Every active skill in this engine, by category: 167 skills in 18 categories. An active skill is a `SKILL.md` under `skills/` or `00-meta-initialization/`. The 78 inactive `ALIAS.md` redirects are excluded, and [`skill-routing-index.md`](skill-routing-index.md) maps retired names to current skills. The root [`SKILL.md`](../SKILL.md) is the engineering baseline router and is not counted.
+Every active skill in this engine, by category: 168 skills in 18 categories. An active skill is a `SKILL.md` under `skills/` or `00-meta-initialization/`. The 78 inactive `ALIAS.md` redirects are excluded, and [`skill-routing-index.md`](skill-routing-index.md) maps retired names to current skills. The root [`SKILL.md`](../SKILL.md) is the engineering baseline router and is not counted.
 
 Not sure which skill you need? Start with [Find the right skill](../README.md#find-the-right-skill) in the root README.
 
@@ -208,7 +208,7 @@ Jump to a category:
 
 ## SaaS platforms
 
-18 skills in [`skills/saas/`](../skills/saas/).
+19 skills in [`skills/saas/`](../skills/saas/).
 
 | Skill | What it does |
 |---|---|
@@ -230,6 +230,7 @@ Jump to a category:
 | [`saas-tenant-data-portability-and-erasure`](../skills/saas/saas-tenant-data-portability-and-erasure/SKILL.md) | Designs verified tenant data export, retention and erasure workflows. |
 | [`stripe-payments`](../skills/saas/stripe-payments/SKILL.md) | Integrates Stripe PaymentIntents, Checkout, SCA, idempotency and webhooks. |
 | [`subscription-billing`](../skills/saas/subscription-billing/SKILL.md) | Designs Stripe Billing subscriptions: trials, proration, dunning, metered usage and tax. |
+| [`tenant-document-numbering`](../skills/saas/tenant-document-numbering/SKILL.md) | Makes invoice, receipt, order and journal numbers contiguous per tenant and document type, for new and existing systems. |
 
 ## Product and business
 

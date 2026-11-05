@@ -143,6 +143,9 @@ explicit release state.
 - One global AES/key cache or offline store. Fix: tenant/profile-scoped key and
   device lifecycle with explicit isolation tests.
 - New idempotency key after timeout. Fix: reconcile and reuse the original key.
+- Storing the authority's fiscal number in the tenant's invoice-number column, or
+  letting it advance the tenant counter. Fix: keep the fiscal number in its own
+  column; the tenant series stays contiguous (`tenant-document-numbering`).
 - `FakeEfrisClient` in production wiring. Fix: fail closed unless a configured,
   authorized adapter is selected.
 - Storing only normalized status. Fix: retain redacted provider code/message,

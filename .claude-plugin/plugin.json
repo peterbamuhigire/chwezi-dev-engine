@@ -141,6 +141,7 @@
     "./skills/saas/saas-tenant-data-portability-and-erasure/",
     "./skills/saas/stripe-payments/",
     "./skills/saas/subscription-billing/",
+    "./skills/saas/tenant-document-numbering/",
     "./skills/sdlc-meta/advanced-testing-strategy/",
     "./skills/sdlc-meta/ai-assisted-development/",
     "./skills/sdlc-meta/ai-slop-audit/",

@@ -47,7 +47,7 @@ CREATE TABLE accounts (
 CREATE TABLE journal_entries (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     franchise_id INT UNSIGNED NOT NULL,
-    entry_number VARCHAR(20) NOT NULL,
+    entry_number VARCHAR(40) NOT NULL,  -- contiguous per tenant; see tenant-document-numbering
     entry_date DATE NOT NULL,
     reference_type VARCHAR(50) NOT NULL
         COMMENT 'sale_invoice, payment, purchase, expense, adjustment, closing',
@@ -137,25 +137,21 @@ CREATE TABLE account_balances (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
-## Trigger: Auto-Generate Entry Number
+## Entry Numbers: Allocated by the Application, Not a Trigger
+
+Do not generate `entry_number` in a trigger or with `MAX(...)+1`. Two concurrent
+postings read the same maximum, a reversed or deleted latest row lets the number be
+reissued, and the logic is invisible to application tests. Allocate the number from the
+tenant's `journal_entry` counter inside the posting transaction, immediately before the
+insert, through the single allocator defined in
+[`tenant-document-numbering`](../../tenant-document-numbering/SKILL.md). The journal
+counter is always locked last, after any business-document counter.
 
 ```sql
-DELIMITER //
-CREATE TRIGGER trg_journal_entry_number
-BEFORE INSERT ON journal_entries
-FOR EACH ROW
-BEGIN
-    DECLARE v_next_num INT;
-    SELECT COALESCE(MAX(
-        CAST(SUBSTRING(entry_number, 4) AS UNSIGNED)
-    ), 0) + 1
-    INTO v_next_num
-    FROM journal_entries
-    WHERE franchise_id = NEW.franchise_id;
-
-    SET NEW.entry_number = CONCAT('JE-', LPAD(v_next_num, 7, '0'));
-END //
-DELIMITER ;
+-- Inside the posting transaction (the allocator does this; shown for clarity)
+SELECT last_number FROM document_counters
+ WHERE tenant_id = :franchise_id AND doc_type = 'journal_entry' FOR UPDATE;
+-- probe, format JE-00000001, UPDATE last_number, INSERT journal_entries ... COMMIT
 ```
 
 ## Trigger: Validate Balance on Insert
@@ -215,10 +211,14 @@ DELIMITER ;
 
 ### Entry Number Sequence
 
-- Format: `JE-0000001`, `JE-0000002`, ...
-- Per-tenant sequence (each tenant starts at 1)
-- Gaps are acceptable (voided entries keep their number)
-- Never reuse entry numbers
+- Format: `JE-00000001`, `JE-00000002`, ... (8-digit padding for this per-posting type;
+  the counter grows past it)
+- One contiguous series per tenant, never reset by year or period; a year in the format
+  is a label only
+- Gaps are not acceptable. Voided entries keep their number and stay visible; a
+  reversal takes the next number
+- Never reuse or delete entry numbers; allocate through the
+  [`tenant-document-numbering`](../../tenant-document-numbering/SKILL.md) allocator
 
 ### Referential Integrity
 

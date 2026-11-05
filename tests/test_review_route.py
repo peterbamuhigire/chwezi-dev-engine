@@ -17,6 +17,7 @@ EXPECTED = {
     "n+1": ("N+1", "N+1"),
     "output escaping": ("Unescaped output", "escap"),
     "ledger write": ("Ledger or journal write", "journal_lines"),
+    "document number": ("Document number from", "allocator"),
 }
 
 

@@ -54,6 +54,20 @@ fixtures:
     expect: subscription-billing
   - task: "Design rate limiting and per-tenant request quotas"
     expect: saas-rate-limiting-and-quotas
+  - task: "Make invoice, receipt and purchase order numbers contiguous per tenant with no gaps or duplicates, replacing MAX+1 and COUNT+1 generators"
+    expect: tenant-document-numbering
+    negatives:
+      - task: "Design the double-entry journal posting rules and reversal entries for sales invoices"
+        owner: saas-accounting-system
+      - task: "Integrate Uganda EFRIS fiscal receipts and authority invoice numbers into the POS"
+        owner: electronic-fiscal-taxing
+  - task: "Retrofit gap-free document numbering for existing tenants: seed each counter past existing numbers, add unique keys and void instead of delete"
+    expect: tenant-document-numbering
+    negatives:
+      - task: "Normalise the orders schema and choose indexes for the reporting queries"
+        owner: database-design-engineering
+  - task: "Review a diff that deletes issued credit notes and numbers journal entries per year instead of one never-reset series per tenant"
+    expect: tenant-document-numbering
   - task: "Add SSO with SAML and SCIM user provisioning for enterprise customers"
     expect: saas-sso-scim-enterprise-auth
   - task: "Let a tenant export all their data and handle a GDPR erasure request"

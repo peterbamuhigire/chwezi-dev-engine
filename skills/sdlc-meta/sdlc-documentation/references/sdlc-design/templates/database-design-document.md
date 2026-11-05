@@ -230,7 +230,7 @@ WHERE t.TABLE_SCHEMA = DATABASE()
 
 | Name | Purpose | Parameters | Return |
 |------|---------|-----------|--------|
-| sp_create_invoice | Create invoice with line items | p_franchise_id, p_customer_id, p_items (JSON) | Invoice ID |
+| sp_create_invoice | Create invoice with line items | p_franchise_id, p_invoice_number (allocated by the application), p_customer_id, p_items (JSON) | Invoice ID |
 | sp_close_pos_session | Close POS session with supervisor auth | p_session_id, p_supervisor_id | Success boolean |
 | sp_detect_receipt_gaps | Find missing receipt numbers | p_franchise_id, p_date_from, p_date_to | Result set of gaps |
 | fn_calculate_stock_level | Get current stock for a product | p_product_id, p_franchise_id, p_warehouse_id | INT (stock level) |

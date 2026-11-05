@@ -49,6 +49,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
 - Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
 - Treating a missing dependency as successful. Fix: name the blocked verification.
+- Numbering the platform's invoices to tenants from a tenant's own invoice counter. Fix: a platform-scope counter and series (`tenant-document-numbering`).
 
 
 <!-- dual-compat-start -->

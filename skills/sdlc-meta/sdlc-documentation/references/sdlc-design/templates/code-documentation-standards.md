@@ -280,7 +280,9 @@ package com.example.app.features.products
 -- Returns:   INT - New invoice ID (or -1 on failure)
 -- Business Rules:
 --   - Stock levels must be sufficient for all items
---   - Invoice number auto-generated per franchise sequence
+--   - Invoice number is passed in, allocated by the application from the
+--     franchise's contiguous series in the same transaction
+--     (never generated in a procedure or trigger; see tenant-document-numbering)
 --   - Audit trail entry created automatically (via trigger)
 -- Example:
 --   CALL sp_create_invoice(1, 42, 5,

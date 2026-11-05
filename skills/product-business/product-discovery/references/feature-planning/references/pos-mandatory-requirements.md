@@ -45,7 +45,7 @@ When planning features for POS, checkout, or sales entry systems, **ALWAYS** inc
 **Depends On:** M1 (POS Session Locking)
 
 **Required Components:**
-1. **Automated Gap Detection** - Daily cron job identifies missing receipt numbers
+1. **Automated Gap Detection** - Nightly incremental job reports missing or duplicate receipt numbers in each tenant's series. Prevent gaps first: allocate per tenant and document type inside the sale transaction (`tenant-document-numbering`); detection is the backstop, not the control
 2. **Management Alerts** - Email/SMS notifications for detected gaps
 3. **Voided Receipt Tracking** - All voids require justification notes (min 10 chars)
 4. **Supervisor Override Workflow** - Gap resolution requires supervisor approval
@@ -57,13 +57,13 @@ When planning features for POS, checkout, or sales entry systems, **ALWAYS** inc
 - Required for compliance with internal control policies
 
 **Implementation Checklist:**
-- [ ] Database table: `receipt_sequence_gaps` (id, sales_point_id, missing_numbers, detection_date, status, resolution_notes)
+- [ ] Database table: `receipt_sequence_gaps` (id, tenant_id, doc_type, missing_numbers, detection_date, status, resolution_notes)
 - [ ] Database table: `voided_receipts` (id, invoice_id, void_reason_code, void_notes, voided_by, voided_at, approved_by)
 - [ ] Cron job: Daily gap detection script (runs at midnight, checks previous day)
 - [ ] API endpoint: `/api/receipts/sequence-control.php` (actions: detect_gaps, void_receipt, resolve_gap)
 - [ ] UI component: Receipt void button with reason dropdown + notes textarea (required fields)
 - [ ] UI page: Gap resolution interface for supervisors (list gaps, view details, approve/reject)
-- [ ] Stored procedure: `sp_detect_receipt_gaps` (per sales point, date range)
+- [ ] Gap report service in application code (per tenant and document type, incremental watermark), not a stored procedure
 - [ ] Notification service: Email/SMS alert for detected gaps with gap details
 - [ ] Unit tests: Gap detection algorithm, void validation, supervisor approval workflow
 - [ ] Integration tests: End-to-end void workflow, gap detection and resolution

@@ -200,10 +200,19 @@ CR  3100 Retained Earnings         {net_income}
 
 ## Balance Validation Stored Procedure
 
+The entry number is not generated here. The application allocates it from the tenant's
+`journal_entry` counter inside the same transaction as the source document and passes
+it in (see [`tenant-document-numbering`](../../tenant-document-numbering/SKILL.md)).
+Because this procedure opens and commits its own transaction, calling it after the
+document insert would split one unit of work in two. Prefer the application posting
+service; if the procedure is kept, remove its `START TRANSACTION`/`COMMIT`/`ROLLBACK`
+and call it inside the caller's transaction.
+
 ```sql
 DELIMITER //
 CREATE PROCEDURE sp_post_journal_entry(
     IN p_franchise_id INT,
+    IN p_entry_number VARCHAR(40),   -- allocated by the application, never here
     IN p_entry_date DATE,
     IN p_reference_type VARCHAR(50),
     IN p_reference_id INT,
@@ -231,10 +240,10 @@ BEGIN
 
     -- Insert header
     INSERT INTO journal_entries
-        (franchise_id, entry_date, reference_type, reference_id,
+        (franchise_id, entry_number, entry_date, reference_type, reference_id,
          narration, posted_by, status)
     VALUES
-        (p_franchise_id, p_entry_date, p_reference_type, p_reference_id,
+        (p_franchise_id, p_entry_number, p_entry_date, p_reference_type, p_reference_id,
          p_narration, p_posted_by, 'POSTED');
 
     SET v_entry_id = LAST_INSERT_ID();

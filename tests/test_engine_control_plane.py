@@ -34,7 +34,7 @@ COMPLIANCE_SCRIPT = (
 )
 COMPLIANCE_MODULE = load_module("engine_compliance", COMPLIANCE_SCRIPT)
 
-EXPECTED_ACTIVE_SKILL_COUNT = 167
+EXPECTED_ACTIVE_SKILL_COUNT = 168
 EXPECTED_CLAUDE_BRIDGE = "# Claude Code repository memory\n\n@AGENTS.md\n"
 PORTABLE_SECTION_ALIASES = {
     "Use When": ("Use When",),

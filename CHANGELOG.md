@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-05 - Tenant document numbering standard
+
+- New skill `skills/saas/tenant-document-numbering`: one contiguous, never-reset series per tenant and document type for every user-facing document number, with the counter allocator, issue-time numbering, clash handling, lock order, separate platform and credit-note series, durable idempotency, offline provisional tags, capacity sizing, retrofit rollout, CI ratchet and gap report. Active catalogue 167 -> 168; plugin manifest 165 -> 166; routing fixtures 239 -> 242.
+- Removed contradicting guidance: the `MAX+1` journal-number trigger and "gaps are acceptable" rule in `saas-accounting-system`, id-derived reversal references, per-sales-point receipt numbering, and procedure-generated invoice numbers in the SDLC templates.
+- Cross-reference lines in 17 related skills and the AI code review gate. Record: [`docs/updates/2026-11-05-tenant-document-numbering-standard.md`](docs/updates/2026-11-05-tenant-document-numbering-standard.md).
+
 ## 2026-10-31 - Dev Engine documentation wave after kaizen pass 2
 
 - Install and validation instructions corrected for Linux: `python3` throughout, the ten CI steps with the pinned dependencies and what each needs, `--min-rank1 89` (was 88), and `bash install.sh` because the file is tracked without its executable bit (`fa5c972`, `ef47b6a`).

@@ -340,7 +340,7 @@ All backend activity MUST go through APIs.
 - Ensures complete transaction recording for compliance
 
 **Implementation Notes:**
-- Receipt numbers must be sequential per sales point (not globally)
+- Receipt numbers must be contiguous per tenant and document type (not per sales point or till, and never reset); see `tenant-document-numbering`
 - Gap detection query runs daily at midnight checking previous day
 - Void tracking includes: original invoice, void reason code, void date, approver
 - Supervisor override creates audit log entry: gap ID, resolution notes, approval timestamp

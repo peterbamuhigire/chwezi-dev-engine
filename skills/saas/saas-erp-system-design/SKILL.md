@@ -149,6 +149,8 @@ Every ERP-grade workflow needs explicit controls for:
 
 - Never edit posted financial records in place without a traceable reversal model.
 - Use document numbers, posting dates, fiscal periods, and actor attribution consistently.
+- Give every user-facing document number one contiguous, never-reset series per tenant and
+  document type, assigned at issue and voided rather than deleted (`tenant-document-numbering`).
 - Separate operational status from accounting status when those timelines differ.
 
 ### Reporting

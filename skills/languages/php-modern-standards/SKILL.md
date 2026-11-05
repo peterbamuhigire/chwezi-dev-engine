@@ -146,6 +146,7 @@ Fallback: without execution, provide exact Composer, static-analysis, and test c
 - Catching `Throwable` without recovery policy.
 - Adding mutable service-locator dependencies.
 - Claiming compatibility without checking Composer constraints.
+- Building document numbers with `uniqid()`, `random_int()`, `COUNT(*)+1` or `sprintf` over the id. Fix: call the single allocator inside the save transaction and wrap the unit of work in its retry helper (`tenant-document-numbering`).
 ## Inputs
 | Artefact | Required? | Purpose |
 |---|---|---|

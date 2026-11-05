@@ -175,7 +175,8 @@ See: `references/journal-posting-rules.md` and `references/accounting-bookkeepin
 2. System marks the original transaction as VOIDED (status change)
 3. System auto-creates a REVERSING journal entry:
    - Same accounts, opposite directions
-   - Reference: "REVERSAL of JE-{original_id}"
+   - Reference: "REVERSAL of JE-00001042" (the original entry_number, never its id);
+     the reversal takes the next contiguous number (see `tenant-document-numbering`)
    - Same date OR current date (configurable)
 4. Original entry + reversal entry net to ZERO
 5. All sub-ledger balances update automatically

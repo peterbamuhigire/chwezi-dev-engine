@@ -110,6 +110,8 @@ oracle, dependency and owner.
   recovery, and queue only safe events.
 - Adding AI or integrations before operational controls. Fix: gate them behind
   data, privacy, security, explainability and support evidence.
+- Numbering bills, kitchen tickets, folios or receipts per outlet, per day or from the row id. Fix:
+  one contiguous series per tenant and document type, issued by the server (`tenant-document-numbering`).
 
 ## Worked example
 

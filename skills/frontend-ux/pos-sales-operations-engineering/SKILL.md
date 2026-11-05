@@ -167,6 +167,7 @@ also route to `chwezi-accounting-doctrine` and the local `accounting-engine`.
   **Fix:** query the original key and reconcile before retrying.
 - **False success:** trusting a browser toast without invoice, stock, and GL
   evidence. **Fix:** verify persisted records and reconcile the posting.
+- **Burnt or reused receipt numbers:** numbering a sale when the draft opens, deleting blank drafts, or numbering per till. **Fix:** number at payment inside the sale transaction from the tenant series; void, never delete (`tenant-document-numbering`).
 
 ## Read next
 

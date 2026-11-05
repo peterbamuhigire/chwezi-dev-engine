@@ -24,7 +24,7 @@ Current guardrail baseline (the test suite checks the active and alias counts ag
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 167 |
+| Active `SKILL.md` files | 168 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 78 |
@@ -180,6 +180,7 @@ concurrency, tenant, reconciliation, recovery and owner-sign-off evidence.
 | Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, `ios-quality-and-release`, Apple TestFlight/Xcode Cloud operations |
 | SaaS managed visual assets | `saas-managed-visual-assets` | Authentication background pools, light/dark logos, favicons, secure admin lifecycle, fallback, and audit |
 | Full-coverage SaaS seeding | `full-coverage-saas-seeding` | Synthetic tenant demonstrations, phased application-boundary journeys, schema-compatibility gates, controlled reference/configuration exceptions, temporal refresh, replay, reset, isolation, reconciliation, and evidence |
+| Tenant document numbering | `tenant-document-numbering` | Contiguous per-tenant invoice, receipt, credit-note, order, purchase-order, stock, money, journal and payroll numbers; counter allocator, issue-time numbering, clash handling, idempotency, offline provisional tags, capacity, retrofit rollout, CI ratchet and gap report |
 | SaaS seeder and demo sign-in | `saas-seeder` | Seeder template bootstrap, super admin, recurring demo activity, and the demo one-click login standard (profile buttons only on demo hosts, same RBAC, no password in code, pages, docs or commits) |
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
 | UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |

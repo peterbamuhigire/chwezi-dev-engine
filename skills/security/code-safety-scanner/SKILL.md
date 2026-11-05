@@ -261,6 +261,7 @@ Analyze for concurrent access problems:
 - Shared mutable state across requests (global variables in web servers)
 - File writes without locking
 - Counter increments without atomic operations (`count++` in concurrent context)
+- Document numbers from `COUNT(*)+1`, `MAX+1`, `uniqid`/random or the row id, or a `DELETE` of a numbered document (`tenant-document-numbering`)
 - Session data modified by parallel requests
 - Missing database transaction isolation
 

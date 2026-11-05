@@ -70,6 +70,7 @@ Skill-specific anti-patterns:
 - **Unversioned breaking change.** The team removes a field from `GET /api/v1/invoices/{id}` because nobody "should" be using it. Fix: ship as `v2`, keep `v1` unchanged, emit `Deprecation` + `Sunset` headers on `v1`.
 - **No idempotency on payments.** `POST /api/v1/payments` charges the card. Network retry charges it again. Fix: require `Idempotency-Key` header, store `(tenant, user, key) -> response` for 24 h, replay the stored response on duplicate.
 - **Unbounded page size.** `GET /api/v1/invoices?per_page=100000`. Fix: clamp `per_page` to a hard maximum (e.g. 100) server-side.
+- **Numbers as JSON integers or client-assigned.** `"invoice_number": 1042`, or the client sends its own number on create. Fix: return document numbers as strings, ignore client numbers, require `Idempotency-Key` on numbered creates and store it on the document row so a replay returns the same number (`tenant-document-numbering`).
 
 ## Outputs
 

@@ -91,3 +91,4 @@ If EXPLAIN plans or production statistics are unavailable, provide read-only hyp
 - Adding indexes without write-cost review. Fix: measure both paths.
 - Using zero dates as missing values. Fix: use nullable semantics.
 - Changing a hot table without lock analysis. Fix: test the DDL plan.
+- Using `AUTO_INCREMENT`, `MAX+1` or a trigger for a visible document number. Fix: counter row locked with `SELECT ... FOR UPDATE` inside the save transaction (`tenant-document-numbering`).

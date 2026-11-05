@@ -186,6 +186,7 @@ See [references/test-matrix-template.md](references/test-matrix-template.md).
 - [ ] End-to-end tests are focused on the highest-value flows.
 - [ ] Manual verification covers the platform or UX gaps automation cannot.
 - [ ] Release evidence makes residual risk explicit.
+- [ ] Numbered documents have concurrency, rollback, clash, idempotent-replay and gap-report tests (`tenant-document-numbering` test checklist).
 
 ## Decision Rules
 

@@ -62,6 +62,7 @@ Fallback without doctrine, mappings, or database access: return a posting design
 - Guessing accounts from feature names. Fix: require mapping-layer resolution.
 - Retrying without idempotency. Fix: persist and enforce the event key.
 - Mixing tenants in one posting context. Fix: require tenant scope on every ledger operation.
+- Generating journal or invoice numbers in a trigger, with `MAX+1`, or outside the posting transaction. Fix: allocate from the tenant counter inside the posting transaction, journal counter locked last (`tenant-document-numbering`).
 
 ## Use When
 

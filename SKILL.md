@@ -39,6 +39,7 @@ When a task requires external research, use the Digital Research Engine (`digita
 | Games, gameplay, interactive narrative, game assets, builds and live operations | `skills/game-development/game-development-orchestration` then the required specialist |
 | TypeScript, JavaScript, Python, PHP, C#/.NET, Java/JVM, Spring, Jakarta EE, Hibernate, Maven, Gradle, WebLogic, Quarkus, Micronaut, Helidon, GraalVM | `skills/languages/*` |
 | SaaS tenancy, pricing, billing, entitlements, SSO/SCIM, portability, admin tooling | `skills/saas/*` |
+| Contiguous per-tenant document numbers (invoices, receipts, orders, journals), new or retrofitted | `skills/saas/tenant-document-numbering` |
 | Security audit, code safety, DPIA, Linux hardening, network security | `skills/security/*` |
 | Review a change or pull request before merge, whether generated or hand-written | `skills/sdlc-meta/ai-assisted-development` (`references/ai-generated-code-review-gate.md`), then each owner its domain-owned checks table names: tenant, SQL, data access, output encoding, ledger writes |
 | Product discovery, business metrics, documents, spreadsheets, proposal readiness, delivery control | `skills/product-business/*` |

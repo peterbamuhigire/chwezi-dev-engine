@@ -50,6 +50,7 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 - Inventing limits, prices, metrics, or compliance claims. Fix: use authoritative records or mark them unresolved.
 - Shipping without rollback and audit evidence. Fix: stage and retain before/after proof.
 - Treating a missing dependency as successful. Fix: name the blocked verification.
+- Numbering tenant documents with `COUNT(*)+1`, `MAX+1`, the row id or one counter shared across tenants or with platform billing. Fix: one contiguous, never-reset series per tenant and document type through `tenant-document-numbering`.
 
 
 <!-- dual-compat-start -->

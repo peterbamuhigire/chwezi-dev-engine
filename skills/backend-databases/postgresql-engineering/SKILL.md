@@ -96,3 +96,4 @@ If EXPLAIN ANALYZE or statistics are unavailable, provide read-only hypotheses a
 - Indexing without workload evidence. Fix: compare read and write cost.
 - Hiding null semantics in application code. Fix: define them in schema.
 - Combining expand and contract in one release. Fix: stage compatibility.
+- Using a `SEQUENCE`, `IDENTITY` or `serial` for a visible document number; `nextval` is never rolled back, so it leaves gaps. Fix: counter table row locked `FOR UPDATE` in the save transaction (`tenant-document-numbering`).

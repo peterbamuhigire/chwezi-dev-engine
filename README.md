@@ -1,6 +1,6 @@
 # Chwezi Dev Engine
 
-Chwezi Dev Engine is a catalogue of 167 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
+Chwezi Dev Engine is a catalogue of 168 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
 
 It is for software engineers, technical leads, architects, product owners, QA and delivery reviewers, and the consultants of Chwezi Core Systems. Use it through Claude Code, Codex or any agent that can read Markdown, when work should follow a written method and leave evidence a reviewer can check.
 
@@ -24,9 +24,9 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 
 ## At a glance
 
-- **167 active skills** in 18 categories, plus 78 retired names kept as redirects.
-- **165 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
-- **239 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 219 (91.6%) and in the top three for all 239. The test matches words in skill descriptions, so it is not live routing.
+- **168 active skills** in 18 categories, plus 78 retired names kept as redirects.
+- **166 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
+- **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
 - **273 tests pass and 3 are skipped** (pytest 9.0.3, Linux, 2026-10-31).
 - **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. The first failure date is 2026-11-04.
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
@@ -40,7 +40,7 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
    /plugin install engineering@chwezi-engineering
    ```
 
-2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 167` and exits 0 on the current tree.
+2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 168` and exits 0 on the current tree.
 
    ```sh
    python3 -X utf8 scripts/skill_catalog_guardrails.py
@@ -50,7 +50,7 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 
 ## Capabilities
 
-The engine holds 167 active skills in 18 categories (165 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
+The engine holds 168 active skills in 18 categories (166 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
 
 ### Find the right skill
 
@@ -93,7 +93,7 @@ The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`]
 
 ## What is inside
 
-[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 167 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
+[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 168 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
 
 | Category | Folder | Skills |
 |---|---|---:|
@@ -109,13 +109,13 @@ The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`]
 | iOS | [`skills/ios/`](skills/ios/) | 4 |
 | Cross-platform mobile | [`skills/mobile-cross/`](skills/mobile-cross/) | 3 |
 | AI and agent systems | [`skills/ai/`](skills/ai/) | 26 |
-| SaaS platforms | [`skills/saas/`](skills/saas/) | 18 |
+| SaaS platforms | [`skills/saas/`](skills/saas/) | 19 |
 | Product and business | [`skills/product-business/`](skills/product-business/) | 15 |
 | Finance implementation | [`skills/finance-accounting/`](skills/finance-accounting/) | 4 |
 | DevOps and cloud | [`skills/devops-cloud/`](skills/devops-cloud/) | 8 |
 | Game development | [`skills/game-development/`](skills/game-development/) | 25 |
 | GIS | [`skills/gis/`](skills/gis/) | 2 |
-| **Total** | | **167** |
+| **Total** | | **168** |
 
 ### Catalogue size
 
@@ -123,11 +123,11 @@ The active count is a checked surface. `tests/test_engine_control_plane.py` comp
 
 | Measure | Value |
 |---|---:|
-| Active `SKILL.md` files | 167 |
+| Active `SKILL.md` files | 168 |
 | Guardrail maximum | 200 |
 | Inactive `ALIAS.md` redirects | 78 |
-| Skills shipped by the Claude plugin manifest | 165 |
-| Routing fixtures | 239 |
+| Skills shipped by the Claude plugin manifest | 166 |
+| Routing fixtures | 242 |
 
 ### What the skills produce
 
@@ -183,7 +183,7 @@ The repository is its own marketplace: `.claude-plugin/marketplace.json`, market
 /plugin install engineering@chwezi-engineering
 ```
 
-The plugin manifest (`.claude-plugin/plugin.json`) ships the 165 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
+The plugin manifest (`.claude-plugin/plugin.json`) ships the 166 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
 
 ### Codex
 

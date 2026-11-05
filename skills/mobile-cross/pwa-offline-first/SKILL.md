@@ -54,6 +54,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Treating `navigator.onLine` as server reachability. Fix: handle real request failures and captive portals.
 - Storing tokens or sensitive payloads in Cache Storage. Fix: minimise storage and apply the data policy.
 - Testing offline reads without replaying writes. Fix: verify save, restart, reconnect, deduplicate, and conflict paths.
+- Inventing an official document number on the device. Fix: show a provisional tag ("Pending number" plus a short code), print it as not yet confirmed, and replace it durably with the server number after sync (`tenant-document-numbering`).
 
 Connectivity in Uganda, Kenya, and Tanzania is bimodal: urban fibre and 4G in Kampala CBD, Westlands, or Masaki, then EDGE/2G the moment a user boards a boda, enters a Bushenyi cooperative, or works inside a hospital ward with poor indoor coverage. Field workers counting inventory in Mbale, community health workers in Arua, and agents confirming MTN MoMo or Airtel Money disbursements in village kiosks all tolerate zero bars for minutes at a time. Co-working spaces on Kampala Road and Ngong Road suffer 30-second uplink stalls mid-upload. Every write path must queue locally and sync when connectivity returns; every read path must fall back to a cached response rather than a spinner.
 

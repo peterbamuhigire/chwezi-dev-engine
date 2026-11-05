@@ -395,6 +395,7 @@ module is governed by the `kmp-development` skill. Use Hilt for DI in
 - **Missing `enableEdgeToEdge()`** — causes immediate crash on Android 15 devices
 - Setting `window.statusBarColor` directly — deprecated, conflicts with edge-to-edge
 - Testing only on one Android version — must verify on both old (minSdk) and new (latest) devices
+- Generating invoice or receipt numbers on the device while offline — show a provisional "Pending" tag and store the server number after sync (`tenant-document-numbering`)
 
 ## Integration with Other Skills
 

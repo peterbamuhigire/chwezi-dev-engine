@@ -214,6 +214,7 @@ For substantive database work, produce:
 - [ ] Audit, retention, and archival rules are documented.
 - [ ] Reporting needs do not distort the transactional model without justification.
 - [ ] Replica lag, projections, or CDC assumptions are explicit where they matter.
+- [ ] User-facing document numbers come from a per-tenant counter allocated in the save transaction, sit in a nullable `VARCHAR(40)` column with `UNIQUE (tenant_id, number)`, and are never deleted (`tenant-document-numbering`).
 
 ## Capability contract
 Design schemas and migration plans by default. Apply DDL, backfills, retention jobs, or production queries only with explicit database and environment authority.

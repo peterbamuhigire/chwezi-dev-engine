@@ -60,6 +60,7 @@ Fallback without doctrine or implementation evidence: issue `Needs Evidence`; do
 - Treating an unreconciled balance as immaterial by default. Fix: quantify and approve thresholds.
 - Hiding unresolved findings in a narrative. Fix: record owner, severity, due date, and release effect.
 - Performing production corrections during review. Fix: use a separately authorised remediation workflow.
+- Accepting gaps, resets or deletions in invoice, credit-note or journal numbers. Fix: one contiguous series per tenant and document type, voids kept and shown (`tenant-document-numbering`).
 
 ## Use When
 
