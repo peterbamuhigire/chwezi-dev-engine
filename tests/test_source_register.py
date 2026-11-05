@@ -14,6 +14,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import check_source_register as csr  # noqa: E402
 
 AS_OF = date(2026, 10, 31)
+# The date the repository's real registers were last reconciled against their primary pages (the UTC read date of
+# the 2026-11-05 re-read of the 14 overdue records). Move it, with a note, each time the registers are reconciled.
+RECONCILED_ON = date(2026, 11, 5)
 
 
 def source(**changes):
@@ -128,5 +131,5 @@ def test_command_line_exit_codes(tmp_path):
 def test_repository_registers_pass_on_the_reconciliation_date():
     paths = sorted((ROOT / "docs" / "source-registers").glob("*.json"))
     assert paths
-    result = csr.run(paths, AS_OF, 14)
+    result = csr.run(paths, RECONCILED_ON, 14)
     assert result == 0
