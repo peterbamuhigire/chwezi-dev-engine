@@ -4,7 +4,7 @@ Parent skill: [`ai-web-apps/SKILL.md`](../SKILL.md).
 
 Model Context Protocol (MCP) is the standard way to expose tools to an AI model across applications. This reference covers server authoring, client wiring in a Next.js route, lifecycle, and hardening rules.
 
-> Currentness (checked 2026-09-24): the MCP specification is now revision 2026-07-28, which removes protocol sessions and the `initialize` handshake, deprecates Roots, Sampling, Logging, and the HTTP+SSE transport, and defaults tool schemas to JSON Schema 2020-12. The SDK snippets below predate it and are `NOT_ASSESSED` against it; check the SDK changelog before copying. Contract-level rules for agent-consumed APIs and MCP tools: `skills/architecture/api-design-first/references/apis-for-ai-agents-and-data.md`.
+> Currentness (checked 2026-11-05): the MCP specification is now revision 2026-07-28, which removes protocol sessions and the `initialize` handshake, deprecates Roots, Sampling, and Logging, reclassifies the HTTP+SSE transport (deprecated since protocol version 2025-03-26) as Deprecated under the feature lifecycle policy (SEP-2596), and defaults tool schemas to JSON Schema 2020-12. The SDK snippets below predate it and are `NOT_ASSESSED` against it; check the SDK changelog before copying. Contract-level rules for agent-consumed APIs and MCP tools: `skills/architecture/api-design-first/references/apis-for-ai-agents-and-data.md`.
 
 ## When to use MCP
 
