@@ -179,8 +179,9 @@ Known baseline as of 2026-10-31 (verify with the script; do not trust this prose
 - `scripts/check_source_register.py` fails when an active source record is past its review
   date or a claim names a superseded or quarantined record. Re-read the primary page, add a
   dated record and move the old one to `superseded_sources`; never extend a date unread.
-  The first date-triggered failure, 2026-11-04 (five Next.js records), has occurred: the
-  check exits 1 as of 2026-11-05. The full calendar is in `README.md` under
+  The first date-triggered failure, 2026-11-04 (five Next.js records), occurred and was
+  cleared on 2026-11-05, when the 14 overdue records were re-read; the check exits 0 as of
+  2026-11-06. The next failing date is 2026-11-12. The full calendar is in `README.md` under
   "Date-triggered gates".
 - `scripts/content_hygiene.py` (run by the catalogue guardrails) fails on host-specific
   paths in active content, new duplicate H2 headings and new broken relative links.
@@ -260,7 +261,7 @@ artefact type, above any domain skill:
 | Environment | Role | Notes |
 | --- | --- | --- |
 | Windows | Local editing environment on the maintainer's Windows machines. | PowerShell examples should work here; not re-run in the October 2026 passes (`NOT ASSESSED`). |
-| Fedora Linux | Local editing and validation environment on the maintainer's Linux workstation. | Every check in `README.md` "Verify" ran here on 2026-11-05 with `python3`; the source-register check exits 1. |
+| Fedora Linux | Local editing and validation environment on the maintainer's Linux workstation. | Every check in `README.md` "Verify" ran here on 2026-11-05 with `python3`; the source-register check exited 1 until the overdue records were re-read that evening and exits 0 on 2026-11-06. |
 | Ubuntu | Secondary validation environment; CI runs on `ubuntu-latest`. | Keep paths and scripts portable. |
 | Debian | Production-like consumer environment. | Avoid OS-specific assumptions in skills. |
 

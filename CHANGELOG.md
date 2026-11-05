@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-06 - Source register re-read
+
+- The 14 records that had gone overdue were re-read from their primary pages on 2026-11-05 (22:11 to 22:13 UTC). `check_source_register.py` went from exit 1 with 14 findings to exit 0 with 0 findings.
+- Nine pages were unchanged and renewed in place. Four had moved on and were superseded: Next.js v16.4.5 and its 2026-11-03 security release, the Android November bulletin, and AGP 9.5.0. The MySQL 8.4.13 release notes returned HTTP 403, so that record is quarantined and `oracle-cpu-oct-2026-mysql-2026-11-05` was added. A PHP informational advisory was added.
+- Skill text updated for the Next.js tenant data security reference, the Android version currency note and the PHP runtime upgrades reference. The README date-gate calendar was recomputed. Record: [`docs/updates/2026-11-06-source-register-reread.md`](docs/updates/2026-11-06-source-register-reread.md).
+
 ## 2026-11-06 - MCP HTTP+SSE deprecation dating
 
 - `mcp-integration.md` (line 7) and `apis-for-ai-agents-and-data.md` (line 164) presented MCP revision 2026-07-28 as the point at which the HTTP+SSE transport was deprecated. Both now say it has been deprecated since protocol version 2025-03-26 and that 2026-07-28 reclassifies it under the feature lifecycle policy (SEP-2596). The Roots, Sampling, Logging, handshake and schema clauses are unchanged.

@@ -28,7 +28,7 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 - **166 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
 - **273 tests pass and 3 are skipped** (pytest 9.2.0, Python 3.14.10, Linux, 2026-11-05).
-- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It has failed since 2026-11-04: five Next.js records were overdue on 2026-11-05 and fourteen records are overdue on 2026-11-06 (see [Date-triggered gates](#date-triggered-gates)).
+- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It failed from 2026-11-04, when five Next.js records went overdue, until 2026-11-05, when the 14 overdue records were re-read; it exits 0 on 2026-11-06 (see [Date-triggered gates](#date-triggered-gates)).
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -234,7 +234,7 @@ Clone the repository. Have the agent read [`CLAUDE.md`](CLAUDE.md), the [skill r
 
 ## Verify
 
-Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). On 2026-11-05 every step exited 0 on the current tree on Linux (Fedora, Python 3.14.10, Node 22.23.1) except the source-register check, which exits 1 (see the table and [Date-triggered gates](#date-triggered-gates)).
+Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). On 2026-11-05 every step exited 0 on the current tree on Linux (Fedora, Python 3.14.10, Node 22.23.1) except the source-register check, which exited 1 until the 14 overdue records were re-read that evening. It exits 0 on 2026-11-06 (see the table and [Date-triggered gates](#date-triggered-gates)).
 
 ```sh
 python3 -m pip install -r requirements-ci.txt
@@ -260,7 +260,7 @@ git diff --check
 | Fixture coverage | Python, PyYAML | 167 of 168 skills have a positive fixture; `new-project` has none |
 | Description collisions | Python, PyYAML | 1 pair above 0.5 (`mysql-engineering` and `postgresql-engineering`, 0.627), allow-listed |
 | Control-plane registry | Python | 12 registry entries; installed checkouts are `NOT ASSESSED` unless parent folders are given (below) |
-| Source registers | Python | **Exit 1.** 72 active sources. 5 findings on 2026-11-05 (Next.js records, `review_after` 2026-11-03) and 14 on 2026-11-06 (those five and nine records with `review_after` 2026-11-05); see the [calendar](#date-triggered-gates) |
+| Source registers | Python | Exit 0 on 2026-11-06: 73 active sources, 0 findings, 16 warnings for dates within 14 days. It exited 1 before the 14 overdue records were re-read; see the [calendar](#date-triggered-gates) |
 | Hook tests | Node | 61/61 and 7/7 |
 | Evidence-declaration contract gate | Python | 162 skills scanned, 0 errors, 6 exempt |
 
@@ -309,6 +309,10 @@ Read the validation records before you treat an example as production proof.
   - 17 related skills and the AI code review gate each gained a cross-reference. Three routing fixtures with three owned negatives cover the skill.
   - `f9e7a46` warns that a bound integer inside `GREATEST()` compares as text and can lower a counter.
   - Record: [`docs/updates/2026-11-05-tenant-document-numbering-standard.md`](docs/updates/2026-11-05-tenant-document-numbering-standard.md).
+- **Source register re-read (5 and 6 November).** The 14 records that had gone overdue were re-read from their primary pages and the check exits 0 again.
+  - Nine pages were unchanged and were renewed in place. Four had moved on and were superseded: Next.js 16.4.5 and its 3 November security release, the Android November bulletin, and AGP 9.5.0.
+  - One page, the MySQL 8.4.13 release notes, returned HTTP 403 to every attempt and is quarantined with a replacement source.
+  - Record: [`docs/updates/2026-11-06-source-register-reread.md`](docs/updates/2026-11-06-source-register-reread.md).
 - **MCP transport dating (6 November, `284b0f2`, `f44848c`, `6592901`).** Two statements presented MCP revision 2026-07-28 as the start of the HTTP+SSE deprecation. They now say it has been deprecated since protocol version 2025-03-26 and was reclassified as Deprecated under the lifecycle policy (SEP-2596) in 2026-07-28, as the changelog read on 2026-11-05 states.
   - A third commit separates the changelog's removals (protocol sessions and the `initialize` handshake) from its additions in the same bullet.
   - Record: [`docs/updates/2026-11-06-mcp-http-sse-dating.md`](docs/updates/2026-11-06-mcp-http-sse-dating.md). The SDK snippets and whether SEP-2596 has reached Final are `NOT_ASSESSED`.
@@ -316,7 +320,7 @@ Read the validation records before you treat an example as production proof.
   - Web: Cloudflare Turnstile Managed mode with server-side validation.
   - Android: Firebase App Check with Play Integrity, with Turnstile in a WebView as the fallback.
   - The provider claims were checked against official documentation on 1 November 2026. Review them by 1 February 2027. Record: [`docs/updates/2026-11-01-signup-human-validation-standard.md`](docs/updates/2026-11-01-signup-human-validation-standard.md).
-- **Verify figures re-measured (5 November).** Every figure in [Verify](#verify) was re-run on 2026-11-05. The one change in outcome is the source-register check, which now exits 1 (see [Date-triggered gates](#date-triggered-gates)). Record: [`docs/updates/2026-11-05-readme-measured-refresh.md`](docs/updates/2026-11-05-readme-measured-refresh.md).
+- **Verify figures re-measured (5 November).** Every figure in [Verify](#verify) was re-run on 2026-11-05. The one change in outcome was the source-register check, which exited 1; it was fixed the same evening (see the next item and [Date-triggered gates](#date-triggered-gates)). Record: [`docs/updates/2026-11-05-readme-measured-refresh.md`](docs/updates/2026-11-05-readme-measured-refresh.md).
 
 ### Latest published score
 
@@ -426,35 +430,39 @@ The [pass-2 log](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md) 
 
 `scripts/check_source_register.py` fails when an active source record's `review_after` date is before the check date. The **Check source registers** CI step runs it. A pass proves dates and metadata only. It does not prove that a page supports a claim.
 
-Each row below was checked on 2026-10-31 by running the check with `--as-of` on that date and on the day before. On the first date of a row, it exits 1:
+Each row below was checked on 2026-11-06 by running the check with `--as-of` on its first failing date and on the day before, and comparing the number of findings. On the first date of a row, the check exits 1 with the total shown:
 
 ```sh
-python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-04
+python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-14
 ```
 
 | First failing `--as-of` date | Records lapsing that day | Failing in total | Topics |
 |---|---:|---:|---|
-| 2026-11-04 | 5 | 5 | Next.js release, support policy, upgrade guide, October and November security notices |
-| 2026-11-06 | 9 | 14 | Android 17, Android security bulletin, AGP and Compose notes, Kotlin and Compose migration, PHP security and Brotli, PostgreSQL and MySQL security |
-| 2026-11-12 | 1 | 15 | PowerShell support lifecycle |
-| 2026-11-30 | 6 | 21 | OpenAI changelog, model selection, skills context budget, plugin format and submission, Claude plugin marketplace |
-| 2026-12-01 | 34 | 55 | The main batch: Play target, Kotlin, PHP supported versions, PostgreSQL support, OpenAI, Anthropic, Gemini and Bedrock guidance, Windows, Intune, PowerShell, Cisco, BIND, Kubernetes, React, MySQL 8.4 |
-| 2026-12-02 | 6 | 61 | WCAG 2.2, ASVS, IFRS 18, Windows security baselines and server documentation |
-| 2026-12-17 | 1 | 62 | W3C validator user documentation |
-| 2026-12-18 | 1 | 63 | W3C validator user documentation (second record) |
-| 2026-12-30 | 1 | 64 | Impeccable slop catalogue |
-| 2027-01-01 | 5 | 69 | NIST AI RMF, OWASP Top 10 2025, ASVS 5.0.0, PCI DSS 4.0.1, SLSA 1.2 |
-| 2027-01-30 | 2 | 71 | Next.js authentication and data-security guides |
-| 2027-09-02 | 1 | 72 | IETF DNSSEC best practice |
+| 2026-11-12 | 1 | 1 | PowerShell support lifecycle |
+| 2026-11-14 | 8 | 9 | Next.js October advisory and November release post, PHP security, Brotli and upload-progress advisories, PostgreSQL security, Android November bulletin, Oracle MySQL alert |
+| 2026-11-21 | 7 | 16 | Android 17, Compose setup and compiler migration, AGP 9.5.0, Next.js 16.4.5 release, support policy and upgrade guide |
+| 2026-11-30 | 6 | 22 | OpenAI changelog, model selection, skills context budget, plugin format and submission, Claude plugin marketplace |
+| 2026-12-01 | 34 | 56 | The main batch: Play target, Kotlin, PHP supported versions, PostgreSQL support, OpenAI, Anthropic, Gemini and Bedrock guidance, Windows, Intune, PowerShell, Cisco, BIND, Kubernetes, React, MySQL 8.4 index |
+| 2026-12-02 | 6 | 62 | WCAG 2.2, ASVS, IFRS 18, Windows security baselines and server documentation |
+| 2026-12-17 | 1 | 63 | W3C validator user documentation |
+| 2026-12-18 | 1 | 64 | W3C validator user documentation (second record) |
+| 2026-12-30 | 1 | 65 | Impeccable slop catalogue |
+| 2027-01-01 | 5 | 70 | NIST AI RMF, OWASP Top 10 2025, ASVS 5.0.0, PCI DSS 4.0.1, SLSA 1.2 |
+| 2027-01-30 | 2 | 72 | Next.js authentication and data-security guides |
+| 2027-09-02 | 1 | 73 | IETF DNSSEC best practice |
 
-**Status on 2026-11-06.** The first two rows have taken effect. `check_source_register.py` exits 1 with 14 findings (5 on 2026-11-05).
+**Status on 2026-11-06.** The check exits 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 between 22:11 and 22:13 UTC (01:11 to 01:13 on 6 November in East Africa). Record dates use the UTC date, so a CI run in UTC never sees a future date. No date was extended unread.
 
-- Five have `review_after` 2026-11-03: `next16-upgrade-2026-10-29`, `nextjs-release-2026-10-29`, `nextjs-support-policy-2026-10-29`, `next-security-oct14-2026` and `next-security-november-notice-2026`.
-- Nine have `review_after` 2026-11-05: `android-17-release-2026-10-29`, `android-security-bulletin-october-2026`, `compose-setup-2026-10-29`, `php-security-oct21-2026`, `php-windows-brotli-2026`, `postgresql-security-2026-10-29`, `mysql-8413-security-2026-10-29`, `android-agp-9-1-notes-2026-10-29` and `kotlin-compose-migration-2026-10-29`.
+- **Renewed in place, page unchanged (9):** `next16-upgrade-2026-10-29`, `nextjs-support-policy-2026-10-29`, `next-security-oct14-2026`, `android-17-release-2026-10-29`, `compose-setup-2026-10-29`, `kotlin-compose-migration-2026-10-29`, `php-security-oct21-2026`, `php-windows-brotli-2026` and `postgresql-security-2026-10-29`.
+- **Superseded by a new dated record (4):**
+  - `nextjs-release-2026-10-29` (v16.4.3) by `nextjs-release-2026-11-05` (v16.4.5, published 2026-11-03).
+  - `next-security-november-notice-2026` by `next-security-november-2026-release-2026-11-05`. The planned release shipped on 2026-11-03: one High and six Medium advisories, fixed in 16.4.5 and 15.5.29.
+  - `android-security-bulletin-october-2026` by `android-security-bulletin-november-2026` (patch level 2026-11-05 or later).
+  - `android-agp-9-1-notes-2026-10-29` by `android-agp-9-5-notes-2026-11-05` (AGP 9.5.0, October 2026).
+- **Quarantined, page unreadable (1):** `mysql-8413-security-2026-10-29`. The MySQL documentation site returned HTTP 403 ("Technical Difficulties") to every attempt, so the 8.4.13 release date and security notes are `NOT_ASSESSED` until it is read again, by 2026-11-13. `oracle-cpu-oct-2026-mysql-2026-11-05` records what the readable Oracle October 2026 alert says: MySQL Server 8.4.0 to 8.4.12 affected, 8.4.13 outside that range. It does not name 8.4.13 as the fix.
+- **Added (1):** `php-session-upload-progress-advisory-2026-11-05`, the PHP informational advisory of 2026-10-23 (CVE-2026-115560, full advisory to follow).
 
-The CI step **Check source registers** fails until those pages are re-read. The 2026-11-12 row (1 record) is next. No record has been re-read or extended since 2026-10-31.
-
-The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
+The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. The security records and the MySQL quarantine come due on 2026-11-13, and the release, setup and migration records on 2026-11-20. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
 
 ## References
 
