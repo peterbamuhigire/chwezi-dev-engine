@@ -28,7 +28,7 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 - **166 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
 - **273 tests pass and 3 are skipped** (pytest 9.2.0, Python 3.14.10, Linux, 2026-11-05).
-- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It has failed since 2026-11-04: five Next.js records are overdue (measured 2026-11-05; see [Date-triggered gates](#date-triggered-gates)).
+- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It has failed since 2026-11-04: five Next.js records were overdue on 2026-11-05 and fourteen records are overdue on 2026-11-06 (see [Date-triggered gates](#date-triggered-gates)).
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -260,7 +260,7 @@ git diff --check
 | Fixture coverage | Python, PyYAML | 167 of 168 skills have a positive fixture; `new-project` has none |
 | Description collisions | Python, PyYAML | 1 pair above 0.5 (`mysql-engineering` and `postgresql-engineering`, 0.627), allow-listed |
 | Control-plane registry | Python | 12 registry entries; installed checkouts are `NOT ASSESSED` unless parent folders are given (below) |
-| Source registers | Python | **Exit 1.** 72 active sources, 5 findings (Next.js records, `review_after` 2026-11-03, overdue as of 2026-11-05), 10 warnings; see the [calendar](#date-triggered-gates) |
+| Source registers | Python | **Exit 1.** 72 active sources. 5 findings on 2026-11-05 (Next.js records, `review_after` 2026-11-03) and 14 on 2026-11-06 (those five and nine records with `review_after` 2026-11-05); see the [calendar](#date-triggered-gates) |
 | Hook tests | Node | 61/61 and 7/7 |
 | Evidence-declaration contract gate | Python | 162 skills scanned, 0 errors, 6 exempt |
 
@@ -301,7 +301,7 @@ Evidence for the October 2026 passes lives in two folders. Each holds a scope re
 
 Read the validation records before you treat an example as production proof.
 
-### Changes after the October kaizen (1 to 5 November 2026)
+### Changes after the October kaizen (1 to 6 November 2026)
 
 - **Tenant document numbering (5 November, `13e4cc9` and `f9e7a46`).** The new skill [`tenant-document-numbering`](skills/saas/tenant-document-numbering/SKILL.md) sets one contiguous, never-resetting series per tenant and document type for every user-facing number, kept apart from the database id.
   - Its references cover the schema and allocator (MySQL 8, PostgreSQL, PHP, retry, lifecycle, lock order), seeding and capacity, API and offline guardrails, and retrofit and rollout.
@@ -309,6 +309,9 @@ Read the validation records before you treat an example as production proof.
   - 17 related skills and the AI code review gate each gained a cross-reference. Three routing fixtures with three owned negatives cover the skill.
   - `f9e7a46` warns that a bound integer inside `GREATEST()` compares as text and can lower a counter.
   - Record: [`docs/updates/2026-11-05-tenant-document-numbering-standard.md`](docs/updates/2026-11-05-tenant-document-numbering-standard.md).
+- **MCP transport dating (6 November, `284b0f2`, `f44848c`, `6592901`).** Two statements presented MCP revision 2026-07-28 as the start of the HTTP+SSE deprecation. They now say it has been deprecated since protocol version 2025-03-26 and was reclassified as Deprecated under the lifecycle policy (SEP-2596) in 2026-07-28, as the changelog read on 2026-11-05 states.
+  - A third commit separates the changelog's removals (protocol sessions and the `initialize` handshake) from its additions in the same bullet.
+  - Record: [`docs/updates/2026-11-06-mcp-http-sse-dating.md`](docs/updates/2026-11-06-mcp-http-sse-dating.md). The SDK snippets and whether SEP-2596 has reached Final are `NOT_ASSESSED`.
 - **Signup bot controls (1 November, `74c9bda`).** A shared reference, [`signup-human-validation.md`](skills/security/vibe-security-skill/references/signup-human-validation.md), sets the defaults.
   - Web: Cloudflare Turnstile Managed mode with server-side validation.
   - Android: Firebase App Check with Play Integrity, with Turnstile in a WebView as the fallback.
@@ -444,7 +447,12 @@ python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-04
 | 2027-01-30 | 2 | 71 | Next.js authentication and data-security guides |
 | 2027-09-02 | 1 | 72 | IETF DNSSEC best practice |
 
-**Status on 2026-11-05.** The first row has taken effect. `check_source_register.py` exits 1 with 5 findings: `next16-upgrade-2026-10-29`, `nextjs-release-2026-10-29`, `nextjs-support-policy-2026-10-29`, `next-security-oct14-2026` and `next-security-november-notice-2026`, each with `review_after` 2026-11-03. The CI step **Check source registers** fails until those pages are re-read. The 2026-11-06 row (9 records) is next. No record has been re-read or extended since 2026-10-31.
+**Status on 2026-11-06.** The first two rows have taken effect. `check_source_register.py` exits 1 with 14 findings (5 on 2026-11-05).
+
+- Five have `review_after` 2026-11-03: `next16-upgrade-2026-10-29`, `nextjs-release-2026-10-29`, `nextjs-support-policy-2026-10-29`, `next-security-oct14-2026` and `next-security-november-notice-2026`.
+- Nine have `review_after` 2026-11-05: `android-17-release-2026-10-29`, `android-security-bulletin-october-2026`, `compose-setup-2026-10-29`, `php-security-oct21-2026`, `php-windows-brotli-2026`, `postgresql-security-2026-10-29`, `mysql-8413-security-2026-10-29`, `android-agp-9-1-notes-2026-10-29` and `kotlin-compose-migration-2026-10-29`.
+
+The CI step **Check source registers** fails until those pages are re-read. The 2026-11-12 row (1 record) is next. No record has been re-read or extended since 2026-10-31.
 
 The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
 
