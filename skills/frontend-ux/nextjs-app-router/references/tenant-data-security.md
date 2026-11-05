@@ -151,6 +151,7 @@ Reject these implementations:
 
 - Next.js Authentication Guide: <https://nextjs.org/docs/app/guides/authentication> (official, accessed 2026-10-29; current page revision shown as 2026-03-25).
 - Next.js Data Security Guide: <https://nextjs.org/docs/app/guides/data-security> (official, accessed 2026-10-29).
-- Next.js Version 16 Upgrade Guide: <https://nextjs.org/docs/app/guides/upgrading/version-16> (official, accessed 2026-10-29).
+- Next.js Version 16 Upgrade Guide: <https://nextjs.org/docs/app/guides/upgrading/version-16> (official, accessed 2026-11-05; page revision shown as 2026-10-15).
 - Proxy convention: <https://nextjs.org/docs/app/api-reference/file-conventions/proxy> (official, accessed 2026-10-29).
+- Next.js November 2026 Security Release: <https://nextjs.org/blog/november-2026-security-release> (official, published 2026-11-03, accessed 2026-11-05). It lists seven advisories, including a High-severity cross-tenant cache disclosure when `unstable_cache` and `use cache` are combined, and names updates v16.4.5 and v15.5.29. Check which advisories apply to the version you run before you cache tenant data.
 - Security applicability is recorded in `docs/source-registers/skills-engine-currentness-2026-09.json`; source currency does not certify a deployed application.

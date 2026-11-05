@@ -227,9 +227,11 @@ class MainActivity : AppCompatActivity() {
 Before selecting an Android, Kotlin, Compose, Gradle, AGP, PHP, or database
 version, check the official release/support and security sources recorded in
 `docs/source-registers/skills-engine-currentness-2026-09.json`. The checked
-2026-10-29 snapshot identifies Android 17/API 37, Kotlin 2.4.21, and Compose
-BOM 2026.09.00 as the current source-listed values at that date; re-check them
-and their compatibility at implementation time. A Play target requirement is
+2026-11-05 snapshot lists Android 17/API 37, Compose BOM 2026.09.00, and AGP 9.5.0
+(the release the official AGP index points to; Gradle 9.6.0 and JDK 17 minimum)
+as the current source-listed values at that date. Kotlin 2.4.21 comes from the
+2026-10-29 snapshot and was not re-read. Re-check them and their compatibility at
+implementation time. A Play target requirement is
 not a statement about the latest Android runtime. For Kotlin 2.0 and later the
 Compose compiler plugin follows the Kotlin version; still validate the chosen
 toolchain with a real build.
