@@ -29,6 +29,12 @@ Rules:
   series skips numbers for no reason.
 - Apply the seed with `GREATEST(last_number, seed)`. A counter only ever goes up, so
   re-running the seeder is harmless and no issued number can be reissued.
+- **Cast a bound seed.** From PHP/PDO a bound integer reaches MySQL as a quoted string, and
+  `GREATEST(<integer column>, '90')` compares **as text** (`'90'` beats `700`), which lowers
+  the counter. Write `GREATEST(last_number, CAST(? AS UNSIGNED))`. `VALUES(last_number)` /
+  `EXCLUDED.last_number` are typed by the column and safe. Test both directions: 700 vs 90
+  must stay 700, and 9 vs 10 must become 10 (found in the Maduuka reference build,
+  5 Nov 2026).
 - A label-bearing format (`JE-{yyyy}-{n}`) seeds from the highest counter whatever the
   label.
 - A new format whose old numbers do not match the new pattern seeds at 0 under a **new
