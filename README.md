@@ -27,8 +27,8 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
 - **168 active skills** in 18 categories, plus 78 retired names kept as redirects.
 - **166 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
-- **273 tests pass and 3 are skipped** (pytest 9.0.3, Linux, 2026-10-31).
-- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. The first failure date is 2026-11-04.
+- **273 tests pass and 3 are skipped** (pytest 9.2.0, Python 3.14.10, Linux, 2026-11-05).
+- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It has failed since 2026-11-04: five Next.js records are overdue (measured 2026-11-05; see [Date-triggered gates](#date-triggered-gates)).
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -234,7 +234,7 @@ Clone the repository. Have the agent read [`CLAUDE.md`](CLAUDE.md), the [skill r
 
 ## Verify
 
-Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). Each exited 0 on the current tree on Linux (Fedora, Python 3.14.8, Node 22.23.1) on 2026-10-31.
+Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). On 2026-11-05 every step exited 0 on the current tree on Linux (Fedora, Python 3.14.10, Node 22.23.1) except the source-register check, which exits 1 (see the table and [Date-triggered gates](#date-triggered-gates)).
 
 ```sh
 python3 -m pip install -r requirements-ci.txt
@@ -251,18 +251,18 @@ python3 -X utf8 skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all
 git diff --check
 ```
 
-| Check | Needs | Result, 2026-10-31 |
+| Check | Needs | Result, 2026-11-05 |
 |---|---|---|
-| Catalogue guardrails (the script also runs the host-path, duplicate-heading and broken-link ratchets) | Python, PyYAML | 167 active skills, 0 errors, 14 size warnings (warnings never change the exit status) |
+| Catalogue guardrails (the script also runs the host-path, duplicate-heading and broken-link ratchets) | Python, PyYAML | 168 active skills, 0 errors, 14 size warnings (warnings never change the exit status) |
 | Guardrail unit tests | Python | 10 tests OK |
 | Test suite | Python, pytest, PyYAML, Git | 273 passed, 3 skipped |
-| Routing smoke test (a lexical proxy, not live routing) | Python, PyYAML | 239 fixtures; precision@1 219/239 (91.6%), precision@3 239/239; 83 owned negatives, 4 `NOT_ASSESSED` |
-| Fixture coverage | Python, PyYAML | 166 of 167 skills have a positive fixture; `new-project` has none |
-| Description collisions | Python, PyYAML | 1 pair above 0.5 (`mysql-engineering` and `postgresql-engineering`), allow-listed |
+| Routing smoke test (a lexical proxy, not live routing) | Python, PyYAML | 242 fixtures; precision@1 222/242 (91.7%), precision@3 242/242; 86 owned negatives (82 pass, 4 `NOT_ASSESSED`) |
+| Fixture coverage | Python, PyYAML | 167 of 168 skills have a positive fixture; `new-project` has none |
+| Description collisions | Python, PyYAML | 1 pair above 0.5 (`mysql-engineering` and `postgresql-engineering`, 0.627), allow-listed |
 | Control-plane registry | Python | 12 registry entries; installed checkouts are `NOT ASSESSED` unless parent folders are given (below) |
-| Source registers | Python | 72 active sources, 0 findings, 15 review dates within 14 days; see the [calendar](#date-triggered-gates) |
+| Source registers | Python | **Exit 1.** 72 active sources, 5 findings (Next.js records, `review_after` 2026-11-03, overdue as of 2026-11-05), 10 warnings; see the [calendar](#date-triggered-gates) |
 | Hook tests | Node | 61/61 and 7/7 |
-| Evidence-declaration contract gate | Python | 161 skills scanned, 0 errors, 6 exempt |
+| Evidence-declaration contract gate | Python | 162 skills scanned, 0 errors, 6 exempt |
 
 The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`). `NOT ASSESSED` means a check could not be run here. It is never reported as a pass.
 
@@ -301,6 +301,20 @@ Evidence for the October 2026 passes lives in two folders. Each holds a scope re
 
 Read the validation records before you treat an example as production proof.
 
+### Changes after the October kaizen (1 to 5 November 2026)
+
+- **Tenant document numbering (5 November, `13e4cc9` and `f9e7a46`).** The new skill [`tenant-document-numbering`](skills/saas/tenant-document-numbering/SKILL.md) sets one contiguous, never-resetting series per tenant and document type for every user-facing number, kept apart from the database id.
+  - Its references cover the schema and allocator (MySQL 8, PostgreSQL, PHP, retry, lifecycle, lock order), seeding and capacity, API and offline guardrails, and retrofit and rollout.
+  - The commit removed guidance that contradicted it: the `MAX+1` journal-number trigger, "gaps are acceptable" and id-derived reversal references.
+  - 17 related skills and the AI code review gate each gained a cross-reference. Three routing fixtures with three owned negatives cover the skill.
+  - `f9e7a46` warns that a bound integer inside `GREATEST()` compares as text and can lower a counter.
+  - Record: [`docs/updates/2026-11-05-tenant-document-numbering-standard.md`](docs/updates/2026-11-05-tenant-document-numbering-standard.md).
+- **Signup bot controls (1 November, `74c9bda`).** A shared reference, [`signup-human-validation.md`](skills/security/vibe-security-skill/references/signup-human-validation.md), sets the defaults.
+  - Web: Cloudflare Turnstile Managed mode with server-side validation.
+  - Android: Firebase App Check with Play Integrity, with Turnstile in a WebView as the fallback.
+  - The provider claims were checked against official documentation on 1 November 2026. Review them by 1 February 2027. Record: [`docs/updates/2026-11-01-signup-human-validation-standard.md`](docs/updates/2026-11-01-signup-human-validation-standard.md).
+- **Verify figures re-measured (5 November).** Every figure in [Verify](#verify) was re-run on 2026-11-05. The one change in outcome is the source-register check, which now exits 1 (see [Date-triggered gates](#date-triggered-gates)). Record: [`docs/updates/2026-11-05-readme-measured-refresh.md`](docs/updates/2026-11-05-readme-measured-refresh.md).
+
 ### Latest published score
 
 Pass 2 rated the engine 62.5/100 raw, the mean of ten dimension ratings. The Portfolio Standard cap, `min(raw, 65)`, leaves 62.5/100. The 29 October pass published 59.5 raw and 59.5 capped.
@@ -314,7 +328,7 @@ The full list, with reasons, is the pass-2 [next-cycle handoff](docs/kaizen/2026
 - **Local settings file.** `.claude/settings.local.json` is a user-local settings file. It is tracked in this public repository and names Windows user-profile paths. It is escalated to the maintainer. Untracking keeps the file on disk but does not remove it from Git history. Do not copy it.
 - **Invoice slice gaps.** `examples/tenant-invoice-listing/` has known contract gaps: no pagination, errors not in RFC 9457 form, raw minor units shown to users, `LIKE` wildcards in search, no migration rollback, accessibility semantics and no evidence pack. Its README lists them. Do not copy the slice as a finished listing.
 - **Hygiene ratchets.** 24 skills still carry a duplicate `##` heading. 84 relative links in 52 files do not resolve. Ratchets in `docs/quality-gates/` hold both counts, and they may only shrink.
-- **Thin routing coverage.** 13 of 167 skills have three positive fixtures and two owned negatives. `new-project` has no fixture.
+- **Thin routing coverage.** 14 of 168 skills have three positive fixtures and two owned negatives (measured 2026-11-05). `new-project` has no fixture.
 - **Currency rows not re-read in pass 2.** These are the legacy hospitality register (review date 2026-10-14, now past), the Apple developer documentation row, the OpenAI Codex availability article (quarantined after an HTTP 403) and the Kubernetes latest version (inferred, not labelled by the source).
 - **Builds not repeated.** The 29 October validation record reports a Next.js build, a Compose build and a MySQL fixture run of the invoice slice. Each ran in a disposable environment outside this repository. Pass 2 and the documentation round that followed could not repeat them.
 - **Not established by any pass:** emulator or browser rendering, authenticated database integration, live-model routing, production behaviour and independent human review. These are `NOT_ASSESSED`, never a pass.
@@ -429,6 +443,8 @@ python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-04
 | 2027-01-01 | 5 | 69 | NIST AI RMF, OWASP Top 10 2025, ASVS 5.0.0, PCI DSS 4.0.1, SLSA 1.2 |
 | 2027-01-30 | 2 | 71 | Next.js authentication and data-security guides |
 | 2027-09-02 | 1 | 72 | IETF DNSSEC best practice |
+
+**Status on 2026-11-05.** The first row has taken effect. `check_source_register.py` exits 1 with 5 findings: `next16-upgrade-2026-10-29`, `nextjs-release-2026-10-29`, `nextjs-support-policy-2026-10-29`, `next-security-oct14-2026` and `next-security-november-notice-2026`, each with `review_after` 2026-11-03. The CI step **Check source registers** fails until those pages are re-read. The 2026-11-06 row (9 records) is next. No record has been re-read or extended since 2026-10-31.
 
 The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
 

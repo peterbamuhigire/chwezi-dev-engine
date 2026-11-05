@@ -170,8 +170,8 @@ Known baseline as of 2026-10-31 (verify with the script; do not trust this prose
 - `scripts/routing_smoke_test.py` measures routing precision against
   `scripts/routing_fixtures.yml` and runs in the same CI job; `--collisions`
   reports near-duplicate skills. Add a fixture when you add a skill a neighbour
-  could steal traffic from. Measured 2026-10-31: 239 fixtures, precision@1 219/239
-  (91.6%), precision@3 239/239; CI floor `--min-rank1 89`. The proxy is lexical, not
+  could steal traffic from. Measured 2026-11-05: 242 fixtures, precision@1 222/242
+  (91.7%), precision@3 242/242; CI floor `--min-rank1 89`. The proxy is lexical, not
   live model routing.
 
 ### Hygiene and currency gates added 2026-10-31
@@ -179,8 +179,9 @@ Known baseline as of 2026-10-31 (verify with the script; do not trust this prose
 - `scripts/check_source_register.py` fails when an active source record is past its review
   date or a claim names a superseded or quarantined record. Re-read the primary page, add a
   dated record and move the old one to `superseded_sources`; never extend a date unread.
-  The first date-triggered failure is 2026-11-04 (five Next.js records); the full calendar
-  is in `README.md` under "Date-triggered gates".
+  The first date-triggered failure, 2026-11-04 (five Next.js records), has occurred: the
+  check exits 1 as of 2026-11-05. The full calendar is in `README.md` under
+  "Date-triggered gates".
 - `scripts/content_hygiene.py` (run by the catalogue guardrails) fails on host-specific
   paths in active content, new duplicate H2 headings and new broken relative links.
   Baselines in `docs/quality-gates/` may only shrink.
@@ -259,7 +260,7 @@ artefact type, above any domain skill:
 | Environment | Role | Notes |
 | --- | --- | --- |
 | Windows | Local editing environment on the maintainer's Windows machines. | PowerShell examples should work here; not re-run in the October 2026 passes (`NOT ASSESSED`). |
-| Fedora Linux | Local editing and validation environment on the maintainer's Linux workstation. | Every check in `README.md` "Verify" ran here on 2026-10-31 with `python3`. |
+| Fedora Linux | Local editing and validation environment on the maintainer's Linux workstation. | Every check in `README.md` "Verify" ran here on 2026-11-05 with `python3`; the source-register check exits 1. |
 | Ubuntu | Secondary validation environment; CI runs on `ubuntu-latest`. | Keep paths and scripts portable. |
 | Debian | Production-like consumer environment. | Avoid OS-specific assumptions in skills. |
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-05 - README measured refresh
+
+- README "At a glance", "Verify", "Date-triggered gates" and "Quality and improvement" re-measured on Linux (Python 3.14.10, pytest 9.2.0, Node 22.23.1): 168 active skills, 242 routing fixtures (precision@1 222/242, precision@3 242/242), 273 tests passed and 3 skipped, contract gate 162 skills scanned with 0 errors.
+- The source-register check exits 1 since 2026-11-04: five Next.js records are past `review_after` 2026-11-03. No record was re-read or extended. Record: [`docs/updates/2026-11-05-readme-measured-refresh.md`](docs/updates/2026-11-05-readme-measured-refresh.md).
+- README now describes the tenant document numbering skill and the signup bot-control standard shipped on 5 and 1 November 2026.
+
 ## 2026-11-05 - Tenant document numbering standard
 
 - New skill `skills/saas/tenant-document-numbering`: one contiguous, never-reset series per tenant and document type for every user-facing document number, with the counter allocator, issue-time numbering, clash handling, lock order, separate platform and credit-note series, durable idempotency, offline provisional tags, capacity sizing, retrofit rollout, CI ratchet and gap report. Active catalogue 167 -> 168; plugin manifest 165 -> 166; routing fixtures 239 -> 242.
