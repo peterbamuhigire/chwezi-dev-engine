@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-06 - MCP HTTP+SSE deprecation dating
+
+- `mcp-integration.md` (line 7) and `apis-for-ai-agents-and-data.md` (line 164) presented MCP revision 2026-07-28 as the point at which the HTTP+SSE transport was deprecated. Both now say it has been deprecated since protocol version 2025-03-26 and that 2026-07-28 reclassifies it under the feature lifecycle policy (SEP-2596). The Roots, Sampling, Logging, handshake and schema clauses are unchanged.
+- Re-read from `modelcontextprotocol.io` (changelog, deprecated-features registry, tools page) on 2026-11-05 at 21:25 UTC. Validators unchanged: all exit 0 except the source-register check (the same 14 overdue records before and after). Record: [`docs/updates/2026-11-06-mcp-http-sse-dating.md`](docs/updates/2026-11-06-mcp-http-sse-dating.md).
+
 ## 2026-11-05 - README measured refresh
 
 - README "At a glance", "Verify", "Date-triggered gates" and "Quality and improvement" re-measured on Linux (Python 3.14.10, pytest 9.2.0, Node 22.23.1): 168 active skills, 242 routing fixtures (precision@1 222/242, precision@3 242/242), 273 tests passed and 3 skipped, contract gate 162 skills scanned with 0 errors.
