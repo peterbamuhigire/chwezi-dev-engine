@@ -4,6 +4,7 @@
 
 - `mcp-integration.md` (line 7) and `apis-for-ai-agents-and-data.md` (line 164) presented MCP revision 2026-07-28 as the point at which the HTTP+SSE transport was deprecated. Both now say it has been deprecated since protocol version 2025-03-26 and that 2026-07-28 reclassifies it under the feature lifecycle policy (SEP-2596). The Roots, Sampling, Logging, handshake and schema clauses are unchanged.
 - Re-read from `modelcontextprotocol.io` (changelog, deprecated-features registry, tools page) on 2026-11-05 at 21:25 UTC. Validators unchanged: all exit 0 except the source-register check (the same 14 overdue records before and after). Record: [`docs/updates/2026-11-06-mcp-http-sse-dating.md`](docs/updates/2026-11-06-mcp-http-sse-dating.md).
+- `apis-for-ai-agents-and-data.md` (line 164): the bullet listed `server/discover`, `subscriptions/listen`, the Multi Round-Trip Request pattern and a required `resultType` as removals. The changelog (re-read 2026-11-05 at 21:30 UTC) removes only protocol sessions and the `initialize` handshake; the others are additions or a requirement. Reworded; a separate commit.
 
 ## 2026-11-05 - README measured refresh
 

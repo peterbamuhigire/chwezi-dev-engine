@@ -79,6 +79,16 @@ The 14 source-register findings are five Next.js records with `review_after` 202
 
 Only one statement mentions HTTP+SSE without a date (line 124). Both statements that carry a date now give 2025-03-26 and SEP-2596. A search for lines that mention HTTP+SSE and 2026-07-28 but not 2025-03-26 returns 0 lines.
 
+## Additional correction found while checking line 164
+
+The bullet on line 164 said the changelog "records removal of" `server/discover`, `subscriptions/listen`, the Multi Round-Trip Request pattern and a required `resultType`. The primary source, read again on 2026-11-05 at 21:30 UTC from `https://modelcontextprotocol.io/specification/2026-07-28/changelog`, says otherwise:
+
+- Removed: protocol-level sessions and the `Mcp-Session-Id` header, and the `initialize` / `notifications/initialized` handshake.
+- Added: `server/discover` ("Add `server/discover`"); `subscriptions/listen`, which replaces the HTTP GET endpoint and `resources/subscribe` / `resources/unsubscribe`; the Multi Round-Trip Requests pattern ("introduced"); and a required `resultType` field on all results ("All results now carry a required `resultType` field").
+- Loosened: `inputSchema` and `outputSchema` now allow any JSON Schema 2020-12 keywords.
+
+The bullet now separates removals, additions, the requirement, the loosening, the deprecations and the reclassification. No statement of fact outside that sentence changed. This was outside the action's stated scope (statements that date the deprecation), so it is a separate commit that can be reverted alone.
+
 ## Not assessed
 
 - Whether SEP-2596 has reached Final status. The registry says earliest removal is "Three months after SEP-2596 reaches Final"; the SEP itself was not read.
