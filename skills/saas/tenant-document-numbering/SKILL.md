@@ -81,7 +81,7 @@ multi-tenant system, whether it is being designed or already runs in production.
 
 ## Quality Standards
 
-The eleven rules. A design or diff that breaks one is not done.
+The twelve rules. A design or diff that breaks one is not done.
 
 1. **One series per (tenant, document type), never reset.** Not per year, branch,
    till or month. A date fragment such as `JE-2026-` is a label; the counter behind it
@@ -134,6 +134,21 @@ The eleven rules. A design or diff that breaks one is not done.
     reporting rather than aborting. One switch per type for rollback.
 11. **Guardrails.** A CI ratchet bans other generators and `DELETE` of numbered rows; a
     schema test asserts the unique keys; a nightly gap and duplicate report alerts.
+12. **Journal descriptions carry the document number (owner rule, 6 Nov 2026).**
+    Every journal entry posted by a numbered document ends its description with the
+    number in brackets, always the same form: `Goods received (GRN-00012)`. The
+    number is last. Line memos keep their account-specific words and carry no number.
+    Companion entries of one document (cost of goods sold for an invoice, the tax line
+    of a bill) carry the same number as their sibling. A reversal resolves the same
+    source document as the entry it undoes and carries the same number. History is
+    never rewritten: old journals keep their text, and a report may show the source
+    number beside them as a display fallback, batch-loaded so a report costs one query
+    per distinct source route, not one per row. No placeholder when a document has no
+    number on record. No row ids (`#123`) or other database ids in a description. The
+    255-character cap is met by shortening the words, never the number. Enforce this
+    once, in the ledger writer that every module goes through, with the poster handing
+    over the source type so the right route is chosen (one reference type can come from
+    different tables). See [journal descriptions](references/journal-descriptions.md).
 
 ## Anti-Patterns
 
@@ -153,6 +168,15 @@ The eleven rules. A design or diff that breaks one is not done.
 - Returning `"invoice_number": 1042` as a JSON number. Fix: always a string.
 - Hidden trigger or stored-procedure generators. Fix: one application allocator that
   tests can exercise.
+- Posters building their own journal description with `sprintf('... #%d', $id)`,
+  `number_format`, `implode` or string interpolation of ids. Fix: hand the ledger
+  writer the source type and id; it appends `(NUMBER)` from the source route.
+- A bare `#123` or a placeholder such as `(no number)` in a journal description.
+  Fix: omit the suffix when no number is on record; never print a database id.
+- Trimming the tail of a long description, which cuts the number. Fix: shorten the
+  words before the number.
+- Rewriting old journal text to add numbers. Fix: leave history; show the source
+  number beside it in reports.
 
 ## Outputs
 
@@ -187,6 +211,8 @@ The eleven rules. A design or diff that breaks one is not done.
 - [API, offline and guardrails](references/api-offline-and-guardrails.md): API
   contract, idempotency, offline provisional tags, CI ratchet, test checklist, review
   checklist.
+- [Journal descriptions](references/journal-descriptions.md): the suffix rule, central
+  enforcement, route map with reasoned exemptions, generated test, CI ratchet.
 - [Retrofit and rollout](references/retrofit-and-rollout.md): zero-disruption order of
   operations, safe unique-key migration, rollback, client notice.
 - Companions: `multi-tenant-saas-architecture` (tenant context),
@@ -225,6 +251,7 @@ Without the domain owner, record each type's issue event as an open question.
 | Existing duplicates block a unique key | Record them, skip the key for that table, keep the probe | Rollout aborted by historical data |
 | Peak lock wait exceeds the target | Move slow work after the insert; keep allocation inside the transaction | Gaps from out-of-transaction allocation |
 | A tax authority also numbers the document | Store its number separately; keep the tenant series | Fiscal number consuming or replacing the series |
+| A journal description lacks the source number, or a poster builds it with ids | Route the source type through the ledger writer, which appends `(NUMBER)`; ratchet the builders | Unreadable ledgers, ids in descriptions, numbers cut by the 255 cap |
 | A client sends a number on create | Ignore it unless it is a documented external reference column | Forged or duplicate numbers |
 
 ## Sources

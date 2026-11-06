@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-06 - Journal descriptions carry the document number
+
+- Rule 12 added to `tenant-document-numbering`: every journal entry posted by a numbered document ends its description with `(NUMBER)`, enforced once in the ledger writer, with a generated test over every posting type and a falling CI ratchet on id-interpolating builders. New reference `journal-descriptions.md`; pointer in `saas-accounting-system`. Record: [`docs/updates/2026-11-06-journal-description-rule.md`](docs/updates/2026-11-06-journal-description-rule.md).
+
 ## 2026-11-06 - Source register re-read
 
 - The 14 records that had gone overdue were re-read from their primary pages on 2026-11-05 (22:11 to 22:13 UTC). `check_source_register.py` went from exit 1 with 14 findings to exit 0 with 0 findings.

@@ -98,4 +98,7 @@ The ratchet keeps a baseline of known legacy generators that may only shrink.
       columns.
 - [ ] Lists sort by issue timestamp and id, not the number string.
 - [ ] Migrations never `UPDATE` an issued number and never lower a counter.
+- [ ] Journal descriptions end with `(NUMBER)` from one ledger-writer enforcement point;
+      generated test covers every posting type; id-interpolating builders ratcheted
+      down (see [journal descriptions](journal-descriptions.md)).
 - [ ] Evidence recorded for each check; anything unrun is marked `NOT ASSESSED`.

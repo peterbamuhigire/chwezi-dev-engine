@@ -208,6 +208,11 @@ document insert would split one unit of work in two. Prefer the application post
 service; if the procedure is kept, remove its `START TRANSACTION`/`COMMIT`/`ROLLBACK`
 and call it inside the caller's transaction.
 
+The description follows the owner's journal-description rule (6 Nov 2026): it ends with the
+source document number in brackets, for example `Goods received (GRN-00012)`, appended by the
+posting service from the source type, never built with row ids. See
+[`journal-descriptions`](../../tenant-document-numbering/references/journal-descriptions.md).
+
 ```sql
 DELIMITER //
 CREATE PROCEDURE sp_post_journal_entry(
