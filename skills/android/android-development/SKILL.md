@@ -81,6 +81,7 @@ Configure base URLs using build flavors (`dev`, `staging`, `prod`) so the app ta
 | **Dependency Injection**    | `references/dependency-injection.md`  | Hilt modules, scoping, ViewModel injection      |
 | **Security**                | `references/security.md`              | Encrypted storage, biometrics, network security |
 | **UI Design System**        | `references/ui-design-system.md`      | Tokens, components, Material 3                  |
+| **Chwezi House Style**      | `references/house-style-compose.md`   | House colour roles, amount type, components, motion gate, guardrail tests |
 | **Premium Android UX**      | `../android-ui-ux-design/SKILL.md`    | Material 3 polish, mobile ergonomics, premium gate |
 | **Screen Patterns**         | `references/screen-patterns.md`       | Complete screen templates, state handling       |
 | **Testing**                 | `references/testing.md`               | Unit, UI, instrumentation tests                 |

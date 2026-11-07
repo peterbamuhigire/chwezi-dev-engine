@@ -2,6 +2,8 @@
 
 Material 3 design tokens and reusable component standards.
 
+For Chwezi apps, [`house-style-compose.md`](house-style-compose.md) supersedes the sample colour values below; keep this file for generic Material 3 structure.
+
 ## Local Development Networking (WAMP)
 
 - On local Windows/Ubuntu dev machines, the Android emulator must reach the backend via the host machine's static LAN IP, not `localhost`.

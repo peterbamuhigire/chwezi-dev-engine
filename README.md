@@ -301,8 +301,9 @@ Evidence for the October 2026 passes lives in two folders. Each holds a scope re
 
 Read the validation records before you treat an example as production proof.
 
-### Changes after the October kaizen (1 to 6 November 2026)
+### Changes after the October kaizen (1 to 7 November 2026)
 
+- **House style implementation references (7 November).** [`house-style-compose.md`](skills/android/android-development/references/house-style-compose.md) and [`house-style-web.md`](skills/frontend-ux/tailwind-css/references/house-style-web.md) show how to build the Chwezi business-app house style, whose canonical standard is in `chwezi-design-engine`, including its guardrail tests. Record: [`docs/updates/2026-11-07-house-style-implementation-references.md`](docs/updates/2026-11-07-house-style-implementation-references.md).
 - **Tenant document numbering (5 November, `13e4cc9` and `f9e7a46`).** The new skill [`tenant-document-numbering`](skills/saas/tenant-document-numbering/SKILL.md) sets one contiguous, never-resetting series per tenant and document type for every user-facing number, kept apart from the database id.
   - Its references cover the schema and allocator (MySQL 8, PostgreSQL, PHP, retry, lifecycle, lock order), seeding and capacity, API and offline guardrails, and retrofit and rollout.
   - The commit removed guidance that contradicted it: the `MAX+1` journal-number trigger, "gaps are acceptable" and id-derived reversal references.

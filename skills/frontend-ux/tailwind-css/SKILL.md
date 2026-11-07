@@ -25,6 +25,7 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 ## References
 
 - Use the links and companion skills already referenced in this file when deeper context is needed.
+- [`references/house-style-web.md`](references/house-style-web.md): Chwezi business-app house style as CSS tokens, Tailwind theme mapping, tabular amount utilities, components, reduced motion and CI guardrails.
 <!-- dual-compat-end -->
 Utility-first CSS framework. Style in HTML — no custom CSS required.
 
