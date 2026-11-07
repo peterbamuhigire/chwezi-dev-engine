@@ -17,6 +17,25 @@ Produce one traceable game artefact, test it under release-like conditions, and 
 ## Required Inputs
 Repository/tag, engine/toolchain locks, target matrix, build variants, dependencies/licences, secret/signing custody, test gates, distribution channels, patch/save policy, observability, and rollback objective.
 
+## Capability and Permission Boundaries
+
+Read the repository and release evidence first. Use a disposable build runner
+only within the authorised target and toolchain. Signing, store upload and
+promotion require the release owner's authority and approved credential custody;
+never borrow a personal signing identity to bypass a missing release credential.
+
+## Decision Rules
+
+| Condition | Action | Failure avoided |
+|---|---|---|
+| Locked SDK/editor or authorised runner is unavailable | Return the build contract and missing-tool record; mark the build `NOT_ASSESSED`. Do not substitute a toolchain and call the artefact reproducible. | Untraceable build |
+| Signing identity is missing, expired or revoked, or signing authority is absent | Stop signing and promotion. Keep any permitted unsigned test artefact explicitly non-releasable; return the gap to the release owner. | Unauthorised or falsely certified release |
+| Upload fails or rollout status is unknown | Stop promotion; reconcile channel state before retrying or rolling back under the approved release procedure. | Duplicate upload or conflicting rollout |
+| Required checks and authority are evidenced | Promote only the tested artefact by its recorded digest and retain the release ledger. | Hidden rebuild after approval |
+
+These degraded results do not waive certification, save-compatibility or
+rollback checks. Resume only after the missing evidence or authority is supplied.
+
 ## Workflow
 1. Define a versioned build interface per engine and fail early on toolchain drift.
 2. Build in a clean environment; produce artefact, symbols, dependency lock, SBOM/licence record, checksum, provenance, and machine-readable manifest.

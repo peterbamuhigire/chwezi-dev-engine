@@ -104,7 +104,7 @@ Extended guidance for `php-modern-standards` was moved to [references/skill-deep
 
 ### PHP DevOps Runtime Discipline
 
-When PHP work affects deployment, Docker, or production operations, pair this skill with `docker-development` and `deployment-release-engineering`, then apply the PHP delivery notes in `../deployment-release-engineering/references/devops-book-patterns.md`:
+When PHP work affects deployment, Docker, or production operations, pair this skill with `docker-development` and `deployment-release-engineering`, then apply the PHP delivery notes in `../../devops-cloud/deployment-release-engineering/references/devops-book-patterns.md`:
 
 - keep Composer lockfiles and dependency installation reproducible;
 - run static analysis, coding standards, and tests in CI before packaging;

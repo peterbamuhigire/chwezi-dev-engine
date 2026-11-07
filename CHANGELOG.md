@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-07 - PHP deployment reference repair
+
+- Corrected the broken relative deployment-reference pointer in `php-modern-standards`. Reused the existing reference; no new skill or copied content. [Validation and recovery](docs/updates/2026-11-07-php-reference-repair.md).
+
 ## 2026-11-07 - House style implementation references
 
 - New references for the Chwezi business-app house style (canonical in `chwezi-design-engine`): `android-development/references/house-style-compose.md` (Compose + Material 3 roles, amount type, components, motion gate, guardrail tests G1-G9) and `tailwind-css/references/house-style-web.md` (CSS tokens, Tailwind mapping, amount utilities, components, reduced motion, CI checks W1-W9). Pointers in both parent skills and in `ui-design-system.md`. No new skill; catalogue stays at 168. Record: [`docs/updates/2026-11-07-house-style-implementation-references.md`](docs/updates/2026-11-07-house-style-implementation-references.md).
@@ -115,3 +119,5 @@
 # 2026-11-01
 
 - Added the signup human-validation standard to the engineering skills and threat model, with Turnstile as the web default and Play Integrity plus Turnstile fallback for Android.
+
+- 2026-11-07: Repair posting-skeleton audit/idempotency atomicity; synthetic failure and retry proof in `docs/updates/2026-11-07-posting-atomicity.md`.

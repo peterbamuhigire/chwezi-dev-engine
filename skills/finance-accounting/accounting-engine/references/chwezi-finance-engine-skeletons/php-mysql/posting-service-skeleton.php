@@ -2,7 +2,9 @@
 /**
  * Chwezi posting-service skeleton (PHP / MySQL).
  *
- * Drop-in starting point for the only code path that writes to the ledger.
+ * Illustrative starting point; helpers and deployment controls are incomplete.
+ * AuditLog and IdempotencyStore must use the same PDO transaction as the ledger.
+ * Validate tenant scoping, concurrency, missing keys and rejection audits before use.
  * Aligns with the Chwezi Accounting & Finance Doctrine v1.0.0.
  *
  * Forbidden alternatives (any of these is a blocker under the quality gate):
@@ -48,8 +50,20 @@ final class PostingService
     public function post(PostingCommand $cmd): PostingResult
     {
         // 1. Idempotency
+        if (trim($cmd->idempotencyKey) === '') {
+            throw new PostingRejected('missing-idempotency-key');
+        }
         if ($prior = $this->idempotency->lookup($cmd->idempotencyKey)) {
             if ($prior->payloadHash !== $cmd->payloadHash()) {
+                // Rejection evidence is durable without creating another journal.
+                $this->auditLog->record(
+                    actor: $this->actor,
+                    action: 'reject-idempotency-replay',
+                    object: 'idempotency:' . $cmd->idempotencyKey,
+                    evidence: $cmd->evidenceRefs,
+                    lineage: null,
+                    payloadHash: $cmd->payloadHash()
+                );
                 throw new PostingRejected('idempotency-key-replay-with-different-payload');
             }
             return $prior->result;
@@ -89,25 +103,29 @@ final class PostingService
                 $this->insertLine($journalId, $line);
             }
             $this->updateSubledgers($journalId, $lines);
+            // Both adapters MUST persist through this same PDO transaction.
+            // An external audit sink needs a transactional outbox instead.
+            // 9. Audit log
+            $this->auditLog->record(
+                actor:      $this->actor,
+                action:     'post',
+                object:     "journal:{$journalId}",
+                evidence:   $cmd->evidenceRefs,
+                lineage:    null,
+                payloadHash: $cmd->payloadHash()
+            );
+
+            // 10. Idempotency persist
+            $result = new PostingResult($journalId);
+            $this->idempotency->store($cmd->idempotencyKey, $cmd->payloadHash(), $result);
+
             $this->db->commit();
         } catch (\Throwable $e) {
-            $this->db->rollBack();
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
             throw new PostingRejected('persist-failed: ' . $e->getMessage(), previous: $e);
         }
-
-        // 9. Audit log
-        $this->auditLog->record(
-            actor:      $this->actor,
-            action:     'post',
-            object:     "journal:{$journalId}",
-            evidence:   $cmd->evidenceRefs,
-            lineage:    null,
-            payloadHash: $cmd->payloadHash()
-        );
-
-        // 10. Idempotency persist
-        $result = new PostingResult($journalId);
-        $this->idempotency->store($cmd->idempotencyKey, $cmd->payloadHash(), $result);
 
         return $result;
     }
