@@ -82,6 +82,11 @@ of the visible bar change: LF about 16. Pictogram arrays and shares that must to
 apportioned by largest remainder: floor every share, then give the spare units to the largest
 fractional parts.
 
+**Maps** (INFO-CHART-006): compare rates, not counts: rate = count / population x k, with k stated
+(per 1,000, per 100,000). Web Mercator multiplies areas by 1 / cos^2(latitude): about 1.00 near the
+equator (Uganda sits within about 4 degrees), 1.33 at 30 degrees and 4.00 at 60 degrees, so a map that
+compares areas across a continent or a hemisphere uses an equal-area projection.
+
 ## Task 5: diagram structure as a graph (INFO-FLOW-001/002/003, INFO-CYCLE-001, INFO-TREE-001)
 
 Keep the diagram as data: nodes (id, label, type: start, step, decision, end, exception) and directed

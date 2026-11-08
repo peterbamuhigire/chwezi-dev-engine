@@ -26,7 +26,7 @@ Every normative rule of the Chwezi Infographics Design and Production Quality St
 | INFO-GATE-01 | Invented or unsourced fact | INFO-DATA-001/002/003, INFO-AGENT-001 |
 | INFO-GATE-02 | Pseudo-text or illegible text | INFO-TYPE-002/003, INFO-SOCIAL-002 |
 | INFO-GATE-03 | Synthetic or unlicensed imagery | INFO-ILLUS-002/003, INFO-ICON-003 |
-| INFO-GATE-04 | Misleading encoding | INFO-CHART-002/003/004, INFO-TIME-002, INFO-COMP-001 |
+| INFO-GATE-04 | Misleading encoding | INFO-CHART-002/003/004/006, INFO-TIME-002, INFO-COMP-001 |
 | INFO-GATE-05 | Broken structure | INFO-FLOW-001/002/003, INFO-CYCLE-001, INFO-TREE-001 |
 | INFO-GATE-06 | Unreviewed regulated or unsafe content | INFO-SAFE-001/002, INFO-TECH-002 |
 | INFO-GATE-07 | Inaccessible | INFO-A11Y-001/002, INFO-COLOUR-001 |
@@ -111,6 +111,7 @@ Every normative rule of the Chwezi Infographics Design and Production Quality St
 | INFO-CHART-003 | MUST | 04 | The lie factor of every encoded comparison lies between 0.95 and 1.05; areas and pictogram counts scale with value (radius with the square root). | Checker output | CALC |
 | INFO-CHART-004 | MUST | 04 | Units, period, meaningful ticks, readable labels, direct labels for key results and uncertainty where relevant are shown. | Chart audit | REVIEW |
 | INFO-CHART-005 | MUST | | Shares that must sum to 100% use largest-remainder rounding; percentages and percentage points are never mixed. | Checker output | CALC |
+| INFO-CHART-006 | MUST | 04 | A map is used only when location is the evidence. It carries a title, legend, scale or a "not to scale" note, and the boundary and base-map source with date and licence; boundaries are correct and current for the date shown; a shaded (choropleth) map shows rates or shares against a stated denominator, never raw counts of unequal areas or populations; the projection does not distort the comparison the map makes ([mathematics](mathematics-and-algorithms.md), task 4). | Map audit | REVIEW, REG |
 
 ## Process flows (FLOW)
 

@@ -24,6 +24,7 @@ inspiration, never factual sources.
 | The reader must understand | Archetype | Structure check |
 |---|---|---|
 | How much, compared or over time | Statistical chart or small multiples | Lie factor, zero baseline, units, period |
+| Where something is or varies by place | Map or geographic figure | Sourced current boundaries, legend, scale, rates not raw counts, projection |
 | What happens in order | Process flow or instruction sequence | Graph check: unique steps, reachability, numbering |
 | What repeats | Cycle or loop | Single closed ring, entry point, direction |
 | When things happen | Timeline or roadmap | True time scale or "sequence, not to scale" |
@@ -41,6 +42,8 @@ inspiration, never factual sources.
 scatter for relationships, maps only for spatial evidence, small multiples for consistent
 comparison). Zero-based bars, honest line scales, direct labels on key results, uncertainty where
 relevant, a dated source. No pie with many categories, no 3D.
+
+**Map or geographic figure.** Used only when location is the evidence. Title, legend, scale or a "not to scale" note; boundary and base-map source, date and licence in the register; boundaries correct for the date shown (districts and counties change); shaded maps use rates or shares against a stated denominator, not raw counts; an equal-area projection when areas are compared across a wide latitude range; labels typeset as real text; a table or list as the text equivalent; sourced and rights-cleared before print at actual size.
 
 **Process flow.** Unique step identifiers in the true order; inputs, transformations, decisions,
 outputs and exceptions distinguished; unambiguous arrowheads; no silent crossings; explicit
