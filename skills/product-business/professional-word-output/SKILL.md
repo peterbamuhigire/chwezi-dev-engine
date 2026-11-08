@@ -71,6 +71,7 @@ Two things kill document quality equally: bad design and bad writing. A document
 - `references/quality-checklist.md` — pre-delivery checklist (run before every delivery)
 
 ---
+- Chwezi decks (slide decks exported alongside DOCX reports): [Presentation and Slide Deck Design Standard, local copy](../../saas/reporting-and-export-engineering/references/presentation-standard/standard.md).
 
 ## The Standard
 

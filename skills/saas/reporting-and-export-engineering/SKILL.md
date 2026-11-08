@@ -207,6 +207,15 @@ Owner rules that bind every report:
   [mathematics and algorithms](references/document-publishing-standard/mathematics-and-algorithms.md),
   [agent contract and QA](references/document-publishing-standard/agent-contract-and-qa.md),
   [blueprints](references/document-publishing-standard/families-and-blueprints.md).
+- Local copy of the Chwezi Presentation and Slide Deck Design Standard 1.0.0 for generated decks
+  (editable PPTX with native objects and theme binding, landscape PDF parity, claim ledger,
+  venue-computed legibility, eight DECK gates):
+  [standard](references/presentation-standard/standard.md),
+  [rules and gates](references/presentation-standard/rules-and-gates.md),
+  [production contracts](references/presentation-standard/production-contracts.md),
+  [mathematics and legibility](references/presentation-standard/mathematics-and-legibility.md),
+  [agent workflow and QA](references/presentation-standard/agent-workflow-and-qa.md),
+  [blueprints](references/presentation-standard/narrative-and-blueprints.md).
 
 ## Capability and permission contract
 

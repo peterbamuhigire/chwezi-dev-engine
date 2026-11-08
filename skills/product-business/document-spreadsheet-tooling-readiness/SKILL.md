@@ -88,6 +88,8 @@ If evidence, stakeholder decisions, specialist tooling, or authoritative commerc
 - `references/toolchain-checks.md`: Commands and package/binary checklist.
 - `references/fallback-routes.md`: Output routes and fallback decision tree.
 - `references/libreoffice-headless.md`: Required cross-platform headless conversion, diagnosis, and validation contract.
+- Chwezi decks (PPTX generation, rendering and PDF comparison readiness for decks): [Presentation and Slide Deck Design Standard, local copy](../../saas/reporting-and-export-engineering/references/presentation-standard/standard.md).
+
 ## Evidence Produced
 
 | Category | Artifact | Format | Example |
