@@ -12,6 +12,10 @@ metadata:
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](../../frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md). Queued work is never shown as confirmed, every create and payment carries a durable idempotency key, and cached screens show the last successful sync time (PX-OFFLINE-001, 003). Where this skill and the standard differ, the standard wins.
+
 ## Use When
 
 - Use when building offline-first Progressive Web Apps — Service Worker lifecycle, Workbox caching strategies, IndexedDB via Dexie.js, Background Sync for queued writes, Web Push notifications, Lighthouse gates, and Next.js PWA integration. Default for apps that must work on EDGE/2G or intermittent connectivity.

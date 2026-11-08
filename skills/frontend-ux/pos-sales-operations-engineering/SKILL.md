@@ -17,6 +17,10 @@ posting, and evidence. Visual hierarchy and typography remain owned by the
 external `chwezi-design-engine` engine.
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](../frontend-architecture/references/product-excellence-engineering-gates.md). Duplicate prevention by idempotency key, queued-versus-confirmed labels, the mobile-money state machine, reconciling totals and contiguous document numbers are hard gates (PX-GATE-01, 02, 03, 13); keypad and tender targets are at least 56 dp with 8 dp spacing (PX-GEOM-009, PX-INTERACT-016). Where this skill and the standard differ, the standard wins.
+
 ## Prerequisites
 
 Load `skills/frontend-ux/pos-sales-operations-engineering` for implementation

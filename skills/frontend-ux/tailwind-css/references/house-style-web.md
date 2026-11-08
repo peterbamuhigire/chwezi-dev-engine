@@ -108,19 +108,21 @@ allowed.) Amounts inside sentences also get `.amount` (R6).
 
 ## 4. Format money once
 
-One module, `money.js`, exports `compact(value)` and `full(value)`; templates never format money
+One module, `money.js`, exports `compact(value)` and `full(value, currency)`; templates never format money
 (guard W6).
 
 - `compact`: below 1,000 the whole number; otherwise K, M or B with exactly two decimals. Round,
   then promote: `999995` gives `1.00M`, never `1000.00K`. No currency symbol.
-- `full`: grouped with two decimals (`Intl.NumberFormat(locale, { minimumFractionDigits: 2,
-  maximumFractionDigits: 2 })`) for documents, closing balances and inputs.
+- `full`: grouped, with the currency's ISO 4217 minor unit as its decimals (UGX and RWF 0; KES,
+  TZS and USD 2), for documents, closing balances and inputs. This supersedes the earlier fixed
+  two decimals (Chwezi Product Excellence Standard PX-L10N-001, owner default 2026-11-07); see
+  [`product-excellence-engineering-gates.md`](../../frontend-architecture/references/product-excellence-engineering-gates.md).
 - Use decimal strings or integer minor units from the API; do not do money arithmetic in floats.
 - Screen readers always get the full amount:
 
 ```html
 <span class="amount-compact" aria-hidden="true">79.43M</span>
-<span class="sr-only">79,430,000.00</span>
+<span class="sr-only">79,430,000</span> <!-- UGX: 0 minor-unit digits -->
 ```
 
 Percentages (R2): never "0%" for a non-zero value; write "less than 1%".
@@ -158,7 +160,7 @@ the only cue; the word carries the meaning.
   <p class="text-sm text-on-primary-container">1 Oct - 31 Oct 2026</p> <!-- range only (R1) -->
   <p class="text-sm text-on-primary-container">Came in</p>
   <p class="amount-lg text-ink" aria-hidden="true">4,812<span class="text-[0.6em] text-muted">.50K</span></p>
-  <p class="sr-only">Came in 4,812,500.00</p>
+  <p class="sr-only">Came in 4,812,500</p>
 </section>
 ```
 

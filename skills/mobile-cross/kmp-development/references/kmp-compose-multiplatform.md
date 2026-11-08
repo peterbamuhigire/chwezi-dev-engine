@@ -68,10 +68,12 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 | Approach | When to Choose |
 |---|---|
-| **Compose Multiplatform (this skill)** | Design system consistency > platform feel; internal tools; desktop+mobile parity needed |
-| **Native UI (kmp-development)** | App Store/Play Store quality expected; platform-specific UX; iOS gestures critical |
+| **Compose Multiplatform (default for Chwezi apps)** | Every Chwezi mobile app under the Product Excellence Standard (effective 01 Nov 2026): shared screens and design system, OS capabilities behind `core/platform/` adapters |
+| **Native screen (exception)** | A screen CMP cannot deliver at the standard's bar on a shipped target (for example a gesture or system integration the adapter cannot reach); record a DDR with the evidence |
 
-Compose Multiplatform shares UI code across Android, iOS, Desktop, and Web. It is **not** a replacement for SwiftUI when platform-native feel matters.
+CMP is Stable on Android, iOS and desktop and Beta on web (`CR:K1`, `CR:K3` in the design engine
+currentness register, accessed 2026-11-07); production web on CMP needs a DDR. iOS Dynamic Type
+and Reduce Motion behaviour is `NOT_ASSESSED` (`CR:K5`) and must be device-tested.
 
 ## Targets Configuration
 

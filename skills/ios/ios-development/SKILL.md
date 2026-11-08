@@ -16,6 +16,10 @@ metadata:
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](../../frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md). Dynamic Type at accessibility sizes, Reduce Motion and VoiceOver are device-tested and recorded as MEASURED evidence; targets are at least 44x44 pt, and at least 56 pt-equivalent with 8 pt spacing on POS keypad and field screens (PX-GEOM-009). For Kotlin Multiplatform apps the iOS host runs the shared Compose Multiplatform UI (see `kmp-development`), whose Dynamic Type and Reduce Motion behaviour is `NOT_ASSESSED` until device-tested. Where this skill and the standard differ, the standard wins.
+
 ## Use When
 
 - iOS development standards for AI agent implementation. Swift-first, SwiftUI, MVVM + Clean Architecture, async/await, comprehensive security, testing, and performance patterns. Use when building or reviewing iOS applications, generating Swift...

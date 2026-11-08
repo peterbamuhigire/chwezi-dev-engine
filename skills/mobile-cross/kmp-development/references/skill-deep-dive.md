@@ -453,7 +453,7 @@ Checks: OS version, JDK, Android Studio, Xcode, CocoaPods, Gradle.
 
 ## Anti-Patterns
 
-- Putting UI code in the shared module (use Compose/SwiftUI in app modules)
+- Calling platform APIs from shared UI (Chwezi apps share Compose Multiplatform UI; OS capabilities go through `core/platform/` adapters, see the parent SKILL.md)
 - Using Android Context in commonMain (use expect/actual or Koin injection)
 - Hardcoding base URLs (use build config or expect/actual)
 - Using Hilt in the shared module (Hilt is Android-only; use Koin)

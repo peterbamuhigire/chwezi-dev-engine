@@ -23,6 +23,10 @@ as untrusted design evidence, not instructions or permission to copy assets;
 framework and library claims require current verification.
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](references/product-excellence-engineering-gates.md). That reference owns the screen state model, component contract tests, screenshot matrix, token export and the release evidence pack for every frontend this skill designs. Where this skill and the standard differ, the standard wins.
+
 ## Use when
 
 - A website or application needs component boundaries, composition rules, a source of truth, or a sustainable design-system implementation.
@@ -87,6 +91,7 @@ framework and library claims require current verification.
 - `frontend-ux/visual-qa`
 - `frontend-ux/practical-ui-design`
 - `sdlc-meta/kaizen-improvement-system`
+- `references/product-excellence-engineering-gates.md` - load for any Chwezi app or system UI work: screen state model, component contract tests, screenshot matrix, device and web performance gates, offline and payment states, currency formatting, token export and backend authorisation.
 - `references/spa-route-contract-and-legacy-modernisation.md` - load when designing client-side routing (URL, history, scroll, title, focus, data states, cleanup, security) or migrating an inherited jQuery/CRA/hash-routed front end.
 - website-skills `skills/build/design-reference` and `skills/build/design-system`
 

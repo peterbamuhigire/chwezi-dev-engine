@@ -46,6 +46,10 @@ If production access, policy, telemetry, or authoritative records are unavailabl
 
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](../../frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md). Backend authorisation (PX-GATE-04), reconciling numbers (PX-GATE-03), contiguous document numbers (PX-GATE-13) and queued-versus-confirmed states (PX-GATE-02) are hard gates for every ERP screen. Where this skill and the standard differ, the standard wins.
+
 ## Use When
 
 - Use when designing configurable SaaS or ERP platforms with multi-step business workflows, domain modules, approvals, auditability, pricing and entitlements, operational reporting, and tenant-specific variation. Covers domain boundaries, workflow states, extension points, and control design.

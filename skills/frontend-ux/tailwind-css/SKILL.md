@@ -12,6 +12,10 @@ metadata:
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](../frontend-architecture/references/product-excellence-engineering-gates.md). Generate the Tailwind theme and CSS custom properties from the single token source (PX-TOKEN-008). Full amounts take the currency's ISO 4217 minor unit (UGX 0 decimals), which overrides the fixed two-decimal `full` formatter in `references/house-style-web.md`. Where this skill and the standard differ, the standard wins.
+
 ## Use When
 
 - Tailwind CSS v3 utility-first styling — setup, responsive design, dark mode, event/state modifiers, tailwind.config.js customization (colors, spacing, screens, plugins), @apply and @layer directives, flexbox/grid classes, and best practices. Use...

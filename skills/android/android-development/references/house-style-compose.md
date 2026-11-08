@@ -116,8 +116,13 @@ Write one formatter object and use it everywhere (guardrail G6).
 | Use | Function | Output |
 |---|---|---|
 | Tiles, rows, summaries | `compact(value)` | `950`, `1.20K`, `79.43M`, `888.88B` |
-| Documents, closing balances, inputs | `full(value)` | `32,450,000.00` |
-| Screen readers, always | `full(value)` | set as `contentDescription` |
+| Documents, closing balances, inputs | `full(value, currency)` | `32,450,000` (UGX), `1,250.50` (USD) |
+| Screen readers, always | `full(value, currency)` | set as `contentDescription` |
+
+`full` takes its decimals from the currency's ISO 4217 minor unit (UGX and RWF 0; KES, TZS and
+USD 2). This supersedes the earlier fixed two decimals (Chwezi Product Excellence Standard
+PX-L10N-001, owner default 2026-11-07); see
+[`product-excellence-engineering-gates.md`](../../../frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md).
 
 Compact rules: below 1,000 show the whole number; otherwise K, M or B with exactly two decimals.
 Round first, then pick the unit, so `999,995` becomes `1.00M`, never `1000.00K`. Use `BigDecimal`
@@ -190,7 +195,7 @@ fun softAmount(text: String, soft: Color): AnnotatedString = buildAnnotatedStrin
     withStyle(SpanStyle(color = soft, fontSize = 0.6.em)) { append(text.substring(cut)) }
 }
 // Text(softAmount(compact(total), muted), style = amounts.large,
-//      modifier = Modifier.semantics { contentDescription = "Came in " + full(total) })
+//      modifier = Modifier.semantics { contentDescription = "Came in " + full(total, currency) })
 ```
 
 Pair it with the money-in-plain-words row (K6): "Came in", "Went out", "Profit", and a bar captioned

@@ -18,6 +18,7 @@ This gate applies to every deliverable produced by `chwezi-dev-engine`. It is st
 | Current facts | Vendor, platform, standard, or statutory claim lacks dated source | Source register entry or Digital Research Skills Engine verification note |
 | Output quality | Section is generic, unsupported, or viewpoint-free | Specific decision, evidence, edge case, and reviewer-facing implication |
 | Cross-engine handoff | Finance, visual design, statutory, or research ownership is copied instead of routed | Link to `chwezi-accounting-doctrine`, `chwezi-design-engine`, or `digital-research-engine` |
+| Product excellence (Chwezi app UI, from 2026-11-01) | Any Chwezi Product Excellence Standard hard gate (PX-GATE-01..13) is open or `NOT_ASSESSED`, or the weighted score is below 85 without an owner-accepted CONDITIONAL verdict | `MEASURED` evidence per `skills/frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md`, scored under the standard in `chwezi-design-engine` |
 
 ## Reviewer Procedure
 

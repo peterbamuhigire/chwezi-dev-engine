@@ -16,6 +16,10 @@ metadata:
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 <!-- dual-compat-start -->
+## Chwezi Product Excellence Standard (mandatory)
+
+Any Chwezi app or system UI work (effective 01 Nov 2026) MUST follow the Chwezi Product Excellence Standard in `chwezi-design-engine` (resolve via the engine-routing table; never hard-code the path): `doctrine/product-excellence-standard.md` and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Engineering gates: [product-excellence-engineering-gates.md](../../frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md). Play targetSdk 36 consequences (edge-to-edge without opt-out, predictive back, orientation locks ignored at sw600dp), Baseline Profiles with Macrobenchmark on a physical floor device, and Android vitals targets are release gates. Where this skill and the standard differ, the standard wins.
+
 ## Use When
 
 - Android development standards for AI agent implementation. Kotlin-first, Jetpack Compose UI, MVVM + Clean Architecture, Hilt DI, comprehensive security, testing, and performance patterns. Use when building or reviewing Android applications...
@@ -203,12 +207,15 @@ Our apps MUST work for the few people still holding older devices, but MUST ALSO
 
 **Mandatory rules:**
 
-1. **Handle edge-to-edge insets deliberately** — Android 15 enforces edge-to-edge for apps targeting API 35 and higher. Use the AndroidX edge-to-edge helper where it fits the app, then verify status/navigation bar contrast, cutouts, IME, and content insets on the supported device range. Missing the helper is not evidence by itself that the app crashes.
+1. **Handle edge-to-edge insets on every screen** — Edge-to-edge is enforced on Android 15+ for targetSdk 35+, and at targetSdk 36 on Android 16+ the `windowOptOutEdgeToEdgeEnforcement` opt-out is deprecated and disabled (`CR:M6`). Since Play requires targetSdk 36 for new apps and updates from 31 Aug 2026 (`CR:M7`), there is no opt-out: call `enableEdgeToEdge()`, pad content by `WindowInsets` (system bars, display cutout, IME), never by fixed numbers, and keep bottom bars and the cart bar above the gesture area. Verify bar contrast, cut-outs, IME, gesture and 3-button navigation on the supported device range. Missing the helper is not evidence by itself that the app crashes; clipped or overlapped content is the observable failure.
 2. **Do NOT set `window.statusBarColor` directly** — It is deprecated and conflicts with edge-to-edge. Let `enableEdgeToEdge()` handle system bar colors. Only control light/dark icon appearance via `WindowCompat.getInsetsController().isAppearanceLightStatusBars`.
-3. **Test the actual support boundary** — Verify the declared minSdk and a current stable Android emulator/device before shipping; add API 35+ inset tests when targeting API 35 or higher.
-4. **Guard version-specific APIs** — When using APIs added after minSdk, wrap them in `if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.X)` checks.
-5. **Keep targetSdk current** — Check the official Play target requirement for the app category at release time. As verified 2026-10-29, general new apps and updates must target API 36 or higher; platform-specific exceptions differ. Keep `compileSdk` compatibility separate from `targetSdk` and verify the actual Gradle/AGP/dependency combination.
-6. **Use `AppCompatActivity`** when locale switching is needed (`AppCompatDelegate.setApplicationLocales()`). Otherwise prefer `ComponentActivity` for pure Compose apps.
+3. **Test the actual support boundary** — Verify the declared minSdk and a current stable Android emulator/device before shipping; inset, predictive-back and sw600dp rotate/resize tests are mandatory at targetSdk 36.
+4. **Predictive back is on by default at targetSdk 36** on Android 16+: `onBackPressed` is not called and `KEYCODE_BACK` is not dispatched (`CR:M8`). Put no logic in `onBackPressed`; use Compose `BackHandler` / `PredictiveBackHandler` (or `OnBackPressedCallback`), and intercept back only to protect unsaved data or an in-flight payment. The manifest opt-out `android:enableOnBackInvokedCallback="false"` is temporary and needs a DDR.
+5. **Orientation and resizability locks are ignored at smallest width >= 600 dp** at targetSdk 36 (games excepted; `CR:M9`): `screenOrientation`, `resizeableActivity=false` and aspect-ratio limits do not hold on tablets and foldables. Build landscape and resizable layouts with window size classes (`CR:M3`) and keep state and drafts across rotation and resize. The compat opt-out ends at API 37.
+6. **`elegantTextHeight` is ignored at targetSdk 36** (`CR:M10`): re-check Arabic and other tall scripts at 100% and 200% font scale.
+7. **Guard version-specific APIs** — When using APIs added after minSdk, wrap them in `if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.X)` checks.
+8. **Keep targetSdk current** — Check the official Play target requirement for the app category at release time. New apps and updates must target API 36 from 31 Aug 2026 (phone and tablet; an extension to 1 Nov 2026 was possible), and existing apps need API 35+ to stay available to new users on newer OS versions (`CR:M7`); other form factors differ. Keep `compileSdk` compatibility separate from `targetSdk` and verify the actual Gradle/AGP/dependency combination.
+9. **Use `AppCompatActivity`** when locale switching is needed (`AppCompatDelegate.setApplicationLocales()`). Otherwise prefer `ComponentActivity` for pure Compose apps.
 
 **Correct MainActivity pattern:**
 
@@ -216,12 +223,14 @@ Our apps MUST work for the few people still holding older devices, but MUST ALSO
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()  // Before super
-        enableEdgeToEdge()     // Apply only with a reviewed inset strategy
+        enableEdgeToEdge()     // No opt-out at targetSdk 36; pad content by WindowInsets
         super.onCreate(savedInstanceState)
         setContent { ... }
     }
 }
 ```
+
+`CR:<ID>` rows are in the design engine currentness register (`skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard/references/currentness-register.md`, accessed 2026-11-07, review by 2027-02-07). Re-read them there before relying on them; a lapsed row makes the dependent check `NOT_ASSESSED`.
 
 ## Version and security currency
 
@@ -395,7 +404,7 @@ module is governed by the `kmp-development` skill. Use Hilt for DI in
 - Ignoring lifecycle (use `collectAsStateWithLifecycle`)
 - Building phone-only UIs — all screens must adapt to tablets/foldables
 - Using hardcoded `isTablet()` checks instead of `WindowSizeClass` breakpoints
-- **Missing `enableEdgeToEdge()`** — causes immediate crash on Android 15 devices
+- **Assuming edge-to-edge can be opted out** — at targetSdk 36 on Android 16+ it cannot (`CR:M6`); unhandled insets put content under the system bars, cut-out or keyboard
 - Setting `window.statusBarColor` directly — deprecated, conflicts with edge-to-edge
 - Testing only on one Android version — must verify on both old (minSdk) and new (latest) devices
 - Generating invoice or receipt numbers on the device while offline — show a provisional "Pending" tag and store the server number after sync (`tenant-document-numbering`)

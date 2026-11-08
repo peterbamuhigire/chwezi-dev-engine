@@ -41,6 +41,20 @@ social-, or SRS-specific domain skills.
 | Word/PDF/Excel, application register, scoring matrix, budget, dashboard, price schedule, report, or annex generation readiness | `skills/product-business/document-spreadsheet-tooling-readiness` |
 | High-stakes bid red-team, evaluator simulation, compliance knockout scan, evidence audit, spreadsheet review, delivery feasibility, final release gate | `skills/sdlc-meta/world-class-bid-red-team-and-delivery-qc` |
 
+## 2026-11-08 Chwezi Product Excellence Standard
+
+Any Chwezi app or system UI work (Android, iOS, KMP/Compose Multiplatform, web front ends,
+desktop) routes to the Chwezi Product Excellence Standard in the external `chwezi-design-engine`
+(resolve per device from the engine-routing table): `doctrine/product-excellence-standard.md`
+and skill `skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard`. Effective
+01 November 2026. No new skill was added here; the engineering side is one reference.
+
+| Trigger | Route |
+|---|---|
+| Design or review what a Chwezi app screen must do, its states, scorecard or release verdict | External `chwezi-design-engine` skill `chwezi-product-excellence-standard` |
+| Turn the standard into tests, CI gates, state models, performance budgets or formatting code | `skills/frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md` |
+| Stack-specific implementation | The stack skill as before; each of the 14 UI-facing skills carries a mandatory cross-reference block (list in `docs/updates/2026-11-08-product-excellence-standard.md`) |
+
 ## Finance Doctrine Canonicality
 
 Finance, accounting, tax, inventory, payroll, banking, mobile money, POS,
@@ -186,6 +200,7 @@ concurrency, tenant, reconciliation, recovery and owner-sign-off evidence.
 | UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
 | UX content | `ux-content-strategy` | `ux-writing` |
 | Frontend architecture | `frontend-architecture` | Component boundaries, tokens, state/content contracts, design-system implementation, frontend quality and migration decisions |
+| Product excellence engineering gates (Chwezi app UI) | `frontend-architecture` -> `references/product-excellence-engineering-gates.md` | Screen state model, component contract tests, test tags, screenshot matrix, Baseline Profiles and Macrobenchmark, Android vitals, Core Web Vitals, targetSdk 36, AGP 9 `androidApp`, offline idempotency, mobile-money states, ISO 4217 minor units, token export, backend authorisation; the standard itself lives in `chwezi-design-engine` |
 | ERP POS sales operations | `pos-sales-operations-engineering` | Tenant default customer, three POS surfaces, product-to-finished-stock identity, manufacturing timing, canonical posting, permissions, idempotency, and reconciliation |
 | Design audit | `design-audit` | `lean-ux-validation`, heuristic review workflows |
 | Database PostgreSQL | `postgresql-engineering` | `postgresql-fundamentals`, `postgresql-patterns`, `postgresql-advanced-sql`, `postgresql-server-programming`, `postgresql-operations`, `postgresql-administration`, `postgresql-performance` |

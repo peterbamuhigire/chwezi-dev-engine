@@ -3,3 +3,6 @@
 doctrine/
 __pycache__/
 *.pyc
+
+# Local Claude Code settings (machine-specific; never publish)
+.claude/settings.local.json

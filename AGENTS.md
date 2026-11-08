@@ -316,6 +316,26 @@ into `chwezi-design-engine` (resolved per device). Migrated skills (`ux-principl
 `pos-sales-ui-design`, `pos-restaurant-ui-standard`) are inactive `ALIAS.md` stubs redirected
 via `docs/skill-aliases.yml`; check that registry before loading any `frontend-ux` design skill.
 
+## Chwezi Product Excellence Standard (binding, effective 01 Nov 2026)
+
+Any app or system UI work - Android, iOS, Kotlin Multiplatform / Compose Multiplatform, web
+front ends and desktop - MUST follow the Chwezi Product Excellence Standard, adopted by Lead
+Developer Peter Bamuhigire and the Chwezi Core Systems design team, effective 01 November 2026
+until further communication. It is owned by `chwezi-design-engine`: resolve that engine from the
+engine-routing table on the current device (never hard-code a path), then read
+`doctrine/product-excellence-standard.md` and the skill
+`skills/00-cross-cutting-ops-qa-a11y/chwezi-product-excellence-standard/SKILL.md`.
+
+- This engine supplies the engineering side only:
+  `skills/frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md`
+  (state model, contract and screenshot tests, device and web performance gates, offline and
+  payment states, ISO 4217 formatting, token export, backend authorisation).
+- The 14 UI-facing skills listed in `docs/updates/2026-11-08-product-excellence-standard.md`
+  carry a mandatory cross-reference block. Where any skill here differs from the standard, the
+  standard wins; record a departure from a SHOULD rule as a design decision record (DDR).
+- A hard gate (PX-GATE-01..13) open or `NOT_ASSESSED` at release blocks PASS. Never report an
+  unrun check as passed.
+
 ## DOMAIN PROMPT GENERATION CONTRACT
 
 For a prompt handoff, read the local [domain prompt contract](docs/ai-prompting/domain-prompt-compilation-contract.md). Generate a ready-to-paste engineering prompt with user outcome, failure consequence, one vertical slice, current architecture/data, behaviour, states, security, dependencies, tests, observability, rollback, and acceptance checks. **Ready-to-paste prompt:** include assumptions and risk flags. **Failure action:** fix one failed slice or regenerate when the design is structurally wrong.

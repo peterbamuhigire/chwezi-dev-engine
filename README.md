@@ -6,29 +6,18 @@ It is for software engineers, technical leads, architects, product owners, QA an
 
 A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engineering/SKILL.md), applies to every change: small, explained changes, explicit failure handling, evidence scaled to risk and a verify-before-done gate.
 
-**Contents**
-
-- [At a glance](#at-a-glance)
-- [Start here](#start-here)
-- [Capabilities](#capabilities)
-- [Find the right skill](#find-the-right-skill)
-- [How it works](#how-it-works)
-- [What is inside](#what-is-inside)
-- [Installation](#installation)
-- [Verify](#verify)
-- [Quality and improvement](#quality-and-improvement)
-- [What the October 2026 kaizen improved](#what-the-october-2026-kaizen-improved)
-- [Date-triggered gates](#date-triggered-gates)
-- [References](#references)
-- [Contributing and licence](#contributing-and-licence)
+**Design standard.** The Chwezi Product Excellence Standard is the design style chosen by Lead Developer Peter Bamuhigire and the Chwezi Core Systems design team.
+It is effective from 01 November 2026 until further communication is given on the matter.
+It is mandatory for all Chwezi apps and systems.
+This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard).
 
 ## At a glance
 
 - **168 active skills** in 18 categories, plus 78 retired names kept as redirects.
 - **166 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
-- **273 tests pass and 3 are skipped** (pytest 9.2.0, Python 3.14.10, Linux, 2026-11-05).
-- **72 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It failed from 2026-11-04, when five Next.js records went overdue, until 2026-11-05, when the 14 overdue records were re-read; it exits 0 on 2026-11-06 (see [Date-triggered gates](#date-triggered-gates)).
+- **272 tests pass, 3 are skipped and 1 fails** (Windows, Python 3.13, 2026-11-08). The failure is the file-budget test, tripped by ignored local folders. On Linux on 2026-11-05: 273 passed, 3 skipped.
+- **73 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It exits 0 on 2026-11-08; the next record lapses on 2026-11-12 (see [Date-triggered gates](#date-triggered-gates)).
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -47,6 +36,42 @@ A root baseline, [`world-class-engineering`](skills/sdlc-meta/world-class-engine
    ```
 
 3. **Use.** Name the skill in your request, for example: "Use `api-design-first` to define the contract for the invoice listing endpoint." Pick the name from [Find the right skill](#find-the-right-skill).
+
+**Contents**
+
+- [At a glance](#at-a-glance)
+- [Start here](#start-here)
+- [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard)
+- [Capabilities](#capabilities)
+- [Find the right skill](#find-the-right-skill)
+- [How it works](#how-it-works)
+- [What is inside](#what-is-inside)
+- [Installation](#installation)
+- [Verify](#verify)
+- [Quality and improvement](#quality-and-improvement)
+- [What the October 2026 kaizen improved](#what-the-october-2026-kaizen-improved)
+- [Date-triggered gates](#date-triggered-gates)
+- [References](#references)
+- [Contributing and licence](#contributing-and-licence)
+
+## Chwezi Product Excellence Standard
+
+The standard binds the UI and UX of every Chwezi app and system on Android, iOS, tablet, desktop and web.
+Its canonical text lives in the Chwezi design engine (`chwezi-design-engine`), in `doctrine/product-excellence-standard.md` and the skill `chwezi-product-excellence-standard`. Resolve that engine from your engine-routing table; never hard-code its path.
+This engine supplies the engineering side, and where a skill here differs from the standard, the standard wins.
+
+- **Binding rule:** the "Chwezi Product Excellence Standard" section of [`AGENTS.md`](AGENTS.md#chwezi-product-excellence-standard-binding-effective-01-nov-2026).
+- **Engineering gates:** [`product-excellence-engineering-gates.md`](skills/frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md) maps each hard gate to tests and CI checks.
+- **Mandatory blocks:** 14 front-end, mobile, desktop, offline, POS and ERP skills carry a cross-reference block. Compose Multiplatform shared UI is the primary mobile stack. Record: [`docs/updates/2026-11-08-product-excellence-standard.md`](docs/updates/2026-11-08-product-excellence-standard.md).
+
+What it governs:
+
+- **13 hard release gates** (`PX-GATE-01` to `PX-GATE-13`), from duplicate records and false confirmation to accessibility and large-text loss. Any open gate blocks release.
+- **The release rule.** PASS needs a weighted score of at least 85, zero open gates and no dimension below 2. A gate whose evidence was not measured counts as open.
+- **13 screen states**, from initial loading to session expired and success, tested by a state-matrix CI check.
+- **Money.** Formatters take decimals from the ISO 4217 minor unit, so UGX shows 0 decimals. The house-style `full` formatters changed from a fixed two.
+- **Offline and low-end Android.** Idempotency keys, queued-versus-confirmed states, and Baseline Profiles with Macrobenchmark on a physical baseline device.
+- **Languages and numbering.** Seven default languages, including Spanish and right-to-left Arabic, in the screenshot matrix. Contiguous document numbering is a hard gate wherever a screen issues numbered documents.
 
 ## Capabilities
 
@@ -264,6 +289,8 @@ git diff --check
 | Hook tests | Node | 61/61 and 7/7 |
 | Evidence-declaration contract gate | Python | 162 skills scanned, 0 errors, 6 exempt |
 
+**Re-run on 2026-11-08 (Windows 11, Python 3.13.7).** Every step above exits 0 with the same counts, except two. The guardrails now give 16 size warnings, all old. The pytest suite gives 272 passed, 3 skipped and 1 failed. The failure is the file-budget test: ignored local folders put this checkout at 8,214 entries against 5,000. Git tracks 2,540 files.
+
 The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`). `NOT ASSESSED` means a check could not be run here. It is never reported as a pass.
 
 A ratchet is a recorded baseline of known problems. A new problem fails the check, and the baseline may only shrink.
@@ -301,8 +328,9 @@ Evidence for the October 2026 passes lives in two folders. Each holds a scope re
 
 Read the validation records before you treat an example as production proof.
 
-### Changes after the October kaizen (1 to 7 November 2026)
+### Changes after the October kaizen (1 to 8 November 2026)
 
+- **Product Excellence Standard wiring (8 November).** A binding `AGENTS.md` rule, the engineering-gates reference, mandatory blocks in 14 skills, and rewrites of `kmp-development` and the `android-development` targetSdk 36 rules. No skill was added. See [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard).
 - **House style implementation references (7 November).** [`house-style-compose.md`](skills/android/android-development/references/house-style-compose.md) and [`house-style-web.md`](skills/frontend-ux/tailwind-css/references/house-style-web.md) show how to build the Chwezi business-app house style, whose canonical standard is in `chwezi-design-engine`, including its guardrail tests. Record: [`docs/updates/2026-11-07-house-style-implementation-references.md`](docs/updates/2026-11-07-house-style-implementation-references.md).
 - **Tenant document numbering (5 November, `13e4cc9` and `f9e7a46`).** The new skill [`tenant-document-numbering`](skills/saas/tenant-document-numbering/SKILL.md) sets one contiguous, never-resetting series per tenant and document type for every user-facing number, kept apart from the database id.
   - Its references cover the schema and allocator (MySQL 8, PostgreSQL, PHP, retry, lifecycle, lock order), seeding and capacity, API and offline guardrails, and retrofit and rollout.
@@ -339,6 +367,7 @@ The full list, with reasons, is the pass-2 [next-cycle handoff](docs/kaizen/2026
 - **Thin routing coverage.** 14 of 168 skills have three positive fixtures and two owned negatives (measured 2026-11-05). `new-project` has no fixture.
 - **Currency rows not re-read in pass 2.** These are the legacy hospitality register (review date 2026-10-14, now past), the Apple developer documentation row, the OpenAI Codex availability article (quarantined after an HTTP 403) and the Kubernetes latest version (inferred, not labelled by the source).
 - **Builds not repeated.** The 29 October validation record reports a Next.js build, a Compose build and a MySQL fixture run of the invoice slice. Each ran in a disposable environment outside this repository. Pass 2 and the documentation round that followed could not repeat them.
+- **Product Excellence gaps.** Screenshot and accessibility tool versions, provider mobile-money callbacks, iOS screenshot protection and Compose Multiplatform Dynamic Type remain `NOT_ASSESSED`.
 - **Not established by any pass:** emulator or browser rendering, authenticated database integration, live-model routing, production behaviour and independent human review. These are `NOT_ASSESSED`, never a pass.
 
 ## What the October 2026 kaizen improved
@@ -354,18 +383,18 @@ Most severe first.
 - **Next.js tenant boundary** (`e00f12f`, `e0cc114`, `b7177be`).
   - Before: the skill taught a role cookie as authority, a global users cache, an unscoped read and an unchecked mutation.
   - Now: session, tenant-membership and permission checks sit at the server-only data-access boundary ([`tenant-data-security.md`](skills/frontend-ux/nextjs-app-router/references/tenant-data-security.md)).
-  - Re-measured: `scripts/validate_tenant_invoice_example.py` prints `PASS`, and `tests/test_tenant_invoice_example.py` passes (7 tests). A disposable `next build` on 29 October found a page and route-handler collision at `/invoices`. It was fixed with a regression test ([validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md); not re-run here).
+  - Re-measured: `scripts/validate_tenant_invoice_example.py` prints `PASS`, and `tests/test_tenant_invoice_example.py` passes (7 tests). A route collision found by a disposable `next build` was fixed with a regression test ([validation record](docs/kaizen/2026-10-engine-kaizen/04-validation-record.md)).
 - **Next.js 16 drift** (`e00f12f`).
   - Before: examples used synchronous `params` and a `middleware.ts` that read `request.ip` and `request.geo`.
   - Now: they use async `params` and `proxy.ts`, and say that a Proxy redirect is only a navigation aid.
   - Checked against the official upgrade guide on 2026-10-29 (source record `next16-upgrade-2026-10-29`).
 - **Android currency** (`4ba4c2d`).
-  - Before: the skill gave API 35 as the Play target. It claimed that omitting one edge-to-edge helper crashes the app.
+  - Before: the skill gave API 35 as the Play target and an unsupported crash claim.
   - Now: it separates the Play target (API 36 or higher, verified 2026-10-29; re-read before release) from the latest platform release (Android 17, API 37), which is a compatibility target. The unsupported crash claim is gone. The same commit added an advisory-check line to the PHP and PostgreSQL skills.
   - Checked: a disposable Compose excerpt built with `:app:assembleDebug` on 29 October. There was no emulator run.
 - **Overdue source records** (`f970df0`).
   - Before: 27 of 65 records were past review, including AI-platform rows the router names as a first stop.
-  - Now: each primary page was re-read on 2026-10-31. 26 snapshots moved to `superseded_sources`, one record was quarantined after an HTTP 403, and two claims were narrowed where the page no longer supported them. The pages show OpenAI's Evals platform and `v1/prompts` due to shut down on 2026-11-30, and Bedrock Agents closed to new customers. No skill depended on them.
+  - Now: each primary page was re-read on 2026-10-31. 26 snapshots moved to `superseded_sources`, one record was quarantined after an HTTP 403, and two claims were narrowed.
   - Re-measured: 27 findings (exit 1) on the earlier register, 0 (exit 0) now. The check covers dates and metadata, not whether a page supports a claim.
 
 ### Tooling that failed on this host
@@ -381,7 +410,7 @@ Most severe first.
 - **Package checks** (`f162535`, `27a602b`).
   - Before: the Codex plugin shape and the package entry limit had no check in this repository.
   - Now: root `plugin.json`, `.agents/plugins/marketplace.json` and `scripts/check_package_file_budget.py`, with an over-cap failure test and a fail-closed case for unreadable paths.
-  - Re-measured: 2524 package-oriented entries against a limit of 5000. The documented context-budget invocation raised the skill paths that an offline Codex `debug prompt-input` loads from 130 to 165 of 165 (validation record; invocation-level, not re-run). Public marketplace acceptance is not assessed.
+  - Re-measured: 2524 package-oriented entries against a limit of 5000. Public marketplace acceptance is not assessed.
 
 ### Checks that only tighten
 
@@ -402,8 +431,8 @@ Most severe first.
 ### Routing and examples
 
 - **Review route** (`a6735a5`).
-  - Before: a review that crosses SQL, tenant scope, query shape, output encoding and ledger writes had no route to the five owning checks. The exercise also named a posting service that differed from the owning skill.
-  - Now: a router row, a routing-index section, one fixture, 4 tests, and a table in [`ai-generated-code-review-gate.md`](skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md) that names the owning skill for each defect class. Renaming one table link fails a test.
+  - Before: a review that crosses SQL, tenant scope, query shape, output encoding and ledger writes had no route to the five owning checks.
+  - Now: a router row, a routing-index section, one fixture, 4 tests, and a table in [`ai-generated-code-review-gate.md`](skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md) that names the owning skill for each defect class.
   - The full original review request still misroutes at rank 1 under the proxy.
 - **Invoice slice** (`2288c75`, `bd4a03b`, `8bec17a`).
   - Before: the practitioner task had no reproducible cross-layer proof of tenant isolation.
@@ -452,16 +481,13 @@ python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-14
 | 2027-01-30 | 2 | 72 | Next.js authentication and data-security guides |
 | 2027-09-02 | 1 | 73 | IETF DNSSEC best practice |
 
-**Status on 2026-11-06.** The check exits 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 between 22:11 and 22:13 UTC (01:11 to 01:13 on 6 November in East Africa). Record dates use the UTC date, so a CI run in UTC never sees a future date. No date was extended unread.
+**Status on 2026-11-08.** The check exits 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 (UTC). No date was extended unread.
 
-- **Renewed in place, page unchanged (9):** `next16-upgrade-2026-10-29`, `nextjs-support-policy-2026-10-29`, `next-security-oct14-2026`, `android-17-release-2026-10-29`, `compose-setup-2026-10-29`, `kotlin-compose-migration-2026-10-29`, `php-security-oct21-2026`, `php-windows-brotli-2026` and `postgresql-security-2026-10-29`.
-- **Superseded by a new dated record (4):**
-  - `nextjs-release-2026-10-29` (v16.4.3) by `nextjs-release-2026-11-05` (v16.4.5, published 2026-11-03).
-  - `next-security-november-notice-2026` by `next-security-november-2026-release-2026-11-05`. The planned release shipped on 2026-11-03: one High and six Medium advisories, fixed in 16.4.5 and 15.5.29.
-  - `android-security-bulletin-october-2026` by `android-security-bulletin-november-2026` (patch level 2026-11-05 or later).
-  - `android-agp-9-1-notes-2026-10-29` by `android-agp-9-5-notes-2026-11-05` (AGP 9.5.0, October 2026).
-- **Quarantined, page unreadable (1):** `mysql-8413-security-2026-10-29`. The MySQL documentation site returned HTTP 403 ("Technical Difficulties") to every attempt, so the 8.4.13 release date and security notes are `NOT_ASSESSED` until it is read again, by 2026-11-13. `oracle-cpu-oct-2026-mysql-2026-11-05` records what the readable Oracle October 2026 alert says: MySQL Server 8.4.0 to 8.4.12 affected, 8.4.13 outside that range. It does not name 8.4.13 as the fix.
-- **Added (1):** `php-session-upload-progress-advisory-2026-11-05`, the PHP informational advisory of 2026-10-23 (CVE-2026-115560, full advisory to follow).
+- **Renewed in place (9):** the page was unchanged.
+- **Superseded by a new dated record (4):** Next.js 16.4.5 and its 3 November security release, the Android November bulletin, and AGP 9.5.0.
+- **Quarantined (1):** `mysql-8413-security-2026-10-29`. The MySQL site returned HTTP 403 to every attempt, so the 8.4.13 notes are `NOT_ASSESSED` until read again, by 2026-11-13. The readable Oracle October alert lists 8.4.0 to 8.4.12 as affected.
+- **Added (1):** the PHP session upload-progress advisory of 2026-10-23.
+- The full list of record IDs is in the [re-read record](docs/updates/2026-11-06-source-register-reread.md).
 
 The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. The security records and the MySQL quarantine come due on 2026-11-13, and the release, setup and migration records on 2026-11-20. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
 
