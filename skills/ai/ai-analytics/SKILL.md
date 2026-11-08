@@ -1,6 +1,6 @@
 ---
 name: ai-analytics
-description: Use when designing AI analytics, dashboards, SaaS AI metrics, NLP analytics, predictive analytics, or executive AI insight workflows. Orchestrates the former granular AI analytics skills as references.
+description: Use when designing AI analytics, dashboards, SaaS AI metrics, NLP analytics, predictive analytics, or executive AI insight workflows. Orchestrates the former granular AI analytics skills as references. Non-AI report, export and print engineering belongs to reporting-and-export-engineering.
 metadata:
   portable: true
   compatible_with:
@@ -85,6 +85,15 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 - Keep routing explicit: name which reference files were used when the work depends on absorbed material.
 - Preserve tenant isolation, auditability, cost controls, safety gates, and operational evidence when they matter.
 - Prefer concrete contracts, checklists, tables, schemas, runbooks, and decision records over broad summaries.
+- AI or written insights built from product figures follow the Chwezi Reporting and Dashboards
+  Standard narrative rules (hard gate RPT-GATE-07, ungrounded narrative): every claim cites the
+  measure, filter and period it rests on (RPT-NARR-001); observation is kept apart from inference,
+  a cause is stated only with supporting evidence and never from correlation alone, and
+  uncertainty is disclosed (RPT-NARR-002); consequential financial, clinical or regulatory text
+  needs named human approval and shows its status, draft, verified or disputed (RPT-NARR-003);
+  prompt, template and model versions are logged where policy allows (RPT-NARR-004). The figures
+  themselves come from approved metric contracts, never from the model. Claim-table and metric
+  procedure: [`reporting-and-export-engineering`](../../saas/reporting-and-export-engineering/SKILL.md).
 
 ## Anti-Patterns
 

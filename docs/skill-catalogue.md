@@ -1,6 +1,6 @@
 # Skill catalogue
 
-Every active skill in this engine, by category: 168 skills in 18 categories. An active skill is a `SKILL.md` under `skills/` or `00-meta-initialization/`. The 78 inactive `ALIAS.md` redirects are excluded, and [`skill-routing-index.md`](skill-routing-index.md) maps retired names to current skills. The root [`SKILL.md`](../SKILL.md) is the engineering baseline router and is not counted.
+Every active skill in this engine, by category: 169 skills in 18 categories. An active skill is a `SKILL.md` under `skills/` or `00-meta-initialization/`. The 78 inactive `ALIAS.md` redirects are excluded, and [`skill-routing-index.md`](skill-routing-index.md) maps retired names to current skills. The root [`SKILL.md`](../SKILL.md) is the engineering baseline router and is not counted.
 
 Not sure which skill you need? Start with [Find the right skill](../README.md#find-the-right-skill) in the root README.
 
@@ -208,13 +208,14 @@ Jump to a category:
 
 ## SaaS platforms
 
-19 skills in [`skills/saas/`](../skills/saas/).
+20 skills in [`skills/saas/`](../skills/saas/).
 
 | Skill | What it does |
 |---|---|
 | [`full-coverage-saas-seeding`](../skills/saas/full-coverage-saas-seeding/SKILL.md) | Seeds and verifies a realistic synthetic SaaS demo tenant across all modules. |
 | [`modular-saas-architecture`](../skills/saas/modular-saas-architecture/SKILL.md) | Designs tenant-selectable SaaS modules with dependency contracts and safe toggles. |
 | [`multi-tenant-saas-architecture`](../skills/saas/multi-tenant-saas-architecture/SKILL.md) | Designs tenant isolation, panel boundaries, zero-trust authorisation and audit trails. |
+| [`reporting-and-export-engineering`](../skills/saas/reporting-and-export-engineering/SKILL.md) | Builds reports, dashboards and exports that reconcile, stay in scope, print properly on A4 and export safely, to the Chwezi Reporting and Dashboards Standard. |
 | [`saas-accounting-system`](../skills/saas/saas-accounting-system/SKILL.md) | Designs double-entry accounting inside SaaS with automated postings and reconciliations. |
 | [`saas-admin-backoffice-tooling`](../skills/saas/saas-admin-backoffice-tooling/SKILL.md) | Designs audited back-office impersonation, tenant lifecycle and billing overrides. |
 | [`saas-architecture-strategy`](../skills/saas/saas-architecture-strategy/SKILL.md) | Chooses multi-tenant patterns, deployment mapping, scaling and blast-radius isolation. |

@@ -68,6 +68,20 @@ fixtures:
         owner: database-design-engineering
   - task: "Review a diff that deletes issued credit notes and numbers journal entries per year instead of one never-reset series per tenant"
     expect: tenant-document-numbering
+  - task: "Make the dashboard sales figure, the daily close PDF and the XLSX export reconcile from one metric catalogue with versioned metric contracts and ledger reconciliation"
+    expect: reporting-and-export-engineering
+    negatives:
+      - task: "Format a professional Excel workbook with tables, number formats, charts and print setup for the finance team"
+        owner: excel-spreadsheets
+      - task: "Define MRR, churn, NRR and LTV to CAC metrics for the SaaS board scorecard"
+        owner: saas-business-metrics
+  - task: "Neutralise spreadsheet formula injection in CSV and XLSX report exports and keep leading-zero identifiers as text"
+    expect: reporting-and-export-engineering
+  - task: "Build background report export jobs with immutable generation records, expiring share links, audited downloads and A4 PDF print templates with repeated table headers and page x of y"
+    expect: reporting-and-export-engineering
+    negatives:
+      - task: "Make invoice, receipt and purchase order numbers contiguous per tenant with no gaps or duplicates"
+        owner: tenant-document-numbering
   - task: "Add SSO with SAML and SCIM user provisioning for enterprise customers"
     expect: saas-sso-scim-enterprise-auth
   - task: "Let a tenant export all their data and handle a GDPR erasure request"

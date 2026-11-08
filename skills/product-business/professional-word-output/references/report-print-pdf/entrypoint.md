@@ -115,22 +115,22 @@ final class ReportFormatting {
         if (empty($value)) {
             return '-';
         }
-        return (new DateTime(substr($value, 0, 10)))->format('d M Y');
+        return (new DateTime(substr($value, 0, 10)))->format('j M Y'); // 4 Nov 2026, no leading zero
     }
 
     public static function formatDateLong(?string $value): string {
         if (empty($value)) {
             return '-';
         }
-        return (new DateTime(substr($value, 0, 10)))->format('d F Y');
+        return (new DateTime(substr($value, 0, 10)))->format('j F Y');
     }
 
     public static function formatPeriod(?string $startDate, ?string $endDate): string {
         if (empty($startDate) && empty($endDate)) {
             return '';
         }
-        $start = $startDate ? (new DateTime($startDate))->format('d M, Y') : '';
-        $end = $endDate ? (new DateTime($endDate))->format('d M, Y') : '';
+        $start = $startDate ? (new DateTime($startDate))->format('j M Y') : '';
+        $end = $endDate ? (new DateTime($endDate))->format('j M Y') : '';
         if ($start && $end) {
             return $start === $end ? $start : "$start - $end";
         }
@@ -241,6 +241,11 @@ HTML;
 
 ## Table Layout Rules (Multi-Page Friendly)
 
+Chwezi reports must also meet the Chwezi Reporting and Dashboards Standard print rules (dedicated
+template, page-one identity, "Page x of y", repeated headings, totals kept with their labels,
+print acceptance cases). The pipeline and acceptance cases are in
+[`reporting-and-export-engineering`](../../../../saas/reporting-and-export-engineering/references/print-pipeline-acceptance.md).
+
 - Use a proper `thead` + `tbody`
 - Set `thead` to `display: table-header-group` for repeating headers
 - Keep padding tight (4–6px)
@@ -345,16 +350,20 @@ echo ReportHtmlTemplate::build(
 ## Visual Standards
 
 - **Font**: DejaVu Sans
-- **Body text**: 10–11px
-- **Table text**: 9–10px
-- **Footer text**: 7–8px
+- **Body text**: at least 9 pt at 100% print scale
+- **Table text**: at least 8.5 pt
+- **Footer and footnote text**: at least 8 pt
+- These are the Chwezi legibility floor (RPT-PRINT-004). If a table does not fit, drop
+  nonessential columns or move it to a landscape annex; never shrink below the floor.
 - **Spacing**: 6–12px between header and content
 - **Color**: White background, subtle gray borders
 
 ## Number Formatting Rules
 
-- Whole numbers → commas, no decimals
-- Non-whole numbers → commas, 2 decimals
+- Money → thousands separators and the currency's ISO 4217 minor unit: UGX and RWF 0 decimals,
+  KES, TZS and USD 2. Never K/M/B on a total, closing balance or payment figure.
+- Quantities → their own unit and precision; never summed across different units.
+- Missing values read "Not available" with the reason, never 0.
 
 ## Summary
 

@@ -1180,6 +1180,40 @@
       "uncertainty": "The full advisory and fixed version were not yet published on the page; exposure depends on application code and configuration.",
       "as_of": "2026-11-05",
       "reverification_note": "First reading 2026-11-05 (fetched 2026-11-05T22:12Z UTC)."
+    },
+    {
+      "id": "owasp-csv-injection-2026-11-08",
+      "title": "OWASP Community: CSV Injection",
+      "ref": "https://community.owasp.org/attacks/CSV_Injection",
+      "tier": 1,
+      "accessed": "2026-11-08",
+      "verified_at": "2026-11-08",
+      "review_after": "2027-02-08",
+      "freshness_class": "current",
+      "as_of": "2026-11-08",
+      "scope": "Lists formula trigger characters (=, +, -, @, tab, carriage return, line feed and full-width variants); gives two mitigations: quote each field, prefix a single quote and double inner quotes; or, for Excel, a tab inside the quoted field before a leading =, +, - or @. Warns the quote methods are not reliable in Excel after save and reopen, the tab stays in the data, and no method suits every program.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text at access time; the page shows no date",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Guidance, not a standard; behaviour of specific spreadsheet programs and versions not tested here.",
+      "reverification_note": "First reading 2026-11-08; the owasp.org URL now redirects (HTTP 308) to community.owasp.org."
+    },
+    {
+      "id": "loc-pdfa4-fdd-2026-11-08",
+      "title": "Library of Congress: PDF/A-4, PDF for Long-term Preservation, Use of PDF 2.0 (fdd000532)",
+      "ref": "https://www.loc.gov/preservation/digital/formats/fdd/fdd000532.shtml",
+      "tier": 2,
+      "accessed": "2026-11-08",
+      "verified_at": "2026-11-08",
+      "review_after": "2027-05-08",
+      "freshness_class": "current",
+      "as_of": "2026-11-08",
+      "scope": "PDF/A-4 is ISO 19005-4:2020, published November 2020, based on PDF 2.0 (ISO 32000-2:2020); a formal dated revision was being prepared by ISO TC 171 SC 2 WG 5 in 2025.",
+      "support_status": "context-bound",
+      "confidence": "medium: authoritative secondary description; the ISO page returned HTTP 403",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Whether the revision has been published is not established.",
+      "reverification_note": "First reading 2026-11-08."
     }
   ],
   "claims": [
@@ -1584,6 +1618,20 @@
         "openai-model-catalog-2026-10-29",
         "openai-gpt6-luna-model-details-2026-10-31",
         "openai-latest-model-guidance-2026-10-31"
+      ]
+    },
+    {
+      "id": "claim-csv-injection-guidance-2026-11-08",
+      "requires_currentness": true,
+      "source_ids": [
+        "owasp-csv-injection-2026-11-08"
+      ]
+    },
+    {
+      "id": "claim-pdfa4-current-part-2026-11-08",
+      "requires_currentness": true,
+      "source_ids": [
+        "loc-pdfa4-fdd-2026-11-08"
       ]
     }
   ],
@@ -2154,6 +2202,28 @@
         "date": "2026-11-05",
         "reverify_by": "2026-11-13",
         "reason": "The MySQL 8.4.13 release-notes page returned HTTP 403 (\"Technical Difficulties\", Akamai edge) to automated fetch on 2026-11-05 (22:12 UTC, 2026-11-06 East Africa Time) on two attempts, and again for the dispatcher with two user agents, and so did the 8.4 index and downloads pages, so the release date and security notes could not be re-read. Oracle October 2026 CPU lists MySQL Server 8.4.0 to 8.4.12 as affected; it was recorded separately."
+      }
+    },
+    {
+      "id": "iso-14289-2-2024-2026-11-08",
+      "title": "ISO 14289-2:2024 Document management applications - Electronic document file format enhancement for accessibility - Part 2 (PDF/UA-2)",
+      "ref": "https://www.iso.org/standard/82278.html",
+      "tier": 1,
+      "accessed": "2026-11-08",
+      "verified_at": "2026-11-08",
+      "review_after": "2027-02-08",
+      "freshness_class": "current",
+      "as_of": "2026-11-08",
+      "scope": "Intended claim: PDF/UA-2 published March 2024, based on PDF 2.0, separate from PDF/UA-1.",
+      "support_status": "NOT_ASSESSED",
+      "confidence": "none from this engine's reading",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Publication month not confirmed by a page this engine could read.",
+      "quarantine": {
+        "status": "NOT_ASSESSED",
+        "reason": "The ISO page and the PDF Association pages returned HTTP 403 to automated fetch on 2026-11-08; the secondary source read was out of date.",
+        "date": "2026-11-08",
+        "reverify_by": "2027-02-08"
       }
     }
   ],

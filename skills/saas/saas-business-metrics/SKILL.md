@@ -1,6 +1,6 @@
 ---
 name: saas-business-metrics
-description: Use when defining or reviewing SaaS revenue, growth, retention, engagement, satisfaction, unit economics, or Rule-of-40 metrics.
+description: Use when defining or reviewing SaaS revenue, growth, retention, engagement, satisfaction, unit economics, or Rule-of-40 metrics. For a metric's versioned contract, reconciliation and report exports, use reporting-and-export-engineering.
 metadata:
   portable: true
   compatible_with:
@@ -359,6 +359,15 @@ If close time drops and re-open rate rises, support agents are closing tickets p
 ## Quality Standards
 
 Every reported metric must fix its grain, denominator, currency, time boundary, source, owner, exclusions, and reconciliation rule before comparison or target-setting.
+
+Before any of these metrics appears on a Chwezi dashboard, report, export or schedule, write its
+versioned metric contract under the Chwezi Reporting and Dashboards Standard (RPT-METRIC-001,
+hard gate RPT-GATE-02): identifier, business question, definition, numerator, denominator,
+inclusions and exclusions, unit, currency, rounding, date basis, grain, source, owner, freshness
+target, privacy class, comparison logic and validation tests, approved by its owner. Compute it
+once on the server (RPT-METRIC-002), keep revenue, cash collected and profit as separate measures
+(RPT-METRIC-006) and reconcile it to detail and ledger (RPT-RECON-001). Template and harness:
+[`reporting-and-export-engineering`](../reporting-and-export-engineering/references/metric-contract-and-semantic-layer.md).
 
 ## Outputs
 

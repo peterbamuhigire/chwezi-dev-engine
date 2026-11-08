@@ -16,7 +16,9 @@ import check_source_register as csr  # noqa: E402
 AS_OF = date(2026, 10, 31)
 # The date the repository's real registers were last reconciled against their primary pages (the UTC read date of
 # the 2026-11-05 re-read of the 14 overdue records). Move it, with a note, each time the registers are reconciled.
-RECONCILED_ON = date(2026, 11, 5)
+# 2026-11-08: moved for the reporting-standard records added that day (OWASP CSV injection, LoC PDF/A-4, quarantined
+# ISO 14289-2); the check passed with 0 findings on that date. The other records were not re-read.
+RECONCILED_ON = date(2026, 11, 8)
 
 
 def source(**changes):

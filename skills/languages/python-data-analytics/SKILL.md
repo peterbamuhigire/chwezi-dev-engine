@@ -223,13 +223,15 @@ Analytics results don't live in Python — they return to PHP or become document
 - **JSON back to PHP:** Pydantic models → FastAPI response. Decimal → string (IEEE754 will bite you).
 - **Persist to MySQL:** `df.to_sql(...)` is OK for < 10K rows; beyond that, use `SQLAlchemy Core` with `INSERT ... ON DUPLICATE KEY UPDATE` and chunked inserts.
 - **Feed into document-generation:** pass the DataFrame directly to the skill's Excel/Word/PDF generators. See `python-document-generation`.
+- **Chwezi reports and exports:** figures must come from approved, versioned metric contracts and reconcile across screen, PDF and XLSX from one canonical dataset; exports follow the formula-injection and typed-cell rules. See [`reporting-and-export-engineering`](../../saas/reporting-and-export-engineering/SKILL.md).
 
 ## Pitfalls specific to SaaS analytics
 
 - **Timezone:** store UTC, report in tenant-local. `df["created_at"].dt.tz_convert(tenant_tz)`.
 - **Currency:** if invoices have mixed currencies, convert to a common reporting currency at the tenant's chosen rate (spot vs transaction-date rate — decide and document).
 - **Dates vs datetimes:** trimming to midnight UTC can shift dates by a day in the user's TZ. Always round-trip through the tenant TZ before truncating.
-- **Division by zero in rates:** guard every rate calc (`retention_rate = active / cohort_size if cohort_size else 0`).
+- **Division by zero in rates:** guard every rate calc and return "not comparable", not zero (`retention_rate = active / cohort_size if cohort_size else None`); a change from zero reads "New this period" (RPT-PERIOD-004, RPT-STATE-002).
+- **Units and currencies:** never sum quantities across different units or amounts across currencies; total per unit or convert with the rate, source and time stated (RPT-METRIC-003).
 - **Tenant isolation:** every DataFrame loaded must be filtered by tenant at SQL level. Never filter in Python after loading — you'll paginate the wrong data.
 
 ## Read next

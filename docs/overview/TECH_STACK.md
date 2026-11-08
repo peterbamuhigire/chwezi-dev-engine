@@ -45,7 +45,7 @@ canonical JSON and SHA-256 hashes; no provider SDK or package was added.
 ## Important Commands
 
 ```sh
-find skills 00-meta-initialization -name SKILL.md | wc -l   # active skills; 168 on 2026-11-05
+find skills 00-meta-initialization -name SKILL.md | wc -l   # active skills; 169 on 2026-11-08
 python3 -X utf8 scripts/skill_catalog_guardrails.py --report-only
 python3 -X utf8 scripts/routing_smoke_test.py
 python3 -X utf8 scripts/routing_smoke_test.py --collisions

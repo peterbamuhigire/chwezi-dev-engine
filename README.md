@@ -1,6 +1,6 @@
 # Chwezi Dev Engine
 
-Chwezi Dev Engine is a catalogue of 168 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
+Chwezi Dev Engine is a catalogue of 169 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
 
 It is for software engineers, technical leads, architects, product owners, QA and delivery reviewers, and the consultants of Chwezi Core Systems. Use it through Claude Code, Codex or any agent that can read Markdown, when work should follow a written method and leave evidence a reviewer can check.
 
@@ -13,8 +13,8 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 
 ## At a glance
 
-- **168 active skills** in 18 categories, plus 78 retired names kept as redirects.
-- **166 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
+- **169 active skills** in 18 categories, plus 78 retired names kept as redirects.
+- **167 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
 - **272 tests pass, 3 are skipped and 1 fails** (Windows, Python 3.13, 2026-11-08). The failure is the file-budget test, tripped by ignored local folders. On Linux on 2026-11-05: 273 passed, 3 skipped.
 - **73 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It exits 0 on 2026-11-08; the next record lapses on 2026-11-12 (see [Date-triggered gates](#date-triggered-gates)).
@@ -29,7 +29,7 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
    /plugin install engineering@chwezi-engineering
    ```
 
-2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 168` and exits 0 on the current tree.
+2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 169` and exits 0 on the current tree.
 
    ```sh
    python3 -X utf8 scripts/skill_catalog_guardrails.py
@@ -42,6 +42,7 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 - [At a glance](#at-a-glance)
 - [Start here](#start-here)
 - [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard)
+- [Chwezi Reporting and Dashboards Standard](#chwezi-reporting-and-dashboards-standard)
 - [Capabilities](#capabilities)
 - [Find the right skill](#find-the-right-skill)
 - [How it works](#how-it-works)
@@ -73,9 +74,25 @@ What it governs:
 - **Offline and low-end Android.** Idempotency keys, queued-versus-confirmed states, and Baseline Profiles with Macrobenchmark on a physical baseline device.
 - **Languages and numbering.** Seven default languages, including Spanish and right-to-left Arabic, in the screenshot matrix. Contiguous document numbering is a hard gate wherever a screen issues numbered documents.
 
+## Chwezi Reporting and Dashboards Standard
+
+The reporting companion to the Product Excellence Standard, adopted on 8 November 2026 (version
+1.0.0, owner Peter Bamuhigire, Chwezi Core Systems). It governs every dashboard, KPI tile, register
+with totals, statement, closeout, scheduled report, A4 PDF or print output, CSV or XLSX export and
+written or AI narrative built from product data. This engine carries a complete local copy, so it
+works without any other repository; the visual layer is maintained in `chwezi-design-engine`.
+
+- **Skill:** [`reporting-and-export-engineering`](skills/saas/reporting-and-export-engineering/SKILL.md),
+  with the local [doctrine](skills/saas/reporting-and-export-engineering/references/reporting-standard-doctrine.md)
+  and every `RPT-<AREA>-NNN` rule in [rules and gates](skills/saas/reporting-and-export-engineering/references/rules-and-gates.md).
+- **Eight hard gates** (`RPT-GATE-01` to `RPT-GATE-08`): reconciliation, undefined metric,
+  ambiguous scope, export leak, unsafe spreadsheet, print failure, ungrounded narrative, unknown
+  shown as known. They add to the PX gates; an open or `NOT_ASSESSED` gate blocks release.
+- **Record:** [`docs/updates/2026-11-08-reporting-and-dashboards-standard.md`](docs/updates/2026-11-08-reporting-and-dashboards-standard.md).
+
 ## Capabilities
 
-The engine holds 168 active skills in 18 categories (166 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
+The engine holds 169 active skills in 18 categories (167 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
 
 ### Find the right skill
 
@@ -95,6 +112,7 @@ Use this engine when software work needs a repeatable method and evidence a revi
 | Add retrieval-augmented generation with chunking, embeddings and a vector store | [`ai-rag-patterns`](skills/ai/ai-rag-patterns/SKILL.md) |
 | Add SAML single sign-on and SCIM provisioning for enterprise customers | [`saas-sso-scim-enterprise-auth`](skills/saas/saas-sso-scim-enterprise-auth/SKILL.md) |
 | Charge monthly with proration, trials and dunning for failed cards | [`subscription-billing`](skills/saas/subscription-billing/SKILL.md) |
+| Make a dashboard, its PDF and its XLSX export reconcile from one metric catalogue, with safe exports | [`reporting-and-export-engineering`](skills/saas/reporting-and-export-engineering/SKILL.md) |
 
 Every skill is listed in the [skill catalogue](docs/skill-catalogue.md).
 
@@ -118,7 +136,7 @@ The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`]
 
 ## What is inside
 
-[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 168 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
+[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 169 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
 
 | Category | Folder | Skills |
 |---|---|---:|
@@ -134,13 +152,13 @@ The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`]
 | iOS | [`skills/ios/`](skills/ios/) | 4 |
 | Cross-platform mobile | [`skills/mobile-cross/`](skills/mobile-cross/) | 3 |
 | AI and agent systems | [`skills/ai/`](skills/ai/) | 26 |
-| SaaS platforms | [`skills/saas/`](skills/saas/) | 19 |
+| SaaS platforms | [`skills/saas/`](skills/saas/) | 20 |
 | Product and business | [`skills/product-business/`](skills/product-business/) | 15 |
 | Finance implementation | [`skills/finance-accounting/`](skills/finance-accounting/) | 4 |
 | DevOps and cloud | [`skills/devops-cloud/`](skills/devops-cloud/) | 8 |
 | Game development | [`skills/game-development/`](skills/game-development/) | 25 |
 | GIS | [`skills/gis/`](skills/gis/) | 2 |
-| **Total** | | **168** |
+| **Total** | | **169** |
 
 ### Catalogue size
 
@@ -148,11 +166,11 @@ The active count is a checked surface. `tests/test_engine_control_plane.py` comp
 
 | Measure | Value |
 |---|---:|
-| Active `SKILL.md` files | 168 |
+| Active `SKILL.md` files | 169 |
 | Guardrail maximum | 200 |
 | Inactive `ALIAS.md` redirects | 78 |
-| Skills shipped by the Claude plugin manifest | 166 |
-| Routing fixtures | 242 |
+| Skills shipped by the Claude plugin manifest | 167 |
+| Routing fixtures | 245 |
 
 ### What the skills produce
 
@@ -208,7 +226,7 @@ The repository is its own marketplace: `.claude-plugin/marketplace.json`, market
 /plugin install engineering@chwezi-engineering
 ```
 
-The plugin manifest (`.claude-plugin/plugin.json`) ships the 166 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
+The plugin manifest (`.claude-plugin/plugin.json`) ships the 167 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
 
 ### Codex
 
@@ -330,6 +348,7 @@ Read the validation records before you treat an example as production proof.
 
 ### Changes after the October kaizen (1 to 8 November 2026)
 
+- **Reporting and Dashboards Standard (8 November).** New skill [`reporting-and-export-engineering`](skills/saas/reporting-and-export-engineering/SKILL.md) with a local copy of the standard, and cross-references in `excel-spreadsheets`, `saas-business-metrics`, `ai-analytics`, `python-data-analytics`, the report-print-pdf reference and the product-excellence engineering gates. See [Chwezi Reporting and Dashboards Standard](#chwezi-reporting-and-dashboards-standard).
 - **Product Excellence Standard wiring (8 November).** A binding `AGENTS.md` rule, the engineering-gates reference, mandatory blocks in 14 skills, and rewrites of `kmp-development` and the `android-development` targetSdk 36 rules. No skill was added. See [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard).
 - **House style implementation references (7 November).** [`house-style-compose.md`](skills/android/android-development/references/house-style-compose.md) and [`house-style-web.md`](skills/frontend-ux/tailwind-css/references/house-style-web.md) show how to build the Chwezi business-app house style, whose canonical standard is in `chwezi-design-engine`, including its guardrail tests. Record: [`docs/updates/2026-11-07-house-style-implementation-references.md`](docs/updates/2026-11-07-house-style-implementation-references.md).
 - **Tenant document numbering (5 November, `13e4cc9` and `f9e7a46`).** The new skill [`tenant-document-numbering`](skills/saas/tenant-document-numbering/SKILL.md) sets one contiguous, never-resetting series per tenant and document type for every user-facing number, kept apart from the database id.

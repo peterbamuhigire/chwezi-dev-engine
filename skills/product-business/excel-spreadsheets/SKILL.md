@@ -1,6 +1,6 @@
 ---
 name: excel-spreadsheets
-description: Use when generating or validating professional Excel workbooks, formulas, imports, charts, formatting, macros, or spreadsheet deliverables.
+description: Use when generating or validating professional Excel workbooks, formulas, imports, charts, formatting, macros, or spreadsheet deliverables. For formula-injection safety and reconciled report downloads in an app, use reporting-and-export-engineering.
 metadata:
   portable: true
   compatible_with:
@@ -146,14 +146,14 @@ Last:   Totals row                      ← bold, top border, SUM/AVERAGE via Ta
 
 | Data type | Format code | Example output |
 |---|---|---|
-| Currency (UGX/KES/TZS) | `#,##0` | 1,250,000 |
-| Currency with decimals | `#,##0.00` | 1,250,000.00 |
+| Currency with 0 minor units (UGX, RWF) | `#,##0` | 1,250,000 |
+| Currency with 2 minor units (KES, TZS) | `#,##0.00` | 1,250,000.00 |
 | USD | `"$"#,##0.00` | $1,250.00 |
 | Percentage | `0.00%` | 12.50% |
 | Percentage (whole) | `0%` | 13% |
-| Date (display) | `DD MMM YYYY` | 05 Apr 2026 |
+| Date (display) | `D MMM YYYY` | 5 Apr 2026 |
 | Date (ISO sort) | `YYYY-MM-DD` | 2026-04-05 |
-| Large numbers | `#,##0.0,,"M"` | 1.3M |
+| Large numbers (charts and summary tiles only; never a closing balance, statement total, payment or export data cell) | `#,##0.0,,"M"` | 1.3M |
 | Negative red | `#,##0.00;[Red]-#,##0.00` | -500.00 (red) |
 | Integer | `#,##0` | 42,000 |
 | Duration (hours) | `[h]:mm` | 37:30 |
@@ -272,6 +272,17 @@ Read `references/programmatic-generation.md` for full code patterns per language
 4. Always freeze the header row
 5. Always set a tab colour per sheet for multi-sheet workbooks
 6. Always use a professional table style (TableStyleMedium2 or equivalent)
+7. When the workbook is a report export from an app (user-entered text, tenant data), apply the
+   Chwezi Reporting and Dashboards Standard export rules owned by
+   [`reporting-and-export-engineering`](../../saas/reporting-and-export-engineering/references/export-safety-checklist.md):
+   a text value starting with `=`, `+`, `-`, `@`, tab, carriage return or line feed (or a
+   full-width form of these) is written with the library's explicit string type and never as a
+   formula, with no apostrophe added in XLSX (CSV output gets a single-quote prefix instead);
+   amounts are number cells, never text;
+   identifiers and document numbers are text with leading zeros; data sheets have no merged cells;
+   a metadata sheet carries period, timezone, filters and metric versions; export totals equal the
+   screen totals (RPT-EXPORT-001/002/003/006, RPT-GATE-05). The CSV single-quote rule is
+   Chwezi's choice; OWASP also describes a tab prefix, and the difference is recorded there.
 
 ---
 

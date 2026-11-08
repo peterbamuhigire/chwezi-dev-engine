@@ -47,6 +47,30 @@ work (PX-QA-006).
 | PX-GATE-12 Unverified release | Independent verifier record; human domain reviewer for money or clinical change | Signed review record |
 | PX-GATE-13 Document numbering (where a screen issues numbered documents) | Concurrent-issue test (N parallel issues give N contiguous numbers, no gap or duplicate); offline issue shows a provisional tag and is numbered at server issue; replay with the same idempotency key returns the same number; void keeps the number and delete is refused | Test report against the tenant counter |
 
+## Reporting surfaces: RPT gates
+
+When a screen or output reports figures (dashboard, KPI tile, register with totals, statement,
+daily close, scheduled report, PDF or print, CSV or XLSX export, written or AI narrative), the
+Chwezi Reporting and Dashboards Standard 1.0.0 (adopted 8 Nov 2026) adds eight hard gates to the
+PX gates above. They block release the same way: an applicable gate open or `NOT_ASSESSED` at
+release blocks PASS. This engine carries the standard locally in
+[`reporting-and-export-engineering`](../../../saas/reporting-and-export-engineering/SKILL.md)
+(doctrine and full rule catalogue in its `references/`).
+
+| Gate | Applies when | Engineering check | Also trips |
+|---|---|---|---|
+| RPT-GATE-01 Report does not reconcile | Any figure with a detail list, ledger or export | Reconciliation harness: headline = detail = ledger = PDF = XLSX for positive, zero, negative, reversed and missing-data fixtures | PX-GATE-03 |
+| RPT-GATE-02 Undefined metric | Any headline, exported or scheduled metric | Approved, versioned metric contract; no measure logic in presentation code | PX-GATE-09 |
+| RPT-GATE-03 Ambiguous scope | Every reporting surface and exported page | Context row (period, timezone, tenant or branch, currency, filters); comparable comparison windows | None (reporting-specific) |
+| RPT-GATE-04 Export leak | Download, print, schedule, share link | Lower-role session calls export APIs directly; row and field filters in query and export service | PX-GATE-04, PX-GATE-05 |
+| RPT-GATE-05 Unsafe spreadsheet | Any CSV or XLSX | Injection fixture (`=`, `+`, `-`, `@`, tab, carriage return) and leading-zero identifiers | None (reporting-specific) |
+| RPT-GATE-06 Print failure | Any A4 PDF or print | Dedicated template; repeated headings; totals with labels; page x of y; legibility floor | None (reporting-specific) |
+| RPT-GATE-07 Ungrounded narrative | Any written or AI insight from product figures | Claim-to-evidence table; human approval for consequential text | PX-GATE-09 |
+| RPT-GATE-08 Unknown shown as known | Any surface that can lack data | No data, restricted, stale and failed reconciliation never shown as zero, complete or live; integrity warning not dismissable | PX-GATE-02, PX-GATE-10 |
+
+Reporting states extend the screen state model below with partial data, stale snapshot,
+reconciliation failure, source disconnected, access restricted and export pending (RPT-STATE-001).
+
 ## Screen state model
 
 Every data screen implements the thirteen canonical states of PX-STATE-001. Use the IDs from the

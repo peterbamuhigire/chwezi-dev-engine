@@ -25,11 +25,11 @@ def test_codex_portable_manifest_and_repo_marketplace_are_valid_shapes() -> None
 def test_claude_plugin_skill_paths_match_present_skills() -> None:
     manifest = json.loads((REPO / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
     paths = manifest["skills"]
-    assert len(paths) == 166
+    assert len(paths) == 167
     assert all((REPO / path.removeprefix("./") / "SKILL.md").is_file() for path in paths)
     active = list((REPO / "skills").glob("**/SKILL.md"))
     initialisation = list((REPO / "00-meta-initialization").glob("**/SKILL.md"))
-    assert len(active) == 166
+    assert len(active) == 167
     assert len(initialisation) == 2
 
 
