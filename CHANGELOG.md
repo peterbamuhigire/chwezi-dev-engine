@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-08 - Chwezi Document Reporting and Publishing Standard (renderer side)
+
+- Local copy of the Chwezi Document Reporting and Publishing Standard 1.0.0 (built from the full handbook edition) under `skills/saas/reporting-and-export-engineering/references/document-publishing-standard/`: doctrine, 87 PUB rules and eight gates, archetypes and blueprints, renderer contracts (one canonical model for HTML, print CSS, PDF and DOCX; determinism; metadata hygiene; Word and LibreOffice round trip), agent contract and QA, mathematics and algorithms (modular type scale, measure, optimal page breaking, largest-remainder rounding, exact arithmetic, nice axis ticks, content hashing, perceptual visual regression), currentness register and a worked review; identical to chwezi-design-engine apart from parent lines, the local-copy notice and link targets. The engine works without that repository. Linked from the skill's References.
+
 ## 2026-11-08 - Chwezi Reporting and Dashboards Standard (engineering side)
 
 - New skill `skills/saas/reporting-and-export-engineering`: versioned metric catalogue and one server measure layer, fact and dimension grain with fan-out tests, reconciliation KPI to detail to ledger and screen = PDF = XLSX, report definition registry, immutable generation records, background export jobs, CSV/XLSX formula-injection safety (Chwezi single-quote rule; OWASP tab alternative recorded), A4 print and PDF pipeline with acceptance cases, report authorisation and audit, performance budgets, observability and tenant isolation. Rules cited by ID: RPT-PURPOSE, METRIC, SCOPE, PERIOD, RECON, STATE, VIEW, NARR, SEC, PERF, PRINT, EXPORT, QA; gates RPT-GATE-01..08.

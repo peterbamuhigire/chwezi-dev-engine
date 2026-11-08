@@ -198,6 +198,15 @@ Owner rules that bind every report:
   [print, export and lifecycle](references/print-export-and-lifecycle.md),
   [engineering and verification](references/engineering-and-verification.md) and the
   [currentness register](references/currentness-register.md).
+- Local copy of the Chwezi Document Reporting and Publishing Standard 1.0.0 for renderer work
+  (one canonical model for HTML, print CSS, PDF and DOCX; output parity; DOCX round trip;
+  deterministic, content-hashed outputs; optimal page breaking; largest-remainder rounding):
+  [standard](references/document-publishing-standard/standard.md),
+  [rules and gates](references/document-publishing-standard/rules-and-gates.md),
+  [renderer contracts](references/document-publishing-standard/page-and-render-pipeline.md),
+  [mathematics and algorithms](references/document-publishing-standard/mathematics-and-algorithms.md),
+  [agent contract and QA](references/document-publishing-standard/agent-contract-and-qa.md),
+  [blueprints](references/document-publishing-standard/families-and-blueprints.md).
 
 ## Capability and permission contract
 
