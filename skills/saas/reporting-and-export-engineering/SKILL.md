@@ -216,6 +216,15 @@ Owner rules that bind every report:
   [mathematics and legibility](references/presentation-standard/mathematics-and-legibility.md),
   [agent workflow and QA](references/presentation-standard/agent-workflow-and-qa.md),
   [blueprints](references/presentation-standard/narrative-and-blueprints.md).
+- Local copy of the Chwezi Infographics Design and Production Quality Standard 1.0.0 for generated
+  infographics and report visuals (provenance register, real text at computed sizes, honest
+  encodings, checked diagram structure, accessible SVG, print and phone proofs, eight INFO gates):
+  [standard](references/infographics-standard/standard.md),
+  [rules and gates](references/infographics-standard/rules-and-gates.md),
+  [production and export](references/infographics-standard/production-and-export.md),
+  [mathematics and algorithms](references/infographics-standard/mathematics-and-algorithms.md),
+  [agent workflow and QA](references/infographics-standard/agent-workflow-and-qa.md), and the
+  standard-library [checker](references/infographics-standard/check_infographic.py).
 
 ## Capability and permission contract
 

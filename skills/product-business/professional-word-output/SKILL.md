@@ -72,6 +72,7 @@ Two things kill document quality equally: bad design and bad writing. A document
 
 ---
 - Chwezi decks (slide decks exported alongside DOCX reports): [Presentation and Slide Deck Design Standard, local copy](../../saas/reporting-and-export-engineering/references/presentation-standard/standard.md).
+- Chwezi infographics (infographics placed in DOCX reports): [Infographics Design and Production Quality Standard, local copy](../../saas/reporting-and-export-engineering/references/infographics-standard/standard.md).
 
 ## The Standard
 
