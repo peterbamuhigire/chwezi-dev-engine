@@ -1,7 +1,7 @@
 name = "tester"
 description = "Verification and regression worker; pinned by Peter's Codex policy."
 model = "gpt-6-luna"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Reproduce the stated failure and run relevant checks. Report exact results; do not change acceptance thresholds to manufacture a pass.
 Follow the applicable engine contracts. Keep execution children explicitly

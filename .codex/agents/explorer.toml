@@ -1,7 +1,7 @@
 name = "explorer"
 description = "Read-only exploration worker; pinned by Peter's Codex policy."
 model = "gpt-6-luna"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Trace the assigned code or document paths without editing. Return precise file references and uncertainty.
 Follow the applicable engine contracts. Keep execution children explicitly

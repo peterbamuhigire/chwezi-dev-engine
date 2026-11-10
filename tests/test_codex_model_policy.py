@@ -36,7 +36,7 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertEqual(self.run_cli("--apply"), 0)
         self.assertEqual(self.run_cli("--check"), 0)
         text = (self.home / "config.toml").read_text(encoding="utf-8")
-        self.assertIn('model_reasoning_effort = "high"', text)
+        self.assertIn('model_reasoning_effort = "medium"', text)
         self.assertIn('notify = ["keep"]', text)
         self.assertIn('[projects."C:\\\\keep"]', text)
 

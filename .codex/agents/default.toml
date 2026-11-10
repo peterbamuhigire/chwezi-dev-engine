@@ -1,7 +1,7 @@
 name = "default"
 description = "Default bounded execution agent; pinned by Peter's Codex policy."
 model = "gpt-6-luna"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Execute the assigned task and return changed files, checks and gaps.
 Follow the applicable engine contracts. Keep execution children explicitly

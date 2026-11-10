@@ -1,5 +1,16 @@
 # Agent Guide
 
+<!-- MODEL-ROUTING-BLOCK v2 2026-11-10 -->
+## Model classes and token discipline (Claude Code, Codex and any runner; mandatory)
+Name a class here, never a model version. The owner's routing file maps classes to current models (Knowledge Bank, Development, Anthropic Models: `model-routing.json`; handoff AM-01), so a model upgrade needs no edit in this repository.
+- **Classes:** **M Mundane** (fastest and cheapest; mechanical work with a clear right answer); **N Normal** (default; executes an approved plan); **X Expert** (strongest standard class; plans, judges, hard debugging, final review); **S Special occasion** (premium class above X; rare; only through the seven-test gate, AM-01 s5, including approved billing). A new model is classified by relative price and vendor positioning (AM-01 s1.1). With no S class available, X is the ceiling.
+- **Escalate one class, on a trigger only:** two failed acceptance checks; an undecidable choice; unreviewed money, tenant, security or legal work. Drop back after the hard step.
+- **Tokens, both runners:** start-up files at most 8,000 tokens and `AGENTS.md` at most 32 KiB (Codex stops at its byte cap); one task per session, clear or new thread between tasks, compact near 80%; plan to a file, execute in a fresh session (resume a plan from its small `RESUME.md` only); read the router section then one `SKILL.md`, search instead of loading; consult only the engine whose domain matches the task; subagents and tools return summaries, cap tool output (`tool_output_token_limit`), disable unused MCP tools; stable prefix first, no instruction edits mid-session; parallel agents only with a written budget; non-interactive runs for bulk (Batch API only with an approved API budget); effort medium by default, high needs a reason, the maximum needs approval.
+- **Class S case for this repository (E-02, AM-02):** none; class X at high effort handles consolidation and standards. Everything else: X plans, N executes, M for mechanical work.
+- **Monthly Kaizen, first step:** Anthropic currency check (AM-01 s8) and the token-budget lint; record `Anthropic currency check YYYY-MM-DD: no change|changed`.
+<!-- /MODEL-ROUTING-BLOCK -->
+
+
 ## Codex-only model setup and Kaizen review
 
 Apply this section only when the active runner is Codex. Claude and other
@@ -12,7 +23,7 @@ If it reports configuration drift, Peter authorises the bounded
 `--runtime codex --apply` repair, followed by `--check`. The helper backs up
 changes and preserves unrelated settings. If Python or configuration access is
 unavailable, report the limitation; do not replace the user's config wholesale.
-Read `.codex/model-policy.md` for the full contract. Use Luna (`gpt-6-luna`) with high reasoning by
+Read `.codex/model-policy.md` for the full contract. Use Luna (`gpt-6-luna`) with medium reasoning by
 default for orchestration, research, audit, review, and implementation. Use Astra (`gpt-6-astra`) only when
 Peter explicitly selects it for the task; never select or fall back to GPT-5.6. Report unavailable required GPT-6
 models. A running session may need restarting for root settings to apply.
@@ -232,7 +243,7 @@ the task needs the complete manifest inventory, the verified explicit
 invocation is:
 
 ```sh
-codex -m gpt-6-luna -c model_reasoning_effort="high" -c skills.max_context_tokens=10000 debug prompt-input
+codex -m gpt-6-luna -c model_reasoning_effort="medium" -c skills.max_context_tokens=10000 debug prompt-input
 ```
 
 This is an invocation-level setting only; do not mutate user configuration

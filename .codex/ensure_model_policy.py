@@ -52,8 +52,8 @@ def load_policy(root: Path) -> tuple[dict, str, dict[str, bytes]]:
     if any(policy.get(key) != "gpt-6-luna" for key in ("root_model", "review_model", "execution_model")):
         raise PolicyError("the Codex default model policy must pin root, review, and execution to gpt-6-luna")
     effort = policy.get("reasoning_effort")
-    if effort != "high":
-        raise PolicyError("the Codex default reasoning_effort must be high")
+    if effort != "medium":
+        raise PolicyError("the Codex default reasoning_effort must be medium (high needs a recorded reason)")
     roles = policy.get("roles")
     if not isinstance(roles, list) or roles != ["default", "worker", "explorer", "tester", "researcher", "reviewer"]:
         raise PolicyError("policy roles must be the six supported roles in order")
