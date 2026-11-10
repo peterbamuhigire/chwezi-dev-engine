@@ -162,7 +162,7 @@ measure the assembled runtime metadata budget.
 
 Known baseline as of 2026-10-31 (verify with the script; do not trust this prose):
 
-- Active `SKILL.md` files: 169. (`tenant-document-numbering` was added on 2026-11-05;
+- Active `SKILL.md` files: 170. (`tenant-document-numbering` was added on 2026-11-05;
   `reporting-and-export-engineering` on 2026-11-08.)
 - Target active catalog size: 150-180 (upper bound raised from 170 to 180 by Peter Bamuhigire,
   Lead Consultant, on 2026-09-24). The 2026-09-24 consolidation merged 18 overlapping skills into

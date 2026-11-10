@@ -1,6 +1,6 @@
 # Chwezi Dev Engine
 
-Chwezi Dev Engine is a catalogue of 169 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
+Chwezi Dev Engine is a catalogue of 170 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
 
 It is for software engineers, technical leads, architects, product owners, QA and delivery reviewers, and the consultants of Chwezi Core Systems. Use it through Claude Code, Codex or any agent that can read Markdown, when work should follow a written method and leave evidence a reviewer can check.
 
@@ -13,8 +13,8 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 
 ## At a glance
 
-- **169 active skills** in 18 categories, plus 78 retired names kept as redirects.
-- **167 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
+- **170 active skills** in 18 categories, plus 78 retired names kept as redirects.
+- **168 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
 - **272 tests pass, 3 are skipped and 1 fails** (Windows, Python 3.13, 2026-11-08). The failure is the file-budget test, tripped by ignored local folders. On Linux on 2026-11-05: 273 passed, 3 skipped.
 - **73 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It exits 0 on 2026-11-08; the next record lapses on 2026-11-12 (see [Date-triggered gates](#date-triggered-gates)).
@@ -29,7 +29,7 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
    /plugin install engineering@chwezi-engineering
    ```
 
-2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 169` and exits 0 on the current tree.
+2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 170` and exits 0 on the current tree.
 
    ```sh
    python3 -X utf8 scripts/skill_catalog_guardrails.py
@@ -92,7 +92,7 @@ works without any other repository; the visual layer is maintained in `chwezi-de
 
 ## Capabilities
 
-The engine holds 169 active skills in 18 categories (167 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
+The engine holds 170 active skills in 18 categories (168 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
 
 ### Find the right skill
 
@@ -136,7 +136,7 @@ The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`]
 
 ## What is inside
 
-[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 169 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
+[`SKILL.md`](SKILL.md) at the root is the router and is not counted. The 170 active skills sit in 18 categories. The [skill catalogue](docs/skill-catalogue.md) lists each skill with a one-line description. The 78 inactive `ALIAS.md` redirects are excluded.
 
 | Category | Folder | Skills |
 |---|---|---:|
@@ -152,13 +152,13 @@ The file model and the policy behind it are in [`docs/overview/ARCHITECTURE.md`]
 | iOS | [`skills/ios/`](skills/ios/) | 4 |
 | Cross-platform mobile | [`skills/mobile-cross/`](skills/mobile-cross/) | 3 |
 | AI and agent systems | [`skills/ai/`](skills/ai/) | 26 |
-| SaaS platforms | [`skills/saas/`](skills/saas/) | 20 |
+| SaaS platforms | [`skills/saas/`](skills/saas/) | 21 |
 | Product and business | [`skills/product-business/`](skills/product-business/) | 15 |
 | Finance implementation | [`skills/finance-accounting/`](skills/finance-accounting/) | 4 |
 | DevOps and cloud | [`skills/devops-cloud/`](skills/devops-cloud/) | 8 |
 | Game development | [`skills/game-development/`](skills/game-development/) | 25 |
 | GIS | [`skills/gis/`](skills/gis/) | 2 |
-| **Total** | | **169** |
+| **Total** | | **170** |
 
 ### Catalogue size
 
@@ -166,10 +166,10 @@ The active count is a checked surface. `tests/test_engine_control_plane.py` comp
 
 | Measure | Value |
 |---|---:|
-| Active `SKILL.md` files | 169 |
+| Active `SKILL.md` files | 170 |
 | Guardrail maximum | 200 |
 | Inactive `ALIAS.md` redirects | 78 |
-| Skills shipped by the Claude plugin manifest | 167 |
+| Skills shipped by the Claude plugin manifest | 168 |
 | Routing fixtures | 245 |
 
 ### What the skills produce
@@ -226,7 +226,7 @@ The repository is its own marketplace: `.claude-plugin/marketplace.json`, market
 /plugin install engineering@chwezi-engineering
 ```
 
-The plugin manifest (`.claude-plugin/plugin.json`) ships the 167 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
+The plugin manifest (`.claude-plugin/plugin.json`) ships the 168 skills under `skills/`, plus `agents/`, `hooks/` and `rules/`. The two project-initialisation skills in `00-meta-initialization/` are read from a clone.
 
 ### Codex
 

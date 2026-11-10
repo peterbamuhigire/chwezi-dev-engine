@@ -68,6 +68,17 @@ fixtures:
         owner: database-design-engineering
   - task: "Review a diff that deletes issued credit notes and numbers journal entries per year instead of one never-reset series per tenant"
     expect: tenant-document-numbering
+  - task: "Design the HR module of our ERP: positions separate from employees with effective dating, contract classes, leave, payroll inputs and an audit trail"
+    expect: hr-module-design
+    negatives:
+      - task: "Build balanced double-entry journals and ledger accounts for gross pay, deductions and net pay clearing"
+        owner: accounting-engine
+      - task: "Let a tenant export all their data and handle an erasure request"
+        owner: saas-tenant-data-portability-and-erasure
+  - task: "Map a client's organisation chart, job families, levels and pay grades into the employee master with disciplinary and medical records behind separate permissions"
+    expect: hr-module-design
+  - task: "Plan a payroll-first HRIS go-live with a parallel run and parameterised statutory rates that are never hard-coded"
+    expect: hr-module-design
   - task: "Make the dashboard sales figure, the daily close PDF and the XLSX export reconcile from one metric catalogue with versioned metric contracts and ledger reconciliation"
     expect: reporting-and-export-engineering
     negatives:

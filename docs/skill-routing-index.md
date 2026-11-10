@@ -24,7 +24,7 @@ Current guardrail baseline (the test suite checks the active and alias counts ag
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 169 |
+| Active `SKILL.md` files | 170 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 78 |
@@ -194,6 +194,7 @@ concurrency, tenant, reconciliation, recovery and owner-sign-off evidence.
 | Mobile operations | `mobile-platform-operations` | `mobile-custom-icons`, `mobile-rbac`, `mobile-saas-planning`, `google-play-store-review`, `ios-quality-and-release`, Apple TestFlight/Xcode Cloud operations |
 | SaaS managed visual assets | `saas-managed-visual-assets` | Authentication background pools, light/dark logos, favicons, secure admin lifecycle, fallback, and audit |
 | Full-coverage SaaS seeding | `full-coverage-saas-seeding` | Synthetic tenant demonstrations, phased application-boundary journeys, schema-compatibility gates, controlled reference/configuration exceptions, temporal refresh, replay, reset, isolation, reconciliation, and evidence |
+| HR module design | `hr-module-design` | HR system and ERP HR module design: positions versus people, effective dating, job families and levels, contract classes (employee, part-time, consultant), leave-time-payroll chain, parameterised Uganda statutory rates (never hard-coded), recruitment to exit workflows, appraisal, disciplinary and medical access, personal-data controls, audit trail, payroll-first go-live |
 | Tenant document numbering | `tenant-document-numbering` | Contiguous per-tenant invoice, receipt, credit-note, order, purchase-order, stock, money, journal and payroll numbers; counter allocator, issue-time numbering, clash handling, idempotency, offline provisional tags, capacity, retrofit rollout, CI ratchet and gap report |
 | Reporting and exports | `reporting-and-export-engineering` | Chwezi Reporting and Dashboards Standard 1.0.0 (local copy, RPT-GATE-01..08): versioned metric catalogue, semantic measure layer, reconciliation KPI to detail to ledger and screen = PDF = XLSX, report registry, immutable generation records, background export jobs, CSV/XLSX formula-injection safety, A4 print and PDF pipeline, report authorisation and audit, performance budgets, observability |
 | SaaS seeder and demo sign-in | `saas-seeder` | Seeder template bootstrap, super admin, recurring demo activity, and the demo one-click login standard (profile buttons only on demo hosts, same RBAC, no password in code, pages, docs or commits) |

@@ -216,6 +216,7 @@ Jump to a category:
 | [`modular-saas-architecture`](../skills/saas/modular-saas-architecture/SKILL.md) | Designs tenant-selectable SaaS modules with dependency contracts and safe toggles. |
 | [`multi-tenant-saas-architecture`](../skills/saas/multi-tenant-saas-architecture/SKILL.md) | Designs tenant isolation, panel boundaries, zero-trust authorisation and audit trails. |
 | [`reporting-and-export-engineering`](../skills/saas/reporting-and-export-engineering/SKILL.md) | Builds reports, dashboards and exports that reconcile, stay in scope, print properly on A4 and export safely, to the Chwezi Reporting and Dashboards Standard. |
+| [`hr-module-design`](../skills/saas/hr-module-design/SKILL.md) | Designs HR systems and ERP HR modules: positions versus people, effective dating, contract classes, parameterised statutory rates, workflows, access and audit. |
 | [`saas-accounting-system`](../skills/saas/saas-accounting-system/SKILL.md) | Designs double-entry accounting inside SaaS with automated postings and reconciliations. |
 | [`saas-admin-backoffice-tooling`](../skills/saas/saas-admin-backoffice-tooling/SKILL.md) | Designs audited back-office impersonation, tenant lifecycle and billing overrides. |
 | [`saas-architecture-strategy`](../skills/saas/saas-architecture-strategy/SKILL.md) | Chooses multi-tenant patterns, deployment mapping, scaling and blast-radius isolation. |
