@@ -316,3 +316,7 @@ above are not installation requirements.
 | Release evidence | Verification results and unresolved prerequisites | Markdown | Failed or unavailable checks remain visible with their release consequence |
 
 <!-- dual-compat-end -->
+
+## Unattended execution handoff
+
+For an owner-authorised unattended development plan, use the project-local `auto-agents/README.md` and `auto-agents/config.json`. Keep the plan and authority explicit, provide project-specific verification commands, and preserve a durable handoff. Publishing, remote, branch, runner and limits are configured per project. Treat the worktree as checkout isolation, not a sandbox; preserve host permissions and security controls. Failed or unavailable checks are never passes. Verify the actual driver version and runtime before relying on it.

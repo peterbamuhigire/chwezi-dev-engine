@@ -1,3 +1,7 @@
+## Unattended development
+
+For an owner-authorised long-running development plan, use `auto-agents/README.md` and `auto-agents/config.json`. Prepare a committed, scoped plan and project-specific verification commands first. Respect existing runtime permissions, project controls, data boundaries and publication settings. Do not run this and `scripts/autorun` concurrently on shared resources.
+
 # Agent Guide
 
 <!-- MODEL-ROUTING-BLOCK v2 2026-11-10 -->

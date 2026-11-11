@@ -1,0 +1,17 @@
+{
+  "runner": "codex",
+  "runner_args": [],
+  "login_mode": "plan",
+  "plan": "auto-agents/PLAN.md",
+  "verify": [],
+  "session_timeout_seconds": 10800,
+  "max_hours": 24,
+  "max_sessions": 1000,
+  "publish": false,
+  "remote": "origin",
+  "target_branch": "main",
+  "max_rate_retries": 3,
+  "initial_backoff_seconds": 60,
+  "max_backoff_seconds": 3600,
+  "max_gate_failures": 3
+}
