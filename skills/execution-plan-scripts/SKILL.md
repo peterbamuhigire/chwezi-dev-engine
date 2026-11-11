@@ -324,4 +324,8 @@ For an owner-authorised unattended development plan, use the project-local `auto
 
 ### Propagate tool upgrades
 
-When this engine changes `auto-agents`, update the canonical copy in `skills-engine-agents` first, regenerate its manifest, run its tests, then discover and update the installed project and engine copies with its managed `propagate.py --apply` workflow. Preserve each copy?s config, plan and local edits; report blocked or missing targets. Batch necessary host plugin-cache refreshes at the end of the change; preserve hook trust checks and report any required review. See `auto-agents/README.md`.
+When this engine changes `auto-agents`, update the canonical copy in `skills-engine-agents` first, regenerate its manifest, run its tests, then discover and update the installed project and engine copies with its managed `propagate.py --apply` workflow. Preserve each copy’s config, plan and local edits; report blocked or missing targets. Batch necessary host plugin-cache refreshes at the end of the change; preserve hook trust checks and report any required review. See `auto-agents/README.md`.
+
+### Durable execution plan and verification
+
+Use the project-owned plan to record the outcome, scope and authority, relevant source-of-truth decisions, observable acceptance examples, ordered slices and dependencies, and a short recovery handoff. `auto-agents/PLAN-TEMPLATE.md` is optional; adapt it to the task rather than filling it mechanically. Configure meaningful project checks before running, and treat each failed, unavailable or unrun check as such. A fresh session resumes from the durable plan and evidence; verify the actual resulting revision independently before any configured publication. Continue independent authorised work without routine confirmation pauses. Apply a second review to the real changes and correct material findings.

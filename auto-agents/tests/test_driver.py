@@ -77,6 +77,27 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(self.d.run(self.cfg,self.base),0)
         self.assertEqual(json.loads((self.base/'status.json').read_text())['state'],'done')
         self.assertIn('rate_wait',(self.base/'events.jsonl').read_text())
+    def test_verification_must_not_commit_a_different_revision(self):
+        remote=self.root.parent/'remote.git'
+        subprocess.run(['git','init','--bare','-q',str(remote)],check=True)
+        git(self.root,'remote','add','origin',str(remote))
+        self.cfg.update(publish=True,target_branch='delivery')
+        self.cfg['verify']=[[sys.executable,'-c',
+            "from pathlib import Path; import subprocess; Path('extra.txt').write_text('unexpected'); subprocess.run(['git','add','extra.txt'],check=True); subprocess.run(['git','commit','-qm','gate mutation'],check=True)"]]
+        self.assertEqual(self.d.run(self.cfg,self.base),2)
+        self.assertIn('verification changed HEAD',json.loads((self.base/'status.json').read_text())['reason'])
+        self.assertNotIn('published',(self.base/'events.jsonl').read_text())
+        self.assertNotEqual(subprocess.run(['git','show-ref','--verify','--quiet','refs/heads/delivery'],cwd=remote).returncode,0)
+    def test_verification_must_not_switch_branch(self):
+        self.cfg['verify']=[[sys.executable,'-c',"import subprocess; subprocess.run(['git','switch','-c','changed'],check=True)"]]
+        self.assertEqual(self.d.run(self.cfg,self.base),2)
+        self.assertIn('verification changed HEAD or branch',json.loads((self.base/'status.json').read_text())['reason'])
+    def test_nonfinite_limits_rejected(self):
+        self.d.CFG=self.root/'auto-agents'/'config.json'
+        for key in ('max_hours','session_timeout_seconds','initial_backoff_seconds'):
+            bad=dict(self.cfg); bad[key]=float('nan')
+            self.d.CFG.write_text(json.dumps(bad),encoding='utf8')
+            with self.assertRaises(self.d.Stop): self.d.config()
     def test_empty_verify_rejected(self):
         self.cfg['verify']=[]; self.d.CFG=self.root/'auto-agents'/'config.json'
         self.d.CFG.write_text(json.dumps(self.cfg),encoding='utf8')

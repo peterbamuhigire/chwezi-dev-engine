@@ -3,6 +3,7 @@
 import argparse
 import datetime as dt
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -39,10 +40,10 @@ def config():
     if type(d.get('max_rate_retries',3)) is not int or d.get('max_rate_retries',3)<0: raise Stop('max_rate_retries must be a nonnegative integer')
     if type(d.get('max_gate_failures',3)) is not int or d.get('max_gate_failures',3)<1: raise Stop('max_gate_failures must be a positive integer')
     for k in ('initial_backoff_seconds','max_backoff_seconds'):
-        if type(d.get(k,1)) not in (int,float) or d.get(k,1)<=0: raise Stop(k+' must be positive')
+        if type(d.get(k,1)) not in (int,float) or not math.isfinite(d.get(k,1)) or d.get(k,1)<=0: raise Stop(k+' must be finite and positive')
     if type(d['publish']) is not bool: raise Stop('publish must be true or false')
     for k in ('session_timeout_seconds','max_hours','max_sessions'):
-        if type(d[k]) not in (int,float) or d[k] <= 0: raise Stop(k + ' must be positive')
+        if type(d[k]) not in (int,float) or not math.isfinite(d[k]) or d[k] <= 0: raise Stop(k + ' must be finite and positive')
     if type(d['max_sessions']) is not int: raise Stop('max_sessions must be an integer')
     if not isinstance(d['remote'],str) or not d['remote'] or d['remote'].startswith('-'): raise Stop('invalid remote')
     if not isinstance(d['target_branch'],str) or not d['target_branch'] or d['target_branch'].startswith('-'): raise Stop('invalid target branch')
@@ -179,6 +180,8 @@ def run(cfg, base):
             rate_retries=0
             if git(worktree,'status','--porcelain'): update('blocked','agent left uncommitted changes'); break
             after=git(worktree,'rev-parse','HEAD')
+            if git(worktree,'branch','--show-current') != branch:
+                update('blocked','agent changed the driver branch'); break
             if before==after: update('blocked','agent made no commit'); break
             if call(['git','merge-base','--is-ancestor',before,after],worktree).returncode: update('blocked','agent rewrote branch history'); break
             failures=pending.get('failures',0) if pending else 0
@@ -194,6 +197,10 @@ def run(cfg, base):
                     update('blocked','verification could not complete: '+str(e)); ok=False; break
                 (base/(runid+'-'+str(session)+'-verify-'+str(idx)+'.log')).write_text(result.stdout or '',encoding='utf-8')
                 log_event('verification',session=session,index=idx,exit=result.returncode)
+                if git(worktree,'rev-parse','HEAD') != after or git(worktree,'branch','--show-current') != branch:
+                    update('blocked','verification changed HEAD or branch; inspect worktree before resuming')
+                    log_event('verification_changed_revision',session=session,index=idx)
+                    ok=False; break
                 if result.returncode:
                     failures+=1
                     write_json(pending_path,{'head':after,'failures':failures,'feedback':(result.stdout or '')[-1500:]})
@@ -206,7 +213,7 @@ def run(cfg, base):
             if cfg['publish']:
                 update('publishing')
                 # No force, no implicit merge or rebase. Git rejects non-fast-forward updates.
-                p=call(['git','push',cfg['remote'],'HEAD:refs/heads/'+cfg['target_branch']],worktree,timeout=min(120,max(1,cfg['max_hours']*3600-(time.monotonic()-started))))
+                p=call(['git','push',cfg['remote'],after+':refs/heads/'+cfg['target_branch']],worktree,timeout=min(120,max(1,cfg['max_hours']*3600-(time.monotonic()-started))))
                 if p.returncode: update('blocked','push failed: '+p.stdout[-1000:]); log_event('push_failed',session=session); break
                 log_event('published',session=session,head=after,target=cfg['target_branch'])
             write_json(checkpoint,{'head':after})
