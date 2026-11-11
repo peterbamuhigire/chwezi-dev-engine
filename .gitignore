@@ -6,3 +6,8 @@ __pycache__/
 
 # Local Claude Code settings (machine-specific; never publish)
 .claude/settings.local.json
+
+# Local operating-system metadata
+.DS_Store
+Thumbs.db
+desktop.ini
