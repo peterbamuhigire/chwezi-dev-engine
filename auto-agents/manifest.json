@@ -1,0 +1,14 @@
+{
+  "version": "1.1.3",
+  "hash_mode": "sha256-text-lf-v1",
+  "files": {
+    "EVIDENCE.md": "2b0286227914cb9957c577b864a690247865b026ebcfba6e4a2744d18b21b7cc",
+    "README.md": "a96721ee1cd31ce45619f285e016f09b4d0a54886142e4a86c93483b534c8fcf",
+    "driver.py": "9d8683d797e39873e1811a46e1aeb200f3a97cb6907cc85797665489ebed2ae3",
+    "propagate.py": "612213c34e95995f7682315d3947d8aaaf8b08cb84650635e71e286fac244d40",
+    "release.py": "5b53c7c22e431791aecfd8588bcf64f7c05f5efc4fbf22381bf0318bb3b60a01",
+    "tests/test_driver.py": "bdb18be2338da2976b93e378803cd237bceb08bcb089724777ad8a6e7f47df5c",
+    "tests/test_upgrade.py": "9893c7fae15915b7eca3a38f942c392226af559eb0ca5c9fbefae264e09d0f30",
+    "upgrade.py": "21eb0d9e61ad8b1510f2bb91952ef8b9229bed8121c24e0fd1c10ec52000a719"
+  }
+}

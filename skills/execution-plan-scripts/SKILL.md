@@ -320,3 +320,8 @@ above are not installation requirements.
 ## Unattended execution handoff
 
 For an owner-authorised unattended development plan, use the project-local `auto-agents/README.md` and `auto-agents/config.json`. Keep the plan and authority explicit, provide project-specific verification commands, and preserve a durable handoff. Publishing, remote, branch, runner and limits are configured per project. Treat the worktree as checkout isolation, not a sandbox; preserve host permissions and security controls. Failed or unavailable checks are never passes. Verify the actual driver version and runtime before relying on it.
+
+
+### Propagate tool upgrades
+
+When this engine changes `auto-agents`, update the canonical copy in `skills-engine-agents` first, regenerate its manifest, run its tests, then discover and update the installed project and engine copies with its managed `propagate.py --apply` workflow. Preserve each copy?s config, plan and local edits; report blocked or missing targets. Batch necessary host plugin-cache refreshes at the end of the change; preserve hook trust checks and report any required review. See `auto-agents/README.md`.

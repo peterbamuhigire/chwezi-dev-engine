@@ -1,5 +1,7 @@
 ## Unattended development
 
+When this engine changes `auto-agents`, update the canonical copy in `skills-engine-agents` first, regenerate its manifest, run its tests, then discover and update the installed project and engine copies with its managed `propagate.py --apply` workflow. Preserve each copy?s config, plan and local edits; report blocked or missing targets. Batch necessary host plugin-cache refreshes at the end of the change; preserve hook trust checks and report any required review. See `auto-agents/README.md`.
+
 For an owner-authorised long-running development plan, use `auto-agents/README.md` and `auto-agents/config.json`. Prepare a committed, scoped plan and project-specific verification commands first. Respect existing runtime permissions, project controls, data boundaries and publication settings. Do not run this and `scripts/autorun` concurrently on shared resources.
 
 # Agent Guide

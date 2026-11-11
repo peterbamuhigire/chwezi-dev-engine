@@ -18,3 +18,7 @@ Second-review findings and disposition:
 5. Completion, failure, stop, lock, rate-limit retry, gate failure/restart/repair and publication to a disposable local remote were exercised by deterministic tests. Production safety, process-tree termination, real login/quota recovery, multi-hour runtime, cross-process resource isolation and application-level test coverage remain NOT_ASSESSED.
 
 Measure for a future supervised pilot: completed slices, failed checks, blocked runs, unverified commits and independently reviewed regressions per run. The EWMA idea in the supplied pattern is a candidate; retry backoff is implemented but has no measured live-run benefit. Do not claim speed or safety improvements without a comparable baseline.
+
+## Managed update review (2026-11-11)
+
+A versioned manifest and managed updater preserve project configuration and plans, reject changed managed files and occupied new paths, and share the driver lock. An interrupted update retains a journal and requires inspection. A second pass found that raw hashes drift under Git CRLF conversion; the manifest now records its hash mode and normalises supported text line endings, while accepting the previous raw mode for migration. Tests cover modified targets, new-file collisions, removals, interrupted journals, locks and Git checkout behavior. Hashes detect accidental drift and do not authenticate a source. Process-crash atomicity across all files, adversarial concurrent writes and live-agent deployment remain NOT_ASSESSED.
