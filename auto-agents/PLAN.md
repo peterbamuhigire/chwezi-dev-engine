@@ -1,15 +1,7 @@
-# Plan template
+STATUS: BLOCKED - Select an owner-authorised engine Kaizen plan before starting.
 
-Replace this template with the owner-approved work before running the driver. Commit it.
+Set `plan` in `config.json` to the committed `docs/plans/` plan you intend to execute.
+Use `PLAN-TEMPLATE.md` for the task, acceptance and recovery contract. This setup marker is not an implementation plan.
 
-## Goal and scope
-
-## Authorised actions and boundaries
-
-## Dependency-ordered slices and acceptance checks
-
-- [ ] Define a concrete first slice and its acceptance checks.
-
-## Current handoff
-
-Next slice, files to inspect, completed evidence, failures and remaining decisions.
+The configured engine profile permits local source edits and disposable tests only.
+Publication, deployment, installed plugin changes, real data and external effects are not included.

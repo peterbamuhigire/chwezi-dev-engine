@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-15 - Resumable plan execution and specialist evidence
+
+- Improved execution-plan-scripts, ai-assisted-development, coding-agent-optimization and implementation-status-auditor: stable task contracts, capability checks, revision-bound evidence, recovery and compact handoffs. Moved detailed prompt examples into an on-demand reference; removed arbitrary task/fan-out quotas and routine phase confirmation pauses.
+- Installed the reviewed shared auto-agents release with detached gate supervision, durable reconciliation, bounded quota waits, descriptive watch, optional JSON task contracts and PowerShell/CMD launchers. The engine profile includes baseline gates and a blocked setup plan; select and commit an authorised plan before running. See `auto-agents/ENGINE.md` and `auto-agents/EVIDENCE.md` for setup and the distinction between tested behavior and unassessed host recovery.
+- Retained owner-selected Codex models after dated official/runtime currentness review; Claude keeps its own model configuration. No startup task, production plan or publication was activated.
+
 ## 2026-11-08 - Chwezi Infographics Design and Production Quality Standard (generation side)
 
 - Re-synced the copy after the design-bible wave: INFO-CHART-006 (maps: sourced current boundaries, legend, scale, rates not raw counts, projection) and its Web Mercator area factor; 83 INFO rules.

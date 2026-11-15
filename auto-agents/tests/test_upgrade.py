@@ -52,8 +52,15 @@ class UpgradeTests(unittest.TestCase):
         lock.unlink(); (self.old/'update-in-progress.json').write_text('{}')
         with self.assertRaises(u.UpgradeError):u.upgrade(self.new,self.old,True)
     def test_manifest_cannot_own_configuration_or_escape(self):
-        for name in ('config.json','PLAN.md','../escape','C:/outside','a\\b','bad\x00path'):
+        for name in ('config.json','PLAN.md','ENGINE.md','../escape','C:/outside','a\\b','bad\x00path'):
             self.assertFalse(u.safe_name(name))
+    def test_windows_launchers_ignore_checkout_line_endings(self):
+        for extension in ('.cmd', '.bat'):
+            file=self.old/('run'+extension)
+            file.write_bytes(b'@echo off\nexit /b 0\n')
+            expected=u.digest(file)
+            file.write_bytes(b'@echo off\r\nexit /b 0\r\n')
+            self.assertEqual(u.digest(file),expected)
     def test_git_line_endings_do_not_look_like_a_local_edit(self):
         (self.old/'driver.py').write_bytes(b'old\r\nline\r\n')
         manifest=json.loads((self.old/'manifest.json').read_text())

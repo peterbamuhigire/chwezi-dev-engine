@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 
 DRIVER = Path(__file__).resolve().parents[1] / 'driver.py'
@@ -28,7 +29,20 @@ class DriverTests(unittest.TestCase):
         self.fake.write_text('''import pathlib,subprocess,sys\nsys.stdin.read()\np=pathlib.Path("auto-agents/PLAN.md")\np.write_text("STATUS: DONE\\n",encoding="utf8")\nsubprocess.run(["git","add",str(p)],check=True)\nsubprocess.run(["git","commit","-qm","finish slice"],check=True)\n''',encoding='utf8')
         self.d.agent_command=lambda cfg:[sys.executable,str(self.fake)]
         self.cfg={'runner':'codex','plan':'auto-agents/PLAN.md','verify':[[sys.executable,'-c','pass']],'session_timeout_seconds':20,'max_hours':1,'max_sessions':2,'publish':False,'remote':'origin','target_branch':'main'}
-    def tearDown(self): self.tmp.cleanup()
+    def tearDown(self):
+        # A failed assertion must not leave a disposable supervisor running while
+        # TemporaryDirectory removes its files. Never start prepared jobs here.
+        import durable
+        jobs=self.base/'jobs'
+        if jobs.exists():
+            assert jobs.resolve().is_relative_to(Path(self.tmp.name).resolve())
+            for job in jobs.iterdir():
+                if job.is_dir() and durable.held(job/'job.mutex'):
+                    (job/'CANCEL').touch()
+                    until=time.monotonic()+10
+                    while durable.held(job/'job.mutex') and time.monotonic()<until:
+                        time.sleep(.05)
+        self.tmp.cleanup()
     def test_accepts_committed_slice_and_completes(self):
         self.assertEqual(self.d.run(self.cfg,self.base),0)
         self.assertEqual(json.loads((self.base/'status.json').read_text())['state'],'done')
@@ -73,7 +87,7 @@ class DriverTests(unittest.TestCase):
     def test_rate_limit_retries_without_changes(self):
         marker=self.root.parent/'attempted'
         self.fake.write_text('''import pathlib,subprocess,sys\nsys.stdin.read()\nm=pathlib.Path(%r)\nif not m.exists():\n m.write_text('once')\n print('usage limit')\n sys.exit(1)\np=pathlib.Path('auto-agents/PLAN.md')\np.write_text('STATUS: DONE\\n',encoding='utf8')\nsubprocess.run(['git','add',str(p)],check=True)\nsubprocess.run(['git','commit','-qm','finish'],check=True)\n''' % str(marker),encoding='utf8')
-        self.cfg.update(max_sessions=3,initial_backoff_seconds=0.01,max_backoff_seconds=0.01,max_rate_retries=2)
+        self.cfg.update(max_sessions=3,initial_backoff_seconds=0.01,max_backoff_seconds=0.01,usage_wait_seconds=0.01,max_rate_retries=2)
         self.assertEqual(self.d.run(self.cfg,self.base),0)
         self.assertEqual(json.loads((self.base/'status.json').read_text())['state'],'done')
         self.assertIn('rate_wait',(self.base/'events.jsonl').read_text())

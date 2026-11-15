@@ -1,0 +1,560 @@
+"""Revision-bound execution and recovery for both CLI adapters."""
+import datetime as dt
+import hashlib
+import json
+import os
+import shutil
+from pathlib import Path
+import time
+import uuid
+
+import durable
+
+
+TERMINAL = {'done', 'stopped', 'blocked'}
+
+
+def stamp(value=None):
+    return dt.datetime.fromtimestamp(value or time.time(), dt.timezone.utc).isoformat()
+
+
+class Execution:
+    def __init__(self, api, cfg, base, resume_only):
+        self.a, self.cfg, self.base = api, cfg, Path(base)
+        self.resume_only = resume_only
+        self.journal = self.base / ('run-' + cfg['runner'] + '.json')
+        self.checkpoint = self.base / ('verified-' + cfg['runner'] + '.json')
+        self.pending_path = self.base / ('pending-' + cfg['runner'] + '.json')
+        self.work = self.base / 'worktrees' / cfg['runner']
+        self.branch = 'auto-agents/' + cfg['runner']
+        self.state = {}
+
+    def save(self, state=None, reason=None, **fields):
+        if state is not None:
+            self.state['state'] = state
+        if reason is not None:
+            self.state['reason'] = reason
+        self.state.update(fields, updated=stamp())
+        durable.write_json(self.journal, self.state)
+        durable.write_json(self.base / 'status.json', self.state)
+
+    def event(self, event, **fields):
+        with (self.base / 'events.jsonl').open('a', encoding='utf-8') as stream:
+            stream.write(json.dumps({'at': stamp(), 'run_id': self.state['run_id'],
+                                     'event': event, **fields}) + '\n')
+            stream.flush()
+
+    def fail(self, reason):
+        raise self.a.Stop(reason)
+
+    def head(self):
+        return self.a.git(self.work, 'rev-parse', 'HEAD')
+
+    def dirty(self):
+        return self.a.git(self.work, 'status', '--porcelain')
+
+    def check_branch(self, before):
+        if self.a.git(self.work, 'branch', '--show-current') != self.branch:
+            self.fail('agent changed the driver branch')
+        if self.a.call(['git', 'merge-base', '--is-ancestor', before, self.head()], self.work).returncode:
+            self.fail('agent rewrote branch history')
+
+    def setup(self):
+        a, cfg = self.a, self.cfg
+        digest = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode()).hexdigest()
+        previous = durable.read_json(self.journal) if self.journal.exists() else None
+        if self.resume_only and (previous is None or previous['state'] in TERMINAL):
+            return False
+        if previous and previous['state'] not in TERMINAL:
+            self.state = previous
+            if previous['config_digest'] != digest:
+                self.preserve_journal = True
+                self.fail('Configuration changed during an unfinished run; reconcile the saved operation first.')
+        else:
+            if previous and previous.get('operation'):
+                self.fail('An operation remains unresolved; inspect its job receipt before starting a new run.')
+            self.state = {'schema': 1, 'run_id': uuid.uuid4().hex, 'runner': cfg['runner'],
+                          'plan': cfg['plan'], 'config_digest': digest, 'started_at': time.time(),
+                          'deadline': time.time() + cfg['max_hours'] * 3600,
+                          'session': 0, 'accepted_slices': 0, 'rate_retries': 0,
+                          'recovery_attempts': 0, 'state': 'starting', 'reason': '',
+                          'operation': None, 'retry_at': None}
+        if (self.base / 'STOP').exists():
+            self.fail('STOP file is present; remove it deliberately to resume')
+        self.agent = a.agent_command(cfg)
+        for command in cfg['verify'] + cfg.get('final_verify', []):
+            if not shutil.which(command[0]) and not (a.ROOT / command[0]).is_file():
+                self.fail('Verification executable is unavailable: ' + command[0])
+        if Path(a.git(a.ROOT, 'rev-parse', '--show-toplevel')).resolve() != a.ROOT.resolve():
+            self.fail('Driver must be installed at the repository root')
+        if not (a.ROOT / cfg['plan']).is_file() or not a.git(a.ROOT, 'ls-files', '--', cfg['plan']):
+            self.fail('Commit the plan before starting.')
+        if a.git(a.ROOT, 'status', '--porcelain', '--', cfg['plan']):
+            self.fail('Commit the plan changes before starting.')
+        root_plan_blob = a.git(a.ROOT, 'rev-parse', 'HEAD:' + cfg['plan'])
+        if self.state.get('root_plan_blob', root_plan_blob) != root_plan_blob:
+            self.preserve_journal = True
+            self.fail('The owner checkout plan changed; reconcile its new intent with the saved run before resuming.')
+        self.state['root_plan_blob'] = root_plan_blob
+        boot = durable.boot_identity()
+        previous_boot = self.state.get('boot_identity')
+        if previous and (not boot or not previous_boot or boot != previous_boot) and self.pending_path.exists():
+            pending = durable.read_json(self.pending_path)
+            if pending.get('index', 0):
+                if not cfg.get('verification_replay_safe', False):
+                    self.preserve_journal = True
+                    self.fail('Host boot changed or is unknown; earlier gate evidence needs safe replay and environment checks.')
+                operation = self.state.get('operation')
+                if operation:
+                    receipt = durable.inspect(self.base / 'jobs' / operation['id'])
+                    if operation['kind'] != 'verifying' or receipt['supervisor_active']:
+                        self.preserve_journal = True
+                        self.fail('Host restart reconciliation found an active or non-verification operation; inspect its effects first.')
+                    self.state.update(operation=None, job_id=None, job_state=None)
+                pending['index'] = 0
+                durable.write_json(self.pending_path, pending)
+        self.state['boot_identity'] = boot
+        created = not self.work.exists()
+        self.work.parent.mkdir(parents=True, exist_ok=True)
+        if created:
+            exists = a.call(['git', 'show-ref', '--verify', '--quiet', 'refs/heads/' + self.branch], a.ROOT).returncode == 0
+            if exists and not self.checkpoint.exists():
+                self.fail('Existing driver branch has no verification checkpoint; inspect it before use.')
+            a.git(a.ROOT, 'worktree', 'add', *([] if exists else ['-b', self.branch]),
+                  str(self.work), self.branch if exists else 'HEAD')
+        if Path(a.git(self.work, 'rev-parse', '--show-toplevel')).resolve() != self.work.resolve():
+            self.fail('Unexpected driver worktree')
+        self.check_branch(self.head())
+        plan = (self.work / cfg['plan']).resolve()
+        if not plan.is_relative_to(self.work.resolve()) or not plan.is_file():
+            self.fail('Plan is absent from driver branch or escapes its worktree.')
+        if not self.state.get('operation') and not self.state.get('reconcile'):
+            self.contract()
+        elif cfg.get('plan_contract'):
+            self.state['plan_contract'] = cfg['plan_contract']
+        if created and not self.checkpoint.exists():
+            durable.write_json(self.checkpoint, {'head': self.head()})
+        if not self.checkpoint.exists():
+            self.fail('Verification checkpoint missing for existing worktree; inspect and recover manually.')
+        accepted = durable.read_json(self.checkpoint)
+        if accepted.get('run_id') == self.state['run_id']:
+            self.state['accepted_slices'] = accepted.get('accepted_slices', self.state['accepted_slices'])
+        if self.dirty() and not self.state.get('operation') and not (
+                self.state.get('reconcile') and cfg.get('recovery_policy') == 'local-only'):
+            self.fail('Driver worktree has uncommitted changes without a recovery record.')
+        self.save(worktree=str(self.work), branch=self.branch, verified_head=durable.read_json(self.checkpoint)['head'])
+        self.event('started', resumed=bool(previous), runner=cfg['runner'])
+        return True
+
+    def contract(self, require_complete=False):
+        name = self.cfg.get('plan_contract')
+        if not name:
+            return
+        import plan_contract
+        path = (self.work / name).resolve()
+        if not path.is_relative_to(self.work.resolve()) or not self.a.git(self.work, 'ls-files', '--', name):
+            self.fail('Plan contract must be a tracked file inside the worktree.')
+        data = plan_contract.load_contract(path)
+        result = plan_contract.completion_readiness(data, self.work)
+        if not result['valid']:
+            self.fail('Invalid plan contract: ' + '; '.join(result['errors']))
+        if require_complete and not result['completion_ready']:
+            self.fail('STATUS: DONE conflicts with incomplete plan-contract tasks or evidence.')
+        self.state['plan_contract'] = name
+
+    def job(self, kind, argv, timeout, input_text=None):
+        op = self.state.get('operation')
+        if op is None:
+            op = {'kind': kind, 'id': uuid.uuid4().hex, 'before': self.head(), 'created_at': time.time(),
+                  'gate_index': self.state.get('gate_index')}
+            self.save(operation=op)
+        if op['kind'] != kind:
+            self.fail('Unexpected saved operation kind; inspect recovery state.')
+        folder = self.base / 'jobs' / op['id']
+        if (folder / 'spec.json').exists():
+            # Reattach to the ORIGINAL command, timeout and prompt. Rebuilding them
+            # from today's remaining budget would change the job identity.
+            spec = durable.read_spec(folder)
+            if spec['argv'] != argv or Path(spec['cwd']).resolve() != self.work.resolve():
+                self.fail('Saved job command or working directory changed.')
+        else:
+            durable.prepare(folder, argv, self.work, timeout, input_text,
+                            self.cfg.get('login_mode', 'plan') if kind == 'agent' else 'inherit')
+        if durable.inspect(folder)['state'] == 'prepared' and (
+                time.time() >= self.state['deadline'] or (self.base / 'STOP').exists()):
+            self.fail('Saved job was never launched; STOP or expired run budget prevents a new launch.')
+        self.save(kind, '', job_id=op['id'], log=str(folder / 'output.log'), action=argv[0])
+        last = [0.0]
+        def observe(status):
+            if time.monotonic() - last[0] >= 2 or status['state'] != 'running':
+                self.save(job_state=status['state'], job_heartbeat=status.get('heartbeat_at'),
+                          last_output_at=status.get('last_output_at'), output_bytes=status.get('output_bytes', 0))
+                last[0] = time.monotonic()
+        result = durable.wait(folder, observe=observe, cancel=lambda: (self.base / 'CANCEL').exists())
+        self.event(kind + '_receipt', job_id=op['id'], outcome=result['state'], exit=result.get('exit_code'))
+        return result, durable.tail(folder / 'output.log'), op
+
+    def clear_operation(self, **fields):
+        self.save(operation=None, job_id=None, job_state=None, **fields)
+
+    def prompt(self, pending):
+        prompt = (f'Read AGENTS.md and CLAUDE.md if present, then {self.cfg["plan"]}. '
+                  'Implement one bounded ready slice of the owner-authorised plan. Read its exact acceptance criteria, '
+                  'dependencies and relevant live skills. Run targeted checks, update the concise durable handoff and commit. '
+                  'Include completed and remaining task IDs, evidence paths and next action. Do not repeat passed checks '
+                  'without a changed input or unresolved concern. Do not push, switch branches, reset, merge or expand permissions. '
+                  'Preserve production data and external-effect boundaries. Mark STATUS: DONE on the first plan line only '
+                  'when all required outcomes have evidence; use STATUS: BLOCKED - reason only when no independent work remains. '
+                  'A marker, test exit, or reviewer score alone does not prove user acceptance.\n')
+        if pending and pending.get('feedback'):
+            prompt += 'Repair this independent gate failure before further work: ' + pending['feedback'][-1500:] + '\n'
+        if self.state.get('reconcile'):
+            prompt += ('RECOVERY: the previous agent was interrupted. Inspect git diff/status/history and the persisted handoff '
+                       'before editing. Preserve useful partial work. Reconcile each intended outcome; do not repeat completed '
+                       'effects or delete/reset uncertain changes. This run permits local-only recovery; external actions are '
+                       'not replayable. Commit recovered work only after appropriate checks.\n')
+        if self.cfg.get('plan_contract'):
+            prompt += f'Update the tracked task/evidence sidecar {self.cfg["plan_contract"]}; keep task IDs and acceptance intent stable.\n'
+        if self.cfg.get('final_verify'):
+            prompt += 'The supervisor runs configured final_verify commands on a completion candidate. Use targeted checks during each slice; do not start a duplicate long final gate.\n'
+        return prompt
+
+    def wait_quota(self):
+        retry_at = self.state.get('retry_at')
+        while retry_at and time.time() < retry_at:
+            if (self.base / 'STOP').exists() or time.time() >= self.state['deadline']:
+                return False
+            self.save('waiting', 'Usage/rate limit; scheduled probe, not a confirmed provider reset.', retry_at=retry_at)
+            time.sleep(min(2, retry_at - time.time(), max(.01, self.state['deadline'] - time.time())))
+        if retry_at:
+            self.save(retry_at=None)
+        return True
+
+    def recover(self, result, op):
+        self.check_branch(op['before'])
+        after = self.head()
+        if not self.dirty() and after != op['before']:
+            # Even an interrupted or failed agent may have committed. Verify that
+            # exact descendant; do not spend another agent session repeating it.
+            previous = durable.read_json(self.pending_path) if self.pending_path.exists() else {}
+            durable.write_json(self.pending_path, {'head': after, 'failures': previous.get('failures', 0), 'index': 0,
+                               'config_digest': self.state['config_digest']})
+            self.clear_operation(reconcile=False)
+            return True
+        if result['state'] in ('interrupted', 'timed_out') and self.cfg.get('recovery_policy') == 'local-only':
+            count = self.state['recovery_attempts'] + 1
+            if count <= self.cfg.get('max_recovery_attempts', 2):
+                self.clear_operation(recovery_attempts=count, reconcile=True)
+                self.event('reconcile_local', attempt=count)
+                return True
+        return False
+
+    def loop(self):
+        cfg = self.cfg
+        while True:
+            # Observe a saved job before acting on a new budget/stop boundary.
+            # Its supervisor owns its original timeout; losing the observer does
+            # not cancel or duplicate it.
+            if not self.state.get('operation') and (not self.wait_quota() or time.time() >= self.state['deadline'] or (self.base / 'STOP').exists()):
+                self.save('stopped', 'STOP requested' if (self.base / 'STOP').exists() else 'Run time budget reached')
+                break
+            pending = durable.read_json(self.pending_path) if self.pending_path.exists() else None
+            checkpoint = durable.read_json(self.checkpoint)
+            verified = checkpoint['head']
+            accepted_current = (checkpoint.get('config_digest') == self.state['config_digest'] and bool(checkpoint.get('at')))
+            before = self.head()
+            op = self.state.get('operation')
+            if op:
+                receipt = durable.inspect(self.base / 'jobs' / op['id'])
+                finished = not receipt['supervisor_active'] and receipt['state'] in ('passed', 'failed', 'interrupted', 'timed_out')
+                # Reconcile crashes between durable transition writes. Never
+                # infer completion merely from a changed index or HEAD.
+                accepted = (accepted_current and before == verified and
+                            ((pending and pending['head'] == before) or checkpoint.get('operation_id') == op['id']))
+                transferred = (pending and op['kind'] == 'agent' and pending['head'] != op['before'])
+                advanced = (pending and op['kind'] == 'verifying' and
+                            pending.get('index', 0) >= (op.get('gate_index') or 1) and receipt['state'] == 'passed')
+                if finished and (accepted or transferred or advanced):
+                    self.clear_operation()
+                    op = None
+            if accepted_current and pending and pending['head'] == verified == before:
+                self.pending_path.unlink()
+                pending = None
+            if pending and pending.get('config_digest') != self.state['config_digest']:
+                if op:
+                    self.fail('Verification configuration changed with an unresolved operation.')
+                pending.update(index=0, config_digest=self.state['config_digest'])
+                durable.write_json(self.pending_path, pending)
+            if before != verified and not pending and not op and not self.state.get('reconcile'):
+                self.fail('unverified commit without matching recovery record; inspect manually')
+            if pending and pending['head'] != before and not (op and op['kind'] == 'agent'):
+                self.fail('recovery record does not match worktree HEAD')
+            if pending and pending.get('failures', 0) >= cfg.get('max_gate_failures', 3):
+                self.fail('verification failure limit reached; inspect before resuming')
+            need_agent = not pending or bool(pending.get('feedback'))
+            if need_agent:
+                lines = (self.work / cfg['plan']).read_text(encoding='utf-8').splitlines()
+                first = lines[0].strip() if lines else ''
+                if not pending and not op and not self.state.get('reconcile'):
+                    if first == 'STATUS: DONE':
+                        self.contract(require_complete=True)
+                        if not accepted_current:
+                            pending = {'head': before, 'failures': 0, 'index': 0, 'config_digest': self.state['config_digest']}
+                            durable.write_json(self.pending_path, pending)
+                            self.verify(pending)
+                            continue
+                        self.save('done', 'Plan marked complete; committed slices passed configured verification')
+                        break
+                    if first.startswith('STATUS: BLOCKED'):
+                        self.fail(first)
+                if not op:
+                    if self.state['session'] >= cfg['max_sessions']:
+                        self.save('stopped', 'Session limit reached')
+                        break
+                    self.save(session=self.state['session'] + 1)
+                result, output, op = self.job('agent', self.agent, min(cfg['session_timeout_seconds'], max(1, self.state['deadline'] - time.time())), self.prompt(pending))
+                if result['state'] != 'passed':
+                    if self.recover(result, op):
+                        continue
+                    message = output.lower()
+                    limited = any(term in message for term in ('rate limit', 'usage limit', 'too many requests', 'http 429'))
+                    unchanged = not self.dirty() and self.head() == op['before']
+                    local_reconcile = cfg.get('recovery_policy') == 'local-only'
+                    if limited and (unchanged or local_reconcile) and self.state['rate_retries'] < cfg.get('max_rate_retries', 3):
+                        attempts = self.state['rate_retries'] + 1
+                        delay = (cfg.get('usage_wait_seconds', 18000) if 'usage limit' in message else
+                                 min(cfg.get('max_backoff_seconds', 3600), cfg.get('initial_backoff_seconds', 60) * 2 ** (attempts - 1)))
+                        self.clear_operation(rate_retries=attempts, retry_at=time.time() + delay, reconcile=not unchanged)
+                        self.save('waiting', 'Provider limit; retry only within configured run budget')
+                        self.event('rate_wait', seconds=delay, retry=attempts)
+                        continue
+                    self.fail('agent ' + result['state'] + '; inspect job log and reconcile worktree')
+                self.check_branch(op['before'])
+                if self.dirty():
+                    self.fail('agent left uncommitted changes')
+                after = self.head()
+                if after == op['before'] and not (self.state.get('reconcile') and after != verified):
+                    self.fail('agent made no commit')
+                durable.write_json(self.pending_path, {'head': after, 'failures': pending.get('failures', 0) if pending else 0,
+                                   'index': 0, 'config_digest': self.state['config_digest']})
+                self.clear_operation(rate_retries=0, reconcile=False)
+                pending = durable.read_json(self.pending_path)
+            self.verify(pending)
+
+    def verify(self, pending):
+        cfg, after = self.cfg, pending['head']
+        lines = (self.work / cfg['plan']).read_text(encoding='utf-8').splitlines()
+        completing = bool(lines and lines[0].strip() == 'STATUS: DONE')
+        self.contract(require_complete=completing)
+        commands = cfg['verify'] + (cfg.get('final_verify', []) if completing else [])
+        for index in range(pending.get('index', 0), len(commands)):
+            if self.dirty() or self.head() != after or self.a.git(self.work, 'branch', '--show-current') != self.branch:
+                self.fail('verification changed HEAD or branch, or worktree is dirty; inspect before resuming')
+            self.save(gate_index=index + 1, gate_total=len(commands), candidate_head=after)
+            result, output, op = self.job('verifying', commands[index],
+                min(cfg.get('verification_timeout_seconds', cfg['max_hours'] * 3600), max(1, self.state['deadline'] - time.time())))
+            if self.head() != after or self.a.git(self.work, 'branch', '--show-current') != self.branch:
+                self.fail('verification changed HEAD or branch; inspect worktree before resuming')
+            if self.dirty():
+                self.fail('verification modified worktree')
+            if result['state'] != 'passed':
+                if result['state'] == 'interrupted' and cfg.get('verification_replay_safe', False):
+                    retries = pending.get('replays', 0) + 1
+                    if retries <= cfg.get('max_recovery_attempts', 2):
+                        pending['replays'] = retries
+                        durable.write_json(self.pending_path, pending)
+                        self.clear_operation()
+                        self.event('verification_replay', index=index, attempt=retries)
+                        return
+                if result['state'] == 'failed' and result.get('exit_code') is not None:
+                    pending.update(failures=pending.get('failures', 0) + 1, index=0, feedback=output[-1500:] or 'Verification exited nonzero; inspect job log.')
+                    durable.write_json(self.pending_path, pending)
+                    self.clear_operation()
+                    self.save('repairing', 'Independent verification failed; next session repairs the observed failure')
+                    return
+                self.fail('verification ' + result['state'] + '; replay requires a safe verification contract')
+            pending.update(index=index + 1, replays=0)
+            durable.write_json(self.pending_path, pending)
+            self.clear_operation()
+            self.event('verification', index=index, exit=0, head=after)
+        if cfg['publish']:
+            # Repeating this exact non-force ref update is idempotent. No merge,
+            # force, branch switch or new revision is introduced on recovery.
+            result, output, _ = self.job('publishing', ['git', 'push', cfg['remote'], after + ':refs/heads/' + cfg['target_branch']], 120)
+            if result['state'] != 'passed':
+                self.fail('push failed or interrupted; inspect remote ref and receipt: ' + output[-500:])
+            self.event('published', head=after, target=cfg['target_branch'])
+        durable.write_json(self.checkpoint, {'head': after, 'config_digest': self.state['config_digest'], 'at': stamp(),
+                           'run_id': self.state['run_id'], 'accepted_slices': self.state['accepted_slices'] + 1,
+                           'operation_id': (self.state.get('operation') or {}).get('id')})
+        self.pending_path.unlink(missing_ok=True)
+        self.clear_operation(verified_head=after, accepted_slices=self.state['accepted_slices'] + 1)
+        self.event('accepted', head=after)
+
+
+def deliberate_recovery(api, cfg, base):
+    """Explicit operator action only. Scheduled resume never clears a stop."""
+    journal = base / ('run-' + cfg['runner'] + '.json')
+    if not journal.exists():
+        raise api.Stop('No saved run to recover; configure and start a new run.')
+    state = durable.read_json(journal)
+    if state['state'] == 'done':
+        raise api.Stop('This run is already complete.')
+    if state['config_digest'] != hashlib.sha256(json.dumps(cfg, sort_keys=True).encode()).hexdigest():
+        raise api.Stop('Restore the saved configuration before recovering; do not reinterpret an interrupted operation.')
+    operation = state.get('operation')
+    if operation:
+        receipt = durable.inspect(base / 'jobs' / operation['id'])
+        if receipt['supervisor_active']:
+            raise api.Stop('Saved job is still active; observe it or cancel and wait for its terminal receipt.')
+        if operation['kind'] == 'publishing':
+            raise api.Stop('Reconcile the interrupted remote publication before recovery; local-only replay is insufficient.')
+        if operation['kind'] == 'verifying' and not cfg.get('verification_replay_safe', False):
+            raise api.Stop('Verification replay is not declared safe.')
+    if cfg.get('recovery_policy') != 'local-only':
+        raise api.Stop('Automatic edit reconciliation requires the previously configured local-only recovery policy.')
+    work = Path(state['worktree'])
+    if api.git(work, 'branch', '--show-current') != state['branch']:
+        raise api.Stop('Worktree branch changed; inspect before recovering.')
+    before = operation['before'] if operation else durable.read_json(base / ('verified-' + cfg['runner'] + '.json'))['head']
+    if api.call(['git', 'merge-base', '--is-ancestor', before, api.git(work, 'rev-parse', 'HEAD')], work).returncode:
+        raise api.Stop('Worktree history changed; inspect before recovering.')
+    # STOP is the commit barrier for this explicit recovery transition. A crash
+    # during marker cleanup must not expose a runnable state with stale CANCEL.
+    (base / 'STOP').touch()
+    state.update(state='recovering', reason='Operator requested local recovery and renewed budget',
+                 operation=None, job_id=None, job_state=None, retry_at=None, session=0,
+                 rate_retries=0, recovery_attempts=0, reconcile=not operation or operation['kind'] == 'agent',
+                 deadline=time.time() + cfg['max_hours'] * 3600, updated=stamp())
+    durable.write_json(journal, state)
+    with (base / 'events.jsonl').open('a', encoding='utf-8') as stream:
+        stream.write(json.dumps({'at': stamp(), 'event': 'operator_recovery', 'run_id': state['run_id'],
+                                 'previous_operation': operation, 'new_deadline': state['deadline']}) + '\n')
+    (base / 'CANCEL').unlink(missing_ok=True)
+    (base / 'STOP').unlink(missing_ok=True)
+
+
+def execute(api, cfg, base, resume_only=False, recover=False):
+    base = Path(base)
+    base.mkdir(parents=True, exist_ok=True)
+    lease = durable.Lease(base / 'run.mutex')
+    try:
+        lease.__enter__()
+    except durable.Busy:
+        raise api.Stop('A driver is already running for this repository.')
+    marker = base / 'run.lock'
+    try:
+        if marker.exists():
+            try:
+                old = durable.read_json(marker)
+            except ValueError:
+                raise api.Stop('Legacy lock exists; verify the old driver is stopped before removing it.')
+            if old.get('schema') != 1:
+                raise api.Stop('Unknown lock owner; inspect before recovery.')
+        if marker.exists():
+            durable.write_json(marker, {'schema': 1, 'mutex': 'run.mutex'})
+        else:
+            try:
+                fd = os.open(marker, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            except FileExistsError:
+                raise api.Stop('Updater acquired the repository lock; retry after it finishes.')
+            with os.fdopen(fd, 'w', encoding='utf-8') as stream:
+                stream.write('{"schema": 1, "mutex": "run.mutex"}\n')
+                stream.flush()
+                os.fsync(stream.fileno())
+        if recover:
+            deliberate_recovery(api, cfg, base)
+        run = Execution(api, cfg, base, resume_only)
+        try:
+            if not run.setup():
+                return 0
+            run.loop()
+        except (api.Stop, OSError, ValueError, RuntimeError) as error:
+            if run.state:
+                if getattr(run, 'preserve_journal', False):
+                    durable.write_json(base / 'status.json', {**run.state, 'state': 'blocked', 'reason': str(error)})
+                else:
+                    run.save('blocked', str(error))
+                run.event('blocked', reason=str(error))
+            print('BLOCKED:', error)
+            return 2
+        print(json.dumps(run.state, indent=2))
+        return 0 if run.state['state'] in ('done', 'stopped') else 2
+    finally:
+        # Only remove our marker; do not remove a legacy/unknown owner's lock.
+        if marker.exists():
+            try:
+                if durable.read_json(marker).get('schema') == 1:
+                    marker.unlink()
+            except ValueError:
+                pass
+        lease.__exit__(None, None, None)
+
+
+def render(base):
+    path = Path(base) / 'status.json'
+    if not path.exists():
+        return 'No run recorded.'
+    state = durable.read_json(path)
+    active = durable.held(Path(base) / 'run.mutex')
+    lines = [f"{state['runner'].upper()} | {state['state'].upper()} | supervisor {'active' if active else 'offline'}",
+             f"Plan: {state['plan']}", f"Worktree: {state.get('worktree', 'not prepared')}",
+             f"Sessions started: {state['session']} | Revisions independently verified: {state['accepted_slices']}",
+             f"Reason: {state.get('reason') or 'No blocker recorded'}",
+             f"Limit probes: {state.get('rate_retries',0)} | Local recovery attempts: {state.get('recovery_attempts',0)}",
+             f"Last durable update: {state['updated']}"]
+    if state.get('action') and state.get('operation'):
+        lines.append('Current executable: ' + state['action'])
+    if state.get('verified_head'):
+        lines.append('Verified revision: ' + state['verified_head'])
+    checkpoint_path = Path(base) / ('verified-' + state['runner'] + '.json')
+    if checkpoint_path.exists():
+        checkpoint = durable.read_json(checkpoint_path)
+        if checkpoint.get('at'):
+            age = max(0, int(time.time() - dt.datetime.fromisoformat(checkpoint['at']).timestamp()))
+            lines.append(f"Verification checkpoint: {checkpoint['at']} | age {age}s")
+        else:
+            lines.append('Verification checkpoint: initial baseline; no gate receipt yet')
+    if state.get('gate_total'):
+        lines.append(f"Verification: command {state['gate_index']} of {state['gate_total']}")
+    if state.get('job_id'):
+        job = durable.inspect(Path(base) / 'jobs' / state['job_id'])
+        lines += [f"Job: {job['state']} | supervisor {'active' if job['supervisor_active'] else 'offline'}",
+                  'Log: ' + job['log']]
+        if job.get('heartbeat_at'):
+            lines.append(f"Heartbeat age: {max(0, int(time.time()-job['heartbeat_at']))}s (liveness, not accepted progress)")
+        if job.get('last_output_at'):
+            lines.append('Last output: ' + stamp(job['last_output_at']) + f" | {job.get('output_bytes',0)} bytes")
+    if state.get('retry_at'):
+        lines.append('Next probe: ' + stamp(state['retry_at']) + ' (provider reset time unconfirmed)')
+    lines += ['Budget ends: ' + stamp(state['deadline'])]
+    if state.get('plan_contract') and state.get('worktree'):
+        try:
+            data = durable.read_json(Path(state['worktree']) / state['plan_contract'])
+            tasks = data['tasks']
+            completed = [task for task in tasks if task['state'] == 'complete']
+            remaining = [task for task in tasks if task['state'] != 'complete']
+            lines.append(f"Plan reports: {len(completed)}/{len(tasks)} tasks complete; {len(remaining)} remaining (metadata, not independent acceptance)")
+            for task in remaining[:5]:
+                lines.append(f"  {task['id']} | {task['state']} | {task['title']}")
+        except (OSError, ValueError, KeyError, TypeError):
+            lines.append('Task summary unavailable: contract may be mid-edit or invalid; no progress inferred.')
+    else:
+        lines.append('Task totals unknown: no JSON plan contract configured. Read the committed handoff.')
+    if not active and state['state'] not in TERMINAL:
+        lines.append('Recovery: run driver.py resume, or use the configured logon task. Existing jobs will be reconciled.')
+    return '\n'.join(lines)
+
+
+def watch(base, follow=False, interval=5):
+    if not .2 <= interval <= 3600:
+        raise ValueError('Watch interval must be between 0.2 and 3600 seconds')
+    try:
+        while True:
+            print(render(base), flush=True)
+            if not follow:
+                return 0
+            time.sleep(interval)
+            print('\n--- refreshed ---', flush=True)
+    except KeyboardInterrupt:
+        return 0  # Closing the watch never stops the run.

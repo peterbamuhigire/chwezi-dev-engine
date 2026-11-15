@@ -65,6 +65,15 @@ This skill bridges **prompting patterns** + **orchestration** + **sub-agent coor
 - Never let two agents write the same files unless one is explicitly reviewing the other's patch.
 - For generated code, require the same quality bar as human code: tests, readable names, explicit error handling, and no invented dependencies. Apply `references/ai-generated-code-review-gate.md` as the merge gate.
 
+For a multi-session or delegated plan, assign stable task IDs and record each
+task's dependencies, exclusive write set, exact input paths/producer artifacts,
+deliverable, and acceptance commands with semantic normal- and failure-path
+oracles. Before assigning a specialist, confirm the live skill, required tools,
+readiness and scoped authority; never infer capability from a role name. Name an
+independent reviewer and read-only scope when risk warrants it. Preserve review
+disagreement with supporting evidence; unavailable specialist or reviewer
+conclusions stay `NOT_ASSESSED`.
+
 ## AI Coding Risk Controls
 
 | Risk | Control |
@@ -81,6 +90,15 @@ This skill bridges **prompting patterns** + **orchestration** + **sub-agent coor
 - For code changes: diff summary, tests/checks run, and known gaps.
 - For architecture or plans: decision record, alternatives considered, evaluation criteria, and economic rationale.
 - For modernization: before/after behavior, migration steps, rollback plan, and compatibility notes.
+- For work crossing sessions or long-running gates: persist task ID, dependency
+  state, revision, relevant configuration/runtime, command and environment for
+  each result, actual outcome, remaining work, owner and next recovery action.
+  Treat a tool-wait timeout as unknown until the process/result is checked. On
+  restart, reconcile the durable record against the current repository. Reuse
+  evidence only when revision, configuration, environment and inputs match;
+  invalidate affected evidence after change, begin with focused inexpensive
+  checks and expand by risk. Do not retry an identical failure without a changed
+  cause or method.
 
 **What you'll learn:**
 - The 5 orchestration strategies for AI development

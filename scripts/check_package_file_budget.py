@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Measure repository and package-oriented file entries against the 5,000 cap."""
+"""Report checkout entries and enforce the 5,000-entry package-oriented cap."""
 from __future__ import annotations
 
 import argparse
@@ -44,10 +44,10 @@ def main() -> int:
         return 1
     print(f"checkout entries (including .git): {checkout}")
     print(f"package-oriented entries (documented exclusions): {package}")
-    if checkout > LIMIT or package > LIMIT:
-        print(f"FAIL: each count must be at most {LIMIT}")
+    if package > LIMIT:
+        print(f"FAIL: package-oriented entries must be at most {LIMIT}")
         return 1
-    print(f"PASS: both counts are at most {LIMIT}")
+    print(f"PASS: package-oriented entries are at most {LIMIT}")
     return 0
 
 

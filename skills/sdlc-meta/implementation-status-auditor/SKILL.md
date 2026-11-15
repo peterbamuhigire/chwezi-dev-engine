@@ -54,7 +54,7 @@ If the directory exists (re-run), append a sequence: `review-21-Feb-2026-v2/`.
 
 ### Step 1: Discovery Phase (Gather Inputs)
 
-Before any analysis, systematically collect all project materials. Use the Explore agent and direct file reads.
+Before any analysis, systematically collect the relevant project materials using available read/search capabilities. Delegation is optional.
 
 **Required discovery targets:**
 
@@ -71,13 +71,14 @@ Before any analysis, systematically collect all project materials. Use the Explo
 
 **Discovery SOP:**
 
-1. Read `CLAUDE.md`, `AGENTS.md`, `README.md` at project root
+1. Read applicable repository instructions and `README.md` at project root
 2. Read `docs/` directory tree for all planning/architecture docs
 3. Scan database directory for schema files and migrations
 4. Map the source code directory structure (top 2 levels)
 5. Identify all API route/controller files
 6. Check for sister/related project references
-7. Locate test files and coverage reports
+7. Locate test files and coverage reports. Use available read/search capability;
+   an Explore agent or plugin is optional and must not be assumed installed.
 
 ### Step 2: Analysis Phase (Five Audit Pillars)
 
@@ -302,6 +303,24 @@ After the initial audit, the user can request deep dives:
 | Claim lacks code, test, or runtime evidence | Mark it unverified or incomplete |
 | Blocker affects critical path | Rank it before cosmetic gaps |
 | Scope exceeds available evidence | Narrow scope and state exclusions |
+
+## Evidence and handoff integrity
+
+Keep each audited requirement/gap under a stable ID. Record exact source paths
+or producer evidence, dependencies, owner, write scope (when a plan is
+requested), and an acceptance command with a semantic expected result for each
+planned action. Bind observed status and test evidence to repository revision,
+configuration/environment, command, date and outcome. Distinguish `observed`,
+`inferred`, `NOT_ASSESSED` and owner-confirmed facts; never derive completion
+from a plan checkbox, silence, an unrelated green suite or an old report.
+
+For an interrupted audit or implementation handoff, reconcile the report with
+the live repository and evidence before resuming. Reuse evidence only when its
+revision, configuration, environment and inputs still match; rerun affected
+checks after change. Record watch state as a timestamped observation with source
+and inspected scope. Verify required specialist skills, tools, readiness and
+scoped authority before delegation; keep independent review and disagreement
+explicit. Missing evidence remains `NOT_ASSESSED`.
 
 ## Capability Contract
 

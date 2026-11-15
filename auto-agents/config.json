@@ -3,7 +3,15 @@
   "runner_args": [],
   "login_mode": "plan",
   "plan": "auto-agents/PLAN.md",
-  "verify": [],
+  "verify": [
+    [
+      "python",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/skill_catalog_guardrails.py"
+    ]
+  ],
   "session_timeout_seconds": 10800,
   "max_hours": 24,
   "max_sessions": 1000,
@@ -13,5 +21,42 @@
   "max_rate_retries": 3,
   "initial_backoff_seconds": 60,
   "max_backoff_seconds": 3600,
-  "max_gate_failures": 3
+  "max_gate_failures": 3,
+  "final_verify": [
+    [
+      "python",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    [
+      "python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "auto-agents/tests"
+    ]
+  ],
+  "runner_args_by_runner": {
+    "codex": [
+      "--model",
+      "gpt-6-luna",
+      "-c",
+      "model_reasoning_effort=\"medium\""
+    ],
+    "claude": []
+  },
+  "verification_timeout_seconds": 14400,
+  "usage_wait_seconds": 18000,
+  "recovery_policy": "local-only",
+  "verification_replay_safe": true,
+  "max_recovery_attempts": 2
 }

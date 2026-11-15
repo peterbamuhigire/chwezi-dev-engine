@@ -11,9 +11,11 @@ import sys
 import uuid
 
 HERE=Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from durable import Lease, Busy
 MANIFEST='manifest.json'
 # Project-owned configuration and plans are deliberately excluded.
-RESERVED={'config.json','plan.md','manifest.json','update-in-progress.json'}
+RESERVED={'config.json','plan.md','engine.md','manifest.json','update-in-progress.json'}
 
 class UpgradeError(Exception): pass
 
@@ -21,7 +23,7 @@ def digest(path,mode='sha256-text-lf-v1'):
     data=path.read_bytes()
     # Git may materialise text as CRLF on Windows. Canonicalise line endings
     # for text files while keeping binary file hashes byte-exact.
-    if mode=='sha256-text-lf-v1' and path.suffix.lower() in {'.py','.md','.json','.sh','.ps1','.txt','.toml','.yml','.yaml'}:
+    if mode=='sha256-text-lf-v1' and path.suffix.lower() in {'.py','.md','.json','.sh','.ps1','.cmd','.bat','.txt','.toml','.yml','.yaml'}:
         data=data.replace(b'\r\n',b'\n')
     return hashlib.sha256(data).hexdigest()
 
@@ -67,8 +69,13 @@ def upgrade(source,target,apply=False):
     if not common.is_absolute(): common=(target.parent/common).resolve()
     lock_dir=common/'auto-agents'; lock_dir.mkdir(parents=True,exist_ok=True)
     lock=lock_dir/'run.lock'
+    lease=Lease(lock_dir/'run.mutex')
+    try: lease.__enter__()
+    except Busy: raise UpgradeError('Driver or updater is active')
     try: fd=os.open(lock,os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
-    except FileExistsError: raise UpgradeError('Driver or updater lock exists: '+str(lock))
+    except OSError:
+        lease.__exit__(None,None,None)
+        raise UpgradeError('Driver or updater lock exists: '+str(lock))
     os.write(fd,str(os.getpid()).encode()); os.close(fd)
     journal=target/'update-in-progress.json'
     try:
@@ -92,6 +99,7 @@ def upgrade(source,target,apply=False):
         raise
     finally:
         lock.unlink(missing_ok=True)
+        lease.__exit__(None,None,None)
     result['applied']=True
     return result
 

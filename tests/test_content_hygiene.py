@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -109,6 +110,24 @@ def test_broken_relative_links_are_found_and_placeholders_and_urls_are_ignored(t
     write(tmp_path, "skills/a/references/r.md", "[parent](../SKILL.md) [bad](../nothing.md)\n```md\n[fenced](ignored.md)\n```\n")
     found = ch.broken_links(tmp_path)
     assert found == {"skills/a/SKILL.md": ["references/missing.md#x"], "skills/a/references/r.md": ["../nothing.md"]}
+
+
+def test_existing_untracked_working_tree_target_resolves_without_staging(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    write(tmp_path, "skills/a/SKILL.md", "[new reference](references/new.md)\n")
+    subprocess.run(["git", "-C", str(tmp_path), "add", "--", "skills/a/SKILL.md"], check=True)
+    target = write(tmp_path, "skills/a/references/new.md", "Working-tree reference.\n")
+    status = subprocess.run(
+        ["git", "-C", str(tmp_path), "status", "--short", "--", "skills/a/references/new.md"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    assert status.startswith("??")
+    assert target.is_file()
+    baseline = tmp_path / "docs/quality-gates/broken-link-baseline.json"
+    write(tmp_path, "docs/quality-gates/broken-link-baseline.json", json.dumps({"files": {}}))
+    assert ch.check_broken_links(tmp_path, baseline) == []
 
 
 def test_new_broken_link_fails_and_repaired_baseline_entry_must_be_removed(tmp_path):

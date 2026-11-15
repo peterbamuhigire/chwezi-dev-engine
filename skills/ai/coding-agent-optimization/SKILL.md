@@ -171,13 +171,35 @@ containers, emulators, or databases.
 
 1. Remove context pollution by keeping durable policy short and routing deep
    procedures to skills or references.
-2. Make delegation explicit, bounded, fresh-context, and cheaper than the
-   primary model; do not delegate merely because the feature exists.
+2. Make delegation explicit, bounded and fresh-context. Assess its total cost
+   and review burden while preserving the owner's model pins; a cheaper model
+   is an option only when available, authorised and adequate for the task.
+   Do not delegate merely because the feature exists.
 3. Pin a model only when its availability and quality/cost reason are evidenced
    on this device. Otherwise inherit the runner's supported default.
 4. Cap concurrency according to the device and aggregate token budget.
 5. Keep read-only review roles read-only and separate implementation write sets.
 6. Close completed workers and avoid redoing work while a delegated task runs.
+
+## Bounded context and durable evidence
+
+Keep task context to relevant instructions, requirements, source paths,
+constraints and acceptance checks. For work spanning sessions or agents, record
+a stable task ID, dependencies, write owner, input paths, semantic oracle and
+recovery checkpoint. After restart, quota expiry or interruption, inspect the
+repository and reconcile the checkpoint; resume the first runnable incomplete
+task without assuming prior tool waits finished. Long gates need process/result
+supervision separate from the caller's wait timeout. Persist watch state as a
+timestamped observation with source and inspected scope; do not infer clearance
+from silence.
+
+Bind evidence to revision, configuration/runtime, environment and inputs. Reuse
+it only while those identifiers match; rerun affected checks after change.
+Prefer inexpensive deterministic checks early, then select broader checks by
+risk. Avoid identical retries without a changed cause or method. Before
+delegation, verify live specialist skills, tools, readiness and scoped
+authority; arrange independent review when risk warrants it and leave missing
+conclusions `NOT_ASSESSED`.
 
 ## Anti-patterns
 

@@ -16,8 +16,8 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 - **170 active skills** in 18 categories, plus 78 retired names kept as redirects.
 - **168 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
 - **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
-- **272 tests pass, 3 are skipped and 1 fails** (Windows, Python 3.13, 2026-11-08). The failure is the file-budget test, tripped by ignored local folders. On Linux on 2026-11-05: 273 passed, 3 skipped.
-- **73 dated source records** back volatile facts. A continuous-integration (CI) step fails when one passes its review date. It exits 0 on 2026-11-08; the next record lapses on 2026-11-12 (see [Date-triggered gates](#date-triggered-gates)).
+- **275 tests pass, 3 are skipped** (Windows 11, Python 3.13.7, 2026-11-15; `python -B -X utf8 -m pytest tests -q -p no:cacheprovider`). On Linux on 2026-11-05: 273 passed, 3 skipped.
+- **75 dated source records** back volatile facts. On 2026-11-15, the CI check reports 9 overdue records and 13 warnings; currentness is open (see [Date-triggered gates](#date-triggered-gates)).
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -116,6 +116,13 @@ Use this engine when software work needs a repeatable method and evidence a revi
 
 Every skill is listed in the [skill catalogue](docs/skill-catalogue.md).
 
+For an authorised multi-session plan, the optional local runner coordinates bounded agent
+sessions, detached verification gates and durable recovery records. On Windows,
+`auto-agents/run.ps1` and `run.cmd` check readiness, start the supervisor and open a status
+watch. They do not change host permissions or register themselves at startup. See the
+[runner guide](auto-agents/README.md) and [current evidence](auto-agents/EVIDENCE.md).
+Runtime tests and bounded provider smokes do not establish a real long-running implementation.
+
 Some work belongs to a neighbouring engine:
 
 - Visual design, typography and UI appearance: the Chwezi design engine.
@@ -127,6 +134,7 @@ Some work belongs to a neighbouring engine:
 
 - The router is the root [`SKILL.md`](SKILL.md), with [`AGENTS.md`](AGENTS.md) and [`CLAUDE.md`](CLAUDE.md), which imports `AGENTS.md`. It maps an intent to a skill family.
 - The agent loads one skill's `SKILL.md` and only the `references/` files that the task needs.
+- For authorised long-running work, the project-local `auto-agents/` runner records progress and independently supervises verification; its guide defines plan, recovery and authority boundaries.
 - Two always-on skills govern output quality. `anti-ai-slop` applies while an artefact is produced. `ai-slop-audit` runs after each major iteration and at release.
 - Retired skill names redirect to current skills. The [skill routing index](docs/skill-routing-index.md) explains the map, and [`docs/skill-aliases.yml`](docs/skill-aliases.yml) holds the machine-readable form.
 - Volatile facts such as versions, dates and vendor policies come from the dated records in `docs/source-registers/`, not from skill text.
@@ -291,10 +299,13 @@ python3 -X utf8 scripts/validate_engine_control_plane.py
 python3 -X utf8 scripts/check_source_register.py
 node hooks/test-destructive-bash-gate.js && node hooks/test-plugin-hook-config.js
 python3 -X utf8 skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all
+python3 -B -m unittest discover -s auto-agents/tests
 git diff --check
 ```
 
-| Check | Needs | Result, 2026-11-05 |
+Unless a later date is shown, the table records the 2026-11-05 run.
+
+| Check | Needs | Result and date |
 |---|---|---|
 | Catalogue guardrails (the script also runs the host-path, duplicate-heading and broken-link ratchets) | Python, PyYAML | 168 active skills, 0 errors, 14 size warnings (warnings never change the exit status) |
 | Guardrail unit tests | Python | 10 tests OK |
@@ -303,11 +314,21 @@ git diff --check
 | Fixture coverage | Python, PyYAML | 167 of 168 skills have a positive fixture; `new-project` has none |
 | Description collisions | Python, PyYAML | 1 pair above 0.5 (`mysql-engineering` and `postgresql-engineering`, 0.627), allow-listed |
 | Control-plane registry | Python | 12 registry entries; installed checkouts are `NOT ASSESSED` unless parent folders are given (below) |
-| Source registers | Python | Exit 0 on 2026-11-06: 73 active sources, 0 findings, 16 warnings for dates within 14 days. It exited 1 before the 14 overdue records were re-read; see the [calendar](#date-triggered-gates) |
+| Source registers | Python | Exit 1 on 2026-11-15: 75 active sources, 9 overdue findings, 13 warnings; see the [calendar](#date-triggered-gates) |
+| Local auto-agents runtime | Python; Windows for process-containment cases | 64 tests passed in 218.268 seconds on 2026-11-15; fake-agent and fault tests, not a real long-running implementation |
 | Hook tests | Node | 61/61 and 7/7 |
 | Evidence-declaration contract gate | Python | 162 skills scanned, 0 errors, 6 exempt |
 
-**Re-run on 2026-11-08 (Windows 11, Python 3.13.7).** Every step above exits 0 with the same counts, except two. The guardrails now give 16 size warnings, all old. The pytest suite gives 272 passed, 3 skipped and 1 failed. The failure is the file-budget test: ignored local folders put this checkout at 8,214 entries against 5,000. Git tracks 2,540 files.
+**Re-run on 2026-11-08 (Windows 11, Python 3.13.7).** Every step above exited 0 with the same counts, except two. The guardrails gave 16 size warnings, all old. The pytest suite gave 272 passed, 3 skipped and 1 failed. The failure was the file-budget test: its assertion capped raw checkout entries, including `.git`, at 5,000. Git tracked 2,540 files. The test did not establish that ignored local folders caused the excess.
+
+**Re-run on 2026-11-15 (Windows 11, Python 3.13.7).** The full pytest suite passed:
+275 passed, 3 skipped. The shared auto-agents runtime suite passed 64 tests in 218.268
+seconds. Two bounded live CLI smokes returned their expected responses; they do not
+establish multi-hour implementation or quota recovery. The file-budget check caps
+package-oriented entries at 5,000 and reports raw checkout entries separately.
+`python -B -X utf8 scripts/check_package_file_budget.py` reported 8,595 raw checkout
+entries, including 5,798 under `.git`, and 2,623 package-oriented entries. The broken-link
+check also passes with an existing untracked working-tree target; it reads files on disk.
 
 The 3 skipped tests are the opt-in installed-portfolio checks (`SKILL_ENGINE_LIVE_TESTS=1`). `NOT ASSESSED` means a check could not be run here. It is never reported as a pass.
 
@@ -500,7 +521,9 @@ python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-14
 | 2027-01-30 | 2 | 72 | Next.js authentication and data-security guides |
 | 2027-09-02 | 1 | 73 | IETF DNSSEC best practice |
 
-**Status on 2026-11-08.** The check exits 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 (UTC). No date was extended unread.
+**Status on 2026-11-08.** The check exited 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 (UTC). No date was extended unread.
+
+**Current check on 2026-11-15.** It exits 1 with 9 overdue findings and 13 warnings across 75 active sources. The overdue source claims remain open until they are reverified; the check itself evaluates dates and metadata, not whether a page supports a claim.
 
 - **Renewed in place (9):** the page was unchanged.
 - **Superseded by a new dated record (4):** Next.js 16.4.5 and its 3 November security release, the Android November bulletin, and AGP 9.5.0.

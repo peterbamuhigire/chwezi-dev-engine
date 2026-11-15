@@ -35,10 +35,11 @@ def test_claude_plugin_skill_paths_match_present_skills() -> None:
 
 def test_current_checkout_is_under_file_budget() -> None:
     checkout, package = counts(REPO)
-    assert 0 < package <= checkout <= LIMIT
+    assert 0 < package <= LIMIT
+    assert checkout >= package
 
 
-def test_budget_counts_excluded_package_trees_but_still_caps_checkout(tmp_path: Path) -> None:
+def test_budget_reports_checkout_and_excludes_git_and_dependency_trees_from_package_count(tmp_path: Path) -> None:
     (tmp_path / ".git").mkdir()
     (tmp_path / ".git" / "metadata").write_text("x", encoding="utf-8")
     (tmp_path / "node_modules").mkdir()
@@ -46,6 +47,30 @@ def test_budget_counts_excluded_package_trees_but_still_caps_checkout(tmp_path: 
     (tmp_path / "skill").mkdir()
     (tmp_path / "skill" / "SKILL.md").write_text("x", encoding="utf-8")
     assert counts(tmp_path) == (3, 1)
+
+
+def test_large_git_history_is_reported_but_does_not_consume_package_budget(tmp_path: Path) -> None:
+    git_objects = tmp_path / ".git" / "objects"
+    git_objects.mkdir(parents=True)
+    for index in range(LIMIT + 1):
+        (git_objects / f"object-{index}").touch()
+    skill = tmp_path / "skills" / "example"
+    skill.mkdir(parents=True)
+    (skill / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+
+    checkout, package = counts(tmp_path)
+    assert checkout > LIMIT
+    assert package == 1
+    result = subprocess.run(
+        [sys.executable, str(REPO / "scripts/check_package_file_budget.py"), str(tmp_path)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert f"checkout entries (including .git): {checkout}" in result.stdout
+    assert "package-oriented entries (documented exclusions): 1" in result.stdout
+    assert "PASS: package-oriented entries are at most 5000" in result.stdout
 
 
 def test_budget_command_fails_above_the_hard_cap(tmp_path: Path) -> None:
@@ -60,7 +85,7 @@ def test_budget_command_fails_above_the_hard_cap(tmp_path: Path) -> None:
         check=False,
     )
     assert result.returncode == 1
-    assert "FAIL: each count must be at most 5000" in result.stdout
+    assert "FAIL: package-oriented entries must be at most 5000" in result.stdout
 
 
 def test_budget_count_fails_closed_when_walk_skips_a_directory(tmp_path: Path, monkeypatch) -> None:
