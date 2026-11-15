@@ -6,6 +6,7 @@ import hashlib
 import json
 import math
 import os
+import re
 from pathlib import Path
 import signal
 import shutil
@@ -177,6 +178,22 @@ def boot_identity():
                 return result.stdout.strip()
         except (OSError, subprocess.TimeoutExpired):
             pass
+    elif sys.platform == 'darwin' or 'bsd' in sys.platform:
+        # macOS: kern.bootsessionuuid is unique per boot; BSDs (and older macOS) fall back to kern.boottime.
+        for key in ('kern.bootsessionuuid', 'kern.boottime'):
+            try:
+                result = subprocess.run(['sysctl', '-n', key], capture_output=True, text=True, timeout=15)
+            except (OSError, subprocess.TimeoutExpired):
+                continue
+            value = result.stdout.strip() if result.returncode == 0 else ''
+            if not value:
+                continue
+            if key == 'kern.bootsessionuuid':
+                return value
+            seconds = re.search(r'sec\s*=\s*(\d+)', value)
+            micros = re.search(r'usec\s*=\s*(\d+)', value)
+            if seconds:
+                return f"boottime:{seconds.group(1)}.{micros.group(1) if micros else '0'}"
     else:
         try:
             return Path('/proc/sys/kernel/random/boot_id').read_text().strip()

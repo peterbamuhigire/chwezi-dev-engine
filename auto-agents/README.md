@@ -4,14 +4,14 @@ This is a sequential, project-local runner for Codex and Claude Code. It uses fr
 
 ## Current capabilities and evidence
 
-Release **2.0.0**, checked on **15 November 2026**, provides:
+Release **2.0.1**, checked on **15 November 2026**, provides:
 
 - Separate agent-session, verification-job and overall run budgets, with expensive checks reserved for completion candidates when configured.
 - Persisted job identity, verified revisions, quota-wait probes and recovery records. Reattach to a running check after observer failure; reconcile interrupted work under the declared replay policy.
 - A descriptive watch with the current operation, gate, checkpoint age, wait/retry reason, logs and optional reported task counts.
 - Optional task-contract validation, separate Codex/Claude argument profiles, PowerShell/CMD launchers and a preview-first Windows logon-resume helper.
 
-The shared runtime passed **64 tests** on Windows. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
+The shared runtime passed **64 tests** on Windows (2.0.0) and **66 tests** on macOS with Python 3.9.6 (2.0.1, three platform-specific skips). Boot identity comes from `/proc` on Linux, PowerShell on Windows and `sysctl` (`kern.bootsessionuuid`, else `kern.boottime`) on macOS and BSD. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
 
 ## One-command launcher
 

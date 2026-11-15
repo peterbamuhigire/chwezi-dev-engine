@@ -144,5 +144,27 @@ class DurableTests(unittest.TestCase):
             d.inspect(job)
 
 
+    def test_boot_identity_on_macos_uses_boot_session_then_boot_time(self):
+        from unittest.mock import patch
+        def fake(outputs):
+            def run(argv, **kwargs):
+                out = outputs.get(argv[-1])
+                return subprocess.CompletedProcess(argv, 0 if out else 1, stdout=out or '', stderr='')
+            return run
+        with patch.object(d.os, 'name', 'posix'), patch.object(d.sys, 'platform', 'darwin'):
+            with patch.object(d.subprocess, 'run', fake({'kern.bootsessionuuid': 'ABC-123\n'})):
+                self.assertEqual(d.boot_identity(), 'ABC-123')
+            with patch.object(d.subprocess, 'run', fake({'kern.boottime': '{ sec = 1794434341, usec = 241329 } Thu Nov 12 00:59:01 2026\n'})):
+                self.assertEqual(d.boot_identity(), 'boottime:1794434341.241329')
+            with patch.object(d.subprocess, 'run', fake({})):
+                self.assertIsNone(d.boot_identity())
+
+    @unittest.skipUnless(sys.platform == 'darwin', 'macOS only')
+    def test_boot_identity_is_known_and_stable_on_this_mac(self):
+        first = d.boot_identity()
+        self.assertTrue(first)
+        self.assertEqual(first, d.boot_identity())
+
+
 if __name__ == '__main__':
     unittest.main()
