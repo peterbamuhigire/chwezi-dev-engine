@@ -41,6 +41,11 @@ This skill bridges **prompting patterns** + **orchestration** + **sub-agent coor
 
 ## Operating Doctrine
 
+For repeated product delivery or a plan spanning sessions, use
+[supervised software delivery](references/supervised-software-factory.md) to
+connect stakeholder evidence, protected acceptance criteria, bounded work,
+independent verification and operational feedback. Reuse existing project records.
+
 - Treat AI as a force multiplier inside a disciplined engineering system, not as a replacement for requirements, design, review, tests, security, or ownership.
 - Start every AI-assisted task with a concrete outcome, repo constraints, acceptance criteria, and verification command. Do not ask an agent to "improve" broad surfaces without a definition of done.
 - Keep humans accountable for architecture, irreversible data changes, production release, security exceptions, licensing/IP decisions, and client commitments.

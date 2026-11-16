@@ -110,7 +110,9 @@ def preflight(cfg):
     if cfg.get('plan_contract'):
         import plan_contract
         path=(ROOT/cfg['plan_contract']).resolve()
-        if not path.is_relative_to(ROOT.resolve()) or not git(ROOT,'ls-files','--',cfg['plan_contract']):
+        if (not path.is_relative_to(ROOT.resolve()) or not path.is_file()
+                or not git(ROOT,'ls-files','--',cfg['plan_contract'])
+                or git(ROOT,'status','--porcelain','--',cfg['plan_contract'])):
             raise Stop('Commit the plan contract inside the repository.')
         result=plan_contract.validate_contract(plan_contract.load_contract(path),ROOT)
         if not result['valid']: raise Stop('; '.join(result['errors']))

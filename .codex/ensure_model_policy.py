@@ -49,8 +49,8 @@ def load_policy(root: Path) -> tuple[dict, str, dict[str, bytes]]:
         raise PolicyError(f"cannot read shipped policy: {exc}") from exc
     if not isinstance(policy, dict) or any(not isinstance(policy.get(k), str) or not policy[k] for k in ("root_model", "review_model")):
         raise PolicyError("policy root_model/review_model must be non-empty strings")
-    if any(policy.get(key) != "gpt-6-luna" for key in ("root_model", "review_model", "execution_model")):
-        raise PolicyError("the Codex default model policy must pin root, review, and execution to gpt-6-luna")
+    if any(policy.get(key) != "gpt-6.1-terra" for key in ("root_model", "review_model", "execution_model")):
+        raise PolicyError("the Codex default model policy must pin root, review, and execution to gpt-6.1-terra")
     effort = policy.get("reasoning_effort")
     if effort != "medium":
         raise PolicyError("the Codex default reasoning_effort must be medium (high needs a recorded reason)")
@@ -113,10 +113,17 @@ def root_scalar(config_text: str, key: str) -> str | None:
 
 
 def set_root_keys(text: str, policy: dict) -> str:
+    # Preserve the owner's explicit high-reasoning selection. Installing the
+    # default policy must not silently demote an already selected Astra session.
+    selected = tomllib.loads(text) if text.strip() else {}
+    preserve_astra = (selected.get('model') == 'gpt-6-astra'
+                      and selected.get('model_reasoning_effort') == 'high')
     first_table = re.search(r"(?m)^[ \t]*\[", text)
     cut = first_table.start() if first_table else len(text)
     head, tail = text[:cut], text[cut:]
     for key in ROOT_KEYS:
+        if preserve_astra and key in ('model', 'model_reasoning_effort'):
+            continue
         if re.search(rf"(?m)^\s*{re.escape(key)}\.", head):
             raise PolicyError(f"complex dotted root key: {key}")
         matches = list(re.finditer(rf"(?m)^\s*{re.escape(key)}\s*=.*$", head))
@@ -234,10 +241,10 @@ def check(home: Path, root: Path) -> None:
     if not config_path.exists():
         raise PolicyDrift("Codex config.toml is missing")
     parsed = parse_config(config_path)
-    if parsed.get("model") != policy["root_model"] or parsed.get("review_model") != policy["review_model"]:
+    selected = (parsed.get('model'), parsed.get('model_reasoning_effort'))
+    allowed = {(policy['root_model'], policy['reasoning_effort']), ('gpt-6-astra', 'high')}
+    if selected not in allowed or parsed.get("review_model") != policy["review_model"]:
         raise PolicyDrift("root model policy drift")
-    if parsed.get("model_reasoning_effort") != policy["reasoning_effort"]:
-        raise PolicyDrift("root reasoning effort policy drift")
     expected_files = expected(home, policy, policy_text, templates)
     safe_destination(config_path, home)
     safe_destination(home / "AGENTS.md", home)
@@ -246,7 +253,16 @@ def check(home: Path, root: Path) -> None:
     for role in policy["roles"]:
         role_path = home / "agents" / f"{role}.toml"
         safe_destination(role_path, home)
-        if not role_path.exists() or role_path.read_bytes() != templates[role]:
+        if not role_path.exists():
+            raise PolicyDrift(f"role template drift: {role}")
+        # Formatting and platform line endings do not change TOML semantics.
+        # expected() rejects extra settings and changed developer instructions.
+        try:
+            actual_role = tomllib.loads(role_path.read_text(encoding="utf-8"))
+            expected_role = tomllib.loads(templates[role].decode("utf-8"))
+        except (OSError, UnicodeError, tomllib.TOMLDecodeError) as exc:
+            raise PolicyError(f"invalid existing role file {role}: {exc}") from exc
+        if actual_role != expected_role:
             raise PolicyDrift(f"role template drift: {role}")
     doc = home / "AGENTS.md"
     if not doc.exists() or merge_agents_doc(doc.read_text(encoding="utf-8"), policy_text).encode() != doc.read_bytes():

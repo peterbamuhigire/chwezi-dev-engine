@@ -46,6 +46,19 @@ means pass. When inputs change, mark dependent evidence stale and rerun only
 affected checks. An attempted command, edit, commit, or phase is activity; it
 does not prove its acceptance outcome.
 
+## Changes to approved intent
+
+Keep task definitions separate from executor progress. An executor may update
+states and evidence but may not remove scope, dependencies, criteria or checks to
+turn a failed outcome into a pass. Record proposed changes with their reason,
+affected tasks/evidence and owner decision. Mark affected evidence stale.
+
+With an optional JSON sidecar, the driver fingerprints definitions and refuses
+drift. Commit the sidecar with the plan before a run. Reconcile an unfinished
+operation before deliberately starting against revised intent. Test code and
+verification configuration still need review: a stable command is not proof of
+a stable oracle. A Markdown-only plan has no task-definition fingerprint.
+
 ## Ordered work
 
 Use stable task IDs that survive reordering. Name prerequisite IDs and owned

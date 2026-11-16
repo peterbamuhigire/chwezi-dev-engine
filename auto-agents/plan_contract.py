@@ -332,6 +332,25 @@ def load_contract(path: str | Path) -> Any:
         raise ContractError(f"cannot load contract JSON: {exc}") from exc
 
 
+def definition_digest(data: dict) -> str:
+    """Fingerprint validated task intent, excluding executor state and evidence.
+
+    Reordering records does not change intent. This detects drift; it does not
+    enforce permissions against an executor that can alter the supervisor host.
+    """
+    definitions = []
+    for task in data['tasks']:
+        definition = {key: value for key, value in task.items() if key not in {'state', 'evidence'}}
+        definition['depends_on'] = sorted(definition['depends_on'])
+        definition['scope'] = sorted(definition['scope'])
+        definition['acceptance'] = sorted(definition['acceptance'], key=lambda item: item['id'])
+        definitions.append(definition)
+    encoded = json.dumps({'schema_version': data['schema_version'],
+                          'tasks': sorted(definitions, key=lambda item: item['id'])},
+                         sort_keys=True, separators=(',', ':'), ensure_ascii=True)
+    return hashlib.sha256(encoded.encode('utf-8')).hexdigest()
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("contract", help="optional plan contract JSON")

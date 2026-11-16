@@ -44,8 +44,16 @@ def write_json(path, value):
 
 
 def read_json(path):
-    # Corruption is an explicit failure, not an empty/finished run.
-    return json.loads(Path(path).read_text(encoding='utf-8'))
+    # Retry only a Windows sharing denial on this read, never the saved action.
+    # Missing/corrupt evidence and persistent denial remain explicit failures.
+    path = Path(path)
+    for attempt in range(8):
+        try:
+            return json.loads(path.read_text(encoding='utf-8'))
+        except PermissionError:
+            if os.name != 'nt' or attempt == 7:
+                raise
+            time.sleep(0.01 * (attempt + 1))
 
 
 class Busy(RuntimeError):

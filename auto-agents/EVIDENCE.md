@@ -1,3 +1,48 @@
+# Live owner intent and receipt reads: 16 November 2026
+
+Release 2.1.1. The full Windows runtime suite passed **78 tests in 486.008
+seconds** after the final behavioral changes. New cases cover owner-plan or
+contract changes during a run, both provider profiles, prepared/active operation
+recovery, unrelated owner work, and transient/persistent receipt-read denial.
+The active-recovery case uses mocked inspection/wait; it is not a live crash test.
+
+Owner inputs are rechecked at operation boundaries and before checkpoint
+acceptance. An already active job may finish; CANCEL remains the immediate-stop
+control. These checks are not atomic revocation or a hostile-host boundary.
+
+Windows PermissionError reads receive up to eight attempts with 0.28 seconds
+of total requested backoff. Only the local read is retried, never the job.
+Missing files, corrupt JSON and persistent denial remain failures. Injected
+denial regressions failed before the fix and passed afterward. One real local
+job executed once; a simulated denial while rereading its completed receipt did
+not launch it again. The original denial's lock holder and real contention
+behavior under other host conditions remain NOT_ASSESSED.
+
+Independent read-only review found no confirmed material defect and identified
+the simulation limits above. No new live provider run, physical power-cut test,
+deployment, schedule or model/permission change is inferred. Earlier evidence
+below remains historical, tied to its stated version and scope.
+
+# Approved-contract regression evidence: 16 November 2026
+
+Release 2.1.0. The final full Windows runtime suite passed **68 tests in 310.926 seconds**, including the recovery-context regression accepted in independent review.
+Disposable Git fixtures and fake agents exercise dirty owner contracts, worker
+acceptance-definition changes under both Codex and Claude runner profiles, and
+legitimate state/evidence progress. No live provider implementation or external
+side effect is inferred from these fixtures. Task metadata remains an assertion;
+independent configured verification and actual-diff review remain necessary.
+
+The Codex project default is now `gpt-6.1-terra`, medium, by the owner's explicit
+16 November decision. `gpt-6-astra`, high, remains explicitly selected only.
+Claude arguments, runtime permissions and publication authority are unchanged.
+The older smoke results below describe the models actually tested at that time;
+they are not new Terra throughput or cost evidence.
+
+Known limits: a fingerprint detects drift, not a privileged actor rewriting its
+own tools; unchanged commands may run weakened test code. Physical power loss,
+live quota resets, multi-hour execution and comparative efficiency remain
+NOT_ASSESSED. The owning engine's Kaizen record holds the current review result.
+
 # Unattended execution Kaizen evidence: 2026-11-15
 
 Scope: shared source tools and relevant skills in the four owner-named development/coordinator/SDLC engines. This update does not run a client implementation plan or install a startup task. Historical evidence below remains dated to its original revision.

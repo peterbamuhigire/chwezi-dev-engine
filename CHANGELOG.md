@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-16 - Supervised delivery and Terra defaults
+
+- Connected customer evidence, owner-approved acceptance, bounded review queues, recovery and release proof through the existing AI-assisted development skill.
+- Replaced Codex Luna defaults with GPT-6.1 Terra/medium; retained explicitly selected Astra/high and preserved Claude settings. Model checks accept equivalent TOML formatting while rejecting semantic drift.
+- Integrated the reviewed approved-intent runtime guard through managed updates. Evidence and limits: [Kaizen record](docs/kaizen/2026-11-16-supervised-software-factory.md).
+
 ## 2026-11-15 - Resumable plan execution and specialist evidence
 
 - Improved execution-plan-scripts, ai-assisted-development, coding-agent-optimization and implementation-status-auditor: stable task contracts, capability checks, revision-bound evidence, recovery and compact handoffs. Moved detailed prompt examples into an on-demand reference; removed arbitrary task/fan-out quotas and routine phase confirmation pauses.

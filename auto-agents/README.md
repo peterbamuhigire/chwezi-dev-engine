@@ -4,14 +4,16 @@ This is a sequential, project-local runner for Codex and Claude Code. It uses fr
 
 ## Current capabilities and evidence
 
-Release **2.0.1**, checked on **15 November 2026**, provides:
+Release **2.1.1**, checked on **16 November 2026**, provides:
 
 - Separate agent-session, verification-job and overall run budgets, with expensive checks reserved for completion candidates when configured.
 - Persisted job identity, verified revisions, quota-wait probes and recovery records. Reattach to a running check after observer failure; reconcile interrupted work under the declared replay policy.
 - A descriptive watch with the current operation, gate, checkpoint age, wait/retry reason, logs and optional reported task counts.
 - Optional task-contract validation, separate Codex/Claude argument profiles, PowerShell/CMD launchers and a preview-first Windows logon-resume helper.
 
-The shared runtime passed **64 tests** on Windows (2.0.0) and **66 tests** on macOS with Python 3.9.6 (2.0.1, three platform-specific skips). Boot identity comes from `/proc` on Linux, PowerShell on Windows and `sysctl` (`kern.bootsessionuuid`, else `kern.boottime`) on macOS and BSD. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
+The runtime passed **78 tests** on Windows. Regressions cover owner-intent changes during execution, prepared/active recovery, and receipt-read denial without job replay. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
+
+The upstream 2.0.1 macOS/BSD boot-identity fix is retained: `sysctl` supplies `kern.bootsessionuuid`, falling back to `kern.boottime`. Its dated macOS test result is preserved in EVIDENCE.md; this integration is validated separately on Windows.
 
 ## One-command launcher
 
@@ -21,7 +23,7 @@ From this `auto-agents` directory, run `./run.ps1` in PowerShell or `run.cmd` in
 
 Commit the tools and a bounded plan under `docs/plans/` (or the existing configured plan path). Use [PLAN-TEMPLATE.md](PLAN-TEMPLATE.md) for stable tasks, dependencies, acceptance criteria and a compact handoff. Configure `auto-agents/config.json`; a generic installation must configure meaningful `verify` commands. These four engine copies include baseline verification profiles and a deliberately blocked setup plan; select a real owner-authorised plan before starting.
 
-- `runner`: `codex` or `claude`; `runner_args`: fallback CLI arguments. Optional `runner_args_by_runner` selects separate argument lists for each provider, so Codex-specific flags never leak into Claude. The engine profiles pin newly started Codex runs to the owner's Luna/medium default; the runtime code itself does not select a model.
+- `runner`: `codex` or `claude`; `runner_args`: fallback CLI arguments. Optional `runner_args_by_runner` selects separate argument lists for each provider, so Codex-specific flags never leak into Claude. The engine profiles pin newly started Codex runs to the owner's GPT-6.1 Terra/medium default; the runtime code itself does not select a model.
 - `plan`: committed relative Markdown path. First line `STATUS: DONE` requests completion verification; `STATUS: BLOCKED - reason` records a blocker.
 - `verify`: nonempty command argument arrays for checks appropriate to each slice.
 - `final_verify`: optional command arrays run on completion candidates. Put an expensive full gate here when it is only needed at completion. For example, `["composer", "check"]` is one command array; confirm the actual project's command and safe test environment first.
@@ -36,6 +38,31 @@ Commit the tools and a bounded plan under `docs/plans/` (or the existing configu
 - `login_mode`: `plan` removes OPENAI_API_KEY, ANTHROPIC_API_KEY and ANTHROPIC_AUTH_TOKEN from the agent environment; `inherit` keeps them. Other credentials remain unchanged. Verify actual login/billing mode separately.
 
 Do not run another orchestrator against the same worktree or shared test resources. Isolate databases and other services across concurrent repositories. Missing executables and invalid contracts fail before a model call; project-specific service/auth readiness still belongs in the plan.
+
+## Preserve the approved task definitions
+
+When `plan_contract` is configured, both the Markdown plan and JSON sidecar must
+be committed and clean in the owner checkout. The run records the sidecar's Git
+blob and a canonical fingerprint of task IDs, titles, dependencies, write scopes
+and acceptance specifications. Worker changes to those definitions block before
+the candidate is accepted. Updates to task state and evidence remain permitted;
+list ordering alone does not change the definitions.
+
+Owner input checks also run between operations. A changed, deleted or dirty
+plan/sidecar blocks a new job and candidate acceptance; unrelated checkout
+changes remain permitted. An active job is observed to its receipt. These
+discrete checks cannot undo a completed effect or catch an edit restored between
+checks. Use `cancel` to request termination of an active job.
+
+Changing the owner sidecar during an unfinished run also blocks and preserves
+recovery evidence. Reconcile the existing operation, record the owner's decision and
+re-baseline through a deliberate new run; do not delete state or silently adopt
+a changed criterion. Without a sidecar this extra definition check is unavailable.
+
+This is a drift check, not a security boundary or proof that the tests are good.
+The executor may have permission to edit test files, the Markdown plan or tools;
+review the real diff and verification configuration for weakened oracles and
+unauthorised effects. Actual permissions and independent review still govern.
 
 ## Run and observe
 

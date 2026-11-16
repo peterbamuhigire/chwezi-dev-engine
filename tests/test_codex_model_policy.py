@@ -49,10 +49,34 @@ class CodexModelPolicyTests(unittest.TestCase):
             self.assertEqual(path.read_bytes(), data)
             self.assertEqual(path.stat().st_mtime_ns, mtime)
 
+    def test_explicit_astra_high_is_preserved_with_terra_workers(self):
+        self.home.mkdir(parents=True)
+        (self.home / 'config.toml').write_text(
+            'model = "gpt-6-astra"\nmodel_reasoning_effort = "high"\n', encoding='utf8')
+        self.assertEqual(self.run_cli('--apply'), 0)
+        self.assertEqual(self.run_cli('--check'), 0)
+        parsed = MODULE.parse_config(self.home / 'config.toml')
+        self.assertEqual(parsed['model'], 'gpt-6-astra')
+        self.assertEqual(parsed['model_reasoning_effort'], 'high')
+        self.assertEqual(parsed['review_model'], 'gpt-6.1-terra')
+        worker = MODULE.parse_config(self.home / 'agents/worker.toml')
+        self.assertEqual(worker['model'], 'gpt-6.1-terra')
+        self.assertEqual(worker['model_reasoning_effort'], 'medium')
+
     def test_missing_config_check_is_error_and_claude_is_noop(self):
         self.assertEqual(self.run_cli("--check"), 1)
         self.assertEqual(MODULE.main(["--apply", "--runtime", "claude", "--codex-home", str(self.home)]), 0)
         self.assertFalse(self.home.exists())
+
+    def test_role_line_endings_do_not_hide_real_model_drift(self):
+        self.assertEqual(self.run_cli('--apply'), 0)
+        role = self.home / 'agents/worker.toml'
+        role.write_bytes(role.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
+        before = role.read_bytes()
+        self.assertEqual(self.run_cli('--check'), 0)
+        self.assertEqual(role.read_bytes(), before)
+        role.write_bytes(before.replace(b'gpt-6.1-terra', b'wrong-model'))
+        self.assertNotEqual(self.run_cli('--check'), 0)
 
     def test_malformed_config_fails_without_writes(self):
         self.home.mkdir(parents=True)

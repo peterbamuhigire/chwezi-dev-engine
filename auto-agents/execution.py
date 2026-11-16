@@ -96,6 +96,24 @@ class Execution:
             self.preserve_journal = True
             self.fail('The owner checkout plan changed; reconcile its new intent with the saved run before resuming.')
         self.state['root_plan_blob'] = root_plan_blob
+        if cfg.get('plan_contract'):
+            import plan_contract
+            name = cfg['plan_contract']
+            owner_path = (a.ROOT / name).resolve()
+            if (not owner_path.is_relative_to(a.ROOT.resolve()) or not owner_path.is_file()
+                    or not a.git(a.ROOT, 'ls-files', '--', name)
+                    or a.git(a.ROOT, 'status', '--porcelain', '--', name)):
+                self.fail('Commit the plan contract inside the owner repository before starting.')
+            owner_blob = a.git(a.ROOT, 'rev-parse', 'HEAD:' + name)
+            if self.state.get('root_contract_blob', owner_blob) != owner_blob:
+                self.preserve_journal = True
+                self.fail('The owner plan contract changed; reconcile its new intent with the saved run before resuming.')
+            owner_data = plan_contract.load_contract(owner_path)
+            owner_result = plan_contract.validate_contract(owner_data, a.ROOT)
+            if not owner_result['valid']:
+                self.fail('Invalid owner plan contract: ' + '; '.join(owner_result['errors']))
+            self.state['root_contract_blob'] = owner_blob
+            self.state['contract_definition_digest'] = plan_contract.definition_digest(owner_data)
         boot = durable.boot_identity()
         previous_boot = self.state.get('boot_identity')
         if previous and (not boot or not previous_boot or boot != previous_boot) and self.pending_path.exists():
@@ -158,13 +176,30 @@ class Execution:
         result = plan_contract.completion_readiness(data, self.work)
         if not result['valid']:
             self.fail('Invalid plan contract: ' + '; '.join(result['errors']))
+        if plan_contract.definition_digest(data) != self.state.get('contract_definition_digest'):
+            self.fail('Plan contract changed approved task definitions; return the scope or acceptance change to the owner.')
         if require_complete and not result['completion_ready']:
             self.fail('STATUS: DONE conflicts with incomplete plan-contract tasks or evidence.')
         self.state['plan_contract'] = name
 
+    def check_owner_baseline(self):
+        """Detect changed owner inputs without replacing an in-flight operation."""
+        inputs = [(self.cfg['plan'], self.state.get('root_plan_blob'))]
+        if self.cfg.get('plan_contract'):
+            inputs.append((self.cfg['plan_contract'], self.state.get('root_contract_blob')))
+        root = self.a.ROOT.resolve()
+        for name, expected_blob in inputs:
+            file = (root / name).resolve()
+            unchanged = (file.is_relative_to(root) and file.is_file()
+                         and self.a.git(root, 'ls-files', '--', name)
+                         and not self.a.git(root, 'status', '--porcelain', '--', name))
+            if not unchanged or self.a.git(root, 'rev-parse', 'HEAD:' + name) != expected_blob:
+                self.fail('Owner input changed during execution; reconcile the plan or contract before continuing.')
+
     def job(self, kind, argv, timeout, input_text=None):
         op = self.state.get('operation')
         if op is None:
+            self.check_owner_baseline()
             op = {'kind': kind, 'id': uuid.uuid4().hex, 'before': self.head(), 'created_at': time.time(),
                   'gate_index': self.state.get('gate_index')}
             self.save(operation=op)
@@ -180,9 +215,10 @@ class Execution:
         else:
             durable.prepare(folder, argv, self.work, timeout, input_text,
                             self.cfg.get('login_mode', 'plan') if kind == 'agent' else 'inherit')
-        if durable.inspect(folder)['state'] == 'prepared' and (
-                time.time() >= self.state['deadline'] or (self.base / 'STOP').exists()):
-            self.fail('Saved job was never launched; STOP or expired run budget prevents a new launch.')
+        if durable.inspect(folder)['state'] == 'prepared':
+            self.check_owner_baseline()
+            if time.time() >= self.state['deadline'] or (self.base / 'STOP').exists():
+                self.fail('Saved job was never launched; STOP or expired run budget prevents a new launch.')
         self.save(kind, '', job_id=op['id'], log=str(folder / 'output.log'), action=argv[0])
         last = [0.0]
         def observe(status):
@@ -192,6 +228,7 @@ class Execution:
                 last[0] = time.monotonic()
         result = durable.wait(folder, observe=observe, cancel=lambda: (self.base / 'CANCEL').exists())
         self.event(kind + '_receipt', job_id=op['id'], outcome=result['state'], exit=result.get('exit_code'))
+        self.check_owner_baseline()
         return result, durable.tail(folder / 'output.log'), op
 
     def clear_operation(self, **fields):
@@ -258,6 +295,8 @@ class Execution:
             if not self.state.get('operation') and (not self.wait_quota() or time.time() >= self.state['deadline'] or (self.base / 'STOP').exists()):
                 self.save('stopped', 'STOP requested' if (self.base / 'STOP').exists() else 'Run time budget reached')
                 break
+            if not self.state.get('operation'):
+                self.check_owner_baseline()
             pending = durable.read_json(self.pending_path) if self.pending_path.exists() else None
             checkpoint = durable.read_json(self.checkpoint)
             verified = checkpoint['head']
@@ -311,6 +350,9 @@ class Execution:
                     if self.state['session'] >= cfg['max_sessions']:
                         self.save('stopped', 'Session limit reached')
                         break
+                    # Validate retained recovery context before another worker
+                    # can consume it; reattachment keeps its original job spec.
+                    self.contract()
                     self.save(session=self.state['session'] + 1)
                 result, output, op = self.job('agent', self.agent, min(cfg['session_timeout_seconds'], max(1, self.state['deadline'] - time.time())), self.prompt(pending))
                 if result['state'] != 'passed':
@@ -343,6 +385,8 @@ class Execution:
 
     def verify(self, pending):
         cfg, after = self.cfg, pending['head']
+        if not self.state.get('operation'):
+            self.check_owner_baseline()
         lines = (self.work / cfg['plan']).read_text(encoding='utf-8').splitlines()
         completing = bool(lines and lines[0].strip() == 'STATUS: DONE')
         self.contract(require_complete=completing)
@@ -384,6 +428,7 @@ class Execution:
             if result['state'] != 'passed':
                 self.fail('push failed or interrupted; inspect remote ref and receipt: ' + output[-500:])
             self.event('published', head=after, target=cfg['target_branch'])
+        self.check_owner_baseline()
         durable.write_json(self.checkpoint, {'head': after, 'config_digest': self.state['config_digest'], 'at': stamp(),
                            'run_id': self.state['run_id'], 'accepted_slices': self.state['accepted_slices'] + 1,
                            'operation_id': (self.state.get('operation') or {}).get('id')})

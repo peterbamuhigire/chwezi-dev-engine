@@ -6,7 +6,7 @@ From this `auto-agents` directory, run `./run.ps1` (PowerShell) or `run.cmd` (Co
 
 1. Write/review a bounded Kaizen plan in `docs/plans/`, with task IDs, dependencies, write ownership, acceptance criteria and recovery notes. Commit it and the required tools. The setup PLAN.md deliberately blocks execution until a real plan is selected.
 2. Set `plan` in `config.json` to that repository-relative path. Optionally set `plan_contract` to the matching JSON sidecar. Keep one authoritative task graph; do not hand-maintain two conflicting manifests.
-3. Choose `runner`: `codex` or `claude`. Provider-specific arguments are in `runner_args_by_runner`. Codex defaults to the owner's Luna/medium pin for newly launched sessions; Claude retains its own configured model. This does not change this interactive session or global CLI settings.
+3. Choose `runner`: `codex` or `claude`. Provider-specific arguments are in `runner_args_by_runner`. Codex defaults to the owner's GPT-6.1 Terra/medium pin for newly launched sessions; Claude retains its own configured model. This does not change this interactive session or global CLI settings.
 4. Check login and the test environment, then run `./run.ps1 -Action Check`. This is read-only and makes no model call. Inspect any blocked reason before starting.
 
 ## Engine verification profile

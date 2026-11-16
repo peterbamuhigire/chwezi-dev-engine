@@ -29,7 +29,7 @@ If it reports configuration drift, Peter authorises the bounded
 `--runtime codex --apply` repair, followed by `--check`. The helper backs up
 changes and preserves unrelated settings. If Python or configuration access is
 unavailable, report the limitation; do not replace the user's config wholesale.
-Read `.codex/model-policy.md` for the full contract. Use Luna (`gpt-6-luna`) with medium reasoning by
+Read `.codex/model-policy.md` for the full contract. Use Terra (`gpt-6.1-terra`) with medium reasoning by
 default for orchestration, research, audit, review, and implementation. Use Astra (`gpt-6-astra`) only when
 Peter explicitly selects it for the task; never select or fall back to GPT-5.6. Report unavailable required GPT-6
 models. A running session may need restarting for root settings to apply.
@@ -249,7 +249,7 @@ the task needs the complete manifest inventory, the verified explicit
 invocation is:
 
 ```sh
-codex -m gpt-6-luna -c model_reasoning_effort="medium" -c skills.max_context_tokens=10000 debug prompt-input
+codex -m gpt-6.1-terra -c model_reasoning_effort="medium" -c skills.max_context_tokens=10000 debug prompt-input
 ```
 
 This is an invocation-level setting only; do not mutate user configuration
