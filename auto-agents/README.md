@@ -11,7 +11,7 @@ Release **2.1.1**, checked on **16 November 2026**, provides:
 - A descriptive watch with the current operation, gate, checkpoint age, wait/retry reason, logs and optional reported task counts.
 - Optional task-contract validation, separate Codex/Claude argument profiles, PowerShell/CMD launchers and a preview-first Windows logon-resume helper.
 
-The runtime passed **78 tests** on Windows. Regressions cover owner-intent changes during execution, prepared/active recovery, and receipt-read denial without job replay. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
+The integrated runtime ran **80 tests** on Windows: **79 passed, 1 skipped**. Regressions cover owner-intent changes during execution, prepared/active recovery, and receipt-read denial without job replay. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
 
 The upstream 2.0.1 macOS/BSD boot-identity fix is retained: `sysctl` supplies `kern.bootsessionuuid`, falling back to `kern.boottime`. Its dated macOS test result is preserved in EVIDENCE.md; this integration is validated separately on Windows.
 

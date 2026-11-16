@@ -1,3 +1,17 @@
+# Publication integration: 16 November 2026
+
+The owner authorised commits and pushes to main after the earlier hold.
+The incoming 2.0.1 macOS/BSD boot-identity fix and its two tests were retained
+alongside the 2.1.1 owner-intent and receipt-read hardening. Documentation
+conflicts retained both dated evidence records; no published history was rewritten.
+
+The combined Windows suite ran **80 tests in 361.555 seconds**:
+**79 passed, 1 skipped**. Command: `python -B -m unittest discover
+-s auto-agents/tests`. The skipped test requires a real Mac; the stubbed macOS
+parsing/fallback test passed. This is not fresh live macOS or reboot evidence.
+Managed hashes verify and project config, PLAN.md and ENGINE.md remain unchanged.
+The earlier suite counts below describe their pre-integration snapshots.
+
 # Live owner intent and receipt reads: 16 November 2026
 
 Release 2.1.1. The full Windows runtime suite passed **78 tests in 486.008
