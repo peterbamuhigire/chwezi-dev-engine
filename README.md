@@ -15,7 +15,7 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 
 - **170 active skills** in 18 categories, plus 78 retired names kept as redirects.
 - **168 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
-- **Auto-agents 2.2.3** supports sequential execution and optional parallel lanes, with separate full-verification and integration-check slots. [Current runner capabilities and evidence](docs/updates/2026-11-17-community-capabilities.md).
+- **Auto-agents 2.2.6** adds deep dependency validation to the existing sequential runner and optional parallel lanes. [Runner capabilities and evidence](docs/updates/2026-11-17-community-capabilities.md).
 - **248 routing fixtures.** On 2026-11-17 the expected skill ranks first for 227 (91.5%) and in the top three for all 248. The test matches words in skill descriptions, so it is not live routing.
 - **277 tests pass, 3 are skipped** (Windows, 2026-11-17; `python -B -X utf8 -m pytest tests -q -p no:cacheprovider`). The separate runtime suite retains its dated evidence below.
 - **75 dated source records** back volatile facts. On 2026-11-17, the CI check reports 9 overdue records and 53 warnings; currentness is open (see [Date-triggered gates](#date-triggered-gates)).
@@ -117,7 +117,7 @@ Use this engine when software work needs a repeatable method and evidence a revi
 
 Every skill is listed in the [skill catalogue](docs/skill-catalogue.md).
 
-For an authorised multi-session plan, Auto-agents 2.2.3 starts fresh Codex or Claude
+For an authorised multi-session plan, Auto-agents starts fresh Codex or Claude
 sessions, supervises verification jobs and records recovery state. Execution is
 sequential unless optional lanes are configured. Each lane has its own plan,
 worktree, branch and state; full gates and integration quick checks have separate

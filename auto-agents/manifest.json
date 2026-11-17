@@ -1,5 +1,5 @@
 {
-  "version": "2.2.5",
+  "version": "2.2.6",
   "hash_mode": "sha256-text-lf-v1",
   "files": {
     "EVIDENCE.md": "e90b0f8a3f4cc36b9284ea58b64a4fa8513fcf718b6d2abbb39e36d4fd45223a",
@@ -9,7 +9,7 @@
     "driver.py": "71bb51d73d43b6e1c13fcd217334c65e94365b8b054d5b81b0c2d796618ae281",
     "durable.py": "e0f6de124e77a729396af9e2f276da5d3bb8d91ab793f7e094a58468bbd99432",
     "execution.py": "b0ae58b382d0f911aeab0e736fb498e0afa4ad41a383426ce7f40d8381f1bf0c",
-    "plan_contract.py": "321c726b7735f2e8d38b80e708d42741e07e23ee08f9d7138668bc3ce6856884",
+    "plan_contract.py": "303bfee9be2e0e60e1fcc8023dc202a9692a816c35631b24070de38f8a2be2f5",
     "propagate.py": "612213c34e95995f7682315d3947d8aaaf8b08cb84650635e71e286fac244d40",
     "register-resume.ps1": "563ba051ea147ac1ee1fa51b531de7dc5e84885d7cbc324cc334da0f48a36945",
     "release.py": "5b53c7c22e431791aecfd8588bcf64f7c05f5efc4fbf22381bf0318bb3b60a01",
@@ -21,7 +21,7 @@
     "tests/test_lanes.py": "94fb7869043e1ea3dd9300ce7b2f436309d8e8126719e8d88f6a2c98050f8d2c",
     "tests/test_launcher.py": "3a6942bfd2b5695c60b51f21b8123e74fd45a9f8dffa9a56783b594878734a4c",
     "tests/test_live_owner.py": "ec5015ffb962e9f1ad2b130ecf6b3708cdf4e246f8a17fd1b2bb95d77c953500",
-    "tests/test_plan_contract.py": "2aced7d53f57de2c4ce448e09925b7b08324d2824ff0a869d268339d39331f80",
+    "tests/test_plan_contract.py": "7797220057688c08d38243ae2929ccbc8b3c33f37710c5885b77eb6a65e8f8ad",
     "tests/test_provider_limit.py": "0e6b03cf36f7ee89dd051f82580dae5b869f4a859aadafa2d62c85227e9d6d70",
     "tests/test_receipt_reads.py": "699a215c67efa4278d219244de4f463881b488d62c9a9d500d69d5a6fd7271c7",
     "tests/test_recovery.py": "e98357f93270259dbd316a56b9c8ebf7962a835f8f8b23049cb698d596224553",

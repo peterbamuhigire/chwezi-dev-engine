@@ -8,6 +8,7 @@ or independent commit verification.
 from __future__ import annotations
 
 import argparse
+from graphlib import CycleError, TopologicalSorter
 import hashlib
 import json
 import re
@@ -188,22 +189,11 @@ def validate_contract(data: Any, root: str | Path) -> dict[str, Any]:
                 if unfinished:
                     raise ContractError(f"{task_id} is {task['state']} before dependencies complete: {', '.join(unfinished)}")
 
-        visiting: set[str] = set()
-        visited: set[str] = set()
-
-        def visit(task_id: str) -> None:
-            if task_id in visiting:
-                raise ContractError(f"dependency cycle includes {task_id}")
-            if task_id in visited:
-                return
-            visiting.add(task_id)
-            for dependency in tasks[task_id]["depends_on"]:
-                visit(dependency)
-            visiting.remove(task_id)
-            visited.add(task_id)
-
-        for task_id in tasks:
-            visit(task_id)
+        # prepare() checks cycles iteratively even for reverse-ordered deep plans.
+        try:
+            TopologicalSorter({key: task["depends_on"] for key, task in tasks.items()}).prepare()
+        except CycleError as exc:
+            raise ContractError(f"dependency cycle includes {exc.args[1][0]}") from exc
 
         evidence_by_task: dict[str, set[str]] = {task_id: set() for task_id in tasks}
         for task_id, task in tasks.items():

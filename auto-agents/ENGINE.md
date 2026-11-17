@@ -4,6 +4,12 @@ From this `auto-agents` directory, run `./run.ps1` (PowerShell) or `run.cmd` (Co
 
 ## Configure the authorised plan
 
+Choose only ready tasks. Check write ownership, migrations and integration capacity before starting concurrent slices.
+
+If work can overlap, choose disjoint owners and identify the first shared acceptance check. If an upstream input changes, identify the dependent results that require revalidation before resuming.
+
+See [Sadhu and Konar, chapter 4](https://doi.org/10.1002/9781119699057.ch4) on individual and joint success and [Graham (1966)](https://doi.org/10.1002/j.1538-7305.1966.tb01709.x) on scheduling with precedence constraints.
+
 1. Write/review a bounded Kaizen plan in `docs/plans/`, with task IDs, dependencies, write ownership, acceptance criteria and recovery notes. Commit it and the required tools. The setup PLAN.md deliberately blocks execution until a real plan is selected.
 2. Set `plan` in `config.json` to that repository-relative path. Optionally set `plan_contract` to the matching JSON sidecar. Keep one authoritative task graph; do not hand-maintain two conflicting manifests.
 3. Choose `runner`: `codex` or `claude`. Provider-specific arguments are in `runner_args_by_runner`. Codex defaults to the owner's GPT-6.1 Terra/medium pin for newly launched sessions; Claude retains its own configured model. This does not change this interactive session or global CLI settings.

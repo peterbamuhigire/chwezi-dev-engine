@@ -93,6 +93,17 @@ class PlanContractTests(unittest.TestCase):
         contract["tasks"][0]["depends_on"] = ["TASK-99"]
         self.assertIn("unknown dependencies", plan_contract.validate_contract(contract, self.root)["errors"][0])
 
+    def test_deep_reverse_ordered_plan_and_cycle(self):
+        template = self.contract()["tasks"][0]
+        tasks = [{**template, "id": f"T{i}",
+                  "depends_on": [f"T{i+1}"] if i < 1099 else [],
+                  "acceptance": [{**template["acceptance"][0], "id": f"AC{i}"}]}
+                 for i in range(1100)]
+        contract = {"schema_version": 1, "tasks": tasks}
+        self.assertTrue(plan_contract.validate_contract(contract, self.root)["valid"])
+        tasks[-1]["depends_on"] = ["T0"]
+        self.assertIn("dependency cycle", plan_contract.validate_contract(contract, self.root)["errors"][0])
+
     def test_dependency_cycle_is_rejected(self):
         contract = self.contract()
         first = contract["tasks"][0]
