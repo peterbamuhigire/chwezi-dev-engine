@@ -472,7 +472,7 @@ class Execution:
                 if pending and pending.get('integration'):
                     if self.rebasing():
                         self.fail('integration session left a rebase in progress; inspect the worktree')
-                    self.check_integration(pending['integration'])
+                    self.check_integration(pending['integration'], pending.get('head'))
                 else:
                     self.check_branch(op['before'])
                 if self.dirty():
@@ -574,19 +574,63 @@ class Execution:
         self.save(verified_head=upstream)
         self.event('synced', head=upstream)
 
-    def check_integration(self, integration):
-        """An integration session may rewrite history only onto the fetched upstream, keeping every lane commit."""
+    def check_integration(self, integration, orig=None):
+        """An integration session may rewrite history only onto the fetched upstream, keeping every lane commit.
+
+        A lane commit may be missing only when the upstream already superseded
+        it: every file it changed was also changed upstream, and the integrated
+        head keeps the upstream version of each of those files (seen when two
+        lanes fixed the same flaky test). Anything else blocks.
+        """
+        upstream = integration['upstream']
         if self.a.git(self.work, 'branch', '--show-current') != self.branch:
             self.fail('integration session changed the driver branch')
-        if not self.ancestor(integration['upstream'], self.head()):
+        if not self.ancestor(upstream, self.head()):
             self.fail('integration session did not rebase onto the fetched upstream')
-        subjects = self.a.git(self.work, 'log', '--reverse', '--format=%s', integration['upstream'] + '..HEAD').splitlines()
+        subjects = self.a.git(self.work, 'log', '--reverse', '--format=%s', upstream + '..HEAD').splitlines()
+        wanted = list(integration['subjects'])
+        superseded = []
         position = 0
         for subject in subjects:
-            if position < len(integration['subjects']) and subject == integration['subjects'][position]:
+            while position < len(wanted) and subject != wanted[position] and self.superseded(wanted[position], upstream, orig):
+                superseded.append(wanted[position])
                 position += 1
-        if position != len(integration['subjects']):
+            if position < len(wanted) and subject == wanted[position]:
+                position += 1
+        while position < len(wanted) and self.superseded(wanted[position], upstream, orig):
+            superseded.append(wanted[position])
+            position += 1
+        if position != len(wanted):
             self.fail('integration session dropped or renamed lane commits; inspect before publishing')
+        if superseded:
+            self.event('integration_superseded', subjects=superseded[:10])
+
+    def superseded(self, subject, upstream, orig):
+        """True when the lane commit `subject` (in the pre-integration history `orig`) is fully replaced upstream."""
+        if not orig:
+            return False
+        base = self.a.git(self.work, 'merge-base', upstream, orig, check=False)
+        if not base:
+            return False
+        commits = [line.split(' ', 1) for line in self.a.git(
+            self.work, 'log', '--format=%H %s', base + '..' + orig, check=False).splitlines() if ' ' in line]
+        matches = [sha for sha, text in commits if text == subject]
+        if len(matches) != 1:
+            return False
+        files = [f for f in self.a.git(self.work, 'diff-tree', '--no-commit-id', '--name-only', '-r', '--root',
+                                        matches[0], check=False).splitlines() if f]
+        if not files:
+            return False
+        upstream_changed = set(self.a.git(self.work, 'diff', '--name-only', base, upstream, check=False).splitlines())
+        for name in files:
+            if name not in upstream_changed:
+                return False
+            if self.blob('HEAD', name) != self.blob(upstream, name):
+                return False
+        return True
+
+    def blob(self, rev, name):
+        return self.a.git(self.work, 'rev-parse', '--verify', '-q', rev + ':' + name, check=False)
 
     def gate_slot(self, saved=None, integration=False):
         """Hold one of the repository's shared gate slots; None when STOP or the budget ends the wait.

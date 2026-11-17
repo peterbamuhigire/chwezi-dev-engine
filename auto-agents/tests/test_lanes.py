@@ -194,6 +194,55 @@ class LaneTests(unittest.TestCase):
         with self.assertRaises(ex.Stop):
             run.check_integration({'upstream': upstream, 'subjects': ['ROW-9: keep me', 'ROW-10: lost']})
 
+    def superseded_fixture(self, upstream_text):
+        """Lane: ROW-1 (a.txt) then a flaky-test repair (t.txt). Upstream changed t.txt meanwhile.
+
+        Returns (run, upstream, orig) with HEAD = upstream + ROW-1 only, as an
+        integration session leaves it after dropping the repair.
+        """
+        ex = self.d
+        from types import SimpleNamespace
+        import execution
+        run = execution.Execution(SimpleNamespace(**vars(ex)), self.cfg, self.base, False)
+        run.state = {'run_id': 'x'}
+        run.work = self.root
+        run.branch = 'main'
+        self.base.mkdir(parents=True, exist_ok=True)
+        (self.root / 't.txt').write_text('old\n'); git(self.root, 'add', 't.txt'); git(self.root, 'commit', '-qm', 'base')
+        base = git(self.root, 'rev-parse', 'HEAD')
+        (self.root / 'a.txt').write_text('a\n'); git(self.root, 'add', 'a.txt'); git(self.root, 'commit', '-qm', 'ROW-1: lane work')
+        (self.root / 't.txt').write_text('lane fix\n'); git(self.root, 'commit', '-qam', 'Gate repair: flaky test')
+        orig = git(self.root, 'rev-parse', 'HEAD')
+        git(self.root, 'checkout', '-q', '-b', 'other', base)
+        if upstream_text is not None:
+            (self.root / 't.txt').write_text(upstream_text); git(self.root, 'commit', '-qam', 'other lane fixed the flaky test')
+        else:
+            (self.root / 'u.txt').write_text('u\n'); git(self.root, 'add', 'u.txt'); git(self.root, 'commit', '-qm', 'other lane unrelated')
+        upstream = git(self.root, 'rev-parse', 'HEAD')
+        git(self.root, 'checkout', '-q', 'main')
+        git(self.root, 'reset', '-q', '--hard', upstream)
+        git(self.root, 'cherry-pick', orig + '~1')
+        return run, upstream, orig
+
+    def test_commit_superseded_upstream_may_be_dropped(self):
+        run, upstream, orig = self.superseded_fixture('upstream fix\n')
+        subjects = ['ROW-1: lane work', 'Gate repair: flaky test']
+        run.check_integration({'upstream': upstream, 'subjects': subjects}, orig)
+        self.assertIn('integration_superseded', [e['event'] for e in self.events()])
+        with self.assertRaises(self.d.Stop):  # without the pre-integration head nothing can be proven
+            run.check_integration({'upstream': upstream, 'subjects': subjects})
+
+    def test_dropped_commit_not_changed_upstream_still_blocks(self):
+        run, upstream, orig = self.superseded_fixture(None)
+        with self.assertRaises(self.d.Stop):
+            run.check_integration({'upstream': upstream, 'subjects': ['ROW-1: lane work', 'Gate repair: flaky test']}, orig)
+
+    def test_dropped_commit_whose_file_differs_from_upstream_blocks(self):
+        run, upstream, orig = self.superseded_fixture('upstream fix\n')
+        (self.root / 't.txt').write_text('something else\n'); git(self.root, 'commit', '-qam', 'ROW-1: lane work, more')
+        with self.assertRaises(self.d.Stop):
+            run.check_integration({'upstream': upstream, 'subjects': ['ROW-1: lane work', 'Gate repair: flaky test']}, orig)
+
     # -- gate slots ----------------------------------------------------
     def test_gate_slots_are_shared_and_stop_aware(self):
         import execution
