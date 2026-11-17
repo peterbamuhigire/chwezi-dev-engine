@@ -18,7 +18,6 @@ AS_OF = date(2026, 10, 31)
 # the 2026-11-05 re-read of the 14 overdue records). Move it, with a note, each time the registers are reconciled.
 # 2026-11-08: moved for the reporting-standard records added that day (OWASP CSV injection, LoC PDF/A-4, quarantined
 # ISO 14289-2); the check passed with 0 findings on that date. The other records were not re-read.
-RECONCILED_ON = date(2026, 11, 8)
 
 
 def source(**changes):
@@ -130,8 +129,8 @@ def test_command_line_exit_codes(tmp_path):
     assert failed.returncode == 1 and "overdue" in failed.stdout
 
 
-def test_repository_registers_pass_on_the_reconciliation_date():
+def test_repository_registers_are_current():
     paths = sorted((ROOT / "docs" / "source-registers").glob("*.json"))
     assert paths
-    result = csr.run(paths, RECONCILED_ON, 14)
+    result = csr.run(paths, date.today(), 14)
     assert result == 0
