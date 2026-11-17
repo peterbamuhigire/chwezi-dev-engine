@@ -48,7 +48,7 @@
   "runner_args_by_runner": {
     "codex": [
       "--model",
-      "gpt-6.1-terra",
+      "gpt-6.2-sol",
       "-c",
       "model_reasoning_effort=\"medium\""
     ],

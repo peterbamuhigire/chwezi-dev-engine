@@ -26,7 +26,7 @@ From this `auto-agents` directory, run `./run.ps1` in PowerShell or `run.cmd` in
 
 Commit the tools and a bounded plan under `docs/plans/` (or the existing configured plan path). Use [PLAN-TEMPLATE.md](PLAN-TEMPLATE.md) for stable tasks, dependencies, acceptance criteria and a compact handoff. Configure `auto-agents/config.json`; a generic installation must configure meaningful `verify` commands. These four engine copies include baseline verification profiles and a deliberately blocked setup plan; select a real owner-authorised plan before starting.
 
-- `runner`: `codex` or `claude`; `runner_args`: fallback CLI arguments. Optional `runner_args_by_runner` selects separate argument lists for each provider, so Codex-specific flags never leak into Claude. The engine profiles pin newly started Codex runs to the owner's GPT-6.1 Terra/medium default; the runtime code itself does not select a model.
+- `runner`: `codex` or `claude`; `runner_args`: fallback CLI arguments. Optional `runner_args_by_runner` selects separate argument lists for each provider, so Codex-specific flags never leak into Claude. Before launching Codex, check the model in the project profile against the active catalogue. The runtime passes the configured arguments to the CLI.
 - `plan`: committed relative Markdown path. First line `STATUS: DONE` requests completion verification; `STATUS: BLOCKED - reason` records a blocker.
 - `verify`: nonempty command argument arrays for checks appropriate to each slice.
 - `final_verify`: optional command arrays run on completion candidates. Put an expensive full gate here when it is only needed at completion. For example, `["composer", "check"]` is one command array; confirm the actual project's command and safe test environment first.

@@ -42,10 +42,10 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 
 - [At a glance](#at-a-glance)
 - [Start here](#start-here)
-- [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard)
-- [Chwezi Reporting and Dashboards Standard](#chwezi-reporting-and-dashboards-standard)
 - [Capabilities](#capabilities)
 - [Find the right skill](#find-the-right-skill)
+- [Chwezi Product Excellence Standard](#chwezi-product-excellence-standard)
+- [Chwezi Reporting and Dashboards Standard](#chwezi-reporting-and-dashboards-standard)
 - [How it works](#how-it-works)
 - [What is inside](#what-is-inside)
 - [Installation](#installation)
@@ -55,41 +55,6 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 - [Date-triggered gates](#date-triggered-gates)
 - [References](#references)
 - [Contributing and licence](#contributing-and-licence)
-
-## Chwezi Product Excellence Standard
-
-The standard binds the UI and UX of every Chwezi app and system on Android, iOS, tablet, desktop and web.
-Its canonical text lives in the Chwezi design engine (`chwezi-design-engine`), in `doctrine/product-excellence-standard.md` and the skill `chwezi-product-excellence-standard`. Resolve that engine from your engine-routing table; never hard-code its path.
-This engine supplies the engineering side, and where a skill here differs from the standard, the standard wins.
-
-- **Binding rule:** the "Chwezi Product Excellence Standard" section of [`AGENTS.md`](AGENTS.md#chwezi-product-excellence-standard-binding-effective-01-nov-2026).
-- **Engineering gates:** [`product-excellence-engineering-gates.md`](skills/frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md) maps each hard gate to tests and CI checks.
-- **Mandatory blocks:** 14 front-end, mobile, desktop, offline, POS and ERP skills carry a cross-reference block. Compose Multiplatform shared UI is the primary mobile stack. Record: [`docs/updates/2026-11-08-product-excellence-standard.md`](docs/updates/2026-11-08-product-excellence-standard.md).
-
-What it governs:
-
-- **13 hard release gates** (`PX-GATE-01` to `PX-GATE-13`), from duplicate records and false confirmation to accessibility and large-text loss. Any open gate blocks release.
-- **The release rule.** PASS needs a weighted score of at least 85, zero open gates and no dimension below 2. A gate whose evidence was not measured counts as open.
-- **13 screen states**, from initial loading to session expired and success, tested by a state-matrix CI check.
-- **Money.** Formatters take decimals from the ISO 4217 minor unit, so UGX shows 0 decimals. The house-style `full` formatters changed from a fixed two.
-- **Offline and low-end Android.** Idempotency keys, queued-versus-confirmed states, and Baseline Profiles with Macrobenchmark on a physical baseline device.
-- **Languages and numbering.** Seven default languages, including Spanish and right-to-left Arabic, in the screenshot matrix. Contiguous document numbering is a hard gate wherever a screen issues numbered documents.
-
-## Chwezi Reporting and Dashboards Standard
-
-The reporting companion to the Product Excellence Standard, adopted on 8 November 2026 (version
-1.0.0, owner Peter Bamuhigire, Chwezi Core Systems). It governs every dashboard, KPI tile, register
-with totals, statement, closeout, scheduled report, A4 PDF or print output, CSV or XLSX export and
-written or AI narrative built from product data. This engine carries a complete local copy, so it
-works without any other repository; the visual layer is maintained in `chwezi-design-engine`.
-
-- **Skill:** [`reporting-and-export-engineering`](skills/saas/reporting-and-export-engineering/SKILL.md),
-  with the local [doctrine](skills/saas/reporting-and-export-engineering/references/reporting-standard-doctrine.md)
-  and every `RPT-<AREA>-NNN` rule in [rules and gates](skills/saas/reporting-and-export-engineering/references/rules-and-gates.md).
-- **Eight hard gates** (`RPT-GATE-01` to `RPT-GATE-08`): reconciliation, undefined metric,
-  ambiguous scope, export leak, unsafe spreadsheet, print failure, ungrounded narrative, unknown
-  shown as known. They add to the PX gates; an open or `NOT_ASSESSED` gate blocks release.
-- **Record:** [`docs/updates/2026-11-08-reporting-and-dashboards-standard.md`](docs/updates/2026-11-08-reporting-and-dashboards-standard.md).
 
 ## Capabilities
 
@@ -137,6 +102,41 @@ Some work belongs to a neighbouring engine:
 - IFRS and IAS rules, statutory values and period close: the [Chwezi Accounting Doctrine](https://github.com/peterbamuhigire/chwezi-accounting-doctrine) engine. This engine implements that treatment in software.
 - Complete website delivery, content and SEO: the Chwezi website engine.
 - Formal SRS and lifecycle specifications: the Chwezi SDLC documentation engine.
+
+## Chwezi Product Excellence Standard
+
+The standard binds the UI and UX of every Chwezi app and system on Android, iOS, tablet, desktop and web.
+Its canonical text lives in the Chwezi design engine (`chwezi-design-engine`), in `doctrine/product-excellence-standard.md` and the skill `chwezi-product-excellence-standard`. Resolve that engine from your engine-routing table; never hard-code its path.
+This engine supplies the engineering side, and where a skill here differs from the standard, the standard wins.
+
+- **Binding rule:** the "Chwezi Product Excellence Standard" section of [`AGENTS.md`](AGENTS.md#chwezi-product-excellence-standard-binding-effective-01-nov-2026).
+- **Engineering gates:** [`product-excellence-engineering-gates.md`](skills/frontend-ux/frontend-architecture/references/product-excellence-engineering-gates.md) maps each hard gate to tests and CI checks.
+- **Mandatory blocks:** 14 front-end, mobile, desktop, offline, POS and ERP skills carry a cross-reference block. Compose Multiplatform shared UI is the primary mobile stack. Record: [`docs/updates/2026-11-08-product-excellence-standard.md`](docs/updates/2026-11-08-product-excellence-standard.md).
+
+What it governs:
+
+- **13 hard release gates** (`PX-GATE-01` to `PX-GATE-13`), from duplicate records and false confirmation to accessibility and large-text loss. Any open gate blocks release.
+- **The release rule.** PASS needs a weighted score of at least 85, zero open gates and no dimension below 2. A gate whose evidence was not measured counts as open.
+- **13 screen states**, from initial loading to session expired and success, tested by a state-matrix CI check.
+- **Money.** Formatters take decimals from the ISO 4217 minor unit, so UGX shows 0 decimals. The house-style `full` formatters changed from a fixed two.
+- **Offline and low-end Android.** Idempotency keys, queued-versus-confirmed states, and Baseline Profiles with Macrobenchmark on a physical baseline device.
+- **Languages and numbering.** Seven default languages, including Spanish and right-to-left Arabic, in the screenshot matrix. Contiguous document numbering is a hard gate wherever a screen issues numbered documents.
+
+## Chwezi Reporting and Dashboards Standard
+
+The reporting companion to the Product Excellence Standard, adopted on 8 November 2026 (version
+1.0.0, owner Peter Bamuhigire, Chwezi Core Systems). It governs every dashboard, KPI tile, register
+with totals, statement, closeout, scheduled report, A4 PDF or print output, CSV or XLSX export and
+written or AI narrative built from product data. This engine carries a complete local copy, so it
+works without any other repository; the visual layer is maintained in `chwezi-design-engine`.
+
+- **Skill:** [`reporting-and-export-engineering`](skills/saas/reporting-and-export-engineering/SKILL.md),
+  with the local [doctrine](skills/saas/reporting-and-export-engineering/references/reporting-standard-doctrine.md)
+  and every `RPT-<AREA>-NNN` rule in [rules and gates](skills/saas/reporting-and-export-engineering/references/rules-and-gates.md).
+- **Eight hard gates** (`RPT-GATE-01` to `RPT-GATE-08`): reconciliation, undefined metric,
+  ambiguous scope, export leak, unsafe spreadsheet, print failure, ungrounded narrative, unknown
+  shown as known. They add to the PX gates; an open or `NOT_ASSESSED` gate blocks release.
+- **Record:** [`docs/updates/2026-11-08-reporting-and-dashboards-standard.md`](docs/updates/2026-11-08-reporting-and-dashboards-standard.md).
 
 ## How it works
 

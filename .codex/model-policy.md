@@ -1,37 +1,46 @@
 ## Codex model and delegation policy
 
-Peter's rule, effective 2026-11-16. Apply only in Codex. Claude and other
-consumers retain their own model selection and all domain-engine capabilities.
+Peter's rule, effective 2026-11-17. Apply only in Codex; this overrides
+generic model-class routing. Other hosts retain their models and domain gates.
 
-- Root/orchestrator, final reviewer, and execution subagents default to
-  `gpt-6.1-terra` with medium reasoning.
-- Use `gpt-6-astra` only when Peter explicitly selects it for a task that needs
-  its additional capability, using high reasoning. Astra is never selected automatically.
-- Every spawned role must explicitly use `gpt-6.1-terra` with medium reasoning
-  unless Peter has manually selected Astra for that task. On hosts that prohibit
-  model overrides with full-history forks, use a bounded-context or no-history
-  fork with a sufficient task brief. Preserve the selected model through nested
-  execution.
+- Prefer `gpt-6.2-sol` with medium reasoning for root/orchestrator, review and
+  execution roles when the active host/account catalogue exposes it. If that
+  surface lacks Sol 6.2, use available `gpt-6.1-terra`/medium and report the
+  fallback. If neither is available, report the model limitation; do not guess
+  a substitute or weaken acceptance checks. An announcement alone is not
+  account or tool availability.
+- `gpt-6.2-astra`/high is the optional model for Peter's explicit selection on
+  demanding tasks. Never escalate to Astra automatically. Preserve a specific
+  owner-selected model, including an older Astra session; do not silently
+  upgrade it. New defaults do not change a running session.
+- Before spawning, check the actual delegation catalogue and role constraints,
+  which can differ from the CLI catalogue. Pin each new role to the available
+  approved model and reasoning level. If overrides require a no-history fork,
+  provide a sufficient bounded brief. Preserve the selected model through
+  nested execution. This policy does not itself authorise delegation.
 - Give each worker its outcome, context, exact scope, file ownership,
-  constraints, acceptance checks and evidence handoff. Use parallel writers
-  only for independent ownership. Keep trivial tasks with the root.
-- On worker failure, record it, inspect the cause, narrow or retry the task,
-  and return unresolved decisions to the user. Never silently substitute
-  another model or claim delegation occurred without an actual spawn.
+  constraints, acceptance checks and evidence handoff. Parallel writers need
+  independent ownership. Keep trivial tasks with the root.
+- Disclose missing files, unavailable tools/models, failed calls and other
+  blockers promptly, with the affected outcome and next viable step. Record
+  worker failures, inspect the cause and narrow or retry safely. Never imply
+  delegation, verification or completion without observed evidence.
 - Before final delivery, the assigned model reviews the real diff and relevant
-  tests, integrates material findings, resolves conflicts and waits for required
+  tests, resolves material findings and conflicts, and waits for required
   agents. Missing tests, sources or reviewers remain `NOT_ASSESSED`.
-- Every Kaizen operation MUST check current official model releases and the
-  active runtime/account model catalogue before retaining or proposing changes
-  to the model policy. Record dated source URLs, model IDs, availability,
-  task-fit evidence, cost/latency/quality considerations, uncertainties and a
-  retain/change decision. Newer does not automatically mean better. Use the
-  Digital Research currentness gate; do not infer latest status from memory.
-- These pins remain until Peter authorises a verified replacement. A new
-  release triggers evaluation, not a silent model switch. If current sources
-  or model selection are unavailable, report the limitation and leave the
-  model evaluation `NOT_ASSESSED`; do not weaken the engine's other gates.
-- Configuration applies to newly started sessions; do not claim a running
-  root changed models because a file was edited. Report any session override
-  or unavailable pin. This is a configuration and agent-instruction policy,
-  not an administrative restriction on the user's model controls.
+- Every Kaizen checks current official releases AND the active runtime/account
+  catalogue. Record dated URLs, model IDs, availability by surface, task fit,
+  cost/latency/quality evidence and uncertainty, and a retain/change decision.
+  Use the retained research currentness workflow. Vendor benchmarks and API
+  token prices do not establish local task savings or subscription charges.
+- Keep stable prompt prefixes unchanged where the host supports it; append
+  new instructions and task updates. Never let cache optimisation override
+  current user instructions, compaction needs, privacy or correctness.
+- These defaults remain until Peter authorises a verified replacement. Recheck
+  on a release, catalogue or host change. Missing evidence stays `NOT_ASSESSED`.
+  Preserve permissions, billing mode, tools, data boundaries and domain gates;
+  no model update authorises publishing or administrative changes.
+
+Release evidence checked 17 November 2026:
+[OpenAI announcement](https://openai.com/index/introducing-gpt-6-2-astra-sol/).
+Account availability must still be checked on the actual execution surface.

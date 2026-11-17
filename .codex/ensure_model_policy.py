@@ -21,6 +21,7 @@ from pathlib import Path
 
 START = "<!-- chwezi-codex-model-policy:start -->"
 END = "<!-- chwezi-codex-model-policy:end -->"
+ASTRA_MODELS = {"gpt-6-astra", "gpt-6.2-astra"}
 ROOT_KEYS = ("model", "review_model", "model_reasoning_effort")
 POLICY_KEYS = {
     "model": "root_model",
@@ -49,8 +50,12 @@ def load_policy(root: Path) -> tuple[dict, str, dict[str, bytes]]:
         raise PolicyError(f"cannot read shipped policy: {exc}") from exc
     if not isinstance(policy, dict) or any(not isinstance(policy.get(k), str) or not policy[k] for k in ("root_model", "review_model")):
         raise PolicyError("policy root_model/review_model must be non-empty strings")
-    if any(policy.get(key) != "gpt-6.1-terra" for key in ("root_model", "review_model", "execution_model")):
-        raise PolicyError("the Codex default model policy must pin root, review, and execution to gpt-6.1-terra")
+    if any(policy.get(key) != "gpt-6.2-sol" for key in ("root_model", "review_model", "execution_model")):
+        raise PolicyError("the preferred Codex root, review, and execution model must be gpt-6.2-sol")
+    if policy.get("fallback_model") != "gpt-6.1-terra" or policy.get("optional_model") != "gpt-6.2-astra":
+        raise PolicyError("unapproved fallback or optional model")
+    if policy.get("catalogue_max_age_hours") != 24:
+        raise PolicyError("catalogue freshness policy must be 24 hours")
     effort = policy.get("reasoning_effort")
     if effort != "medium":
         raise PolicyError("the Codex default reasoning_effort must be medium (high needs a recorded reason)")
@@ -71,6 +76,42 @@ def load_policy(root: Path) -> tuple[dict, str, dict[str, bytes]]:
         if parsed.get("name") != role or parsed.get("model") != expected_model or parsed.get("model_reasoning_effort") != effort:
             raise PolicyError(f"role template contract mismatch: {role}")
         templates[role] = data
+    return policy, text, templates
+
+
+def resolve_policy(home: Path, root: Path) -> tuple[dict, str, dict[str, bytes]]:
+    """Resolve only approved defaults using the host's recent account catalogue.
+
+    This is configuration evidence, not a model-call or delegation entitlement
+    check. Refuse unknown/stale catalogues rather than asserting availability.
+    """
+    policy, text, templates = load_policy(root)
+    try:
+        catalogue = json.loads((home / "models_cache.json").read_text(encoding="utf-8"))
+        fetched = dt.datetime.fromisoformat(catalogue["fetched_at"].replace("Z", "+00:00"))
+        age = dt.datetime.now(dt.timezone.utc) - fetched
+        models = catalogue["models"]
+        if not isinstance(models, list):
+            raise ValueError("models is not a list")
+        if age.total_seconds() < -300 or age > dt.timedelta(hours=policy["catalogue_max_age_hours"]):
+            raise ValueError("catalogue is stale or future-dated")
+        available = {
+            row["slug"] for row in models
+            if row.get("visibility") == "list"
+            and any(level.get("effort") == policy["reasoning_effort"]
+                    for level in row.get("supported_reasoning_levels", []))
+        }
+    except (OSError, UnicodeError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        raise PolicyError(f"model availability NOT_ASSESSED; refresh the Codex account catalogue: {exc}") from exc
+    preferred, fallback = policy["root_model"], policy["fallback_model"]
+    selected = preferred if preferred in available else fallback if fallback in available else None
+    if selected is None:
+        raise PolicyError("neither approved default is available with medium reasoning")
+    if selected != preferred:
+        print(f"FALLBACK: {preferred} unavailable in this catalogue; using {selected}/medium", file=sys.stderr)
+        for key in ("root_model", "review_model", "execution_model"):
+            policy[key] = selected
+        templates = {role: data.replace(preferred.encode(), selected.encode()) for role, data in templates.items()}
     return policy, text, templates
 
 
@@ -113,11 +154,8 @@ def root_scalar(config_text: str, key: str) -> str | None:
 
 
 def set_root_keys(text: str, policy: dict) -> str:
-    # Preserve the owner's explicit high-reasoning selection. Installing the
-    # default policy must not silently demote an already selected Astra session.
     selected = tomllib.loads(text) if text.strip() else {}
-    preserve_astra = (selected.get('model') == 'gpt-6-astra'
-                      and selected.get('model_reasoning_effort') == 'high')
+    preserve_astra = selected.get("model") in ASTRA_MODELS
     first_table = re.search(r"(?m)^[ \t]*\[", text)
     cut = first_table.start() if first_table else len(text)
     head, tail = text[:cut], text[cut:]
@@ -211,7 +249,11 @@ def expected(home: Path, policy: dict, policy_text: str, templates: dict[str, by
                 shipped = tomllib.loads(data.decode("utf-8"))
             except (OSError, UnicodeError, tomllib.TOMLDecodeError) as exc:
                 raise PolicyError(f"invalid existing role file {role}: {exc}") from exc
-            if set(existing) - set(shipped) or ("developer_instructions" in existing and existing.get("developer_instructions") != shipped.get("developer_instructions")):
+            # Accept only the known model-name migration in otherwise identical
+            # shipped instructions. Preserve every unrelated user restriction.
+            def normalise_model(value: str) -> str:
+                return value.replace("pinned to gpt-6.1-terra.", "pinned to gpt-6.2-sol.")
+            if set(existing) - set(shipped) or ("developer_instructions" in existing and normalise_model(existing.get("developer_instructions", "")) != normalise_model(shipped.get("developer_instructions", ""))):
                 raise PolicyError(f"existing role file {role} contains user restrictions; adoption required")
         out[role_path] = data
     return out
@@ -236,14 +278,15 @@ def assert_semantic(before: dict, after: dict, policy: dict) -> None:
 
 
 def check(home: Path, root: Path) -> None:
-    policy, policy_text, templates = load_policy(root)
+    policy, policy_text, templates = resolve_policy(home, root)
     config_path = home / "config.toml"
     if not config_path.exists():
         raise PolicyDrift("Codex config.toml is missing")
     parsed = parse_config(config_path)
     selected = (parsed.get('model'), parsed.get('model_reasoning_effort'))
-    allowed = {(policy['root_model'], policy['reasoning_effort']), ('gpt-6-astra', 'high')}
-    if selected not in allowed or parsed.get("review_model") != policy["review_model"]:
+    default_selection = (policy["root_model"], policy["reasoning_effort"])
+    if (selected[0] not in ASTRA_MODELS and selected != default_selection
+            or parsed.get("review_model") != policy["review_model"]):
         raise PolicyDrift("root model policy drift")
     expected_files = expected(home, policy, policy_text, templates)
     safe_destination(config_path, home)
@@ -284,7 +327,7 @@ def atomic_write(path: Path, data: bytes) -> None:
 
 
 def apply(home: Path, root: Path) -> None:
-    policy, policy_text, templates = load_policy(root)
+    policy, policy_text, templates = resolve_policy(home, root)
     if home.exists() and home.is_symlink():
         raise PolicyError("Codex home is a symlink")
     home.mkdir(parents=True, exist_ok=True)

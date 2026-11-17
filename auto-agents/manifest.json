@@ -1,10 +1,10 @@
 {
-  "version": "2.2.6",
+  "version": "2.2.7",
   "hash_mode": "sha256-text-lf-v1",
   "files": {
     "EVIDENCE.md": "e90b0f8a3f4cc36b9284ea58b64a4fa8513fcf718b6d2abbb39e36d4fd45223a",
     "PLAN-TEMPLATE.md": "a6ba929fd68f6d404100434d2a2ea406455a22f9bad50846d1f4f1a745383cd4",
-    "README.md": "b9896405804248adb504b8aefaf95eddb131dc15037a190596d907f2d9096c36",
+    "README.md": "cec5829e142b1bb4625b823f0e746440a39848bc1dfd83f7873fa0e9a81f59a1",
     "RECOVERY.md": "9700f797d47787e5b3d40a93855552a10e16c068a70986a7e4e644148b37d8ea",
     "driver.py": "71bb51d73d43b6e1c13fcd217334c65e94365b8b054d5b81b0c2d796618ae281",
     "durable.py": "e0f6de124e77a729396af9e2f276da5d3bb8d91ab793f7e094a58468bbd99432",

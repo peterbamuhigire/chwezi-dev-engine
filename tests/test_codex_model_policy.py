@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime as dt
 import importlib.util
 import json
 import os
@@ -21,6 +22,11 @@ class CodexModelPolicyTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.home = Path(self.tmp.name) / "codex"
+        self.home.mkdir()
+        catalogue = {"fetched_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+                     "models": [{"slug": "gpt-6.1-terra", "visibility": "list",
+                                 "supported_reasoning_levels": [{"effort": "medium"}]}]}
+        (self.home / "models_cache.json").write_text(json.dumps(catalogue), encoding="utf-8")
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -29,7 +35,6 @@ class CodexModelPolicyTests(unittest.TestCase):
         return MODULE.main([*args, "--runtime", "codex", "--codex-home", str(self.home)])
 
     def test_apply_check_and_preserve_unrelated_settings(self):
-        self.home.mkdir(parents=True)
         original = 'model = "old"\nreview_model = "old-review"\nmodel_reasoning_effort = "high"\nnotify = ["keep"]\n\n[projects."C:\\\\keep"]\ntrust_level = "trusted"\n'
         (self.home / "config.toml").write_text(original, encoding="utf-8")
         (self.home / "AGENTS.md").write_text("User instructions.\n", encoding="utf-8")
@@ -50,7 +55,6 @@ class CodexModelPolicyTests(unittest.TestCase):
             self.assertEqual(path.stat().st_mtime_ns, mtime)
 
     def test_explicit_astra_high_is_preserved_with_terra_workers(self):
-        self.home.mkdir(parents=True)
         (self.home / 'config.toml').write_text(
             'model = "gpt-6-astra"\nmodel_reasoning_effort = "high"\n', encoding='utf8')
         self.assertEqual(self.run_cli('--apply'), 0)
@@ -66,7 +70,7 @@ class CodexModelPolicyTests(unittest.TestCase):
     def test_missing_config_check_is_error_and_claude_is_noop(self):
         self.assertEqual(self.run_cli("--check"), 1)
         self.assertEqual(MODULE.main(["--apply", "--runtime", "claude", "--codex-home", str(self.home)]), 0)
-        self.assertFalse(self.home.exists())
+        self.assertEqual({p.name for p in self.home.iterdir()}, {"models_cache.json"})
 
     def test_role_line_endings_do_not_hide_real_model_drift(self):
         self.assertEqual(self.run_cli('--apply'), 0)
@@ -79,7 +83,6 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertNotEqual(self.run_cli('--check'), 0)
 
     def test_malformed_config_fails_without_writes(self):
-        self.home.mkdir(parents=True)
         path = self.home / "config.toml"
         path.write_text("[broken\n", encoding="utf-8")
         before = path.read_bytes()
@@ -88,7 +91,6 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertFalse((self.home / "AGENTS.md").exists())
 
     def test_malformed_markers_fail_without_writes(self):
-        self.home.mkdir(parents=True)
         (self.home / "config.toml").write_text('model = "x"\nreview_model = "y"\n', encoding="utf-8")
         doc = self.home / "AGENTS.md"
         doc.write_text(f"{MODULE.START}\nunterminated\n", encoding="utf-8")
@@ -97,13 +99,11 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertEqual({p: p.read_bytes() for p in before}, before)
 
     def test_markers_in_reverse_order_fail(self):
-        self.home.mkdir(parents=True)
         (self.home / "config.toml").write_text('model = "x"\nreview_model = "y"\n', encoding="utf-8")
         (self.home / "AGENTS.md").write_text(f"{MODULE.END}\n{MODULE.START}\n", encoding="utf-8")
         self.assertEqual(self.run_cli("--apply"), 2)
 
     def test_custom_agent_and_managed_extra_settings_are_safe(self):
-        self.home.mkdir(parents=True)
         (self.home / "config.toml").write_text('[agents.custom]\nmodel = "keep"\n\n', encoding="utf-8")
         self.assertEqual(self.run_cli("--apply"), 0)
         self.assertIn('[agents.custom]\nmodel = "keep"', (self.home / "config.toml").read_text(encoding="utf-8"))
@@ -122,14 +122,12 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertEqual(role.read_bytes(), before)
 
     def test_existing_custom_config_file_fails_closed(self):
-        self.home.mkdir(parents=True)
         (self.home / "config.toml").write_text('[agents.worker]\nconfig_file = "personal.toml"\ndescription = "personal"\n', encoding="utf-8")
         before = (self.home / "config.toml").read_bytes()
         self.assertEqual(self.run_cli("--apply"), 2)
         self.assertEqual((self.home / "config.toml").read_bytes(), before)
 
     def test_relative_home_managed_config_file_is_adoptable(self):
-        self.home.mkdir(parents=True)
         (self.home / "config.toml").write_text(
             '[agents.default]\nconfig_file = "agents/default.toml"\ndescription = "legacy"\n',
             encoding="utf-8",
@@ -138,7 +136,6 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertEqual(self.run_cli("--check"), 0)
 
     def test_managed_roles_followed_by_unrelated_table_are_stable(self):
-        self.home.mkdir(parents=True)
         self.assertEqual(self.run_cli("--apply"), 0)
         config = self.home / "config.toml"
         config.write_text(config.read_text(encoding="utf-8") + '\n[projects."C:\\\\keep"]\ntrust_level = "trusted"\n', encoding="utf-8")
@@ -159,7 +156,6 @@ class CodexModelPolicyTests(unittest.TestCase):
     def test_symlink_destination_is_rejected(self):
         if not hasattr(os, "symlink"):
             self.skipTest("symlink unsupported")
-        self.home.mkdir(parents=True)
         outside = Path(self.tmp.name) / "outside"
         outside.mkdir()
         (self.home / "agents").symlink_to(outside, target_is_directory=True)
@@ -189,7 +185,6 @@ class CodexModelPolicyTests(unittest.TestCase):
     def test_backup_symlink_is_rejected(self):
         if not hasattr(os, "symlink"):
             self.skipTest("symlink unsupported")
-        self.home.mkdir(parents=True)
         outside = Path(self.tmp.name) / "outside-backups"
         outside.mkdir()
         (self.home / "backups").symlink_to(outside, target_is_directory=True)
@@ -197,7 +192,6 @@ class CodexModelPolicyTests(unittest.TestCase):
         self.assertFalse(any(outside.iterdir()))
 
     def test_complex_merge_fails_closed(self):
-        self.home.mkdir(parents=True)
         (self.home / "config.toml").write_text('model.foo = "bad"\n', encoding="utf-8")
         before = (self.home / "config.toml").read_bytes()
         self.assertEqual(self.run_cli("--apply"), 2)
