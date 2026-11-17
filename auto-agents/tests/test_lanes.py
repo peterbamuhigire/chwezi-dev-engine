@@ -232,6 +232,30 @@ class LaneTests(unittest.TestCase):
         with self.assertRaises(self.d.Stop):  # without the pre-integration head nothing can be proven
             run.check_integration({'upstream': upstream, 'subjects': subjects})
 
+    def test_commit_whose_identical_patch_is_upstream_may_be_dropped(self):
+        ex = self.d
+        from types import SimpleNamespace
+        import execution
+        run = execution.Execution(SimpleNamespace(**vars(ex)), self.cfg, self.base, False)
+        run.state = {'run_id': 'x'}
+        run.work = self.root
+        run.branch = 'main'
+        self.base.mkdir(parents=True, exist_ok=True)
+        base = git(self.root, 'rev-parse', 'HEAD')
+        (self.root / 'plan.md').write_text('plan\n'); git(self.root, 'add', 'plan.md'); git(self.root, 'commit', '-qm', 'Lane plan')
+        plan = git(self.root, 'rev-parse', 'HEAD')
+        (self.root / 'plan.md').write_text('plan\nhandoff\n'); git(self.root, 'commit', '-qam', 'ROW-1: work and handoff')
+        orig = git(self.root, 'rev-parse', 'HEAD')
+        git(self.root, 'checkout', '-q', '-b', 'other', base)
+        (self.root / 'u.txt').write_text('u\n'); git(self.root, 'add', 'u.txt'); git(self.root, 'commit', '-qm', 'other lane')
+        git(self.root, 'cherry-pick', plan)  # the same plan commit published separately (new parent, new id)
+        upstream = git(self.root, 'rev-parse', 'HEAD')
+        git(self.root, 'checkout', '-q', 'main')
+        git(self.root, 'reset', '-q', '--hard', upstream)
+        git(self.root, 'cherry-pick', orig)
+        run.check_integration({'upstream': upstream, 'subjects': ['Lane plan', 'ROW-1: work and handoff']}, orig)
+        self.assertIn('integration_superseded', [e['event'] for e in self.events()])
+
     def test_dropped_commit_not_changed_upstream_still_blocks(self):
         run, upstream, orig = self.superseded_fixture(None)
         with self.assertRaises(self.d.Stop):

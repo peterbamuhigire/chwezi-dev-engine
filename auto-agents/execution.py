@@ -617,6 +617,12 @@ class Execution:
         matches = [sha for sha, text in commits if text == subject]
         if len(matches) != 1:
             return False
+        # An identical patch already upstream (git cherry marks it "-") is superseded
+        # even when later lane commits changed the same files again.
+        equivalent = {line[2:] for line in self.a.git(self.work, 'cherry', upstream, orig, base, check=False).splitlines()
+                      if line.startswith('- ')}
+        if matches[0] in equivalent:
+            return True
         files = [f for f in self.a.git(self.work, 'diff-tree', '--no-commit-id', '--name-only', '-r', '--root',
                                         matches[0], check=False).splitlines() if f]
         if not files:

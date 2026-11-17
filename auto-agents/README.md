@@ -4,7 +4,7 @@ This is a sequential, project-local runner for Codex and Claude Code. It uses fr
 
 ## Current capabilities and evidence
 
-Release **2.2.4**, checked on **17 November 2026**, provides:
+Release **2.2.5**, checked on **17 November 2026**, provides:
 
 - Separate agent-session, verification-job and overall run budgets, with expensive checks reserved for completion candidates when configured.
 - Persisted job identity, verified revisions, quota-wait probes and recovery records. Reattach to a running check after observer failure; reconcile interrupted work under the declared replay policy.
