@@ -15,6 +15,10 @@ import durable
 TERMINAL = {'done', 'stopped', 'blocked'}
 
 
+class Halted(Exception):
+    """STOP or the run budget ended the run before a prepared job launched."""
+
+
 class SimpleLease:
     def __init__(self, lease):
         self.lease = lease
@@ -232,8 +236,15 @@ class Execution:
                             self.cfg.get('login_mode', 'plan') if kind == 'agent' else 'inherit')
         if durable.inspect(folder)['state'] == 'prepared':
             self.check_owner_baseline()
-            if time.time() >= self.state['deadline'] or (self.base / 'STOP').exists():
+            if time.time() >= self.state['deadline']:
                 self.fail('Saved job was never launched; STOP or expired run budget prevents a new launch.')
+            if (self.base / 'STOP').exists():
+                # Nothing ran: drop the unlaunched job and stop cleanly. The
+                # pending record is unchanged, so a resumed run repeats this step.
+                reason = 'STOP requested before the ' + kind + ' job launched; nothing ran'
+                self.clear_operation()
+                self.event('launch_withheld', kind=kind, job_id=op['id'])
+                raise Halted(reason)
         self.save(kind, '', job_id=op['id'], log=str(folder / 'output.log'), action=argv[0])
         last = [0.0]
         def observe(status):
@@ -815,6 +826,8 @@ def execute(api, cfg, base, resume_only=False, recover=False):
             if not run.setup():
                 return 0
             run.loop()
+        except Halted as halted:
+            run.save('stopped', str(halted))
         except (api.Stop, OSError, ValueError, RuntimeError) as error:
             if run.state:
                 if getattr(run, 'preserve_journal', False):

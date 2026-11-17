@@ -319,5 +319,21 @@ class LaneTests(unittest.TestCase):
         self.assertNotIn('published', [e['event'] for e in self.events()])
 
 
+    def test_stop_before_a_prepared_gate_launches_stops_cleanly_and_resumes(self):
+        stop = self.base / 'STOP'
+        self.fake.write_text(AGENT.replace("prompt=sys.stdin.read()", "prompt=sys.stdin.read(); pathlib.Path(%r).write_text('stop')" % str(stop)) % 'lane.txt', encoding='utf8')
+        self.assertEqual(self.d.run(self.cfg, self.base), 0)
+        status = json.loads((self.base / 'status.json').read_text())
+        self.assertEqual(status['state'], 'stopped')
+        self.assertIsNone(status.get('operation'))
+        self.assertIn('launch_withheld', [e['event'] for e in self.events()])
+        self.assertNotIn('published', [e['event'] for e in self.events()])
+        stop.unlink()
+        self.write_agent('lane.txt')
+        self.assertEqual(self.d.run(self.cfg, self.base), 0)
+        self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'done')
+        self.assertIn('ROW-1: lane slice', git(self.remote, 'log', '--format=%s', 'main'))
+
+
 if __name__ == '__main__':
     unittest.main()
