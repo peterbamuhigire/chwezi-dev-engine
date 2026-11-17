@@ -4,12 +4,55 @@ import datetime as dt
 import hashlib
 import json
 import os
+import re
 import shutil
 from pathlib import Path
 import time
 import uuid
 
 import durable
+
+
+USAGE_TERMS = ('usage limit', 'hit your limit', 'session limit reached', 'weekly limit', '5-hour limit', 'out of extra usage')
+RATE_TERMS = ('rate limit', 'too many requests', 'http 429')
+RESET = re.compile(r'resets\s+(?:at\s+)?(\d{1,2})(?::(\d{2}))?\s*(am|pm)?(?:\s*\(([A-Za-z_]+/[A-Za-z_/]+)\))?', re.I)
+
+
+def provider_limit(message, now=None):
+    """Classify a failed agent's output as a provider usage or rate limit.
+
+    Returns (kind, seconds_until_reset_or_None); kind is None when no limit
+    was reported. Provider CLIs word the usage limit differently (Claude Code
+    prints "You've hit your 5-hour limit · resets 7:10am (Africa/Kampala)"),
+    so a stated reset time is used when it can be read.
+    """
+    text = message.lower()
+    usage = any(term in text for term in USAGE_TERMS) or bool(re.search(r"hit your [\w -]*limit", text))
+    if not usage and not any(term in text for term in RATE_TERMS):
+        return None, None
+    if not usage:
+        return 'rate', None
+    match = RESET.search(message)
+    if not match:
+        return 'usage', None
+    hour, minute, half, zone = int(match.group(1)), int(match.group(2) or 0), (match.group(3) or '').lower(), match.group(4)
+    if half == 'pm' and hour < 12:
+        hour += 12
+    elif half == 'am' and hour == 12:
+        hour = 0
+    if hour > 23 or minute > 59:
+        return 'usage', None
+    try:
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo(zone) if zone else None
+    except Exception:
+        tz = None
+    current = dt.datetime.fromtimestamp(now if now is not None else time.time(), tz) if tz else \
+        dt.datetime.fromtimestamp(now if now is not None else time.time()).astimezone()
+    target = current.replace(hour=hour, minute=minute, second=0, microsecond=0)
+    if target <= current:
+        target += dt.timedelta(days=1)
+    return 'usage', (target - current).total_seconds()
 
 
 TERMINAL = {'done', 'stopped', 'blocked'}
@@ -408,14 +451,19 @@ class Execution:
                 if result['state'] != 'passed':
                     if self.recover(result, op):
                         continue
-                    message = output.lower()
-                    limited = any(term in message for term in ('rate limit', 'usage limit', 'too many requests', 'http 429'))
+                    kind, reset_in = provider_limit(output)
+                    limited = kind is not None
                     unchanged = not self.dirty() and self.head() == op['before']
                     local_reconcile = cfg.get('recovery_policy') == 'local-only'
                     if limited and (unchanged or local_reconcile) and self.state['rate_retries'] < cfg.get('max_rate_retries', 3):
                         attempts = self.state['rate_retries'] + 1
-                        delay = (cfg.get('usage_wait_seconds', 18000) if 'usage limit' in message else
-                                 min(cfg.get('max_backoff_seconds', 3600), cfg.get('initial_backoff_seconds', 60) * 2 ** (attempts - 1)))
+                        if kind == 'usage':
+                            # A stated reset time (plus a short margin) wins; the
+                            # configured wait stays the ceiling and the fallback.
+                            ceiling = cfg.get('usage_wait_seconds', 18000)
+                            delay = min(ceiling, reset_in + 120) if reset_in is not None else ceiling
+                        else:
+                            delay = min(cfg.get('max_backoff_seconds', 3600), cfg.get('initial_backoff_seconds', 60) * 2 ** (attempts - 1))
                         self.clear_operation(rate_retries=attempts, retry_at=time.time() + delay, reconcile=not unchanged)
                         self.save('waiting', 'Provider limit; retry only within configured run budget')
                         self.event('rate_wait', seconds=delay, retry=attempts)

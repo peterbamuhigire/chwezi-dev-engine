@@ -84,6 +84,13 @@ class DriverTests(unittest.TestCase):
         worker=self.base/'worktrees'/'codex'
         self.assertEqual(sent,git(worker,'rev-parse','HEAD'))
         self.assertIn('published',(self.base/'events.jsonl').read_text())
+    def test_claude_cli_limit_wording_waits_instead_of_blocking(self):
+        marker=self.root.parent/'attempted'
+        self.fake.write_text('''import pathlib,subprocess,sys\nsys.stdin.read()\nm=pathlib.Path(%r)\nif not m.exists():\n m.write_text('once')\n print("You've hit your 5-hour limit - resets 7:10am (Africa/Kampala)")\n sys.exit(1)\np=pathlib.Path('auto-agents/PLAN.md')\np.write_text('STATUS: DONE\\n',encoding='utf8')\nsubprocess.run(['git','add',str(p)],check=True)\nsubprocess.run(['git','commit','-qm','finish'],check=True)\n''' % str(marker),encoding='utf8')
+        self.cfg.update(max_sessions=3,usage_wait_seconds=0.01,max_rate_retries=2)
+        self.assertEqual(self.d.run(self.cfg,self.base),0)
+        self.assertEqual(json.loads((self.base/'status.json').read_text())['state'],'done')
+        self.assertIn('rate_wait',(self.base/'events.jsonl').read_text())
     def test_rate_limit_retries_without_changes(self):
         marker=self.root.parent/'attempted'
         self.fake.write_text('''import pathlib,subprocess,sys\nsys.stdin.read()\nm=pathlib.Path(%r)\nif not m.exists():\n m.write_text('once')\n print('usage limit')\n sys.exit(1)\np=pathlib.Path('auto-agents/PLAN.md')\np.write_text('STATUS: DONE\\n',encoding='utf8')\nsubprocess.run(['git','add',str(p)],check=True)\nsubprocess.run(['git','commit','-qm','finish'],check=True)\n''' % str(marker),encoding='utf8')
