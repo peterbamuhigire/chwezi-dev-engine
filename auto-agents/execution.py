@@ -1,4 +1,5 @@
 """Revision-bound execution and recovery for both CLI adapters."""
+import contextlib
 import datetime as dt
 import hashlib
 import json
@@ -14,6 +15,14 @@ import durable
 TERMINAL = {'done', 'stopped', 'blocked'}
 
 
+class SimpleLease:
+    def __init__(self, lease):
+        self.lease = lease
+
+    def close(self):
+        self.lease.__exit__(None, None, None)
+
+
 def stamp(value=None):
     return dt.datetime.fromtimestamp(value or time.time(), dt.timezone.utc).isoformat()
 
@@ -26,7 +35,11 @@ class Execution:
         self.checkpoint = self.base / ('verified-' + cfg['runner'] + '.json')
         self.pending_path = self.base / ('pending-' + cfg['runner'] + '.json')
         self.work = self.base / 'worktrees' / cfg['runner']
-        self.branch = 'auto-agents/' + cfg['runner']
+        lane = cfg.get('lane')
+        self.branch = 'auto-agents/' + ('lane-' + lane + '-' if lane else '') + cfg['runner']
+        # Lanes keep their own state under <shared>/lanes/<lane>; gate slots are
+        # shared by every lane and the default run of the repository.
+        self.shared = self.base.parent.parent if lane else self.base
         self.state = {}
 
     def save(self, state=None, reason=None, **fields):
@@ -142,6 +155,7 @@ class Execution:
                   str(self.work), self.branch if exists else 'HEAD')
         if Path(a.git(self.work, 'rev-parse', '--show-toplevel')).resolve() != self.work.resolve():
             self.fail('Unexpected driver worktree')
+        self.reconcile_integration()
         self.check_branch(self.head())
         plan = (self.work / cfg['plan']).resolve()
         if not plan.is_relative_to(self.work.resolve()) or not plan.is_file():
@@ -160,8 +174,9 @@ class Execution:
         if self.dirty() and not self.state.get('operation') and not (
                 self.state.get('reconcile') and cfg.get('recovery_policy') == 'local-only'):
             self.fail('Driver worktree has uncommitted changes without a recovery record.')
-        self.save(worktree=str(self.work), branch=self.branch, verified_head=durable.read_json(self.checkpoint)['head'])
-        self.event('started', resumed=bool(previous), runner=cfg['runner'])
+        self.save(worktree=str(self.work), branch=self.branch, lane=cfg.get('lane'),
+                  verified_head=durable.read_json(self.checkpoint)['head'])
+        self.event('started', resumed=bool(previous), runner=cfg['runner'], lane=cfg.get('lane'))
         return True
 
     def contract(self, require_complete=False):
@@ -243,7 +258,16 @@ class Execution:
                   'Preserve production data and external-effect boundaries. Mark STATUS: DONE on the first plan line only '
                   'when all required outcomes have evidence; use STATUS: BLOCKED - reason only when no independent work remains. '
                   'A marker, test exit, or reviewer score alone does not prove user acceptance.\n')
-        if pending and pending.get('feedback'):
+        if pending and pending.get('integration'):
+            integration = pending['integration']
+            prompt += ('INTEGRATION: ' + self.cfg['remote'] + '/' + self.cfg['target_branch'] + ' moved while your verified commits '
+                       'waited to publish, and replaying them conflicts in: ' + ', '.join(integration['conflicts'][:30]) + '. '
+                       'In this session only, and as the single exception to the rule against rebasing, run '
+                       '`git -c core.editor=true rebase ' + integration['upstream'] + '` (already fetched), resolve each conflict '
+                       'keeping the intent of both sides (regenerate generated files instead of hand-merging them), run the checks '
+                       'of the touched modules and finish the rebase. Keep every commit and its subject; you may add one fix commit. '
+                       'Do no other work in this session and do not push.\n')
+        elif pending and pending.get('feedback'):
             prompt += 'Repair this independent gate failure before further work: ' + pending['feedback'][-1500:] + '\n'
         if self.state.get('reconcile'):
             prompt += ('RECOVERY: the previous agent was interrupted. Inspect git diff/status/history and the persisted handoff '
@@ -268,14 +292,25 @@ class Execution:
         return True
 
     def recover(self, result, op):
-        self.check_branch(op['before'])
+        previous = durable.read_json(self.pending_path) if self.pending_path.exists() else {}
+        if previous.get('integration'):
+            # An interrupted integration session: abandon a half-done rebase, or
+            # accept a finished one only if it kept every lane commit.
+            if self.rebasing():
+                self.a.call(['git', 'rebase', '--abort'], self.work)
+                if self.rebasing():
+                    self.fail('interrupted integration rebase could not be abandoned; inspect the worktree')
+            if self.head() != op['before']:
+                self.check_integration(previous['integration'])
+        else:
+            self.check_branch(op['before'])
         after = self.head()
         if not self.dirty() and after != op['before']:
             # Even an interrupted or failed agent may have committed. Verify that
             # exact descendant; do not spend another agent session repeating it.
-            previous = durable.read_json(self.pending_path) if self.pending_path.exists() else {}
             durable.write_json(self.pending_path, {'head': after, 'failures': previous.get('failures', 0), 'index': 0,
-                               'config_digest': self.state['config_digest']})
+                               'config_digest': self.state['config_digest'],
+                               **{k: previous[k] for k in ('integrations', 'rejections') if k in previous}})
             self.clear_operation(reconcile=False)
             return True
         if result['state'] in ('interrupted', 'timed_out') and self.cfg.get('recovery_policy') == 'local-only':
@@ -340,7 +375,9 @@ class Execution:
                         if not accepted_current:
                             pending = {'head': before, 'failures': 0, 'index': 0, 'config_digest': self.state['config_digest']}
                             durable.write_json(self.pending_path, pending)
-                            self.verify(pending)
+                            if self.verify(pending) == 'halt':
+                                self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
+                                break
                             continue
                         self.save('done', 'Plan marked complete; committed slices passed configured verification')
                         break
@@ -350,6 +387,8 @@ class Execution:
                     if self.state['session'] >= cfg['max_sessions']:
                         self.save('stopped', 'Session limit reached')
                         break
+                    if not pending and not self.state.get('reconcile') and cfg.get('integrate'):
+                        self.sync()
                     # Validate retained recovery context before another worker
                     # can consume it; reattachment keeps its original job spec.
                     self.contract()
@@ -371,17 +410,252 @@ class Execution:
                         self.event('rate_wait', seconds=delay, retry=attempts)
                         continue
                     self.fail('agent ' + result['state'] + '; inspect job log and reconcile worktree')
-                self.check_branch(op['before'])
+                if pending and pending.get('integration'):
+                    if self.rebasing():
+                        self.fail('integration session left a rebase in progress; inspect the worktree')
+                    self.check_integration(pending['integration'])
+                else:
+                    self.check_branch(op['before'])
                 if self.dirty():
                     self.fail('agent left uncommitted changes')
                 after = self.head()
                 if after == op['before'] and not (self.state.get('reconcile') and after != verified):
                     self.fail('agent made no commit')
                 durable.write_json(self.pending_path, {'head': after, 'failures': pending.get('failures', 0) if pending else 0,
-                                   'index': 0, 'config_digest': self.state['config_digest']})
+                                   'index': 0, 'config_digest': self.state['config_digest'],
+                                   **{k: pending[k] for k in ('integrations', 'rejections') if pending and k in pending}})
                 self.clear_operation(rate_retries=0, reconcile=False)
                 pending = durable.read_json(self.pending_path)
-            self.verify(pending)
+            if self.verify(pending) == 'halt':
+                self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
+                break
+
+    def rebasing(self):
+        for name in ('rebase-merge', 'rebase-apply'):
+            path = Path(self.a.git(self.work, 'rev-parse', '--git-path', name))
+            if (path if path.is_absolute() else self.work / path).exists():
+                return True
+        return False
+
+    def reconcile_integration(self):
+        """Repair the records after a crash inside integration or sync (called from setup)."""
+        a = self.a
+        pending = durable.read_json(self.pending_path) if self.pending_path.exists() else None
+        if self.rebasing():
+            if not pending or not (pending.get('integrating') or pending.get('integration')):
+                self.fail('A rebase is in progress in the driver worktree without an integration record; inspect it.')
+            # The driver's rebase, or an agent's integration session, was interrupted: abandon it.
+            a.call(['git', 'rebase', '--abort'], self.work)
+            if self.rebasing() or self.dirty():
+                self.fail('Interrupted integration could not be abandoned cleanly; inspect the worktree.')
+            self.event('integration_abandoned', head=self.head())
+        if not pending:
+            # A crash between sync's fast-forward and its checkpoint write.
+            checkpoint = durable.read_json(self.checkpoint) if self.checkpoint.exists() else None
+            tracking = 'refs/remotes/' + self.cfg['remote'] + '/' + self.cfg['target_branch']
+            upstream = a.git(self.work, 'rev-parse', '--verify', '-q', tracking, check=False)
+            head = self.head()
+            if (checkpoint and head != checkpoint['head'] and head == upstream and not self.dirty()
+                    and self.ancestor(checkpoint['head'], head)):
+                checkpoint['head'] = head
+                durable.write_json(self.checkpoint, checkpoint)
+                self.event('synced', head=head, recovered=True)
+            return
+        head = self.head()
+        integrating = pending.get('integrating')
+        if integrating:
+            if head == integrating['orig']:
+                pending.pop('integrating')
+            elif not self.dirty() and self.ancestor(integrating['upstream'], head):
+                # The rebase finished but its record was not written.
+                self.check_integration({'upstream': integrating['upstream'], 'subjects': integrating['subjects']})
+                pending.pop('integrating')
+                pending.update(head=head, index=0, replays=0, regen=bool(self.cfg.get('integration_commands')), quick=False)
+            else:
+                self.fail('Interrupted integration left an unexpected revision; inspect the worktree.')
+            durable.write_json(self.pending_path, pending)
+            return
+        op = self.state.get('operation') or {}
+        if op.get('kind') == 'integrating' and head != pending['head']:
+            # An integration command committed before the crash.
+            if self.dirty() or not self.ancestor(pending['head'], head):
+                self.fail('Interrupted integration command left an unexpected revision; inspect the worktree.')
+            pending.update(head=head, index=0, replays=0, regen=True, quick=False)
+            durable.write_json(self.pending_path, pending)
+
+    def ancestor(self, older, newer):
+        return self.a.call(['git', 'merge-base', '--is-ancestor', older, newer], self.work).returncode == 0
+
+    def fetch(self):
+        """Fetch the target branch; None when it cannot be read (offline or not created yet)."""
+        remote, target = self.cfg['remote'], self.cfg['target_branch']
+        tracking = 'refs/remotes/' + remote + '/' + target
+        try:
+            result = self.a.call(['git', 'fetch', '-q', remote, '+refs/heads/' + target + ':' + tracking], self.work, timeout=300)
+        except Exception as error:  # a hung fetch must not stop the lane
+            self.event('fetch_failed', output=str(error)[-300:])
+            return None
+        if result.returncode:
+            self.event('fetch_failed', output=result.stdout[-300:])
+            return None
+        return self.a.git(self.work, 'rev-parse', tracking)
+
+    def sync(self):
+        """Start a fresh session from the published target so lanes see each other's work."""
+        checkpoint = durable.read_json(self.checkpoint)
+        head = self.head()
+        if head != checkpoint['head'] or self.dirty():
+            return
+        upstream = self.fetch()
+        if upstream is None or upstream == head or not self.ancestor(head, upstream):
+            return
+        self.a.git(self.work, 'merge', '-q', '--ff-only', upstream)
+        checkpoint['head'] = upstream
+        durable.write_json(self.checkpoint, checkpoint)
+        self.save(verified_head=upstream)
+        self.event('synced', head=upstream)
+
+    def check_integration(self, integration):
+        """An integration session may rewrite history only onto the fetched upstream, keeping every lane commit."""
+        if self.a.git(self.work, 'branch', '--show-current') != self.branch:
+            self.fail('integration session changed the driver branch')
+        if not self.ancestor(integration['upstream'], self.head()):
+            self.fail('integration session did not rebase onto the fetched upstream')
+        subjects = self.a.git(self.work, 'log', '--reverse', '--format=%s', integration['upstream'] + '..HEAD').splitlines()
+        position = 0
+        for subject in subjects:
+            if position < len(integration['subjects']) and subject == integration['subjects'][position]:
+                position += 1
+        if position != len(integration['subjects']):
+            self.fail('integration session dropped or renamed lane commits; inspect before publishing')
+
+    def gate_slot(self, saved=None):
+        """Hold one of the repository's shared gate slots; None when STOP or the budget ends the wait."""
+        count = self.cfg.get('gate_slots')
+        if not count:
+            return contextlib.nullcontext()
+        if saved and durable.inspect(self.base / 'jobs' / saved['id'])['state'] != 'prepared':
+            # Reattaching to a gate that already started: it ran under a slot, and
+            # waiting here could not stop it, only delay observing it.
+            return contextlib.nullcontext()
+        folder = self.shared / 'gate-slots'
+        waiting = False
+        while True:
+            for index in range(count):
+                lease = durable.Lease(folder / ('slot-%d.mutex' % index))
+                try:
+                    lease.__enter__()
+                except durable.Busy:
+                    continue
+                if waiting:
+                    self.event('gate_slot', slot=index)
+                return contextlib.closing(SimpleLease(lease))
+            if (self.base / 'STOP').exists() or time.time() >= self.state['deadline']:
+                return None
+            if not waiting:
+                self.save('waiting_gate', 'All %d gate slots are busy; waiting for one' % count)
+                waiting = True
+            time.sleep(self.cfg.get('gate_slot_poll_seconds', 10))
+
+    def plan_line(self):
+        lines = (self.work / self.cfg['plan']).read_text(encoding='utf-8').splitlines()
+        return lines[0].strip() if lines else ''
+
+    def integrate(self, pending, after, total):
+        """Replay verified lane commits onto a moved target.
+
+        Returns the head to publish, None to loop (full gate or repair session
+        needed) or 'halt' (STOP while waiting for a gate slot).
+        """
+        cfg = self.cfg
+        upstream = self.fetch()
+        moved = upstream is not None and not self.ancestor(upstream, after)
+        if not moved and not pending.get('regen'):
+            return after
+        overlap = []
+        if moved:
+            attempts = pending.get('integrations', 0) + 1
+            if attempts > cfg.get('max_integration_attempts', 6):
+                self.fail('integration attempts exhausted for this slice; the target keeps moving or keeps conflicting')
+            base = self.a.git(self.work, 'merge-base', upstream, after)
+            changed = lambda a, b: set(filter(None, self.a.git(self.work, 'diff', '--name-only', a, b).splitlines()))
+            lane_files, incoming = changed(base, after), changed(base, upstream)
+            overlap = sorted(lane_files & incoming)
+            subjects = self.a.git(self.work, 'log', '--reverse', '--format=%s', upstream + '..' + after).splitlines()
+            plan_before = self.plan_line()
+            pending.update(integrating={'upstream': upstream, 'orig': after, 'subjects': subjects}, integrations=attempts)
+            durable.write_json(self.pending_path, pending)
+            env = dict(os.environ, GIT_EDITOR='true')
+            result = self.a.call(['git', 'rebase', upstream], self.work, timeout=900, env=env)
+            if result.returncode:
+                conflicts = self.a.git(self.work, 'diff', '--name-only', '--diff-filter=U', check=False).splitlines()
+                self.a.call(['git', 'rebase', '--abort'], self.work)
+                if self.rebasing() or self.head() != after or self.dirty():
+                    self.fail('integration rebase could not be abandoned cleanly; inspect the worktree')
+                pending.pop('integrating')
+                pending.update(index=0, replays=0, feedback='integration conflict',
+                               integration={'upstream': upstream, 'subjects': subjects, 'conflicts': conflicts or ['(unknown)']})
+                durable.write_json(self.pending_path, pending)
+                self.event('integration_conflict', upstream=upstream, files=conflicts[:30])
+                self.save('repairing', 'Verified commits conflict with the moved target; next session integrates them')
+                return None
+            pending.pop('integrating')
+            # The quick check may replace the full gate only for disjoint changes
+            # that leave the plan's completion state alone.
+            pending.update(head=self.head(), index=0, replays=0, regen=bool(cfg.get('integration_commands')),
+                           quick=not overlap and self.plan_line() == plan_before)
+            durable.write_json(self.pending_path, pending)
+        regenerated = False
+        if pending.get('regen'):
+            for command in cfg.get('integration_commands', []):
+                before = self.head()
+                result, output, _ = self.job('integrating', command, cfg.get('verification_timeout_seconds', 3600))
+                self.clear_operation()
+                if self.a.git(self.work, 'branch', '--show-current') != self.branch or not self.ancestor(before, self.head()):
+                    self.fail('integration command changed the branch or rewrote history')
+                if self.dirty():
+                    self.fail('integration command left uncommitted changes')
+                if self.head() != before:
+                    regenerated = True
+                    pending.update(head=self.head(), index=0, quick=False)
+                durable.write_json(self.pending_path, pending)
+                if result['state'] != 'passed':
+                    pending.update(failures=pending.get('failures', 0) + 1, feedback=output[-1500:] or 'Integration command failed.')
+                    durable.write_json(self.pending_path, pending)
+                    self.save('repairing', 'Integration command failed; next session repairs it')
+                    return None
+            pending.pop('regen')
+            durable.write_json(self.pending_path, pending)
+        head = self.head()
+        if moved:
+            self.event('integrated', upstream=upstream, head=head, overlap=overlap[:30], regenerated=regenerated)
+        if head == after:
+            return after  # regeneration changed nothing on an unchanged head
+        if not (moved and pending.get('quick') and cfg.get('integration_verify')):
+            self.save('verifying', 'Integrated onto the moved target; the full gate runs again')
+            return None
+        for command in cfg['integration_verify']:
+            slot = self.gate_slot()
+            if slot is None:
+                return 'halt'  # pending index 0: the full gate runs on resume
+            with slot:
+                result, output, _ = self.job('integrating', command,
+                    min(cfg.get('verification_timeout_seconds', 3600), max(1, self.state['deadline'] - time.time())))
+            self.clear_operation()
+            if self.head() != head or self.dirty():
+                self.fail('integration check changed the worktree')
+            if result['state'] != 'passed':
+                self.event('integration_check_failed', head=head)
+                self.save('verifying', 'Quick integration check failed; the full gate runs again')
+                return None
+        # The full gate passed on the same lane changes over a base whose
+        # incoming changes touch none of the lane's files; the quick check passed
+        # on the combined revision.
+        pending.update(index=total)
+        pending.pop('quick', None)
+        durable.write_json(self.pending_path, pending)
+        self.event('integration_verified', head=head)
+        return head
 
     def verify(self, pending):
         cfg, after = self.cfg, pending['head']
@@ -391,12 +665,24 @@ class Execution:
         completing = bool(lines and lines[0].strip() == 'STATUS: DONE')
         self.contract(require_complete=completing)
         commands = cfg['verify'] + (cfg.get('final_verify', []) if completing else [])
+        op = self.state.get('operation')
+        if op and op['kind'] == 'integrating':
+            # An integration command or quick check was interrupted. Both are
+            # repeatable; pending already asks for the full gate on this head.
+            if durable.inspect(self.base / 'jobs' / op['id'])['supervisor_active']:
+                self.fail('An interrupted integration job is still running; resume after it ends.')
+            self.clear_operation()
+            self.event('integration_interrupted', job_id=op['id'])
         for index in range(pending.get('index', 0), len(commands)):
             if self.dirty() or self.head() != after or self.a.git(self.work, 'branch', '--show-current') != self.branch:
                 self.fail('verification changed HEAD or branch, or worktree is dirty; inspect before resuming')
+            slot = self.gate_slot(self.state.get('operation'))
+            if slot is None:
+                return 'halt'
             self.save(gate_index=index + 1, gate_total=len(commands), candidate_head=after)
-            result, output, op = self.job('verifying', commands[index],
-                min(cfg.get('verification_timeout_seconds', cfg['max_hours'] * 3600), max(1, self.state['deadline'] - time.time())))
+            with slot:
+                result, output, op = self.job('verifying', commands[index],
+                    min(cfg.get('verification_timeout_seconds', cfg['max_hours'] * 3600), max(1, self.state['deadline'] - time.time())))
             if self.head() != after or self.a.git(self.work, 'branch', '--show-current') != self.branch:
                 self.fail('verification changed HEAD or branch; inspect worktree before resuming')
             if self.dirty():
@@ -422,10 +708,25 @@ class Execution:
             self.clear_operation()
             self.event('verification', index=index, exit=0, head=after)
         if cfg['publish']:
+            if cfg.get('integrate') and not self.state.get('operation'):
+                after = self.integrate(pending, after, len(commands))
+                if after is None or after == 'halt':
+                    return after
             # Repeating this exact non-force ref update is idempotent. No merge,
             # force, branch switch or new revision is introduced on recovery.
             result, output, _ = self.job('publishing', ['git', 'push', cfg['remote'], after + ':refs/heads/' + cfg['target_branch']], 120)
             if result['state'] != 'passed':
+                rejected = any(term in output for term in ('non-fast-forward', 'fetch first', '[rejected]'))
+                if cfg.get('integrate') and result['state'] == 'failed' and rejected:
+                    # Another lane published first. Nothing was sent; integrate again.
+                    self.clear_operation()
+                    pending['rejections'] = pending.get('rejections', 0) + 1
+                    if pending['rejections'] > 2 * cfg.get('max_integration_attempts', 6):
+                        self.fail('push rejected too often for this slice; the target keeps moving or fetch keeps failing')
+                    durable.write_json(self.pending_path, pending)
+                    self.event('push_rejected', head=after, count=pending['rejections'])
+                    time.sleep(min(60, 5 * pending['rejections']))
+                    return
                 self.fail('push failed or interrupted; inspect remote ref and receipt: ' + output[-500:])
             self.event('published', head=after, target=cfg['target_branch'])
         self.check_owner_baseline()
@@ -542,7 +843,7 @@ def render(base):
         return 'No run recorded.'
     state = durable.read_json(path)
     active = durable.held(Path(base) / 'run.mutex')
-    lines = [f"{state['runner'].upper()} | {state['state'].upper()} | supervisor {'active' if active else 'offline'}",
+    lines = [f"{('LANE ' + state['lane'] + ' | ') if state.get('lane') else ''}{state['runner'].upper()} | {state['state'].upper()} | supervisor {'active' if active else 'offline'}",
              f"Plan: {state['plan']}", f"Worktree: {state.get('worktree', 'not prepared')}",
              f"Sessions started: {state['session']} | Revisions independently verified: {state['accepted_slices']}",
              f"Reason: {state.get('reason') or 'No blocker recorded'}",

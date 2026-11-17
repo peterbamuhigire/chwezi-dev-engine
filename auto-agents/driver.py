@@ -6,6 +6,7 @@ import json
 import math
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -17,6 +18,7 @@ from durable import write_json
 
 ROOT = Path(__file__).resolve().parent.parent
 CFG = ROOT / 'auto-agents' / 'config.json'
+LANE = re.compile(r'^[a-z0-9][a-z0-9-]{0,39}$')
 
 class Stop(Exception):
     pass
@@ -30,9 +32,23 @@ def git(root, *args, check=True):
         raise Stop('git ' + ' '.join(args) + ': ' + p.stdout[-1500:])
     return p.stdout.strip()
 
-def config():
+def commands(value):
+    return isinstance(value,list) and all(isinstance(c,list) and c and all(isinstance(s,str) and s for s in c) for c in value)
+
+def config(lane=None):
     d = json.loads(CFG.read_text(encoding='utf-8'))
     if not isinstance(d,dict): raise Stop('Configuration must be a JSON object')
+    if 'lane' in d: raise Stop('lane is chosen with --lane, not in config.json')
+    if lane is not None:
+        # A lane is an independent run of this repository with its own plan,
+        # state, worktree and branch; its overlay file changes only what differs.
+        if not isinstance(lane,str) or not LANE.match(lane): raise Stop('lane must match '+LANE.pattern)
+        overlay_path = CFG.parent / 'lanes' / (lane + '.json')
+        if not overlay_path.is_file(): raise Stop('Lane configuration missing: auto-agents/lanes/'+lane+'.json')
+        overlay = json.loads(overlay_path.read_text(encoding='utf-8'))
+        if not isinstance(overlay,dict) or 'lane' in overlay: raise Stop('Lane configuration must be a JSON object without a lane key')
+        d.update(overlay)
+        d['lane'] = lane
     required = ('runner','plan','verify','session_timeout_seconds','max_hours','max_sessions','publish','remote','target_branch')
     missing = [x for x in required if x not in d]
     if missing: raise Stop('Missing config: ' + ', '.join(missing))
@@ -54,6 +70,14 @@ def config():
     if type(d.get('verification_replay_safe',False)) is not bool: raise Stop('verification_replay_safe must be true or false')
     if type(d.get('max_recovery_attempts',2)) is not int or d.get('max_recovery_attempts',2)<0: raise Stop('max_recovery_attempts must be a nonnegative integer')
     if type(d['publish']) is not bool: raise Stop('publish must be true or false')
+    if type(d.get('integrate',False)) is not bool: raise Stop('integrate must be true or false')
+    if d.get('integrate') and not d['publish']: raise Stop('integrate needs publish')
+    for k in ('gate_slots','max_integration_attempts'):
+        if k in d and (type(d[k]) is not int or d[k]<1): raise Stop(k+' must be a positive integer')
+    if type(d.get('gate_slot_poll_seconds',10)) not in (int,float) or not math.isfinite(d.get('gate_slot_poll_seconds',10)) or d.get('gate_slot_poll_seconds',10)<=0:
+        raise Stop('gate_slot_poll_seconds must be finite and positive')
+    for k in ('integration_commands','integration_verify'):
+        if not commands(d.get(k,[])): raise Stop(k+' must contain command argument arrays')
     for k in ('session_timeout_seconds','max_hours','max_sessions'):
         if type(d[k]) not in (int,float) or not math.isfinite(d[k]) or d[k] <= 0: raise Stop(k + ' must be finite and positive')
     if type(d['max_sessions']) is not int: raise Stop('max_sessions must be an integer')
@@ -81,10 +105,13 @@ def agent_command(cfg):
     if cfg['runner']=='codex': return [executable('codex'),'exec',*args,'-']
     return [executable('claude'),'-p',*args]
 
-def status_path():
+def status_path(lane=None):
     common=git(ROOT,'rev-parse','--git-common-dir')
     p=Path(common)
-    return (p if p.is_absolute() else ROOT / p).resolve() / 'auto-agents'
+    base=(p if p.is_absolute() else ROOT / p).resolve() / 'auto-agents'
+    if lane is None: return base
+    if not isinstance(lane,str) or not LANE.match(lane): raise Stop('lane must match '+LANE.pattern)
+    return base / 'lanes' / lane
 
 def show(base):
     p=base/'status.json'
@@ -104,7 +131,7 @@ def preflight(cfg):
     if not lines or lines[0].strip()=='# Plan template' or lines[0].startswith('STATUS: BLOCKED'):
         raise Stop('The plan is empty, a setup placeholder or blocked. Set config.json plan to the approved docs/plans/ file and commit it.')
     agent_command(cfg)
-    for command in cfg['verify']+cfg.get('final_verify',[]):
+    for command in cfg['verify']+cfg.get('final_verify',[])+cfg.get('integration_commands',[])+cfg.get('integration_verify',[]):
         if not shutil.which(command[0]) and not (ROOT/command[0]).is_file():
             raise Stop('Verification executable unavailable: '+command[0])
     if cfg.get('plan_contract'):
@@ -116,7 +143,7 @@ def preflight(cfg):
             raise Stop('Commit the plan contract inside the repository.')
         result=plan_contract.validate_contract(plan_contract.load_contract(path),ROOT)
         if not result['valid']: raise Stop('; '.join(result['errors']))
-    print('READY: '+cfg['runner']+'; plan '+cfg['plan']+'; '+str(len(cfg['verify']))+' slice checks and '+str(len(cfg.get('final_verify',[])))+' final checks.')
+    print('READY: '+('lane '+cfg['lane']+'; ' if cfg.get('lane') else '')+cfg['runner']+'; plan '+cfg['plan']+'; '+str(len(cfg['verify']))+' slice checks and '+str(len(cfg.get('final_verify',[])))+' final checks.')
     print('Authentication, test services and semantic acceptance remain project-specific checks. Publication: '+str(cfg['publish']).lower())
     return 0
 
@@ -131,9 +158,10 @@ def main():
     p.add_argument('action',choices=('check','run','resume','recover','start','status','watch','stop','cancel'))
     p.add_argument('--interval',type=float,default=5)
     p.add_argument('--once',action='store_true')
+    p.add_argument('--lane',help='run, inspect or stop one lane (auto-agents/lanes/LANE.json)')
     args=p.parse_args()
     try:
-        base=status_path()
+        base=status_path(args.lane)
         if args.action=='status':
             show(base)
             return 0
@@ -146,13 +174,13 @@ def main():
             if args.action=='cancel': (base/'CANCEL').touch()
             print('Stop requested:',base/'STOP')
             return 0
-        cfg=config()
+        cfg=config(args.lane)
         if args.action=='check': return preflight(cfg)
         if args.action=='start':
             preflight(cfg)
             from durable import detached
             base.mkdir(parents=True,exist_ok=True)
-            child=detached([sys.executable,'-B',str(Path(__file__).resolve()),'run'],ROOT,base/'launcher.log')
+            child=detached([sys.executable,'-B',str(Path(__file__).resolve()),'run',*(['--lane',args.lane] if args.lane else [])],ROOT,base/'launcher.log')
             print('Started supervisor PID',child.pid,'; inspect with watch. Log:',base/'launcher.log')
             return 0
         return run(cfg,base,args.action=='resume',args.action=='recover')

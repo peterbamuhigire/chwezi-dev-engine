@@ -4,16 +4,19 @@ This is a sequential, project-local runner for Codex and Claude Code. It uses fr
 
 ## Current capabilities and evidence
 
-Release **2.1.1**, checked on **16 November 2026**, provides:
+Release **2.2.0**, checked on **17 November 2026**, provides:
 
 - Separate agent-session, verification-job and overall run budgets, with expensive checks reserved for completion candidates when configured.
 - Persisted job identity, verified revisions, quota-wait probes and recovery records. Reattach to a running check after observer failure; reconcile interrupted work under the declared replay policy.
 - A descriptive watch with the current operation, gate, checkpoint age, wait/retry reason, logs and optional reported task counts.
+- Optional parallel lanes: several runs of one repository, each with its own plan, state, worktree and branch, sharing a cap on concurrent gates and integrating onto the moved target branch before each push (see "Parallel lanes").
 - Optional task-contract validation, separate Codex/Claude argument profiles, PowerShell/CMD launchers and a preview-first Windows logon-resume helper.
 
 The integrated runtime ran **80 tests** on Windows: **79 passed, 1 skipped**. Regressions cover owner-intent changes during execution, prepared/active recovery, and receipt-read denial without job replay. Both installed provider CLIs passed bounded response smokes. Actual power cuts, post-reboot authentication, live quota exhaustion/reset and multi-hour implementation remain `NOT_ASSESSED`; see [EVIDENCE.md](EVIDENCE.md). The logon-resume helper is supplied but not registered automatically.
 
 The upstream 2.0.1 macOS/BSD boot-identity fix is retained: `sysctl` supplies `kern.bootsessionuuid`, falling back to `kern.boottime`. Its dated macOS test result is preserved in EVIDENCE.md; this integration is validated separately on Windows.
+
+2.2.0 adds parallel lanes. On macOS with Python 3.9.6 the 2.2.0 runtime passed the counts recorded in EVIDENCE.md; lanes on Windows remain `NOT_ASSESSED`.
 
 ## One-command launcher
 
@@ -63,6 +66,17 @@ This is a drift check, not a security boundary or proof that the tests are good.
 The executor may have permission to edit test files, the Markdown plan or tools;
 review the real diff and verification configuration for weakened oracles and
 unauthorised effects. Actual permissions and independent review still govern.
+
+## Parallel lanes
+
+A lane is an independent run of the same repository. Create `auto-agents/lanes/<lane>.json` with only the keys that differ from `config.json` (normally `plan`), commit a separate plan for it, then use `--lane <lane>` with any action (`check`, `start`, `run`, `watch`, `status`, `stop`, `cancel`, `resume`, `recover`). Lane state lives in `auto-agents/lanes/<lane>/` under the Git common directory; its branch is `auto-agents/lane-<lane>-<runner>`. Give lanes disjoint work: separate plans, registers and test databases. Two runs of the same lane are refused.
+
+Settings, normally in `config.json` so every lane and the default run share them:
+
+- `integrate: true` (needs `publish`): before a fresh agent session the lane fast-forwards to the published target; before each push it fetches the target and, when the target moved, rebases the verified commits onto it. A conflict is handed to the next agent session, which may rebase only onto the fetched revision and must keep every lane commit (checked by subject). A rejected push (another lane published first) integrates again. `max_integration_attempts` (default 6) bounds attempts per slice.
+- `integration_commands`: project commands run after a clean rebase, for example regenerating generated files and committing the result. They must leave a clean tree and must not rewrite history.
+- `integration_verify`: a quick check. It replaces the full gate only when the rebase was clean, no integration command made a commit, and the incoming changes touch none of the lane's files. Otherwise the full gate runs again on the integrated revision. Semantic interference through disjoint files is possible; later gates and any full scans remain the safeguard, so keep a broad final gate.
+- `gate_slots`: the most verification and quick-check jobs that run at once across all lanes of the repository; `gate_slot_poll_seconds` (default 10) sets the wait poll. A lane waiting for a slot shows `WAITING_GATE`.
 
 ## Run and observe
 
