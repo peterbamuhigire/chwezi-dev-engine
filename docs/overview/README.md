@@ -7,6 +7,13 @@ documentation templates, and catalog maintenance tooling.
 
 ## Latest Update
 
+The [17 November community capability refresh](../updates/2026-11-17-community-capabilities.md)
+documents Auto-agents 2.2.3: optional parallel lanes, bounded target integration,
+separate verification slot pools, stop-before-launch handling and additional
+Claude usage-limit recognition. The catalogue remains at 170 active skills.
+Current validation and open source-review findings are recorded with the update;
+the older results below retain their original dates and scope.
+
 The [2026-10 Dev Engine Kaizen, pass 2](../kaizen/2026-10-engine-kaizen-pass-2/README.md)
 (2026-10-31) cleared all 27 overdue source records, made the control-plane and
 approval validators resolve sibling engines on any machine, added gates for

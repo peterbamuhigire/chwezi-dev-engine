@@ -15,9 +15,10 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 
 - **170 active skills** in 18 categories, plus 78 retired names kept as redirects.
 - **168 skills** ship in the Claude Code plugin. The two project-initialisation skills are read from a clone.
-- **242 routing fixtures.** Each pairs a sample task with the skill that should win it. The expected skill ranks first for 222 (91.7%) and in the top three for all 242. The test matches words in skill descriptions, so it is not live routing.
-- **275 tests pass, 3 are skipped** (Windows 11, Python 3.13.7, 2026-11-15; `python -B -X utf8 -m pytest tests -q -p no:cacheprovider`). On Linux on 2026-11-05: 273 passed, 3 skipped.
-- **75 dated source records** back volatile facts. On 2026-11-15, the CI check reports 9 overdue records and 13 warnings; currentness is open (see [Date-triggered gates](#date-triggered-gates)).
+- **Auto-agents 2.2.3** supports sequential execution and optional parallel lanes, with separate full-verification and integration-check slots. [Current runner capabilities and evidence](docs/updates/2026-11-17-community-capabilities.md).
+- **248 routing fixtures.** On 2026-11-17 the expected skill ranks first for 227 (91.5%) and in the top three for all 248. The test matches words in skill descriptions, so it is not live routing.
+- **277 tests pass, 3 are skipped** (Windows, 2026-11-17; `python -B -X utf8 -m pytest tests -q -p no:cacheprovider`). The separate runtime suite retains its dated evidence below.
+- **75 dated source records** back volatile facts. On 2026-11-17, the CI check reports 9 overdue records and 53 warnings; currentness is open (see [Date-triggered gates](#date-triggered-gates)).
 - **Latest published rating: 62.5/100.** It is a practitioner's judgement, not an external audit, and the 95/100 target is not reached.
 
 ## Start here
@@ -116,12 +117,19 @@ Use this engine when software work needs a repeatable method and evidence a revi
 
 Every skill is listed in the [skill catalogue](docs/skill-catalogue.md).
 
-For an authorised multi-session plan, the optional local runner coordinates bounded agent
-sessions, detached verification gates and durable recovery records. On Windows,
-`auto-agents/run.ps1` and `run.cmd` check readiness, start the supervisor and open a status
-watch. They do not change host permissions or register themselves at startup. See the
-[runner guide](auto-agents/README.md) and [current evidence](auto-agents/EVIDENCE.md).
-Runtime tests and bounded provider smokes do not establish a real long-running implementation.
+For an authorised multi-session plan, Auto-agents 2.2.3 starts fresh Codex or Claude
+sessions, supervises verification jobs and records recovery state. Execution is
+sequential unless optional lanes are configured. Each lane has its own plan,
+worktree, branch and state; full gates and integration quick checks have separate
+slot pools. Opt-in target integration fetches, rebases and rechecks before a normal
+push, with bounded retries. Shared services and test data still need isolation.
+
+On Windows, `auto-agents/run.ps1` and `run.cmd` check readiness, start the supervisor
+and open a status watch. Startup registration and publication require explicit
+configuration and authority. See [parallel-lane configuration](auto-agents/README.md#parallel-lanes)
+and the [17 November capability record](docs/updates/2026-11-17-community-capabilities.md).
+Historical runtime tests and bounded provider smokes do not establish live lane
+throughput, a real multi-hour implementation or recovery from a physical power cut.
 
 Some work belongs to a neighbouring engine:
 
@@ -304,6 +312,11 @@ git diff --check
 ```
 
 Unless a later date is shown, the table records the 2026-11-05 run.
+
+The [17 November refresh](docs/updates/2026-11-17-community-capabilities.md)
+records the current repository-suite, catalogue, routing and control checks.
+The table below preserves earlier evidence; it is not a claim that every gate
+passes today. The source-register gate remains open.
 
 | Check | Needs | Result and date |
 |---|---|---|
@@ -523,7 +536,7 @@ python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-14
 
 **Status on 2026-11-08.** The check exited 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 (UTC). No date was extended unread.
 
-**Current check on 2026-11-15.** It exits 1 with 9 overdue findings and 13 warnings across 75 active sources. The overdue source claims remain open until they are reverified; the check itself evaluates dates and metadata, not whether a page supports a claim.
+**Current check on 2026-11-17.** It exits 1 with 9 overdue findings and 53 warnings across 75 active sources. The overdue source claims remain open until they are reverified; the check itself evaluates dates and metadata, not whether a page supports a claim.
 
 - **Renewed in place (9):** the page was unchanged.
 - **Superseded by a new dated record (4):** Next.js 16.4.5 and its 3 November security release, the Android November bulletin, and AGP 9.5.0.
