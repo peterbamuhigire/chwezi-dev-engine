@@ -588,16 +588,27 @@ class Execution:
         if position != len(integration['subjects']):
             self.fail('integration session dropped or renamed lane commits; inspect before publishing')
 
-    def gate_slot(self, saved=None):
-        """Hold one of the repository's shared gate slots; None when STOP or the budget ends the wait."""
+    def gate_slot(self, saved=None, integration=False):
+        """Hold one of the repository's shared gate slots; None when STOP or the budget ends the wait.
+
+        Integration quick checks use their own pool (`integration_slots`,
+        default 1 when `gate_slots` is set) so a short check never queues
+        behind full gates while the target keeps moving.
+        """
         count = self.cfg.get('gate_slots')
         if not count:
             return contextlib.nullcontext()
+        pool, label = 'gate-slots', 'gate'
+        if integration:
+            count = self.cfg.get('integration_slots', 1)
+            if not count:
+                return contextlib.nullcontext()
+            pool, label = 'integration-slots', 'integration check'
         if saved and durable.inspect(self.base / 'jobs' / saved['id'])['state'] != 'prepared':
             # Reattaching to a gate that already started: it ran under a slot, and
             # waiting here could not stop it, only delay observing it.
             return contextlib.nullcontext()
-        folder = self.shared / 'gate-slots'
+        folder = self.shared / pool
         waiting = False
         while True:
             for index in range(count):
@@ -612,7 +623,7 @@ class Execution:
             if (self.base / 'STOP').exists() or time.time() >= self.state['deadline']:
                 return None
             if not waiting:
-                self.save('waiting_gate', 'All %d gate slots are busy; waiting for one' % count)
+                self.save('waiting_gate', 'All %d %s slots are busy; waiting for one' % (count, label))
                 waiting = True
             time.sleep(self.cfg.get('gate_slot_poll_seconds', 10))
 
@@ -694,7 +705,7 @@ class Execution:
             self.save('verifying', 'Integrated onto the moved target; the full gate runs again')
             return None
         for command in cfg['integration_verify']:
-            slot = self.gate_slot()
+            slot = self.gate_slot(integration=True)
             if slot is None:
                 return 'halt'  # pending index 0: the full gate runs on resume
             with slot:

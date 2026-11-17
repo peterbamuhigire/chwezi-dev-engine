@@ -4,7 +4,7 @@ This is a sequential, project-local runner for Codex and Claude Code. It uses fr
 
 ## Current capabilities and evidence
 
-Release **2.2.2**, checked on **17 November 2026**, provides:
+Release **2.2.3**, checked on **17 November 2026**, provides:
 
 - Separate agent-session, verification-job and overall run budgets, with expensive checks reserved for completion candidates when configured.
 - Persisted job identity, verified revisions, quota-wait probes and recovery records. Reattach to a running check after observer failure; reconcile interrupted work under the declared replay policy.
@@ -76,7 +76,8 @@ Settings, normally in `config.json` so every lane and the default run share them
 - `integrate: true` (needs `publish`): before a fresh agent session the lane fast-forwards to the published target; before each push it fetches the target and, when the target moved, rebases the verified commits onto it. A conflict is handed to the next agent session, which may rebase only onto the fetched revision and must keep every lane commit (checked by subject). A rejected push (another lane published first) integrates again. `max_integration_attempts` (default 6) bounds attempts per slice.
 - `integration_commands`: project commands run after a clean rebase, for example regenerating generated files and committing the result. They must leave a clean tree and must not rewrite history.
 - `integration_verify`: a quick check. It replaces the full gate only when the rebase was clean, no integration command made a commit, and the incoming changes touch none of the lane's files. Otherwise the full gate runs again on the integrated revision. Semantic interference through disjoint files is possible; later gates and any full scans remain the safeguard, so keep a broad final gate.
-- `gate_slots`: the most verification and quick-check jobs that run at once across all lanes of the repository; `gate_slot_poll_seconds` (default 10) sets the wait poll. A lane waiting for a slot shows `WAITING_GATE`.
+- `gate_slots`: the most full verification jobs that run at once across all lanes of the repository; `gate_slot_poll_seconds` (default 10) sets the wait poll. A lane waiting for a slot shows `WAITING_GATE`.
+- `integration_slots` (default 1 when `gate_slots` is set; 0 removes the cap): the most integration quick checks (`integration_verify`) that run at once. They have their own pool so a short check never waits behind full gates while the target keeps moving.
 
 ## Run and observe
 

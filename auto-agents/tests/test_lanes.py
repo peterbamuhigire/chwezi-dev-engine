@@ -217,6 +217,34 @@ class LaneTests(unittest.TestCase):
         with again:
             pass
 
+    def test_integration_checks_do_not_queue_behind_full_gates(self):
+        # Seen in Medic8 (17 Nov 2026): 5-minute quick checks waited 30-80
+        # minutes behind full gates, the target moved meanwhile and a lane
+        # exhausted its integration attempts.
+        import execution
+        from types import SimpleNamespace
+        cfg = dict(self.cfg, gate_slots=1, gate_slot_poll_seconds=0.01)
+        run = execution.Execution(SimpleNamespace(**vars(self.d)), cfg, self.base, False)
+        run.state = {'run_id': 'x', 'deadline': time.time() + 60}
+        self.base.mkdir(parents=True, exist_ok=True)
+        gate = run.gate_slot()
+        with gate:  # every full-gate slot is busy
+            quick = run.gate_slot(integration=True)
+            self.assertIsNotNone(quick)
+            with quick:  # the single integration slot is busy too
+                (self.base / 'STOP').write_text('stop')
+                self.assertIsNone(run.gate_slot(integration=True))
+                (self.base / 'STOP').unlink()
+        self.assertTrue((run.shared / 'integration-slots' / 'slot-0.mutex').exists())
+
+    def test_disjoint_change_with_gate_slots_uses_integration_pool(self):
+        self.cfg.update(gate_slots=1, gate_slot_poll_seconds=0.01)
+        self.cfg['integration_verify'] = [[sys.executable, '-c', 'import pathlib;assert pathlib.Path("other.txt").exists()']]
+        self.cfg['verify'].append(self.mover('other.txt', 'x\n', 'other lane slice'))
+        self.assertEqual(self.d.run(self.cfg, self.base), 0)
+        self.assertIn('integration_verified', [e['event'] for e in self.events()])
+        self.assertTrue((self.base.parent.parent / 'integration-slots').is_dir())
+
 
     # -- crash and interruption windows (review findings, 17 Nov 2026) --
     def execution(self, cfg=None):
