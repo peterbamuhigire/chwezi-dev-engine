@@ -151,6 +151,15 @@ Cross-references:
 - `ai-model-gateway` — gateway-mediated retrieval calls.
 - `saas-tenant-data-portability-and-erasure` — KB erasure cascade for embeddings.
 - [Catalog metadata for AI](../../backend-databases/database-design-engineering/references/metadata-catalog-and-lineage-design.md) — load when retrieval or an agent draws on data-catalog or data-contract metadata: classification-first filtering, ODCS `context` block, provenance.
+
+## Test a change of context on a cache hit
+
+Run two requests with identical wording against different permitted document revisions. Seed the first with a policy that permits cancellation before dispatch. In the second revision add an exception for custom orders and ask about a custom order. Record the retrieved revision and returned decision for cold and warm requests. Both paths must apply the exception. Repeat with access to the underlying document revoked and verify that cached text cannot supply the answer. Include the cost of invalidation and cold misses when evaluating reuse.
+
+Concept source: Labaschin et al. (2025), *Managing Memory for AI Agents*, chapters 1 and 2, on semantic caching and conversational context.
+
+When an index updates asynchronously, pause its consumer after a source correction and before the new embedding is visible. Query during the pause and after replaying the same update twice. Check the served revision, current access decision and indexed record count. This distinguishes stale retrieval from repeated ingestion. Stewart and Huang (2026), *Agentic AI Data Architectures*, chapter 3, discuss temporal retrieval, refresh watermarks and incremental synchronisation.
+
 ## Consolidated Child References
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.

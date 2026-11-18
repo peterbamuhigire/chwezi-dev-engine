@@ -75,7 +75,7 @@ Use this engine when software work needs a repeatable method and evidence a revi
 | Diagnose an intermittent production bug | [`systematic-bug-diagnosis`](skills/sdlc-meta/systematic-bug-diagnosis/SKILL.md) |
 | Design the unit, integration and end-to-end test strategy for a service | [`advanced-testing-strategy`](skills/sdlc-meta/advanced-testing-strategy/SKILL.md) |
 | Build a CI/CD pipeline with build, test and deployment stages | [`cicd-pipelines`](skills/devops-cloud/cicd-pipelines/SKILL.md) |
-| Add retrieval-augmented generation with chunking, embeddings and a vector store | [`ai-rag-patterns`](skills/ai/ai-rag-patterns/SKILL.md) |
+| Build a retrieval pipeline and test cached answers after a source correction or access revocation | [`ai-rag-patterns`](skills/ai/ai-rag-patterns/SKILL.md) |
 | Add SAML single sign-on and SCIM provisioning for enterprise customers | [`saas-sso-scim-enterprise-auth`](skills/saas/saas-sso-scim-enterprise-auth/SKILL.md) |
 | Charge monthly with proration, trials and dunning for failed cards | [`subscription-billing`](skills/saas/subscription-billing/SKILL.md) |
 | Make a dashboard, its PDF and its XLSX export reconcile from one metric catalogue, with safe exports | [`reporting-and-export-engineering`](skills/saas/reporting-and-export-engineering/SKILL.md) |
