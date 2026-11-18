@@ -11,6 +11,22 @@ metadata:
 # AI Multi-Agent Coordination
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+## Selecting a technical specialist
+
+Use a role to answer a specific decision in the plan. Resolve the matching skill in the installed engine and return evidence to the task owner.
+
+| Role | Route and expected handoff |
+|---|---|
+| Systems analyst | [Project requirements](../../sdlc-meta/project-requirements/SKILL.md) for workflow decisions, exceptions and testable examples. |
+| Accountant | The applicable accounting authority for worked postings, reversals and reconciled balances. |
+| Auditor | Independent review of the named control, its sample, exceptions and evidence. |
+| Database administrator | [Database reliability](../../backend-databases/database-reliability/SKILL.md) for migration, lock, recovery or query-plan evidence. |
+| PHP tester | [PHP standards](../../languages/php-modern-standards/SKILL.md) and the project's test runner for an executable regression through the affected entry point. |
+| Researcher | The research route for a dated technical question, primary sources and applicability to the installed version. |
+| Front-end UI/UX specialist | [Frontend architecture](../../frontend-ux/frontend-architecture/SKILL.md) and the project's design standard for responsive interaction states and observed keyboard and usability checks. |
+| Cybersecurity specialist | [Web application security review](../../security/web-app-security-audit/SKILL.md) for trust-boundary findings, remediation and defensive checks. |
+| Enterprise network specialist (CCNP scope) | Review routing, switching and failover against the supplied topology and telemetry. Use [network security](../../security/network-security/SKILL.md) for the segmentation portion. Record any platform-specific expertise or evidence still needed. |
+
 <!-- dual-compat-start -->
 ## Use When
 
