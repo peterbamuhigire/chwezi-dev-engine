@@ -46,6 +46,8 @@ When required telemetry, evidence, execution, network access, or write authority
 
 ## Comparing prompt revisions on recorded failures
 
+Use the first observed error to locate a fault. When measuring a repair, recheck every eligible trace for that particular failure, including traces where another error came first. Record the number of affected traces and the number eligible in each revision. Keep deliberately selected failures separate from the production sample used to estimate prevalence.
+
 Annotate the first observable failure in each sampled trace, then group the annotations by mechanism. Keep cases used to tune the prompt separate from held-out cases drawn from the same workload. Compare both prompts against the same acceptance criterion, tools and model. Report resolved cases, new failures, unresolved cases and retries for each task class. A second failure downstream of a bad retrieval belongs to the same incident unless the trace shows another cause.
 
 Sources: Shankar and Husain, *Evals for AI Engineers*, Open Coding: Reading and Labeling Traces. Hander, *Building AI Systems with Python*, chapter 23. Joseph, *Ultimate Prompt Engineering with LLMs for Professionals*, discussion of prompt optimisation objectives.
