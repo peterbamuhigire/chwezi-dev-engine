@@ -1,5 +1,7 @@
 # Chwezi Dev Engine
 
+Use the [software delivery specialist guide](skills/ai/ai-agent-multi-agent-coordination/references/delivery-specialists.md) to assign responsibility from discovery to production and agree the evidence due at handoff.
+
 For agent regressions, trace the first observable failure and keep comparison prompts and held-out cases fixed across runs. See [AI agent observability and evaluation](skills/ai/ai-agent-observability-evaluation/SKILL.md).
 
 Use the [technical specialist routes](skills/ai/ai-agent-multi-agent-coordination/SKILL.md#selecting-a-technical-specialist) to assign a question and identify the evidence due back.

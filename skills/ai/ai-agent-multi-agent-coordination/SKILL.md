@@ -11,6 +11,8 @@ metadata:
 # AI Multi-Agent Coordination
 Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
+Use the [software delivery specialist guide](references/delivery-specialists.md) to assign responsibility from discovery to production and agree the evidence due at handoff.
+
 ## Selecting a technical specialist
 
 Use a role to answer a specific decision in the plan. Resolve the matching skill in the installed engine and return evidence to the task owner.
