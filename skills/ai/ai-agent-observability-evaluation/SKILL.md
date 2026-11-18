@@ -44,6 +44,12 @@ When required telemetry, evidence, execution, network access, or write authority
 | A mutation exceeds authority or tenant boundary | Block it and route for approval |
 | Evidence meets the stated threshold | Issue the output with provenance and owner |
 
+## Comparing prompt revisions on recorded failures
+
+Annotate the first observable failure in each sampled trace, then group the annotations by mechanism. Keep cases used to tune the prompt separate from held-out cases drawn from the same workload. Compare both prompts against the same acceptance criterion, tools and model. Report resolved cases, new failures, unresolved cases and retries for each task class. A second failure downstream of a bad retrieval belongs to the same incident unless the trace shows another cause.
+
+Sources: Shankar and Husain, *Evals for AI Engineers*, Open Coding: Reading and Labeling Traces. Hander, *Building AI Systems with Python*, chapter 23. Joseph, *Ultimate Prompt Engineering with LLMs for Professionals*, discussion of prompt optimisation objectives.
+
 ## Anti-Patterns
 
 - Treating absent evidence as success. Fix: mark the check unassessed and name the missing source.

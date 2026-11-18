@@ -1,5 +1,7 @@
 # Chwezi Dev Engine
 
+For agent regressions, trace the first observable failure and keep comparison prompts and held-out cases fixed across runs. See [AI agent observability and evaluation](skills/ai/ai-agent-observability-evaluation/SKILL.md).
+
 Chwezi Dev Engine is a catalogue of 170 routed `SKILL.md` files. They tell an AI coding agent, or the engineer directing one, how to design, build, review, secure and operate production software. The skills cover architecture, databases, security, languages, web and mobile clients, AI and agent systems, multi-tenant SaaS, DevOps, game development and GIS.
 
 It is for software engineers, technical leads, architects, product owners, QA and delivery reviewers, and the consultants of Chwezi Core Systems. Use it through Claude Code, Codex or any agent that can read Markdown, when work should follow a written method and leave evidence a reviewer can check.
