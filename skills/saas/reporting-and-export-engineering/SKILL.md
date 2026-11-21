@@ -24,6 +24,8 @@ requires it to run.
 <!-- dual-compat-start -->
 ## Use When
 
+For the drawn layer of a poster, infographic or explanatory report, use the local [illustration and cartoon drawing](../../frontend-ux/illustration-and-cartoon-drawing/SKILL.md) skill. Keep figures and chart geometry in the verified reporting layer.
+
 - Building or changing a dashboard, KPI tile, analytical screen, register with totals, financial
   statement, daily close, night audit, scheduled report, report centre, PDF or print output, or
   CSV or XLSX export in a Chwezi app or system.

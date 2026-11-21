@@ -46,6 +46,7 @@ When a task requires external research, use the Digital Research Engine (`digita
 | Product discovery, business metrics, documents, spreadsheets, proposal readiness, delivery control | `skills/product-business/*` |
 | SDLC documentation, skill writing, catalog guardrails, world-class engineering gates | `skills/sdlc-meta/*` and `00-meta-initialization/*` |
 | Finance/accounting rules, statutory values, IFRS, close, audit, payroll, tax | External `chwezi-accounting-doctrine`; local finance skills only orchestrate implementation |
+| Draw an original cartoon, poster, illustration or infographic vignette | [Illustration and cartoon drawing](skills/frontend-ux/illustration-and-cartoon-drawing/SKILL.md) |
 | Visual design, typography, UI/UX appearance, documents, slides, spreadsheets, PDF visual polish | External `chwezi-design-engine` |
 | Complete website delivery, content, SEO and launch | External `website-skills`; retain technical implementation here |
 | Formal SRS, lifecycle specifications and governance artefacts | External `chwezi-sdlc-documentation`; retain implementation evidence here |

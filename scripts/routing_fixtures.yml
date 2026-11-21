@@ -11,6 +11,8 @@
 #       python -X utf8 scripts/routing_smoke_test.py --collisions   (noise report)
 
 fixtures:
+  - task: "Draw a woodcut poster and a cartoon for a library training handout"
+    expect: illustration-and-cartoon-drawing
   # --- AI ---
   - task: "Design the overall architecture for an AI-powered SaaS feature, choosing components and the AI stack"
     expect: ai-app-architecture

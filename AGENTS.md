@@ -324,6 +324,8 @@ body face; no bare system stacks alone. State the chosen typeface and reason bef
 any artifact.
 <!-- /chwezi-design-engine:trigger -->
 
+For a request to draw an illustration, cartoon, poster or infographic, start with the [local drawing skill](skills/frontend-ux/illustration-and-cartoon-drawing/SKILL.md). Its recipes and production workflow travel with this engine.
+
 Local note (kept outside the shared trigger block so the block stays identical across engines).
 Migration status: UI/UX design skills are migrating OUT of this repo's `skills/frontend-ux/`
 into `chwezi-design-engine` (resolved per device). Migrated skills (`ux-principles-101`,
