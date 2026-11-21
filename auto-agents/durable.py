@@ -15,6 +15,29 @@ import sys
 import time
 import uuid
 
+# Windows sharing denials (status watchers, antivirus) are retried for about 8 s
+# in total with capped backoff (15 Nov 2026: a 0.3 s budget killed a live Garage
+# agent job). Only the local file operation is retried, never the saved action.
+SHARING_RETRIES = 40
+
+
+def sharing_delay(attempt):
+    return min(0.25, 0.02 * (attempt + 1))
+
+
+def write_heartbeat(path, value):
+    """Best-effort liveness write. A heartbeat is rewritten every 0.25 s, so one denied
+    replace is harmless; letting it raise used to fail the job and the Windows job object
+    then killed the healthy agent (Aqar 18 Nov 2026, WinError 5 on result.json).
+    Start and terminal receipts still use write_json and must succeed."""
+    try:
+        write_json(path, value)
+        return True
+    except PermissionError:
+        if os.name != 'nt':
+            raise
+        return False
+
 
 def write_json(path, value):
     path = Path(path)
@@ -27,14 +50,15 @@ def write_json(path, value):
         os.fsync(stream.fileno())
     # Windows readers/AV may briefly deny replacement while holding the old file.
     # Retry only this local replace, never the operation whose receipt it records.
-    for attempt in range(8):
+    for attempt in range(SHARING_RETRIES):
         try:
             os.replace(temp, path)
             break
         except PermissionError:
-            if os.name != 'nt' or attempt == 7:
+            if os.name != 'nt' or attempt == SHARING_RETRIES - 1:
+                temp.unlink(missing_ok=True)
                 raise
-            time.sleep(0.01 * (attempt + 1))
+            time.sleep(sharing_delay(attempt))
     if os.name != 'nt':
         fd = os.open(path.parent, os.O_RDONLY)
         try:
@@ -47,13 +71,13 @@ def read_json(path):
     # Retry only a Windows sharing denial on this read, never the saved action.
     # Missing/corrupt evidence and persistent denial remain explicit failures.
     path = Path(path)
-    for attempt in range(8):
+    for attempt in range(SHARING_RETRIES):
         try:
             return json.loads(path.read_text(encoding='utf-8'))
         except PermissionError:
-            if os.name != 'nt' or attempt == 7:
+            if os.name != 'nt' or attempt == SHARING_RETRIES - 1:
                 raise
-            time.sleep(0.01 * (attempt + 1))
+            time.sleep(sharing_delay(attempt))
 
 
 class Busy(RuntimeError):
@@ -113,7 +137,9 @@ def held(path):
 
 def detached(argv, cwd, log):
     kwargs = {'start_new_session': True} if os.name != 'nt' else {
-        'creationflags': subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+        # A hidden console (not DETACHED_PROCESS, which has none): console children such as git, php
+        # and the agent CLI inherit it instead of each opening a new visible window.
+        'creationflags': subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP,
         'startupinfo': subprocess.STARTUPINFO(),
     }
     if os.name == 'nt':
@@ -360,7 +386,7 @@ def worker(folder):
                     child.kill()
                     break
                 state['heartbeat_at'] = time.time()
-                write_json(folder / 'result.json', state)
+                write_heartbeat(folder / 'result.json', state)
                 time.sleep(0.25)
             code = child.wait()
             if os.name != 'nt':

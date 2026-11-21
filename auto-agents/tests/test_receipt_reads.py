@@ -25,8 +25,34 @@ class ReceiptReads(unittest.TestCase):
                 Path, 'read_text', side_effect=PermissionError('denied')) as read, patch.object(d.time, 'sleep') as sleep:
             with self.assertRaises(PermissionError):
                 d.read_json('result.json')
-            self.assertEqual(read.call_count, 8)
-            self.assertEqual(sleep.call_count, 7)
+            self.assertEqual(read.call_count, d.SHARING_RETRIES)
+            self.assertEqual(sleep.call_count, d.SHARING_RETRIES - 1)
+            # The whole budget stays bounded (about 8 s) but well above the 0.3 s that killed a live job.
+            total = sum(d.sharing_delay(a) for a in range(d.SHARING_RETRIES - 1))
+            self.assertTrue(5 < total < 10, total)
+
+    def test_denied_heartbeat_does_not_fail_the_job(self):
+        # Aqar 18 Nov 2026: one denied heartbeat replace failed the job and killed the agent.
+        with patch.object(d, 'os', SimpleNamespace(name='nt')), patch.object(
+                d, 'write_json', side_effect=PermissionError('[WinError 5] Access is denied')) as write:
+            self.assertFalse(d.write_heartbeat('result.json', {'state': 'running'}))
+            self.assertEqual(write.call_count, 1)
+        with patch.object(d, 'write_json') as write:
+            self.assertTrue(d.write_heartbeat('result.json', {'state': 'running'}))
+            write.assert_called_once()
+
+    def test_non_windows_heartbeat_denial_still_raises(self):
+        with patch.object(d, 'os', SimpleNamespace(name='posix')), patch.object(
+                d, 'write_json', side_effect=PermissionError('denied')):
+            with self.assertRaises(PermissionError):
+                d.write_heartbeat('result.json', {'state': 'running'})
+
+    def test_worker_loop_uses_best_effort_heartbeat(self):
+        import inspect
+        source = inspect.getsource(d)
+        loop = source[source.index('while child.poll() is None:'):source.index('code = child.wait()')]
+        self.assertIn('write_heartbeat(', loop)
+        self.assertNotIn('write_json(', loop)
 
     def test_non_windows_denial_is_not_retried(self):
         with patch.object(d, 'os', SimpleNamespace(name='posix')), patch.object(

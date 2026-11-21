@@ -65,6 +65,37 @@ class PlanContractTests(unittest.TestCase):
             }
         ]
 
+    def git(self, *args):
+        return subprocess.run(["git", "-C", str(self.root), *args], check=True, capture_output=True, text=True).stdout.strip()
+
+    def test_rebased_tested_revision_counts_as_in_history(self):
+        # Garage 19 Nov 2026: integrate rebased the slice; evidence still named the pre-rebase commit.
+        main = self.git("branch", "--show-current")
+        self.git("checkout", "-qb", "side")
+        (self.root / "src" / "output.py").write_text("# output\nvalue = 1\n", encoding="utf-8")
+        self.git("commit", "-qam", "slice change")
+        tested = self.git("rev-parse", "HEAD")
+        (self.root / "src" / "other.py").write_text("# unrelated\n", encoding="utf-8")
+        self.git("add", "src/other.py"); self.git("commit", "-qm", "not carried over")
+        stray = self.git("rev-parse", "HEAD")
+        self.git("checkout", "-q", main)
+        (self.root / "README.md").write_text("moved target\n", encoding="utf-8")
+        self.git("add", "README.md"); self.git("commit", "-qm", "target moved")
+        self.git("cherry-pick", tested)
+        self.assertNotEqual(self.git("rev-parse", "HEAD"), tested)
+        self.assertTrue(plan_contract._rebased_into_head(self.root, tested))
+        self.assertFalse(plan_contract._rebased_into_head(self.root, stray))
+
+    def test_evidence_digest_tolerates_only_crlf_checkout(self):
+        # Garage 19 Nov 2026: a core.autocrlf checkout stored CRLF; the digest came from LF content.
+        lf = b"# Evidence\nresult: PASS\n"
+        digest = hashlib.sha256(lf).hexdigest()
+        self.assertTrue(plan_contract._evidence_digest_matches(lf, digest))
+        self.assertTrue(plan_contract._evidence_digest_matches(lf.replace(b"\n", b"\r\n"), digest))
+        self.assertTrue(plan_contract._evidence_digest_matches(lf, digest.upper()))
+        self.assertFalse(plan_contract._evidence_digest_matches(b"# Evidence\r\nresult: FAIL\r\n", digest))
+        self.assertFalse(plan_contract._evidence_digest_matches(b"# Evidence\nresult: FAIL\n", digest))
+
     def test_incomplete_valid_contract_is_not_completion_ready(self):
         result = plan_contract.completion_readiness(self.contract(), self.root)
         self.assertTrue(result["valid"])

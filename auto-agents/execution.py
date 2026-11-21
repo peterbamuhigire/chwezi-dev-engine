@@ -1,5 +1,6 @@
 """Revision-bound execution and recovery for both CLI adapters."""
 import contextlib
+import fnmatch
 import datetime as dt
 import hashlib
 import json
@@ -23,7 +24,7 @@ def provider_limit(message, now=None):
 
     Returns (kind, seconds_until_reset_or_None); kind is None when no limit
     was reported. Provider CLIs word the usage limit differently (Claude Code
-    prints "You've hit your 5-hour limit · resets 7:10am (Africa/Kampala)"),
+    prints "You've hit your 5-hour limit Â· resets 7:10am (Africa/Kampala)"),
     so a stated reset time is used when it can be read.
     """
     text = message.lower()
@@ -56,6 +57,32 @@ def provider_limit(message, now=None):
 
 
 TERMINAL = {'done', 'stopped', 'blocked'}
+# Keys that only relocate files; they do not change what a run means, so they
+# stay out of the configuration digest and an unfinished run can be moved.
+LOCATION_KEYS = {'worktree_root'}
+# Transport failures reported by the agent CLI when the model API is unreachable.
+NETWORK_TERMS = ("can't reach the api server", 'enotfound', 'eai_again', 'econnreset', 'econnrefused',
+                 'etimedout', 'network error', 'connection error', 'socket hang up')
+PUSH_REJECTED = ('non-fast-forward', 'fetch first', '[rejected]')
+
+
+def config_digest(cfg):
+    material = {k: v for k, v in cfg.items() if k not in LOCATION_KEYS}
+    return hashlib.sha256(json.dumps(material, sort_keys=True).encode()).hexdigest()
+
+
+def worktree_path(root, cfg, base):
+    """Worktree location. The default stays under the Git common dir (compatible
+    with existing runs); `worktree_root` (absolute, or relative to the repository
+    root) moves it outside `.git`, where agent CLIs that guard `.git` paths as
+    sensitive (Claude Code refuses every edit there) can still edit files."""
+    configured = cfg.get('worktree_root')
+    if configured:
+        folder = Path(configured)
+        folder = folder if folder.is_absolute() else Path(root) / folder
+        lane = cfg.get('lane')
+        return folder.resolve() / (('lane-' + lane + '-' if lane else '') + cfg['runner'])
+    return Path(base) / 'worktrees' / cfg['runner']
 
 
 class Halted(Exception):
@@ -81,7 +108,7 @@ class Execution:
         self.journal = self.base / ('run-' + cfg['runner'] + '.json')
         self.checkpoint = self.base / ('verified-' + cfg['runner'] + '.json')
         self.pending_path = self.base / ('pending-' + cfg['runner'] + '.json')
-        self.work = self.base / 'worktrees' / cfg['runner']
+        self.work = worktree_path(api.ROOT, cfg, self.base)
         lane = cfg.get('lane')
         self.branch = 'auto-agents/' + ('lane-' + lane + '-' if lane else '') + cfg['runner']
         # Lanes keep their own state under <shared>/lanes/<lane>; gate slots are
@@ -111,7 +138,34 @@ class Execution:
         return self.a.git(self.work, 'rev-parse', 'HEAD')
 
     def dirty(self):
-        return self.a.git(self.work, 'status', '--porcelain')
+        status = self.a.git(self.work, 'status', '--porcelain')
+        if status and self.restore_eol_only(status):
+            status = self.a.git(self.work, 'status', '--porcelain')
+        return status
+
+    def restore_eol_only(self, status):
+        """Restore tracked files whose only difference is CR/LF line endings.
+
+        Tools and editors on Windows rewrite line endings without changing content
+        (Garage 18 Nov 2026: a menu file blocked the run as "agent left uncommitted
+        changes" while `git diff` was empty). Only unstaged, unquoted modifications
+        are considered, and only when git confirms no difference beyond CR at EOL.
+        """
+        eol_only = []
+        # api.git() strips output, which would eat the leading space of " M"; read it raw.
+        raw = self.a.call(['git', 'status', '--porcelain'], self.work)
+        for line in (raw.stdout if raw.returncode == 0 else '').splitlines():
+            if len(line) < 4 or line[:2] != ' M' or line[3] == '"':
+                continue
+            path = line[3:]
+            if self.a.call(['git', 'diff', '--quiet', '--ignore-cr-at-eol', '--', path], self.work).returncode == 0:
+                eol_only.append(path)
+        if not eol_only:
+            return False
+        self.a.git(self.work, 'checkout', '--', *eol_only)
+        if self.state.get('run_id'):
+            self.event('eol_restored', files=eol_only[:50], count=len(eol_only))
+        return True
 
     def check_branch(self, before):
         if self.a.git(self.work, 'branch', '--show-current') != self.branch:
@@ -121,12 +175,15 @@ class Execution:
 
     def setup(self):
         a, cfg = self.a, self.cfg
-        digest = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode()).hexdigest()
+        digest = config_digest(cfg)
         previous = durable.read_json(self.journal) if self.journal.exists() else None
         if self.resume_only and (previous is None or previous['state'] in TERMINAL):
             return False
         if previous and previous['state'] not in TERMINAL:
             self.state = previous
+            if previous.get('worktree') and Path(previous['worktree']).resolve() != self.work.resolve():
+                # An operator moved the worktree (`git worktree move`) between sessions.
+                self.state['worktree'] = str(self.work)
             if previous['config_digest'] != digest:
                 self.preserve_journal = True
                 self.fail('Configuration changed during an unfinished run; reconcile the saved operation first.')
@@ -142,6 +199,9 @@ class Execution:
         if (self.base / 'STOP').exists():
             self.fail('STOP file is present; remove it deliberately to resume')
         self.agent = a.agent_command(cfg)
+        extra = a.managed_args(cfg)
+        if extra and self.agent[2:2 + len(extra)] == extra:
+            a.managed_args(cfg, write=True)  # refresh the skill profile and subagent file the agent will load
         for command in cfg['verify'] + cfg.get('final_verify', []):
             if not shutil.which(command[0]) and not (a.ROOT / command[0]).is_file():
                 self.fail('Verification executable is unavailable: ' + command[0])
@@ -244,24 +304,24 @@ class Execution:
             self.fail('STATUS: DONE conflicts with incomplete plan-contract tasks or evidence.')
         self.state['plan_contract'] = name
 
-    def check_owner_baseline(self):
-        """Detect changed owner inputs without replacing an in-flight operation."""
-        inputs = [(self.cfg['plan'], self.state.get('root_plan_blob'))]
-        if self.cfg.get('plan_contract'):
-            inputs.append((self.cfg['plan_contract'], self.state.get('root_contract_blob')))
-        root = self.a.ROOT.resolve()
-        for name, expected_blob in inputs:
-            file = (root / name).resolve()
-            unchanged = (file.is_relative_to(root) and file.is_file()
-                         and self.a.git(root, 'ls-files', '--', name)
-                         and not self.a.git(root, 'status', '--porcelain', '--', name))
-            if not unchanged or self.a.git(root, 'rev-parse', 'HEAD:' + name) != expected_blob:
-                self.fail('Owner input changed during execution; reconcile the plan or contract before continuing.')
+    def owner_intent(self):
+        """Recheck the owner checkout at operation boundaries, without rebasing work."""
+        for name, saved_key in ((self.cfg['plan'], 'root_plan_blob'),
+                                (self.cfg.get('plan_contract'), 'root_contract_blob')):
+            if not name:
+                continue
+            path = (self.a.ROOT / name).resolve()
+            if (not path.is_relative_to(self.a.ROOT.resolve()) or not path.is_file()
+                    or not self.a.git(self.a.ROOT, 'ls-files', '--', name)
+                    or self.a.git(self.a.ROOT, 'status', '--porcelain', '--', name)):
+                self.fail('Owner plan or contract changed during this run; reconcile intent before further work.')
+            if self.a.git(self.a.ROOT, 'rev-parse', 'HEAD:' + name) != self.state.get(saved_key):
+                self.fail('Owner plan or contract changed during this run; reconcile intent before further work.')
 
     def job(self, kind, argv, timeout, input_text=None):
         op = self.state.get('operation')
         if op is None:
-            self.check_owner_baseline()
+            self.owner_intent()
             op = {'kind': kind, 'id': uuid.uuid4().hex, 'before': self.head(), 'created_at': time.time(),
                   'gate_index': self.state.get('gate_index')}
             self.save(operation=op)
@@ -272,13 +332,22 @@ class Execution:
             # Reattach to the ORIGINAL command, timeout and prompt. Rebuilding them
             # from today's remaining budget would change the job identity.
             spec = durable.read_spec(folder)
-            if spec['argv'] != argv or Path(spec['cwd']).resolve() != self.work.resolve():
+            # A job prepared before 2.5.0 lacks the subagent arguments, and one prepared before 2.4.0
+            # also lacks the skill arguments; both reattach to their original command.
+            accepted = [argv]
+            if kind == 'agent':
+                extra = self.a.managed_args(self.cfg)
+                if extra and argv[2:2 + len(extra)] == extra:
+                    skills = self.a.skill_args(self.cfg)
+                    rest = argv[2 + len(extra):]
+                    accepted += [argv[:2] + skills + rest, argv[:2] + rest]
+            if spec['argv'] not in accepted or Path(spec['cwd']).resolve() != self.work.resolve():
                 self.fail('Saved job command or working directory changed.')
         else:
             durable.prepare(folder, argv, self.work, timeout, input_text,
                             self.cfg.get('login_mode', 'plan') if kind == 'agent' else 'inherit')
         if durable.inspect(folder)['state'] == 'prepared':
-            self.check_owner_baseline()
+            self.owner_intent()
             if time.time() >= self.state['deadline']:
                 self.fail('Saved job was never launched; STOP or expired run budget prevents a new launch.')
             if (self.base / 'STOP').exists():
@@ -297,7 +366,7 @@ class Execution:
                 last[0] = time.monotonic()
         result = durable.wait(folder, observe=observe, cancel=lambda: (self.base / 'CANCEL').exists())
         self.event(kind + '_receipt', job_id=op['id'], outcome=result['state'], exit=result.get('exit_code'))
-        self.check_owner_baseline()
+        self.owner_intent()
         return result, durable.tail(folder / 'output.log'), op
 
     def clear_operation(self, **fields):
@@ -311,7 +380,19 @@ class Execution:
                   'without a changed input or unresolved concern. Do not push, switch branches, reset, merge or expand permissions. '
                   'Preserve production data and external-effect boundaries. Mark STATUS: DONE on the first plan line only '
                   'when all required outcomes have evidence; use STATUS: BLOCKED - reason only when no independent work remains. '
-                  'A marker, test exit, or reviewer score alone does not prove user acceptance.\n')
+                  'A marker, test exit, or reviewer score alone does not prove user acceptance. '
+                  'Run every command in the foreground and wait for it (raise the tool timeout for long checks); '
+                  'background tasks die with this non-interactive session. Commit before ending the session. '
+                  'Write text files as UTF-8 (Windows PowerShell 5.1 Set-Content/Out-File default to ANSI; pass -Encoding utf8 '
+                  'or use the Edit/Write tools).\n')
+        if self.cfg.get('skills', 'on-demand') == 'on-demand':
+            prompt += ('Skills are not preloaded. When a step needs one, run `python "' + str(Path(__file__).resolve().parent / 'find_skill.py') + '" "<task words>"` '
+                       '(optionally --engine development|writing|orchestrator|accounting|knowledge-bank), read that engine\'s '
+                       'router section, then Read only the one SKILL.md it names. Do not load whole skill folders.\n')
+        if self.cfg.get('subagents', 'economy') == 'economy' and self.cfg['runner'] == 'claude':
+            prompt += ('When locating something would take more than a few searches across many files, delegate it to the '
+                       'Explore subagent (cheapest model class, read-only) and act on its path:line report. Keep judgement, '
+                       'edits and verification in this session; do not start other subagents for searching.\n')
         if pending and pending.get('integration'):
             integration = pending['integration']
             prompt += ('INTEGRATION: ' + self.cfg['remote'] + '/' + self.cfg['target_branch'] + ' moved while your verified commits '
@@ -328,6 +409,10 @@ class Execution:
                        'before editing. Preserve useful partial work. Reconcile each intended outcome; do not repeat completed '
                        'effects or delete/reset uncertain changes. This run permits local-only recovery; external actions are '
                        'not replayable. Commit recovered work only after appropriate checks.\n')
+            if self.state.get('contract_repair'):
+                prompt += ('The interrupted work left the plan contract invalid. Repair it first (stage or commit every '
+                           'evidence file it names, or leave evidence [] until the task is complete): '
+                           + self.state['contract_repair'] + '\n')
         if self.cfg.get('plan_contract'):
             prompt += f'Update the tracked task/evidence sidecar {self.cfg["plan_contract"]}; keep task IDs and acceptance intent stable.\n'
         if self.cfg.get('final_verify'):
@@ -339,8 +424,11 @@ class Execution:
         while retry_at and time.time() < retry_at:
             if (self.base / 'STOP').exists() or time.time() >= self.state['deadline']:
                 return False
-            self.save('waiting', 'Usage/rate limit; scheduled probe, not a confirmed provider reset.', retry_at=retry_at)
-            time.sleep(min(2, retry_at - time.time(), max(.01, self.state['deadline'] - time.time())))
+            reason = ('Network failure reaching the model API; fresh session after a pause'
+                      if self.state.get('net_retries') else
+                      'Usage/rate limit; scheduled probe, not a confirmed provider reset.')
+            self.save('waiting', reason, retry_at=retry_at)
+            time.sleep(max(0, min(2, retry_at - time.time(), self.state['deadline'] - time.time())))
         if retry_at:
             self.save(retry_at=None)
         return True
@@ -385,7 +473,7 @@ class Execution:
                 self.save('stopped', 'STOP requested' if (self.base / 'STOP').exists() else 'Run time budget reached')
                 break
             if not self.state.get('operation'):
-                self.check_owner_baseline()
+                self.owner_intent()
             pending = durable.read_json(self.pending_path) if self.pending_path.exists() else None
             checkpoint = durable.read_json(self.checkpoint)
             verified = checkpoint['head']
@@ -421,7 +509,7 @@ class Execution:
                 self.fail('verification failure limit reached; inspect before resuming')
             need_agent = not pending or bool(pending.get('feedback'))
             if need_agent:
-                lines = (self.work / cfg['plan']).read_text(encoding='utf-8').splitlines()
+                lines = (self.work / cfg['plan']).read_text(encoding='utf-8', errors='replace').splitlines()
                 first = lines[0].strip() if lines else ''
                 if not pending and not op and not self.state.get('reconcile'):
                     if first == 'STATUS: DONE':
@@ -443,9 +531,23 @@ class Execution:
                         break
                     if not pending and not self.state.get('reconcile') and cfg.get('integrate'):
                         self.sync()
-                    # Validate retained recovery context before another worker
-                    # can consume it; reattachment keeps its original job spec.
-                    self.contract()
+                    # Reconciliation may retain dirty local progress, but never
+                    # launch a fresh worker against changed approved definitions.
+                    # An invalid sidecar inside interrupted local work (e.g. evidence
+                    # naming a file the agent wrote but never staged before a usage
+                    # limit) is handed to the recovery session to repair; the gate
+                    # re-checks the contract before anything is accepted.
+                    try:
+                        self.contract()
+                        self.save(contract_repair=None)
+                    except self.a.Stop as error:
+                        # Also when the gate itself handed the contract defect back as feedback:
+                        # otherwise the repair session it asked for could never start (Garage 19 Nov).
+                        repairing = self.state.get('reconcile') or bool(pending and pending.get('feedback'))
+                        if not (repairing and str(error).startswith('Invalid plan contract')):
+                            raise
+                        self.save(contract_repair=str(error)[:1500])
+                        self.event('contract_feedback', reason=str(error)[:500], stage='recovery')
                     self.save(session=self.state['session'] + 1)
                 result, output, op = self.job('agent', self.agent, min(cfg['session_timeout_seconds'], max(1, self.state['deadline'] - time.time())), self.prompt(pending))
                 if result['state'] != 'passed':
@@ -468,6 +570,17 @@ class Execution:
                         self.save('waiting', 'Provider limit; retry only within configured run budget')
                         self.event('rate_wait', seconds=delay, retry=attempts)
                         continue
+                    network = any(term in output.lower() for term in NETWORK_TERMS)
+                    if (network and result['state'] == 'failed' and (unchanged or local_reconcile)
+                            and self.state.get('net_retries', 0) < cfg.get('max_network_retries', 24)):
+                        # The model API was unreachable (DNS/connection). Pause, then a fresh
+                        # session on the same worktree; bounded, and reset by each accepted slice.
+                        attempts = self.state.get('net_retries', 0) + 1
+                        delay = cfg.get('network_retry_seconds', 300)
+                        self.clear_operation(net_retries=attempts, retry_at=time.time() + delay, reconcile=not unchanged)
+                        self.save('waiting', 'Network failure reaching the model API; fresh session after a pause')
+                        self.event('network_wait', seconds=delay, retry=attempts)
+                        continue
                     self.fail('agent ' + result['state'] + '; inspect job log and reconcile worktree')
                 if pending and pending.get('integration'):
                     if self.rebasing():
@@ -483,7 +596,7 @@ class Execution:
                 durable.write_json(self.pending_path, {'head': after, 'failures': pending.get('failures', 0) if pending else 0,
                                    'index': 0, 'config_digest': self.state['config_digest'],
                                    **{k: pending[k] for k in ('integrations', 'rejections') if pending and k in pending}})
-                self.clear_operation(rate_retries=0, reconcile=False)
+                self.clear_operation(rate_retries=0, net_retries=0, reconcile=False)
                 pending = durable.read_json(self.pending_path)
             if self.verify(pending) == 'halt':
                 self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
@@ -638,7 +751,7 @@ class Execution:
     def blob(self, rev, name):
         return self.a.git(self.work, 'rev-parse', '--verify', '-q', rev + ':' + name, check=False)
 
-    def gate_slot(self, saved=None, integration=False):
+    def gate_slot(self, saved=None, integration=False, turn=False):
         """Hold one of the repository's shared gate slots; None when STOP or the budget ends the wait.
 
         Integration quick checks use their own pool (`integration_slots`,
@@ -646,10 +759,14 @@ class Execution:
         behind full gates while the target keeps moving.
         """
         count = self.cfg.get('gate_slots')
-        if not count:
-            return contextlib.nullcontext()
         pool, label = 'gate-slots', 'gate'
-        if integration:
+        if turn:
+            # One run publishes at a time: it rebases, quick-checks and pushes
+            # while holding the turn, so the target cannot move underneath it.
+            count, pool, label = 1, 'publish-turn', 'publish turn'
+        elif not count:
+            return contextlib.nullcontext()
+        elif integration:
             count = self.cfg.get('integration_slots', 1)
             if not count:
                 return contextlib.nullcontext()
@@ -659,26 +776,57 @@ class Execution:
             # waiting here could not stop it, only delay observing it.
             return contextlib.nullcontext()
         folder = self.shared / pool
+        # First come, first served: a waiting run holds a ticket and may take a free
+        # slot only when no older live ticket exists (polling alone let one lane
+        # wait six hours while others took slots again and again).
+        queue = folder / 'queue'
+        queue.mkdir(parents=True, exist_ok=True)
+        ticket = queue / ('%020d-%s.ticket' % (time.time_ns(), uuid.uuid4().hex[:12]))
+        holder = durable.Lease(ticket)  # kernel lock: the ticket is live while this process holds it
+        holder.__enter__()
         waiting = False
-        while True:
-            for index in range(count):
-                lease = durable.Lease(folder / ('slot-%d.mutex' % index))
-                try:
-                    lease.__enter__()
-                except durable.Busy:
-                    continue
-                if waiting:
-                    self.event('gate_slot', slot=index)
-                return contextlib.closing(SimpleLease(lease))
-            if (self.base / 'STOP').exists() or time.time() >= self.state['deadline']:
-                return None
-            if not waiting:
-                self.save('waiting_gate', 'All %d %s slots are busy; waiting for one' % (count, label))
-                waiting = True
-            time.sleep(self.cfg.get('gate_slot_poll_seconds', 10))
+        try:
+            while True:
+                if not self.older_tickets(queue, ticket):
+                    for index in range(count):
+                        lease = durable.Lease(folder / ('slot-%d.mutex' % index))
+                        try:
+                            lease.__enter__()
+                        except durable.Busy:
+                            continue
+                        if waiting:
+                            self.event('gate_slot', slot=index)
+                        return contextlib.closing(SimpleLease(lease))
+                if (self.base / 'STOP').exists() or time.time() >= self.state['deadline']:
+                    return None
+                if not waiting:
+                    self.save('waiting_gate', 'Another run is publishing; waiting for the publish turn' if turn
+                              else 'All %d %s slots are busy; waiting for one' % (count, label))
+                    waiting = True
+                time.sleep(self.cfg.get('gate_slot_poll_seconds', 10))
+        finally:
+            holder.__exit__(None, None, None)
+            ticket.unlink(missing_ok=True)
+
+    @staticmethod
+    def older_tickets(queue, ticket):
+        """Live tickets queued before `ticket`; tickets nobody holds any more are removed."""
+        older = []
+        for other in sorted(queue.glob('*.ticket')):
+            if other.name >= ticket.name:
+                break
+            try:
+                young = time.time() - other.stat().st_mtime < 5  # its owner may not hold the lock yet
+            except FileNotFoundError:
+                continue
+            if young or durable.held(other):
+                older.append(other)
+            else:
+                other.unlink(missing_ok=True)
+        return older
 
     def plan_line(self):
-        lines = (self.work / self.cfg['plan']).read_text(encoding='utf-8').splitlines()
+        lines = (self.work / self.cfg['plan']).read_text(encoding='utf-8', errors='replace').splitlines()
         return lines[0].strip() if lines else ''
 
     def integrate(self, pending, after, total):
@@ -700,7 +848,11 @@ class Execution:
             base = self.a.git(self.work, 'merge-base', upstream, after)
             changed = lambda a, b: set(filter(None, self.a.git(self.work, 'diff', '--name-only', a, b).splitlines()))
             lane_files, incoming = changed(base, after), changed(base, upstream)
-            overlap = sorted(lane_files & incoming)
+            # Files a project marks as rebuilt or append-only shared lists
+            # (`integration_overlap_ignore`, fnmatch globs) do not force a full
+            # gate: they merged cleanly and the quick check covers them.
+            ignore = cfg.get('integration_overlap_ignore', [])
+            overlap = sorted(f for f in lane_files & incoming if not any(fnmatch.fnmatch(f, g) for g in ignore))
             subjects = self.a.git(self.work, 'log', '--reverse', '--format=%s', upstream + '..' + after).splitlines()
             plan_before = self.plan_line()
             pending.update(integrating={'upstream': upstream, 'orig': after, 'subjects': subjects}, integrations=attempts)
@@ -737,7 +889,15 @@ class Execution:
                     self.fail('integration command left uncommitted changes')
                 if self.head() != before:
                     regenerated = True
-                    pending.update(head=self.head(), index=0, quick=False)
+                    # Regenerating only files the project marks as rebuilt
+                    # (`integration_overlap_ignore`) keeps the quick check; any
+                    # other file forces the full gate. Without this a lane whose
+                    # slice feeds a generated file re-ran the full gate on every
+                    # move of the target and never published.
+                    rebuilt = self.a.git(self.work, 'diff', '--name-only', before, self.head()).splitlines()
+                    ignore = cfg.get('integration_overlap_ignore', [])
+                    generated_only = bool(rebuilt) and all(any(fnmatch.fnmatch(f, g) for g in ignore) for f in rebuilt)
+                    pending.update(head=self.head(), index=0, quick=pending.get('quick', False) and generated_only)
                 durable.write_json(self.pending_path, pending)
                 if result['state'] != 'passed':
                     pending.update(failures=pending.get('failures', 0) + 1, feedback=output[-1500:] or 'Integration command failed.')
@@ -780,10 +940,25 @@ class Execution:
     def verify(self, pending):
         cfg, after = self.cfg, pending['head']
         if not self.state.get('operation'):
-            self.check_owner_baseline()
-        lines = (self.work / cfg['plan']).read_text(encoding='utf-8').splitlines()
+            self.owner_intent()
+        lines = (self.work / cfg['plan']).read_text(encoding='utf-8', errors='replace').splitlines()
         completing = bool(lines and lines[0].strip() == 'STATUS: DONE')
-        self.contract(require_complete=completing)
+        try:
+            self.contract(require_complete=completing)
+        except (self.a.Stop, ValueError) as error:
+            if isinstance(error, self.a.Stop) and not str(error).startswith('Invalid plan contract'):
+                raise  # e.g. STATUS: DONE over incomplete tasks, or changed definitions, stays a hard block
+            # The sidecar is agent-authored at this candidate. Hand the defect back as gate
+            # feedback (bounded by max_gate_failures) instead of blocking the run.
+            pending.update(failures=pending.get('failures', 0) + 1, index=0,
+                           feedback='Plan contract check failed; repair ' + str(cfg.get('plan_contract')) +
+                                    ' (evidence entries must be objects with criterion_id, path, tested_revision, '
+                                    'sha256, command, result; leave evidence [] until the task is complete): ' + str(error))
+            durable.write_json(self.pending_path, pending)
+            self.clear_operation()
+            self.save('repairing', 'Plan contract invalid; next session repairs it')
+            self.event('contract_feedback', reason=str(error)[:500])
+            return
         commands = cfg['verify'] + (cfg.get('final_verify', []) if completing else [])
         op = self.state.get('operation')
         if op and op['kind'] == 'integrating':
@@ -828,28 +1003,49 @@ class Execution:
             self.clear_operation()
             self.event('verification', index=index, exit=0, head=after)
         if cfg['publish']:
-            if cfg.get('integrate') and not self.state.get('operation'):
-                after = self.integrate(pending, after, len(commands))
-                if after is None or after == 'halt':
-                    return after
-            # Repeating this exact non-force ref update is idempotent. No merge,
-            # force, branch switch or new revision is introduced on recovery.
-            result, output, _ = self.job('publishing', ['git', 'push', cfg['remote'], after + ':refs/heads/' + cfg['target_branch']], 120)
-            if result['state'] != 'passed':
-                rejected = any(term in output for term in ('non-fast-forward', 'fetch first', '[rejected]'))
-                if cfg.get('integrate') and result['state'] == 'failed' and rejected:
-                    # Another lane published first. Nothing was sent; integrate again.
+            turn = self.gate_slot(turn=True) if cfg.get('integrate') else contextlib.nullcontext()
+            if turn is None:
+                return 'halt'
+            with turn:
+                if cfg.get('integrate') and not self.state.get('operation'):
+                    after = self.integrate(pending, after, len(commands))
+                    if after is None or after == 'halt':
+                        return after
+                # Repeating this exact non-force ref update is idempotent. No merge,
+                # force, branch switch or new revision is introduced on recovery.
+                # A failed push that the remote did not reject (DNS/network outage) is
+                # retried after a pause, bounded by max_publish_retries and the deadline.
+                attempts = 0
+                while True:
+                    result, output, _ = self.job('publishing', ['git', 'push', cfg['remote'], after + ':refs/heads/' + cfg['target_branch']], 120)
+                    rejected = any(term in output for term in PUSH_REJECTED)
+                    if result['state'] == 'passed' or rejected:
+                        break
+                    attempts += 1
+                    delay = cfg.get('publish_retry_seconds', 300)
+                    if (attempts > cfg.get('max_publish_retries', 72) or (self.base / 'STOP').exists()
+                            or time.time() + delay >= self.state['deadline']):
+                        break
                     self.clear_operation()
-                    pending['rejections'] = pending.get('rejections', 0) + 1
-                    if pending['rejections'] > 2 * cfg.get('max_integration_attempts', 6):
-                        self.fail('push rejected too often for this slice; the target keeps moving or fetch keeps failing')
-                    durable.write_json(self.pending_path, pending)
-                    self.event('push_rejected', head=after, count=pending['rejections'])
-                    time.sleep(min(60, 5 * pending['rejections']))
-                    return
-                self.fail('push failed or interrupted; inspect remote ref and receipt: ' + output[-500:])
+                    self.save('waiting', f'Push failed; retry {attempts} in {delay}s: ' + output[-200:])
+                    self.event('publish_retry', attempt=attempts, seconds=delay)
+                    until = time.time() + delay
+                    while time.time() < until and not (self.base / 'STOP').exists():
+                        time.sleep(min(5, max(0.01, until - time.time())))
+                if result['state'] != 'passed':
+                    if cfg.get('integrate') and result['state'] == 'failed' and rejected:
+                        # Another lane published first. Nothing was sent; integrate again.
+                        self.clear_operation()
+                        pending['rejections'] = pending.get('rejections', 0) + 1
+                        if pending['rejections'] > 2 * cfg.get('max_integration_attempts', 6):
+                            self.fail('push rejected too often for this slice; the target keeps moving or fetch keeps failing')
+                        durable.write_json(self.pending_path, pending)
+                        self.event('push_rejected', head=after, count=pending['rejections'])
+                        time.sleep(min(60, 5 * pending['rejections']))
+                        return
+                    self.fail('push failed or interrupted; inspect remote ref and receipt: ' + output[-500:])
             self.event('published', head=after, target=cfg['target_branch'])
-        self.check_owner_baseline()
+        self.owner_intent()
         durable.write_json(self.checkpoint, {'head': after, 'config_digest': self.state['config_digest'], 'at': stamp(),
                            'run_id': self.state['run_id'], 'accepted_slices': self.state['accepted_slices'] + 1,
                            'operation_id': (self.state.get('operation') or {}).get('id')})
@@ -866,31 +1062,42 @@ def deliberate_recovery(api, cfg, base):
     state = durable.read_json(journal)
     if state['state'] == 'done':
         raise api.Stop('This run is already complete.')
-    if state['config_digest'] != hashlib.sha256(json.dumps(cfg, sort_keys=True).encode()).hexdigest():
+    if state['config_digest'] != config_digest(cfg):
         raise api.Stop('Restore the saved configuration before recovering; do not reinterpret an interrupted operation.')
     operation = state.get('operation')
     if operation:
         receipt = durable.inspect(base / 'jobs' / operation['id'])
         if receipt['supervisor_active']:
             raise api.Stop('Saved job is still active; observe it or cancel and wait for its terminal receipt.')
-        if operation['kind'] == 'publishing':
+        if operation['kind'] == 'publishing' and receipt['state'] not in ('failed', 'interrupted', 'timed_out'):
             raise api.Stop('Reconcile the interrupted remote publication before recovery; local-only replay is insufficient.')
         if operation['kind'] == 'verifying' and not cfg.get('verification_replay_safe', False):
             raise api.Stop('Verification replay is not declared safe.')
     if cfg.get('recovery_policy') != 'local-only':
         raise api.Stop('Automatic edit reconciliation requires the previously configured local-only recovery policy.')
-    work = Path(state['worktree'])
+    work = worktree_path(api.ROOT, cfg, base)
     if api.git(work, 'branch', '--show-current') != state['branch']:
         raise api.Stop('Worktree branch changed; inspect before recovering.')
     before = operation['before'] if operation else durable.read_json(base / ('verified-' + cfg['runner'] + '.json'))['head']
     if api.call(['git', 'merge-base', '--is-ancestor', before, api.git(work, 'rev-parse', 'HEAD')], work).returncode:
         raise api.Stop('Worktree history changed; inspect before recovering.')
+    if operation and operation['kind'] == 'publishing':
+        # Replay the push only when the remote ref is the candidate itself or one
+        # of its ancestors; any other remote state needs manual reconciliation.
+        pending_path = base / ('pending-' + cfg['runner'] + '.json')
+        candidate = durable.read_json(pending_path)['head'] if pending_path.exists() else None
+        remote = api.call(['git', 'ls-remote', cfg['remote'], 'refs/heads/' + cfg['target_branch']], api.ROOT, timeout=120)
+        if remote.returncode or not candidate:
+            raise api.Stop('Remote unreachable or no pending candidate; cannot reconcile the failed publication yet.')
+        sha = remote.stdout.split()[0] if remote.stdout.strip() else ''
+        if sha != candidate and (not sha or api.call(['git', 'merge-base', '--is-ancestor', sha, candidate], work).returncode):
+            raise api.Stop('Remote branch is not an ancestor of the candidate; reconcile the publication manually.')
     # STOP is the commit barrier for this explicit recovery transition. A crash
     # during marker cleanup must not expose a runnable state with stale CANCEL.
     (base / 'STOP').touch()
     state.update(state='recovering', reason='Operator requested local recovery and renewed budget',
                  operation=None, job_id=None, job_state=None, retry_at=None, session=0,
-                 rate_retries=0, recovery_attempts=0, reconcile=not operation or operation['kind'] == 'agent',
+                 rate_retries=0, net_retries=0, recovery_attempts=0, reconcile=not operation or operation['kind'] == 'agent',
                  deadline=time.time() + cfg['max_hours'] * 3600, updated=stamp())
     durable.write_json(journal, state)
     with (base / 'events.jsonl').open('a', encoding='utf-8') as stream:

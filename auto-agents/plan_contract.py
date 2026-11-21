@@ -18,6 +18,51 @@ from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 
+# git can stall for seconds while the machine is busy; a slow answer is not an invalid contract.
+GIT_TIMEOUT = 60
+
+
+def _evidence_digest_matches(data: bytes, digest: str) -> bool:
+    """True when the recorded SHA-256 matches the file, or matches it with CRLF line ends
+    normalised to LF. A Windows checkout with core.autocrlf=true stores CRLF on disk while
+    the digest was taken from the committed (LF) content (Garage 19 Nov 2026: start blocked
+    on an evidence file unchanged since it was recorded). Any other difference still fails."""
+    want = digest.lower()
+    if hashlib.sha256(data).hexdigest() == want:
+        return True
+    return b"\r\n" in data and hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest() == want
+
+
+def _patch_ids(root: Path, log_args: list[str]) -> set[str]:
+    """Stable patch IDs of the commits `git log -p <log_args>` prints (merges excluded)."""
+    log = subprocess.run(["git", "-C", str(root), "log", "-p", "--no-merges", "--no-color", "--format=commit %H", *log_args],
+                         capture_output=True, timeout=GIT_TIMEOUT, check=False)
+    if log.returncode != 0 or not log.stdout:
+        return set()
+    ids = subprocess.run(["git", "-C", str(root), "patch-id", "--stable"], input=log.stdout,
+                         capture_output=True, timeout=GIT_TIMEOUT, check=False)
+    return {line.split()[0] for line in ids.stdout.decode("ascii", "replace").splitlines() if line.strip()}
+
+
+def _rebased_into_head(root: Path, revision: str) -> bool:
+    """True when `revision` is not in HEAD's history but a commit with the identical patch is.
+
+    Publishing with integrate rebases verified slices onto the moved target, which rewrites the
+    commits that evidence names as tested_revision (Garage 19 Nov 2026: the CLOSE evidence named
+    the pre-rebase commit and every start blocked). Equal stable patch IDs mean the same change.
+    Only the commits since the merge base are searched; anything else stays a contract error.
+    """
+    try:
+        base = subprocess.run(["git", "-C", str(root), "merge-base", revision, "HEAD"],
+                              capture_output=True, text=True, timeout=GIT_TIMEOUT, check=False).stdout.strip()
+        if not base:
+            return False
+        own = _patch_ids(root, ["-1", revision])
+        return bool(own) and own <= _patch_ids(root, [f"{base}..HEAD"])
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+
+
 TASK_STATES = {"pending", "running", "blocked", "complete"}
 RESULTS = {"PASS", "FAIL", "NOT_ASSESSED"}
 ID_RE = re.compile(r"^[A-Z][A-Z0-9_-]{1,31}$")
@@ -96,7 +141,7 @@ def _tracked(root: Path, path: Path, where: str) -> None:
             ["git", "-C", str(root), "ls-files", "--error-unmatch", "--", relative],
             capture_output=True,
             text=True,
-            timeout=5,
+            timeout=GIT_TIMEOUT,
             check=False,
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
@@ -219,7 +264,7 @@ def validate_contract(data: Any, root: str | Path) -> dict[str, Any]:
                         ["git", "-C", str(root_path), "cat-file", "-e", f"{revision}^{{commit}}"],
                         capture_output=True,
                         text=True,
-                        timeout=5,
+                        timeout=GIT_TIMEOUT,
                         check=False,
                     )
                 except (OSError, subprocess.TimeoutExpired) as exc:
@@ -231,19 +276,20 @@ def validate_contract(data: Any, root: str | Path) -> dict[str, Any]:
                         ["git", "-C", str(root_path), "merge-base", "--is-ancestor", revision, "HEAD"],
                         capture_output=True,
                         text=True,
-                        timeout=5,
+                        timeout=GIT_TIMEOUT,
                         check=False,
                     )
                 except (OSError, subprocess.TimeoutExpired) as exc:
                     raise ContractError(f"{e_where}.tested_revision ancestry could not be checked: {exc}") from exc
                 if ancestry.returncode == 1:
-                    raise ContractError(f"{e_where}.tested_revision is not an ancestor of current HEAD")
-                if ancestry.returncode != 0:
+                    if not _rebased_into_head(root_path, revision):
+                        raise ContractError(f"{e_where}.tested_revision is not an ancestor of current HEAD")
+                elif ancestry.returncode != 0:
                     raise ContractError(f"{e_where}.tested_revision ancestry check failed: {ancestry.stderr.strip()}")
                 digest = _text(evidence["sha256"], f"{e_where}.sha256")
                 if not re.fullmatch(r"[a-fA-F0-9]{64}", digest):
                     raise ContractError(f"{e_where}.sha256 must be a 64-character SHA-256 digest")
-                if hashlib.sha256(path.read_bytes()).hexdigest().lower() != digest.lower():
+                if not _evidence_digest_matches(path.read_bytes(), digest):
                     raise ContractError(f"{e_where}.sha256 does not match the evidence file")
                 command = evidence["command"]
                 if isinstance(command, list):
@@ -306,6 +352,26 @@ def completion_readiness(data: Any, root: str | Path) -> dict[str, Any]:
     }
 
 
+def definition_digest(data: dict) -> str:
+    """Bind validated owner intent; progress and evidence remain executor-owned.
+
+    Call only after validate_contract succeeds. Reordering tasks or criteria is
+    harmless; changing any definition (including an oracle) requires owner review.
+    This is drift detection, not an authorization boundary against a hostile host.
+    """
+    definitions = []
+    for task in data['tasks']:
+        definition = {key: value for key, value in task.items() if key not in {'state', 'evidence'}}
+        definition['depends_on'] = sorted(definition['depends_on'])
+        definition['scope'] = sorted(definition['scope'])
+        definition['acceptance'] = sorted(definition['acceptance'], key=lambda item: item['id'])
+        definitions.append(definition)
+    encoded = json.dumps({'schema_version': data['schema_version'],
+                          'tasks': sorted(definitions, key=lambda item: item['id'])},
+                         sort_keys=True, separators=(',', ':'), ensure_ascii=True)
+    return hashlib.sha256(encoded.encode('utf-8')).hexdigest()
+
+
 def load_contract(path: str | Path) -> Any:
     """Load a JSON contract file."""
     def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -320,25 +386,6 @@ def load_contract(path: str | Path) -> Any:
         return json.loads(Path(path).read_text(encoding="utf-8"), object_pairs_hook=unique_object)
     except (OSError, json.JSONDecodeError) as exc:
         raise ContractError(f"cannot load contract JSON: {exc}") from exc
-
-
-def definition_digest(data: dict) -> str:
-    """Fingerprint validated task intent, excluding executor state and evidence.
-
-    Reordering records does not change intent. This detects drift; it does not
-    enforce permissions against an executor that can alter the supervisor host.
-    """
-    definitions = []
-    for task in data['tasks']:
-        definition = {key: value for key, value in task.items() if key not in {'state', 'evidence'}}
-        definition['depends_on'] = sorted(definition['depends_on'])
-        definition['scope'] = sorted(definition['scope'])
-        definition['acceptance'] = sorted(definition['acceptance'], key=lambda item: item['id'])
-        definitions.append(definition)
-    encoded = json.dumps({'schema_version': data['schema_version'],
-                          'tasks': sorted(definitions, key=lambda item: item['id'])},
-                         sort_keys=True, separators=(',', ':'), ensure_ascii=True)
-    return hashlib.sha256(encoded.encode('utf-8')).hexdigest()
 
 
 def main(argv: list[str] | None = None) -> int:

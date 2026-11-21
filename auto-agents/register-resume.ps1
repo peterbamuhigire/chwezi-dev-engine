@@ -189,7 +189,9 @@ function Test-OwnedTask($Task, $Spec) {
     if (-not $Task) { return $false }
     if ($Task.Description -cne $Spec.Marker) { return $false }
     if ($Task.Principal.LogonType -ne 'Interactive' -or $Task.Principal.RunLevel -ne 'Limited') { return $false }
-    if ($Task.Principal.UserId -notin @($Spec.Identity.Name, $Spec.Identity.User.Value)) { return $false }
+    # Task Scheduler may store the principal without its domain ("Peter" for TECH-KOP\Peter; seen 21 Nov 2026).
+    if ($Task.Principal.UserId -notin @($Spec.Identity.Name, $Spec.Identity.User.Value,
+            ($Spec.Identity.Name -split '\\')[-1])) { return $false }
     if ($Task.Actions.Count -ne 1) { return $false }
     $action = $Task.Actions[0]
     $actionPath = [IO.Path]::GetFullPath($action.Execute)

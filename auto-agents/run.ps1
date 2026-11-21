@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 
 function Show-LauncherHelp {
     @'
-Auto-Agents local launcher
+Jidoka (JAD) local launcher
 
   .\run.ps1                         Check readiness, start detached run, watch status
   .\run.ps1 -NoWatch                Check readiness and start without watching
@@ -88,6 +88,6 @@ try {
     exit $exitCode
 }
 catch {
-    [Console]::Error.WriteLine("Auto-Agents launcher failed: $($_.Exception.Message)")
+    [Console]::Error.WriteLine("Jidoka launcher failed: $($_.Exception.Message)")
     exit 2
 }

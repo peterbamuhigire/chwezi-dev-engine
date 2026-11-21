@@ -148,10 +148,20 @@ class RecoveryTests(unittest.TestCase):
     def test_adapters_preserve_explicit_arguments_and_add_no_bypass(self):
         import driver
         with patch.object(driver, 'executable', side_effect=lambda name: name):
-            self.assertEqual(driver.agent_command({'runner':'codex','runner_args':['--json']}), ['codex','exec','--json','-'])
-            self.assertEqual(driver.agent_command({'runner':'claude','runner_args':['--output-format','json']}), ['claude','-p','--output-format','json'])
-            cfg={'runner':'claude','runner_args_by_runner':{'codex':['--model','example-model'],'claude':[]}}
+            pre={'skills':'preload','subagents':'inherit'}
+            self.assertEqual(driver.agent_command({**pre,'runner':'codex','runner_args':['--json']}), ['codex','exec','--json','-'])
+            self.assertEqual(driver.agent_command({**pre,'runner':'claude','runner_args':['--output-format','json']}), ['claude','-p','--output-format','json'])
+            cfg={**pre,'runner':'claude','runner_args_by_runner':{'codex':['--model','example-model'],'claude':[]}}
             self.assertEqual(driver.agent_command(cfg), ['claude','-p'])
+            # Defaults (skills=on-demand, subagents=economy) insert only the skill profile and, for Claude,
+            # the subagent file, before the owner's arguments. Codex has no subagent arguments.
+            self.assertEqual(driver.agent_command({'runner':'codex','runner_args':['--json']}), ['codex','exec','-p',driver.CODEX_SKILL_PROFILE,'--json','-'])
+            argv=driver.agent_command({'runner':'claude','runner_args':['--output-format','json']})
+            self.assertEqual((argv[:3], argv[4], argv[6:]), (['claude','-p','--settings'], '--agents', ['--output-format','json']))
+            self.assertTrue(argv[3].endswith('skills-on-demand.claude.json'))
+            self.assertTrue(argv[5].endswith('subagents-economy.claude.json'))
+            argv=driver.agent_command({'runner':'claude','subagents':'inherit','runner_args':[]})
+            self.assertNotIn('--agents', argv)
 
     def test_preflight_checks_readiness_without_starting_a_job(self):
         self.assertEqual(self.d.preflight(self.cfg), 0)
