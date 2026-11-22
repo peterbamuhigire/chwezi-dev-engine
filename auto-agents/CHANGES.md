@@ -11,6 +11,14 @@ Read this before you update another copy of the runner tools: the community copy
 
 The community copy (`chwezi-engine-agents`) was at 2.2.7 on 19 Nov 2026, so it lacks every entry below.
 
+## 2.5.4 (21 Nov 2026): release the two post-2.5.3 fixes
+
+- **Why:** two commits after 2.5.3 changed managed files without a release, so the manifest hashes no longer matched and `upgrade.py` refused to install into Medic8 ("Modified managed file: README.md").
+- **What:** 146e58b: README records the Codex-on-Windows trap (a linked worktree's Git metadata stays read-only under `workspace-write`; the owner may set `--sandbox danger-full-access` in `runner_args_by_runner.codex`; the runner never adds it). 2cb6bf9: `register-resume.ps1` accepts the task principal without its domain ("Peter" as well as "TECH-KOP\Peter" or the SID).
+- **Tests:** the full suite is rerun; no behaviour change in the Python runner.
+- **Files:** `README.md`, `register-resume.ps1`, `CHANGES.md`, `manifest.json`.
+- **Porting notes:** no configuration key and no digest change. Safe to propagate while a run is stopped. After a change to any managed file, run `release.py` in the same commit.
+
 ## 2.5.3 (20 Nov 2026): the runner is named Jidoka (JAD)
 
 - **Why:** the owner named the unattended runner **Jidoka**, the *Jidoka Automated Development* tool (JAD), so every new repository's auto runner carries one name alongside the engines' Kaizen vocabulary.
