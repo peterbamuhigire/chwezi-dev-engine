@@ -88,8 +88,8 @@
         {
           "criterion_id": "AC-ER3",
           "path": "docs/plans/ai-engine-kaizen/evidence/ER3/receipt.md",
-          "tested_revision": "33f81ba6492eaec12db63d94da3a91a04647cb03",
-          "sha256": "4567c5c8f4ccce896ed2541cf3d77db89ac9b1715ef351602ed99e69d6009229",
+          "tested_revision": "b9e20e9a742281922cb9fc8b13e65e0969ab3139",
+          "sha256": "ce28b5cff83f4297a47c8e238a71e388a81274276f085ba8402c8177ecd22828",
           "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER3/check_preservation.py",
           "result": "PASS"
         }

@@ -1,6 +1,6 @@
 ﻿# AC-ER3 README release validation receipt
 
-- **README tested revision:** pending commit of the evidence and final readability edit; pre-edit baseline: `7965083c0dedbfd5c6e52847d1c2db9ddfec3dba`.
+- **README tested revision:** `b9e20e9a742281922cb9fc8b13e65e0969ab3139`; pre-edit baseline: `7965083c0dedbfd5c6e52847d1c2db9ddfec3dba`.
 - **Date and environment:** 2026-11-23; Windows PowerShell, Python 3.12.0.
 - **Shared metrics command:** `python -B -X utf8 C:/wamp64/www/skills-engine-agents/scripts/readme_metrics.py README.md --check`. It passed: 6 limits met; 6,870 words, 14 H2 headings, one TOC, first command at line 34, longest H2 section 1,193 words, 20 long lines, maximum line 557 characters, mean sentence length 12.2, reading-ease score 53, 178 bullets and 83 table rows. The previous count was 21 long lines; the opening description was shortened by one overlong line. Exact output: [shared-metrics.txt](shared-metrics.txt).
 - **Shared preservation command:** `python -B -X utf8 C:/wamp64/www/skills-engine-agents/scripts/check_readme_preservation.py . 7965083 HEAD`. It passed: 82 original and 87 new local link targets, 0 lost; all 32 original commands retained, 0 lost; 2 tracked README-anchor links and 15 in-page anchors, 0 broken. Exact output: [shared-preservation.txt](shared-preservation.txt).
