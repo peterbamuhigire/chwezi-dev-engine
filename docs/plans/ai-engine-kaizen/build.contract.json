@@ -120,8 +120,17 @@
           "evidence_oracle": "K4 distinguishes all three failure classes, restores the compatible bundle and prevents duplicate effects on retry. An alert with missing labels states what is observable and defers any accuracy claim."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E04",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E04/receipt.md",
+          "tested_revision": "e721eb2a0f81c16c1a6f95ae13ec74dcdb7bbafe",
+          "sha256": "b49aaa527ed113c234408076ea0c97415aa779e05010b7400de78e0f2f3eaea4",
+          "command": "python -B -m unittest discover -s tests -p test_kaizen_release_diagnostics.py -v",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "E05",

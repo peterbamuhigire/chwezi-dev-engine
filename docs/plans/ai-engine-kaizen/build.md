@@ -1,6 +1,6 @@
 # chwezi-dev-engine · AI capability implementation
 
-**Current handoff.** E01 through E03 are committed with checked evidence. The operator submitted this revision for native verification. The next implementation task is E04, followed by E05 and E06. E03 tests actual and incompatible manifest decisions with synthetic inputs. Model execution and rights-unknown publication remain unassessed.
+**Current handoff.** Committed task evidence: E01, E02, E03, E04. Remaining: E05, E06.
 
 **Accountable owner** Peter. **Execution role** Public engineering maintainer. **Observed starting revision** `9354c95bab654ad38a2bf86da5d599a405bd496e`. Recheck the revision on staging. Apply ordinary commits to the isolated JAD branch. Link a receipt for each criterion; the sidecar records each task's current state and evidence.
 
