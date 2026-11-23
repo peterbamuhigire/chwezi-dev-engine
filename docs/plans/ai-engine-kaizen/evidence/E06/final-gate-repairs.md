@@ -1,0 +1,5 @@
+# Public build final gate repairs
+
+The earlier E06 source-check.txt captures the original eight failures. On 23 November 2026, the source verifier revisited all eight publisher records and updated the register and three affected references. The second source check returned zero findings. Upcoming review dates and report-only warnings remain in source-recheck.txt. The focused source suite passed sixteen tests.
+
+The complete repository test run also found stale expectations for the already-present illustration skill. A fresh count gave 171 active skills including two initialization skills and 169 plugin skills. The documented counts and checks now agree. The two filesystem-boundary tests had failed during fixture creation on this Windows host. They now exercise a real directory junction when Windows denies symlink creation. Both tests still assert rejection and check that the external destination is untouched. The four affected test groups passed 58 cases with one pre-existing opt-in skip.
