@@ -66,6 +66,19 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 
 The engine holds 171 active skills in 18 categories (169 ship in the Claude Code plugin), grouped under [What is inside](#what-is-inside). The [skill catalogue](docs/skill-catalogue.md) lists each one. The table under Find the right skill is the capability map: common tasks and the skill that handles each.
 
+### Try a working example
+
+These small, offline fixtures show what a task route does and where its evidence comes from. Run commands from the repository root; Python 3 is required. They use synthetic data and do not establish hosted model quality or production performance.
+
+| If you need to… | Start here | Observable result and limit |
+|---|---|---|
+| Train and score a text-label baseline | [`ticket-triage`](skills/languages/python-ml-predictive/examples/ticket-triage/) — run `python skills/languages/python-ml-predictive/examples/ticket-triage/train.py --model "$env:TEMP/ticket-triage-model.json"`, then `python skills/languages/python-ml-predictive/examples/ticket-triage/score.py --model "$env:TEMP/ticket-triage-model.json"` in PowerShell. | Writes a small JSON model and prints held-out fixture predictions and class metrics. It is a deterministic synthetic baseline, not a production classifier. |
+| Diagnose a retrieval fixture after negation is lost | [`curated-retrieval`](skills/ai/ai-rag-patterns/examples/curated-retrieval/evaluate.py) — run `python -B skills/ai/ai-rag-patterns/examples/curated-retrieval/evaluate.py`, then add `--drop-negation`. | The negative control exposes a changed retrieval/evaluation result. Lexical matching and exact claim checks do not evaluate generated answers or prove access control. |
+| Review adaptation metadata before use | [`adaptation-review`](skills/ai/ai-evaluation/examples/adaptation-review/review.py) — run `python -B skills/ai/ai-evaluation/examples/adaptation-review/review.py`. | Prints compatibility, duplicate-output and review-status findings from a fixture; it does not load weights, run inference or establish data rights. |
+| Inspect a release recovery scenario | [`release-diagnostics`](skills/languages/python-ml-predictive/examples/release-diagnostics/diagnose.py) — run `python -B skills/languages/python-ml-predictive/examples/release-diagnostics/diagnose.py`. | Prints fixture diagnoses and in-memory promotion/replay outcomes; no persistent service is changed. |
+| Review a software-change example through a public CLI | [`E05 K3 ticket import`](skills/sdlc-meta/ai-assisted-development/examples/e05-k3/README.md) — follow its fixture commands for normal, retry, conflict and injected-failure paths. | SQLite rows and CLI exit codes make idempotency and rollback observable. The documented baseline and `ticket-level-dedupe` alternatives reproduce defects; this is a local teaching fixture, not a service contract. |
+| Design a non-AI API contract | [`api-design-first`](skills/architecture/api-design-first/SKILL.md) — work through its API design process. | Produces a versioned contract, error model and idempotency decisions; use the skill's review and test guidance for the specific service. |
+
 ### Find the right skill
 
 Use this engine when software work needs a repeatable method and evidence a reviewer can check: a design, a review, a security audit or a release gate. The names below come from the routing fixtures, so each task is one the engine's routing test already uses.
