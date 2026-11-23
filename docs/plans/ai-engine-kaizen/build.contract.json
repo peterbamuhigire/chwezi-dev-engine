@@ -19,8 +19,17 @@
           "evidence_oracle": "K1 holds input modality constant while the preferred policy changes with workload or missed-case cost. Old absolute numerical speed/cost claims either gain scoped measurements or are removed. A text label task can choose a conventional classifier. The documented commands generate the model and independently score the unseen examples. The measured results are kept separate from K1’s hand-calculated policy table. The K1 regression fixture rejects a mislabeled scorer and distinguishes MSE of 1/3 from R-squared of 7/8."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E01",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E01/receipt.md",
+          "tested_revision": "e5c2bb62e2cd2c36be4993d3e4172f6c8a167238",
+          "sha256": "dcad56a836bb40353a592a238703badececdadfe4718af19393be85eced7b77b",
+          "command": "Run the receipt train and score commands, then python -B -m unittest discover -s skills/languages/python-ml-predictive/examples/ticket-triage -p \"test_*.py\" -v",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "E02",
