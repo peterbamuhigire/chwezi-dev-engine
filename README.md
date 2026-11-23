@@ -39,7 +39,7 @@ This engine enforces it in code: see [Chwezi Product Excellence Standard](#chwez
 2. **Check.** From a clone, run the catalogue check. It needs Python and PyYAML, reports `active SKILL.md files: 171` and exits 0 on the current tree.
 
    ```sh
-   python3 -X utf8 scripts/skill_catalog_guardrails.py
+   python -X utf8 scripts/skill_catalog_guardrails.py
    ```
 
 3. **Use.** Name the skill in your request, for example: "Use `api-design-first` to define the contract for the invoice listing endpoint." Pick the name from [Find the right skill](#find-the-right-skill).
