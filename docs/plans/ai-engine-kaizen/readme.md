@@ -1,3 +1,5 @@
+STATUS: IN PROGRESS - ER1 complete; ER2 and ER3 underway
+
 # chwezi-dev-engine · Post-implementation README rewrite
 
 **Accountable owner** Peter. **Execution role** Public engineering maintainer. **Observed starting revision** `9354c95bab654ad38a2bf86da5d599a405bd496e`. Recheck the revision on staging. Apply ordinary commits to the isolated JAD branch. Link a receipt for each criterion. All tasks begin pending.
@@ -48,4 +50,4 @@ Keep an independent test oracle and the frozen synthetic case IDs. Use original 
 
 For interruption, inspect JAD status, branch, plan and the verification receipt. A matching digest can identify an existing artifact. Reconcile partial effects by their operation ID. Resume the existing lane after confirming the saved intent. Never reissue an uncertain external action. A gate failure retains its log and remains failed until repaired and rerun. Continue independent tasks. Enter a blocked result only if no permitted work remains.
 
-**Handoff at staging.** Current task is ER1. No implementation or README evidence has been submitted. Update the next-ready IDs, blockers, tested revision and receipt paths after each slice. Once all criteria genuinely pass, place `STATUS: DONE` on the first line and commit the completion candidate and complete sidecar. The independent JAD final verification must still succeed. Local integration and cross-engine receipts are recorded separately.
+**Handoff (updated 2026-11-23).** Completed task IDs: ER1. ER1 inventory, public-safe four-build integration summary and targeted checker are committed in `docs/plans/ai-engine-kaizen/evidence/ER1/`; the checker passed at integrated source revision `7965083c0dedbfd5c6e52847d1c2db9ddfec3dba`. ER2 is in progress; ER3 remains pending. E01-E06 are accepted inputs with their revisions and receipts recorded in `claim-inventory.json`. Build integration attestations resolve the entry condition. Next: complete and validate the README task routes, then run preservation and final checks. Do not set `STATUS: DONE` until ER1-ER3 and their required results have evidence; independent JAD final verification remains required.

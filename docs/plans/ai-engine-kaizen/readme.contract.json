@@ -19,8 +19,17 @@
           "evidence_oracle": "Every proposed material claim has an owner, real entry point, revision and a result with its environment. Unverified claims have explicit limits. Historic broad capabilities missing from the proposed outline are restored or given an intentional, resolvable destination."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-ER1",
+          "path": "docs/plans/ai-engine-kaizen/evidence/ER1/receipt.md",
+          "tested_revision": "3cc9a2c9b1a874690435e51d59070b5c28485ba7",
+          "sha256": "e918d30f90f2733a2a831ecb8cc49186b4bb082c0e478383793ea43b22842dfe",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER1/check_inventory.py",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "ER2",
