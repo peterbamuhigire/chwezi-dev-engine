@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "ER1",
+      "title": "Inventory release evidence and preserve the front door",
+      "depends_on": [],
+      "scope": [
+        "README.md",
+        "docs",
+        "docs/plans/ai-engine-kaizen/readme.md",
+        "docs/plans/ai-engine-kaizen/readme.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-ER1",
+          "description": "Inventory release evidence and preserve the front door with a reproducible observable result",
+          "evidence_oracle": "Every proposed material claim has an owner, real entry point, revision and a result with its environment. Unverified claims have explicit limits. Historic broad capabilities missing from the proposed outline are restored or given an intentional, resolvable destination."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "ER2",
+      "title": "Write the public engineering README",
+      "depends_on": [
+        "ER1"
+      ],
+      "scope": [
+        "README.md",
+        "docs",
+        "docs/plans/ai-engine-kaizen/readme.md",
+        "docs/plans/ai-engine-kaizen/readme.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-ER2",
+          "description": "Write the public engineering README with a reproducible observable result",
+          "evidence_oracle": "A first-time reader can use the new task table to complete one AI-system journey and one assisted-software journey. A relevant non-AI route still works. Each example resolves on this checkout. No prototype, metadata check, vendor benchmark or planned work is described as a verified production capability."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "ER3",
+      "title": "Validate and release the rewritten README",
+      "depends_on": [
+        "ER2"
+      ],
+      "scope": [
+        "README.md",
+        "docs",
+        "docs/plans/ai-engine-kaizen/readme.md",
+        "docs/plans/ai-engine-kaizen/readme.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-ER3",
+          "description": "Validate and release the rewritten README with a reproducible observable result",
+          "evidence_oracle": "All material links and anchors resolve or have a working compatibility anchor. Each changed command is exercised or explicitly qualified. Capabilities appears among the first four H2 headings. Dated results match the tested revision; an independent reader locates the cases, artifacts and limitations."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    }
+  ]
+}

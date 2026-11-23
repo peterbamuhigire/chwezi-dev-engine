@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "E01",
+      "title": "Replace modality shortcuts in the public ML guide",
+      "depends_on": [],
+      "scope": [
+        "skills/languages/python-ml-predictive",
+        "skills/ai/ai-opportunity-canvas",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E01",
+          "description": "Replace modality shortcuts in the public ML guide with a reproducible observable result",
+          "evidence_oracle": "K1 holds input modality constant while the preferred policy changes with workload or missed-case cost. Old absolute numerical speed/cost claims either gain scoped measurements or are removed. A text label task can choose a conventional classifier. The documented commands generate the model and independently score the unseen examples. The measured results are kept separate from K1’s hand-calculated policy table. The K1 regression fixture rejects a mislabeled scorer and distinguishes MSE of 1/3 from R-squared of 7/8."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "E02",
+      "title": "Test corpus preparation, retrieval and answer quality independently",
+      "depends_on": [
+        "E01"
+      ],
+      "scope": [
+        "skills/ai/ai-rag-patterns",
+        "skills/ai/ai-evaluation",
+        "tests",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E02",
+          "description": "Test corpus preparation, retrieval and answer quality independently with a reproducible observable result",
+          "evidence_oracle": "K2 permits a correct ranking with a failed answer-support grade. With no eligible document the system abstains. Original identifiers survive normalization and retrieval output contains no inaccessible or withdrawn row. The evaluator can identify a wrong result introduced by removing a meaningful token, recover its unmodified source and rerun the comparison."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "E03",
+      "title": "Select adaptation or media generation against a fixed comparator",
+      "depends_on": [
+        "E01"
+      ],
+      "scope": [
+        "skills/ai/ai-llm-integration",
+        "skills/ai/ai-evaluation",
+        "skills/ai/ai-app-architecture",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E03",
+          "description": "Select adaptation or media generation against a fixed comparator with a reproducible observable result",
+          "evidence_oracle": "K4 rejects a candidate adapter on the wrong base. K5 detects duplicated outputs and missing rights. The guide reports which quality measures still require a real model and reviewers. No GPU, training or provider performance is claimed from metadata. A missing model or license produces a complete decision record with the unrun inference or training step visibly unresolved."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "E04",
+      "title": "Diagnose data, model and serving failures with recoverable releases",
+      "depends_on": [
+        "E02",
+        "E03"
+      ],
+      "scope": [
+        "skills/ai/ai-observability-and-debugging",
+        "skills/ai/ai-incident-response",
+        "skills/languages/python-ml-predictive",
+        "tests",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E04",
+          "description": "Diagnose data, model and serving failures with recoverable releases with a reproducible observable result",
+          "evidence_oracle": "K4 distinguishes all three failure classes, restores the compatible bundle and prevents duplicate effects on retry. An alert with missing labels states what is observable and defers any accuracy claim."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "E05",
+      "title": "Use repository-aware coding assistance and independent review",
+      "depends_on": [],
+      "scope": [
+        "skills/sdlc-meta/ai-assisted-development",
+        "skills/ai/coding-agent-optimization",
+        "tests",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E05",
+          "description": "Use repository-aware coding assistance and independent review with a reproducible observable result",
+          "evidence_oracle": "K3 fails the original defect, rejects a plausible incorrect implementation, and passes a correct one through a normal caller. Include pre-change persisted data and evidence from independent execution. Scope, fallback and rework stay in the receipt."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    },
+    {
+      "id": "E06",
+      "title": "Prove the public routes and catalog still work",
+      "depends_on": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05"
+      ],
+      "scope": [
+        "scripts",
+        "tests",
+        "skills",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E06",
+          "description": "Prove the public routes and catalog still work with a reproducible observable result",
+          "evidence_oracle": "A user seeking predictive text classification reaches the intended public route; ground an answer, recover an incident and review an AI-authored patch each reach an appropriate owner. Show before/after routing on the same fixtures and retain unrelated baseline warnings."
+        }
+      ],
+      "state": "pending",
+      "evidence": []
+    }
+  ]
+}
