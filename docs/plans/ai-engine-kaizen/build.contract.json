@@ -85,8 +85,17 @@
           "evidence_oracle": "K4 rejects a candidate adapter on the wrong base. K5 detects duplicated outputs and missing rights. The guide reports which quality measures still require a real model and reviewers. No GPU, training or provider performance is claimed from metadata. A missing model or license produces a complete decision record with the unrun inference or training step visibly unresolved."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E03",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E03/receipt.md",
+          "tested_revision": "006b535063c452cc23feae3a9eb9d619c07beb88",
+          "sha256": "17c2563771b060dce3b362e431ad8a2fc8db8012cc2c2483ea8298518e754466",
+          "command": "Run the two offline adaptation-review commands and four focused unit tests documented in receipt.md.",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "E04",

@@ -1,8 +1,8 @@
 # chwezi-dev-engine · AI capability implementation
 
-**Current Jidoka handoff.** E01 and E02 are committed and both have valid acceptance receipts. During the operator recovery session (the driver prompt contains the line beginning with RECOVERY), the entire assigned slice is to reconcile these already committed results. If Git status is clean and E01 and E02 are complete, return immediately with the candidate SHA so the supervisor runs its independent gate. No further edits or commits are due in that recovery session. During the subsequent ordinary session (driver prompt has no RECOVERY line), begin E03. E04 through E06 follow their listed dependencies.
+**Current handoff.** E01 through E03 are committed with checked evidence. The operator submitted this revision for native verification. The next implementation task is E04, followed by E05 and E06. E03 tests actual and incompatible manifest decisions with synthetic inputs. Model execution and rights-unknown publication remain unassessed.
 
-**Accountable owner** Peter. **Execution role** Public engineering maintainer. **Observed starting revision** `9354c95bab654ad38a2bf86da5d599a405bd496e`. Recheck the revision on staging. Apply ordinary commits to the isolated JAD branch. Link a receipt for each criterion. All tasks begin pending.
+**Accountable owner** Peter. **Execution role** Public engineering maintainer. **Observed starting revision** `9354c95bab654ad38a2bf86da5d599a405bd496e`. Recheck the revision on staging. Apply ordinary commits to the isolated JAD branch. Link a receipt for each criterion; the sidecar records each task's current state and evidence.
 
 **User journey** model choice → worked implementation → diagnostics → code review. Maintain the public examples directly in their owning skills. Public content uses original synthetic data and its own evidence. Avoid a dependency on the private Development repository.
 
