@@ -1,4 +1,4 @@
-STATUS: IN PROGRESS - ER1 complete; ER2 and ER3 underway
+STATUS: DONE
 
 # chwezi-dev-engine · Post-implementation README rewrite
 
@@ -50,4 +50,4 @@ Keep an independent test oracle and the frozen synthetic case IDs. Use original 
 
 For interruption, inspect JAD status, branch, plan and the verification receipt. A matching digest can identify an existing artifact. Reconcile partial effects by their operation ID. Resume the existing lane after confirming the saved intent. Never reissue an uncertain external action. A gate failure retains its log and remains failed until repaired and rerun. Continue independent tasks. Enter a blocked result only if no permitted work remains.
 
-**Handoff (updated 2026-11-23).** Completed task IDs: ER1. ER1 inventory, public-safe four-build integration summary and targeted checker are committed in `docs/plans/ai-engine-kaizen/evidence/ER1/`; the checker passed at integrated source revision `7965083c0dedbfd5c6e52847d1c2db9ddfec3dba`. ER2 is in progress; ER3 remains pending. E01-E06 are accepted inputs with their revisions and receipts recorded in `claim-inventory.json`. Build integration attestations resolve the entry condition. Next: complete and validate the README task routes, then run preservation and final checks. Do not set `STATUS: DONE` until ER1-ER3 and their required results have evidence; independent JAD final verification remains required.
+**Handoff (updated 2026-11-23).** Completed task IDs: ER1, ER2, ER3. ER1 release inventory, public-safe producer build summary and checker are in `docs/plans/ai-engine-kaizen/evidence/ER1/`. ER2 task routes and the executable example walkthrough are in `docs/plans/ai-engine-kaizen/evidence/ER2/`. ER3 link, anchor and quick-start results plus initial failures and limitations are in `docs/plans/ai-engine-kaizen/evidence/ER3/`. The tested README includes offline AI fixtures, the public E05 K3 SQLite CLI journey and the non-AI `api-design-first` route; all are scoped to their observed local evidence. Shared historical README metrics tools were unavailable and remain `NOT_ASSESSED`; see the ER3 receipt. The independent JAD final verification and root integration remain to run.

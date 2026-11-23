@@ -51,8 +51,17 @@
           "evidence_oracle": "A first-time reader can use the new task table to complete one AI-system journey and one assisted-software journey. A relevant non-AI route still works. Each example resolves on this checkout. No prototype, metadata check, vendor benchmark or planned work is described as a verified production capability."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-ER2",
+          "path": "docs/plans/ai-engine-kaizen/evidence/ER2/receipt.md",
+          "tested_revision": "a67158cd15ebf766e6ed9a2ad6c2d18c344e12ca",
+          "sha256": "b9329e2742585dcf996456b8fc7df49df7dda2f7ca5f5da9a3fc7cf1d6ce15fd",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER2/walkthrough.py",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "ER3",
@@ -74,8 +83,17 @@
           "evidence_oracle": "All material links and anchors resolve or have a working compatibility anchor. Each changed command is exercised or explicitly qualified. Capabilities appears among the first four H2 headings. Dated results match the tested revision; an independent reader locates the cases, artifacts and limitations."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-ER3",
+          "path": "docs/plans/ai-engine-kaizen/evidence/ER3/receipt.md",
+          "tested_revision": "33f81ba6492eaec12db63d94da3a91a04647cb03",
+          "sha256": "4567c5c8f4ccce896ed2541cf3d77db89ac9b1715ef351602ed99e69d6009229",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER3/check_preservation.py",
+          "result": "PASS"
+        }
+      ]
     }
   ]
 }
