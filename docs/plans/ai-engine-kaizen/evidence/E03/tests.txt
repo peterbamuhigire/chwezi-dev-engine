@@ -1,0 +1,9 @@
+test_duplicate_low_fidelity_unknown_rights_and_changed_sampler_are_separate (test_review.AdaptationReviewTests.test_duplicate_low_fidelity_unknown_rights_and_changed_sampler_are_separate) ... ok
+test_matching_base_and_tokenizer_pass_compatibility_gate (test_review.AdaptationReviewTests.test_matching_base_and_tokenizer_pass_compatibility_gate) ... ok
+test_tokenizer_mismatch_is_rejected_even_when_base_matches (test_review.AdaptationReviewTests.test_tokenizer_mismatch_is_rejected_even_when_base_matches) ... ok
+test_wrong_base_is_rejected_and_inference_stays_unassessed (test_review.AdaptationReviewTests.test_wrong_base_is_rejected_and_inference_stays_unassessed) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

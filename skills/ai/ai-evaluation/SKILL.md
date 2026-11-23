@@ -63,6 +63,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
+- Load [model adaptation and generated-output review](references/model-adaptation-and-generation-review.md) when comparing prompt changes, retrieval, adaptation, or generated-media candidates.
+
 - Use the links and companion skills already referenced in this file when deeper context is needed.
 - Load `ai-llm-integration/references/llm-application-pattern-decision-catalogue.md` (section 4) when the task is the eval-driven development loop or reusing evals as runtime guardrails.
 <!-- dual-compat-end -->

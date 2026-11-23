@@ -1,0 +1,37 @@
+{
+  "adapter_accepted": true,
+  "compatibility_failures": [],
+  "decision": {
+    "comparison_status": "NOT_RUN",
+    "fixed_comparator": {
+      "decode_settings": {
+        "guidance": "synthetic-default",
+        "sample_count": 1,
+        "seed": 17
+      },
+      "model_revision": "model-r7",
+      "template_revision": "template-p0",
+      "tokenizer_revision": "tokenizer-r3"
+    },
+    "fixed_comparator_id": "prompt-baseline-P0",
+    "held_out_set_revision": "K5-review-v1",
+    "inference_status": "NOT_RUN",
+    "license_status": "UNRESOLVED",
+    "next_action": "obtain a permitted model and run the held-out review",
+    "quality_measures_pending": [
+      "fidelity",
+      "diversity",
+      "representative human review"
+    ],
+    "quality_status": "NOT_ASSESSED",
+    "runtime_model_status": "MISSING",
+    "selected_next_step": "evaluate prompt baseline before adaptation",
+    "training_status": "NOT_RUN"
+  },
+  "duplicate_output_groups": [],
+  "exclude_from_training_or_publication": [],
+  "inference_claim": "NOT_ASSESSED",
+  "low_fidelity_for_reviewer": [],
+  "quality_claim": "NOT_ASSESSED",
+  "sampler_revision_changed": []
+}

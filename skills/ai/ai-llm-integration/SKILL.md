@@ -47,6 +47,8 @@ Acknowledgement: Shared by Peter Bamuhigire, techguypeter.com, +256 784 464178.
 
 ## References
 
+- Load [model adaptation and generated-output review](../ai-evaluation/references/model-adaptation-and-generation-review.md) before selecting adapter or fine-tuning work; require an exact base and tokenizer match.
+
 - Use the links and companion skills already referenced in this file when deeper context is needed.
 - Load [references/llm-application-pattern-decision-catalogue.md](references/llm-application-pattern-decision-catalogue.md) when choosing an LLM pattern (component, chain, RAG, tools, agent), designing structured outputs, or setting up eval-driven development.
 - Load [references/structured-text-extraction-regex-vs-llm.md](references/structured-text-extraction-regex-vs-llm.md) when parsing repetitive structured text: regex first, confidence scoring, and LLM validation for low-confidence items only (absorbed from the retired `regex-vs-llm-structured-text` skill).
