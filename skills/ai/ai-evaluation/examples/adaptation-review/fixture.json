@@ -1,0 +1,42 @@
+{
+  "candidate": {
+    "model_family": "synthetic-image-model",
+    "model_revision": "model-r7",
+    "tokenizer_revision": "tokenizer-r3",
+    "adapter_base_revision": "model-r6",
+    "adapter_tokenizer_revision": "tokenizer-r3",
+    "template_revision": "template-r2",
+    "decode_settings": {"sample_count": 4, "seed": 17, "guidance": "synthetic-default"},
+    "sampler_revision": "sampler-r5",
+    "seed": 17,
+    "decision": {
+      "prompt_candidate": "one prompt example for a stable style instruction",
+      "retrieval_candidate": "versioned permitted source for current product details",
+      "adaptation_candidate": "stable style behavior after prompt baseline",
+      "fixed_comparator_id": "prompt-baseline-P0",
+      "fixed_comparator": {
+        "model_revision": "model-r7",
+        "tokenizer_revision": "tokenizer-r3",
+        "template_revision": "template-p0",
+        "decode_settings": {"sample_count": 4, "seed": 17, "guidance": "synthetic-default"}
+      },
+      "held_out_set_revision": "K5-review-v1",
+      "comparison_status": "NOT_RUN",
+      "quality_measures_pending": ["fidelity", "diversity", "representative human review"],
+      "selected_next_step": "hold adaptation until a compatible licensed model and held-out evaluation exist",
+      "runtime_model_status": "MISSING",
+      "license_status": "UNRESOLVED",
+      "inference_status": "NOT_RUN",
+      "training_status": "NOT_RUN",
+      "quality_status": "NOT_ASSESSED",
+      "next_action": "identify a compatible model revision and verify asset permissions before a disjoint human-reviewed evaluation"
+    }
+  },
+  "outputs": [
+    {"id": "img-a", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "fidelity_score": 4, "rights_status": "verified", "sampler_revision": "sampler-r5"},
+    {"id": "img-b", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "fidelity_score": 4, "rights_status": "verified", "sampler_revision": "sampler-r5"},
+    {"id": "img-c", "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "fidelity_score": 1, "rights_status": "verified", "sampler_revision": "sampler-r5"},
+    {"id": "img-d", "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "fidelity_score": 4, "rights_status": "unknown", "sampler_revision": "sampler-r6"}
+  ],
+  "fidelity_review_threshold": 3
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "E01",
+      "title": "Replace modality shortcuts in the public ML guide",
+      "depends_on": [],
+      "scope": [
+        "skills/languages/python-ml-predictive",
+        "skills/ai/ai-opportunity-canvas",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E01",
+          "description": "Replace modality shortcuts in the public ML guide with a reproducible observable result",
+          "evidence_oracle": "K1 holds input modality constant while the preferred policy changes with workload or missed-case cost. Old absolute numerical speed/cost claims either gain scoped measurements or are removed. A text label task can choose a conventional classifier. The documented commands generate the model and independently score the unseen examples. The measured results are kept separate from K1’s hand-calculated policy table. The K1 regression fixture rejects a mislabeled scorer and distinguishes MSE of 1/3 from R-squared of 7/8."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E01",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E01/receipt.md",
+          "tested_revision": "e5c2bb62e2cd2c36be4993d3e4172f6c8a167238",
+          "sha256": "dcad56a836bb40353a592a238703badececdadfe4718af19393be85eced7b77b",
+          "command": "Run the receipt train and score commands, then python -B -m unittest discover -s skills/languages/python-ml-predictive/examples/ticket-triage -p \"test_*.py\" -v",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "title": "Test corpus preparation, retrieval and answer quality independently",
+      "depends_on": [
+        "E01"
+      ],
+      "scope": [
+        "skills/ai/ai-rag-patterns",
+        "skills/ai/ai-evaluation",
+        "tests",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E02",
+          "description": "Test corpus preparation, retrieval and answer quality independently with a reproducible observable result",
+          "evidence_oracle": "K2 permits a correct ranking with a failed answer-support grade. With no eligible document the system abstains. Original identifiers survive normalization and retrieval output contains no inaccessible or withdrawn row. The evaluator can identify a wrong result introduced by removing a meaningful token, recover its unmodified source and rerun the comparison."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E02",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E02/receipt.md",
+          "tested_revision": "94de845b8482823ba516dacbd7e73a4e03c93413",
+          "sha256": "2179dfa02b04481f91d3ab350089c6e5100dd934f5ce7f3b4614e2325c98d647",
+          "command": "Run the E02 receipt commands, compare normal and --drop-negation outputs to result.json and negative-control.json, and run the four curated-retrieval unit tests.",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "title": "Select adaptation or media generation against a fixed comparator",
+      "depends_on": [
+        "E01"
+      ],
+      "scope": [
+        "skills/ai/ai-llm-integration",
+        "skills/ai/ai-evaluation",
+        "skills/ai/ai-app-architecture",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E03",
+          "description": "Select adaptation or media generation against a fixed comparator with a reproducible observable result",
+          "evidence_oracle": "K4 rejects a candidate adapter on the wrong base. K5 detects duplicated outputs and missing rights. The guide reports which quality measures still require a real model and reviewers. No GPU, training or provider performance is claimed from metadata. A missing model or license produces a complete decision record with the unrun inference or training step visibly unresolved."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E03",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E03/receipt.md",
+          "tested_revision": "006b535063c452cc23feae3a9eb9d619c07beb88",
+          "sha256": "17c2563771b060dce3b362e431ad8a2fc8db8012cc2c2483ea8298518e754466",
+          "command": "Run the two offline adaptation-review commands and four focused unit tests documented in receipt.md.",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "E04",
+      "title": "Diagnose data, model and serving failures with recoverable releases",
+      "depends_on": [
+        "E02",
+        "E03"
+      ],
+      "scope": [
+        "skills/ai/ai-observability-and-debugging",
+        "skills/ai/ai-incident-response",
+        "skills/languages/python-ml-predictive",
+        "tests",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E04",
+          "description": "Diagnose data, model and serving failures with recoverable releases with a reproducible observable result",
+          "evidence_oracle": "K4 distinguishes all three failure classes, restores the compatible bundle and prevents duplicate effects on retry. An alert with missing labels states what is observable and defers any accuracy claim."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E04",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E04/receipt.md",
+          "tested_revision": "e721eb2a0f81c16c1a6f95ae13ec74dcdb7bbafe",
+          "sha256": "b49aaa527ed113c234408076ea0c97415aa779e05010b7400de78e0f2f3eaea4",
+          "command": "python -B -m unittest discover -s tests -p test_kaizen_release_diagnostics.py -v",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "title": "Use repository-aware coding assistance and independent review",
+      "depends_on": [],
+      "scope": [
+        "skills/sdlc-meta/ai-assisted-development",
+        "skills/ai/coding-agent-optimization",
+        "tests",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E05",
+          "description": "Use repository-aware coding assistance and independent review with a reproducible observable result",
+          "evidence_oracle": "K3 fails the original defect, rejects a plausible incorrect implementation, and passes a correct one through a normal caller. Include pre-change persisted data and evidence from independent execution. Scope, fallback and rework stay in the receipt."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E05",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E05/receipt.md",
+          "tested_revision": "c3bd56826e4fbc9568ecd34e87b02f55caf9e64d",
+          "sha256": "53d58343c11c5fbcfede416920b8d423a72e67a55942ff02f51700c8d72d87b6",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/E05/independent.py skills/sdlc-meta/ai-assisted-development/examples/e05-k3",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "E06",
+      "title": "Prove the public routes and catalog still work",
+      "depends_on": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05"
+      ],
+      "scope": [
+        "scripts",
+        "tests",
+        "skills",
+        "docs/plans/ai-engine-kaizen/build.md",
+        "docs/plans/ai-engine-kaizen/build.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-E06",
+          "description": "Prove the public routes and catalog still work with a reproducible observable result",
+          "evidence_oracle": "A user seeking predictive text classification reaches the intended public route; ground an answer, recover an incident and review an AI-authored patch each reach an appropriate owner. Show before/after routing on the same fixtures and retain unrelated baseline warnings."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E06",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E06/receipt.md",
+          "tested_revision": "dd03a4170539feaa34535ec953558d328f1398b2",
+          "sha256": "86d1193a1776ee2e346ae7f7b3fcef7b0294295bbbb0e4280adea7a5f84d2f7c",
+          "command": "python -B -X utf8 scripts/routing_smoke_test.py --lint-fixtures and --collisions --collision-gate; python -B -X utf8 scripts/skill_catalog_guardrails.py",
+          "result": "PASS"
+        }
+      ]
+    }
+  ]
+}

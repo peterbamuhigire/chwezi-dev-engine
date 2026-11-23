@@ -1,0 +1,53 @@
+{
+  "adapter_accepted": false,
+  "compatibility_failures": [
+    "adapter_base_revision_mismatch"
+  ],
+  "decision": {
+    "adaptation_candidate": "stable style behavior after prompt baseline",
+    "comparison_status": "NOT_RUN",
+    "fixed_comparator": {
+      "decode_settings": {
+        "guidance": "synthetic-default",
+        "sample_count": 4,
+        "seed": 17
+      },
+      "model_revision": "model-r7",
+      "template_revision": "template-p0",
+      "tokenizer_revision": "tokenizer-r3"
+    },
+    "fixed_comparator_id": "prompt-baseline-P0",
+    "held_out_set_revision": "K5-review-v1",
+    "inference_status": "NOT_RUN",
+    "license_status": "UNRESOLVED",
+    "next_action": "identify a compatible model revision and verify asset permissions before a disjoint human-reviewed evaluation",
+    "prompt_candidate": "one prompt example for a stable style instruction",
+    "quality_measures_pending": [
+      "fidelity",
+      "diversity",
+      "representative human review"
+    ],
+    "quality_status": "NOT_ASSESSED",
+    "retrieval_candidate": "versioned permitted source for current product details",
+    "runtime_model_status": "MISSING",
+    "selected_next_step": "hold adaptation until a compatible licensed model and held-out evaluation exist",
+    "training_status": "NOT_RUN"
+  },
+  "duplicate_output_groups": [
+    [
+      "img-a",
+      "img-b"
+    ]
+  ],
+  "exclude_from_training_or_publication": [
+    "img-d"
+  ],
+  "inference_claim": "NOT_ASSESSED",
+  "low_fidelity_for_reviewer": [
+    "img-c"
+  ],
+  "quality_claim": "NOT_ASSESSED",
+  "sampler_revision_changed": [
+    "img-d"
+  ]
+}

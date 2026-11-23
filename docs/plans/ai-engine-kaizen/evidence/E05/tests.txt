@@ -1,0 +1,18 @@
+Command harness: PowerShell here-string piped to Python; the harness created a fresh copy of legacy_fixture.sql per scenario and invoked cli.py through subprocess.
+
+PASS fixed E7/E7/E8: 3 history rows including legacy; 2 keys; closed
+PASS changed-payload key reuse: exit 3; state unchanged
+PASS injected rollback and retry: exit 4; zero event effects; retry creates one
+PASS baseline duplicate defect: observed two E7 history rows
+PASS ticket-level wrong alternative: legacy suppresses E7 and distinct E8
+PASS unknown ticket failure: exit 4; no mutation
+PASS Python compile() syntax check
+PASS concurrent identical E7: both CLI exits 0; one event key and one history effect
+
+Observed injected-failure stderr: error: injected failure before history insert
+Observed key-conflict stderr: conflict: event 'E7' was already used with a different payload
+Observed missing-ticket stderr: error: unknown ticket: missing
+
+Environment: Windows PowerShell, Python interpreter resolved by `python`; interpreter version and OS build were not recorded. Fixture root was a temporary directory under `%LOCALAPPDATA%\Temp`; it is not a deliverable input.
+Observed elapsed tool execution: scenario harness 2.3 seconds; syntax plus concurrent replay 1.8 seconds. These include process startup and are not performance measurements.
+Independent operator replay/review: NOT_RUN.

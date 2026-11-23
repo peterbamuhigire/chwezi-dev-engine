@@ -1,0 +1,15 @@
+{
+  "plan": "docs/plans/ai-engine-kaizen/readme.md",
+  "plan_contract": "docs/plans/ai-engine-kaizen/readme.contract.json",
+  "publish": false,
+  "integrate": false,
+  "runner_args_by_runner": {
+    "codex": [
+      "--model",
+      "gpt-6-luna",
+      "-c",
+      "model_reasoning_effort=\"high\""
+    ],
+    "claude": []
+  }
+}

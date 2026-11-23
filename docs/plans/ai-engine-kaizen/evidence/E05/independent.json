@@ -1,0 +1,29 @@
+{
+  "baseline": {
+    "legacy_preserved": true,
+    "first_applied": true,
+    "retry_once": false,
+    "distinct_applied": false,
+    "conflict_rejected": false,
+    "failure_atomic": false,
+    "retry_recovers": false
+  },
+  "ticket-level-dedupe": {
+    "legacy_preserved": true,
+    "first_applied": false,
+    "retry_once": false,
+    "distinct_applied": false,
+    "conflict_rejected": false,
+    "failure_atomic": false,
+    "retry_recovers": false
+  },
+  "fixed": {
+    "legacy_preserved": true,
+    "first_applied": true,
+    "retry_once": true,
+    "distinct_applied": true,
+    "conflict_rejected": true,
+    "failure_atomic": true,
+    "retry_recovers": true
+  }
+}

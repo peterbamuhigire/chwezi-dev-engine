@@ -105,3 +105,27 @@ whose correct result is abstention.
 adapted from nextlevelbuilder/ui-ux-pro-max-skill, MIT, commit
 `09170eec67eefd46a7ae85de61b40c194020f997`. Only the harness design is adapted; no rows, font or
 palette data are used.)
+
+## 7. Offline K2 fixture: retrieval is not answer support
+
+Run the synthetic K2 example in [`examples/curated-retrieval/`](../examples/curated-retrieval/):
+
+```sh
+python skills/ai/ai-rag-patterns/examples/curated-retrieval/evaluate.py
+python -m unittest discover -s skills/ai/ai-rag-patterns/examples/curated-retrieval -p "test_*.py" -v
+```
+
+The fixture keeps four original work instructions, including withdrawn P1, active P2 revision 2,
+another tenant's P3 and unrelated P4. Eligibility is applied before scoring. The frozen query
+family is held out; no threshold or tokenizer setting is tuned on it. `ranked_ids` and reciprocal
+rank describe retrieval. `answer_supported` checks a supplied claim against the selected source
+separately. P2 can rank first while a response claiming “five days” fails support. With no eligible
+supporting row, the result is `ABSTAIN`; tenant-filtered results do not expose another tenant's ID or text.
+
+The tokenizer preserves case-sensitive identifiers in source text, lowercases terms only for
+matching, and retains negators. `span_for` returns offsets into the unmodified source, so the caller
+can recover the exact source wording. The negation ablation removes `not` from the normalized text;
+then the phrase “seven days” falsely appears supported. The test catches that false positive,
+recovers P2's original `not seven days` span and reruns retrieval against the untouched corpus.
+This is a deterministic synthetic check, not a benchmark of BM25, answer quality, or production
+access control. The example uses equal tenant and revision eligibility for all ranking comparisons.

@@ -265,3 +265,7 @@ Required replay surface: per-task replay re-running a recorded task with candida
 ## Consolidated Child References
 
 - Load [references/routing.md](references/routing.md) to map retired AI child skill slugs to their reference modules.
+
+## Replay a release incident
+
+Run the [offline K4 diagnostic](../../languages/python-ml-predictive/examples/release-diagnostics/diagnose.py) with Python. Compare the same record on the training and serving paths. A shift in input lengths can trigger investigation while accuracy awaits labels. Check the schema, vocabulary order and adapter base before serving. The example stages the complete rollback bundle, interrupts the index promotion, retries the operation and reports the number of effects. Escalate to the operator named in the trace and send affected users to the correction queue.

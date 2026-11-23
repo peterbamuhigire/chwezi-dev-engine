@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "task_id": "ER1",
+  "acceptance_id": "AC-ER1",
+  "observed_at": "2026-11-23",
+  "local_integrated_revision": "7965083c0dedbfd5c6e52847d1c2db9ddfec3dba",
+  "casebook": {
+    "path": "docs/plans/ai-engine-kaizen/casebook.md",
+    "sha256": "cb00e249cef5153b0926a03affe42e7f901d7ab906c5d52c92b656ed3bcf8921"
+  },
+  "implementation_packets": [
+    {"id": "E01", "revision": "e5c2bb62e2cd2c36be4993d3e4172f6c8a167238", "evidence": "docs/plans/ai-engine-kaizen/evidence/E01/receipt.md"},
+    {"id": "E02", "revision": "94de845b8482823ba516dacbd7e73a4e03c93413", "evidence": "docs/plans/ai-engine-kaizen/evidence/E02/receipt.md"},
+    {"id": "E03", "revision": "006b535063c452cc23feae3a9eb9d619c07beb88", "evidence": "docs/plans/ai-engine-kaizen/evidence/E03/receipt.md"},
+    {"id": "E04", "revision": "e721eb2a0f81c16c1a6f95ae13ec74dcdb7bbafe", "evidence": "docs/plans/ai-engine-kaizen/evidence/E04/receipt.md"},
+    {"id": "E05", "revision": "c3bd56826e4fbc9568ecd34e87b02f55caf9e64d", "evidence": "docs/plans/ai-engine-kaizen/evidence/E05/receipt.md"},
+    {"id": "E06", "revision": "dd03a4170539feaa34535ec953558d328f1398b2", "evidence": "docs/plans/ai-engine-kaizen/evidence/E06/receipt.md"}
+  ],
+  "claims": [
+    {
+      "id": "AI-ML-BASELINE",
+      "claim": "A text-label task can compare a rule with a conventional classifier using separate training and held-out scoring.",
+      "owner": "skills/languages/python-ml-predictive/SKILL.md",
+      "entry_points": ["skills/languages/python-ml-predictive/examples/ticket-triage/train.py", "skills/ai/ai-opportunity-canvas/SKILL.md"],
+      "status": "fixture-tested",
+      "tested_revision": "e5c2bb62e2cd2c36be4993d3e4172f6c8a167238",
+      "result": "Train and score commands use separate inputs; four focused tests passed. The tiny synthetic held-out fixture includes a missed urgent case.",
+      "environment": "Local checkout; Python standard library; synthetic CSV fixtures; no hosted model or production data.",
+      "limitations": "Fixture reproducibility only. No production quality, comparative model performance, latency, or cost is established.",
+      "evidence": "docs/plans/ai-engine-kaizen/evidence/E01/receipt.md"
+    },
+    {
+      "id": "AI-RAG-DIAGNOSIS",
+      "claim": "Retrieval rank and answer support are separate outcomes; the curated example abstains when no eligible document supports an answer.",
+      "owner": "skills/ai/ai-rag-patterns/SKILL.md",
+      "entry_points": ["skills/ai/ai-rag-patterns/examples/curated-retrieval/evaluate.py", "skills/ai/ai-evaluation/SKILL.md"],
+      "status": "fixture-tested",
+      "tested_revision": "94de845b8482823ba516dacbd7e73a4e03c93413",
+      "result": "Four tests passed; negative/identifier controls and no-answer abstention are recorded in the receipt.",
+      "environment": "Local checkout; deterministic lexical evaluator; synthetic corpus and held-out questions; no hosted model or private corpus.",
+      "limitations": "Literal support checking is not semantic entailment; results are not a production access-control or retrieval benchmark.",
+      "evidence": "docs/plans/ai-engine-kaizen/evidence/E02/receipt.md"
+    },
+    {
+      "id": "AI-ADAPTATION-REVIEW",
+      "claim": "A metadata review can reject an incompatible adapter and flag duplicate outputs or unresolved rights before model evaluation.",
+      "owner": "skills/ai/ai-evaluation/SKILL.md",
+      "entry_points": ["skills/ai/ai-evaluation/references/model-adaptation-and-generation-review.md", "skills/ai/ai-evaluation/examples/adaptation-review/review.py", "skills/ai/ai-llm-integration/SKILL.md"],
+      "status": "fixture-tested",
+      "tested_revision": "006b535063c452cc23feae3a9eb9d619c07beb88",
+      "result": "Four tests passed, including wrong-base/tokenizer controls; the matching-base fixture is the positive control.",
+      "environment": "Local Python metadata checks over synthetic fixtures; no model, training job, image asset, provider, or GPU used.",
+      "limitations": "Inference/training remains NOT_RUN; quality and rights for real assets remain NOT_ASSESSED. Do not claim production capability or performance.",
+      "evidence": "docs/plans/ai-engine-kaizen/evidence/E03/receipt.md"
+    },
+    {
+      "id": "AI-RELEASE-DIAGNOSTICS",
+      "claim": "An offline diagnostic distinguishes data shift, serving transform mismatch, and incompatible release, with a simulated recoverable rollback.",
+      "owner": "skills/ai/ai-observability-and-debugging/SKILL.md",
+      "entry_points": ["skills/languages/python-ml-predictive/examples/release-diagnostics/diagnose.py", "skills/ai/ai-incident-response/SKILL.md"],
+      "status": "fixture-tested",
+      "tested_revision": "e721eb2a0f81c16c1a6f95ae13ec74dcdb7bbafe",
+      "result": "The trace and focused tests distinguish the three failure classes; same-operation retry produces one simulated restoration.",
+      "environment": "Local Python fixture; synthetic values; in-memory simulation.",
+      "limitations": "Process-crash durability, production rollout, real model quality, and latency remain unassessed.",
+      "evidence": "docs/plans/ai-engine-kaizen/evidence/E04/receipt.md"
+    },
+    {
+      "id": "AI-CODE-REVIEW",
+      "claim": "The AI-assisted development example exercises an idempotent change through its public caller and checks persisted state.",
+      "owner": "skills/sdlc-meta/ai-assisted-development/SKILL.md",
+      "entry_points": ["skills/sdlc-meta/ai-assisted-development/examples/e05-k3/README.md", "skills/ai/coding-agent-optimization/SKILL.md"],
+      "status": "fixture-tested",
+      "tested_revision": "c3bd56826e4fbc9568ecd34e87b02f55caf9e64d",
+      "result": "Independent CLI checks passed against SQLite fixture state; baseline duplicates a retry and a plausible alternative suppresses a distinct event.",
+      "environment": "Local Python/SQLite subprocesses; synthetic persisted rows; no external service or production database.",
+      "limitations": "No real multi-host database, production contention, performance trial, or production incident is established.",
+      "evidence": "docs/plans/ai-engine-kaizen/evidence/E05/receipt.md"
+    },
+    {
+      "id": "AI-SKILL-DISCOVERY",
+      "claim": "The public lexical routing harness directs the four tested AI requests to their intended skill owners.",
+      "owner": "scripts/routing_smoke_test.py",
+      "entry_points": ["docs/plans/ai-engine-kaizen/evidence/E06/routing.json", "docs/skill-routing-index.md"],
+      "status": "fixture-tested",
+      "tested_revision": "dd03a4170539feaa34535ec953558d328f1398b2",
+      "result": "Four changed intents ranked their owners first; suite result was 253 fixtures with four cross-engine negatives NOT_ASSESSED locally.",
+      "environment": "Local lexical catalogue harness over 171 active skills; no live model routing.",
+      "limitations": "Lexical discovery is not live model routing. Existing source-register findings remain under source owners.",
+      "evidence": "docs/plans/ai-engine-kaizen/evidence/E06/receipt.md"
+    }
+  ],
+  "currentness": {
+    "checked_at": "2026-11-23",
+    "official_sources": [
+      {
+        "url": "https://help.openai.com/en/articles/9624314-model-release-notes",
+        "scope": "Official OpenAI API model release notes; latest model release entry checked was GPT-6.2 Astra and Sol, dated 2026-11-17.",
+        "publication_date": "2026-11-17",
+        "access_date": "2026-11-23",
+        "freshness_class": "time-sensitive",
+        "review_date": "2026-11-30, or earlier on a model release",
+        "support_status": "verified for dated release announcement",
+        "uncertainty": "Announcement does not establish this account/runtime's availability, task fit, cost, latency, or quality."
+      },
+      {
+        "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+        "scope": "Official Work/Codex availability and preview announcement for GPT-6.2 Astra and Sol.",
+        "publication_date": "2026-11-17",
+        "access_date": "2026-11-23",
+        "freshness_class": "time-sensitive",
+        "review_date": "2026-11-30, or earlier on a model release",
+        "support_status": "verified for dated preview announcement",
+        "uncertainty": "Access depends on plan, seat, workspace settings, client version; actual account/runtime catalogue remains NOT_ASSESSED."
+      }
+    ],
+    "runtime_catalogue": "NOT_ASSESSED; this session exposes no active account model catalogue.",
+    "policy_check": "python .codex/ensure_model_policy.py --runtime codex --check => DRIFT: root model policy drift; no host configuration changed.",
+    "decision": "No model policy change is proposed. Retain the existing pinned policy pending owner reconciliation of policy drift and actual runtime availability."
+  }
+}

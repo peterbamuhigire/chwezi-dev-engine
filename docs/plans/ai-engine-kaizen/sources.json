@@ -1,0 +1,495 @@
+{
+  "register_id": "ai-engine-kaizen-2026-11-23",
+  "as_of": "2026-11-23",
+  "method": "Read primary pages or local artifacts, narrow claims to their locators, compare with the proposed decision. Review immediately on a material change and before release. Publication years and documentation versions are kept at original precision.",
+  "sources": [
+    {
+      "id": "R01",
+      "title": "Datasheets for Datasets",
+      "url": "https://arxiv.org/abs/1803.09010",
+      "edition": "2021-12-01",
+      "locator": "Abstract, v8",
+      "scope": "Dataset documentation covers motivation, composition, collection and recommended uses.",
+      "uncertainty": "Documentation design only. Data permissions require evidence for the particular corpus.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2021-12-01",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R02",
+      "title": "Model Cards for Model Reporting",
+      "url": "https://arxiv.org/abs/1810.03993",
+      "edition": "2019-01-14",
+      "locator": "Abstract, v2",
+      "scope": "Model releases can describe intended use, conditions of evaluation and performance across relevant population groups.",
+      "uncertainty": "Report what was measured. Small or missing groups can remain unassessed.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2019-01-14",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R03",
+      "title": "scikit-learn common pitfalls",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "edition": "1.9.1",
+      "locator": "Data leakage, preprocessing",
+      "scope": "Fit learned transformations using training data. Apply the learned transform to held-out inputs.",
+      "uncertainty": "The stable URL moves. Inspect the installed version before adopting API examples.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "as_of": "2026-11-23",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R04",
+      "title": "scikit-learn cross-validation",
+      "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+      "edition": "1.9.1",
+      "locator": "Grouped data and time series splitters",
+      "scope": "Use a split consistent with a group or a time-ordered prediction question.",
+      "uncertainty": "A time split alone will not stop near-duplicate text or a reused entity from leaking across partitions.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "as_of": "2026-11-23",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R05",
+      "title": "Beyond Accuracy, CheckList",
+      "url": "https://arxiv.org/abs/2005.04118",
+      "edition": "2020-05-08",
+      "locator": "Abstract and method",
+      "scope": "An NLP test matrix can exercise behavior beyond aggregate held-out accuracy.",
+      "uncertainty": "Author study scope. Adapt the cases for a particular user workflow.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2020-05-08",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R06",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "edition": "2021-04-12",
+      "locator": "Abstract, v4",
+      "scope": "A generator can combine model parameters with a separate retrievable corpus.",
+      "uncertainty": "Historical architecture. Retrieval does not establish a citation supports the answer.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2021-04-12",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R07",
+      "title": "LoRA, Low-Rank Adaptation of Large Language Models",
+      "url": "https://arxiv.org/abs/2106.09685",
+      "edition": "2021-10-16",
+      "locator": "Abstract, v2",
+      "scope": "Adaptation can freeze pretrained weights and train low-rank updates.",
+      "uncertainty": "Results apply to experiments in the paper. Local quality and cost need a baseline.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2021-10-16",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R08",
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "url": "https://arxiv.org/abs/2112.10752",
+      "edition": "2022-04-13",
+      "locator": "Abstract, v2",
+      "scope": "Latent-space diffusion and conditioning are architecture choices for image synthesis.",
+      "uncertainty": "The paper establishes the method. No model rights, current hardware sizing or local rendering performance are inferred.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2022-04-13",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R09",
+      "title": "The ML Test Score",
+      "url": "https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/",
+      "edition": "2017",
+      "locator": "Publication abstract, IEEE Big Data",
+      "scope": "Data, models and the systems that run them need tests and monitoring for production-readiness assessment.",
+      "uncertainty": "A rubric supports test design. Passing example checks does not certify a deployment.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "as_of": "2026-11-23",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R10",
+      "title": "NIST SP 800-218A",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+      "edition": "2024-07-26",
+      "locator": "Final publication, abstract and relationship to SP 800-218",
+      "scope": "The GenAI SSDF community profile adds model-development practices to SSDF 1.1.",
+      "uncertainty": "Use scoped mappings where applicable. No blanket compliance requirement or certification.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2024-07-26",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R11",
+      "title": "NIST AI 600-1",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+      "edition": "2024-07-26",
+      "locator": "Publication abstract, GenAI profile",
+      "scope": "The profile helps organizations identify GenAI-specific risks and actions to manage them.",
+      "uncertainty": "Voluntary guidance. Record the system boundary and the action actually tested.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2024-07-26",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R12",
+      "title": "METR, developer productivity experiment redesign",
+      "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+      "edition": "2026-02-24",
+      "locator": "Experiment redesign and selection effects",
+      "scope": "METR reports that selection into its follow-up study limits inference about current developer speedups.",
+      "uncertainty": "Supports recording opt-outs, difficulty, review and repair time. No transferable speedup estimate.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2026-02-24",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R13",
+      "title": "OpenAI model release notes",
+      "url": "https://help.openai.com/en/articles/9624314-model-release-notes",
+      "edition": "2026-11-17",
+      "locator": "Nov 17 release entry",
+      "scope": "OpenAI announced gpt-6.2-sol and gpt-6.2-astra in the API.",
+      "uncertainty": "Oracle for this dated release. An announcement does not prove account or tool access.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2026-11-30",
+      "publication_date": "2026-11-17",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R14",
+      "title": "OpenAI, Introducing GPT-6.2 Astra and Sol",
+      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "edition": "2026-11-17",
+      "locator": "Pricing, availability and reported evaluations",
+      "scope": "OpenAI publishes API pricing and describes Sol for speed and Astra for demanding reasoning.",
+      "uncertainty": "Provider claims and rates. The local Codex subscription, realized latency and task quality need separate measurements.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2026-11-30",
+      "publication_date": "2026-11-17",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R15",
+      "title": "METR, early-2025 developer productivity trial",
+      "url": "https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf",
+      "edition": "2025-07-10",
+      "locator": "Trial design and abstract",
+      "scope": "The trial assigned real issues in familiar repositories to AI-allowed or disallowed conditions and measured completion time.",
+      "uncertainty": "Historical participants and tools. Pair with R12 before drawing a comparison.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "publication_date": "2025-07-10",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R18",
+      "title": "Anthropic, Claude Fable 5.2 and Mythos 5.2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "edition": "2026-11-09",
+      "locator": "Introduction and availability",
+      "scope": "Anthropic announced Claude Fable 5.2 and Mythos 5.2 on November 9.",
+      "uncertainty": "Provider release evidence only. Claude account access was not assessed. No Claude execution profile change is proposed.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2026-11-30",
+      "publication_date": "2026-11-09",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R19",
+      "title": "scikit-learn cross_val_score",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html",
+      "edition": "1.9.1",
+      "locator": "scoring parameter",
+      "scope": "With scoring omitted, cross_val_score uses the default evaluation criterion of the supplied estimator.",
+      "uncertainty": "Version-scoped documentation. The historical external dataset and remote book example were not executed.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "as_of": "2026-11-23",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    },
+    {
+      "id": "R20",
+      "title": "scikit-learn LinearRegression",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html",
+      "edition": "1.9.1",
+      "locator": "score method and return value",
+      "scope": "LinearRegression.score reports the coefficient of determination, R-squared.",
+      "uncertainty": "Version-scoped documentation. The historical external dataset and remote book example were not executed.",
+      "tier": 1,
+      "accessed": "2026-11-23",
+      "verified_at": "2026-11-23",
+      "review_after": "2027-02-23",
+      "as_of": "2026-11-23",
+      "freshness_class": "context-bound",
+      "support_state": "verified",
+      "confidence": "High within the stated scope",
+      "owner": "Execution lead for the consuming task"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C01",
+      "text": "Dataset documentation covers motivation, composition, collection and recommended uses.",
+      "source_ids": [
+        "R01"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C02",
+      "text": "Model releases can describe intended use, conditions of evaluation and performance across relevant population groups.",
+      "source_ids": [
+        "R02"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C03",
+      "text": "Fit learned transformations using training data. Apply the learned transform to held-out inputs.",
+      "source_ids": [
+        "R03"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C04",
+      "text": "Use a split consistent with a group or a time-ordered prediction question.",
+      "source_ids": [
+        "R04"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C05",
+      "text": "An NLP test matrix can exercise behavior beyond aggregate held-out accuracy.",
+      "source_ids": [
+        "R05"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C06",
+      "text": "A generator can combine model parameters with a separate retrievable corpus.",
+      "source_ids": [
+        "R06"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C07",
+      "text": "Adaptation can freeze pretrained weights and train low-rank updates.",
+      "source_ids": [
+        "R07"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C08",
+      "text": "Latent-space diffusion and conditioning are architecture choices for image synthesis.",
+      "source_ids": [
+        "R08"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C09",
+      "text": "Data, models and the systems that run them need tests and monitoring for production-readiness assessment.",
+      "source_ids": [
+        "R09"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C10",
+      "text": "The GenAI SSDF community profile adds model-development practices to SSDF 1.1.",
+      "source_ids": [
+        "R10"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C11",
+      "text": "The profile helps organizations identify GenAI-specific risks and actions to manage them.",
+      "source_ids": [
+        "R11"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C12",
+      "text": "METR reports that selection into its follow-up study limits inference about current developer speedups.",
+      "source_ids": [
+        "R12"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C13",
+      "text": "OpenAI announced gpt-6.2-sol and gpt-6.2-astra in the API.",
+      "source_ids": [
+        "R13"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C14",
+      "text": "OpenAI publishes API pricing and describes Sol for speed and Astra for demanding reasoning.",
+      "source_ids": [
+        "R14"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C15",
+      "text": "The trial assigned real issues in familiar repositories to AI-allowed or disallowed conditions and measured completion time.",
+      "source_ids": [
+        "R15"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C18",
+      "text": "Anthropic announced Claude Fable 5.2 and Mythos 5.2 on November 9.",
+      "source_ids": [
+        "R18"
+      ],
+      "requires_currentness": true,
+      "status": "verified within source scope"
+    },
+    {
+      "id": "C19",
+      "text": "With scoring omitted, cross_val_score uses the default evaluation criterion of the supplied estimator.",
+      "source_ids": [
+        "R19"
+      ],
+      "requires_currentness": true,
+      "status": "verified for the documented API"
+    },
+    {
+      "id": "C20",
+      "text": "LinearRegression.score reports the coefficient of determination, R-squared.",
+      "source_ids": [
+        "R20"
+      ],
+      "requires_currentness": true,
+      "status": "verified for the documented API"
+    }
+  ]
+}

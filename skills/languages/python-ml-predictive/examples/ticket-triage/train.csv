@@ -1,0 +1,19 @@
+ticket_id,text,label
+T-001,"all cashiers are locked out of the tills",urgent
+T-002,"cannot sign in after the service outage",urgent
+T-003,"water is leaking beside the server cabinet",urgent
+T-004,"payment terminal is frozen for every cashier",urgent
+T-005,"account takeover suspected after failed logins",urgent
+T-006,"the cash drawer will not open during trading",urgent
+T-007,"barcode scanners stopped working at all counters",urgent
+T-008,"the server is down and checkout has stopped",urgent
+T-009,"staff are blocked from processing payments",urgent
+T-010,"please change the logo on printed receipts",routine
+T-011,"how do I download the daily sales report",routine
+T-012,"please add a new cashier account next week",routine
+T-013,"one report loads slowly but checkout works",routine
+T-014,"I need a copy of yesterday's invoice",routine
+T-015,"please update the shop opening hours",routine
+T-016,"the printer needs a paper refill",routine
+T-017,"how can I change my password",routine
+T-018,"the report is delayed but is not urgent",routine

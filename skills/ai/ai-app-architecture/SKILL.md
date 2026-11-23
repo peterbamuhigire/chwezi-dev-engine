@@ -337,6 +337,8 @@ function checkAiQuota(int $tenantId): void {
 
 ## Sources
 Chip Huyen — *AI Engineering* (2025); David Spuler — *Generative AI Applications* (2024); Andrea De Mauro — *AI Applications Made Easy* (2024)
+
+For a prompt-versus-retrieval-versus-adaptation decision and release evidence for generated outputs, use [model adaptation and generated-output review](../ai-evaluation/references/model-adaptation-and-generation-review.md).
 ## Consolidated Child References
 
 - Load `references/routing.md` to map retired AI child skill slugs to their reference modules.

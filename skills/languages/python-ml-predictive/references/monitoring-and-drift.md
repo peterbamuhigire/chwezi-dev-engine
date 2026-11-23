@@ -233,3 +233,7 @@ Persist `results` to a table; Grafana reads from it; alert rules live in Alertma
 Access date 2026-09-24. Evidently API from docs.evidentlyai.com (quickstart); latest release v0.7.23 (2026-09-11, GitHub). NannyML (label-free performance estimation) last released v0.13.1 in 2025-07: treat as low-activity and verify maintenance before adopting. PSI/alert thresholds in this file are engineering conventions, not standards; calibrate per model.
 
 Sources: Dowling (2026) *Building Machine Learning Systems with a Feature Store*; Rabanser, Guennemann and Lipton (2019) "Failing Loudly", NeurIPS; Evidently documentation.
+
+## Replay a release incident
+
+Run the [offline K4 diagnostic](../examples/release-diagnostics/diagnose.py) with Python. Compare the same record on the training and serving paths. A shift in input lengths can trigger investigation while accuracy awaits labels. Check the schema, vocabulary order and adapter base before serving. The example stages the complete rollback bundle, interrupts the index promotion, retries the operation and reports the number of effects. Escalate to the operator named in the trace and send affected users to the correction queue.

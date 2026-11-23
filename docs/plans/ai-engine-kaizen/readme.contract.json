@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "ER1",
+      "title": "Inventory release evidence and preserve the front door",
+      "depends_on": [],
+      "scope": [
+        "README.md",
+        "docs",
+        "docs/plans/ai-engine-kaizen/readme.md",
+        "docs/plans/ai-engine-kaizen/readme.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-ER1",
+          "description": "Inventory release evidence and preserve the front door with a reproducible observable result",
+          "evidence_oracle": "Every proposed material claim has an owner, real entry point, revision and a result with its environment. Unverified claims have explicit limits. Historic broad capabilities missing from the proposed outline are restored or given an intentional, resolvable destination."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-ER1",
+          "path": "docs/plans/ai-engine-kaizen/evidence/ER1/receipt.md",
+          "tested_revision": "3cc9a2c9b1a874690435e51d59070b5c28485ba7",
+          "sha256": "e918d30f90f2733a2a831ecb8cc49186b4bb082c0e478383793ea43b22842dfe",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER1/check_inventory.py",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "ER2",
+      "title": "Write the public engineering README",
+      "depends_on": [
+        "ER1"
+      ],
+      "scope": [
+        "README.md",
+        "docs",
+        "docs/plans/ai-engine-kaizen/readme.md",
+        "docs/plans/ai-engine-kaizen/readme.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-ER2",
+          "description": "Write the public engineering README with a reproducible observable result",
+          "evidence_oracle": "A first-time reader can use the new task table to complete one AI-system journey and one assisted-software journey. A relevant non-AI route still works. Each example resolves on this checkout. No prototype, metadata check, vendor benchmark or planned work is described as a verified production capability."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-ER2",
+          "path": "docs/plans/ai-engine-kaizen/evidence/ER2/receipt.md",
+          "tested_revision": "a67158cd15ebf766e6ed9a2ad6c2d18c344e12ca",
+          "sha256": "b9329e2742585dcf996456b8fc7df49df7dda2f7ca5f5da9a3fc7cf1d6ce15fd",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER2/walkthrough.py",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "id": "ER3",
+      "title": "Validate and release the rewritten README",
+      "depends_on": [
+        "ER2"
+      ],
+      "scope": [
+        "README.md",
+        "docs",
+        "docs/plans/ai-engine-kaizen/readme.md",
+        "docs/plans/ai-engine-kaizen/readme.contract.json",
+        "docs/plans/ai-engine-kaizen/evidence"
+      ],
+      "acceptance": [
+        {
+          "id": "AC-ER3",
+          "description": "Validate and release the rewritten README with a reproducible observable result",
+          "evidence_oracle": "All material links and anchors resolve or have a working compatibility anchor. Each changed command is exercised or explicitly qualified. Capabilities appears among the first four H2 headings. Dated results match the tested revision; an independent reader locates the cases, artifacts and limitations."
+        }
+      ],
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-ER3",
+          "path": "docs/plans/ai-engine-kaizen/evidence/ER3/receipt.md",
+          "tested_revision": "b9e20e9a742281922cb9fc8b13e65e0969ab3139",
+          "sha256": "ce28b5cff83f4297a47c8e238a71e388a81274276f085ba8402c8177ecd22828",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER3/check_preservation.py",
+          "result": "PASS"
+        }
+      ]
+    }
+  ]
+}

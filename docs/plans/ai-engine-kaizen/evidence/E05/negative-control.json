@@ -1,0 +1,11 @@
+{
+  "acceptance_id": "AC-E05",
+  "baseline_duplicate_rows": 2,
+  "baseline_variant": "baseline",
+  "observed": true,
+  "ticket_level_variant": "ticket-level-dedupe",
+  "ticket_level_e7_outcome": "suppressed",
+  "ticket_level_e8_outcome": "suppressed",
+  "legacy_history_row_count_after_wrong_variant": 1,
+  "source_revision": "8d32481d567aed20bd6b6a8ff45d20ef4dc32adc"
+}

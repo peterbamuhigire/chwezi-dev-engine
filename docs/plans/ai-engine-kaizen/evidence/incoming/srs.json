@@ -1,0 +1,36 @@
+{
+  "producer": "srs-skills",
+  "tested_revision": "65d3f6fd587f96e411e6e18b10889c3661f6f1b3",
+  "handoff_sha256": "874a863a6870bbe2a2d600f1b3b6b3f8f14a91708cc1f169715080a7cde4a366",
+  "visibility": "Public synthetic examples only",
+  "cases": [
+    {
+      "id": "K1",
+      "revision": "tickets-v1",
+      "outcome": "CAP-2 rejects candidate-v1. CAP-ALL requires further evidence.",
+      "fixture_sha256": "301e269039a03074d5e0f294d2ed89b901291f7b2c815b9088b8e32b95f2ac82",
+      "evaluation_sha256": "1e2102901d1405d3393429e5277a4b4129f5170dbfad9436859099b197b2acbf"
+    },
+    {
+      "id": "K2",
+      "revision": "atlas-v2",
+      "outcome": "P2 rank one passes retrieval. A five-day answer fails support.",
+      "fixture_sha256": "301e269039a03074d5e0f294d2ed89b901291f7b2c815b9088b8e32b95f2ac82",
+      "evaluation_sha256": "1e2102901d1405d3393429e5277a4b4129f5170dbfad9436859099b197b2acbf"
+    },
+    {
+      "id": "K3",
+      "revision": "synthetic-event-store-v1",
+      "outcome": "One committed effect per event; distinct E8 is retained.",
+      "fixture_sha256": "a7bf2355f6c78a8449e55e3e9dd5fd478e24d829e13518803b3d9a2946967cce",
+      "evaluation_sha256": "a7bf2355f6c78a8449e55e3e9dd5fd478e24d829e13518803b3d9a2946967cce"
+    },
+    {
+      "id": "K4",
+      "revision": "G1",
+      "outcome": "Restore the entire G1 bundle and compare the eligible response.",
+      "fixture_sha256": "9403bf82be1150ae6af4df8c22f647f44cc2db129184a7075480549588e893e0",
+      "evaluation_sha256": "9403bf82be1150ae6af4df8c22f647f44cc2db129184a7075480549588e893e0"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "acceptance_id": "AC-ER1",
+  "evidence_source": "Four-engine build integration attestation supplied for this task; locally read on 2026-11-23.",
+  "checked_at": "2026-11-23T19:37:31.598615+00:00",
+  "integration_branch": "kaizen/ai-engines-2026-11-23",
+  "producer_builds": [
+    {
+      "repository": "srs-skills",
+      "state": "integrated",
+      "tested_revision": "65d3f6fd587f96e411e6e18b10889c3661f6f1b3",
+      "integration_head": "65d3f6fd587f96e411e6e18b10889c3661f6f1b3",
+      "gates_passed": 3
+    },
+    {
+      "repository": "chwezi-development-engine",
+      "state": "integrated",
+      "tested_revision": null,
+      "integration_head": null,
+      "gates_passed": 4,
+      "visibility": "Private repository revision identifiers are omitted from this public record."
+    },
+    {
+      "repository": "chwezi-dev-engine",
+      "state": "integrated",
+      "tested_revision": "7965083c0dedbfd5c6e52847d1c2db9ddfec3dba",
+      "integration_head": "7965083c0dedbfd5c6e52847d1c2db9ddfec3dba",
+      "gates_passed": 3
+    },
+    {
+      "repository": "skills-engine-agents",
+      "state": "integrated",
+      "tested_revision": "e9adbe7ca9de9c6c238999067f932b79a6c4d7d5",
+      "integration_head": "e9adbe7ca9de9c6c238999067f932b79a6c4d7d5",
+      "gates_passed": 3
+    }
+  ],
+  "limits": "The task-supplied integration attestation records local synthetic build evidence only. Hosted provider inference, production performance, external rollout, and private engine implementation details are not asserted."
+}

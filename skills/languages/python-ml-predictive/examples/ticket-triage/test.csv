@@ -1,0 +1,7 @@
+ticket_id,text,label
+T-101,"all cashiers cannot access tills since the login outage",urgent
+T-102,"water leak under the counter is near a power cable",urgent
+T-103,"account locked after another failed login",urgent
+T-104,"QZ-8841: not urgent; please do not close this case because the report is delayed",routine
+T-105,"could the invoice header show our new shop name",routine
+T-106,"where can I export weekly takings by branch",routine

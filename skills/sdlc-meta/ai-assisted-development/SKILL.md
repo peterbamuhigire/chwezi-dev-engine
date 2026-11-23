@@ -173,6 +173,12 @@ Before merging any materially AI-generated diff, load the
 for blocking checks on performance, API currency, states, accessibility,
 security, supply chain, and measured evidence for optimisation claims.
 
+For a small, reproducible retry/idempotency exercise with a normal CLI caller,
+legacy persisted history, a deliberately defective baseline and a plausible
+wrong fix, use the [K3 coding example](examples/e05-k3/README.md). It documents
+the fixture, public entry point, variant selection and independent-check
+procedure; it is a teaching fixture, not a production import service.
+
 ## Codebase grounding modules
 
 - Load [legacy style inheritance](references/legacy-style-inheritance.md) when
