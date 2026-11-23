@@ -1,0 +1,37 @@
+{
+  "acceptance_id": "AC-E05",
+  "acceptance_status": "AUTHOR_SELF_CHECK_PASS_INDEPENDENT_REVIEW_PENDING",
+  "checks": {
+    "changed_payload_conflict": {
+      "exit_code": 3,
+      "state_unchanged": true,
+      "stderr": "conflict: event 'E7' was already used with a different payload"
+    },
+    "fixed_e7_retry_e8": {
+      "history_rows": 3,
+      "legacy_history_preserved": true,
+      "outcomes": ["created", "replayed", "created"],
+      "ticket_final_status": "closed",
+      "unique_event_keys": 2
+    },
+    "injected_failure_then_retry": {
+      "failure_exit_code": 4,
+      "failure_stderr": "error: injected failure before history insert",
+      "post_failure_event_effects": 0,
+      "post_failure_history_rows": 1,
+      "post_failure_ticket_status": "open",
+      "retry_outcome": "created",
+      "retry_event_effects": 1
+    },
+    "unknown_ticket": {
+      "exit_code": 4,
+      "state_unchanged": true,
+      "stderr": "error: unknown ticket: missing"
+    }
+  },
+  "source_revision": "8d32481d567aed20bd6b6a8ff45d20ef4dc32adc",
+  "variant_results": {
+    "baseline": "two E7 history rows after two deliveries",
+    "ticket-level-dedupe": "E7 and E8 both suppressed by legacy history"
+  }
+}

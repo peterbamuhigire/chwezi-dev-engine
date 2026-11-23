@@ -40,6 +40,12 @@ adapter: [Codex](references/codex.md) or [Claude Code](references/claude-code.md
 - Create, use or remove a Git worktree for a lane; load
   [worktree safety](references/worktree-safety.md) first.
 
+For an ordinary bounded repository change, do not run device/resource
+inventory just because an optimisation skill is available. Use the smallest
+repository evidence needed for the task; reserve inventory for a device or
+runner-configuration assessment. The [K3 coding example](../../sdlc-meta/ai-assisted-development/examples/e05-k3/README.md)
+shows this boundary for an independently checkable CLI change.
+
 Do not use this skill to design an application agent runtime, an in-product
 multi-agent protocol, or a provider gateway. Route those tasks to
 `ai-agent-runtime-architecture`, `ai-agent-multi-agent-coordination`, or
