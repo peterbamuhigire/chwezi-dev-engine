@@ -1,6 +1,6 @@
 ---
 name: python-ml-predictive
-description: Use when adding forecasting, classification, regression, or anomaly detection to a SaaS feature — demand/sales/cash-flow forecasting, churn and risk scoring — with scikit-learn, Prophet, and statsmodels. Covers data prep, point-in-time correct training data from a feature store, model serving, monitoring, and explainability.
+description: Classify support tickets by text and measure urgent-case recall. Use for SaaS forecasting, classification, regression, anomaly detection, churn and risk scoring with scikit-learn, Prophet or statsmodels. Covers point-in-time training data, feature stores, model serving, monitoring and explainability.
 metadata:
   portable: true
   compatible_with:

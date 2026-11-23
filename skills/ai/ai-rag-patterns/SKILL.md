@@ -1,6 +1,6 @@
 ---
 name: ai-rag-patterns
-description: Use when building features that answer questions from private data, documents, policies, or time-sensitive information — RAG architecture, chunking, hybrid search, re-ranking, vector databases, evaluation, agentic and multimodal RAG, and bounded iterative retrieval for context-starved subagents.
+description: Ground answers in permitted passages from private documents or current policies and trace citations to the source revision. Use for RAG architecture, chunking, hybrid search, re-ranking, vector databases, evaluation, multimodal retrieval and bounded iterative search for context-starved subagents.
 metadata:
   portable: true
   compatible_with:

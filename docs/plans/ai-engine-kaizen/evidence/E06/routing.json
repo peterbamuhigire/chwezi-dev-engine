@@ -1,0 +1,47 @@
+{
+  "baseline_revision": "9354c95bab654ad38a2bf86da5d599a405bd496e",
+  "before": [
+    {
+      "task": "Classify incoming support tickets from their text and measure recall for the urgent queue on unseen tickets",
+      "expected": "python-ml-predictive",
+      "rank": 102
+    },
+    {
+      "task": "Ground an answer in permitted passages and keep citations tied to the current document",
+      "expected": "ai-rag-patterns",
+      "rank": 7
+    },
+    {
+      "task": "Recover an AI incident after promoting a mismatched revision and restore the last working model bundle",
+      "expected": "ai-incident-response",
+      "rank": 1
+    },
+    {
+      "task": "Review an AI-authored patch to a legacy import and catch duplicate effects when a caller retries",
+      "expected": "ai-assisted-development",
+      "rank": 1
+    }
+  ],
+  "after": [
+    {
+      "task": "Classify incoming support tickets from their text and measure recall for the urgent queue on unseen tickets",
+      "expected": "python-ml-predictive",
+      "rank": 1
+    },
+    {
+      "task": "Ground an answer in permitted passages and keep citations tied to the current document",
+      "expected": "ai-rag-patterns",
+      "rank": 1
+    },
+    {
+      "task": "Recover an AI incident after promoting a mismatched revision and restore the last working model bundle",
+      "expected": "ai-incident-response",
+      "rank": 1
+    },
+    {
+      "task": "Review an AI-authored patch to a legacy import and catch duplicate effects when a caller retries",
+      "expected": "ai-assisted-development",
+      "rank": 1
+    }
+  ]
+}

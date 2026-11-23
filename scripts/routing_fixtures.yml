@@ -523,3 +523,18 @@ fixtures:
     expect: unity-mobile-game-development
   - task: "Restructure the Unreal game with C++ and Blueprints, Gameplay Framework classes and packaging automation"
     expect: unreal-game-development
+  # Public AI implementation acceptance cases, original synthetic requests.
+  - task: "Classify incoming support tickets from their text and measure recall for the urgent queue on unseen tickets"
+    expect: python-ml-predictive
+    negatives:
+      - task: "Ground an answer in permitted passages and keep citations tied to the current document"
+        owner: ai-rag-patterns
+  - task: "Ground an answer in permitted passages and keep citations tied to the current document"
+    expect: ai-rag-patterns
+  - task: "Recover an AI incident after promoting a mismatched revision and restore the last working model bundle"
+    expect: ai-incident-response
+  - task: "Review an AI-authored patch to a legacy import and catch duplicate effects when a caller retries"
+    expect: ai-assisted-development
+    negatives:
+      - task: "Find the statement causing a PostgreSQL slow query and examine the index plan"
+        owner: postgresql-engineering
