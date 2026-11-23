@@ -162,6 +162,14 @@ fairness-criterion ownership, and contest path required before release.
 
 Do not ship an AI feature because a demo looked good. Ship it because it passes the evaluation contract.
 
+For retrieval-augmented answers, score retrieval relevance and answer support as separate outcomes.
+A relevant top-ranked source can still fail to support the response claim. Include no-answer cases,
+access-filtered rows, withdrawn revisions, and negation or identifier normalization controls. Keep
+the original source text or a reversible offset map so a failed grade can be reviewed against the
+source. The offline [curated retrieval example](../ai-rag-patterns/examples/curated-retrieval/)
+shows these checks on a small synthetic fixture; its literal-claim grader is not a substitute for
+human review or a semantic entailment evaluator.
+
 ---
 
 ## Creating a Golden Test Set

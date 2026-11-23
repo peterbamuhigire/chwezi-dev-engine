@@ -1,0 +1,30 @@
+[
+  {
+    "id": "P1",
+    "tenant": "tenant-a",
+    "revision": 1,
+    "status": "withdrawn",
+    "text": "Atlas retains jobs for seven days. This revision is withdrawn."
+  },
+  {
+    "id": "P2",
+    "tenant": "tenant-a",
+    "revision": 2,
+    "status": "active",
+    "text": "Atlas retains jobs for three days, not seven days."
+  },
+  {
+    "id": "P3",
+    "tenant": "tenant-b",
+    "revision": 2,
+    "status": "active",
+    "text": "Atlas retains jobs for five days."
+  },
+  {
+    "id": "P4",
+    "tenant": "tenant-a",
+    "revision": 1,
+    "status": "active",
+    "text": "Borealis retains jobs for seven days."
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "heldout-atlas-duration",
+    "family": "heldout-duration",
+    "query": "Atlas retention duration",
+    "tenant": "tenant-a",
+    "relevant": ["P2"],
+    "expected_answer": "three days",
+    "response_claim": "five days"
+  },
+  {
+    "id": "heldout-atlas-seven-negation",
+    "family": "heldout-negation",
+    "query": "Does Atlas retain jobs for seven days?",
+    "tenant": "tenant-a",
+    "relevant": ["P2"],
+    "expected_answer": "not seven days"
+  },
+  {
+    "id": "heldout-unknown-product",
+    "family": "heldout-no-answer",
+    "query": "What is the retention period for Cygnus?",
+    "tenant": "tenant-a",
+    "relevant": [],
+    "expected_answer": null
+  },
+  {
+    "id": "heldout-tenant-isolation",
+    "family": "heldout-access",
+    "query": "Atlas retention period",
+    "tenant": "tenant-c",
+    "relevant": [],
+    "expected_answer": null
+  }
+]

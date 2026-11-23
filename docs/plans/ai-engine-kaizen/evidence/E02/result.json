@@ -1,0 +1,84 @@
+﻿[
+  {
+    "case_id": "heldout-atlas-duration",
+    "corpus_revision": "synthetic-fixture-v1",
+    "eligibility": {
+      "tenant": "tenant-a",
+      "eligible_ids": [
+        "P2",
+        "P4"
+      ]
+    },
+    "ranked_ids": [
+      "P2"
+    ],
+    "reciprocal_rank": 1.0,
+    "status": "ANSWER",
+    "answer_supported": false,
+    "response_claim": "five days",
+    "reviewer_grade": "UNSUPPORTED",
+    "selected_span": {
+      "start": 23,
+      "end": 33,
+      "text": "three days"
+    }
+  },
+  {
+    "case_id": "heldout-atlas-seven-negation",
+    "corpus_revision": "synthetic-fixture-v1",
+    "eligibility": {
+      "tenant": "tenant-a",
+      "eligible_ids": [
+        "P2",
+        "P4"
+      ]
+    },
+    "ranked_ids": [
+      "P2",
+      "P4"
+    ],
+    "reciprocal_rank": 1.0,
+    "status": "ANSWER",
+    "answer_supported": true,
+    "response_claim": "not seven days",
+    "reviewer_grade": "SUPPORTED",
+    "selected_span": {
+      "start": 35,
+      "end": 49,
+      "text": "not seven days"
+    }
+  },
+  {
+    "case_id": "heldout-unknown-product",
+    "corpus_revision": "synthetic-fixture-v1",
+    "eligibility": {
+      "tenant": "tenant-a",
+      "eligible_ids": [
+        "P2",
+        "P4"
+      ]
+    },
+    "ranked_ids": [],
+    "reciprocal_rank": 0,
+    "status": "ABSTAIN",
+    "answer_supported": null,
+    "response_claim": null,
+    "reviewer_grade": "NOT_APPLICABLE",
+    "selected_span": null
+  },
+  {
+    "case_id": "heldout-tenant-isolation",
+    "corpus_revision": "synthetic-fixture-v1",
+    "eligibility": {
+      "tenant": "tenant-c",
+      "eligible_ids": []
+    },
+    "ranked_ids": [],
+    "reciprocal_rank": 0,
+    "status": "ABSTAIN",
+    "answer_supported": null,
+    "response_claim": null,
+    "reviewer_grade": "NOT_APPLICABLE",
+    "selected_span": null
+  }
+]

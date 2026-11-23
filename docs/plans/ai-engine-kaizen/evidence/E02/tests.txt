@@ -1,0 +1,9 @@
+test_negation_ablation_is_rejected_and_source_span_is_recoverable (test_evaluate.CuratedRetrievalTests.test_negation_ablation_is_rejected_and_source_span_is_recoverable) ... ok
+test_no_eligible_document_abstains_without_leaking_ids (test_evaluate.CuratedRetrievalTests.test_no_eligible_document_abstains_without_leaking_ids) ... ok
+test_retrieval_and_answer_support_are_separate (test_evaluate.CuratedRetrievalTests.test_retrieval_and_answer_support_are_separate) ... ok
+test_withdrawn_revision_is_excluded_and_identifiers_preserved (test_evaluate.CuratedRetrievalTests.test_withdrawn_revision_is_excluded_and_identifiers_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
