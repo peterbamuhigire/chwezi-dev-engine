@@ -188,8 +188,17 @@
           "evidence_oracle": "A user seeking predictive text classification reaches the intended public route; ground an answer, recover an incident and review an AI-authored patch each reach an appropriate owner. Show before/after routing on the same fixtures and retain unrelated baseline warnings."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E06",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E06/receipt.md",
+          "tested_revision": "dd03a4170539feaa34535ec953558d328f1398b2",
+          "sha256": "86d1193a1776ee2e346ae7f7b3fcef7b0294295bbbb0e4280adea7a5f84d2f7c",
+          "command": "python -B -X utf8 scripts/routing_smoke_test.py --lint-fixtures and --collisions --collision-gate; python -B -X utf8 scripts/skill_catalog_guardrails.py",
+          "result": "PASS"
+        }
+      ]
     }
   ]
 }
