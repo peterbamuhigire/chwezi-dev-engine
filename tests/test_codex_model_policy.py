@@ -18,6 +18,17 @@ assert SPEC.loader
 SPEC.loader.exec_module(MODULE)
 
 
+def link_external_directory(link: Path, target: Path):
+    try:
+        link.symlink_to(target, target_is_directory=True)
+    except OSError as exc:
+        if os.name != "nt" or exc.winerror != 1314:
+            raise
+        # Exercise the same real out-of-home path without requiring Windows symlink privileges.
+        import _winapi
+        _winapi.CreateJunction(str(target), str(link))
+
+
 class CodexModelPolicyTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -158,7 +169,7 @@ class CodexModelPolicyTests(unittest.TestCase):
             self.skipTest("symlink unsupported")
         outside = Path(self.tmp.name) / "outside"
         outside.mkdir()
-        (self.home / "agents").symlink_to(outside, target_is_directory=True)
+        link_external_directory(self.home / "agents", outside)
         self.assertEqual(self.run_cli("--apply"), 2)
         self.assertFalse((outside / "worker.toml").exists())
 
@@ -187,7 +198,7 @@ class CodexModelPolicyTests(unittest.TestCase):
             self.skipTest("symlink unsupported")
         outside = Path(self.tmp.name) / "outside-backups"
         outside.mkdir()
-        (self.home / "backups").symlink_to(outside, target_is_directory=True)
+        link_external_directory(self.home / "backups", outside)
         self.assertEqual(self.run_cli("--apply"), 2)
         self.assertFalse(any(outside.iterdir()))
 

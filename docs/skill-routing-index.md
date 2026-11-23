@@ -24,7 +24,7 @@ Current guardrail baseline (the test suite checks the active and alias counts ag
 
 | Metric | Value |
 |---|---:|
-| Active `SKILL.md` files | 170 |
+| Active `SKILL.md` files | 171 |
 | Guardrail hard cap | 200 |
 | Duplicate frontmatter names | 0 |
 | Inactive alias files retained | 78 |
