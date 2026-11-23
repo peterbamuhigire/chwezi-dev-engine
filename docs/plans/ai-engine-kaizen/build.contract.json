@@ -151,8 +151,17 @@
           "evidence_oracle": "K3 fails the original defect, rejects a plausible incorrect implementation, and passes a correct one through a normal caller. Include pre-change persisted data and evidence from independent execution. Scope, fallback and rework stay in the receipt."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E05",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E05/receipt.md",
+          "tested_revision": "c3bd56826e4fbc9568ecd34e87b02f55caf9e64d",
+          "sha256": "53d58343c11c5fbcfede416920b8d423a72e67a55942ff02f51700c8d72d87b6",
+          "command": "python -B docs/plans/ai-engine-kaizen/evidence/E05/independent.py skills/sdlc-meta/ai-assisted-development/examples/e05-k3",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "E06",

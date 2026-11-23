@@ -1,6 +1,6 @@
 # chwezi-dev-engine · AI capability implementation
 
-**Current handoff.** Committed task evidence: E01, E02, E03, E04. Remaining: E05, E06.
+**Current handoff.** Committed task evidence: E01, E02, E03, E04, E05. Remaining: E06.
 
 **Accountable owner** Peter. **Execution role** Public engineering maintainer. **Observed starting revision** `9354c95bab654ad38a2bf86da5d599a405bd496e`. Recheck the revision on staging. Apply ordinary commits to the isolated JAD branch. Link a receipt for each criterion; the sidecar records each task's current state and evidence.
 
