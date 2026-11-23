@@ -1,5 +1,7 @@
 # chwezi-dev-engine · AI capability implementation
 
+**Current Jidoka handoff.** E01 and E02 are committed and both have valid acceptance receipts. During the operator recovery session (the driver prompt contains the line beginning with RECOVERY), the entire assigned slice is to reconcile these already committed results. If Git status is clean and E01 and E02 are complete, return immediately with the candidate SHA so the supervisor runs its independent gate. No further edits or commits are due in that recovery session. During the subsequent ordinary session (driver prompt has no RECOVERY line), begin E03. E04 through E06 follow their listed dependencies.
+
 **Accountable owner** Peter. **Execution role** Public engineering maintainer. **Observed starting revision** `9354c95bab654ad38a2bf86da5d599a405bd496e`. Recheck the revision on staging. Apply ordinary commits to the isolated JAD branch. Link a receipt for each criterion. All tasks begin pending.
 
 **User journey** model choice → worked implementation → diagnostics → code review. Maintain the public examples directly in their owning skills. Public content uses original synthetic data and its own evidence. Avoid a dependency on the private Development repository.
@@ -83,7 +85,3 @@ Preserve the repository's configured slice and final checks. Run the narrow chec
 Keep an independent test oracle and the frozen synthetic case IDs. Use original product-safe work in public repositories. The book files and window receipts stay outside all engines. Link any additional task-specific code, catalogue, generated projections and test fixtures to the ownership decision in the evidence record. Avoid unrelated edits.
 
 For interruption, inspect JAD status, branch, plan and the verification receipt. A matching digest can identify an existing artifact. Reconcile partial effects by their operation ID. Resume the existing lane after confirming the saved intent. Never reissue an uncertain external action. A gate failure retains its log and remains failed until repaired and rerun. Continue independent tasks. Enter a blocked result only if no permitted work remains.
-
-**Handoff after E01.** The operator reproduced training, artifact reload and four checks at the E01 implementation (e5c2bb62e2). The accepted SRS handoff distinguishes CAP-2 rejection from CAP-ALL eligibility for further evaluation. E02 through E06 remain open.
-
-When reconciling a clean, operator-committed E01 revision ahead of the last Jidoka checkpoint, return control immediately so the supervisor can verify this slice. On the following ordinary session, proceed with E02. The original worker could edit files but could not create the Git index lock. Preserve the sandbox and leave Git operations to the operator when needed.

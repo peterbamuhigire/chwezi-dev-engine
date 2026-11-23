@@ -52,8 +52,17 @@
           "evidence_oracle": "K2 permits a correct ranking with a failed answer-support grade. With no eligible document the system abstains. Original identifiers survive normalization and retrieval output contains no inaccessible or withdrawn row. The evaluator can identify a wrong result introduced by removing a meaningful token, recover its unmodified source and rerun the comparison."
         }
       ],
-      "state": "pending",
-      "evidence": []
+      "state": "complete",
+      "evidence": [
+        {
+          "criterion_id": "AC-E02",
+          "path": "docs/plans/ai-engine-kaizen/evidence/E02/receipt.md",
+          "tested_revision": "94de845b8482823ba516dacbd7e73a4e03c93413",
+          "sha256": "2179dfa02b04481f91d3ab350089c6e5100dd934f5ce7f3b4614e2325c98d647",
+          "command": "Run the E02 receipt commands, compare normal and --drop-negation outputs to result.json and negative-control.json, and run the four curated-retrieval unit tests.",
+          "result": "PASS"
+        }
+      ]
     },
     {
       "id": "E03",
