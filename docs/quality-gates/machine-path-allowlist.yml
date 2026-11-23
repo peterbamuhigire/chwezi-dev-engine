@@ -1,0 +1,11 @@
+# Reviewed matches in the upstream Jidoka 2.5.4 distribution.
+allow:
+  - path: auto-agents/driver.py
+    contains: "wamp64\\www' if os.name=='nt' else None) if r]"
+    reason: "Canonical Jidoka 2.5.4 checks a conventional Windows directory as its last read-only research-clone lookup. Explicit environment settings and the repository parent take precedence."
+  - path: auto-agents/README.md
+    contains: "wamp64\\www\\chwezi-agentic-research`), run `scripts\\daily-collect.ps1` once"
+    reason: "Upstream operator guide shows the example directory for that optional research clone."
+  - path: auto-agents/CHANGES.md
+    contains: "wamp64\\www`), the clone's `origin`, and whether the Windows task"
+    reason: "Upstream release history records the same optional fallback."
