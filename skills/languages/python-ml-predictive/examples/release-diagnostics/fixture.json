@@ -1,0 +1,104 @@
+{
+  "events": [
+    {
+      "id": "data_shift",
+      "input_length_reference": [
+        4,
+        5,
+        6,
+        6
+      ],
+      "input_length_recent": [
+        18,
+        20,
+        21,
+        24
+      ],
+      "labels_available_at": "next_week"
+    },
+    {
+      "id": "serving_skew",
+      "record_id": "synthetic-17",
+      "training_features": [
+        1,
+        0,
+        1
+      ],
+      "serving_features": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "release_mismatch",
+      "expected_bundle": "G1",
+      "candidate_bundle": "G2",
+      "component": "transform.vocabulary"
+    }
+  ],
+  "bundles": {
+    "G1": {
+      "id": "G1",
+      "code": "c1",
+      "schema": "s1",
+      "transform": {
+        "revision": "t1",
+        "vocabulary": [
+          "alpha",
+          "beta"
+        ]
+      },
+      "model": {
+        "revision": "m1",
+        "vocabulary": [
+          "alpha",
+          "beta"
+        ]
+      },
+      "tokenizer": "tok1",
+      "adapter": "none",
+      "prompt": "p1",
+      "index": "i1"
+    },
+    "G2": {
+      "id": "G2",
+      "code": "c2",
+      "schema": "s2",
+      "transform": {
+        "revision": "t2",
+        "vocabulary": [
+          "beta",
+          "alpha"
+        ]
+      },
+      "model": {
+        "revision": "m2",
+        "vocabulary": [
+          "alpha",
+          "beta"
+        ]
+      },
+      "tokenizer": "tok2",
+      "adapter": "a2",
+      "prompt": "p2",
+      "index": "i2",
+      "adapter_base": "m1"
+    }
+  },
+  "promotion": {
+    "id": "promote-42"
+  },
+  "operator": "ML on-call: Amina N.",
+  "user_correction_path": "Pause automated action; user can correct the prediction in the review queue.",
+  "decision_time": "synthetic T+12 minutes",
+  "latency": {
+    "first_output_ms": 120,
+    "complete_response_ms": 460
+  },
+  "attempts": {
+    "total": 3,
+    "timeouts": 1,
+    "retries": 1
+  }
+}

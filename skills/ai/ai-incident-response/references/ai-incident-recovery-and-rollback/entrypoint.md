@@ -200,4 +200,6 @@ The incident does **not** close while a rollback is in effect with no plan. Open
 - Recovery plan owned by the IC who responded, not the feature team — implementation drift.
 - Decision log absent for "permanent rollback" — six months later, nobody knows why we're on the old version.
 
+## Replay a release incident
 
+Run the [offline K4 diagnostic](../../../../languages/python-ml-predictive/examples/release-diagnostics/diagnose.py) with Python. Compare the same record on the training and serving paths. A shift in input lengths can trigger investigation while accuracy awaits labels. Check the schema, vocabulary order and adapter base before serving. The example stages the complete rollback bundle, interrupts the index promotion, retries the operation and reports the number of effects. Escalate to the operator named in the trace and send affected users to the correction queue.

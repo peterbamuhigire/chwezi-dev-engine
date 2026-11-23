@@ -1,0 +1,97 @@
+{
+  "diagnoses": {
+    "data": {
+      "class": "input_distribution_shift",
+      "reference_median": 5.5,
+      "recent_median": 20.5,
+      "fixture_rule": "recent median exceeds twice reference median",
+      "labels_due": "next_week",
+      "accuracy": "NOT_ASSESSED"
+    },
+    "serving": {
+      "class": "training_serving_skew",
+      "record": "synthetic-17",
+      "training": [
+        1,
+        0,
+        1
+      ],
+      "serving": [
+        1,
+        1,
+        1
+      ]
+    },
+    "release": {
+      "mismatched_components": [
+        "transform.vocabulary",
+        "adapter.base"
+      ],
+      "candidate_outcome": "incompatible"
+    }
+  },
+  "promotion_id": "promote-42",
+  "interruption": "interrupted_before_index_promotion",
+  "bundle_after_interruption": {
+    "id": "G1",
+    "code": "c1",
+    "schema": "s1",
+    "transform": {
+      "revision": "t1",
+      "vocabulary": [
+        "alpha",
+        "beta"
+      ]
+    },
+    "model": {
+      "revision": "m1",
+      "vocabulary": [
+        "alpha",
+        "beta"
+      ]
+    },
+    "tokenizer": "tok1",
+    "adapter": "none",
+    "prompt": "p1",
+    "index": "i1"
+  },
+  "restoration": "published",
+  "retry": "replay",
+  "active_bundle": {
+    "id": "G1",
+    "code": "c1",
+    "schema": "s1",
+    "transform": {
+      "revision": "t1",
+      "vocabulary": [
+        "alpha",
+        "beta"
+      ]
+    },
+    "model": {
+      "revision": "m1",
+      "vocabulary": [
+        "alpha",
+        "beta"
+      ]
+    },
+    "tokenizer": "tok1",
+    "adapter": "none",
+    "prompt": "p1",
+    "index": "i1"
+  },
+  "effect_count": 1,
+  "owner": "ML on-call: Amina N.",
+  "correction": "Pause automated action; user can correct the prediction in the review queue.",
+  "decision_time": "synthetic T+12 minutes",
+  "synthetic_latency": {
+    "first_output_ms": 120,
+    "complete_response_ms": 460
+  },
+  "attempts": {
+    "total": 3,
+    "timeouts": 1,
+    "retries": 1
+  },
+  "charge": "NOT_ASSESSED"
+}
