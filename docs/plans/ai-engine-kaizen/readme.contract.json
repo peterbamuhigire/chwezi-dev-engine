@@ -57,7 +57,7 @@
           "criterion_id": "AC-ER2",
           "path": "docs/plans/ai-engine-kaizen/evidence/ER2/receipt.md",
           "tested_revision": "a67158cd15ebf766e6ed9a2ad6c2d18c344e12ca",
-          "sha256": "b9329e2742585dcf996456b8fc7df49df7dda2f7ca5f5da9a3fc7cf1d6ce15fd",
+          "sha256": "0fae9c43d7e9a27a6fc958f39d1c4575e5dada109a0a56c26137c9c054d6c391",
           "command": "python -B docs/plans/ai-engine-kaizen/evidence/ER2/walkthrough.py",
           "result": "PASS"
         }
