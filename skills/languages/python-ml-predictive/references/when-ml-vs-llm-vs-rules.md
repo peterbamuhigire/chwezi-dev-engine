@@ -1,119 +1,48 @@
-# When ML vs LLM vs Rules
+# Choosing rules, classifiers, and LLMs
 
-Deciding which technique fits a SaaS feature. Wrong choice is the most expensive early mistake.
+Choose from the decision the system must make, the available evidence, and the cost of a wrong action. Text is an input format; it does not by itself make an LLM the right classifier.
 
-## Decision matrix
+## Compare candidates on one task
 
-| Signal shape | Best fit | Typical SaaS examples |
-| --- | --- | --- |
-| Numeric features, labelled history, < 100 features | Tabular ML | Churn, demand forecast, credit score, late-payment risk, inventory reorder quantity |
-| Free text, images, audio, PDFs | LLM or pre-trained model | Invoice extraction, sentiment, support triage, summary of meeting notes |
-| Problem statable in < 5 boolean conditions | Rules in PHP | "Flag invoice if amount > 1M and supplier new" |
-| Text in, number/label out | LLM -> ML hybrid | LLM extracts features from complaint text, GBDT classifies severity |
-| Number in, narrative out | ML -> LLM hybrid | Forecast yields values, LLM drafts commentary for the CFO |
+For a text label, begin with a rule that a reviewer can inspect and a sparse linear or Naive Bayes classifier. Keep the same permitted records, prediction time, held-out examples, and review workflow for every candidate. Add an LLM only when it has a defined advantage to test, such as handling varied instructions or producing a justified extraction. Record the prompt and model revision if you test one.
 
-## Concrete SaaS scenarios
+For numeric features with a stable target, compare a simple statistical or ML baseline with the existing rule. Use retrieval when the answer depends on current authorised documents. Use generation when the required output is new text. These can be combined, but each component needs its own evaluation.
 
-### Churn prediction (ML wins)
-- 50+ numeric features per tenant (usage, invoices paid, support tickets, days since last login).
-- Labelled data from historic cancellations.
-- Need a calibrated probability for segmentation and CS outreach.
-- Gradient-boosted trees. Retrain monthly.
+Do not fit vocabulary, thresholds, or other learned preprocessing on held-out rows. Split by the unit that can repeat (for example, customer or ticket thread), and respect time order when the prediction is about a future period. An IID random split is not evidence for a time-ordered or grouped workload. See the scikit-learn guidance on [common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html) and [cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), accessed 2026-11-23; apply the split that matches the deployment question.
 
-### Support ticket triage (LLM wins)
-- Input is free-text.
-- Classes drift (new product means new tags).
-- LLM zero-shot or few-shot outperforms a trained classifier until you have 5K+ labelled tickets.
-- Once you have labels, add a small ML classifier as a cheaper fast path, with LLM as fallback.
+## K1: support-ticket triage under two review policies
 
-### Duplicate customer detection (Rules or ML)
-- If you can enumerate match rules (same phone, same TIN, fuzzy name match > 0.9), rules win.
-- When signal needs to combine 8+ features with thresholds, a logistic or tree-based model beats hand-coded rules.
+K1 in [the casebook](../../../../docs/plans/ai-engine-kaizen/casebook.md) freezes eight support-ticket outcomes for a text-label task. It supplies expected predictions and labels, not raw ticket messages. The current rule yields TP/FP/FN/TN = 1/1/2/4; the candidate yields 3/2/0/3. With illustrative penalties of five per missed urgent case and one per unnecessary review, their hand-calculated costs are 11 and 2. These penalties are assumptions for this example, not measured business costs.
 
-### Demand forecasting (ML / statistical wins)
-- Univariate or low-dimensional time series.
-- Prophet or SARIMA. LLM forecasting is expensive and unreliable for numeric series.
+The candidate sends five of eight tickets to review. Under a two-alert shift limit it is infeasible, despite the lower illustrative error cost; keep the current policy until ranking, threshold, or reviewer workflow is evaluated. If a shift can inspect every alert (CAP-ALL), the candidate is eligible for further evaluation on the strength of its lower fixture cost. The accepted SRS handoff still requires further evidence for release. The text-label task and frozen predictions stay fixed while workload changes the decision.
 
-### Fraud flagging (Hybrid)
-- Rules fire first for known bad patterns (blocklists, geo anomalies).
-- IsolationForest on embeddings of transactions catches the weird cases.
-- LLM reads the description field for prompt-injection / social-engineering indicators.
+This policy table is a hand calculation over frozen predictions. It is not the model result from the separate fixture below.
 
-## Cost model
+## Run the offline text-label example
 
-### Per-inference cost
-- **Rules (PHP)**: sub-millisecond, essentially zero.
-- **Tabular ML sidecar**: 1 to 50 ms CPU, no external call. Cost = server time only.
-- **LLM call**: 200 ms to 5 s, $0.0001 to $0.05 per call depending on tokens and model. Network dependency.
+The example uses original synthetic ticket messages and the Python standard library. Multinomial Naive Bayes is a conventional sparse bag-of-words classifier; it is a baseline, not a claim that this method wins for every text task. The train and test files are separate. Training writes a JSON model artifact, and scoring reloads it in a separate process.
 
-Rule of thumb: if you'll score > 10K items a day, every unit of ML per-call cost matters. LLM quickly dominates the budget.
+From `skills/languages/python-ml-predictive/`:
 
-### Training cost
-- **Rules**: developer time only.
-- **Tabular ML**: minutes on a worker box, negligible $.
-- **LLM fine-tune**: $50 to $5000, plus labelled data.
-
-### Operational cost
-- **Rules**: highest readability, lowest monitoring need, easiest to change (but easiest to rot without tests).
-- **ML**: needs drift monitoring, periodic retraining, explainability infra.
-- **LLM**: needs prompt versioning, eval harness, provider outage handling, PII scrubbing, cost monitoring.
-
-Do not pay ML operational tax for a problem rules would solve.
-
-## Sequencing: start simple, upgrade when data earns it
-
-1. **Rules first.** Ship a deterministic rule. Log the decision plus the features you would have used.
-2. **Collect labels.** After 3 to 6 months of real traffic, you have a labelled dataset.
-3. **Baseline model.** Train logistic regression on those labels. Compare vs rules on a holdout week.
-4. **Upgrade if it wins.** Move to GBDT only if logistic beats rules by a meaningful margin on a business metric.
-5. **LLM is the last tool, not the first,** for numeric predictions. It is the first tool for language.
-
-If you cannot articulate what metric the upgrade should improve, you are not ready to upgrade.
-
-## Hybrid patterns that work
-
-### LLM as feature extractor, ML as decider
-```text
-raw text -> LLM (extract sentiment, topic, urgency as JSON) -> ML classifier
+```sh
+python examples/ticket-triage/train.py --model ticket-triage-model.json
+python examples/ticket-triage/score.py --model ticket-triage-model.json
+python -m unittest discover -s examples/ticket-triage -p "test_*.py" -v
 ```
-Good when you have lots of text and some labels. ML remains explainable and cheap; LLM is called once per new item.
 
-### ML as candidate generator, LLM as ranker
-```text
-query -> ML retrieves top 100 candidates -> LLM re-ranks top 10 with reasons
-```
-Used in search, recommendations, document Q&A (RAG).
+The scorer reports per-class precision, recall, and F1 alongside the confusion counts. Those observed held-out results are in the E01 receipt. The fixture is small and constructed for a walkthrough; it does not support a production-quality or comparative-performance claim.
 
-### Rules as guardrail around ML
-```text
-ML predicts -> rules override for known edge cases (whitelist, blocklist, regulatory)
-```
-Always layer rules on top of ML for decisions that carry legal risk (credit denial, suspension, refunds).
+One held-out row has ID `QZ-8841` and says, “Not urgent; please do not close this case because the report is delayed.” The tokenizer lowercases and splits on punctuation, preserving `not` and adjacent word pairs such as `not urgent`. Lowercasing can erase meaningful case distinctions, punctuation splitting breaks a compound identifier into pieces, and a rare unseen ID has no learned signal. Keep identifiers in a separate field for exact matching or routing; do not rely on a tiny text model to interpret them. A unigram-only tokenizer would not encode `not urgent` as one feature; whether that changes a prediction is NOT_ASSESSED. The fixture test checks that this bigram is retained.
 
-### ML for probability, rules for action
-```text
-ML -> probability score -> business rule decides action based on threshold and context
-```
-Keeps the ML model stable while product tunes thresholds by segment.
+## Measure the decision, not a generic cost tier
 
-## Red flags that tell you the choice is wrong
+Record the population, time window, action threshold, error counts, review capacity, and the source of each penalty. Do not reuse absolute latency or price ranges across providers, models, deployments, or workloads. If speed or cost affects the choice, measure the actual candidate against the same request mix and include setup, review, retry, and operating costs. Unknown measurements remain unknown.
 
-- **Building ML but no labels exist.** You are fitting noise.
-- **Using LLM to predict a number.** Costly, unstable, non-calibrated. Use ML.
-- **Using rules for a 20-variable interaction.** Rules collapse; engineers fear to touch them.
-- **Using LLM for high-volume inference** (> 100K/day) when ML would do. Budget will surprise you.
-- **Using ML when the rule "Y if X > threshold" achieves 95% of the value.** Complexity tax not earned.
+## Route by output and failure path
 
-## Picking for our stack
+- A stable, exhaustive condition belongs in a rule with regression coverage.
+- A repeated label task with examples can use a conventional classifier if held-out results and operating constraints support it.
+- Variable language understanding, extraction, or generated prose may justify an LLM comparison; retrieval can supply current evidence, but does not prove that an answer is supported.
+- When labels, permissions, representative evaluation data, or a safe correction path are missing, keep the decision open and record what must be measured.
 
-Default order for any new predictive feature in a PHP + MySQL + mobile SaaS:
-
-1. Can this be a rule in PHP? Ship it. Measure.
-2. Do we have labelled data and numeric features? Build tabular ML in a Python sidecar.
-3. Is the input unstructured (text, image, PDF)? LLM (see `ai-*` skills).
-4. Hybrid if the problem straddles categories.
-
-Companion skills:
-- LLM path: `ai-llm-integration`, `ai-predictive-analytics`, `ai-cost-modeling`.
-- ML path: the rest of this skill.
-- Rules path: ordinary PHP plus `advanced-testing-strategy` for regression coverage.
+For current scikit-learn APIs, check the [official documentation](https://scikit-learn.org/stable/) for the installed version. This example intentionally uses no third-party package and makes no scikit-learn compatibility claim.

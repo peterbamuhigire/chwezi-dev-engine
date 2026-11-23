@@ -53,18 +53,13 @@ Skill-specific references:
 - Anomaly detection on SaaS metrics (transaction volume, latency, error rates).
 - Any feature where a PHP developer would write a rule that needs tuning from data.
 
-## When ML vs LLM vs rules (decision rule)
+## Choose by decision, workload, and error cost
 
-```text
-Output is a number or label derived from many numeric features  -> ML
-Output is text, summary, classification of language, extraction -> LLM
-Output can be stated in < 5 unambiguous rules                    -> Rules (PHP)
-Hybrid (e.g., LLM extracts features -> ML classifies)            -> both, pipeline
-```
+Input type alone does not select the model. For a text label, compare an explicit rule and a small conventional classifier with any LLM candidate on the same permitted examples. For generated prose or extraction that must generalise across varied instructions, evaluate an LLM against the exact workflow. Keep a human review or abstention path when errors carry material cost.
 
-Rules beat ML whenever you can enumerate them — faster, explainable, testable. Reach for ML when the signal is in the data, the rules are fuzzy, and the cost of a wrong answer is modest.
+Choose the simplest option that meets the measured quality, review-capacity, privacy, and operating constraints. Compare false-positive and false-negative costs at the actual action threshold. A classifier can rank cases for a limited review queue; a rule may be enough when its conditions are stable and complete. Change the model only when a held-out comparison shows a useful improvement for the intended workload.
 
-See `references/when-ml-vs-llm-vs-rules.md`.
+See `references/when-ml-vs-llm-vs-rules.md` for the worked ticket-triage decision and offline classifier example.
 
 ## Core stack
 
@@ -265,7 +260,7 @@ Load `references/ml-system-architecture-fti.md` when the model must run beyond a
 
 ## See also
 
-- `ai-predictive-analytics` — LLM-based prediction (use when features are unstructured text).
+- `ai-predictive-analytics` — LLM-based prediction; compare against a conventional classifier for text labels.
 - `ai-evaluation` — for LLM output quality; ML evaluation is different (this skill).
 - `saas-business-metrics` — to decide which outcome to model.
 

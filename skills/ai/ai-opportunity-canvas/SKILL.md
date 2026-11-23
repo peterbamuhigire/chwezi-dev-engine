@@ -117,11 +117,17 @@ Score on three dimensions (1–5 each):
 |-----------|---|---|---|
 | **Business Impact** | Nice-to-have | Saves hours/week | Core competitive advantage |
 | **Data Availability** | No data exists | Partial data | Rich historical data |
-| **Implementation Effort** | Custom ML needed | Standard LLM call | Single prompt |
+| **Implementation Effort** | New data pipeline or substantial workflow change | Existing component integration | Small, scoped change |
 
 **Priority Score** = Impact × Data × (6 − Effort)
 
 Rank opportunities by priority score descending.
+
+### Choose an implementation candidate
+
+Do not infer the technique from the input format. For a text label, include an explicit rule and a conventional classifier as candidates alongside an LLM only when each can be tested against the same permitted examples and review workflow. For current document answers, assess retrieval and answer support separately. For generated language or extraction, define the required output and compare an LLM only where it has a testable advantage. Keep quality, review capacity, privacy, operating burden, and error cost visible in the opportunity record.
+
+An opportunity score ranks work; it is not evidence that a model improves outcomes. Record cost as an assumption until measured for the chosen workload, including human review and failure handling. Do not reuse generic latency or price ranges.
 
 ### Step 4 — Gate Assessment
 
@@ -198,8 +204,8 @@ Deliver the AI Opportunity Register as a markdown table (above template) followe
 
 ## What NOT to Include
 
-- Do not propose building custom ML models — only LLM API integrations.
-- Do not propose AI for features where a simple rule/filter suffices (e.g., "flag invoices > $10,000" does not need AI).
+- Do not propose a model where a tested rule meets the need (for example, flagging an invoice above an approved threshold).
+- Do not reject a conventional classifier or statistical model solely because its input is text or because it requires training; require a scoped, held-out comparison before recommending it.
 - Do not include opportunities where data does not yet exist and cannot be collected within 6 months.
 
 ---
