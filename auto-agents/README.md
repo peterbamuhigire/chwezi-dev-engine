@@ -110,6 +110,8 @@ python auto-agents/driver.py resume      # reattach unfinished work; respects te
 python auto-agents/driver.py recover     # deliberate local reconciliation and budget renewal
 ```
 
+A run always ends `done` once its plan is finished. If it blocked or stopped and the owner then finished the plan on the target branch (committed `STATUS: DONE`, a completion-ready contract, every runner commit already merged and a clean worktree), the next `resume`, `run` or `start` marks it `done` with `closed_by: owner` and keeps the original block reason. Runner gates do not run on the owner's commits. In any other case the run stays as it was.
+
 `run` executes in the foreground and is useful for controlled tests. `start` confirms process launch, not readiness or success: inspect status and `launcher.log`. `recover` requires the saved local-only policy, unchanged configuration and safe replay for interrupted verification. It never resets or deletes partial edits. Read [RECOVERY.md](RECOVERY.md) before configuring restart automation.
 
 Status lives under the repository's Git common directory in `auto-agents/`. The watch names the plan/worktree, reported task states when configured, independently verified revision, current gate, job heartbeat, last output, retries/wait time, budget and log. A heartbeat proves liveness, not progress or acceptance. Unknown task totals and provider reset times remain unknown.

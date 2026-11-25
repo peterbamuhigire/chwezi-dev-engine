@@ -221,6 +221,49 @@ subprocess.run(['git','commit','-qm','slice'],check=True)
         self.assertEqual(self.run_driver(), 0)
         self.assertTrue(marker.exists())
 
+    def block_then_owner_marks(self, owner_first_line):
+        plan = self.root / self.cfg['plan']
+        plan.write_text('STATUS: BLOCKED - owner decision needed\n')
+        git(self.root, 'add', self.cfg['plan'])
+        git(self.root, 'commit', '-qm', 'blocked')
+        self.assertEqual(self.run_driver(), 2)
+        self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'blocked')
+        plan.write_text(owner_first_line + '\n')
+        git(self.root, 'add', self.cfg['plan'])
+        git(self.root, 'commit', '-qm', 'owner resolves')
+
+    def test_owner_completed_plan_closes_blocked_run_as_done(self):
+        # Writing engine 24 Nov 2026: the owner finished a blocked plan on main and the run stayed blocked.
+        self.block_then_owner_marks('STATUS: DONE')
+        self.assertEqual(self.run_driver(resume=True), 0)
+        status = json.loads((self.base / 'status.json').read_text())
+        self.assertEqual((status['state'], status['closed_by'], status['closed_from']), ('done', 'owner', 'blocked'))
+        self.assertIn('owner decision needed', status['reason'])
+        self.assertIn('"closed"', (self.base / 'events.jsonl').read_text())
+        self.assertEqual(self.run_driver(resume=True), 0)  # idempotent: a done run stays done
+
+    def test_blocked_run_stays_blocked_until_owner_marks_done(self):
+        self.block_then_owner_marks('STATUS: BLOCKED - still waiting')
+        self.assertEqual(self.run_driver(resume=True), 0)
+        self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'blocked')
+
+    def test_unmerged_runner_commit_prevents_owner_close(self):
+        self.fake.write_text('''import pathlib,subprocess,sys
+sys.stdin.read()
+pathlib.Path('work.txt').write_text('runner work')
+p=pathlib.Path('auto-agents/PLAN.md')
+p.write_text('STATUS: BLOCKED - owner decision needed\\n')
+subprocess.run(['git','add','work.txt',str(p)],check=True)
+subprocess.run(['git','commit','-qm','runner slice'],check=True)
+''')
+        self.assertEqual(self.run_driver(), 2)
+        plan = self.root / self.cfg['plan']
+        plan.write_text('STATUS: DONE\n')
+        git(self.root, 'add', self.cfg['plan'])
+        git(self.root, 'commit', '-qm', 'owner marks done without the runner slice')
+        self.assertEqual(self.run_driver(resume=True), 0)
+        self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'blocked')
+
     def test_wait_resume_retains_deadline_and_retry_time(self):
         import execution
         self.fake.write_text("import sys; sys.stdin.read(); print('usage limit'); sys.exit(1)")

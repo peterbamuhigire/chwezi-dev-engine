@@ -177,6 +177,8 @@ class Execution:
         a, cfg = self.a, self.cfg
         digest = config_digest(cfg)
         previous = durable.read_json(self.journal) if self.journal.exists() else None
+        if previous and previous['state'] in ('blocked', 'stopped') and self.close_completed(previous):
+            return False
         if self.resume_only and (previous is None or previous['state'] in TERMINAL):
             return False
         if previous and previous['state'] not in TERMINAL:
@@ -284,6 +286,55 @@ class Execution:
         self.save(worktree=str(self.work), branch=self.branch, lane=cfg.get('lane'),
                   verified_head=durable.read_json(self.checkpoint)['head'])
         self.event('started', resumed=bool(previous), runner=cfg['runner'], lane=cfg.get('lane'))
+        return True
+
+    def close_completed(self, previous):
+        """Mark a blocked or stopped run done when the owner has finished its plan.
+
+        Writing engine, 24 Nov 2026: the runner blocked on an owner decision, the
+        owner resolved it and committed `STATUS: DONE` on the target branch, and
+        the run stayed "blocked" for good. A run closes only when the committed
+        owner plan says DONE, its contract (if any) is completion-ready, no
+        operation is unresolved and every runner commit is already in the owner
+        branch, so nothing the runner made can be lost.
+        """
+        a, cfg = self.a, self.cfg
+        if previous.get('operation') or previous.get('plan') != cfg['plan']:
+            return False
+        if not a.git(a.ROOT, 'ls-files', '--', cfg['plan']) or a.git(a.ROOT, 'status', '--porcelain', '--', cfg['plan']):
+            return False
+        shown = a.call(['git', 'show', 'HEAD:' + cfg['plan']], a.ROOT)
+        lines = shown.stdout.splitlines() if shown.returncode == 0 else []
+        if not lines or lines[0].strip() != 'STATUS: DONE':
+            return False
+        if cfg.get('plan_contract'):
+            import plan_contract
+            name = cfg['plan_contract']
+            path = (a.ROOT / name).resolve()
+            if (not path.is_relative_to(a.ROOT.resolve()) or not path.is_file()
+                    or not a.git(a.ROOT, 'ls-files', '--', name) or a.git(a.ROOT, 'status', '--porcelain', '--', name)):
+                return False
+            result = plan_contract.completion_readiness(plan_contract.load_contract(path), a.ROOT)
+            if not result['valid'] or not result['completion_ready']:
+                return False
+        owner_head = a.git(a.ROOT, 'rev-parse', 'HEAD')
+        runner_heads = []
+        if self.checkpoint.exists():
+            runner_heads.append(durable.read_json(self.checkpoint)['head'])
+        if self.work.exists():
+            if self.dirty():
+                return False
+            runner_heads.append(self.head())
+        for head in runner_heads:
+            if a.call(['git', 'merge-base', '--is-ancestor', head, owner_head], a.ROOT).returncode:
+                return False
+        self.state = previous
+        self.pending_path.unlink(missing_ok=True)
+        reason = ('Owner completed the plan at ' + owner_head[:12] + '; closed the ' + previous['state'] + ' run ('
+                  + (previous.get('reason') or 'no reason recorded') + '). Runner gates did not run on owner commits.')
+        self.save('done', reason, closed_by='owner', closed_from=previous['state'], owner_head=owner_head)
+        self.event('closed', closed_from=previous['state'], owner_head=owner_head)
+        print('DONE: ' + reason)
         return True
 
     def contract(self, require_complete=False):

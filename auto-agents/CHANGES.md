@@ -11,6 +11,14 @@ Read this before you update another copy of the runner tools: the community copy
 
 The community copy (`chwezi-engine-agents`) was at 2.2.7 on 19 Nov 2026, so it lacks every entry below.
 
+## 2.5.5 (25 Nov 2026): a run whose plan the owner finished closes as done
+
+- **Why:** the writing engine run blocked on an owner decision (24 Nov 2026). The owner made the decision, finished the last task on `main` and committed `STATUS: DONE`, but the run stayed "blocked" for good. Nothing told the runner that its job was finished.
+- **What:** on `resume`, `run` or `start`, a `blocked` or `stopped` run is marked `done` when all of these hold: the committed owner plan starts `STATUS: DONE`; its plan contract, if configured, is committed, clean and completion-ready; no operation is unresolved; the runner worktree is clean; and the verified head and worktree HEAD are both already in the owner branch, so no runner work is lost. The status records `closed_by: owner`, `closed_from`, `owner_head` and the original block reason, says that runner gates did not run on owner commits, and writes a `closed` event. Otherwise the run stays as it was.
+- **Tests:** `test_owner_completed_plan_closes_blocked_run_as_done`, `test_blocked_run_stays_blocked_until_owner_marks_done`, `test_unmerged_runner_commit_prevents_owner_close` in `tests/test_recovery.py`; full suite 156 passed, 1 skipped.
+- **Files:** `execution.py`, `tests/test_recovery.py`, `README.md`, `CHANGES.md`, `manifest.json`.
+- **Porting notes:** no configuration key and no digest change. Safe to propagate while a run is stopped or blocked; a scheduled `resume` then closes a finished run by itself.
+
 ## 2.5.4 (21 Nov 2026): release the two post-2.5.3 fixes
 
 - **Why:** two commits after 2.5.3 changed managed files without a release, so the manifest hashes no longer matched and `upgrade.py` refused to install into Medic8 ("Modified managed file: README.md").
