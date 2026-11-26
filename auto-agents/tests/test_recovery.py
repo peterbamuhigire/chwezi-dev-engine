@@ -221,6 +221,38 @@ subprocess.run(['git','commit','-qm','slice'],check=True)
         self.assertEqual(self.run_driver(), 0)
         self.assertTrue(marker.exists())
 
+    def sleep_during_first_gate(self):
+        import durable, execution
+        real = durable.wait
+        seen = {'gates': 0}
+        def wait(folder, *args, **kwargs):
+            result = real(folder, *args, **kwargs)
+            if durable.read_spec(folder)['argv'] == self.cfg['verify'][0]:
+                seen['gates'] += 1
+                if seen['gates'] == 1:  # the host slept through the first gate run
+                    result = {**result, 'state': 'timed_out', 'exit_code': 1, 'suspended_seconds': 7200.0}
+            return result
+        return patch.object(execution.durable, 'wait', wait), seen
+
+    def test_gate_timed_out_by_host_sleep_is_replayed_and_budget_extended(self):
+        self.cfg['verification_replay_safe'] = True
+        patcher, seen = self.sleep_during_first_gate()
+        with patcher:
+            self.assertEqual(self.run_driver(), 0, self.last_output if hasattr(self, 'last_output') else '')
+        status = json.loads((self.base / 'status.json').read_text())
+        self.assertEqual(status['state'], 'done')
+        self.assertEqual(seen['gates'], 2)
+        self.assertGreater(status['deadline'] - status['started_at'], 3600 + 7000)
+        events = (self.base / 'events.jsonl').read_text()
+        self.assertIn('"host_suspended"', events)
+        self.assertIn('"verification_replay"', events)
+
+    def test_gate_timed_out_by_host_sleep_blocks_without_replay_safety(self):
+        patcher, _ = self.sleep_during_first_gate()
+        with patcher:
+            self.assertEqual(self.run_driver(), 2)
+        self.assertIn('timed_out', json.loads((self.base / 'status.json').read_text())['reason'])
+
     def block_then_owner_marks(self, owner_first_line):
         plan = self.root / self.cfg['plan']
         plan.write_text('STATUS: BLOCKED - owner decision needed\n')

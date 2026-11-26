@@ -191,6 +191,53 @@ def windows_job():
     return handle  # Deliberately not closed until supervisor process exit.
 
 
+SUSPEND_GAP = 30.0  # seconds without a supervisor tick (normally 0.25 s) count as host sleep
+
+
+class ActiveClock:
+    """Job time that excludes host sleep or hibernation.
+
+    Aqar and Garage, 26 Nov 2026: a laptop went into Modern Standby for two hours.
+    The frozen gate then "timed out" on wake and blocked the run, and an agent
+    session lost most of its budget. The supervisor ticks every 0.25 s, so a gap
+    longer than SUSPEND_GAP between ticks is time the host was not running; it
+    is recorded as suspended, not spent. Wall-clock deltas work on every host
+    (Windows' monotonic clock counts sleep, Linux's does not); a backwards clock
+    step counts as zero.
+    """
+
+    def __init__(self, now=time.time, gap=SUSPEND_GAP):
+        self._now, self.gap = now, gap
+        self.last = now()
+        self.active = 0.0
+        self.suspended = 0.0
+
+    def tick(self):
+        now = self._now()
+        delta = max(0.0, now - self.last)
+        self.last = now
+        if delta > self.gap:
+            self.suspended += delta
+        else:
+            self.active += delta
+        return self.active
+
+
+def keep_awake():
+    """Ask Windows not to idle-sleep while this supervisor runs (best effort).
+
+    The request ends when the supervisor exits. It does not override a closed
+    lid, the power button or a user's explicit sleep; ActiveClock covers those.
+    """
+    if os.name != 'nt':
+        return False
+    try:
+        ES_CONTINUOUS, ES_SYSTEM_REQUIRED = 0x80000000, 0x00000001
+        return bool(ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED))
+    except (AttributeError, OSError):
+        return False
+
+
 def tail(path, limit=4000):
     try:
         with Path(path).open('rb') as stream:
@@ -376,11 +423,16 @@ def worker(folder):
                                      stdout=output, stderr=subprocess.STDOUT, env=env,
                                      start_new_session=(os.name != 'nt'))
             state['child_pid'] = child.pid
+            state['keep_awake'] = keep_awake()
+            clock = ActiveClock()
             terminal = None
             while child.poll() is None:
+                active = clock.tick()
+                if clock.suspended:
+                    state['suspended_seconds'] = round(clock.suspended, 1)
                 if (folder / 'CANCEL').exists():
                     terminal = 'cancelled'
-                elif time.time() - started >= spec['timeout']:
+                elif active >= spec['timeout']:
                     terminal = 'timed_out'
                 if terminal:
                     child.kill()

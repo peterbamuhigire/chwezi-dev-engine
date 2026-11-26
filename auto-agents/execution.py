@@ -417,8 +417,18 @@ class Execution:
                 last[0] = time.monotonic()
         result = durable.wait(folder, observe=observe, cancel=lambda: (self.base / 'CANCEL').exists())
         self.event(kind + '_receipt', job_id=op['id'], outcome=result['state'], exit=result.get('exit_code'))
+        self.credit_suspension(op['id'], result)
         self.owner_intent()
         return result, durable.tail(folder / 'output.log'), op
+
+    def credit_suspension(self, job_id, result):
+        """Give the run budget back the time the host slept during a job, once per job."""
+        slept = float(result.get('suspended_seconds') or 0)
+        if slept <= 0 or job_id in self.state.get('suspension_credited', []):
+            return
+        credited = (self.state.get('suspension_credited', []) + [job_id])[-20:]
+        self.save(deadline=self.state['deadline'] + slept, suspension_credited=credited)
+        self.event('host_suspended', job_id=job_id, seconds=round(slept, 1), new_deadline=stamp(self.state['deadline']))
 
     def clear_operation(self, **fields):
         self.save(operation=None, job_id=None, job_state=None, **fields)
@@ -1034,7 +1044,8 @@ class Execution:
             if self.dirty():
                 self.fail('verification modified worktree')
             if result['state'] != 'passed':
-                if result['state'] == 'interrupted' and cfg.get('verification_replay_safe', False):
+                slept = result['state'] == 'timed_out' and float(result.get('suspended_seconds') or 0) > 0
+                if (result['state'] == 'interrupted' or slept) and cfg.get('verification_replay_safe', False):
                     retries = pending.get('replays', 0) + 1
                     if retries <= cfg.get('max_recovery_attempts', 2):
                         pending['replays'] = retries

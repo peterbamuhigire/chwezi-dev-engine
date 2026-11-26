@@ -67,6 +67,24 @@ class DurableTests(unittest.TestCase):
         time.sleep(2)
         self.assertFalse(marker.exists())
 
+    def test_active_clock_excludes_host_sleep(self):
+        # Aqar 26 Nov 2026: two hours of Modern Standby timed out a gate that was frozen, not slow.
+        now = [1000.0]
+        clock = d.ActiveClock(now=lambda: now[0])
+        for step in (0.25, 0.25, 7200.0, 0.25, -5.0, 0.25):
+            now[0] += step
+            clock.tick()
+        self.assertAlmostEqual(clock.active, 1.0)
+        self.assertAlmostEqual(clock.suspended, 7200.0)
+
+    def test_receipt_records_keep_awake_and_no_suspension_when_awake(self):
+        job = self.root / 'job'
+        d.prepare(job, [sys.executable, '-c', 'import time; time.sleep(.6)'], self.root, 20)
+        result = d.wait(job)
+        self.assertEqual(result['state'], 'passed')
+        self.assertEqual(result.get('keep_awake'), os.name == 'nt')
+        self.assertNotIn('suspended_seconds', result)
+
     def test_supervisor_crash_is_interrupted_not_replayed(self):
         job = self.root / 'job'
         marker = self.root / 'escaped'
