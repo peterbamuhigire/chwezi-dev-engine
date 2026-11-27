@@ -276,6 +276,51 @@ subprocess.run(['git','commit','-qm','slice'],check=True)
         self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'done')
         self.assertEqual(seen['gates'], 2)
 
+    def cut_first_session(self, marker):
+        # First session leaves uncommitted work (cut off); the next one commits it and finishes.
+        self.fake.write_text('''import pathlib,subprocess,sys
+sys.stdin.read()
+m=pathlib.Path(%r)
+pathlib.Path('partial.txt').write_text('work in progress',encoding='utf8')
+if not m.exists():
+    m.write_text('once')
+    sys.exit(0)
+pathlib.Path('auto-agents/PLAN.md').write_text('STATUS: DONE\\n',encoding='utf8')
+subprocess.run(['git','add','-A'],check=True)
+subprocess.run(['git','commit','-qm','finish'],check=True)
+''' % str(marker), encoding='utf8')
+        import durable, execution
+        real, seen = durable.wait, {'sessions': 0}
+        def wait(folder, *args, **kwargs):
+            result = real(folder, *args, **kwargs)
+            if durable.read_spec(folder)['argv'] == [sys.executable, str(self.fake)]:
+                seen['sessions'] += 1
+                if seen['sessions'] == 1:
+                    result = {**result, 'state': 'timed_out', 'exit_code': 1}
+            return result
+        return patch.object(execution.durable, 'wait', wait), seen
+
+    def test_session_cut_short_by_run_budget_stops_and_recover_reconciles(self):
+        # Garage 27 Nov 2026: a session cut off at the deadline, recovery attempts used, blocked the run.
+        self.cfg.update(session_timeout_seconds=10 ** 6, recovery_policy='local-only', max_recovery_attempts=0)
+        patcher, seen = self.cut_first_session(self.root.parent / 'cut-once')
+        with patcher:
+            self.assertEqual(self.run_driver(), 0, self.last_output if hasattr(self, 'last_output') else '')
+            status = json.loads((self.base / 'status.json').read_text())
+            self.assertEqual(status['state'], 'stopped')
+            self.assertIn('budget reached during an agent session', status['reason'])
+            self.assertIn('"budget_cut_session"', (self.base / 'events.jsonl').read_text())
+            self.assertEqual(self.run_driver(recover=True), 0, self.last_output)
+        self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'done')
+        self.assertEqual(seen['sessions'], 2)
+
+    def test_session_timeout_within_budget_still_blocks_without_attempts(self):
+        self.cfg.update(session_timeout_seconds=60, recovery_policy='local-only', max_recovery_attempts=0)
+        patcher, _ = self.cut_first_session(self.root.parent / 'cut-once')
+        with patcher:
+            self.assertEqual(self.run_driver(), 2)
+        self.assertIn('agent timed_out', json.loads((self.base / 'status.json').read_text())['reason'])
+
     def test_gate_timeout_within_budget_still_blocks(self):
         import durable, execution
         self.cfg['verification_timeout_seconds'] = 60  # the gate's own limit, well inside the budget

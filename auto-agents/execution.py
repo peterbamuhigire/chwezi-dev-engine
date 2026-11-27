@@ -631,8 +631,20 @@ class Execution:
                         self.save(contract_repair=str(error)[:1500])
                         self.event('contract_feedback', reason=str(error)[:500], stage='recovery')
                     self.save(session=self.state['session'] + 1)
-                result, output, op = self.job('agent', self.agent, min(cfg['session_timeout_seconds'], max(1, self.state['deadline'] - time.time())), self.prompt(pending))
+                remaining = max(1, self.state['deadline'] - time.time())
+                result, output, op = self.job('agent', self.agent, min(cfg['session_timeout_seconds'], remaining), self.prompt(pending))
                 if result['state'] != 'passed':
+                    committed = not self.dirty() and self.head() != op['before']
+                    if (result['state'] == 'timed_out' and remaining < cfg['session_timeout_seconds'] and not committed
+                            and not float(result.get('suspended_seconds') or 0)
+                            and cfg.get('recovery_policy') == 'local-only'):
+                        # The run budget, not the session limit, ended this session (Garage 27 Nov 2026:
+                        # cut off at the deadline with its recovery attempts used, so the run blocked).
+                        # Keep the partial work for a reconcile session and stop on the budget.
+                        self.clear_operation(reconcile=True)
+                        self.event('budget_cut_session', job_id=op['id'], allowed=round(remaining, 1))
+                        self.save('stopped', 'Run time budget reached during an agent session; recover reconciles its work')
+                        break
                     if self.recover(result, op):
                         continue
                     kind, reset_in = provider_limit(output)

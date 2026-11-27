@@ -12,6 +12,15 @@ Read this before you update another copy of the runner tools: the community copy
 
 The community copy (`chwezi-engine-agents`) was at 2.2.7 on 19 Nov 2026, so it lacks every entry below.
 
+## 2.5.9 (28 Nov 2026): an agent session cut short by the run budget stops the run instead of blocking it
+
+- **Why:** Garage (27 Nov 2026). Session 127 of run `a2843ca3` was launched with less budget left than its 10,800 s session limit. The deadline cut it off at 21:24 local, and the run blocked with "agent timed_out; inspect job log and reconcile worktree". It had already used its 2 local recovery attempts, so the local-only reconcile path did not apply. Garage's own watchdog recovered it at 21:33. Aqar has no such watchdog. This is the agent-session form of the 2.5.7 gate defect: the session was never allowed its configured time, so the run had not failed.
+- **What:** in `Execution.loop`, the session's timeout is recorded as the session limit and the budget left. A session counts as cut by the budget when it times out, the budget left was shorter than `session_timeout_seconds`, it left no clean new commit, the host did not sleep, and `recovery_policy` is `local-only`. The runner then keeps the partial work for a reconcile session (`reconcile: true`), writes a `budget_cut_session` event (job id, seconds allowed), saves `stopped` with "Run time budget reached during an agent session; recover reconciles its work", and ends the loop. This uses no recovery attempt. A clean commit left by the session still goes to the gate as before. A timeout inside the budget, or under another recovery policy, still blocks as before.
+- **Tests:** `test_session_cut_short_by_run_budget_stops_and_recover_reconciles` (on 2.5.8 it fails with "BLOCKED: agent timed_out; inspect job log and reconcile worktree", Garage's reason) and `test_session_timeout_within_budget_still_blocks_without_attempts` in `tests/test_recovery.py`.
+- **Files:** `execution.py`, `tests/test_recovery.py`, `README.md`, `CHANGES.md`, `manifest.json`.
+- **Porting notes:** no configuration key, spec field or digest change. New event `budget_cut_session`. Propagate while a run is stopped or blocked. With 2.5.7, a run ended by its budget now always stops rather than blocks when the project is `local-only` and replay-safe, so a budget-renewal task needs to recognise only `stopped`.
+- **Research record:** registered in `chwezi-agentic-research/data/reference/jidoka_releases.csv`.
+
 ## 2.5.8 (27 Nov 2026): pulling the run's own work into the owner checkout no longer blocks it
 
 - **Why:** Aqar (27 Nov 2026). The runner publishes from its worktree, so the owner checkout falls behind `origin/main`. To push the 2.5.7 runner upgrade, the owner checkout was pulled. That brought in the run's own published slices, which edit the plan. The plan blob in the owner checkout (`da13670`) no longer matched the blob saved at run start (`479723d`), and `recover` blocked at once with "The owner checkout plan changed". Every pulled commit was an ancestor of the runner worktree HEAD, so no owner intent was new. The run was unblocked by hand (an `owner_plan_reconciled` event in its log).
