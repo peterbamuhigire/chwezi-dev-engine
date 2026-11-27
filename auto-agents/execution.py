@@ -167,6 +167,23 @@ class Execution:
             self.event('eol_restored', files=eol_only[:50], count=len(eol_only))
         return True
 
+    def owner_follows_run(self, key, blob):
+        """Accept a changed owner plan or contract when the owner checkout only caught up with this run.
+
+        The runner publishes from its worktree, so pulling the target into the owner checkout
+        brings the run's own plan edits (Aqar 27 Nov 2026). When the owner HEAD is an ancestor
+        of the worktree HEAD, the run already holds every owner commit, so its intent is not new.
+        An owner commit the run lacks still blocks.
+        """
+        if not self.work.exists() or not self.state.get('run_id'):
+            return False
+        root = self.a.git(self.a.ROOT, 'rev-parse', 'HEAD')
+        if self.a.call(['git', 'merge-base', '--is-ancestor', root, self.head()], self.work).returncode:
+            return False
+        self.event('owner_checkout_followed', key=key, previous=self.state.get(key), blob=blob, root_head=root)
+        self.save(**{key: blob})
+        return True
+
     def check_branch(self, before):
         if self.a.git(self.work, 'branch', '--show-current') != self.branch:
             self.fail('agent changed the driver branch')
@@ -214,7 +231,8 @@ class Execution:
         if a.git(a.ROOT, 'status', '--porcelain', '--', cfg['plan']):
             self.fail('Commit the plan changes before starting.')
         root_plan_blob = a.git(a.ROOT, 'rev-parse', 'HEAD:' + cfg['plan'])
-        if self.state.get('root_plan_blob', root_plan_blob) != root_plan_blob:
+        if (self.state.get('root_plan_blob', root_plan_blob) != root_plan_blob
+                and not self.owner_follows_run('root_plan_blob', root_plan_blob)):
             self.preserve_journal = True
             self.fail('The owner checkout plan changed; reconcile its new intent with the saved run before resuming.')
         self.state['root_plan_blob'] = root_plan_blob
@@ -227,7 +245,8 @@ class Execution:
                     or a.git(a.ROOT, 'status', '--porcelain', '--', name)):
                 self.fail('Commit the plan contract inside the owner repository before starting.')
             owner_blob = a.git(a.ROOT, 'rev-parse', 'HEAD:' + name)
-            if self.state.get('root_contract_blob', owner_blob) != owner_blob:
+            if (self.state.get('root_contract_blob', owner_blob) != owner_blob
+                    and not self.owner_follows_run('root_contract_blob', owner_blob)):
                 self.preserve_journal = True
                 self.fail('The owner plan contract changed; reconcile its new intent with the saved run before resuming.')
             owner_data = plan_contract.load_contract(owner_path)
@@ -366,7 +385,8 @@ class Execution:
                     or not self.a.git(self.a.ROOT, 'ls-files', '--', name)
                     or self.a.git(self.a.ROOT, 'status', '--porcelain', '--', name)):
                 self.fail('Owner plan or contract changed during this run; reconcile intent before further work.')
-            if self.a.git(self.a.ROOT, 'rev-parse', 'HEAD:' + name) != self.state.get(saved_key):
+            blob = self.a.git(self.a.ROOT, 'rev-parse', 'HEAD:' + name)
+            if blob != self.state.get(saved_key) and not self.owner_follows_run(saved_key, blob):
                 self.fail('Owner plan or contract changed during this run; reconcile intent before further work.')
 
     def job(self, kind, argv, timeout, input_text=None):
@@ -579,7 +599,8 @@ class Execution:
                             pending = {'head': before, 'failures': 0, 'index': 0, 'config_digest': self.state['config_digest']}
                             durable.write_json(self.pending_path, pending)
                             if self.verify(pending) == 'halt':
-                                self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
+                                if self.state['state'] != 'stopped':
+                                    self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
                                 break
                             continue
                         self.save('done', 'Plan marked complete; committed slices passed configured verification')
@@ -660,7 +681,8 @@ class Execution:
                 self.clear_operation(rate_retries=0, net_retries=0, reconcile=False)
                 pending = durable.read_json(self.pending_path)
             if self.verify(pending) == 'halt':
-                self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
+                if self.state['state'] != 'stopped':
+                    self.save('stopped', 'STOP requested or run budget reached while waiting for a gate slot')
                 break
 
     def rebasing(self):
@@ -1036,9 +1058,10 @@ class Execution:
             if slot is None:
                 return 'halt'
             self.save(gate_index=index + 1, gate_total=len(commands), candidate_head=after)
+            configured = cfg.get('verification_timeout_seconds', cfg['max_hours'] * 3600)
+            remaining = max(1, self.state['deadline'] - time.time())
             with slot:
-                result, output, op = self.job('verifying', commands[index],
-                    min(cfg.get('verification_timeout_seconds', cfg['max_hours'] * 3600), max(1, self.state['deadline'] - time.time())))
+                result, output, op = self.job('verifying', commands[index], min(configured, remaining))
             if self.head() != after or self.a.git(self.work, 'branch', '--show-current') != self.branch:
                 self.fail('verification changed HEAD or branch; inspect worktree before resuming')
             if self.dirty():
@@ -1053,6 +1076,16 @@ class Execution:
                         self.clear_operation()
                         self.event('verification_replay', index=index, attempt=retries)
                         return
+                if (result['state'] == 'timed_out' and remaining < configured and not slept
+                        and cfg.get('verification_replay_safe', False)):
+                    # The run budget, not the gate, set this timeout (Aqar 27 Nov 2026: a 5400 s gate
+                    # got 2 min before the deadline). The candidate was never judged: keep it pending
+                    # with its saved operation and stop on the budget, so recover replays the gate
+                    # (as for a blocked gate) instead of the run blocking for the owner.
+                    durable.write_json(self.pending_path, pending)
+                    self.event('budget_cut_gate', index=index, job_id=op['id'], allowed=round(remaining, 1))
+                    self.save('stopped', 'Run time budget reached during verification; recover reruns the gate')
+                    return 'halt'
                 if result['state'] == 'failed' and result.get('exit_code') is not None:
                     pending.update(failures=pending.get('failures', 0) + 1, index=0, feedback=output[-1500:] or 'Verification exited nonzero; inspect job log.')
                     durable.write_json(self.pending_path, pending)

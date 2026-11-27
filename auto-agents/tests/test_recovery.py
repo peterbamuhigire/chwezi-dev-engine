@@ -253,6 +253,42 @@ subprocess.run(['git','commit','-qm','slice'],check=True)
             self.assertEqual(self.run_driver(), 2)
         self.assertIn('timed_out', json.loads((self.base / 'status.json').read_text())['reason'])
 
+    def test_gate_cut_short_by_run_budget_stops_and_recover_reruns_it(self):
+        # Aqar 27 Nov 2026: a gate started 2 min before the deadline timed out and blocked the run.
+        import durable, execution
+        self.cfg.update(verification_timeout_seconds=10 ** 6, recovery_policy='local-only',  # gate limit > budget left
+                        verification_replay_safe=True)
+        real, seen = durable.wait, {'gates': 0}
+        def wait(folder, *args, **kwargs):
+            result = real(folder, *args, **kwargs)
+            if durable.read_spec(folder)['argv'] == self.cfg['verify'][0]:
+                seen['gates'] += 1
+                if seen['gates'] == 1:
+                    result = {**result, 'state': 'timed_out', 'exit_code': 1}
+            return result
+        with patch.object(execution.durable, 'wait', wait):
+            self.assertEqual(self.run_driver(), 0)
+            status = json.loads((self.base / 'status.json').read_text())
+            self.assertEqual(status['state'], 'stopped')
+            self.assertIn('budget reached during verification', status['reason'])
+            self.assertIn('"budget_cut_gate"', (self.base / 'events.jsonl').read_text())
+            self.assertEqual(self.run_driver(recover=True), 0, self.last_output)
+        self.assertEqual(json.loads((self.base / 'status.json').read_text())['state'], 'done')
+        self.assertEqual(seen['gates'], 2)
+
+    def test_gate_timeout_within_budget_still_blocks(self):
+        import durable, execution
+        self.cfg['verification_timeout_seconds'] = 60  # the gate's own limit, well inside the budget
+        real = durable.wait
+        def wait(folder, *args, **kwargs):
+            result = real(folder, *args, **kwargs)
+            if durable.read_spec(folder)['argv'] == self.cfg['verify'][0]:
+                result = {**result, 'state': 'timed_out', 'exit_code': 1}
+            return result
+        with patch.object(execution.durable, 'wait', wait):
+            self.assertEqual(self.run_driver(), 2)
+        self.assertIn('timed_out', json.loads((self.base / 'status.json').read_text())['reason'])
+
     def block_then_owner_marks(self, owner_first_line):
         plan = self.root / self.cfg['plan']
         plan.write_text('STATUS: BLOCKED - owner decision needed\n')

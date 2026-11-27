@@ -287,6 +287,35 @@ subprocess.run(['git','commit','-qm','record completion'],check=True)
         checkpoint = json.loads((self.base / 'verified-codex.json').read_text())
         self.assertNotIn('at', checkpoint)
 
+    def test_owner_checkout_catching_up_with_the_run_does_not_block(self):
+        # Aqar 27 Nov 2026: pulling the run's own published plan edits into the owner checkout blocked recover.
+        import execution
+        self.base.mkdir(parents=True)
+        runner = execution.Execution(self.d, self.cfg, self.base, False)
+        runner.setup()
+        (runner.work / self.cfg['plan']).write_text('# Plan\nslice one done by the run\n')
+        fixtures.git(runner.work, 'add', self.cfg['plan'])
+        fixtures.git(runner.work, 'commit', '-qm', 'run slice edits the plan')
+        fixtures.git(self.root, 'merge', '-q', '--ff-only', runner.branch)  # the owner pulls the published slice
+        blob = fixtures.git(self.root, 'rev-parse', 'HEAD:' + self.cfg['plan'])
+        runner.owner_intent()
+        self.assertEqual(runner.state['root_plan_blob'], blob)
+        self.assertIn('"owner_checkout_followed"', (self.base / 'events.jsonl').read_text())
+        again = execution.Execution(self.d, self.cfg, self.base, False)
+        again.setup()  # a resumed driver accepts the caught-up checkout too
+        self.assertEqual(again.state['root_plan_blob'], blob)
+
+    def test_owner_plan_commit_the_run_lacks_still_blocks_after_catching_up(self):
+        import execution
+        self.base.mkdir(parents=True)
+        runner = execution.Execution(self.d, self.cfg, self.base, False)
+        runner.setup()
+        fixtures.git(self.root, 'merge', '-q', '--ff-only', runner.branch)
+        (self.root / self.cfg['plan']).write_text('STATUS: BLOCKED - owner withdrew task\n')
+        fixtures.git(self.root, 'commit', '-qam', 'owner changes intent')
+        with self.assertRaisesRegex(self.d.Stop, 'Owner plan or contract changed'):
+            runner.owner_intent()
+
     def test_unrelated_owner_changes_do_not_block_progress(self):
         import execution
         self.base.mkdir(parents=True)
