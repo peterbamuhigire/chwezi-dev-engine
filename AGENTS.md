@@ -79,7 +79,7 @@ accurate, portable, easy to route, and below the active skill cap.
 | Always-on cross-cutting rules (security, coding style, verification, user-run scripts) | `rules/README.md` |
 | Documentation index | `docs/README.md` |
 | How to run every validator, and what each needs | `README.md`, section "Verify" |
-| October 2026 kaizen evidence, open findings, date-triggered gates | `docs/kaizen/2026-10-engine-kaizen-pass-2/06-next-cycle.md`; `README.md`, section "Quality and improvement" |
+| Kaizen evidence, open findings, date-triggered gates | `docs/kaizen/2026-11-28-four-engine-book-kaizen/06-next-cycle.md` and "Quality and improvement" in `README.md` |
 
 ## Working Rules
 
@@ -189,10 +189,8 @@ Known baseline as of 2026-10-31 (verify with the script; do not trust this prose
 - `scripts/check_source_register.py` fails when an active source record is past its review
   date or a claim names a superseded or quarantined record. Re-read the primary page, add a
   dated record and move the old one to `superseded_sources`; never extend a date unread.
-  The first date-triggered failure, 2026-11-04 (five Next.js records), occurred and was
-  cleared on 2026-11-05, when the 14 overdue records were re-read; the check exits 0 as of
-  2026-11-06. The next failing date is 2026-11-12. The full calendar is in `README.md` under
-  "Date-triggered gates".
+  Run the gate for the working tree. Use `--as-of` to check a planned review date
+  against the same records. See "Date-triggered gates" in `README.md`.
 - `scripts/content_hygiene.py` (run by the catalogue guardrails) fails on host-specific
   paths in active content, new duplicate H2 headings and new broken relative links.
   Baselines in `docs/quality-gates/` may only shrink.
@@ -200,9 +198,8 @@ Known baseline as of 2026-10-31 (verify with the script; do not trust this prose
   coverage per skill; add a positive fixture with every new skill.
 - Review routes start at `skills/sdlc-meta/ai-assisted-development/references/ai-generated-code-review-gate.md`
   and its domain-owned checks table.
-- Evidence for the October 2026 passes: `docs/kaizen/2026-10-engine-kaizen/` and
-  `docs/kaizen/2026-10-engine-kaizen-pass-2/`. Latest published score: 62.5/100 raw and
-  capped (pass 2's final report); the 95/100 target is not reached.
+- The November scorecard and October history are linked from "Quality and
+  improvement" in `README.md`.
 - Open item for the maintainer: `.claude/settings.local.json` is tracked in this public
   repository and names Windows user-profile paths. Do not edit, copy or untrack it without
   the maintainer's decision; untracking does not remove it from history.

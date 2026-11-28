@@ -334,10 +334,7 @@ git diff --check
 
 Unless a later date is shown, the table records the 2026-11-05 run.
 
-The [17 November refresh](docs/updates/2026-11-17-community-capabilities.md)
-records the current repository-suite, catalogue, routing and control checks.
-The table below preserves earlier evidence; it is not a claim that every gate
-passes today. The source-register gate remains open.
+The table preserves earlier results. See the [17 November refresh](docs/updates/2026-11-17-community-capabilities.md) and the [28 November validation record](docs/kaizen/2026-11-28-four-engine-book-kaizen/04-validation-record.md) for later checks and their limits.
 
 | Check | Needs | Result and date |
 |---|---|---|
@@ -394,7 +391,11 @@ None of these is part of CI.
 
 Improvement work (kaizen, the Japanese term for continuous improvement) follows the Observe, Baseline, Select, Experiment, Check, Standardise, Teach, Re-measure cycle in [`kaizen-improvement-system`](skills/sdlc-meta/kaizen-improvement-system/SKILL.md).
 
-Evidence for the October 2026 passes lives in two folders. Each holds a scope record, a frozen baseline scorecard, a backlog, an experiment log, a validation record, a final report and a next-cycle handoff.
+The 28 November book-informed cycle fixed the file coordinates in YAML diagnostics,
+reconciled the legacy UX route with the alias registry, and reverified eight overdue
+sources. The [final report](docs/kaizen/2026-11-28-four-engine-book-kaizen/05-final-report.md) records the outcomes, and the [handoff](docs/kaizen/2026-11-28-four-engine-book-kaizen/06-next-cycle.md) lists the next checks.
+
+Earlier cycles:
 
 - [`docs/kaizen/2026-10-engine-kaizen/`](docs/kaizen/2026-10-engine-kaizen/README.md), the 29 October pass.
 - [`docs/kaizen/2026-10-engine-kaizen-pass-2/`](docs/kaizen/2026-10-engine-kaizen-pass-2/README.md), the 31 October pass. Its [final report](docs/kaizen/2026-10-engine-kaizen-pass-2/05-final-report.md) is the source of the scores below.
@@ -427,9 +428,13 @@ Read the validation records before you treat an example as production proof.
 
 ### Latest published score
 
+The 28 November scorecard recorded 69.4/100 raw, capped at 65/100 for its initial
+baseline, and 78.4/100 after the measured changes. It covers a sample of catalogue
+behaviour and keeps security and privacy blockers outside the average.
+
 Pass 2 rated the engine 62.5/100 raw, the mean of ten dimension ratings. The Portfolio Standard cap, `min(raw, 65)`, leaves 62.5/100. The 29 October pass published 59.5 raw and 59.5 capped.
 
-The two figures are not a trend. Pass 2 scored the whole tree afresh and found items the first pass had not checked. The ratings are a practitioner's judgement, not an external audit or benchmark. The 95/100 target was not reached and remains a target.
+Pass 2 scored the whole tree afresh and found items the first pass had not checked. The ratings reflect practitioner judgement and the coverage recorded in each scorecard.
 
 ### Open findings that matter to a reader
 
@@ -534,38 +539,23 @@ The [pass-2 log](docs/kaizen/2026-10-engine-kaizen-pass-2/03-experiment-log.md) 
 
 `scripts/check_source_register.py` fails when an active source record's `review_after` date is before the check date. The **Check source registers** CI step runs it. A pass proves dates and metadata only. It does not prove that a page supports a claim.
 
-Each row below was checked on 2026-11-06 by running the check with `--as-of` on its first failing date and on the day before, and comparing the number of findings. On the first date of a row, the check exits 1 with the total shown:
+Run the gate for the working tree, or pass the date of a planned check to evaluate
+the same recorded dates. The output identifies the records that need review.
 
 ```sh
-python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-14
+python3 -X utf8 scripts/check_source_register.py
+python3 -X utf8 scripts/check_source_register.py --as-of 2026-11-30
 ```
 
-| First failing `--as-of` date | Records lapsing that day | Failing in total | Topics |
-|---|---:|---:|---|
-| 2026-11-12 | 1 | 1 | PowerShell support lifecycle |
-| 2026-11-14 | 8 | 9 | Next.js October advisory and November release post, PHP security, Brotli and upload-progress advisories, PostgreSQL security, Android November bulletin, Oracle MySQL alert |
-| 2026-11-21 | 7 | 16 | Android 17, Compose setup and compiler migration, AGP 9.5.0, Next.js 16.4.5 release, support policy and upgrade guide |
-| 2026-11-30 | 6 | 22 | OpenAI changelog, model selection, skills context budget, plugin format and submission, Claude plugin marketplace |
-| 2026-12-01 | 34 | 56 | The main batch: Play target, Kotlin, PHP supported versions, PostgreSQL support, OpenAI, Anthropic, Gemini and Bedrock guidance, Windows, Intune, PowerShell, Cisco, BIND, Kubernetes, React, MySQL 8.4 index |
-| 2026-12-02 | 6 | 62 | WCAG 2.2, ASVS, IFRS 18, Windows security baselines and server documentation |
-| 2026-12-17 | 1 | 63 | W3C validator user documentation |
-| 2026-12-18 | 1 | 64 | W3C validator user documentation (second record) |
-| 2026-12-30 | 1 | 65 | Impeccable slop catalogue |
-| 2027-01-01 | 5 | 70 | NIST AI RMF, OWASP Top 10 2025, ASVS 5.0.0, PCI DSS 4.0.1, SLSA 1.2 |
-| 2027-01-30 | 2 | 72 | Next.js authentication and data-security guides |
-| 2027-09-02 | 1 | 73 | IETF DNSSEC best practice |
+On 28 November 2026 the gate exited 0 with 75 active sources, zero findings and
+58 warnings. The same snapshot first fails on 30 November with six overdue
+records. See the [second-wave record](docs/kaizen/2026-11-28-four-engine-book-kaizen/07-wave-2.md)
+for the date boundary and the evidence behind the earlier source changes.
 
-**Status on 2026-11-08.** The check exited 0: 73 active sources and 0 findings. The 14 records that were overdue were re-read from their primary pages on 2026-11-05 (UTC). No date was extended unread.
-
-**Current check on 2026-11-17.** It exits 1 with 9 overdue findings and 53 warnings across 75 active sources. The overdue source claims remain open until they are reverified; the check itself evaluates dates and metadata, not whether a page supports a claim.
-
-- **Renewed in place (9):** the page was unchanged.
-- **Superseded by a new dated record (4):** Next.js 16.4.5 and its 3 November security release, the Android November bulletin, and AGP 9.5.0.
-- **Quarantined (1):** `mysql-8413-security-2026-10-29`. The MySQL site returned HTTP 403 to every attempt, so the 8.4.13 notes are `NOT_ASSESSED` until read again, by 2026-11-13. The readable Oracle October alert lists 8.4.0 to 8.4.12 as affected.
-- **Added (1):** the PHP session upload-progress advisory of 2026-10-23.
-- The full list of record IDs is in the [re-read record](docs/updates/2026-11-06-source-register-reread.md).
-
-The cure is to re-read the primary page, add a dated record and move the old one to `superseded_sources`. Never extend a date unread. The security records and the MySQL quarantine come due on 2026-11-13, and the release, setup and migration records on 2026-11-20. Also due: the next full re-audit on or before 2026-11-30, and the model comparison by 2026-12-28 (both from the handoff).
+To renew a record, reread the primary page, add a dated record and preserve the
+previous record under `superseded_sources`. See the
+[November source reread](docs/updates/2026-11-06-source-register-reread.md) for
+the earlier renewals and the MySQL release-note quarantine.
 
 ## References
 
