@@ -14,4 +14,6 @@ The [October handoff](../2026-10-engine-kaizen-pass-2/06-next-cycle.md)
 retains the other open findings, including the maintainer decision on local
 settings history and the 28 December model-comparison checkpoint.
 
-Live user acceptance, hosted installation, billing changes and Linux execution on this Windows host remain NOT_ASSESSED.
+The [Alpine receipt](07-wave-2.md#targeted-linux-validation) covers the focused
+guardrail tests and two validators. The full Linux suite and installer, live
+user acceptance, hosted installation and billing changes remain `NOT_ASSESSED`.

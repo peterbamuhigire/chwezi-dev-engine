@@ -91,6 +91,7 @@ The guardrail checks cover both LF and CRLF malformed YAML cases.
 | `node hooks/test-destructive-bash-gate.js` | 0 | 61/61, run before launching the Python suites |
 | `node hooks/test-plugin-hook-config.js` | 0 | 7/7 |
 | `python -X utf8 skills/sdlc-meta/skill-writing/scripts/contract_gate.py --all` | 0 | 165 scanned, six exempt, zero errors or warnings |
+| `python -B -m unittest discover -s auto-agents/tests` | 0 | 167 tests counted, one skipped, 1,147.883 s |
 | `python -X utf8 scripts/validate_engine_control_plane.py --workspace-root .. --engine accounting --engine business-plan --engine chwezi-dev-engine --engine design --engine digital-research --engine linux --engine proposal --engine social-media --engine srs --engine website --engine windows-admin` | 0 | 11 named installations, zero findings |
 | `python -X utf8 scripts/validate_approval_adapters.py --workspace-root ..` | 0 | 11 adapters, zero findings |
 | `python -X utf8 scripts/validate_tenant_invoice_example.py` | 0 | Fixture files and tenant safety invariants |
@@ -108,23 +109,38 @@ Git blob sizes fell from 24,234 to 23,947 bytes for AGENTS.md and from
 validators both exited 0 again after commit `173e94b`.
 
 The first wave’s closing runtime command was
-`python -B -m unittest discover -s auto-agents/tests`. It exited 0 for all
-167 cases. That run and the second-wave starting tree have identical
+`python -B -m unittest discover -s auto-agents/tests`. It counted 167 tests
+and exited 0. That run and the second-wave starting tree have identical
 `auto-agents` Git tree IDs, `77378dcab3bf16e5bcc6e9c834405b1537789a77`.
-The second wave only edits Markdown outside that tree.
+The fresh Windows repeat exited 0 on the same tree. Its `OK (skipped=1)`
+summary covers the local runner suite. Live long-running work remains
+`NOT_ASSESSED`.
 
 The Bash hook rerun reproduces all 61 expected synthetic decisions without
 a hook change. The first-wave 54/61 and 56/61 results remain recorded. Load
 sensitivity remains open because the successful rerun does not test the
 earlier concurrent workload.
 
-The Debian WSL check exited 1 with `ERROR_PATH_NOT_FOUND` while mounting
-its registered disk. Current Linux execution, real installers, production
-behaviour, native skill inventory, exact tokenizer counts, legacy settings
-history and catalogue parity remain `NOT_ASSESSED`.
+The full Linux suite and installer, production behaviour, native skill
+inventory, exact tokenizer counts, legacy settings history and catalogue
+parity remain `NOT_ASSESSED`.
 
 The scope and claims review covered the changed prose, source assertions and
 links. No unsupported claims or book text were added. Third-party runtime
 delivery and the previous unresolved security and privacy findings remain
 outside this evidence. The independent cycle lead review accepted the date
 gate and requested retention of the earlier command and model checkpoint.
+
+### Targeted Linux validation
+
+The cycle lead ran the commands below in a disposable Alpine 3.23.8 guest
+using a fresh Git archive of `e72f14f` and Python 3.12.16.
+
+| Command | Exit | Observation |
+| --- | ---: | --- |
+| `python -X utf8 -m unittest tests/test_skill_catalog_guardrails.py` | 0 | 11 tests |
+| `python -X utf8 scripts/skill_catalog_guardrails.py` | 0 | 171 active skills, 17 warnings and zero errors in the tracked archive |
+| `python -X utf8 scripts/source_ingestion_guardrail.py` | 0 | Zero findings |
+
+The Debian WSL check on the Windows host exited 1 with
+`ERROR_PATH_NOT_FOUND` while mounting its registered disk.
