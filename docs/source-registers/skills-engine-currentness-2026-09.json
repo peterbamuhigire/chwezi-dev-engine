@@ -276,13 +276,13 @@
       "uncertainty": "Does not establish security of a specific application's implementation."
     },
     {
-      "id": "next-security-oct14-2026",
+      "id": "next-security-oct14-2026-r2026-11-28",
       "title": "Next.js Security Update for Upstream Vulnerabilities",
       "ref": "https://nextjs.org/blog/nextjs-security-update-october-14-2026",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
       "publication_date": "2026-10-14",
       "scope": "Official advisory for upstream vulnerabilities and fixes then published for Next.js 16.4.1 and 15.5.28.",
@@ -290,17 +290,17 @@
       "confidence": "high for named affected/fixed versions and vulnerability details",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Scope is the October advisory only. A later security release (2026-11-03, fixed in 16.4.5 and 15.5.29) is recorded separately in next-security-november-2026-release-2026-11-05; 16.4.1 and 15.5.28 are no longer the latest patched versions. No completeness claim for current versions.",
-      "as_of": "2026-11-17",
-      "reverification_note": "October advisory confirms 16.4.1 and 15.5.28 for that release."
+      "as_of": "2026-11-28",
+      "reverification_note": "The publisher's October advisory still identifies 16.4.1 and 15.5.28 as its historical fixes. Treat it as the record for that release and use the separate November tags for their own fixes."
     },
     {
-      "id": "php-security-oct21-2026",
+      "id": "php-security-oct21-2026-r2026-11-28",
       "title": "PHP critical remote code execution advisory",
       "ref": "https://www.php.net/archive/2026.php#2026-10-21-5",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
       "publication_date": "2026-10-21",
       "scope": "PHP vendor advisory identifies CVE-2026-109618 and CVE-2026-109619 and fixed source runtime releases including 8.5.12.",
@@ -308,17 +308,17 @@
       "confidence": "high for vendor advisory and listed releases",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Installed package origin/build and backports require checking the actual server distribution.",
-      "as_of": "2026-11-17",
-      "reverification_note": "The October 21 PHP archive entry confirms both CVEs and the four fixed branch releases."
+      "as_of": "2026-11-28",
+      "reverification_note": "The October 21 PHP archive entry still identifies both advisories and four fixed source branches, 8.5.12, 8.4.27, 8.3.36 and 8.2.35. Verify distribution backport status separately."
     },
     {
-      "id": "php-windows-brotli-2026",
+      "id": "php-windows-brotli-2026-r2026-11-28",
       "title": "Updated PHP Windows builds for Brotli security fix",
       "ref": "https://www.php.net/archive/2026.php#2026-10-26-1",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
       "publication_date": "2026-10-26",
       "scope": "PHP Windows package rebuilds 8.5.12-1, 8.4.27-1, 8.3.36-1, 8.2.35-1 include Brotli 1.2.1 for CVE-2026-111497; cURL automatic decompression must be enabled to reach the described path.",
@@ -326,8 +326,8 @@
       "confidence": "high for vendor notice and stated condition",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Does not apply as-is to Linux packages; actual PHP Windows build suffix and cURL configuration need inspection.",
-      "as_of": "2026-11-17",
-      "reverification_note": "October 26 entry confirms the four Windows rebuilds and Brotli 1.2.1."
+      "as_of": "2026-11-28",
+      "reverification_note": "The October 26 archive entry still identifies all four Windows rebuilds and Brotli 1.2.1. The cURL condition is automatic HTTP response decompression. The -1 suffix identifies updated package dependencies and leaves the PHP source runtime version intact."
     },
     {
       "id": "php-supported-versions-2026-10-29",
@@ -364,21 +364,21 @@
       "reverification_note": "Page re-read on 2026-10-31; the values in scope were unchanged from the 2026-10-29 reading."
     },
     {
-      "id": "postgresql-security-2026-10-29",
+      "id": "postgresql-security-2026-10-29-r2026-11-28",
       "title": "PostgreSQL security information",
       "ref": "https://www.postgresql.org/support/security/",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
-      "as_of": "2026-11-17",
+      "as_of": "2026-11-28",
       "scope": "PostgreSQL vulnerability table maps affected components to the first fixed minor release for each branch.",
       "support_status": "context-bound",
       "confidence": "high for official table at access time",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Applicability depends on the deployed server/client component and installed patch level.",
-      "reverification_note": "The CVE-2026-19385 row retains the earlier client fixes. The November 12 release adds later minors 18.7, 17.12, 16.16, 15.20 and 14.25."
+      "reverification_note": "The live vendor table still maps the cited client advisory to its earlier fixed minima and lists additional November fixes for active branches. PostgreSQL 14.25 is separately dated 2026-11-12 in https://www.postgresql.org/docs/release/14.25/."
     },
     {
       "id": "openai-model-catalog-2026-10-29",
@@ -578,21 +578,21 @@
       "uncertainty": "No product support date is asserted by this record."
     },
     {
-      "id": "ms-powershell-lifecycle-2026-10-31",
+      "id": "ms-powershell-lifecycle-2026-10-31-r2026-11-28",
       "title": "PowerShell support lifecycle",
       "ref": "https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-support-lifecycle?view=powershell-7.6",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "platform",
-      "as_of": "2026-11-17",
+      "as_of": "2026-11-28",
       "scope": "PowerShell 7.6 is an LTS line. The published support end date for 7.4 and 7.5 was November 10, 2026. Windows PowerShell 5.1 follows its host Windows lifecycle.",
       "support_status": "context-bound",
       "confidence": "high for the page text read at access time",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Support dates follow the .NET policy and can change; patch numbers move monthly.",
-      "reverification_note": "The 7.4 and 7.5 lifecycle dates have passed. The page still labels older patches current, so use the support schedule only."
+      "reverification_note": "The official lifecycle table still identifies 7.6 as LTS and shows 10-Nov-2026 for both 7.4 and 7.5. The Windows PowerShell 5.1 section delegates support to Windows support channels. Scope is lifecycle only."
     },
     {
       "id": "ms-intune-security-baselines-2026-10-31",
@@ -1094,31 +1094,31 @@
       "reverification_note": "Re-read official release tag on 2026-11-23: v16.4.6 is marked Latest and released 2026-11-09. Next.js v16 upgrade guide, re-read the same date, also labels v16.4.6 Latest. Canary builds are prereleases and excluded from latest stable. Check the release page again before version selection."
     },
     {
-      "id": "next-security-november-2026-release-2026-11-05",
+      "id": "next-security-november-2026-release-2026-11-05-r2026-11-28",
       "title": "Next.js November security release tags",
       "ref": "https://github.com/vercel/next.js/releases/tag/v16.4.5",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
       "publication_date": "2026-11-03",
-      "scope": "The v16.4.5 release lists seven fixes under Moderate. The v15.5.29 release lists three.",
+      "scope": "The v16.4.5 and v15.5.29 release tags list their respective Moderate security fixes.",
       "support_status": "context-bound",
       "confidence": "high for entries in both release tags",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Release notes establish included fixes. Installed versions and application exposure require separate verification.",
-      "as_of": "2026-11-17",
-      "reverification_note": "Verified against the publisher release tags. The blog URL was unavailable in this review. Companion tag: https://github.com/vercel/next.js/releases/tag/v15.5.29"
+      "as_of": "2026-11-28",
+      "reverification_note": "Both official tags label the entries Moderate and show 2026-11-03 in release timestamp metadata. Companion tag https://github.com/vercel/next.js/releases/tag/v15.5.29. The released versions are historical scope; current deployment exposure needs its own evidence."
     },
     {
-      "id": "android-security-bulletin-november-2026",
+      "id": "android-security-bulletin-november-2026-r2026-11-28",
       "title": "Android Security Bulletin—November 2026",
       "ref": "https://source.android.com/docs/security/bulletin/2026/2026-11-01",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
       "publication_date": "2026-11-02",
       "scope": "Official Android platform bulletin for November 2026; states security patch level 2026-11-05 or later addresses all of the listed issues (2026-11-01 patch level details are also listed).",
@@ -1126,8 +1126,8 @@
       "confidence": "high for bulletin scope and stated patch levels",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Does not prove a specific OEM device, Android build, application, or dependency has received the corresponding fixes.",
-      "as_of": "2026-11-17",
-      "reverification_note": "The November 6 revision retains the November 5 patch level for full bulletin coverage."
+      "as_of": "2026-11-28",
+      "reverification_note": "The bulletin published November 2 and updated November 6 still states 2026-11-05 or later addresses the listed issues. This concerns the bulletin's listed issues, with separate evidence required for an OEM device."
     },
     {
       "id": "android-agp-9-5-notes-2026-11-05",
@@ -1148,21 +1148,21 @@
       "reverification_note": "Re-read official AGP 9.5.0 compatibility table on 2026-11-23: maximum API level 37; Gradle 9.6.0 and Build Tools 36.0.0 minimum/default; JDK 17 minimum/default. The versioned release page continues to state these values. It does not establish compatibility of another plugin set or the specimen build."
     },
     {
-      "id": "oracle-cpu-oct-2026-mysql-2026-11-05",
+      "id": "oracle-cpu-oct-2026-mysql-2026-11-05-r2026-11-28",
       "title": "Oracle Critical Patch Update Advisory - October 2026 (MySQL Server rows)",
       "ref": "https://www.oracle.com/security-alerts/cpuoct2026.html",
       "tier": 1,
-      "accessed": "2026-11-17",
-      "verified_at": "2026-11-17",
-      "review_after": "2026-11-24",
+      "accessed": "2026-11-28",
+      "verified_at": "2026-11-28",
+      "review_after": "2026-12-05",
       "freshness_class": "volatile",
-      "as_of": "2026-11-17",
+      "as_of": "2026-11-28",
       "scope": "Oracle October 2026 CPU lists MySQL Server versions 8.4.0 through 8.4.12 (also 9.7.0-9.7.3 and 26.7.0-26.7.1) as affected, for example CVE-2026-9547 and CVE-2025-15467; 8.4.13 is outside the listed affected range. It does not name 8.4.13 as the fixed release and is not the 8.4.13 release notes.",
       "support_status": "context-bound",
       "confidence": "high for the advisory affected-version list at access time; the page states no publication date",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Does not establish which release fixes each issue, the 8.4.13 release date, or exploitability in any deployment; the 8.4.13 release notes could not be read.",
-      "reverification_note": "The October MySQL risk matrix retains the specified affected ranges."
+      "reverification_note": "The MySQL risk matrix lists 8.4.0 through 8.4.12, 9.7.0 through 9.7.3 and 26.7.0 through 26.7.1 in the MySQL Server column for each cited advisory. A missing version in this affected list does not identify the release fixing an issue."
     },
     {
       "id": "php-session-upload-progress-advisory-2026-11-05",
@@ -1283,7 +1283,7 @@
       "id": "claim-powershell-support",
       "requires_currentness": true,
       "source_ids": [
-        "ms-powershell-lifecycle-2026-10-31"
+        "ms-powershell-lifecycle-2026-10-31-r2026-11-28"
       ],
       "previous_source_ids": [
         "ms-powershell-lifecycle"
@@ -1495,7 +1495,7 @@
       "source_ids": [
         "play-target-2026-10-29",
         "android-17-release-2026-10-29",
-        "android-security-bulletin-november-2026",
+        "android-security-bulletin-november-2026-r2026-11-28",
         "kotlin-release-2026-10-29",
         "compose-setup-2026-10-29",
         "android-agp-api-support-2026-10-29",
@@ -1518,16 +1518,16 @@
       "id": "claim-nextjs-security-advisory-currentness-2026-10-29",
       "requires_currentness": true,
       "source_ids": [
-        "next-security-oct14-2026",
-        "next-security-november-2026-release-2026-11-05"
+        "next-security-oct14-2026-r2026-11-28",
+        "next-security-november-2026-release-2026-11-05-r2026-11-28"
       ]
     },
     {
       "id": "claim-php-runtime-security-currentness-2026-10-29",
       "requires_currentness": true,
       "source_ids": [
-        "php-security-oct21-2026",
-        "php-windows-brotli-2026",
+        "php-security-oct21-2026-r2026-11-28",
+        "php-windows-brotli-2026-r2026-11-28",
         "php-supported-versions-2026-10-29",
         "php-session-upload-progress-advisory-2026-11-05"
       ]
@@ -1537,8 +1537,8 @@
       "requires_currentness": true,
       "source_ids": [
         "postgresql-support-2026-10-29",
-        "postgresql-security-2026-10-29",
-        "oracle-cpu-oct-2026-mysql-2026-11-05"
+        "postgresql-security-2026-10-29-r2026-11-28",
+        "oracle-cpu-oct-2026-mysql-2026-11-05-r2026-11-28"
       ]
     },
     {
@@ -1690,7 +1690,7 @@
       "freshness_class": "platform",
       "as_of": "2026-09-01",
       "scope": "PowerShell 7 stable/LTS/support claims; Windows PowerShell 5.1 is a separate OS component.",
-      "superseded_by": "ms-powershell-lifecycle-2026-10-31",
+      "superseded_by": "ms-powershell-lifecycle-2026-10-31-r2026-11-28",
       "superseded_on": "2026-10-31"
     },
     {
@@ -2120,7 +2120,7 @@
       "confidence": "high for existence/date and number stated in notice",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Affected versions, impacts and upgrade instructions were not yet published; keep update applicability NOT_ASSESSED until release.",
-      "superseded_by": "next-security-november-2026-release-2026-11-05",
+      "superseded_by": "next-security-november-2026-release-2026-11-05-r2026-11-28",
       "superseded_on": "2026-11-05"
     },
     {
@@ -2138,7 +2138,7 @@
       "confidence": "high for bulletin scope and stated patch level",
       "owner": "Chwezi Dev Engine",
       "uncertainty": "Does not prove a specific OEM device, Android build, application, or dependency has received the corresponding fixes.",
-      "superseded_by": "android-security-bulletin-november-2026",
+      "superseded_by": "android-security-bulletin-november-2026-r2026-11-28",
       "superseded_on": "2026-11-05"
     },
     {
@@ -2158,6 +2158,171 @@
       "uncertainty": "A minimum supported Gradle/JDK combination does not certify this specimen or other plugins.",
       "superseded_by": "android-agp-9-5-notes-2026-11-05",
       "superseded_on": "2026-11-05"
+    },
+    {
+      "id": "next-security-oct14-2026",
+      "title": "Next.js Security Update for Upstream Vulnerabilities",
+      "ref": "https://nextjs.org/blog/nextjs-security-update-october-14-2026",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "publication_date": "2026-10-14",
+      "scope": "Official advisory for upstream vulnerabilities and fixes then published for Next.js 16.4.1 and 15.5.28.",
+      "support_status": "context-bound",
+      "confidence": "high for named affected/fixed versions and vulnerability details",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Scope is the October advisory only. A later security release (2026-11-03, fixed in 16.4.5 and 15.5.29) is recorded separately in next-security-november-2026-release-2026-11-05; 16.4.1 and 15.5.28 are no longer the latest patched versions. No completeness claim for current versions.",
+      "as_of": "2026-11-17",
+      "reverification_note": "October advisory confirms 16.4.1 and 15.5.28 for that release.",
+      "superseded_by": "next-security-oct14-2026-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "php-security-oct21-2026",
+      "title": "PHP critical remote code execution advisory",
+      "ref": "https://www.php.net/archive/2026.php#2026-10-21-5",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "publication_date": "2026-10-21",
+      "scope": "PHP vendor advisory identifies CVE-2026-109618 and CVE-2026-109619 and fixed source runtime releases including 8.5.12.",
+      "support_status": "context-bound",
+      "confidence": "high for vendor advisory and listed releases",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Installed package origin/build and backports require checking the actual server distribution.",
+      "as_of": "2026-11-17",
+      "reverification_note": "The October 21 PHP archive entry confirms both CVEs and the four fixed branch releases.",
+      "superseded_by": "php-security-oct21-2026-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "php-windows-brotli-2026",
+      "title": "Updated PHP Windows builds for Brotli security fix",
+      "ref": "https://www.php.net/archive/2026.php#2026-10-26-1",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "publication_date": "2026-10-26",
+      "scope": "PHP Windows package rebuilds 8.5.12-1, 8.4.27-1, 8.3.36-1, 8.2.35-1 include Brotli 1.2.1 for CVE-2026-111497; cURL automatic decompression must be enabled to reach the described path.",
+      "support_status": "context-bound",
+      "confidence": "high for vendor notice and stated condition",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Does not apply as-is to Linux packages; actual PHP Windows build suffix and cURL configuration need inspection.",
+      "as_of": "2026-11-17",
+      "reverification_note": "October 26 entry confirms the four Windows rebuilds and Brotli 1.2.1.",
+      "superseded_by": "php-windows-brotli-2026-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "postgresql-security-2026-10-29",
+      "title": "PostgreSQL security information",
+      "ref": "https://www.postgresql.org/support/security/",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "as_of": "2026-11-17",
+      "scope": "PostgreSQL vulnerability table maps affected components to the first fixed minor release for each branch.",
+      "support_status": "context-bound",
+      "confidence": "high for official table at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Applicability depends on the deployed server/client component and installed patch level.",
+      "reverification_note": "The CVE-2026-19385 row retains the earlier client fixes. The November 12 release adds later minors 18.7, 17.12, 16.16, 15.20 and 14.25.",
+      "superseded_by": "postgresql-security-2026-10-29-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "ms-powershell-lifecycle-2026-10-31",
+      "title": "PowerShell support lifecycle",
+      "ref": "https://learn.microsoft.com/en-us/powershell/scripting/install/powershell-support-lifecycle?view=powershell-7.6",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "platform",
+      "as_of": "2026-11-17",
+      "scope": "PowerShell 7.6 is an LTS line. The published support end date for 7.4 and 7.5 was November 10, 2026. Windows PowerShell 5.1 follows its host Windows lifecycle.",
+      "support_status": "context-bound",
+      "confidence": "high for the page text read at access time",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Support dates follow the .NET policy and can change; patch numbers move monthly.",
+      "reverification_note": "The 7.4 and 7.5 lifecycle dates have passed. The page still labels older patches current, so use the support schedule only.",
+      "superseded_by": "ms-powershell-lifecycle-2026-10-31-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "next-security-november-2026-release-2026-11-05",
+      "title": "Next.js November security release tags",
+      "ref": "https://github.com/vercel/next.js/releases/tag/v16.4.5",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "publication_date": "2026-11-03",
+      "scope": "The v16.4.5 release lists seven fixes under Moderate. The v15.5.29 release lists three.",
+      "support_status": "context-bound",
+      "confidence": "high for entries in both release tags",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Release notes establish included fixes. Installed versions and application exposure require separate verification.",
+      "as_of": "2026-11-17",
+      "reverification_note": "Verified against the publisher release tags. The blog URL was unavailable in this review. Companion tag: https://github.com/vercel/next.js/releases/tag/v15.5.29",
+      "superseded_by": "next-security-november-2026-release-2026-11-05-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "android-security-bulletin-november-2026",
+      "title": "Android Security Bulletin—November 2026",
+      "ref": "https://source.android.com/docs/security/bulletin/2026/2026-11-01",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "publication_date": "2026-11-02",
+      "scope": "Official Android platform bulletin for November 2026; states security patch level 2026-11-05 or later addresses all of the listed issues (2026-11-01 patch level details are also listed).",
+      "support_status": "context-bound",
+      "confidence": "high for bulletin scope and stated patch levels",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Does not prove a specific OEM device, Android build, application, or dependency has received the corresponding fixes.",
+      "as_of": "2026-11-17",
+      "reverification_note": "The November 6 revision retains the November 5 patch level for full bulletin coverage.",
+      "superseded_by": "android-security-bulletin-november-2026-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
+    },
+    {
+      "id": "oracle-cpu-oct-2026-mysql-2026-11-05",
+      "title": "Oracle Critical Patch Update Advisory - October 2026 (MySQL Server rows)",
+      "ref": "https://www.oracle.com/security-alerts/cpuoct2026.html",
+      "tier": 1,
+      "accessed": "2026-11-17",
+      "verified_at": "2026-11-17",
+      "review_after": "2026-11-24",
+      "freshness_class": "volatile",
+      "as_of": "2026-11-17",
+      "scope": "Oracle October 2026 CPU lists MySQL Server versions 8.4.0 through 8.4.12 (also 9.7.0-9.7.3 and 26.7.0-26.7.1) as affected, for example CVE-2026-9547 and CVE-2025-15467; 8.4.13 is outside the listed affected range. It does not name 8.4.13 as the fixed release and is not the 8.4.13 release notes.",
+      "support_status": "context-bound",
+      "confidence": "high for the advisory affected-version list at access time; the page states no publication date",
+      "owner": "Chwezi Dev Engine",
+      "uncertainty": "Does not establish which release fixes each issue, the 8.4.13 release date, or exploitability in any deployment; the 8.4.13 release notes could not be read.",
+      "reverification_note": "The October MySQL risk matrix retains the specified affected ranges.",
+      "superseded_by": "oracle-cpu-oct-2026-mysql-2026-11-05-r2026-11-28",
+      "superseded_on": "2026-11-28",
+      "supersession_reason": "Primary source re-read; see the dated record for current scope and uncertainty."
     }
   ],
   "quarantined_sources": [
@@ -2242,5 +2407,5 @@
       }
     }
   ],
-  "last_reconciled": "2026-11-05"
+  "last_reconciled": "2026-11-28"
 }
