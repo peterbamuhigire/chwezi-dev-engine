@@ -99,8 +99,13 @@ The guardrail checks cover both LF and CRLF malformed YAML cases.
 | `python -X utf8 scripts/source_ingestion_guardrail.py` | 0 | Zero findings |
 | `python -X utf8 scripts/validate_work_graph.py templates/work-graph.yml` | 0 | One node, zero findings |
 | `python -X utf8 docs/plans/ai-engine-kaizen/evidence/ER2/check_readme.py` | 0 | Existing task links and anchors pass. A synthetic broken task link is rejected. |
+| `python -X utf8 ../chwezi-engine-agents/scripts/check_readme_preservation.py . 3e45a2b 173e94b` | 0 | Zero link or command losses and zero broken anchors. The historical command moved to this record. |
 | `python -X utf8 ../chwezi-engine-agents/scripts/check_token_budget.py --strict .` | 0 | Zero byte and placement findings |
 | `git diff --check` | 0 | No whitespace findings |
+
+Git blob sizes fell from 24,234 to 23,947 bytes for AGENTS.md and from
+52,806 to 50,862 bytes for README.md. The final catalogue and source-ingestion
+validators both exited 0 again after commit `173e94b`.
 
 The first wave’s closing runtime command was
 `python -B -m unittest discover -s auto-agents/tests`. It exited 0 for all
