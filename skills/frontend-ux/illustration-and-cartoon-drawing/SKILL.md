@@ -8,6 +8,8 @@ metadata:
 
 # Illustration and cartoon drawing
 
+<!-- dual-compat-start -->
+
 ## Use When
 
 A reader needs to recognise a tool, follow a handover, see who acts next or understand a decision. Use this skill for an original drawn image, an illustrator's brief, or a series of related posters and infographics.
@@ -54,11 +56,15 @@ If the image tool or a required reference is unavailable, supply a drawable brie
 
 ## Evidence Produced
 
-Keep the chosen prompt and image, the source of factual detail, the target-size proof, the review result and the master version together.
+| Category | Artifact | Format | Example |
+|---|---|---|---|
+| Correctness | Drawing review | Master revision, chosen prompt and image, factual source, target-size proof and reviewer decision | Phone-size proof of the library return slot |
 
 ## References
 
 - Use the [engineering anti-slop gate](../../../docs/quality-gates/anti-slop-governance.md) for claims about a system and the [local infographic standard](../../saas/reporting-and-export-engineering/references/infographics-standard/standard.md) for data, type and export.
+
+<!-- dual-compat-end -->
 
 ## Example
 

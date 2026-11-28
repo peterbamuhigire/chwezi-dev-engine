@@ -10,7 +10,7 @@ metadata:
   - codex
 ---
 
-> Inactive alias. This skill migrated to the external design engine: route to `ux-foundations` in the `chwezi-design-engine` checkout (resolved per device) per `docs/skill-aliases.yml`; this file is retained for historical content.
+> Inactive alias. This skill migrated to the external design engine: route to `ux-psychology` in the `chwezi-design-engine` checkout (resolved per device) per `docs/skill-aliases.yml`; this file is retained for historical content.
 
 
 # UX Principles 101

@@ -1,6 +1,6 @@
 ## Unattended development
 
-When this engine changes `auto-agents`, update the canonical copy in `skills-engine-agents` first, regenerate its manifest, run its tests, then discover and update the installed project and engine copies with its managed `propagate.py --apply` workflow. Preserve each copy?s config, plan and local edits; report blocked or missing targets. Batch necessary host plugin-cache refreshes at the end of the change; preserve hook trust checks and report any required review. See `auto-agents/README.md`.
+The community runtime is maintained in `chwezi-engine-agents` (formerly `skills-engine-agents`). This checkout consumes that distribution. Independently maintained runtimes have separate release owners. Follow `auto-agents/README.md` for authorised updates and preserve installation-specific settings, plans and local changes.
 
 For an owner-authorised long-running development plan, use `auto-agents/README.md` and `auto-agents/config.json`. Prepare a committed, scoped plan and project-specific verification commands first. Respect existing runtime permissions, project controls, data boundaries and publication settings. Do not run this and `scripts/autorun` concurrently on shared resources.
 
@@ -46,13 +46,9 @@ The package may read the router, discover skills, inspect Git, and run only decl
 
 Project context: if the working project root holds a `PROJECT.md` with `project_schema: 1`, read it before planning. It points to this engine's own context sources and never replaces them.
 
-## Mandatory Digital Research currentness gate for Kaizen
+## Currentness gate for Kaizen
 
-Every Kaizen audit, skill edit, reference update, validator change, and
-standardisation decision MUST begin with the Digital Research Engine (`digital-research-engine`;
-resolve its checkout on this device from the engine-routing table). Read its `source-evaluation` and
-`source-verification` skills and the currentness gate reference
-`docs/continuous-improvement/kaizen-currentness-gate.md`.
+Resolve the host's configured research route for source evaluation and verification. Use the community Digital Research checkout when explicitly selected. If the required authority cannot be resolved, record the affected decision as `NOT_ASSESSED`.
 
 Before admitting any standard, policy, law, technology, platform capability,
 software version, command, security control, benchmark, or lifecycle claim,

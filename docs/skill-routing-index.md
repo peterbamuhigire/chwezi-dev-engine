@@ -136,7 +136,7 @@ target instead.
 | `skills/saas/saas-tenant-onboarding-automation` | `skills/product-business/product-led-growth` |
 | `skills/security/uganda-dppa-compliance` | `skills/security/dpia-generator` |
 | `skills/ai/ux-for-ai` | `design-system/skills/ai-ux` (external alias; resolve through the design engine router) |
-| `skills/frontend-ux/ux-principles-101` | `design-system/skills/ux-foundations` (external alias; resolve through the design engine router) |
+| `skills/frontend-ux/ux-principles-101` | `design-system/skills/ux-psychology` (external alias; resolve through the design engine router) |
 | `skills/backend-databases/vector-databases` | `skills/ai/ai-rag-patterns` |
 | `skills/sdlc-meta/code-tour` | `skills/sdlc-meta/doc-architect` (`references/code-tour.md`) |
 | `skills/sdlc-meta/markdown-lint-cleanup` | `skills/sdlc-meta/doc-architect` (`references/markdown-lint-cleanup.md`) |
@@ -199,7 +199,7 @@ concurrency, tenant, reconciliation, recovery and owner-sign-off evidence.
 | Reporting and exports | `reporting-and-export-engineering` | Chwezi Reporting and Dashboards Standard 1.0.0 (local copy, RPT-GATE-01..08): versioned metric catalogue, semantic measure layer, reconciliation KPI to detail to ledger and screen = PDF = XLSX, report registry, immutable generation records, background export jobs, CSV/XLSX formula-injection safety, A4 print and PDF pipeline, report authorisation and audit, performance budgets, observability |
 | SaaS seeder and demo sign-in | `saas-seeder` | Seeder template bootstrap, super admin, recurring demo activity, and the demo one-click login standard (profile buttons only on demo hosts, same RBAC, no password in code, pages, docs or commits) |
 | Frontend CSS | `tailwind-css` | `responsive-design`, `every-layout`, `grid-systems` |
-| UX foundations | `ux-foundations` | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
+| UX foundations | `ux-psychology` (external design router) | `ux-principles-101`, `ux-psychology`, `laws-of-ux`, `web-usability-krug`, `cognitive-ux-framework` |
 | UX content | `ux-content-strategy` | `ux-writing` |
 | Frontend architecture | `frontend-architecture` | Component boundaries, tokens, state/content contracts, design-system implementation, frontend quality and migration decisions |
 | Product excellence engineering gates (Chwezi app UI) | `frontend-architecture` -> `references/product-excellence-engineering-gates.md` | Screen state model, component contract tests, test tags, screenshot matrix, Baseline Profiles and Macrobenchmark, Android vitals, Core Web Vitals, targetSdk 36, AGP 9 `androidApp`, offline idempotency, mobile-money states, ISO 4217 minor units, token export, backend authorisation; the standard itself lives in `chwezi-design-engine` |

@@ -186,11 +186,15 @@ def parse_frontmatter(path: Path, content: str) -> tuple[dict | None, Finding | 
     try:
         parsed = yaml.safe_load(match.group(1))
     except yaml.YAMLError as exc:
+        mark = getattr(exc, "problem_mark", None)
+        message = "invalid YAML frontmatter"
+        if mark is not None:
+            message += f" at line {mark.line + 2}, column {mark.column + 1}"
         return None, Finding(
             "error",
             "frontmatter-yaml",
             relpath(path),
-            f"invalid YAML frontmatter: {exc}",
+            message,
         )
 
     if not isinstance(parsed, dict):

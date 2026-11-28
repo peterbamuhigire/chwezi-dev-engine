@@ -29,6 +29,15 @@ class SourceIngestionGuardrailTests(unittest.TestCase):
                     path.write_text(content, encoding="utf-8")
             return guardrails.check_source_ingestion(root)
 
+    def test_yaml_location_is_relative_to_the_skill_file(self):
+        path = SCRIPT.parents[1] / "SKILL.md"
+        for newline in ("\n", "\r\n"):
+            with self.subTest(newline=newline):
+                source = newline.join(["---", "name: demo", "description: x: y", "---", ""])
+                _, finding = guardrails.parse_frontmatter(path, source)
+                self.assertEqual(finding.code, "frontmatter-yaml")
+                self.assertIn("line 3, column 15", finding.message)
+
     def test_rejects_raw_ebook(self):
         findings = self.scan({"sources/book.epub": b"ebook"})
         self.assertIn("raw-book-source", {finding.code for finding in findings})

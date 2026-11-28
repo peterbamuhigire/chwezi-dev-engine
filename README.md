@@ -312,6 +312,8 @@ Clone the repository. Have the agent read [`CLAUDE.md`](CLAUDE.md), the [skill r
 
 ## Verify
 
+A frontmatter YAML error reports the line and column in the skill file, including the opening delimiter.
+
 Run from the repository root. These are the steps of the CI workflow (`.github/workflows/skill-guardrails.yml`), in its order, plus `git diff --check` from [`CONTRIBUTING.md`](CONTRIBUTING.md). On 2026-11-05 every step exited 0 on the current tree on Linux (Fedora, Python 3.14.10, Node 22.23.1) except the source-register check, which exited 1 until the 14 overdue records were re-read that evening. It exits 0 on 2026-11-06 (see the table and [Date-triggered gates](#date-triggered-gates)).
 
 ```sh
