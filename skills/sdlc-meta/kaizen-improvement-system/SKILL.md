@@ -36,7 +36,7 @@ domain judgement with the owning engine and makes learning discoverable.
 ## Prerequisites
 
 - Read `docs/continuous-improvement/kaizen-adoption-2026-08.md`.
-- For portfolio or current-standards claims, use the Digital Research engine's source-evaluation and source-verification routes.
+- For portfolio or current-standards claims, use the configured research route's source-evaluation and source-verification routes.
 
 ## Workflow
 
@@ -111,15 +111,9 @@ slice that preserves the client's design thesis rather than copying a reference 
 - `advanced-testing-strategy` for risk-scaled validation.
 - `world-class-engineering` for delivery gates and operational handoff.
 
-## Mandatory Digital Research currentness gate
+## Currentness gate for Kaizen
 
-Every Kaizen cycle must begin with `digital-research-engine` source evaluation
-and source verification. Record scope, dates, freshness class, support status,
-uncertainty, and review date for current standards, APIs, frameworks, packages,
-security, platform, and lifecycle claims; quarantine unsupported claims as
-`NOT_ASSESSED`. Apply the currentness gate at
-`digital-research-engine/docs/continuous-improvement/kaizen-currentness-gate.md`
-(resolve that engine per device).
+Use the configured research route for source evaluation and verification. Record the primary source, edition or version, access date, scope, uncertainty and review trigger. Quarantine unsupported claims as `NOT_ASSESSED`. Digital Research is a community option when explicitly selected.
 
 Include claims using superlatives such as “largest”, “first”, “only”, “most
 severe”, and emergency severity scores in the currentness preflight. Verify
@@ -130,7 +124,7 @@ missing, narrow the claim and record it as unsupported instead of repeating it.
 ## References
 
 - `docs/continuous-improvement/kaizen-adoption-2026-08.md` - local adoption plan.
-- `digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md` (resolve that engine per device) - cross-engine standard.
+- `digital-research-engine/docs/continuous-improvement/portfolio-kaizen-standard-2026-08.md` - reference when that community workflow is selected.
 - `skills/sdlc-meta/skill-engine-audit/` - audit dimensions, scoring, and report structure.
 - `skills/sdlc-meta/skill-engine-audit/references/skill-safety-gate.md` - safety and source-ingestion gate.
 - `skills/sdlc-meta/kaizen-improvement-system/references/purpose-fit-premium-ux-implementation.md` - implementation patterns for friction reduction, dashboards, state feedback, and authored visual systems.
@@ -167,6 +161,6 @@ conditional plan or verdict; never convert unavailable evidence into a pass.
 | A material outcome, render, system, or production check cannot run | Mark it `NOT ASSESSED` and retain the blocker | False readiness |
 | The experiment passes its acceptance evidence | Standardise the result and schedule re-measurement | Learning lost in a one-off patch |
 
-The book-wave operating contract is [book-driven system decision and agent orchestration](../references/book-driven-system-decision-and-agent-orchestration.md). Current technology and security claims must pass Digital Research verification.
+The book-wave operating contract is [book-driven system decision and agent orchestration](../references/book-driven-system-decision-and-agent-orchestration.md). Current technology and security claims require verification through the configured research route.
 
 The 2026-09-02 cross-engine study is [Book-driven Kaizen Wave 3](references/book-driven-kaizen-wave-3-2026-09-02.md); use it for currentness-gated contracts, testing, Git recovery, secure input handling, protocol semantics, and agent evaluation.

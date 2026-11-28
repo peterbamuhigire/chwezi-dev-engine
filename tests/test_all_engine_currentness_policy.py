@@ -1,4 +1,4 @@
-"""Portfolio contract: every engine's Kaizen work uses Digital Research currentness gates."""
+"""Portfolio contract: every engine's Kaizen work requires a resolved currentness authority."""
 from pathlib import Path
 import unittest
 import os
@@ -40,21 +40,37 @@ class PortfolioCurrentnessPolicyTests(unittest.TestCase):
             router = WWW / engine / "AGENTS.md"
             self.assertTrue(router.is_file(), router)
             text = router.read_text(encoding="utf-8").lower()
-            self.assertIn(MARKER.lower(), text, router)
-            self.assertIn("digital-research", text, router)
+            if engine in {"chwezi-dev-engine", "chwezi-sdlc-documentation"}:
+                self.assert_configured_authority(text, router)
+            else:
+                self.assertIn(MARKER.lower(), text, router)
+                self.assertIn("digital-research", text, router)
 
     @unittest.skipUnless(os.environ.get("SKILL_ENGINE_LIVE_TESTS") == "1", "NOT ASSESSED: installed-portfolio check; set SKILL_ENGINE_LIVE_TESTS=1")
     def test_every_kaizen_owner_points_to_digital_research(self):
         for skill in KAIZEN_SKILLS:
             self.assertTrue(skill.is_file(), skill)
             text = skill.read_text(encoding="utf-8").lower()
-            self.assertIn("digital-research", text, skill)
+            if skill.is_relative_to(ROOT) or skill.is_relative_to(WWW / "chwezi-sdlc-documentation"):
+                self.assertIn("configured research route", text, skill)
+                self.assertIn("not_assessed", text, skill)
+            else:
+                self.assertIn("digital-research", text, skill)
             self.assertIn("currentness", text, skill)
 
     def test_local_router_declares_currentness_gate(self):
         text = (ROOT / "AGENTS.md").read_text(encoding="utf-8").lower()
-        self.assertIn(MARKER.lower(), text)
-        self.assertIn("digital-research", text)
+        self.assert_configured_authority(text, ROOT / "AGENTS.md")
+        skill = (ROOT / "skills/sdlc-meta/kaizen-improvement-system/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("configured research route", skill)
+        self.assertIn("NOT_ASSESSED", skill)
+        prompt = (ROOT / "prompts/full-kaizen-operation.md").read_text(encoding="utf-8")
+        self.assertIn("currentness workflow from the host routing table", prompt)
+
+    def assert_configured_authority(self, text, router):
+        for requirement in ("configured research route", "explicitly selected", "not_assessed",
+                            "access date", "primary sources", "uncertainty"):
+            self.assertIn(requirement, text, router)
 
 
 if __name__ == "__main__":
