@@ -138,9 +138,9 @@ using a fresh Git archive of `e72f14f` and Python 3.12.16.
 
 | Command | Exit | Observation |
 | --- | ---: | --- |
-| `python -X utf8 -m unittest tests/test_skill_catalog_guardrails.py` | 0 | 11 tests |
-| `python -X utf8 scripts/skill_catalog_guardrails.py` | 0 | 171 active skills, 17 warnings and zero errors in the tracked archive |
-| `python -X utf8 scripts/source_ingestion_guardrail.py` | 0 | Zero findings |
+| `python3 -B -m unittest tests/test_skill_catalog_guardrails.py` | 0 | 11 tests |
+| `python3 scripts/skill_catalog_guardrails.py` | 0 | 171 active skills, 17 warnings and zero errors in the tracked archive |
+| `python3 scripts/source_ingestion_guardrail.py` | 0 | Zero findings |
 
 The Debian WSL check on the Windows host exited 1 with
 `ERROR_PATH_NOT_FOUND` while mounting its registered disk.
