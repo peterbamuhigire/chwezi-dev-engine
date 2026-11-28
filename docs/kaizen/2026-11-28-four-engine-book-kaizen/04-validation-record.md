@@ -71,3 +71,8 @@ Windows, Python 3.13.7, Node v24.8.0. Product commit 1ad166d and source commit b
 
 
 The final catalogue suite passed 291 tests and ten subtests with three skips in 228.41 seconds at the corrected currentness policy. Linux repeat NOT_ASSESSED: the registered distribution could not mount its backing storage. The Bash-hook repeat passed 56/61 Windows cases, with fail-closed timeouts on the Git probes. No hook policy or timeout was weakened.
+
+
+**Closing verification.** Both runtime test commands exited 0 (baseline 167 in 3,046.350 s; final 167 in 2,338.979 s). The managed runtime and test tree remained identical across revisions. Timing is confounded by concurrent workload. Final source-ingestion guard reported zero findings. Earlier in-progress entries above are superseded by the closing exits.
+
+The initial main checkout was fast-forwarded on the cycle branch before freezing 2ef1f97. The frozen scorecard's reference to main describes its source, not the checked-out cycle branch.
